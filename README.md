@@ -29,10 +29,6 @@ For doing the release build, go to [build job][build-job] and click `Release Bui
 
 [java_img]: https://img.shields.io/badge/OpenJDK-21-ea791d?logo=java&style=for-the-badge&logoColor=ea791d
 
-[build-job]:
-
-[build-svg]:
-
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 
 [kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff&style=for-the-badge

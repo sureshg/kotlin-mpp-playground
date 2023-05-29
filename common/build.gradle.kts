@@ -18,11 +18,11 @@ application {
       )
 }
 
-dependencies { jvmMainImplementation(libs.slf4j.api) }
-
 tasks {
   // Add generated buildConfig to commonMain sourceSet
   val buildConfig by registering(BuildConfig::class) { classFqName = "BuildConfig" }
   kotlin.sourceSets.commonMain.configure { kotlin.srcDirs(buildConfig) }
   maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
 }
+
+dependencies { jvmMainImplementation(libs.slf4j.api) }
