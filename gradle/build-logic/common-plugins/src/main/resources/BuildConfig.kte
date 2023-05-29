@@ -1,0 +1,13 @@
+@import java.time.LocalDateTime
+@import gg.jte.support.ForSupport
+
+@param className: String
+@param pkg: String
+@param additionalFields: Map<String, Any>
+
+/* GENERATED, DO NOT EDIT MANUALLY! */
+@if(pkg.isNotBlank())package ${pkg}@endif
+object ${className} {
+
+   const val time = "${LocalDateTime.now().toString()}"
+}
