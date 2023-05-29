@@ -13,6 +13,8 @@ plugins {
  */
 val dslJavaVersion = libs.versions.kotlin.dsl.jvmtarget
 
+// java { toolchain { languageVersion = dslJavaVersion.map(JavaLanguageVersion::of) } }
+
 tasks {
   withType<KotlinCompile>().configureEach {
     compilerOptions { jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget) }
@@ -32,6 +34,15 @@ kotlin {
 
 gradlePlugin {
   plugins {
+
+    // Re-exposure of plugin from dependency. Gradle doesn't expose the plugin itself.
+    create("com.gradle.enterprise") {
+      id = "com.gradle.enterprise"
+      implementationClass = "com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin"
+      displayName = "Gradle Enterprise"
+      description = "Gradle enterprise settings plugin re-exposed from dependency"
+    }
+
     // Uncomment the id to change plugin id for this pre-compiled plugin
     named("plugins.common") {
       // id = "dev.suresh.gradle.plugins.common"
@@ -39,6 +50,8 @@ gradlePlugin {
       description = "Common pre-compiled script plugin"
       tags = listOf("Common Plugin")
     }
+
+    // val settingsPlugin by creating {}
   }
 }
 
@@ -66,6 +79,8 @@ dependencies {
   implementation(libs.build.kotlinx.kover)
   implementation(libs.build.dokka)
   implementation(libs.build.ksp.redacted)
+  implementation(libs.build.gradle.enterprise)
+  implementation(libs.build.nexus.plugin)
   implementation(libs.build.nexus.plugin)
   implementation(libs.build.spotless.plugin)
   implementation(libs.build.shadow.plugin)
@@ -74,4 +89,7 @@ dependencies {
   implementation(libs.build.dependencyanalysis)
   implementation(libs.build.foojay.resolver)
   testImplementation(gradleTestKit())
+
+  // implementation(libs.build.jte.plugin)
+  // implementation(libs.build.includegit.plugin)
 }

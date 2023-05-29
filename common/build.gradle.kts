@@ -18,11 +18,7 @@ application {
       )
 }
 
-kotlin {
-  sourceSets {
-    val jvmMain by getting { dependencies { implementation(libs.slf4j.api) } }
-  }
-}
+dependencies { jvmMainImplementation(libs.slf4j.api) }
 
 tasks {
   // Add generated buildConfig to commonMain sourceSet

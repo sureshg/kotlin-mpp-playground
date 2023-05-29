@@ -225,7 +225,6 @@ val nodeConfigKey = "isNodeJSConfigured"
 var isNodeJSConfigured = System.getProperty(nodeConfigKey).toBoolean()
 
 if (!isNodeJSConfigured) {
-
   // https://kotlinlang.org/docs/js-project-setup.html#use-pre-installed-node-js
   rootProject.plugins.withType<NodeJsRootPlugin> {
     rootProject.extensions.configure<NodeJsRootExtension> {
@@ -233,7 +232,6 @@ if (!isNodeJSConfigured) {
       System.setProperty(nodeConfigKey, "true")
     }
   }
-
   // https://kotlinlang.org/docs/js-project-setup.html#version-locking-via-kotlin-js-store
   rootProject.plugins.withType<YarnPlugin> {
     rootProject.extensions.configure<YarnRootExtension> {

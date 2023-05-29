@@ -1,6 +1,7 @@
 Kotlin Multiplatform Playground!
 ----------
-[![Build Status][build-svg]][build-job]
+
+[//]: # ([![Build Status][build-svg]][build-job])
 [![OpenJDK Version][java_img]][java_url]
 [![Kotlin release][kt_img]][kt_url]
 [![Style guide][ktfmt_img]][ktfmt_url]
@@ -10,8 +11,8 @@ Kotlin Multiplatform Playground!
 ```bash
 # Mac OS
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 21.ea.23-open
-$ sdk u java 21.ea.23-open
+$ sdk i java 21.ea.24-open
+$ sdk u java 21.ea.24-open
 ```
 
 ### Build & Run
@@ -28,9 +29,9 @@ For doing the release build, go to [build job][build-job] and click `Release Bui
 
 [java_img]: https://img.shields.io/badge/OpenJDK-21-ea791d?logo=java&style=for-the-badge&logoColor=ea791d
 
-[build-job]: 
+[build-job]:
 
-[build-svg]: 
+[build-svg]:
 
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 
