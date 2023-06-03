@@ -2,7 +2,7 @@ import dev.suresh.gradle.addModules
 
 plugins {
   application
-  id("plugins.kotlinJvm")
+  id("plugins.kotlin.jvm")
 }
 
 application {

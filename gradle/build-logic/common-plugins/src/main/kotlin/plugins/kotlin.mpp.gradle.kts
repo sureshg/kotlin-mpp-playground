@@ -8,6 +8,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.yarn.*
+import tasks.BuildConfig
 
 plugins {
   java
@@ -107,6 +108,7 @@ kotlinMPP.apply {
       }
 
       testTask {
+        enabled = true
         testLogging.showStandardStreams = true
         useKarma { useChromeHeadless() }
       }
@@ -196,6 +198,14 @@ koverReport {
 }
 
 tasks {
+
+  // Since buildConfig needs to execute only once, add this task the commonMain sourceSet.
+  if (project.name == "common") {
+    val buildConfig by registering(BuildConfig::class) { classFqName = "BuildConfig" }
+    kotlinMPP.sourceSets.named("commonMain") { kotlin.srcDirs(buildConfig) }
+    maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
+  }
+
   // Copy the js app to jvm resource
   named<Copy>("jvmProcessResources") {
     val jsBrowserDist = named("jsBrowserDistribution")
@@ -220,16 +230,18 @@ tasks {
   }
 }
 
-// A workaround to initialize Node.js and Yarn extensions only once in a multimodule project
-val nodeConfigKey = "isNodeJSConfigured"
-var isNodeJSConfigured = System.getProperty(nodeConfigKey).toBoolean()
+// A workaround to initialize Node.js and Yarn extensions only once in a multimodule
+// project by setting extra properties on a root project from a subproject.
+// https://docs.gradle.org/current/userguide/kotlin_dsl.html#extra_properties
 
-if (!isNodeJSConfigured) {
+var isNodeJSConfigured: String? by rootProject.extra
+
+if (!isNodeJSConfigured.toBoolean()) {
   // https://kotlinlang.org/docs/js-project-setup.html#use-pre-installed-node-js
   rootProject.plugins.withType<NodeJsRootPlugin> {
     rootProject.extensions.configure<NodeJsRootExtension> {
       download = true
-      System.setProperty(nodeConfigKey, "true")
+      isNodeJSConfigured = "true"
     }
   }
   // https://kotlinlang.org/docs/js-project-setup.html#version-locking-via-kotlin-js-store
@@ -237,7 +249,7 @@ if (!isNodeJSConfigured) {
     rootProject.extensions.configure<YarnRootExtension> {
       download = true
       lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
-      System.setProperty(nodeConfigKey, "true")
+      isNodeJSConfigured = "true"
     }
   }
 }

@@ -123,7 +123,6 @@ tasks {
           "-Xemit-jvm-type-annotations",
           "-Xjspecify-annotations=strict",
           "-Xextended-compiler-checks",
-          "-Xuse-fir-extended-checkers",
           // "-Xjdk-release=$javaVersion",
           // "-Xadd-modules=ALL-MODULE-PATH",
           // "-Xmodule-path=",
@@ -133,6 +132,7 @@ tasks {
           // "-Xgenerate-strict-metadata-version",
       )
     }
+
     // finalizedBy("spotlessApply")
   }
 }
@@ -143,8 +143,13 @@ dependencies {
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.datetime)
+  // Auto-service
+  ksp(libs.ksp.auto.service)
+  implementation(libs.google.auto.annotations)
+
   testImplementation(platform(libs.junit.bom))
   testImplementation(kotlin("test-junit5"))
+  testImplementation(libs.junit.jupiter)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.slf4j.simple)
 }

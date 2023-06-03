@@ -5,8 +5,8 @@ kotlin-ksp                     = "1.9.0-Beta-1.0.11"
 kotlin-jvmtarget               = "20"
 kotlin-dsl-jvmtarget           = "17"
 kotlin-api-version             = "1.9"
-kotlin-lang-version            = "1.9"
-gradle                         = "8.1.1"
+kotlin-lang-version            = "2.0"
+gradle                         = "8.2-rc-1"
 java-vendor                    = "Oracle"
 java-jvmArguments              = "--enable-preview"
 java-addModules                = "jdk.incubator.concurrent,jdk.incubator.vector"
@@ -18,20 +18,32 @@ app-module                     = "dev.suresh.kotlinmpp"
 githubProject                  = "https://github.com/sureshg/kotlin-mpp-playground"
 
 # Gradle Dependencies Versions
-kotlinx-kover                  = "0.7.0"
+kotlinx-kover                  = "0.7.1"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "2.0.0-beta13"
+classgraph                     = "4.8.160"
 dokka                          = "1.8.10"
+jgit                           = "6.2.0.202206071550-r"
 jte                            = "2.3.2"
 junit                          = "5.10.0-M1"
 kotlinx-atomicfu               = "0.20.2"
 kotlinx-coroutines             = "1.7.1"
 kotlinx-datetime               = "0.4.0"
 kotlinx-serialization          = "1.5.1"
+ktor                           = "2.3.0"
+kotlinRetry                    = "1.0.9"
+koin                           = "3.1.5"
+kotest                         = "5.6.2"
+ksp-auto-service               = "1.0.0"
 ksp-redacted                   = "1.4.0"
+ksp-powerassert                = "0.13.0"
 slf4j                          = "2.0.7"
 ktfmt                          = "0.44"
 google-javaformat              = "1.17.0"
+google-auto-service            = "1.0.1"
+google-tink                    = "1.8.0"
+graalvm                        = "22.3.2"
+rsocket                        = "0.15.4"
 
 # Plugin versions
 benmanes                       = "0.46.0"
@@ -44,6 +56,7 @@ semver-plugin                  = "0.5.0-alpha.2"
 taskinfo                       = "2.1.0"
 dependency-analysis            = "1.20.0"
 best-practices-plugin          = "0.9"
+graalvm-nativeimage            = "0.9.22"
 
 
 [libraries]
@@ -68,6 +81,7 @@ build-semver-plugin             = { module = "com.javiersc.semver:semver-gradle-
 build-zip-prefixer              = { module = "net.e175.klaus:zip-prefixer"                                    , version.ref = "zip-prefixer" }
 build-foojay-resolver           = { module = "org.gradle.toolchains:foojay-resolver"                          , version.ref = "foojay-resolver" }
 build-kotlinx-kover             = { module = "org.jetbrains.kotlinx:kover-gradle-plugin"                      , version.ref = "kotlinx-kover" }
+build-nativeimage-plugin        = { module = "org.graalvm.buildtools:native-gradle-plugin"                    , version.ref = "graalvm-nativeimage"}
 
 # Gradle Dependencies
 kotlin-bom                    = { module = "org.jetbrains.kotlin:kotlin-bom"                    , version.ref = "kotlin"}
@@ -81,14 +95,60 @@ kotlinx-serialization-core    = { module = "org.jetbrains.kotlinx:kotlinx-serial
 kotlinx-serialization-json    = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"   , version.ref = "kotlinx-serialization"}
 kotlinx-datetime              = { module = "org.jetbrains.kotlinx:kotlinx-datetime"             , version.ref = "kotlinx-datetime"}
 kotlinx-atomicfu              = { module = "org.jetbrains.kotlinx:atomicfu"                     , version.ref = "kotlinx-atomicfu"}
-ajalt-mordant                 = { module = "com.github.ajalt.mordant:mordant"                   , version.ref = "ajalt-mordant"}
-jte-runtime                   = { module = "gg.jte:jte-runtime"                                 , version.ref = "jte" }
-junit-bom                     = { module = "org.junit:junit-bom"                                , version.ref = "junit"}
-slf4j-api                     = { module = "org.slf4j:slf4j-api"                                , version.ref = "slf4j"}
-slf4j-simple                  = { module = "org.slf4j:slf4j-simple"                             , version.ref = "slf4j"}
+
+kotlinRetry                = { module = "com.michael-bull.kotlin-retry:kotlin-retry"       , version.ref = "kotlinRetry" }
+kotest-core                = { module = "io.kotest:kotest-assertions-core"                 , version.ref = "kotest"}
+kotest-junit5              = { module = "io.kotest:kotest-runner-junit5"                   , version.ref = "kotest"}
+
+ktor-bom                    = { module = "io.ktor:ktor-bom"                                 , version.ref = "ktor"}
+ktor-server                 = { module = "io.ktor:ktor-server-core"                         , version.ref = "ktor"}
+ktor-auth                   = { module = "io.ktor:ktor-auth"                                , version.ref = "ktor"}
+ktor-serialization          = { module = "io.ktor:ktor-serialization"                       , version.ref = "ktor"}
+ktor-server-host-common     = { module = "io.ktor:ktor-server-host-common"                  , version.ref = "ktor"}
+ktor-server-netty           = { module = "io.ktor:ktor-server-netty"                        , version.ref = "ktor"}
+ktor-server-tests           = { module = "io.ktor:ktor-server-tests"                        , version.ref = "ktor"}
+
+ktor-client-core            = { module = "io.ktor:ktor-client-core"                         , version.ref = "ktor"}
+ktor-client-cio             = { module = "io.ktor:ktor-client-cio"                          , version.ref = "ktor"}
+ktor-client-java            = { module = "io.ktor:ktor-client-java"                         , version.ref = "ktor"}
+ktor-client-okhttp          = { module = "io.ktor:ktor-client-okhttp"                       , version.ref = "ktor"}
+ktor-client-jetty           = { module = "io.ktor:ktor-client-jetty"                        , version.ref = "ktor"}
+ktor-client-serialization   = { module = "io.ktor:ktor-client-serialization"                , version.ref = "ktor"}
+ktor-client-websockets      = { module = "io.ktor:ktor-client-websockets"                   , version.ref = "ktor"}
+ktor-client-auth            = { module = "io.ktor:ktor-client-auth"                         , version.ref = "ktor"}
+ktor-client-logging         = { module = "io.ktor:ktor-client-logging"                      , version.ref = "ktor"}
+
+rsocket-ktor-client         = { module = "io.rsocket.kotlin:rsocket-ktor-client"            , version.ref = "rsocket"}
+rsocket-ktor-server         = { module = "io.rsocket.kotlin:rsocket-ktor-server"            , version.ref = "rsocket"}
+
+ajalt-mordant               = { module = "com.github.ajalt.mordant:mordant"           , version.ref = "ajalt-mordant"}
+jgit                        = { module = "org.eclipse.jgit:org.eclipse.jgit"          , version.ref = "jgit" }
+jte                         = { module = "gg.jte:jte"                                 , version.ref = "jte" }
+jte-runtime                 = { module = "gg.jte:jte-runtime"                         , version.ref = "jte" }
+jte-kotlin                  = { module = "gg.jte:jte-kotlin"                          , version.ref = "jte" }
+junit-bom                   = { module = "org.junit:junit-bom"                        , version.ref = "junit"}
+junit-jupiter               = { module = "org.junit.jupiter:junit-jupiter"            , version.ref = "junit"}
+junit-jupiter-api           = { module = "org.junit.jupiter:junit-jupiter-api"        , version.ref = "junit"}
+junit-jupiter-engine        = { module = "org.junit.jupiter:junit-jupiter-engine"     , version.ref = "junit"}
+junit-jupiter-params        = { module = "org.junit.jupiter:junit-jupiter-params"     , version.ref = "junit"}
+
+graalvm-sdk                 = { module = "org.graalvm.sdk:graal-sdk"                        , version.ref = "graalvm"}
+google-auto-annotations     = { module = "com.google.auto.service:auto-service-annotations" , version.ref = "google-auto-service"}
+google-tink                 = { module = "com.google.crypto.tink:tink"                      , version.ref = "google-tink"}
+ksp-auto-service            = { module = "dev.zacsweers.autoservice:auto-service-ksp"       , version.ref = "ksp-auto-service"}
+koin-core                   = { module = "io.insert-koin:koin-core"                         , version.ref = "koin"}
+koin-ktor                   = { module = "io.insert-koin:koin-ktor"                         , version.ref = "koin"}
+koin-slf4j                  = { module = "io.insert-koin:koin-logger-slf4j"                 , version.ref = "koin"}
+koin-test                   = { module = "io.insert-koin:koin-test"                         , version.ref = "koin"}
+koin-test-junit5            = { module = "io.insert-koin:koin-test-junit5"                  , version.ref = "koin"}
+
+classgraph                  = { module = "io.github.classgraph:classgraph"                    , version.ref = "classgraph"}
+slf4j-api                   = { module = "org.slf4j:slf4j-api"                                , version.ref = "slf4j"}
+slf4j-simple                = { module = "org.slf4j:slf4j-simple"                             , version.ref = "slf4j"}
+slf4j-nop                   = { module = "org.slf4j:slf4j-nop"                                , version.ref = "slf4j"}
 
 [plugins]
 benmanes                    = { id = "com.github.ben-manes.versions"                         , version.ref = "benmanes" }
 jte                         = { id = "gg.jte.gradle"                                         , version.ref = "jte" }
 bestpractices               = { id = "com.autonomousapps.plugin-best-practices-plugin"       , version.ref = "best-practices-plugin" }
-
+graalvm-nativeimage         = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}

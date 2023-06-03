@@ -11,8 +11,8 @@ Kotlin Multiplatform Playground!
 ```bash
 # Mac OS
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 21.ea.24-open
-$ sdk u java 21.ea.24-open
+$ sdk i java 21.ea.25-open
+$ sdk u java 21.ea.25-open
 ```
 
 ### Build & Run
