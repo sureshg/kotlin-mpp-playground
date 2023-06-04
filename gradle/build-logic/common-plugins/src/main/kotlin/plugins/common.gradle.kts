@@ -7,7 +7,6 @@ import dev.suresh.gradle.libs
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.spi.*
-import org.gradle.api.tasks.testing.logging.*
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
 import tasks.*
@@ -34,7 +33,7 @@ if (hasCleanTask) {
   )
 }
 
-afterEvaluate { println("=== Project Configuration Completed ===") }
+afterEvaluate { logger.lifecycle(TextColors.magenta("=== Project Configuration Completed ===")) }
 
 idea {
   module {
@@ -51,10 +50,7 @@ java {
   withSourcesJar()
   withJavadocJar()
 
-  toolchain {
-    languageVersion = toolchainVersion
-    vendor = toolchainVendor
-  }
+  toolchain { configureJvmToolchain() }
 }
 
 @Suppress("UnstableApiUsage", "UNUSED_VARIABLE")
@@ -63,29 +59,9 @@ testing {
     val test by getting(JvmTestSuite::class) { useJUnitJupiter(libs.versions.junit) }
     // OR "test"(JvmTestSuite::class) {}
 
-    // Configure all test suites
     withType(JvmTestSuite::class) {
-      targets.configureEach {
-        testTask {
-          jvmArgs(jvmArguments)
-          reports.html.required = true
-          maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
-
-          testLogging {
-            events =
-                setOf(
-                    TestLogEvent.STANDARD_ERROR,
-                    TestLogEvent.FAILED,
-                    TestLogEvent.SKIPPED,
-                )
-            exceptionFormat = TestExceptionFormat.FULL
-            showExceptions = true
-            showCauses = true
-            showStackTraces = true
-            showStandardStreams = true
-          }
-        }
-      }
+      // Configure all test suites
+      targets.configureEach { testTask { configureJavaTest() } }
     }
   }
 }

@@ -19,35 +19,15 @@ plugins {
 java {
   withSourcesJar()
   withJavadocJar()
-
-  toolchain {
-    languageVersion = toolchainVersion
-    vendor = toolchainVendor
-  }
+  toolchain { configureJvmToolchain() }
 }
 
 kotlin {
   sourceSets.all {
-    languageSettings.apply {
-      progressiveMode = true
-      languageVersion = kotlinLangVersion.get().version
-      optIn("kotlin.ExperimentalStdlibApi")
-      optIn("kotlin.contracts.ExperimentalContracts")
-      optIn("kotlin.ExperimentalUnsignedTypes")
-      optIn("kotlin.io.path.ExperimentalPathApi")
-      optIn("kotlin.time.ExperimentalTime")
-      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-      optIn("kotlinx.serialization.ExperimentalSerializationApi")
-      optIn("kotlin.ExperimentalMultiplatform")
-      optIn("kotlin.js.ExperimentalJsExport")
-    }
+    languageSettings { configureKotlinLang() }
     // kotlin.setSrcDirs(listOf("src/kotlin"))
   }
-
-  jvmToolchain {
-    languageVersion = toolchainVersion
-    vendor = toolchainVendor
-  }
+  jvmToolchain { configureJvmToolchain() }
 }
 
 atomicfu {
@@ -76,63 +56,11 @@ koverReport {
 
 tasks {
   // Configure "compileJava" and "compileTestJava" tasks.
-  withType<JavaCompile>().configureEach {
-    options.apply {
-      encoding = "UTF-8"
-      release = javaRelease
-      isIncremental = true
-      isFork = true
-      debugOptions.debugLevel = "source,lines,vars"
-      // For Gradle worker daemon.
-      forkOptions.jvmArgs?.addAll(jvmArguments)
-      compilerArgs.addAll(
-          jvmArguments +
-              listOf(
-                  "-Xlint:all",
-                  "-parameters",
-                  "--add-modules=$addModules",
-                  // "-Xlint:-deprecation", // suppress deprecations
-                  // "-Xlint:lossy-conversions", // suppress lossy conversions
-                  // "-XX:+IgnoreUnrecognizedVMOptions",
-                  // "--add-exports",
-                  // "java.base/sun.nio.ch=ALL-UNNAMED",
-                  // "--patch-module",
-                  // "$moduleName=${sourceSets.main.get().output.asPath}"
-              ),
-      )
-    }
-  }
+  withType<JavaCompile>().configureEach { configureJavac() }
 
   withType<KotlinCompile>().configureEach {
     usePreciseJavaTracking = true
-    compilerOptions {
-      jvmTarget = kotlinJvmTarget
-      apiVersion = kotlinApiVersion
-      languageVersion = kotlinLangVersion
-      verbose = true
-      javaParameters = true
-      allWarningsAsErrors = false
-      suppressWarnings = false
-      freeCompilerArgs.addAll(
-          "-Xadd-modules=$addModules",
-          "-Xjsr305=strict",
-          "-Xjvm-default=all",
-          "-Xassertions=jvm",
-          "-Xcontext-receivers",
-          "-Xallow-result-return-type",
-          "-Xemit-jvm-type-annotations",
-          "-Xjspecify-annotations=strict",
-          "-Xextended-compiler-checks",
-          // "-Xjdk-release=$javaVersion",
-          // "-Xadd-modules=ALL-MODULE-PATH",
-          // "-Xmodule-path=",
-          // "-Xjvm-enable-preview",
-          // "-Xjavac-arguments=\"--add-exports java.base/sun.nio.ch=ALL-UNNAMED\"",
-          // "-Xexplicit-api={strict|warning|disable}",
-          // "-Xgenerate-strict-metadata-version",
-      )
-    }
-
+    compilerOptions { configureKotlinJvm() }
     // finalizedBy("spotlessApply")
   }
 }
@@ -146,7 +74,7 @@ dependencies {
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)
-
+  // Test dependencies
   testImplementation(platform(libs.junit.bom))
   testImplementation(kotlin("test-junit5"))
   testImplementation(libs.junit.jupiter)

@@ -1,12 +1,12 @@
 package plugins
 
+import com.google.devtools.ksp.gradle.KspTaskJvm
 import dev.suresh.gradle.*
 import dev.suresh.gradle.libs
-import org.gradle.api.tasks.testing.logging.*
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.dsl.*
+import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.targets.js.yarn.*
 import tasks.BuildConfig
 
@@ -21,81 +21,31 @@ plugins {
 
 // Workaround for "The root project is not yet available for build" error.
 // https://slack-chats.kotlinlang.org/t/8236845/does-anybody-use-composite-builds-build-logic-with-applying-
-
 apply(plugin = "org.jetbrains.kotlin.multiplatform")
 
 val kotlinMPP = extensions.getByType<KotlinMultiplatformExtension>()
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlinMPP.apply {
   targetHierarchy.default()
 
-  // Configure all compilations of all targets
+  jvmToolchain { configureJvmToolchain() }
+
   targets.all {
-    compilations.all {
-      compilerOptions.configure {
-        apiVersion = kotlinApiVersion
-        languageVersion = kotlinLangVersion
-        allWarningsAsErrors = false
-      }
-    }
+    // Configure all compilations of all targets
+    compilations.all { compilerOptions.configure { configureKotlinCommon() } }
   }
 
   jvm {
     withJava()
     compilations.all {
-      compileJavaTaskProvider?.configure {
-        options.apply {
-          encoding = "UTF-8"
-          release = javaRelease
-          isIncremental = true
-          isFork = true
-          debugOptions.debugLevel = "source,lines,vars"
-          forkOptions.jvmArgs?.addAll(jvmArguments)
-          compilerArgs.addAll(
-              jvmArguments + listOf("-Xlint:all", "-parameters", "--add-modules=$addModules"))
-        }
-      }
-
-      compilerOptions.configure {
-        jvmTarget = kotlinJvmTarget
-        verbose = true
-        javaParameters = true
-        suppressWarnings = false
-        freeCompilerArgs.addAll(
-            "-Xadd-modules=$addModules",
-            "-Xjsr305=strict",
-            "-Xjvm-default=all",
-            "-Xassertions=jvm",
-            "-Xallow-result-return-type",
-            "-Xemit-jvm-type-annotations",
-            "-Xjspecify-annotations=strict",
-        )
-      }
+      compileJavaTaskProvider?.configure { configureJavac() }
+      compilerOptions.configure { configureKotlinJvm() }
     }
 
     // val test by testRuns.existing
-    testRuns.configureEach {
-      executionTask.configure {
-        useJUnitPlatform()
-        jvmArgs(jvmArguments)
-        reports.html.required = true
-        testLogging {
-          events =
-              setOf(
-                  TestLogEvent.STANDARD_ERROR,
-                  TestLogEvent.FAILED,
-                  TestLogEvent.SKIPPED,
-              )
-          exceptionFormat = TestExceptionFormat.FULL
-          showExceptions = true
-          showCauses = true
-          showStackTraces = true
-          showStandardStreams = true
-        }
-      }
-    }
+    testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
   }
+
   // jvm("desktop") {}
 
   js(IR) {
@@ -113,49 +63,27 @@ kotlinMPP.apply {
         useKarma { useChromeHeadless() }
       }
 
-      // @OptIn(ExperimentalDistributionDsl::class)
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
   }
 
-  //  wasm {
-  //    binaries.executable()
-  //    browser {
-  //      commonWebpackConfig {
-  //        devServer =
-  //            (devServer ?: KotlinWebpackConfig.DevServer()).copy(
-  //                open =
-  //                    mapOf(
-  //                        "app" to
-  //                            mapOf(
-  //                                "name" to "google chrome",
-  //                            )),
-  //            )
-  //      }
-  //    }
-  //  }
-
-  jvmToolchain {
-    languageVersion = toolchainVersion
-    vendor = toolchainVendor
+  // Disable wasm by default as some of the common dependencies are not compatible with wasm.
+  if (project.hasProperty("wasm")) {
+    wasm {
+      binaries.executable()
+      browser {
+        commonWebpackConfig {
+          devServer =
+              (devServer ?: KotlinWebpackConfig.DevServer()).copy(
+                  open = mapOf("app" to mapOf("name" to "google chrome")))
+        }
+      }
+    }
   }
 
   @Suppress("UNUSED_VARIABLE")
   this.sourceSets {
-    all {
-      languageSettings.apply {
-        progressiveMode = true
-        optIn("kotlin.ExperimentalStdlibApi")
-        optIn("kotlin.contracts.ExperimentalContracts")
-        optIn("kotlin.ExperimentalUnsignedTypes")
-        optIn("kotlin.io.path.ExperimentalPathApi")
-        optIn("kotlin.time.ExperimentalTime")
-        optIn("kotlin.ExperimentalMultiplatform")
-        optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-        optIn("kotlinx.serialization.ExperimentalSerializationApi")
-        optIn("kotlin.js.ExperimentalJsExport")
-      }
-    }
+    all { languageSettings { configureKotlinLang() } }
 
     val commonMain by getting {
       dependencies {
@@ -172,11 +100,28 @@ kotlinMPP.apply {
       }
     }
 
-    val jvmMain by getting { dependencies { implementation(libs.kotlin.stdlib.jdk8) } }
-    val jvmTest by getting
+    val jvmMain by getting {
+      dependencies {
+        implementation(libs.kotlin.stdlib.jdk8)
+        // https://kotlinlang.org/docs/ksp-multiplatform.html
+        project.dependencies.add("kspJvm", libs.ksp.auto.service)
+        implementation(libs.google.auto.annotations)
+      }
+    }
+
+    val jvmTest by getting {
+      dependencies {
+        implementation(project.dependencies.platform(libs.junit.bom))
+        implementation(kotlin("test-junit5"))
+      }
+    }
+
     val jsMain by getting
     val jsTest by getting
   }
+
+  // kotlinDaemonJvmArgs = jvmArguments
+  // explicitApiWarning()
 }
 
 ksp {
@@ -199,7 +144,7 @@ koverReport {
 
 tasks {
 
-  // Since buildConfig needs to execute only once, add this task the commonMain sourceSet.
+  // Since buildConfig needs to execute only once, add this task to the commonMain sourceSet.
   if (project.name == "common") {
     val buildConfig by registering(BuildConfig::class) { classFqName = "BuildConfig" }
     kotlinMPP.sourceSets.named("commonMain") { kotlin.srcDirs(buildConfig) }
@@ -221,12 +166,12 @@ tasks {
     }
   }
 
-  withType<KotlinJsCompile>().configureEach {
-    kotlinOptions {
-      // sourceMap = true
-      // sourceMapEmbedSources = "always"
-      // freeCompilerArgs += listOf("-Xir-per-module")
-    }
+  withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
+
+  // configure jvm target for ksp
+  withType(KspTaskJvm::class).all {
+    compilerOptions { configureKotlinJvm() }
+    jvmTargetValidationMode = JvmTargetValidationMode.WARNING
   }
 }
 
@@ -254,4 +199,6 @@ if (!isNodeJSConfigured.toBoolean()) {
   }
 }
 
-// dependencies { add("kspJvm", project(":ksp-processor")) }
+dependencies {
+  // add("kspJvm", project(":ksp-processor"))
+}

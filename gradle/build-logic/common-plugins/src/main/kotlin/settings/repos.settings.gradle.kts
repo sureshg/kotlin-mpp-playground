@@ -20,6 +20,10 @@ pluginManagement {
       }
     }
   }
+
+  plugins {
+    // id("org.jetbrains.compose").version(extra["compose.version"] as String)
+  }
 }
 
 // Apply the plugins to all projects
@@ -65,7 +69,7 @@ gradleEnterprise {
       publishAlways()
       isUploadInBackground = false
       tag("GITHUB_ACTION")
-      // buildScanPublished { addJobSummary() }
+      buildScanPublished { addJobSummary() }
     }
   }
 }
