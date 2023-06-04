@@ -1,1 +1,1 @@
-plugins { id("plugins.kotlin.mpp") }
+plugins { plugins.kotlin.mpp }

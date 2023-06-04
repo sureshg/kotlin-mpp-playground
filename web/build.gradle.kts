@@ -1,4 +1,4 @@
-plugins { id("plugins.kotlin.mpp") }
+plugins { plugins.kotlin.mpp }
 
 // kotlin.sourceSets.jsMain.configure {
 //  println(implementationConfigurationName)

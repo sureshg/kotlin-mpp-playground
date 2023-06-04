@@ -1,5 +1,5 @@
 plugins {
-  id("plugins.common")
-  id("plugins.misc")
+  plugins.common
+  plugins.misc
   kotlin("multiplatform") apply false
 }

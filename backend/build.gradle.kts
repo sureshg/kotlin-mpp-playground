@@ -2,7 +2,7 @@ import common.addModules
 
 plugins {
   application
-  id("plugins.kotlin.jvm")
+  plugins.kotlin.jvm
 }
 
 application {
