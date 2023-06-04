@@ -1,8 +1,7 @@
 package plugins
 
 import com.google.devtools.ksp.gradle.KspTaskJvm
-import dev.suresh.gradle.*
-import dev.suresh.gradle.libs
+import common.*
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*

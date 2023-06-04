@@ -1,7 +1,6 @@
 package plugins
 
-import dev.suresh.gradle.*
-import dev.suresh.gradle.libs
+import common.*
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 

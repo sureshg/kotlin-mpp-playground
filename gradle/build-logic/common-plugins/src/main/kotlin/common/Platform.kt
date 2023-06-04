@@ -1,3 +1,5 @@
+package common
+
 object Platform {
 
   enum class OS(val id: String) {

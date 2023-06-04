@@ -1,6 +1,6 @@
 package plugins
 
-import dev.suresh.gradle.libs
+import common.libs
 import org.gradle.kotlin.dsl.*
 
 plugins {

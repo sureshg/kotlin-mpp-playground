@@ -1,6 +1,6 @@
 package plugins
 
-import dev.suresh.gradle.libs
+import common.libs
 
 plugins {
   `maven-publish`

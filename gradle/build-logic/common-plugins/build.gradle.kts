@@ -54,9 +54,9 @@ gradlePlugin {
     // Uncomment the id to change plugin id for this pre-compiled plugin
     named("plugins.common") {
       // id = "dev.suresh.gradle.plugins.common"
-      displayName = "Common plugin"
+      displayName = "Common build-logic plugin"
       description = "Common pre-compiled script plugin"
-      tags = listOf("Common Plugin")
+      tags = listOf("Common Plugin", "build-logic")
     }
 
     // val settingsPlugin by creating {}

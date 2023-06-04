@@ -1,7 +1,7 @@
 package tasks
 
-import dev.suresh.gradle.javaToolchainPath
-import dev.suresh.gradle.libs
+import common.javaToolchainPath
+import common.libs
 import java.io.*
 import javax.inject.*
 import org.gradle.api.*

@@ -1,9 +1,7 @@
 package plugins
 
 import com.github.ajalt.mordant.rendering.TextColors
-import dev.suresh.gradle.*
-import dev.suresh.gradle.catalogs
-import dev.suresh.gradle.libs
+import common.*
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.spi.*

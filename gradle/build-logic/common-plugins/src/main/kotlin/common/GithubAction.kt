@@ -1,4 +1,5 @@
-import GithubAction.MsgType.*
+package common
+
 import java.nio.file.StandardOpenOption.*
 import java.util.*
 import kotlin.io.path.*
@@ -27,7 +28,7 @@ object GithubAction {
    * Prints a debug message to the log. You must create a secret named **ACTIONS_STEP_DEBUG** with
    * the value `true` to see the debug messages set by this command in the log.
    */
-  fun debug(message: String) = echo(message(message, DEBUG))
+  fun debug(message: String) = echo(message(message, MsgType.DEBUG))
 
   /**
    * Creates a notice message and prints the message to the log. This message will create an
@@ -46,7 +47,7 @@ object GithubAction {
       echo(
           message(
               message = message,
-              type = NOTICE,
+              type = MsgType.NOTICE,
               title = title,
               file = file,
               line = line,
@@ -71,7 +72,7 @@ object GithubAction {
       echo(
           message(
               message = message,
-              type = WARNING,
+              type = MsgType.WARNING,
               title = title,
               file = file,
               line = line,
@@ -96,7 +97,7 @@ object GithubAction {
       echo(
           message(
               message = message,
-              type = ERROR,
+              type = MsgType.ERROR,
               title = title,
               file = file,
               line = line,
@@ -256,7 +257,7 @@ object GithubAction {
     append("::")
     append(type.name.lowercase())
     when {
-      type != DEBUG -> {
+      type != MsgType.DEBUG -> {
         val params = mutableListOf<String>()
         if (title.isNotBlank()) {
           params.add("title=$title")

@@ -1,7 +1,7 @@
 package settings
 
-import GithubAction
 import com.gradle.scan.plugin.PublishedBuildScan
+import common.GithubAction
 import org.gradle.kotlin.dsl.*
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
 

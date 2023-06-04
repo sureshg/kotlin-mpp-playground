@@ -1,4 +1,4 @@
-import dev.suresh.gradle.addModules
+import common.addModules
 
 plugins {
   application

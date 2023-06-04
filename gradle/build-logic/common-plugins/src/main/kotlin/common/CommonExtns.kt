@@ -1,4 +1,4 @@
-package dev.suresh.gradle
+package common
 
 import java.io.File
 import java.text.DecimalFormat

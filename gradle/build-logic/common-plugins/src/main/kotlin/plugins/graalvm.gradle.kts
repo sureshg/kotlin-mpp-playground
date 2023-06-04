@@ -1,9 +1,9 @@
 package plugins
 
-import GithubAction
-import Platform
 import com.javiersc.semver.project.gradle.plugin.SemverExtension
-import dev.suresh.gradle.*
+import common.*
+import common.GithubAction
+import common.Platform
 import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
 plugins {

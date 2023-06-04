@@ -1,4 +1,4 @@
-package dev.suresh.gradle
+package common
 
 import java.nio.file.Path
 import org.gradle.accessors.dm.LibrariesForLibs
