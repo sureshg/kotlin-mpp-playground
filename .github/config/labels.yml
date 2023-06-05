@@ -1,0 +1,63 @@
+- name: bug
+  description: Something isn't working
+  color: d73a4a
+- name: doc
+  description: Improvements to documentation
+  color: d4c5f9
+- name: duplicate
+  description: This issue or pull request already exists
+  color: cfd3d7
+- name: feature
+  color: 1d76db
+  description: New features
+- name: enhancement
+  description: Enhancement of existing functionality
+  color: 84b6eb
+- name: deprecated
+  description: Deprecating API
+  color: f4c21d
+- name: removed
+  description: Removing API
+  color: e4b21d
+- name: tests
+  description: Enhancement of tests
+  color: 0e8a16
+- name: java
+  description: Java/JDK changes
+  color: 03d0d6
+- name: gradle
+  description: Gradle changes
+  color: d0d603
+- name: maven
+  description: Maven changes
+  color: d60366
+- name: compose
+  description: Jetbrains Compose issues
+  color: 3cdc84
+- name: help
+  description: Help Wanted
+  color: 0e8a16
+- name: question
+  description: Questions and discussions
+  color: cc317c
+- name: dependencies
+  description: Changes that affect dependencies
+  color: 5319e7
+- name: docker
+  description: Container changes
+  color: e99695
+- name: github-actions
+  description: Github action workflow changes
+  color: ff7619
+- name: graalvm
+  description: GraalVM changes
+  color: 387E65
+- name: native-image
+  description: GraalVM native-image changes
+  color: A720DE
+- name: kotlin
+  description: Kotlin changes
+  color: 5319E7
+- name: kotlin-kmp
+  description: Kotlin Multiplatform changes
+  color: 7f52ff

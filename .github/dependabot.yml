@@ -1,0 +1,42 @@
+version: 2
+updates:
+  - package-ecosystem: "gradle"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    labels:
+      - "gradle"
+      - "dependencies"
+    reviewers:
+      - sureshg
+
+  - package-ecosystem: "gradle"
+    directory: "/gradle/build-logic"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    labels:
+      - "gradle"
+      - "dependencies"
+    reviewers:
+      - sureshg
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    open-pull-requests-limit: 5
+    labels:
+      - "github-actions"
+      - "dependencies"
+    reviewers:
+      - sureshg
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    labels:
+      - "docker"
+      - "dependencies"

@@ -1,0 +1,38 @@
+name: Dependabot auto-approve
+
+on: pull_request_target
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]'
+    steps:
+      - name: 🔧Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v1.4.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Approve a PR
+        run: gh pr review --approve "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Enable auto-merge for Dependabot PRs
+        if: steps.dependabot-metadata.outputs.update-type != 'version-update:semver-major'
+        run: gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+      - name: Add a label for dependencies
+        if: steps.dependabot-metadata.outputs.dependency-type == 'direct:production'
+        run: gh pr edit "$PR_URL" --add-label "dependencies"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}

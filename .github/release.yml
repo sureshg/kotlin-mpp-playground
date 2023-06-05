@@ -1,0 +1,39 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+      - ci
+      - skip-ci
+    authors:
+      - octocat
+  categories:
+    - title: New Features 🎉
+      labels:
+        - feat
+        - enhancement
+    - title: Breaking Changes 🛠
+      labels:
+        - Semver-Major
+        - breaking-change
+    - title: Fixes 🐛
+      labels:
+        - fix
+        - bug
+    - title: Maintenance 🧰
+      labels:
+        - chore
+        - maintenance
+    - title: Tests 🧪
+      labels:
+        - test
+    - title: Documentation 🖍️
+      labels:
+        - doc
+    - title: Dependencies 📦️
+      labels:
+        - deps
+        - dependencies
+        - chore(deps)
+    - title: Other Changes 🖇️
+      labels:
+        - "*"
