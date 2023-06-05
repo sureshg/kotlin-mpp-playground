@@ -1,7 +1,7 @@
 Kotlin Multiplatform Playground!
 ----------
 
-[//]: # ([![Build Status][build-svg]][build-job])
+[![GitHub Workflow Status][gha_badge]][gha_url]
 [![OpenJDK Version][java_img]][java_url]
 [![Kotlin release][kt_img]][kt_url]
 [![Style guide][ktfmt_img]][ktfmt_url]
@@ -21,8 +21,6 @@ $ sdk u java 21.ea.25-open
 $ ./gradlew build
 ```
 
-For doing the release build, go to [build job][build-job] and click `Release Build`
-
 <!-- Badges -->
 
 [java_url]: https://www.azul.com/downloads/?version=java-21-ea&package=jdk#zulu
@@ -32,6 +30,10 @@ For doing the release build, go to [build job][build-job] and click `Release Bui
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 
 [kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff&style=for-the-badge
+
+[gha_url]: https://github.com/sureshg/kotlin-mpp-playground/actions/workflows/build.yml
+
+[gha_badge]: https://img.shields.io/github/actions/workflow/status/sureshg/kotlin-mpp-playground/build.yml?branch=main&color=green&label=Build&logo=Github-Actions&logoColor=green&style=for-the-badge
 
 [sty_url]: https://kotlinlang.org/docs/coding-conventions.html
 

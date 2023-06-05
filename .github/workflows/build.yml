@@ -94,7 +94,7 @@ jobs:
 
       - name: 🚀 Deploy html docs to 🕸️website
         if: startsWith(github.ref, 'refs/tags/') && runner.os == 'XLinux'
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
           branch: main
           folder: build/dokka
@@ -104,7 +104,7 @@ jobs:
 
       - name: 🏖️ Deploy coverage report to website
         if: startsWith(github.ref, 'refs/tags/') && runner.os == 'XLinux'
-        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
           branch: main
           folder: build/reports
