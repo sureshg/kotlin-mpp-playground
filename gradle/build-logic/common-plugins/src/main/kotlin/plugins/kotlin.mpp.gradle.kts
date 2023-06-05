@@ -5,6 +5,7 @@ import common.*
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
+import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.targets.js.yarn.*
 import tasks.BuildConfig
@@ -165,13 +166,15 @@ tasks {
     }
   }
 
-  withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
-
   // configure jvm target for ksp
   withType(KspTaskJvm::class).all {
     compilerOptions { configureKotlinJvm() }
     jvmTargetValidationMode = JvmTargetValidationMode.WARNING
   }
+
+  withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
+
+  withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
 }
 
 // A workaround to initialize Node.js and Yarn extensions only once in a multimodule
@@ -186,8 +189,11 @@ if (!isNodeJSConfigured.toBoolean()) {
     rootProject.extensions.configure<NodeJsRootExtension> {
       download = true
       isNodeJSConfigured = "true"
+      // nodeVersion = "20.0.0-v8-canaryxxxx"
+      // nodeDownloadBaseUrl = "https://nodejs.org/download/v8-canary"
     }
   }
+
   // https://kotlinlang.org/docs/js-project-setup.html#version-locking-via-kotlin-js-store
   rootProject.plugins.withType<YarnPlugin> {
     rootProject.extensions.configure<YarnRootExtension> {

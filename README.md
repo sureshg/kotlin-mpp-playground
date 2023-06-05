@@ -23,7 +23,7 @@ $ ./gradlew build
 
 <!-- Badges -->
 
-[java_url]: https://www.azul.com/downloads/?version=java-21-ea&package=jdk#zulu
+[java_url]: https://jdk.java.net/21/
 
 [java_img]: https://img.shields.io/badge/OpenJDK-21-ea791d?logo=java&style=for-the-badge&logoColor=ea791d
 

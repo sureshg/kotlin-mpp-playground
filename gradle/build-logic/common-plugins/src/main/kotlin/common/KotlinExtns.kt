@@ -9,6 +9,7 @@ import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.assign
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
+import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 
 /** Java version properties. */
@@ -172,4 +173,9 @@ fun KotlinJsOptions.configureKotlinJs() {
   // sourceMap = true
   // sourceMapEmbedSources = "always"
   // freeCompilerArgs += listOf("-Xir-per-module")
+}
+
+context(Project)
+fun KotlinNpmInstallTask.configureKotlinNpm() {
+  //args.add("--ignore-engines")
 }
