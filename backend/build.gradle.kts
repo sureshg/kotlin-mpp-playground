@@ -1,4 +1,5 @@
 import common.addModules
+import common.mppTargetName
 
 plugins {
   application
@@ -15,5 +16,7 @@ application {
           "--enable-native-access=ALL-UNNAMED",
       )
 }
+
+mppTargetName = "jvm"
 
 dependencies { implementation(projects.common) }

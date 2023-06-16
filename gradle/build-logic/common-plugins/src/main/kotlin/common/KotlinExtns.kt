@@ -2,6 +2,7 @@ package common
 
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.api.attributes.Attribute
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.logging.*
@@ -54,6 +55,17 @@ val Project.isKotlinJvmProject
 val Project.isKotlinJsProject
   get() = plugins.hasPlugin("org.jetbrains.kotlin.js")
 
+// https://kotlinlang.org/docs/multiplatform-set-up-targets.html#distinguish-several-targets-for-one-platform
+val mppTargetAttr = Attribute.of("mpp.target.name", String::class.java)
+
+var Project.mppTargetName: String
+  get() = configurations.firstOrNull()?.attributes?.getAttribute(mppTargetAttr).orEmpty()
+  set(value) {
+    configurations.all {
+      attributes.attribute(mppTargetAttr, value)
+    }
+  }
+
 context(Project)
 fun JavaToolchainSpec.configureJvmToolchain() {
   languageVersion = toolchainVersion
@@ -96,6 +108,10 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   allWarningsAsErrors = false
   suppressWarnings = false
   verbose = true
+  freeCompilerArgs.addAll(
+    "-Xcontext-receivers",
+    "-Xallow-result-return-type",
+  )
 }
 
 context(Project)

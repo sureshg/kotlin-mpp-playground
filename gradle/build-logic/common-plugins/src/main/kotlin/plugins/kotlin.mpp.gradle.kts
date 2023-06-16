@@ -23,9 +23,9 @@ plugins {
 // https://slack-chats.kotlinlang.org/t/8236845/does-anybody-use-composite-builds-build-logic-with-applying-
 apply(plugin = "org.jetbrains.kotlin.multiplatform")
 
-val kotlinMPP = extensions.getByType<KotlinMultiplatformExtension>()
+val kotlinMultiplatform = extensions.getByType<KotlinMultiplatformExtension>()
 
-kotlinMPP.apply {
+kotlinMultiplatform.apply {
   targetHierarchy.default()
 
   jvmToolchain { configureJvmToolchain() }
@@ -44,9 +44,17 @@ kotlinMPP.apply {
 
     // val test by testRuns.existing
     testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
+    attributes.attribute(mppTargetAttr, "jvm")
   }
 
-  // jvm("desktop") {}
+  jvm("desktop") {
+    compilations.all {
+      compileJavaTaskProvider?.configure { configureJavac() }
+      compilerOptions.configure { configureKotlinJvm() }
+    }
+    testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
+    attributes.attribute(mppTargetAttr, "desktop")
+  }
 
   js(IR) {
     useEsModules()
@@ -83,13 +91,23 @@ kotlinMPP.apply {
 
   @Suppress("UNUSED_VARIABLE")
   this.sourceSets {
-    all { languageSettings { configureKotlinLang() } }
+    all {
+      languageSettings { configureKotlinLang() }
+      // Apply multiplatform library bom to all source sets
+      dependencies {
+        implementation(project.dependencies.enforcedPlatform(libs.kotlin.bom))
+        implementation(project.dependencies.enforcedPlatform(libs.ktor.bom))
+      }
+    }
 
     val commonMain by getting {
       dependencies {
         implementation(libs.kotlinx.coroutines.core)
         implementation(libs.kotlinx.datetime)
         implementation(libs.kotlinx.serialization.json)
+        implementation(libs.ktor.client.core)
+        implementation(libs.ktor.client.logging)
+        implementation(libs.ktor.client.serialization)
       }
     }
 
@@ -143,11 +161,10 @@ koverReport {
 }
 
 tasks {
-
-  // Since buildConfig needs to execute only once, add this task to the commonMain sourceSet.
   if (project.name == "common") {
+    // Register buildConfig task only for common module
     val buildConfig by registering(BuildConfig::class) { classFqName = "BuildConfig" }
-    kotlinMPP.sourceSets.named("commonMain") { kotlin.srcDirs(buildConfig) }
+    kotlinMultiplatform.sourceSets.named("commonMain") { kotlin.srcDirs(buildConfig) }
     maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
@@ -180,7 +197,6 @@ tasks {
 // A workaround to initialize Node.js and Yarn extensions only once in a multimodule
 // project by setting extra properties on a root project from a subproject.
 // https://docs.gradle.org/current/userguide/kotlin_dsl.html#extra_properties
-
 var isNodeJSConfigured: String? by rootProject.extra
 
 if (!isNodeJSConfigured.toBoolean()) {

@@ -41,7 +41,7 @@ jobs:
       max-parallel: 3
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
-        jdk: [ 21 ]
+        jdk: [ ea ]
 
     runs-on: ${{ matrix.os }}
     continue-on-error: false
@@ -52,12 +52,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: ⬇️ Download OpenJDK ${{ matrix.jdk }} build from ☁️jdk.java.net
+      - name: ⬇️ Download OpenJDK ${{ matrix.jdk }} latest build from ☁️jdk.java.net
         id: download-jdk
         uses: oracle-actions/setup-java@main
         with:
           website: jdk.java.net
           release: ${{ matrix.jdk }}
+          version: latest
           install: false
 
       - name: ☕ Set up OpenJDK ${{ matrix.jdk }}

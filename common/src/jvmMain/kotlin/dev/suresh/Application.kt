@@ -1,6 +1,6 @@
 package dev.suresh
 
-import jdk.incubator.concurrent.StructuredTaskScope
+import java.util.concurrent.StructuredTaskScope
 
 /** Run with **--enable-preview --add-modules=ALL-SYSTEM** jvm arguments */
 fun main() {
@@ -10,8 +10,8 @@ fun main() {
     println(getResource("common-jvm-res.txt")?.readText())
   }
   StructuredTaskScope.ShutdownOnFailure().use {
-    val task = it.fork { "Virtual thread on ${Lang("Kotlin")} $platform !" }
+    val subTask = it.fork { "Virtual thread on ${Lang("Kotlin")} $platform !" }
     it.join().throwIfFailed()
-    println(task.get())
+    println(subTask.get())
   }
 }

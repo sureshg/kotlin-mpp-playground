@@ -36,6 +36,7 @@ kotlin {
       optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl")
       optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl")
       optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
+      optIn("org.jetbrains.compose.ExperimentalComposeLibrary")
     }
   }
 }
