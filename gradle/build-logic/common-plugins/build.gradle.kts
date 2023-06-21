@@ -69,6 +69,9 @@ jte {
   contentType = gg.jte.ContentType.Plain
   sourceDirectory = sourceSets.main.get().resources.srcDirs.firstOrNull()?.toPath()
   generate()
+  // jteExtension("gg.jte.models.generator.ModelExtension")
+  // jteExtension("gg.jte.nativeimage.NativeResourcesExtension")
+  // binaryStaticContent = true
 }
 
 dependencies {
@@ -78,6 +81,7 @@ dependencies {
   implementation(libs.ajalt.mordant)
   implementation(libs.jte.runtime)
   implementation(libs.build.zip.prefixer)
+  // jteGenerate(libs.jte.models)
   // compileOnly(libs.jte.kotlin)
 
   implementation(libs.build.kotlin)

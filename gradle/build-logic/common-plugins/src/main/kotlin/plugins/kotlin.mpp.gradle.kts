@@ -160,13 +160,31 @@ koverReport {
   }
 }
 
+// https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
+val commonJsResources by
+    configurations.creating {
+      isCanBeConsumed = true
+      isCanBeResolved = false
+      attributes.attribute(Attribute.of("commonJSResources", String::class.java), "true")
+    }
+
 tasks {
-  if (project.name == "common") {
+  if (project.name == commonProjectName) {
     // Register buildConfig task only for common module
     val buildConfig by registering(BuildConfig::class) { classFqName = "BuildConfig" }
     kotlinMultiplatform.sourceSets.named("commonMain") { kotlin.srcDirs(buildConfig) }
     maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
+
+  // configure jvm target for ksp
+  withType(KspTaskJvm::class).all {
+    compilerOptions { configureKotlinJvm() }
+    jvmTargetValidationMode = JvmTargetValidationMode.WARNING
+  }
+
+  withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
+
+  withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
 
   // Copy the js app to jvm resource
   named<Copy>("jvmProcessResources") {
@@ -182,16 +200,12 @@ tasks {
       classpath(jvmJar)
     }
   }
+}
 
-  // configure jvm target for ksp
-  withType(KspTaskJvm::class).all {
-    compilerOptions { configureKotlinJvm() }
-    jvmTargetValidationMode = JvmTargetValidationMode.WARNING
-  }
+artifacts { add("commonJsResources", tasks.named("jsProcessResources")) }
 
-  withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
-
-  withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
+dependencies {
+  // add("kspJvm", project(":ksp-processor"))
 }
 
 // A workaround to initialize Node.js and Yarn extensions only once in a multimodule
@@ -218,8 +232,4 @@ if (!isNodeJSConfigured.toBoolean()) {
       isNodeJSConfigured = "true"
     }
   }
-}
-
-dependencies {
-  // add("kspJvm", project(":ksp-processor"))
 }

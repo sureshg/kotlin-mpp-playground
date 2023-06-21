@@ -7,7 +7,8 @@ Kotlin Multiplatform Playground!
 [![Style guide][ktfmt_img]][ktfmt_url]
 
 This repo shows a Gradle multi-project build structure that uses the [Kotlin Multiplatform][Kotlin Multiplatform] to
-build a [JVM][Kotlin-JVM], [JS][Kotlin-JS], [Desktop][Compose-Multiplatform] and Compose Web (wasm) applications.
+build a [JVM][Kotlin-JVM], [JS][Kotlin-JS], [Desktop][Compose-Multiplatform]
+and [Compose Web (wasm)][Compose-Multiplatform] applications.
 
 ### Install OpenJDK EA Build
 

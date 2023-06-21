@@ -27,6 +27,9 @@ internal val Project.catalogs
 val Project.xQuote
   get() = if (OperatingSystem.current().isWindows) """\"""" else """""""
 
+val Project.commonProjectName
+  get() = "common"
+
 val Project.isPlatformProject
   get() = plugins.hasPlugin("java-platform")
 

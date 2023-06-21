@@ -1,0 +1,18 @@
+@param items: List<String>
+
+<table>
+    <tr>
+        <td>Lang</td>
+        <td>Year</td>
+    </tr>
+    @for(item in items)
+        <tr>
+            <td>${item.substringBefore(",")}</td>
+            <td>${item.substringAfterLast(",")}</td>
+        </tr>
+    @else
+        <tr>
+            <td colspan="2">The list is empty!</td>
+        </tr>
+    @endfor
+</table>

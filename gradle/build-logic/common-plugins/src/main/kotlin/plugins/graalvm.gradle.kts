@@ -18,6 +18,7 @@ val debugEnabled = project.hasProperty("debug")
 val quickBuildEnabled = project.hasProperty("quick")
 val nativeBundleEnabled = project.hasProperty("bundle")
 val muslEnabled = project.hasProperty("musl")
+val reportsEnabled = project.hasProperty("reports")
 
 application {
   mainClass = libs.versions.app.mainclass
@@ -50,15 +51,20 @@ graalvmNative {
         add("-R:MaxHeapSize=64m")
         add("-H:+ReportExceptionStackTraces")
         add("-EBUILD_NUMBER=${project.version}")
-        add("-ECOMMIT_HASH=${ semverExtn.commits.get().first().hash}")
-        // add("--enable-url-protocols=http,https,jar,unix")
+        add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
+        // add("-H:+AddAllCharsets")
+        // add("-H:+IncludeAllLocales")
+        // add("-H:+IncludeAllTimeZones")
         // add("-H:IncludeResources=.*(message\\.txt|\\app.properties)\$")
+        // add("--enable-url-protocols=http,https,jar,unix")
+        // add("--initialize-at-build-time=kotlinx,kotlin,org.slf4j")
 
         if (Platform.isLinux) {
           when {
             muslEnabled -> {
               add("--static")
               add("--libc=musl")
+              // add("-H:CCompilerOption=-Wl,-z,stack-size=2097152")
             }
             else -> add("-H:+StaticExecutableWithDynamicLibC")
           }
@@ -75,14 +81,26 @@ graalvmNative {
           add("-H:+TraceNativeToolUsage")
           add("-H:+TraceSecurityServices")
           add("--trace-class-initialization=kotlin.annotation.AnnotationRetention")
+          // add("--debug-attach")
         }
 
         if (nativeBundleEnabled) {
           add("--bundle-create")
           add("--dry-run")
         }
+
+        if (reportsEnabled) {
+          add("-H:+BuildReport")
+          add("-H:DashboardDump=${layout.buildDirectory.dir("dashboard").get().asFile.path}")
+          add("-H:+DashboardHeap")
+          add("-H:+DashboardCode")
+          // add("-H:+DashboardPretty")
+          // add("-H:+DashboardAll")
+        }
+        // https://www.graalvm.org/dev/reference-manual/native-image/overview/BuildOptions/
+        // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
       }
-      jvmArgs = listOf("--add-modules=$addModules")
+      jvmArgs = listOf("--add-modules=$addModules", "-Xmx4G")
       systemProperties = mapOf("java.awt.headless" to "false")
       resources { autodetect() }
     }
