@@ -90,16 +90,19 @@ graalvmNative {
         }
 
         if (reportsEnabled) {
-          add("-H:+BuildReport")
-          add("-H:DashboardDump=${layout.buildDirectory.dir("dashboard").get().asFile.path}")
+          add("-H:DashboardDump=${layout.buildDirectory.file(niDashBoardDump).get().asFile.path}")
           add("-H:+DashboardHeap")
           add("-H:+DashboardCode")
           // add("-H:+DashboardPretty")
           // add("-H:+DashboardAll")
+          if (java.toolchain.vendor.get().matches("Oracle.*")) {
+            add("-H:+BuildReport")
+          }
         }
         // https://www.graalvm.org/dev/reference-manual/native-image/overview/BuildOptions/
         // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
       }
+
       jvmArgs = listOf("--add-modules=$addModules", "-Xmx4G")
       systemProperties = mapOf("java.awt.headless" to "false")
       resources { autodetect() }
@@ -150,7 +153,7 @@ configurations {
 tasks {
   val archiveTgz by
       creating(Tar::class) {
-        archiveFileName = archiveName()
+        archiveFileName = niArchiveName
         compression = Compression.GZIP
         destinationDirectory = project.layout.buildDirectory
         from(nativeCompile.map { it.outputFile })
@@ -160,7 +163,9 @@ tasks {
             setOutput("version", project.version)
             setOutput("native_image_name", archiveFileName.get())
             setOutput("native_image_path", archiveFile.get().asFile.absolutePath)
+            setOutput("native_image_dashboard", "$niDashBoardDump.bgv")
           }
+
           val binFile = archiveFile.get().asFile
           logger.lifecycle(
               "Native Image Archive: ${binFile.absolutePath} (${binFile.length().byteDisplaySize()})")
@@ -174,22 +179,26 @@ tasks {
   // shadowJar { mergeServiceFiles() }
 }
 
-fun archiveName() = buildString {
-  append(project.name)
-  append("-")
-  append(project.version)
-  append("-")
-  if (muslEnabled) {
-    append("static-")
+val niArchiveName
+  get() = buildString {
+    append(project.name)
+    append("-")
+    append(project.version)
+    append("-")
+    if (muslEnabled) {
+      append("static-")
+    }
+    if (nativeBundleEnabled) {
+      append("bundle-")
+    }
+    append(Platform.currentOS.id)
+    append("-")
+    append(Platform.currentArch.isa)
+    append(".tar.gz")
   }
-  if (nativeBundleEnabled) {
-    append("bundle-")
-  }
-  append(Platform.currentOS.id)
-  append("-")
-  append(Platform.currentArch.isa)
-  append(".tar.gz")
-}
+
+val niDashBoardDump
+  get() = "${project.name}-${project.version}"
 
 dependencies {
   // Dependencies required for native-image build. Use "graalCompileOnly" for compile only deps.
