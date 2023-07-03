@@ -80,7 +80,6 @@ jobs:
         id: gradle-build
         run: |
           ./gradlew ciBuild
-          ls -ltrh backend/build/distributions
           echo "dist_path=$(ls -1 backend/build/distributions/*.zip | head -n 1)" >> "$GITHUB_OUTPUT"
           echo "dist_name=$(ls -1 backend/build/distributions/*.zip | head -n 1 | xargs basename)" >> "$GITHUB_OUTPUT"
         env:

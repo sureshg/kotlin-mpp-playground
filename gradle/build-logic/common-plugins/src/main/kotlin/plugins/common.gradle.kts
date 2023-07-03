@@ -97,10 +97,10 @@ tasks {
       logger.quiet(
           """
           |Application modules for OpenJDK-${java.toolchain.languageVersion.get()} are,
-          |${modules.split(",")
-              .mapIndexed {i, module -> " ${(i+1).toString().padStart(2)}) $module" }
-              .joinToString(System.lineSeparator())
-             }
+          |${
+                modules.split(",").mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
+                    .joinToString(System.lineSeparator())
+            }
           """
               .trimMargin())
     }
@@ -185,7 +185,8 @@ tasks {
 
   register("ciBuild") {
     description = "Build with all the reports!"
-    dependsOn(tasks.build, "koverHtmlReport", "dokkaHtmlMultiModule")
+    dependsOn(
+        tasks.build, ":web:build", ":backend:build", "koverHtmlReport", "dokkaHtmlMultiModule")
     named("koverHtmlReport").map { it.mustRunAfter(tasks.build) }
     named("dokkaHtmlMultiModule").map { it.mustRunAfter(tasks.build) }
   }
