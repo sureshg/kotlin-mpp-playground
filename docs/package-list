@@ -1,0 +1,10 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:////PointingToDeclaration/web/[root]/index.html
+$dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
+$dokka.location://main/#/PointingToDeclaration/web/[root]/main.html
+module:common
+dev.suresh
+module:web
+hljs
+xterm
