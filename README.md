@@ -22,8 +22,14 @@ $ sdk u java 22.ea.2-open
 ### Build & Run
 
 ```bash
-$ ./gradlew build
+$ ./gradlew ciBuild
 ```
+
+### Deployed App and Docs
+
+- [Web App](https://suresh.dev/kotlin-mpp-playground/app/)
+- [Docs](https://suresh.dev/kotlin-mpp-playground/docs)
+- [Coverage](https://suresh.dev/kotlin-mpp-playground/reports)
 
 <!-- Badges -->
 
