@@ -588,6 +588,7 @@ object GithubAction {
             true -> GITHUB_REF.substringAfter("refs/tags/")
             false -> GITHUB_REF.substringAfter("refs/heads/")
           }
+
     /** Gets the value of the environment variable set in the Github action runner. */
     operator fun get(name: String): String? = System.getenv(name)
   }
