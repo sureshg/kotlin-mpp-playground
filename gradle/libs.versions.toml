@@ -22,6 +22,7 @@ publish-scm-url                = "https://github.com/sureshg/kotlin-mpp-playgrou
 
 # Gradle Dependencies Versions
 kotlinx-kover                  = "0.7.2"
+kotlinx-io                     = "0.2.0"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "2.0.0-beta14"
 classgraph                     = "4.8.160"
@@ -100,6 +101,7 @@ kotlinx-serialization-core    = { module = "org.jetbrains.kotlinx:kotlinx-serial
 kotlinx-serialization-json    = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"   , version.ref = "kotlinx-serialization"}
 kotlinx-datetime              = { module = "org.jetbrains.kotlinx:kotlinx-datetime"             , version.ref = "kotlinx-datetime"}
 kotlinx-atomicfu              = { module = "org.jetbrains.kotlinx:atomicfu"                     , version.ref = "kotlinx-atomicfu"}
+kotlinx-io-core               = { module = "org.jetbrains.kotlinx:kotlinx-io-core"              , version.ref = "kotlinx-io"}
 
 kotlinRetry                = { module = "com.michael-bull.kotlin-retry:kotlin-retry"       , version.ref = "kotlinRetry" }
 kotest-core                = { module = "io.kotest:kotest-assertions-core"                 , version.ref = "kotest"}
