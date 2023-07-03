@@ -13,9 +13,12 @@ java-addModules                = "jdk.incubator.vector"
 
 # Additional metadata
 group                          = "dev.suresh"
-app-mainclass                  = "dev.suresh.Main"
-app-module                     = "dev.suresh.kotlinmpp"
-githubProject                  = "https://github.com/sureshg/kotlin-mpp-playground"
+app-mainclass                  = "dev.suresh.MainKt"
+publish-dev-name               = "Suresh"
+publish-dev-email              = "email@suresh.dev"
+publish-org-name               = "suresh.dev"
+publish-org-url                = "https://suresh.dev"
+publish-scm-url                = "https://github.com/sureshg/kotlin-mpp-playground"
 
 # Gradle Dependencies Versions
 kotlinx-kover                  = "0.7.2"

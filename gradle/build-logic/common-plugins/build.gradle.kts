@@ -54,7 +54,7 @@ gradlePlugin {
 
     // Uncomment the id to change plugin id for this pre-compiled plugin
     named("plugins.common") {
-      // id = "dev.suresh.gradle.plugins.common"
+      // id = "build.plugins.common"
       displayName = "Common build-logic plugin"
       description = "Common pre-compiled script plugin"
       tags = listOf("Common Plugin", "build-logic")

@@ -47,7 +47,7 @@ graalvmNative {
         add("--enable-monitoring=heapdump,jfr,jvmstat")
         add("--enable-https")
         add("--install-exit-handlers")
-        add("--features=dev.suresh.aot.RuntimeFeature")
+        add("--features=graal.aot.RuntimeFeature")
         add("-R:MaxHeapSize=64m")
         add("-H:+ReportExceptionStackTraces")
         add("-EBUILD_NUMBER=${project.version}")

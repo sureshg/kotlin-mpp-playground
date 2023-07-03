@@ -75,7 +75,7 @@ publishing {
 }
 
 fun MavenPublication.configurePom() {
-  val githubUrl = libs.versions.githubProject.getOrElse("")
+  val githubUrl = libs.versions.publish.scm.url
   pom {
     name = provider { "${project.group}:${project.name}" }
     description = provider { project.description }
@@ -84,10 +84,10 @@ fun MavenPublication.configurePom() {
 
     developers {
       developer {
-        name = "Suresh"
-        email = "email@suresh.dev"
-        organization = "suresh.dev"
-        organizationUrl = "https://suresh.dev"
+        name = libs.versions.publish.dev.name
+        email = libs.versions.publish.dev.email
+        organization = libs.versions.publish.org.name
+        organizationUrl = libs.versions.publish.org.url
       }
     }
 
@@ -100,8 +100,8 @@ fun MavenPublication.configurePom() {
 
     scm {
       url = githubUrl
-      connection = "scm:git:$githubUrl.git"
-      developerConnection = "scm:git:$githubUrl.git"
+      connection = githubUrl.map { "scm:git:$it.git" }
+      developerConnection = githubUrl.map { "scm:git:$it.git" }
     }
   }
 }

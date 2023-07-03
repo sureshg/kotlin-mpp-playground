@@ -34,6 +34,8 @@ plugins {
   id("org.gradle.toolchains.foojay-resolver")
   // Use semver on all projects
   id("com.javiersc.semver")
+  // Include another pre-compiled settings plugin
+  id("settings.include")
 }
 
 // Centralizing repositories declaration

@@ -1,5 +1,6 @@
 package common
 
+import java.io.ByteArrayOutputStream
 import java.nio.file.Path
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
@@ -85,3 +86,48 @@ inline fun <reified T : Task> TaskContainer.maybeRegister(
       in names -> named(taskName, T::class)
       else -> register(taskName, T::class)
     }.also { it.configure(configAction) }
+
+/** Return incubator modules of the tool chain JDK */
+val Project.incubatorModules
+  get(): String {
+    val javaCmd = project.javaToolchainPath.resolve("bin").resolve("java")
+    val bos = ByteArrayOutputStream()
+    val execResult = exec {
+      workingDir = layout.buildDirectory.get().asFile
+      commandLine = listOf(javaCmd.toString())
+      args = listOf("--list-modules")
+      standardOutput = bos
+      errorOutput = bos
+    }
+    execResult.assertNormalExitValue()
+    return bos.toString(Charsets.UTF_8)
+        .lines()
+        .filter { it.startsWith("jdk.incubator") }
+        .joinToString(",") { it.substringBefore("@").trim() }
+  }
+
+/**
+ * Print all the catalog version strings and it's values.
+ *
+ * [VersionCatalogsExtension](https://docs.gradle.org/current/userguide/platforms.html#sub:type-unsafe-access-to-catalog)
+ */
+fun Project.printVersionCatalog() {
+  if (debugEnabled) {
+    catalogs.catalogNames.map { cat ->
+      println("=== Catalog $cat ===")
+      val catalog = catalogs.named(cat)
+      catalog.versionAliases.forEach { alias ->
+        println("${alias.padEnd(30, '-')}-> ${catalog.findVersion(alias).get()}")
+      }
+    }
+  }
+}
+
+/** Print all the tasks */
+fun Project.printTaskGraph() {
+  if (debugEnabled) {
+    gradle.taskGraph.whenReady {
+      allTasks.forEachIndexed { index, task -> println("${index + 1}. ${task.name}") }
+    }
+  }
+}

@@ -46,6 +46,11 @@ jobs:
     runs-on: ${{ matrix.os }}
     continue-on-error: false
 
+    outputs:
+      name: ${{ steps.gradle-build.outputs.name }}
+      group: ${{ steps.gradle-build.outputs.group }}
+      version: ${{ steps.gradle-build.outputs.version }}
+
     steps:
       - name: 🛎️ Check out the source code
         uses: actions/checkout@v3
@@ -74,7 +79,7 @@ jobs:
       - name: 🏗️ Gradle Build & Run
         id: gradle-build
         run: |
-          ./gradlew build
+          ./gradlew ciBuild
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JOB_CONTEXT: ${{ toJSON(job) }}
@@ -84,32 +89,42 @@ jobs:
           STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
 
-      - name: 📤 Uploading ${{ matrix.os }} executable jar
-        if: steps.gradle-build.outcome == 'success' && runner.os == 'XLinux'
+      - name: 📤 Uploading ${{ matrix.os }} build artifacts
+        if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.gradle-build.outputs.appjar_name }}
+          name: ${{ steps.gradle-build.outputs.dist_name }}.zip
           path: |
-            ${{ steps.gradle-build.outputs.appjar_path }}
+            backend/build/distributions/backend-*.zip
           if-no-files-found: error
 
-      - name: 🚀 Deploy html docs to 🕸️website
-        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'XLinux'
+      - name: 🕸Deploy the webapp to Github Pages
+        if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
-          branch: main
-          folder: build/dokka
-          target-folder: docs/apidoc/
+          branch: gh-pages
+          folder: web/build/dist/js/productionExecutable
+          target-folder: app
           clean: true
-          commit-message: 'doc: Deployed dokka website'
+          commit-message: 'web: Deployed web app'
 
-      - name: 🏖️ Deploy coverage report to website
-        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'XLinux'
+      - name: 🏖️ Publish documentation to Github Pages
+        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'Linux'
         uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
-          branch: main
-          folder: build/reports
-          target-folder: docs/reports/
+          branch: gh-pages
+          folder: build/dokka/htmlMultiModule
+          target-folder: docs
+          clean: true
+          commit-message: 'doc: Deployed dokka html documentation'
+
+      - name: 🏖️ Publish coverage report to Github Pages
+        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'Linux'
+        uses: JamesIves/github-pages-deploy-action@v4.4.2
+        with:
+          branch: gh-pages
+          folder: build/reports/kover/html
+          target-folder: reports
           clean: true
           commit-message: 'doc: Deployed coverage report'
 
@@ -131,3 +146,45 @@ jobs:
             git push
             # git push origin HEAD:${{ github.event.repository.default_branch }}
           fi
+  
+
+  # GitHub Release Action on tag push
+  release:
+    name: 🚰 Release new version.
+    needs: [ build ]
+    if: startsWith(github.ref, 'refs/tags/') && needs.build.result == 'success'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🛎️Check out the source code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: ⚙️Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v4
+        with:
+          configuration: ".github/config/configuration.json"
+          commitMode: true
+          ignorePreReleases: ${{ !contains(github.ref, '-') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: ⏬Download all the build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: release-artifacts
+
+      - name: ✨Github Release (version = ${{ needs.build.outputs.version }})
+        uses: softprops/action-gh-release@v1
+        with:
+          # body_path: ${{ github.workspace }}-CHANGELOG.txt
+          body: ${{ steps.github_release.outputs.changelog }}
+          files: |
+            ${{ github.workspace }}/release-artifacts/**
+          generate_release_notes: true
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

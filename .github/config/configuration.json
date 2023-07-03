@@ -36,7 +36,8 @@
       "labels": [
         "deps",
         "dependencies",
-        "chore(deps)"
+        "chore(deps)",
+        "build(deps)"
       ]
     },
     {
