@@ -111,7 +111,7 @@ jobs:
           commit-message: 'web: Deployed web app'
 
       - name: 🏖️ Publish documentation to Github Pages
-        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'Linux'
+        if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
           branch: gh-pages
@@ -121,7 +121,7 @@ jobs:
           commit-message: 'doc: Deployed dokka html documentation'
 
       - name: 🏖️ Publish coverage report to Github Pages
-        if: startsWith(github.ref, 'refs/tags/') && runner.os == 'Linux'
+        if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:
           branch: gh-pages
