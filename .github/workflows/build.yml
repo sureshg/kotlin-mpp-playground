@@ -80,6 +80,9 @@ jobs:
         id: gradle-build
         run: |
           ./gradlew ciBuild
+          ls -ltrh backend/build/distributions
+          echo "dist_path=$(ls -1 backend/build/distributions/*.zip | head -n 1)" >> "$GITHUB_OUTPUT"
+          echo "dist_name=$(ls -1 backend/build/distributions/*.zip | head -n 1 | xargs basename)" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JOB_CONTEXT: ${{ toJSON(job) }}
@@ -93,12 +96,12 @@ jobs:
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.gradle-build.outputs.dist_name }}.zip
+          name: ${{ steps.gradle-build.outputs.dist_name }}
           path: |
-            backend/build/distributions/backend-*.zip
+            ${{ steps.gradle-build.outputs.dist_path }}
           if-no-files-found: error
 
-      - name: 🕸Deploy the webapp to Github Pages
+      - name: 🕸 Deploy the webapp to Github Pages
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: JamesIves/github-pages-deploy-action@v4.4.2
         with:

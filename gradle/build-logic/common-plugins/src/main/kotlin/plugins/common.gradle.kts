@@ -178,7 +178,7 @@ tasks {
         setOutput("name", project.name)
         setOutput("group", project.group)
         setOutput("version", project.version)
-        setOutput("dist_name", "${project.name}-${project.version}")
+        setOutput("artifact_name", "${project.name}-${project.version}")
       }
     }
   }
