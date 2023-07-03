@@ -568,6 +568,26 @@ object GithubAction {
     val JAVA_HOME_17_X64
       get() = System.getenv("JAVA_HOME_17_X64")
 
+    /**
+     * Returns a boolean value indicating whether the current build is a tag build. A tag build
+     * refers to a build triggered by a git tag push event.
+     *
+     * @return true if the build is a tag build, false otherwise.
+     */
+    val isTagBuild
+      get() = GITHUB_REF.startsWith("refs/tags/")
+
+    /**
+     * Returns the ref name (tag/branch) that triggered the GitHub workflow run.
+     *
+     * @return The ref name.
+     */
+    val ref
+      get() =
+          when (isTagBuild) {
+            true -> GITHUB_REF.substringAfter("refs/tags/")
+            false -> GITHUB_REF.substringAfter("refs/heads/")
+          }
     /** Gets the value of the environment variable set in the Github action runner. */
     operator fun get(name: String): String? = System.getenv(name)
   }
