@@ -1,9 +1,41 @@
 package dev.suresh
 
 import BuildConfig
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+import kotlinx.io.bytestring.*
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 expect val platform: String
 
 class Greeting {
-  fun greeting() = "${BuildConfig.time} - ${KData("sdsds",123,"dssdsd")}: Kotlin $platform!"
+
+  val json = Json { prettyPrint = true }
+
+  fun greeting() =
+      """
+      | ${BuildConfig.time} - ${KData("Foo", 123, "xxxx")}: Kotlin $platform!
+      | ${kotlinxTests()}
+      """
+          .trimMargin()
+
+  private fun kotlinxTests(): String {
+    val ba = "Kotlinx".encodeToByteArray()
+    val bs1 = ByteString(ba)
+    val bs2 = "IO".encodeToByteString()
+
+    val bs = buildByteString {
+      append(bs1)
+      append(bs2)
+    }
+
+    return """
+      |${Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())}
+      |${json.encodeToString(KData("Bar", 123, "xxxx"))}
+      |${bs.decodeToString()}
+    """
+        .trimMargin()
+  }
 }

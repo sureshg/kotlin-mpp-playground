@@ -102,6 +102,7 @@ kotlinx-serialization-json    = { module = "org.jetbrains.kotlinx:kotlinx-serial
 kotlinx-datetime              = { module = "org.jetbrains.kotlinx:kotlinx-datetime"             , version.ref = "kotlinx-datetime"}
 kotlinx-atomicfu              = { module = "org.jetbrains.kotlinx:atomicfu"                     , version.ref = "kotlinx-atomicfu"}
 kotlinx-io-core               = { module = "org.jetbrains.kotlinx:kotlinx-io-core"              , version.ref = "kotlinx-io"}
+kotlinx-io-bytestring         = { module = "org.jetbrains.kotlinx:kotlinx-io-bytestring"        , version.ref = "kotlinx-io"}
 
 kotlinRetry                = { module = "com.michael-bull.kotlin-retry:kotlin-retry"       , version.ref = "kotlinRetry" }
 kotest-core                = { module = "io.kotest:kotest-assertions-core"                 , version.ref = "kotest"}

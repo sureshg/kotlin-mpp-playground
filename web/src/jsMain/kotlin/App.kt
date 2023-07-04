@@ -5,18 +5,18 @@ import kotlinx.browser.document
 import kotlinx.coroutines.await
 import kotlinx.coroutines.delay
 import kotlinx.dom.appendText
-import kotlinx.io.bytestring.ByteString
-import kotlinx.io.bytestring.decodeToString
 
 suspend fun main() {
   val text = "${BuildConfig.time}: Hello, ${Greeting().greeting()}!"
-  println(text)
   val root = document.getElementById("root")
-  root?.appendText(text)
+
+  text.lines().forEach {
+    println(it)
+    root?.appendText(it)
+    root?.appendChild(document.createElement("br"))
+  }
+
   delay(1.seconds)
   val promise = Promise.resolve("Promise")
   root?.appendText(promise.await())
-
-  val ba = ByteString("Kotlin-IO".encodeToByteArray())
-  println(ba.decodeToString())
 }
