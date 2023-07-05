@@ -20,7 +20,8 @@ tasks {
 
 dependencies {
   jsMainImplementation(projects.common)
-  commonWebResources(project(path = ":$commonProjectName", configuration = "commonJsResources"))
+  commonWebResources(
+      project(path = ":$commonProjectName", configuration = configurations.commonJsResources.name))
 }
 
 // kotlin.sourceSets.jsMain.configure {

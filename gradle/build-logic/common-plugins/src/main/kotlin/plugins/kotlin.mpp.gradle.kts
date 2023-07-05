@@ -106,10 +106,12 @@ kotlinMultiplatform.apply {
         implementation(libs.kotlinx.datetime)
         implementation(libs.kotlinx.serialization.json)
         implementation(libs.kotlinx.io.bytestring)
+        implementation(libs.kotlinx.collections.immutable)
         implementation(libs.kotlinx.io.core)
         implementation(libs.ktor.client.core)
         implementation(libs.ktor.client.logging)
         implementation(libs.ktor.client.serialization)
+        implementation(libs.intellij.markdown)
       }
     }
 
@@ -126,6 +128,7 @@ kotlinMultiplatform.apply {
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         project.dependencies.add("kspJvm", libs.ksp.auto.service)
         implementation(libs.google.auto.annotations)
+        implementation(libs.slf4j.api)
       }
     }
 
@@ -204,7 +207,7 @@ tasks {
   }
 }
 
-artifacts { add("commonJsResources", tasks.named("jsProcessResources")) }
+artifacts { add(commonJsResources.name, tasks.named("jsProcessResources")) }
 
 dependencies {
   // add("kspJvm", project(":ksp-processor"))

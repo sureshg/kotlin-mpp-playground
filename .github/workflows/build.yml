@@ -77,7 +77,11 @@ jobs:
           distribution: jdkfile
           java-version: ${{ steps.download-jdk.outputs.version }}
           jdkFile: ${{ steps.download-jdk.outputs.archive }}
-          cache: 'gradle'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: wrapper
 
       - name: 🏗️ Gradle Build & Run
         id: gradle-build

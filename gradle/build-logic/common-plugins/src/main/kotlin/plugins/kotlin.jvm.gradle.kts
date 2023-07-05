@@ -77,6 +77,7 @@ dependencies {
   testImplementation(platform(libs.junit.bom))
   testImplementation(kotlin("test-junit5"))
   testImplementation(libs.junit.jupiter)
+  testImplementation(libs.kotlinx.lincheck)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.slf4j.simple)
 }
