@@ -75,6 +75,20 @@ tasks {
     isReproducibleFileOrder = true
   }
 
+  // Run the checkBestPractices check for build-logic included builds.
+  register("checkBuildLogicBestPractices") {
+    description = "Run the checkBestPractices check for build-logic included builds!"
+    group = BasePlugin.BUILD_GROUP
+    dependsOn(gradle.includedBuild("build-logic").task(":common-plugins:checkBestPractices"))
+  }
+
+  // Clean all composite builds
+  register("cleanAll") {
+    description = "Clean all composite builds"
+    group = LifecycleBasePlugin.CLEAN_TASK_NAME
+    gradle.includedBuilds.forEach { dependsOn(it.task(":clean")) }
+  }
+
   wrapper {
     gradleVersion = libs.versions.gradle.asProvider().get()
     distributionType = Wrapper.DistributionType.ALL

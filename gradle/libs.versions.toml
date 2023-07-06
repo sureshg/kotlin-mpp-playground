@@ -1,6 +1,6 @@
 [versions]
 java                           = "22"
-kotlin                         = "1.9.0-RC"
+kotlin                         = "1.9.0"
 kotlin-ksp                     = "1.9.0-RC-1.0.11"
 kotlin-jvmtarget               = "20"
 kotlin-dsl-jvmtarget           = "17"
@@ -28,7 +28,7 @@ kotlinx-coroutines             = "1.7.2"
 kotlinx-datetime               = "0.4.0"
 kotlinx-serialization          = "1.5.1"
 kotlinx-collections-immutable  = "0.3.5"
-kotlinx-lincheck               = "2.20"
+kotlinx-lincheck               = "2.21"
 kotlinx-benchmark              = "0.4.8"
 kotlinx-reflect-lite           = "1.0.0"
 zip-prefixer                   = "0.3.1"
@@ -54,6 +54,10 @@ google-auto-service            = "1.1.1"
 google-tink                    = "1.9.0"
 graalvm                        = "23.0.0"
 rsocket                        = "0.15.4"
+compose-icons                  = "1.1.0"
+compose-routing                = "0.2.12"
+benasher44-uuid                = "0.7.1"
+kotlinx-uuid                   = "0.0.20"
 
 # Plugin versions
 benmanes                       = "0.47.0"
@@ -168,6 +172,21 @@ classgraph                  = { module = "io.github.classgraph:classgraph"      
 slf4j-api                   = { module = "org.slf4j:slf4j-api"                               , version.ref = "slf4j"}
 slf4j-simple                = { module = "org.slf4j:slf4j-simple"                            , version.ref = "slf4j"}
 slf4j-nop                   = { module = "org.slf4j:slf4j-nop"                               , version.ref = "slf4j"}
+
+compose-icons-cssgg          = { module = "br.com.devsrsouza.compose.icons:css-gg"                     , version.ref = "compose-icons" }
+compose-icons-weatherIcons   = { module = "br.com.devsrsouza.compose.icons:erikflowers-weather-icons"  , version.ref = "compose-icons" }
+compose-icons-evaIcons       = { module = "br.com.devsrsouza.compose.icons:eva-icons"                  , version.ref = "compose-icons" }
+compose-icons-feather        = { module = "br.com.devsrsouza.compose.icons:feather"                    , version.ref = "compose-icons" }
+compose-icons-fontAwesome    = { module = "br.com.devsrsouza.compose.icons:font-awesome"               , version.ref = "compose-icons" }
+compose-icons-lineAwesome    = { module = "br.com.devsrsouza.compose.icons:line-awesome"               , version.ref = "compose-icons" }
+compose-icons-linea          = { module = "br.com.devsrsouza.compose.icons:linea"                      , version.ref = "compose-icons" }
+compose-icons-octicons       = { module = "br.com.devsrsouza.compose.icons:octicons"                   , version.ref = "compose-icons" }
+compose-icons-simpleIcons    = { module = "br.com.devsrsouza.compose.icons:simple-icons"               , version.ref = "compose-icons" }
+compose-icons-tablerIcons    = { module = "br.com.devsrsouza.compose.icons:tabler-icons"               , version.ref = "compose-icons" }
+
+compose-routing              = { module = "app.softwork:routing-compose"                     , version.ref = "compose-routing" }
+kotlinx-uuid                 = { module = "app.softwork:kotlinx-uuid-core"                   , version.ref = "kotlinx-uuid" }
+benasher44-uuid              = { module = "com.benasher44:uuid"                              , version.ref = "benasher44-uuid" }
 
 [plugins]
 benmanes                    = { id = "com.github.ben-manes.versions"                         , version.ref = "benmanes" }

@@ -4,11 +4,13 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.ExternalDependency
 import org.gradle.api.attributes.Attribute
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.logging.*
 import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.assign
+import org.gradle.plugin.use.PluginDependency
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
@@ -56,6 +58,13 @@ val Project.isKotlinJvmProject
 
 val Project.isKotlinJsProject
   get() = plugins.hasPlugin("org.jetbrains.kotlin.js")
+
+/**
+ * Returns the dependency artifact for the given Gradle plugin.
+ */
+fun Provider<PluginDependency>.toDep() = map {
+  "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
+}
 
 // https://kotlinlang.org/docs/multiplatform-set-up-targets.html#distinguish-several-targets-for-one-platform
 val mppTargetAttr = Attribute.of("mpp.target.name", String::class.java)
@@ -113,6 +122,8 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   freeCompilerArgs.addAll(
     "-Xcontext-receivers",
     "-Xallow-result-return-type",
+    // "-P",
+    // "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
   )
 }
 
@@ -188,6 +199,7 @@ fun Test.configureJavaTest() {
 
 context(Project)
 fun KotlinJsOptions.configureKotlinJs() {
+  useEsClasses = true
   // sourceMap = true
   // sourceMapEmbedSources = "always"
   // freeCompilerArgs += listOf("-Xir-per-module")

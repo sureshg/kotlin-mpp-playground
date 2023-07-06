@@ -97,10 +97,11 @@ tasks {
       logger.quiet(
           """
           |Application modules for OpenJDK-${java.toolchain.languageVersion.get()} are,
-          |${
-                modules.split(",").mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
-                    .joinToString(System.lineSeparator())
-            }
+          |${modules
+              .split(",")
+              .mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
+              .joinToString(System.lineSeparator())
+          }
           """
               .trimMargin())
     }
