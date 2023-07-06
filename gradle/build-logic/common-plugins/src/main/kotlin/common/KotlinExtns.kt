@@ -63,7 +63,7 @@ val Project.isKotlinJsProject
  * Returns the dependency artifact for the given Gradle plugin.
  */
 fun Provider<PluginDependency>.toDep() = map {
-  "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}"
+  "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}"
 }
 
 // https://kotlinlang.org/docs/multiplatform-set-up-targets.html#distinguish-several-targets-for-one-platform
