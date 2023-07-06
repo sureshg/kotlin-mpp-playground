@@ -15,8 +15,8 @@ and [Compose Web (wasm)][Compose-Multiplatform] applications.
 ```bash
 # Mac OS
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 22.ea.2-open
-$ sdk u java 22.ea.2-open
+$ sdk i java 22.ea-open
+$ sdk u java 22.ea-open
 ```
 
 ### Build & Run

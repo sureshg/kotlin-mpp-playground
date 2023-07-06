@@ -124,8 +124,9 @@ kotlinMultiplatform.apply {
         implementation(libs.ktor.client.core)
         implementation(libs.ktor.client.logging)
         implementation(libs.ktor.client.serialization)
-        implementation(libs.intellij.markdown)
+        implementation(libs.ajalt.colormath)
         implementation(libs.benasher44.uuid)
+        implementation(libs.intellij.markdown)
       }
     }
 

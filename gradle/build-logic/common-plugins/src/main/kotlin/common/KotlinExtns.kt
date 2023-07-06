@@ -199,7 +199,7 @@ fun Test.configureJavaTest() {
 
 context(Project)
 fun KotlinJsOptions.configureKotlinJs() {
-  useEsClasses = true
+  // useEsClasses = true
   // sourceMap = true
   // sourceMapEmbedSources = "always"
   // freeCompilerArgs += listOf("-Xir-per-module")

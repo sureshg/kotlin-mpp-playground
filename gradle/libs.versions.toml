@@ -34,6 +34,7 @@ kotlinx-reflect-lite           = "1.0.0"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "2.0.0"
 ajalt-clikt                    = "4.0.0"
+ajalt-colormath                = "3.3.1"
 classgraph                     = "4.8.160"
 dokka                          = "1.8.20"
 intellij-markdown              = "0.4.1"
@@ -146,6 +147,7 @@ rsocket-ktor-client         = { module = "io.rsocket.kotlin:rsocket-ktor-client"
 rsocket-ktor-server         = { module = "io.rsocket.kotlin:rsocket-ktor-server"            , version.ref = "rsocket"}
 
 ajalt-mordant               = { module = "com.github.ajalt.mordant:mordant"                 , version.ref = "ajalt-mordant"}
+ajalt-colormath             = { module = "com.github.ajalt.colormath:colormath"             , version.ref = "ajalt-colormath"}
 jgit                        = { module = "org.eclipse.jgit:org.eclipse.jgit"                , version.ref = "jgit" }
 jte                         = { module = "gg.jte:jte"                                       , version.ref = "jte" }
 jte-runtime                 = { module = "gg.jte:jte-runtime"                               , version.ref = "jte" }
