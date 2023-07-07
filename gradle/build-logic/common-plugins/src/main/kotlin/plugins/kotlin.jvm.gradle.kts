@@ -70,6 +70,7 @@ dependencies {
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.datetime)
+  implementation(libs.kotlinx.atomicfu)
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

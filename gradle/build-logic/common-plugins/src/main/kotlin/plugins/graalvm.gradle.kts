@@ -103,9 +103,15 @@ graalvmNative {
         // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
       }
 
+      resources {
+        autodetection {
+          enabled = true
+          restrictToProjectDependencies = false
+        }
+      }
+
       jvmArgs = listOf("--add-modules=$addModules", "-Xmx4G")
       systemProperties = mapOf("java.awt.headless" to "false")
-      resources { autodetect() }
     }
   }
   metadataRepository { enabled = true }

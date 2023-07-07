@@ -2,6 +2,8 @@ import common.commonProjectName
 
 plugins { plugins.kotlin.mpp }
 
+description = "Web application"
+
 // To copy common resources to JS/Wasm targets
 val commonWebResources by
     configurations.creating {
@@ -15,13 +17,20 @@ tasks {
         from(commonWebResources)
         into(jsProcessResources.get().destinationDir)
       }
+
   jsProcessResources { dependsOn(copyCommonJsResources) }
 }
 
 dependencies {
-  jsMainImplementation(projects.common)
   commonWebResources(
       project(path = ":$commonProjectName", configuration = configurations.commonJsResources.name))
+
+  jsMainImplementation(projects.common)
+  jsMainImplementation(libs.kotlinx.html)
+  // jsMainImplementation(npm("kotlin-playground", "1.28.0"))
+  // jsMainImplementation(npm("highlight.js", "11.8.0"))
+  // jsMainImplementation(npm("xterm", "5.2.1"))
+  // jsMainImplementation(npm("vega-lite", "5.13.0"))
 }
 
 // kotlin.sourceSets.jsMain.configure {

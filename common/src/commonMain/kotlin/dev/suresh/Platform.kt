@@ -16,7 +16,7 @@ class Greeting {
 
   fun greeting() =
       """
-      | ${BuildConfig.time} - ${KData("Foo", 123, "xxxx")}: Kotlin $platform!
+      | ${BuildConfig.time} - ${KData("Foo", 123, "test")}: Kotlin $platform: ${KotlinVersion.CURRENT}!
       | ${kotlinxTests()}
       """
           .trimMargin()
@@ -33,7 +33,7 @@ class Greeting {
 
     return """
       |${Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())}
-      |${json.encodeToString(KData("Bar", 123, "xxxx"))}
+      |${json.encodeToString(KData("Bar", 123, "test"))}
       |${bs.decodeToString()}
     """
         .trimMargin()

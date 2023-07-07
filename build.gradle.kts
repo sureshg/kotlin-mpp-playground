@@ -1,5 +1,3 @@
-import common.commonProjectName
-
 plugins {
   plugins.common
   plugins.misc
@@ -7,8 +5,4 @@ plugins {
 }
 
 // Multi module single coverage report
-dependencies {
-  kover(project(":$commonProjectName"))
-  kover(project("backend"))
-  kover(project("web"))
-}
+dependencies { project.subprojects.forEach { kover(project(":${it.name}")) } }

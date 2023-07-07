@@ -14,6 +14,7 @@ plugins {
   java
   kotlin("plugin.serialization")
   id("com.google.devtools.ksp")
+  id("kotlinx-atomicfu")
   id("dev.zacsweers.redacted")
   id("org.jetbrains.dokka")
   id("org.jetbrains.kotlinx.kover")
@@ -117,16 +118,9 @@ kotlinMultiplatform.apply {
       dependencies {
         implementation(libs.kotlinx.coroutines.core)
         implementation(libs.kotlinx.datetime)
+        implementation(libs.kotlinx.atomicfu)
         implementation(libs.kotlinx.serialization.json)
-        implementation(libs.kotlinx.io.bytestring)
         implementation(libs.kotlinx.collections.immutable)
-        implementation(libs.kotlinx.io.core)
-        implementation(libs.ktor.client.core)
-        implementation(libs.ktor.client.logging)
-        implementation(libs.ktor.client.serialization)
-        implementation(libs.ajalt.colormath)
-        implementation(libs.benasher44.uuid)
-        implementation(libs.intellij.markdown)
       }
     }
 
@@ -165,6 +159,12 @@ kotlinMultiplatform.apply {
 ksp {
   arg("autoserviceKsp.verify", "true")
   arg("autoserviceKsp.verbose", "true")
+}
+
+atomicfu {
+  transformJvm = true
+  transformJs = true
+  jvmVariant = "VH"
 }
 
 redacted { enabled = true }
