@@ -3,6 +3,7 @@ $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/web/[root]/index.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
 $dokka.location://main/#/PointingToDeclaration/web/[root]/main.html
+$dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
 module:common
 dev.suresh
 module:web
