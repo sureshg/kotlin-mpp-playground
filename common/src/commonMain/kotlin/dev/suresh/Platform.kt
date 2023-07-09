@@ -12,7 +12,10 @@ expect val platform: String
 
 class Greeting {
 
-  val json = Json { prettyPrint = true }
+  val json = Json {
+    isLenient = true
+    prettyPrint = true
+  }
 
   fun greeting() =
       """
