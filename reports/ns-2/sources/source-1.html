@@ -138,7 +138,46 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;actual val platform = &quot;Desktop JVM&quot;
+&nbsp;import BuildConfig
+&nbsp;import kotlinx.datetime.Clock
+&nbsp;import kotlinx.datetime.TimeZone
+&nbsp;import kotlinx.datetime.toLocalDateTime
+&nbsp;import kotlinx.io.bytestring.*
+&nbsp;import kotlinx.serialization.encodeToString
+&nbsp;import kotlinx.serialization.json.Json
+&nbsp;
+<b class="fc">&nbsp;class Greeting {</b>
+&nbsp;
+<b class="fc">&nbsp;  val json = Json {</b>
+<b class="fc">&nbsp;    isLenient = true</b>
+<b class="fc">&nbsp;    prettyPrint = true</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  fun greeting() =
+&nbsp;      &quot;&quot;&quot;
+<b class="fc">&nbsp;      | ${BuildConfig.time} - ${KData(&quot;Foo&quot;, 20, &quot;test&quot;)}: Kotlin $platform: ${KotlinVersion.CURRENT}!</b>
+<b class="fc">&nbsp;      | ${kotlinxTests()}</b>
+&nbsp;      &quot;&quot;&quot;
+<b class="fc">&nbsp;          .trimMargin()</b>
+&nbsp;
+&nbsp;  private fun kotlinxTests(): String {
+<b class="fc">&nbsp;    val ba = &quot;Kotlinx&quot;.encodeToByteArray()</b>
+<b class="fc">&nbsp;    val bs1 = ByteString(ba)</b>
+<b class="fc">&nbsp;    val bs2 = &quot;IO&quot;.encodeToByteString()</b>
+&nbsp;
+<b class="fc">&nbsp;    val bs = buildByteString {</b>
+<b class="fc">&nbsp;      append(bs1)</b>
+<b class="fc">&nbsp;      append(bs2)</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    return &quot;&quot;&quot;
+<b class="fc">&nbsp;      |${Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())}</b>
+<b class="fc">&nbsp;      |${json.encodeToString(KData(&quot;Bar&quot;, 22, &quot;test&quot;))}</b>
+<b class="fc">&nbsp;      |${bs.decodeToString()}</b>
+&nbsp;    &quot;&quot;&quot;
+<b class="fc">&nbsp;        .trimMargin()</b>
+&nbsp;  }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -162,7 +201,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-09 10:58</div>
+    <div style="float:right;">generated on 2023-07-10 09:20</div>
 </div>
 </body>
 </html>
