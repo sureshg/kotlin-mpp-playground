@@ -10,22 +10,26 @@ import kotlinx.html.div
 import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.progress
+import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLProgressElement
 import org.w3c.dom.Node
 
 suspend fun main() {
   val text = Greeting().greeting()
-  val root = document.getElementById("root")
+  val root = document.getElementById("root") as HTMLDivElement
 
   text.lines().forEach {
     println(it)
-    root?.appendText(it)
-    root?.appendChild(document.createElement("br"))
+    root.appendText(it)
+    root.appendChild(document.createElement("br"))
   }
 
+  // HighlightJs.highlightElement(root)
+
+  // Javascript Promise
   delay(1.seconds)
   val promise = Promise.resolve("Promise")
-  root?.appendText(promise.await())
+  root.appendText(promise.await())
 
   topLevelJsFun()
   runCoroutines()

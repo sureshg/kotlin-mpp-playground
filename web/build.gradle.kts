@@ -27,8 +27,8 @@ dependencies {
 
   jsMainImplementation(projects.common)
   jsMainImplementation(libs.kotlinx.html)
+  jsMainImplementation(npm("highlight.js", "11.8.0"))
   // jsMainImplementation(npm("kotlin-playground", "1.28.0"))
-  // jsMainImplementation(npm("highlight.js", "11.8.0"))
   // jsMainImplementation(npm("xterm", "5.2.1"))
   // jsMainImplementation(npm("vega-lite", "5.13.0"))
 }
