@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > Greeting</title>
+  <title>kotlin-mpp-playground Coverage Report > CommonBenchmark</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,15 +19,18 @@
 <div class="breadCrumbs">
 Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh</a>
+    <a href="../index.html">bench</a>
 </div>
 
-<h1>Coverage Summary for Class: Greeting (dev.suresh)</h1>
+<h1>Coverage Summary for Class: CommonBenchmark (bench)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,89 +49,49 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">Greeting</td>
+  <td class="name">CommonBenchmark</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (3/3)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (16/16)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (75/75)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">Greeting$json$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (2/2)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (5/5)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (4/4)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (18/18)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (80/80)
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/94)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -136,46 +99,55 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
+<code class="sourceCode" id="sourceCode">&nbsp;package bench
 &nbsp;
-&nbsp;import BuildConfig
-&nbsp;import kotlinx.datetime.Clock
-&nbsp;import kotlinx.datetime.TimeZone
-&nbsp;import kotlinx.datetime.toLocalDateTime
-&nbsp;import kotlinx.io.bytestring.*
-&nbsp;import kotlinx.serialization.encodeToString
-&nbsp;import kotlinx.serialization.json.Json
+&nbsp;import kotlin.math.*
+&nbsp;import kotlinx.benchmark.*
 &nbsp;
-<b class="fc">&nbsp;class Greeting {</b>
+<b class="nc">&nbsp;@State(Scope.Benchmark)</b>
+&nbsp;@Measurement(iterations = 3, time = 1, timeUnit = BenchmarkTimeUnit.SECONDS)
+&nbsp;@OutputTimeUnit(BenchmarkTimeUnit.MILLISECONDS)
+&nbsp;@BenchmarkMode(Mode.AverageTime)
+&nbsp;class CommonBenchmark {
+&nbsp;  private var data = 0.0
+&nbsp;  private lateinit var text: String
 &nbsp;
-<b class="fc">&nbsp;  val json = Json {</b>
-<b class="fc">&nbsp;    isLenient = true</b>
-<b class="fc">&nbsp;    prettyPrint = true</b>
+&nbsp;  @Setup
+&nbsp;  fun setUp() {
+<b class="nc">&nbsp;    data = 3.0</b>
+<b class="nc">&nbsp;    text = &quot;Hello!&quot;</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  fun greeting() =
-&nbsp;      &quot;&quot;&quot;
-<b class="fc">&nbsp;      | ${BuildConfig.time} - ${KData(&quot;Foo&quot;, 20, &quot;test&quot;)}: Kotlin $platform: ${KotlinVersion.CURRENT}!</b>
-<b class="fc">&nbsp;      | ${kotlinxTests()}</b>
-&nbsp;      &quot;&quot;&quot;
-<b class="fc">&nbsp;          .trimMargin()</b>
+<b class="nc">&nbsp;  @TearDown fun teardown() {}</b>
 &nbsp;
-&nbsp;  private fun kotlinxTests(): String {
-<b class="fc">&nbsp;    val ba = &quot;Kotlinx&quot;.encodeToByteArray()</b>
-<b class="fc">&nbsp;    val bs1 = ByteString(ba)</b>
-<b class="fc">&nbsp;    val bs2 = &quot;IO&quot;.encodeToByteString()</b>
+&nbsp;  @Benchmark
+&nbsp;  fun exception() {
+<b class="nc">&nbsp;    try {</b>
+<b class="nc">&nbsp;      fail()</b>
+<b class="nc">&nbsp;    } catch (e: Throwable) {</b>
+<b class="nc">&nbsp;      throw Exception(&quot;I failed!&quot;, e)</b>
+&nbsp;    }
+&nbsp;  }
 &nbsp;
-<b class="fc">&nbsp;    val bs = buildByteString {</b>
-<b class="fc">&nbsp;      append(bs1)</b>
-<b class="fc">&nbsp;      append(bs2)</b>
-<b class="fc">&nbsp;    }</b>
+&nbsp;  private fun fail() {
+<b class="nc">&nbsp;    TODO(&quot;not implemented&quot;)</b>
+&nbsp;  }
 &nbsp;
-&nbsp;    return &quot;&quot;&quot;
-<b class="fc">&nbsp;      |${Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())}</b>
-<b class="fc">&nbsp;      |${json.encodeToString(KData(&quot;Bar&quot;, 22, &quot;test&quot;))}</b>
-<b class="fc">&nbsp;      |${bs.decodeToString()}</b>
-&nbsp;    &quot;&quot;&quot;
-<b class="fc">&nbsp;        .trimMargin()</b>
+&nbsp;  @Benchmark
+&nbsp;  fun mathBenchmark(): Double {
+<b class="nc">&nbsp;    return log(sqrt(data) * cos(data), 2.0)</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Benchmark
+&nbsp;  fun longBenchmark(): Double {
+<b class="nc">&nbsp;    var value = 1.0</b>
+<b class="nc">&nbsp;    repeat(1000) { value *= text.length }</b>
+<b class="nc">&nbsp;    return value</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  @Benchmark
+&nbsp;  fun longBlackholeBenchmark(bh: Blackhole) {
+<b class="nc">&nbsp;    repeat(1000) { bh.consume(text.length) }</b>
 &nbsp;  }
 &nbsp;}
 </code>
@@ -201,7 +173,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-11 00:20</div>
+    <div style="float:right;">generated on 2023-07-11 09:10</div>
 </div>
 </body>
 </html>
