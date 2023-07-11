@@ -1,4 +1,6 @@
 import common.mppTargetName
+import kotlinx.benchmark.gradle.BenchmarkTarget
+import kotlinx.benchmark.gradle.JvmBenchmarkTarget
 
 plugins {
   plugins.kotlin.mpp
@@ -6,12 +8,14 @@ plugins {
   alias(libs.plugins.kotlin.allopen)
 }
 
+description = "Kotlin benchmarking tests"
+
 allOpen { annotation("org.openjdk.jmh.annotations.State") }
 
 benchmark {
   targets {
-    register("jvm")
-    register("desktop")
+    register("jvm") { configureJmh() }
+    register("desktop") { configureJmh() }
     // register("js")
   }
 
@@ -32,4 +36,9 @@ mppTargetName = "jvm"
 dependencies {
   commonMainImplementation(projects.common)
   commonMainImplementation(libs.kotlinx.bench.runtime)
+}
+
+fun BenchmarkTarget.configureJmh() {
+  this as JvmBenchmarkTarget
+  jmhVersion = libs.versions.jmh.get()
 }

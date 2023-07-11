@@ -20,7 +20,6 @@ application {
 
 dependencies {
   // Common multiplatform dependencies
-  commonMainImplementation(libs.kotlinx.io.bytestring)
   commonMainImplementation(libs.kotlinx.io.core)
   commonMainImplementation(libs.ktor.client.core)
   commonMainImplementation(libs.ktor.client.logging)

@@ -6,6 +6,8 @@ plugins {
   plugins.kotlin.jvm
 }
 
+description = "Ktor backend application"
+
 application {
   mainClass = "AppKt"
   applicationDefaultJvmArgs +=
