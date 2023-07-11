@@ -20,4 +20,6 @@ include(":web")
 
 include(":compose-web")
 
-include("desktop")
+include(":desktop")
+
+include(":benchmarks")

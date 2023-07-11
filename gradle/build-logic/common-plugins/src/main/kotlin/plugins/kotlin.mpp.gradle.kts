@@ -134,10 +134,12 @@ kotlinMultiplatform.apply {
     val jvmMain by getting {
       dependencies {
         implementation(libs.kotlin.stdlib.jdk8)
-        // https://kotlinlang.org/docs/ksp-multiplatform.html
-        project.dependencies.add("kspJvm", libs.ksp.auto.service)
+        implementation(libs.kotlin.reflect)
         implementation(libs.google.auto.annotations)
         implementation(libs.slf4j.api)
+
+        // https://kotlinlang.org/docs/ksp-multiplatform.html
+        project.dependencies.add("kspJvm", libs.ksp.auto.service)
       }
     }
 
@@ -250,6 +252,9 @@ if (!isNodeJSConfigured.toBoolean()) {
       download = true
       lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
       isNodeJSConfigured = "true"
+
+      yarnLockMismatchReport = YarnLockMismatchReport.WARNING
+      yarnLockAutoReplace = false
     }
   }
 }

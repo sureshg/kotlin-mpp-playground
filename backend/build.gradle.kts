@@ -19,4 +19,9 @@ application {
 
 mppTargetName = "jvm"
 
-dependencies { implementation(projects.common) }
+dependencies {
+  implementation(projects.common)
+
+  // Specify the classifier using variantOf
+  // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })
+}

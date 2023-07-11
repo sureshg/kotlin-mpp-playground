@@ -6,7 +6,7 @@ kotlin-jvmtarget               = "20"
 kotlin-dsl-jvmtarget           = "17"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "2.0"
-gradle                         = "8.2"
+gradle                         = "8.2.1"
 java-vendor                    = "Oracle"
 java-jvmArguments              = "--enable-preview"
 java-addModules                = "jdk.incubator.vector"
@@ -39,10 +39,11 @@ ajalt-clikt                    = "4.0.0"
 ajalt-colormath                = "3.3.1"
 compose-routing                = "0.2.12"
 classgraph                     = "4.8.160"
+cache4k                        = "0.11.0"
 dokka                          = "1.8.20"
 intellij-markdown              = "0.4.1"
 jgit                           = "6.5.0.202303070854-r"
-jte                            = "3.0.0"
+jte                            = "3.0.1"
 junit                          = "5.10.0-RC1"
 ktor                           = "2.3.2"
 koin                           = "3.4.1"
@@ -71,12 +72,14 @@ kotlin-retry                   = "1.0.9"
 kmp-store5                     = "5.0.0-beta01"
 kmp-settings                   = "1.0.0"
 parsus                         = "0.4.0"
+java-keyring                   = "1.0.3"
+java-keychain                  = "1.1.0"
 
 
 # Plugin versions
 benmanes                       = "0.47.0"
 compose-mpp                    = "0.0.0"
-foojay-resolver                = "0.5.0"
+foojay-resolver                = "0.6.0"
 gradle-enterprise              = "3.13.4"
 nexus-publish                  = "2.0.0-rc-1"
 shadow                         = "8.1.1"
@@ -97,6 +100,7 @@ build-kotlin                    = { module = "org.jetbrains.kotlin:kotlin-gradle
 build-kotlin-noarg              = { module = "org.jetbrains.kotlin:kotlin-noarg"                               , version.ref = "kotlin"}
 build-kotlinx-serialization     = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
 build-kotlinx-atomicfu          = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
+build-kotlinx-benchmark         = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
 build-dokka                     = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
 build-kotlin-ksp                = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
 build-ksp-redacted              = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "ksp-redacted"}
@@ -119,6 +123,7 @@ build-wire-plugin               = { module = "com.squareup.wire:wire-gradle-plug
 build-poko-plugin               = { module = "dev.drewhamilton.poko:poko-gradle-plugin"                        , version.ref = "poko-plugin"}
 build-kotlinx-bincompat         = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin" , version.ref = "kotlinx-bincompat"}
 
+
 # Gradle Dependencies
 kotlin-bom                      = { module = "org.jetbrains.kotlin:kotlin-bom"                          , version.ref = "kotlin"}
 kotlin-stdlib                   = { module = "org.jetbrains.kotlin:kotlin-stdlib"                       , version.ref = "kotlin"}
@@ -139,6 +144,7 @@ kotlinx-lincheck                = { module = "org.jetbrains.kotlinx:lincheck"   
 kotlinx-reflect-lite            = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"               , version.ref = "kotlinx-reflect-lite"}
 kotlinx-collections-immutable   = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable"      , version.ref = "kotlinx-collections-immutable"}
 kotlinx-html                    = { module = "org.jetbrains.kotlinx:kotlinx-html"                       , version.ref = "kotlinx-html"}
+kotlinx-bench-runtime           = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime"          , version.ref = "kotlinx-benchmark"}
 
 ktor-bom                     = { module = "io.ktor:ktor-bom"                                 , version.ref = "ktor"}
 ktor-server                  = { module = "io.ktor:ktor-server-core"                         , version.ref = "ktor"}
@@ -174,6 +180,7 @@ benasher44-uuid              = { module = "com.benasher44:uuid"                 
 store5                       = { module = "org.mobilenativefoundation.store:store5"          , version.ref = "kmp-store5" }
 multiplatform-settings       = { module = "com.russhwolf:multiplatform-settings"             , version.ref = "kmp-settings" }
 parsus                       = { module = "me.alllex.parsus:parsus"                          , version.ref = "parsus" }
+cache4k                      = { module = "io.github.reactivecircus.cache4k:cache4k"         , version.ref = "cache4k" }
 
 ajalt-mordant                = { module = "com.github.ajalt.mordant:mordant"                 , version.ref = "ajalt-mordant"}
 ajalt-colormath              = { module = "com.github.ajalt.colormath:colormath"             , version.ref = "ajalt-colormath"}
@@ -210,6 +217,9 @@ log4j-bom                    = { module = "org.apache.logging.log4j:log4j-bom"  
 log4j-core                   = { module = "org.apache.logging.log4j:log4j-core"              , version.ref = "log4j"}
 log4j-jpl                    = { module = "org.apache.logging.log4j:log4j-jpl"               , version.ref = "log4j"}
 
+java-keyring                 = { module = "com.github.javakeyring:java-keyring"              , version.ref = "java-keyring"}
+java-keychain                = { module = "pt.davidafsilva.apple:jkeychain"                  , version.ref = "java-keychain"}
+
 compose-routing              = { module = "app.softwork:routing-compose"                     , version.ref = "compose-routing" }
 
 compose-icons-cssgg          = { module = "br.com.devsrsouza.compose.icons:css-gg"                     , version.ref = "compose-icons" }
@@ -224,7 +234,9 @@ compose-icons-simpleIcons    = { module = "br.com.devsrsouza.compose.icons:simpl
 compose-icons-tablerIcons    = { module = "br.com.devsrsouza.compose.icons:tabler-icons"               , version.ref = "compose-icons" }
 
 [plugins]
-benmanes                    = { id = "com.github.ben-manes.versions"                         , version.ref = "benmanes" }
 jte                         = { id = "gg.jte.gradle"                                         , version.ref = "jte" }
+kotlin-allopen              = { id = "org.jetbrains.kotlin.plugin.allopen"                   , version.ref = "kotlin"}
+kotlinx-benchmark           = { id = "org.jetbrains.kotlinx.benchmark"                       , version.ref = "kotlinx-benchmark" }
+benmanes                    = { id = "com.github.ben-manes.versions"                         , version.ref = "benmanes" }
 bestpractices               = { id = "com.autonomousapps.plugin-best-practices-plugin"       , version.ref = "best-practices-plugin" }
 graalvm-nativeimage         = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}

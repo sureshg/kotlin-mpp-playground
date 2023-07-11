@@ -14,4 +14,7 @@ fun main() {
     it.join().throwIfFailed()
     println(subTask.get())
   }
+
+  langFeatures()
+  stdlibFeatures()
 }
