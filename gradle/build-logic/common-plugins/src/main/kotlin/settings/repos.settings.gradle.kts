@@ -22,6 +22,12 @@ pluginManagement {
   plugins {
     // id("org.jetbrains.compose").version(extra["compose.version"] as String)
   }
+
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+    composeMultiplatformDev()
+  }
 }
 
 // Apply the plugins to all projects
@@ -56,8 +62,17 @@ dependencyResolutionManagement {
       metadataSources { artifact() }
       content { includeModule("com.yarnpkg", "yarn") }
     }
+
+    composeMultiplatformDev()
   }
   repositoriesMode = RepositoriesMode.PREFER_SETTINGS
+}
+
+/**
+ * https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#using-the-compose-multiplatform-compiler
+ */
+fun RepositoryHandler.composeMultiplatformDev() {
+  maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 
 gradleEnterprise {
