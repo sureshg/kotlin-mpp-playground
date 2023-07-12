@@ -75,6 +75,7 @@ kmp-settings                   = "1.0.0"
 parsus                         = "0.4.0"
 java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
+webjars-xterm                  = "5.1.0"
 
 
 # Plugin versions
@@ -232,6 +233,8 @@ compose-icons-linea          = { module = "br.com.devsrsouza.compose.icons:linea
 compose-icons-octicons       = { module = "br.com.devsrsouza.compose.icons:octicons"                   , version.ref = "compose-icons" }
 compose-icons-simpleIcons    = { module = "br.com.devsrsouza.compose.icons:simple-icons"               , version.ref = "compose-icons" }
 compose-icons-tablerIcons    = { module = "br.com.devsrsouza.compose.icons:tabler-icons"               , version.ref = "compose-icons" }
+
+webjars-xterm                = { module = "org.webjars.npm:xterm"                                      , version.ref = "webjars-xterm" }
 
 [plugins]
 jte                         = { id = "gg.jte.gradle"                                         , version.ref = "jte" }
