@@ -72,7 +72,7 @@ dependencyResolutionManagement {
  * https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#using-the-compose-multiplatform-compiler
  */
 fun RepositoryHandler.composeMultiplatformDev() {
-  maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+  // maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
 }
 
 gradleEnterprise {
