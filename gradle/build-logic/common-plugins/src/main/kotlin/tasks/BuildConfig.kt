@@ -3,32 +3,26 @@ package tasks
 import gg.jte.ContentType
 import gg.jte.TemplateEngine
 import gg.jte.output.StringOutput
+import javax.inject.Inject
 import org.gradle.api.DefaultTask
+import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.provider.MapProperty
-import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
+import org.gradle.kotlin.dsl.listProperty
+import org.gradle.kotlin.dsl.mapProperty
+import org.gradle.kotlin.dsl.property
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 @CacheableTask
-abstract class BuildConfig : DefaultTask() {
-
-  @get:[Input Optional]
-  abstract val classFqName: Property<String>
-
-  @get:[Input Optional]
-  abstract val additionalFields: MapProperty<String, Any>
+abstract class BuildConfig @Inject constructor(private val extension: BuildConfigExtension) :
+    DefaultTask() {
 
   @get:[OutputDirectory Optional]
-  abstract val generatedOutputDir: DirectoryProperty
+  val generatedOutputDir: DirectoryProperty = extension.outputDir
 
   init {
     description = "Generate build config class"
     group = LifecycleBasePlugin.BUILD_TASK_NAME
-    // Set the default values.
-    classFqName.convention("BuildConfig")
-    generatedOutputDir.convention(project.layout.buildDirectory.dir("generated/buildconfig"))
-    additionalFields.convention(emptyMap())
   }
 
   @TaskAction
@@ -37,7 +31,7 @@ abstract class BuildConfig : DefaultTask() {
     dir.deleteRecursively()
     dir.mkdirs()
 
-    val fqName = classFqName.get()
+    val fqName = extension.classFqName.get()
     val className = fqName.substringAfterLast('.')
     val pkg = fqName.substringBeforeLast(".", "")
 
@@ -46,7 +40,12 @@ abstract class BuildConfig : DefaultTask() {
 
     // the<VersionCatalogsExtension>().named("libs").
     val params =
-        mapOf("className" to className, "pkg" to pkg, "additionalFields" to additionalFields.get())
+        mapOf(
+            "className" to className,
+            "pkg" to pkg,
+            "version" to extension.version.get(),
+            "catalogVersions" to extension.catalogVersions.get(),
+            "dependencies" to extension.dependencies.get())
 
     val content = StringOutput()
     val tmplEngine =
@@ -55,4 +54,25 @@ abstract class BuildConfig : DefaultTask() {
     tmplEngine.render("BuildConfig.kte", params, content)
     file.writeText(content.toString())
   }
+}
+
+open class BuildConfigExtension(@Inject private val project: Project) {
+
+  @get:Input val classFqName = project.objects.property<String>().convention("BuildConfig")
+
+  @get:Input val version = project.objects.property<String>().convention(project.version.toString())
+
+  @get:Input
+  val catalogVersions = project.objects.mapProperty<String, String>().convention(emptyMap())
+
+  @get:Input val dependencies = project.objects.listProperty<String>().convention(emptyList())
+
+  @get:Input
+  val outputDir =
+      project.objects
+          .directoryProperty()
+          .convention(project.layout.buildDirectory.dir("generated/buildconfig"))
+
+  //  @get:[Input Optional]
+  //  val additionalFields: MapProperty<String, Any> = project.objects.mapProperty<String, Any>()
 }

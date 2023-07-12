@@ -17,7 +17,13 @@ class Greeting {
 
   fun greeting() =
       """
-      | ${BuildConfig.time} - ${KData("Foo", 20, "test")}: Kotlin $platform: ${KotlinVersion.CURRENT}!
+      | Build Time     : ${BuildConfig.time}
+      | Build Version  : ${BuildConfig.version}
+      | Platform       : Kotlin $platform
+      | Java Version   : ${BuildConfig.java}
+      | Kotlin Version : ${KotlinVersion.CURRENT}
+      | Gradle Version : ${BuildConfig.gradle}
+      | ${KData("Foo", 20, "test")}
       | ${kotlinxTests()}
       """
           .trimMargin()
@@ -29,6 +35,7 @@ class Greeting {
 
     val bs = buildByteString {
       append(bs1)
+      append(" ".encodeToByteArray())
       append(bs2)
     }
 

@@ -113,7 +113,7 @@ constructor(
   }
 }
 
-open class JdeprscanExtension(@Inject val project: Project) {
+open class JdeprscanExtension(@Inject private val project: Project) {
 
   @get:Input
   val release =

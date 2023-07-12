@@ -24,6 +24,13 @@ val File.displaySize
 val Long.compactFmt: String
   get() = NumberFormat.getCompactNumberInstance().format(this)
 
+/** Converts a string to camelcase by splitting it by space, dash, underscore, or dot. */
+val String.camelCase: String
+  get() =
+      split("[. -_]".toRegex())
+          .mapIndexed { idx, s -> if (idx == 0) s else s.replaceFirstChar { it.uppercaseChar() } }
+          .joinToString("")
+
 /**
  * Returns a human-readable version of the Byte size, where the input represents a specific number
  * of bytes.

@@ -31,3 +31,5 @@ $ curl -L \
 
 * [Gradle Best Practices](https://github.com/liutikas/gradle-best-practices)
 * [Gradle Best Practices Plugin](https://github.com/autonomousapps/gradle-best-practices-plugin)
+* [Stampeding Elephants](https://developer.squareup.com/blog/stampeding-elephants/)
+* [Stop using buildSrc](https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-instead-3c38ac7a2ab3)

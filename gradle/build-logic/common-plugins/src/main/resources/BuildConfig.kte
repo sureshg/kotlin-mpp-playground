@@ -1,13 +1,22 @@
+@import common.camelCase
 @import java.time.LocalDateTime
 @import gg.jte.support.ForSupport
 
 @param className: String
 @param pkg: String
-@param additionalFields: Map<String, Any>
+@param version: String
+@param catalogVersions: Map<String, String>
+@param dependencies: List<String>
 
 /* GENERATED, DO NOT EDIT MANUALLY! */
 @if(pkg.isNotBlank())package ${pkg}@endif
 object ${className} {
 
    const val time = "${LocalDateTime.now().toString()}"
+
+   const val version = "${version}"
+
+   @for((k,v) in catalogVersions)
+   const val ${k.camelCase} = "${v}"
+   @endfor
 }

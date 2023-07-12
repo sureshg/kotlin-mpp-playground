@@ -18,6 +18,13 @@ application {
       )
 }
 
+buildConfig {
+  version = project.version.toString()
+  val catalog = project.versionCatalogs.named("libs")
+  val catalogMap = catalog.versionAliases.associateWith { catalog.findVersion(it).get().toString() }
+  catalogVersions = catalogMap
+}
+
 dependencies {
   // Common multiplatform dependencies
   commonMainImplementation(libs.kotlinx.io.core)

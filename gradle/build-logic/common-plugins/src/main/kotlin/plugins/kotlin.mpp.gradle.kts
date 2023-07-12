@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 import org.jetbrains.kotlin.gradle.targets.js.yarn.*
 import tasks.BuildConfig
+import tasks.BuildConfigExtension
 
 plugins {
   java
@@ -193,8 +194,9 @@ val commonJsResources by
 tasks {
   if (project.name == commonProjectName) {
     // Register buildConfig task only for common module
-    val buildConfig by registering(BuildConfig::class) { classFqName = "BuildConfig" }
-    kotlinMultiplatform.sourceSets.named("commonMain") { kotlin.srcDirs(buildConfig) }
+    val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
+    val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
+    kotlinMultiplatform.sourceSets.named("${commonProjectName}Main") { kotlin.srcDirs(buildConfig) }
     maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
