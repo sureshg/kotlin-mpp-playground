@@ -61,3 +61,6 @@
 - name: kotlin-kmp
   description: Kotlin Multiplatform changes
   color: 7f52ff
+- name: kotlin-multiplatform
+  description: Kotlin Multiplatform changes
+  color: 7f52ff
