@@ -62,6 +62,16 @@ tasks {
     compilerOptions { configureKotlinJvm() }
     // finalizedBy("spotlessApply")
   }
+
+  processResources {
+    inputs.property("version", project.version.toString())
+    filesMatching("*-res.txt") {
+      expand(
+          "name" to project.name,
+          "version" to project.version,
+      )
+    }
+  }
 }
 
 dependencies {
