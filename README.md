@@ -46,6 +46,13 @@ $ ./gradlew :benchmarks:benchmark
 - [Docs](https://suresh.dev/kotlin-mpp-playground/docs)
 - [Coverage](https://suresh.dev/kotlin-mpp-playground/reports)
 
+### Resources
+
+- [🔍 Kotlin Multiplatform Package Search](https://package-search.jetbrains.com/search?query=http&onlyMpp=true)
+- [🎨 Compose Multiplatform Template](https://github.com/JetBrains/compose-multiplatform-template)
+- [📏 Compose Lint Rules](https://slackhq.github.io/compose-lints/rules/)
+
+
 <!-- Badges -->
 
 [java_url]: https://jdk.java.net/22/
