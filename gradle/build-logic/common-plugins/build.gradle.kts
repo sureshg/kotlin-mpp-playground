@@ -75,10 +75,11 @@ jte {
 dependencies {
   implementation(platform(libs.kotlin.bom))
   implementation(kotlin("stdlib"))
-  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
+  implementation(libs.kotlinx.coroutines.core)
   implementation(libs.ajalt.mordant)
   implementation(libs.jte.runtime)
   implementation(libs.build.zip.prefixer)
+  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
   // jteGenerate(libs.jte.models)
   // compileOnly(libs.jte.kotlin)
 

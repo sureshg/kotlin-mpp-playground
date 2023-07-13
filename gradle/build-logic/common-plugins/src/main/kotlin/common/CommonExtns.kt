@@ -11,6 +11,8 @@ import kotlin.math.pow
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.full.isSubtypeOf
 import kotlin.reflect.typeOf
+import kotlin.time.Duration.Companion.milliseconds
+import kotlinx.coroutines.*
 
 internal val DEC_FORMAT = DecimalFormat("#.##")
 
@@ -99,4 +101,29 @@ inline fun <reified T> sysProp(): ReadOnlyProperty<Any?, T> = ReadOnlyProperty {
         }
   }
       as T
+}
+
+/**
+ * Displays the progress of a task by animating a progress symbol.
+ *
+ * ```kotlin
+ *  // Start the work
+ *  val progress = showProgress("Waiting for job to complete")
+ *  // Check if work is completed
+ *  progress.cancel()
+ * ```
+ *
+ * @param message The message to be displayed alongside the progress symbol.
+ */
+fun CoroutineScope.showProgress(message: String) = launch {
+  val progressSymbols = listOf("⣷", "⣯", "⣟", "⡿", "⢿", "⣻", "⣽", "⣾")
+  launch {
+    var progressIndex = 0
+    while (isActive) {
+      progressIndex = (progressIndex + 1) % progressSymbols.size
+      val symbol = progressSymbols[progressIndex]
+      print("\r[$symbol] $message")
+      delay(200.milliseconds)
+    }
+  }
 }

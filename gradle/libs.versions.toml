@@ -80,7 +80,7 @@ webjars-xterm                  = "5.1.0"
 
 # Plugin versions
 benmanes                       = "0.47.0"
-compose-mpp                    = "0.0.0"
+compose-mpp                    = "1.5.0-dev1094"
 foojay-resolver                = "0.6.0"
 gradle-enterprise              = "3.13.4"
 nexus-publish                  = "2.0.0-rc-1"
@@ -124,7 +124,7 @@ build-github-depgraph           = { module = "org.gradle:github-dependency-graph
 build-wire-plugin               = { module = "com.squareup.wire:wire-gradle-plugin"                            , version.ref = "wire-plugin"}
 build-poko-plugin               = { module = "dev.drewhamilton.poko:poko-gradle-plugin"                        , version.ref = "poko-plugin"}
 build-kotlinx-bincompat         = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin" , version.ref = "kotlinx-bincompat"}
-
+build-compose-mpp               = { module = "org.jetbrains.compose:compose-gradle-plugin"                     , version.ref = "compose-mpp"}
 
 # Gradle Dependencies
 kotlin-bom                      = { module = "org.jetbrains.kotlin:kotlin-bom"                          , version.ref = "kotlin"}
@@ -243,3 +243,4 @@ kotlinx-benchmark           = { id = "org.jetbrains.kotlinx.benchmark"          
 benmanes                    = { id = "com.github.ben-manes.versions"                         , version.ref = "benmanes" }
 bestpractices               = { id = "com.autonomousapps.plugin-best-practices-plugin"       , version.ref = "best-practices-plugin" }
 graalvm-nativeimage         = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}
+compose-mpp                 = { id = "org.jetbrains.compos"                                  , version.ref = "compose-mpp"}
