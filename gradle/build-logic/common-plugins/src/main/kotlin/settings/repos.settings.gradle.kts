@@ -2,6 +2,7 @@ package settings
 
 import com.gradle.scan.plugin.PublishedBuildScan
 import common.GithubAction
+import common.Repo
 import org.gradle.kotlin.dsl.*
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
 
@@ -26,7 +27,7 @@ pluginManagement {
   repositories {
     mavenCentral()
     gradlePluginPortal()
-    composeMultiplatformDev()
+    // composeMultiplatformDev()
   }
 }
 
@@ -47,32 +48,49 @@ plugins {
 dependencyResolutionManagement {
   repositories {
     mavenCentral()
-
-    // Fix for https://youtrack.jetbrains.com/issue/KT-56300
-    ivy("https://nodejs.org/dist/") {
-      name = "Node.js Distributions"
-      patternLayout { artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
-      metadataSources { artifact() }
-      content { includeModule("org.nodejs", "node") }
-    }
-
-    ivy("https://github.com/yarnpkg/yarn/releases/download/") {
-      name = "Yarn Distributions"
-      patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
-      metadataSources { artifact() }
-      content { includeModule("com.yarnpkg", "yarn") }
-    }
-
-    composeMultiplatformDev()
+    nodeJS()
+    yarn()
+    // mavenSnapshot()
+    // composeMultiplatformDev()
   }
   repositoriesMode = RepositoriesMode.PREFER_SETTINGS
 }
 
+fun RepositoryHandler.nodeJS() {
+  // Fix for https://youtrack.jetbrains.com/issue/KT-56300
+  ivy(Repo.NODEJS) {
+    name = "Node.js Distributions"
+    patternLayout { artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
+    metadataSources { artifact() }
+    content { includeModule("org.nodejs", "node") }
+  }
+}
+
+fun RepositoryHandler.yarn() {
+  ivy(Repo.YARN) {
+    name = "Yarn Distributions"
+    patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
+    metadataSources { artifact() }
+    content { includeModule("com.yarnpkg", "yarn") }
+  }
+}
+
+fun RepositoryHandler.mavenSnapshot() {
+  maven(url = Repo.MAVEN_SNAPSHOT) {
+    name = "Sonatype Snapshots"
+    content { includeGroup("org.jetbrains") }
+  }
+}
+
 /**
- * https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#using-the-compose-multiplatform-compiler
+ * [Compose Multiplatform
+ * Compiler](https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#using-the-compose-multiplatform-compiler)
  */
 fun RepositoryHandler.composeMultiplatformDev() {
-  // maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
+  maven(url = Repo.COMPOSE_MULTIPLATFORM_DEV) {
+    name = "Jetbrains Compose Multiplatform Development Repository"
+    content { includeGroup("org.jetbrains.compose") }
+  }
 }
 
 gradleEnterprise {

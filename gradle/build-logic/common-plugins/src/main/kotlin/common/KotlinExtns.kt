@@ -105,7 +105,8 @@ fun JavaCompile.configureJavac() {
                 // "--add-exports",
                 // "java.base/sun.nio.ch=ALL-UNNAMED",
                 // "--patch-module",
-                // "$moduleName=${sourceSets.main.get().output.asPath}"
+                // "$moduleName=${sourceSets.main.get().output.asPath}",
+                // "-Xplugin:unchecked", // compiler plugin
               ),
     )
   }
