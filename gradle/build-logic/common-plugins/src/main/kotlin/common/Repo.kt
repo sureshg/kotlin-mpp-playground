@@ -14,6 +14,18 @@ object Repo {
 
   const val COMPOSE_MULTIPLATFORM_DEV = "https://maven.pkg.jetbrains.space/public/p/compose/dev"
 
+  const val JETPACK_COMPOSE = "https://androidx.dev/storage/compose-compiler/repository"
+
+  /**
+   * Generates the URL for the GitHub package repository based on the owner and repository name.
+   *
+   * @param owner The owner of the GitHub repository.
+   * @param repository The name of the GitHub repository.
+   * @return The URL of the GitHub package repository.
+   */
+  fun githubPackage(owner: String, repository: String) =
+      "https://maven.pkg.github.com/$owner/$repository"
+
   /**
    * Returns the latest download URL for a given [groupId] and [artifactId] from Maven Central.
    *

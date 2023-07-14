@@ -12,6 +12,7 @@ import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.assign
 import org.gradle.plugin.use.PluginDependency
 import org.jetbrains.kotlin.gradle.dsl.*
+import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
@@ -209,6 +210,22 @@ fun KotlinJsOptions.configureKotlinJs() {
 context(Project)
 fun KotlinNpmInstallTask.configureKotlinNpm() {
   //args.add("--ignore-engines")
+}
+
+/**
+ * Adds a KSP dependency to the specified target in the project.
+ *
+ * @param targetName The name of the target to add the dependency to.
+ * @param dependencyNotation The notation of the dependency to add.
+ */
+context(Project)
+fun KotlinDependencyHandler.kspDependency(
+  targetName: String, dependencyNotation: Any,
+) {
+  dependencies.add(
+    "ksp${targetName.replaceFirstChar { it.uppercaseChar() }}",
+    dependencyNotation,
+  )
 }
 
 /** Returns the path of the dependency jar in runtime classpath. */

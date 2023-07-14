@@ -4,6 +4,7 @@ import com.google.devtools.ksp.gradle.KspTaskJvm
 import common.*
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -138,9 +139,8 @@ kotlinMultiplatform.apply {
         implementation(libs.kotlin.reflect)
         implementation(libs.google.auto.annotations)
         implementation(libs.slf4j.api)
-
         // https://kotlinlang.org/docs/ksp-multiplatform.html
-        project.dependencies.add("kspJvm", libs.ksp.auto.service)
+        kspDependency("jvm", libs.ksp.auto.service)
       }
     }
 
@@ -148,6 +148,7 @@ kotlinMultiplatform.apply {
       dependencies {
         implementation(project.dependencies.platform(libs.junit.bom))
         implementation(kotlin("test-junit5"))
+        implementation(libs.mockk)
       }
     }
 
@@ -259,4 +260,22 @@ if (!isNodeJSConfigured.toBoolean()) {
       yarnLockAutoReplace = false
     }
   }
+}
+
+fun Project.addKspDependencyForAllTargets(
+    dependencyNotation: Any,
+    configurationNameSuffix: String = ""
+) {
+  val kotlinMultiplatform = extensions.getByType<KotlinMultiplatformExtension>()
+  kotlinMultiplatform.targets
+      .filter { target ->
+        // Don't add KSP for common target, only final platforms
+        target.platformType != KotlinPlatformType.common
+      }
+      .forEach { target ->
+        dependencies.add(
+            "ksp${target.targetName.replaceFirstChar { it.uppercaseChar() }}$configurationNameSuffix",
+            dependencyNotation,
+        )
+      }
 }

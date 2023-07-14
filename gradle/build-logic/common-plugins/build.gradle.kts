@@ -5,6 +5,7 @@ plugins {
   `kotlin-dsl`
   alias(libs.plugins.jte)
   alias(libs.plugins.bestpractices)
+  // alias(libs.plugins.kotlin.dsl)
 }
 
 /**
@@ -43,11 +44,20 @@ gradlePlugin {
   plugins {
 
     // Re-exposure of plugin from dependency. Gradle doesn't expose the plugin itself.
-    create("com.gradle.enterprise") {
+    register("com.gradle.enterprise") {
       id = "com.gradle.enterprise"
       implementationClass = "com.gradle.enterprise.gradleplugin.GradleEnterprisePlugin"
       displayName = "Gradle Enterprise"
       description = "Gradle enterprise settings plugin re-exposed from dependency"
+    }
+
+    // A generic plugin for both project and settings
+    register("Generic Plugin") {
+      id = "plugins.generic"
+      implementationClass = "plugins.GenericPlugin"
+      displayName = "Generic plugin"
+      description = "A plugin-aware pre-compiled generic plugin"
+      tags = listOf("Generic Plugin", "build-logic")
     }
 
     // Uncomment the id to change plugin id for this pre-compiled plugin
@@ -58,7 +68,7 @@ gradlePlugin {
       tags = listOf("Common Plugin", "build-logic")
     }
 
-    // val settingsPlugin by creating {}
+    // val settingsPlugin by registering {}
   }
 }
 
@@ -98,6 +108,7 @@ dependencies {
   implementation(libs.build.semver.plugin)
   implementation(libs.build.benmanesversions)
   implementation(libs.build.dependencyanalysis)
+  implementation(libs.build.cyclonedx.plugin)
   implementation(libs.build.foojay.resolver)
   implementation(libs.build.nativeimage.plugin)
   testImplementation(gradleTestKit())

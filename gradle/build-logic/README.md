@@ -33,3 +33,4 @@ $ curl -L \
 * [Gradle Best Practices Plugin](https://github.com/autonomousapps/gradle-best-practices-plugin)
 * [Stampeding Elephants](https://developer.squareup.com/blog/stampeding-elephants/)
 * [Stop using buildSrc](https://proandroiddev.com/stop-using-gradle-buildsrc-use-composite-builds-instead-3c38ac7a2ab3)
+* [Project Dependency Graph Script](https://github.com/JakeWharton/SdkSearch/blob/master/gradle/projectDependencyGraph.gradle)

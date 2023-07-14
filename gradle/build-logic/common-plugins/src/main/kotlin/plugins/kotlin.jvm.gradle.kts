@@ -91,4 +91,5 @@ dependencies {
   testImplementation(libs.kotlinx.lincheck)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.slf4j.simple)
+  testImplementation(libs.mockk)
 }

@@ -35,7 +35,7 @@ dependencies {
   commonMainImplementation(libs.benasher44.uuid)
   commonMainImplementation(libs.intellij.markdown)
   commonMainImplementation(libs.kotlin.codepoints.deluxe)
-  commonMainImplementation(libs.multiplatform.settings)
+  commonMainImplementation(libs.multiplatform.settings.core)
   // commonMainImplementation(libs.kotlinx.html)
   // commonMainImplementation(libs.store5)
 

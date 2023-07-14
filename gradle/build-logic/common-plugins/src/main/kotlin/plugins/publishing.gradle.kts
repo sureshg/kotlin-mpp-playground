@@ -1,10 +1,12 @@
 package plugins
 
+import common.Repo
 import common.libs
 
 plugins {
   `maven-publish`
   signing
+  id("org.cyclonedx.bom")
 }
 
 // Nexus plugin needs to apply to the root project only
@@ -14,11 +16,30 @@ if (project == rootProject) {
 
 group = libs.versions.group.get()
 
+tasks {
+  cyclonedxBom {
+    includeConfigs = listOf("runtimeClasspath")
+    skipConfigs = listOf("compileClasspath", "testCompileClasspath")
+    destination = project.layout.buildDirectory.dir("sbom").map { it.asFile }
+    outputFormat = "json"
+    includeLicenseText = true
+  }
+}
+
 publishing {
   repositories {
     maven {
       name = "local"
       url = uri(layout.buildDirectory.dir("repo"))
+    }
+
+    maven {
+      name = "GitHubPackages"
+      url = uri(Repo.githubPackage(libs.versions.publish.dev.name.get(), project.name))
+      credentials {
+        username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME")
+        password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN")
+      }
     }
   }
 
@@ -29,6 +50,15 @@ publishing {
         register<MavenPublication>(name) {
           from(components["java"])
           configurePom()
+        }
+      }
+
+      // 2. Add executable jar as an artifact
+      if (project == rootProject) {
+        withType<MavenPublication>().configureEach {
+          // val buildExecutable by tasks.existing
+          // artifact(buildExecutable)
+          // artifact(tasks.shadowJar)
         }
       }
     }
@@ -73,6 +103,20 @@ publishing {
     }
   }
 }
+
+// signing {
+//  setRequired {
+//    gradle.taskGraph.allTasks.any {
+//      it.name.startsWith("publish")
+//    }
+//  }
+//
+//  publishing.publications.configureEach {
+//    sign(this)
+//  }
+
+//  useGpgCmd()
+// }
 
 fun MavenPublication.configurePom() {
   val githubUrl = libs.versions.publish.scm.url

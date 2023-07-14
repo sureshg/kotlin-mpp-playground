@@ -76,15 +76,12 @@ fun RepositoryHandler.yarn() {
 }
 
 fun RepositoryHandler.mavenSnapshot() {
-  maven(url = Repo.MAVEN_SNAPSHOT) {
-    name = "Sonatype Snapshots"
-    content { includeGroup("org.jetbrains") }
-  }
+  maven(url = Repo.MAVEN_SNAPSHOT)
+  maven(url = Repo.MAVEN_SNAPSHOT_2)
 }
 
 /**
- * [Compose Multiplatform
- * Compiler](https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#using-the-compose-multiplatform-compiler)
+ * [Compose-Multiplatform-Compiler](https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#using-the-compose-multiplatform-compiler)
  */
 fun RepositoryHandler.composeMultiplatformDev() {
   maven(url = Repo.COMPOSE_MULTIPLATFORM_DEV) {
