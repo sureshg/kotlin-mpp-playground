@@ -113,6 +113,7 @@ kotlinMultiplatform.apply {
       dependencies {
         implementation(project.dependencies.enforcedPlatform(libs.kotlin.bom))
         implementation(project.dependencies.enforcedPlatform(libs.ktor.bom))
+        // implementation(project.dependencies.enforcedPlatform(libs.kotlin.wrappers.bom))
       }
     }
 
@@ -152,7 +153,12 @@ kotlinMultiplatform.apply {
       }
     }
 
-    val jsMain by getting
+    val jsMain by getting {
+      dependencies {
+        // implementation(kotlinw("web"))
+        // implementation(kotlinw("browser"))
+      }
+    }
     val jsTest by getting
   }
 

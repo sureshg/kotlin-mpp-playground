@@ -14,6 +14,8 @@ import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLProgressElement
 import org.w3c.dom.Node
 
+val mainScope = MainScope()
+
 suspend fun main() {
   val text = Greeting().greeting()
   val root = document.getElementById("root") as HTMLDivElement

@@ -33,6 +33,7 @@ kotlinx-html                   = "0.9.1"
 kotlinx-benchmark              = "0.4.8"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.13.2"
+kotlin-wrappers                = "1.0.0-pre.596"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "2.0.0"
 ajalt-clikt                    = "4.0.0"
@@ -241,9 +242,9 @@ compose-icons-simpleIcons       = { module = "br.com.devsrsouza.compose.icons:si
 compose-icons-tablerIcons       = { module = "br.com.devsrsouza.compose.icons:tabler-icons"               , version.ref = "compose-icons" }
 
 
-
-multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-settings"             , version.ref = "kmp-settings" }
-multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"  , version.ref = "kmp-settings" }
+kotlin-wrappers-bom                  = { module = "org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom"  , version.ref = "kotlin-wrappers" }
+multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-settings"               , version.ref = "kmp-settings" }
+multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"    , version.ref = "kmp-settings" }
 
 [plugins]
 jte                              = { id = "gg.jte.gradle"                                         , version.ref = "jte" }

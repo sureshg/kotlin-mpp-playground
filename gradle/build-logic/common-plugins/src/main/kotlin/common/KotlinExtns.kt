@@ -61,6 +61,14 @@ val Project.isKotlinJsProject
   get() = plugins.hasPlugin("org.jetbrains.kotlin.js")
 
 /**
+ * Returns the dependency string for the specified Kotlin wrapper.
+ *
+ * @param target The target wrapper to retrieve the dependency string for.
+ * @return The dependency string for the specified Kotlin wrapper.
+ */
+fun kotlinw(target: String) = "org.jetbrains.kotlin-wrappers:kotlin-$target"
+
+/**
  * Returns the dependency artifact for the given Gradle plugin.
  */
 fun Provider<PluginDependency>.toDep() = map {
