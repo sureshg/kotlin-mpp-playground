@@ -14,7 +14,12 @@ object Repo {
 
   const val COMPOSE_MULTIPLATFORM_DEV = "https://maven.pkg.jetbrains.space/public/p/compose/dev"
 
+  const val KOBWEB = "https://us-central1-maven.pkg.dev/varabyte-repos/public"
+
   const val JETPACK_COMPOSE = "https://androidx.dev/storage/compose-compiler/repository"
+
+  const val KOTLIN_WASM_EXPERIMENTAL =
+      "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental"
 
   /**
    * Generates the URL for the GitHub package repository based on the owner and repository name.

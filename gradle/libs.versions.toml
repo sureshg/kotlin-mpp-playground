@@ -33,10 +33,10 @@ kotlinx-html                   = "0.9.1"
 kotlinx-benchmark              = "0.4.8"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.13.2"
-kotlin-wrappers                = "1.0.0-pre.596"
+kotlin-wrappers                = "1.0.0-pre.597"
 zip-prefixer                   = "0.3.1"
-ajalt-mordant                  = "2.0.0"
-ajalt-clikt                    = "4.0.0"
+ajalt-mordant                  = "2.0.1"
+ajalt-clikt                    = "4.1.0"
 ajalt-colormath                = "3.3.1"
 compose-routing                = "0.2.12"
 classgraph                     = "4.8.161"
@@ -78,6 +78,7 @@ parsus                         = "0.4.0"
 java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.1.0"
+kobweb                         = "0.13.9-SNAPSHOT"
 
 
 # Plugin versions
@@ -204,6 +205,12 @@ junit-jupiter-api               = { module = "org.junit.jupiter:junit-jupiter-ap
 junit-jupiter-engine            = { module = "org.junit.jupiter:junit-jupiter-engine"           , version.ref = "junit"}
 junit-jupiter-params            = { module = "org.junit.jupiter:junit-jupiter-params"           , version.ref = "junit"}
 
+kobweb-api                      = { module = "com.varabyte.kobweb:kobweb-api"                   , version.ref = "kobweb" }
+kobweb-core                     = { module = "com.varabyte.kobweb:kobweb-core"                  , version.ref = "kobweb" }
+kobweb-silk-core                = { module = "com.varabyte.kobweb:kobweb-silk"                  , version.ref = "kobweb" }
+kobweb-silk-icons-fa            = { module = "com.varabyte.kobweb:kobweb-silk-icons-fa"         , version.ref = "kobweb" }
+kobweb-streams                  = { module = "com.varabyte.kobweb:kobweb-streams"               , version.ref = "kobweb" }
+
 graalvm-sdk                     = { module = "org.graalvm.sdk:graal-sdk"                        , version.ref = "graalvm"}
 google-auto-annotations         = { module = "com.google.auto.service:auto-service-annotations" , version.ref = "google-auto-service"}
 google-tink                     = { module = "com.google.crypto.tink:tink"                      , version.ref = "google-tink"}
@@ -227,7 +234,7 @@ log4j-jpl                       = { module = "org.apache.logging.log4j:log4j-jpl
 
 java-keyring                    = { module = "com.github.javakeyring:java-keyring"              , version.ref = "java-keyring"}
 java-keychain                   = { module = "pt.davidafsilva.apple:jkeychain"                  , version.ref = "java-keychain"}
-webjars-xterm                   = { module = "org.webjars.npm:xterm"                                      , version.ref = "webjars-xterm" }
+webjars-xterm                   = { module = "org.webjars.npm:xterm"                            , version.ref = "webjars-xterm" }
 
 compose-routing                 = { module = "app.softwork:routing-compose"                     , version.ref = "compose-routing" }
 compose-icons-cssgg             = { module = "br.com.devsrsouza.compose.icons:css-gg"                     , version.ref = "compose-icons" }
@@ -247,11 +254,15 @@ multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-s
 multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"    , version.ref = "kmp-settings" }
 
 [plugins]
-jte                              = { id = "gg.jte.gradle"                                         , version.ref = "jte" }
+
 kotlin-allopen                   = { id = "org.jetbrains.kotlin.plugin.allopen"                   , version.ref = "kotlin"}
 kotlinx-benchmark                = { id = "org.jetbrains.kotlinx.benchmark"                       , version.ref = "kotlinx-benchmark" }
+jte                              = { id = "gg.jte.gradle"                                         , version.ref = "jte" }
 benmanes                         = { id = "com.github.ben-manes.versions"                         , version.ref = "benmanes" }
 bestpractices                    = { id = "com.autonomousapps.plugin-best-practices-plugin"       , version.ref = "best-practices-plugin" }
 graalvm-nativeimage              = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}
-compose-mpp                      = { id = "org.jetbrains.compos"                                  , version.ref = "compose-mpp"}
 buildkonfig                      = { id = "com.codingfeline.buildkonfig"                          , version.ref = "buildkonfig"}
+compose-mpp                      = { id = "org.jetbrains.compos"                                  , version.ref = "compose-mpp"}
+kobweb-application               = { id = "com.varabyte.kobweb.application"                       , version.ref = "kobweb" }
+kobweb-library                   = { id = "com.varabyte.kobweb.library"                           , version.ref = "kobweb" }
+kobwebx-markdown                 = { id = "com.varabyte.kobwebx.markdown"                         , version.ref = "kobweb" }

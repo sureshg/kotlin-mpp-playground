@@ -5,15 +5,19 @@ import org.gradle.api.file.*
 import org.gradle.api.provider.*
 import org.gradle.api.tasks.*
 
+@CacheableTask
 abstract class SampleTask : DefaultTask() {
 
   @get:Input abstract val greeting: Property<String>
 
-  @get:Input @get:Optional abstract val versions: MapProperty<String, String>
+  @get:[Input Optional]
+  abstract val versions: MapProperty<String, String>
 
-  @get:InputDirectory @get:Optional abstract val inputDirectory: DirectoryProperty
+  @get:[InputDirectory Optional]
+  abstract val inputDirectory: DirectoryProperty
 
-  @get:InputFile @get:Optional abstract val inputFile: RegularFileProperty
+  @get:[InputFile Optional]
+  abstract val inputFile: RegularFileProperty
 
   @get:Internal val type = "Sample Task"
 
