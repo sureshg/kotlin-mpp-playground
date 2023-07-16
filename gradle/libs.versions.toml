@@ -106,6 +106,7 @@ cyclonedx-plugin               = "1.7.4"
 # External plugins for precompiled script plugins
 build-kotlin                    = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin"                       , version.ref = "kotlin"}
 build-kotlin-noarg              = { module = "org.jetbrains.kotlin:kotlin-noarg"                               , version.ref = "kotlin"}
+build-kotlin-allopen            = { module = "org.jetbrains.kotlin:kotlin-allopen"                             , version.ref = "kotlin"}
 build-kotlinx-serialization     = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
 build-kotlinx-atomicfu          = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
 build-kotlinx-benchmark         = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
@@ -254,7 +255,6 @@ multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-s
 multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"    , version.ref = "kmp-settings" }
 
 [plugins]
-
 kotlin-allopen                   = { id = "org.jetbrains.kotlin.plugin.allopen"                   , version.ref = "kotlin"}
 kotlinx-benchmark                = { id = "org.jetbrains.kotlinx.benchmark"                       , version.ref = "kotlinx-benchmark" }
 jte                              = { id = "gg.jte.gradle"                                         , version.ref = "jte" }

@@ -83,22 +83,28 @@ jte {
 }
 
 dependencies {
+  // Hack to access version catalog from pre-compiled script plugins.
+  // https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
+  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(platform(libs.kotlin.bom))
   implementation(kotlin("stdlib"))
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.ajalt.mordant)
   implementation(libs.jte.runtime)
   implementation(libs.build.zip.prefixer)
-  implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
   // jteGenerate(libs.jte.models)
   // compileOnly(libs.jte.kotlin)
 
+  // External plugins deps to use in precompiled script plugins
+  // https://docs.gradle.org/current/userguide/custom_plugins.html#applying_external_plugins_in_precompiled_script_plugins
   implementation(libs.build.kotlin)
   // OR implementation(kotlin("gradle-plugin"))
   implementation(libs.build.kotlin.ksp)
   implementation(libs.build.kotlinx.atomicfu)
+  implementation(libs.build.kotlin.allopen)
   implementation(libs.build.kotlinx.serialization)
   implementation(libs.build.kotlinx.kover)
+  implementation(libs.build.kotlinx.benchmark)
   implementation(libs.build.dokka)
   implementation(libs.build.ksp.redacted)
   implementation(libs.build.gradle.enterprise)
