@@ -34,7 +34,11 @@ class GenericSettingsPlugin : Plugin<Settings> {
 
         // Configure an extension when a plugin is applied.
         plugins.withId("com.gradle.enterprise") {}
-
         // OR pluginManager.withPlugin("com.gradle.enterprise") {}
+
+        // pluginManager.withPlugin("org.graalvm.buildtools.native") {
+        //   val graalExt = extensions.findByType(GraalVMExtension::class.java)
+        //   graalExt?.ext {}
+        // }
       }
 }
