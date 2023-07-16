@@ -134,7 +134,15 @@ kotlinMultiplatform.apply {
       }
     }
 
+    // val jvmCommon by creating {
+    //   dependsOn(commonMain)
+    //   dependencies {
+    //     implementation(..)
+    //   }
+    // }
+
     val jvmMain by getting {
+      // dependsOn(jvmCommon)
       dependencies {
         implementation(libs.kotlin.stdlib.jdk8)
         implementation(libs.kotlin.reflect)
