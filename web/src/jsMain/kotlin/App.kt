@@ -1,4 +1,5 @@
 import dev.suresh.Greeting
+import js.promise.await
 import kotlin.js.Promise
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
@@ -10,6 +11,7 @@ import kotlinx.html.div
 import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.progress
+import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLProgressElement
 import org.w3c.dom.Node
@@ -17,9 +19,17 @@ import org.w3c.dom.Node
 val mainScope = MainScope()
 
 suspend fun main() {
-  val text = Greeting().greeting()
   val root = document.getElementById("root") as HTMLDivElement
+  val copy = document.getElementById("copy") as HTMLButtonElement
 
+  copy.onclick = {
+    mainScope.launch {
+      web.navigator.navigator.clipboard.writeText(root.textContent.orEmpty()).await()
+      println("Copied to clipboard using kotlinx-wrapper APIs!")
+    }
+  }
+
+  val text = Greeting().greeting()
   text.lines().forEach {
     println(it)
     root.appendText(it)
