@@ -11,9 +11,7 @@ import tasks.*
 
 plugins {
   idea
-  java
   application
-  `test-suite-base`
   id("com.github.johnrengelman.shadow")
   id("org.jetbrains.dokka")
   id("org.jetbrains.kotlinx.kover")
@@ -45,26 +43,6 @@ idea {
 
 // shadow plugin requires mainClass to be set
 application { mainClass = libs.versions.app.mainclass }
-
-java {
-  withSourcesJar()
-  withJavadocJar()
-
-  toolchain { configureJvmToolchain() }
-}
-
-@Suppress("UnstableApiUsage", "UNUSED_VARIABLE")
-testing {
-  suites {
-    val test by getting(JvmTestSuite::class) { useJUnitJupiter(libs.versions.junit) }
-    // OR "test"(JvmTestSuite::class) {}
-
-    withType(JvmTestSuite::class) {
-      // Configure all test suites
-      targets.configureEach { testTask { configureJavaTest() } }
-    }
-  }
-}
 
 @Suppress("UNUSED_VARIABLE")
 tasks {

@@ -13,6 +13,7 @@ plugins {
   id("dev.zacsweers.redacted")
   id("org.jetbrains.dokka")
   id("org.jetbrains.kotlinx.kover")
+  // `test-suite-base`
 }
 
 java {
@@ -27,6 +28,22 @@ kotlin {
     // kotlin.setSrcDirs(listOf("src/kotlin"))
   }
   jvmToolchain { configureJvmToolchain() }
+}
+
+@Suppress("UnstableApiUsage", "UNUSED_VARIABLE")
+testing {
+  suites {
+    val test by
+        getting(JvmTestSuite::class) {
+          // OR "test"(JvmTestSuite::class) {}
+          useJUnitJupiter(libs.versions.junit)
+        }
+
+    withType(JvmTestSuite::class) {
+      // Configure all test suites
+      targets.configureEach { testTask { configureJavaTest() } }
+    }
+  }
 }
 
 atomicfu {

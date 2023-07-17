@@ -12,9 +12,6 @@ plugins {
   id("com.github.ben-manes.versions")
 }
 
-val ktfmtVersion = libs.versions.ktfmt.get()
-val gjfVersion = libs.versions.google.javaformat.get()
-
 // jte {
 //   contentType = ContentType.Plain
 //   generateNativeImageResources = true
@@ -24,12 +21,14 @@ val gjfVersion = libs.versions.google.javaformat.get()
 // Formatting
 spotless {
   java {
-    googleJavaFormat(gjfVersion)
-    target("**/*.java.fix")
+    // googleJavaFormat(libs.versions.google.javaformat.get())
+    palantirJavaFormat(libs.versions.palantir.javaformat.get())
+    target("**/*.java")
     targetExclude("**/build/**", "**/.gradle/**")
   }
   // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
 
+  val ktfmtVersion = libs.versions.ktfmt.get()
   kotlin {
     ktfmt(ktfmtVersion)
     target("**/*.kt")
