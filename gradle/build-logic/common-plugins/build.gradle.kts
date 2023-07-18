@@ -119,6 +119,7 @@ dependencies {
   implementation(libs.build.nativeimage.plugin)
   testImplementation(gradleTestKit())
 
+  // implementation(libs.build.mokkery.plugin)
   // implementation(libs.build.jte.plugin)
   // implementation(libs.build.includegit.plugin)
 }

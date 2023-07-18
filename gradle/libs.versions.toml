@@ -50,6 +50,7 @@ ktor                           = "2.3.2"
 koin                           = "3.4.1"
 kotest                         = "5.6.2"
 mockk                          = "1.13.5"
+mokkery                        = "1.9.0-1.1.0"
 ksp-auto-service               = "1.1.0"
 ksp-redacted                   = "1.6.0"
 ksp-powerassert                = "0.13.0"
@@ -139,6 +140,7 @@ build-kotlinx-bincompat         = { module = "org.jetbrains.kotlinx.binary-compa
 build-compose-mpp               = { module = "org.jetbrains.compose:compose-gradle-plugin"                     , version.ref = "compose-mpp"}
 build-buildkonfig-plugin        = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin"          , version.ref = "buildkonfig"}
 build-gmazzo-buildconfig        = { module = "com.github.gmazzo.buildconfig:plugin"                            , version.ref = "gmazzo-buildconfig"}
+build-mokkery-plugin            = { module = "dev.mokkery:mokkery-gradle"                                      , version.ref = "mokkery"}
 
 # Gradle Dependencies
 kotlin-bom                      = { module = "org.jetbrains.kotlin:kotlin-bom"                          , version.ref = "kotlin"}

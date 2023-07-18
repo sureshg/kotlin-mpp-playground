@@ -20,6 +20,7 @@ plugins {
   id("dev.zacsweers.redacted")
   id("org.jetbrains.dokka")
   id("org.jetbrains.kotlinx.kover")
+  // id("dev.mokkery")
 }
 
 // Workaround for "The root project is not yet available for build" error.
