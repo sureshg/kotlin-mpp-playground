@@ -1,12 +1,16 @@
 package dev.suresh
 
 import BuildConfig
+import dev.zacsweers.redacted.annotations.Redacted
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.io.bytestring.*
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+
+@Serializable data class KData(val name: String, val age: Int, @Redacted val password: String)
 
 class Greeting {
 
@@ -17,9 +21,9 @@ class Greeting {
 
   fun greeting() =
       """
+      | Platform       : Kotlin $platform
       | Build Time     : ${BuildConfig.time}
       | Build Version  : ${BuildConfig.version}
-      | Platform       : Kotlin $platform
       | Java Version   : ${BuildConfig.java}
       | Kotlin Version : ${KotlinVersion.CURRENT}
       | Gradle Version : ${BuildConfig.gradle}

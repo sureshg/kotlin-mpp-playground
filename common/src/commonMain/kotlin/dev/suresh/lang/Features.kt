@@ -1,5 +1,5 @@
-package dev.suresh
-
+import kotlin.jvm.JvmInline
+import kotlin.text.HexFormat
 import kotlin.time.Duration.Companion.microseconds
 import kotlin.time.TimeSource
 
@@ -41,7 +41,7 @@ fun stdlibFeatures() {
 
   val timeSource = TimeSource.Monotonic
   val m1 = timeSource.markNow()
-  Thread.sleep(100)
+
   val m2 = timeSource.markNow()
   println(m2.elapsedNow() + 2.microseconds)
   println(m1 + 2.microseconds)
@@ -55,23 +55,23 @@ fun stdlibFeatures() {
   println(match.groups["areacode"]?.value)
 
   val hexFormat = HexFormat {
-    this.upperCase = true
-    this.bytes {
-      this.bytePrefix = "0x"
-      this.byteSeparator = ":"
-      this.bytesPerLine = 4
-      this.bytesPerGroup = 2
-      this.groupSeparator = " "
+    upperCase = true
+    bytes {
+      bytePrefix = "0x"
+      byteSeparator = ":"
+      bytesPerLine = 4
+      bytesPerGroup = 2
+      groupSeparator = " "
     }
 
-    this.number {
-      this.prefix = "0x"
-      this.removeLeadingZeros = true
+    number {
+      prefix = "0x"
+      removeLeadingZeros = true
     }
   }
 
   println(123232.toHexString(hexFormat))
-  val hex = "Kotlin 1.9.0".encodeToByteArray().toHexString(hexFormat)
+  val hex = "Kotlin ${KotlinVersion.CURRENT}".encodeToByteArray().toHexString(hexFormat)
   println(hex)
   println(hex.hexToByteArray(hexFormat).decodeToString())
 }

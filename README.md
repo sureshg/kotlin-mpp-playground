@@ -36,6 +36,7 @@ $ ./gradlew :common:run
 $ ./gradlew :backend:run
 $ ./gradlew :web:jsBrowserProductionRun
 $ ./gradlew :benchmarks:benchmark
+$ ./gradlew publishMavenPublicationToLocalRepository
 ```
 
 </details>

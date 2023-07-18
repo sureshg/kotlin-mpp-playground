@@ -17,3 +17,7 @@ include(":benchmarks")
 include(":compose:web")
 
 include(":compose:desktop")
+
+include(":dep-mgmt:bom")
+
+include(":dep-mgmt:catalog")

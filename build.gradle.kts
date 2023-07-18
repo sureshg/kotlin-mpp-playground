@@ -5,4 +5,5 @@ plugins {
 }
 
 // Multi module single coverage report
-dependencies { project.subprojects.forEach { kover(project(":${it.path}")) } }
+// tasks.dokkaHtmlMultiModule { moduleName = project.name }
+dependencies { project.subprojects.forEach { kover(it) } }

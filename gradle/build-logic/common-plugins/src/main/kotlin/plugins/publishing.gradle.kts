@@ -85,20 +85,21 @@ publishing {
       val dokkaHtmlJar by
           tasks.registering(Jar::class) {
             from(tasks.named("dokkaHtml"))
-            archiveClassifier = "htmldoc"
+            archiveClassifier = "html-docs"
           }
 
       // For publishing a pure kotlin project
-      val emptyJar by
+      val dokkaJavadocJar by
           tasks.registering(Jar::class) {
+            from(tasks.named("dokkaJavadoc"))
             archiveClassifier = "javadoc"
-            archiveAppendix = "empty"
             duplicatesStrategy = DuplicatesStrategy.WARN
           }
 
       withType<MavenPublication>().configureEach {
         // add dokka html jar as an artifact
         artifact(dokkaHtmlJar)
+        artifact(dokkaJavadocJar)
       }
     }
   }
@@ -110,11 +111,9 @@ publishing {
 //      it.name.startsWith("publish")
 //    }
 //  }
-//
 //  publishing.publications.configureEach {
 //    sign(this)
 //  }
-
 //  useGpgCmd()
 // }
 

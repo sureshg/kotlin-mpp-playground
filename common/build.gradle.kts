@@ -8,7 +8,7 @@ plugins {
 description = "Shared common module for all projects"
 
 application {
-  mainClass = "dev.suresh.ApplicationKt"
+  mainClass = libs.versions.app.mainclass
   applicationDefaultJvmArgs +=
       listOf(
           "--show-version",
@@ -31,6 +31,7 @@ dependencies {
   commonMainImplementation(libs.ktor.client.core)
   commonMainImplementation(libs.ktor.client.logging)
   commonMainImplementation(libs.ktor.client.serialization)
+  commonMainImplementation(libs.ktor.client.resources)
   commonMainImplementation(libs.ajalt.colormath)
   commonMainImplementation(libs.benasher44.uuid)
   commonMainImplementation(libs.intellij.markdown)

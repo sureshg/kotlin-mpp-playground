@@ -1,7 +1,9 @@
 package plugins
 
+import com.google.devtools.ksp.gradle.KspTaskJvm
 import common.*
 import org.gradle.kotlin.dsl.*
+import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -80,6 +82,12 @@ tasks {
     // finalizedBy("spotlessApply")
   }
 
+  // configure jvm target for ksp
+  withType(KspTaskJvm::class).all {
+    compilerOptions { configureKotlinJvm() }
+    jvmTargetValidationMode = JvmTargetValidationMode.WARNING
+  }
+
   processResources {
     inputs.property("version", project.version.toString())
     filesMatching("*-res.txt") {
@@ -87,6 +95,20 @@ tasks {
           "name" to project.name,
           "version" to project.version,
       )
+    }
+  }
+
+  // Javadoc
+  javadoc {
+    isFailOnError = true
+    modularity.inferModulePath = true
+    (options as StandardJavadocDocletOptions).apply {
+      encoding = "UTF-8"
+      linkSource(true)
+      addBooleanOption("-enable-preview", true)
+      addStringOption("-add-modules", addModules)
+      addStringOption("-release", javaRelease.get().toString())
+      addStringOption("Xdoclint:none", "-quiet")
     }
   }
 }

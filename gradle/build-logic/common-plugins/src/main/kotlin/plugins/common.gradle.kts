@@ -13,8 +13,8 @@ plugins {
   idea
   application
   id("com.github.johnrengelman.shadow")
-  id("org.jetbrains.dokka")
-  id("org.jetbrains.kotlinx.kover")
+  id("plugins.kotlin.docs")
+  id("plugins.publishing")
 }
 
 if (hasCleanTask) {
@@ -46,6 +46,7 @@ application { mainClass = libs.versions.app.mainclass }
 
 @Suppress("UNUSED_VARIABLE")
 tasks {
+  // run.invoke { args(true) }
 
   // Prints java module dependencies using jdeps
   val printModuleDeps by registering {
@@ -75,11 +76,9 @@ tasks {
       logger.quiet(
           """
           |Application modules for OpenJDK-${java.toolchain.languageVersion.get()} are,
-          |${modules
-              .split(",")
-              .mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
-              .joinToString(System.lineSeparator())
-          }
+          |${modules.split(",")
+                     .mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
+                     .joinToString(System.lineSeparator())}
           """
               .trimMargin())
     }

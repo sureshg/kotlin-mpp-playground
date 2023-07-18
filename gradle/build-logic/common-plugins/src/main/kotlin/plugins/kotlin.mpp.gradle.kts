@@ -35,7 +35,10 @@ kotlinMultiplatform.apply {
 
   targets.all {
     // Configure all compilations of all targets
-    compilations.all { compilerOptions.configure { configureKotlinCommon() } }
+    compilations.all {
+      compileTaskProvider.configure { compilerOptions { configureKotlinCommon() } }
+      compilerOptions.configure { configureKotlinCommon() }
+    }
   }
 
   jvm {
