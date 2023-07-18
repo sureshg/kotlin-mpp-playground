@@ -139,12 +139,16 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
 &nbsp;import BuildConfig
+&nbsp;import dev.zacsweers.redacted.annotations.Redacted
 &nbsp;import kotlinx.datetime.Clock
 &nbsp;import kotlinx.datetime.TimeZone
 &nbsp;import kotlinx.datetime.toLocalDateTime
 &nbsp;import kotlinx.io.bytestring.*
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;import kotlinx.serialization.encodeToString
 &nbsp;import kotlinx.serialization.json.Json
+&nbsp;
+&nbsp;@Serializable data class KData(val name: String, val age: Int, @Redacted val password: String)
 &nbsp;
 <b class="fc">&nbsp;class Greeting {</b>
 &nbsp;
@@ -155,9 +159,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;  fun greeting() =
 &nbsp;      &quot;&quot;&quot;
+<b class="fc">&nbsp;      | Platform       : Kotlin $platform</b>
 &nbsp;      | Build Time     : ${BuildConfig.time}
 &nbsp;      | Build Version  : ${BuildConfig.version}
-<b class="fc">&nbsp;      | Platform       : Kotlin $platform</b>
 &nbsp;      | Java Version   : ${BuildConfig.java}
 <b class="fc">&nbsp;      | Kotlin Version : ${KotlinVersion.CURRENT}</b>
 &nbsp;      | Gradle Version : ${BuildConfig.gradle}
@@ -208,7 +212,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-17 12:17</div>
+    <div style="float:right;">generated on 2023-07-18 06:58</div>
 </div>
 </body>
 </html>

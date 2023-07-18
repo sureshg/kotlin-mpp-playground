@@ -1,0 +1,205 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>kotlin-mpp-playground Coverage Report > FeaturesKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: FeaturesKt (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">FeaturesKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/200)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import kotlin.jvm.JvmInline
+&nbsp;import kotlin.text.HexFormat
+&nbsp;import kotlin.time.Duration.Companion.microseconds
+&nbsp;import kotlin.time.TimeSource
+&nbsp;
+&nbsp;enum class Planet(val moon: Int) {
+&nbsp;  MERCURY(0),
+&nbsp;  VENUS(0),
+&nbsp;  EARTH(1),
+&nbsp;  MARS(2),
+&nbsp;  JUPITER(5),
+&nbsp;  SATURN(66),
+&nbsp;  URANUS(62),
+&nbsp;  NEPTUNE(13)
+&nbsp;}
+&nbsp;
+&nbsp;data object MyService
+&nbsp;
+&nbsp;@JvmInline
+&nbsp;value class Person(private val name: String) {
+&nbsp;  init {
+&nbsp;    check(name.isNotBlank()) { &quot;Name should not be empty&quot; }
+&nbsp;  }
+&nbsp;
+&nbsp;  constructor(firstName: String, lastName: String) : this(&quot;$firstName $lastName&quot;) {
+&nbsp;    check(firstName.isNotBlank()) { &quot;First name should not be empty&quot; }
+&nbsp;    check(lastName.isNotBlank()) { &quot;Last name should not be empty&quot; }
+&nbsp;  }
+&nbsp;}
+&nbsp;
+&nbsp;fun langFeatures() {
+<b class="nc">&nbsp;  println(Planet.entries.filter { it.moon == 1 })</b>
+&nbsp;  // MyService::class.createInstance() - Throws error
+<b class="nc">&nbsp;  println(MyService)</b>
+&nbsp;
+<b class="nc">&nbsp;  println(Person(&quot;Foo&quot;))</b>
+<b class="nc">&nbsp;  println(Person(&quot;Foo&quot;, &quot;Bar&quot;))</b>
+&nbsp;}
+&nbsp;
+&nbsp;fun stdlibFeatures() {
+&nbsp;
+<b class="nc">&nbsp;  val timeSource = TimeSource.Monotonic</b>
+<b class="nc">&nbsp;  val m1 = timeSource.markNow()</b>
+&nbsp;
+<b class="nc">&nbsp;  val m2 = timeSource.markNow()</b>
+<b class="nc">&nbsp;  println(m2.elapsedNow() + 2.microseconds)</b>
+<b class="nc">&nbsp;  println(m1 + 2.microseconds)</b>
+<b class="nc">&nbsp;  println(m2 - m1)</b>
+&nbsp;
+<b class="nc">&nbsp;  val regex = &quot;&quot;&quot;\b(?&lt;city&gt;[A-Za-z\s]+),\s(?&lt;state&gt;[A-Z]{2}),\s(?&lt;areacode&gt;[0-9]{5})\b&quot;&quot;&quot;.toRegex()</b>
+<b class="nc">&nbsp;  val match = regex.find(&quot;San Jose, CA, 95124&quot;)!!</b>
+<b class="nc">&nbsp;  println(match.groups)</b>
+<b class="nc">&nbsp;  println(match.groups[&quot;city&quot;]?.value)</b>
+<b class="nc">&nbsp;  println(match.groups[&quot;state&quot;]?.value)</b>
+<b class="nc">&nbsp;  println(match.groups[&quot;areacode&quot;]?.value)</b>
+&nbsp;
+<b class="nc">&nbsp;  val hexFormat = HexFormat {</b>
+<b class="nc">&nbsp;    upperCase = true</b>
+<b class="nc">&nbsp;    bytes {</b>
+<b class="nc">&nbsp;      bytePrefix = &quot;0x&quot;</b>
+<b class="nc">&nbsp;      byteSeparator = &quot;:&quot;</b>
+<b class="nc">&nbsp;      bytesPerLine = 4</b>
+<b class="nc">&nbsp;      bytesPerGroup = 2</b>
+<b class="nc">&nbsp;      groupSeparator = &quot; &quot;</b>
+<b class="nc">&nbsp;    }</b>
+&nbsp;
+<b class="nc">&nbsp;    number {</b>
+<b class="nc">&nbsp;      prefix = &quot;0x&quot;</b>
+<b class="nc">&nbsp;      removeLeadingZeros = true</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  println(123232.toHexString(hexFormat))</b>
+<b class="nc">&nbsp;  val hex = &quot;Kotlin ${KotlinVersion.CURRENT}&quot;.encodeToByteArray().toHexString(hexFormat)</b>
+<b class="nc">&nbsp;  println(hex)</b>
+<b class="nc">&nbsp;  println(hex.hexToByteArray(hexFormat).decodeToString())</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-07-18 06:58</div>
+</div>
+</body>
+</html>

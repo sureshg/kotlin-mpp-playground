@@ -132,10 +132,57 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
+&nbsp;import BuildConfig
 &nbsp;import dev.zacsweers.redacted.annotations.Redacted
+&nbsp;import kotlinx.datetime.Clock
+&nbsp;import kotlinx.datetime.TimeZone
+&nbsp;import kotlinx.datetime.toLocalDateTime
+&nbsp;import kotlinx.io.bytestring.*
 &nbsp;import kotlinx.serialization.Serializable
+&nbsp;import kotlinx.serialization.encodeToString
+&nbsp;import kotlinx.serialization.json.Json
 &nbsp;
 <b class="pc">&nbsp;@Serializable data class KData(val name: String, val age: Int, @Redacted val password: String)</b>
+&nbsp;
+&nbsp;class Greeting {
+&nbsp;
+&nbsp;  val json = Json {
+&nbsp;    isLenient = true
+&nbsp;    prettyPrint = true
+&nbsp;  }
+&nbsp;
+&nbsp;  fun greeting() =
+&nbsp;      &quot;&quot;&quot;
+&nbsp;      | Platform       : Kotlin $platform
+&nbsp;      | Build Time     : ${BuildConfig.time}
+&nbsp;      | Build Version  : ${BuildConfig.version}
+&nbsp;      | Java Version   : ${BuildConfig.java}
+&nbsp;      | Kotlin Version : ${KotlinVersion.CURRENT}
+&nbsp;      | Gradle Version : ${BuildConfig.gradle}
+&nbsp;      | ${KData(&quot;Foo&quot;, 20, &quot;test&quot;)}
+&nbsp;      | ${kotlinxTests()}
+&nbsp;      &quot;&quot;&quot;
+&nbsp;          .trimMargin()
+&nbsp;
+&nbsp;  private fun kotlinxTests(): String {
+&nbsp;    val ba = &quot;Kotlinx&quot;.encodeToByteArray()
+&nbsp;    val bs1 = ByteString(ba)
+&nbsp;    val bs2 = &quot;IO&quot;.encodeToByteString()
+&nbsp;
+&nbsp;    val bs = buildByteString {
+&nbsp;      append(bs1)
+&nbsp;      append(&quot; &quot;.encodeToByteArray())
+&nbsp;      append(bs2)
+&nbsp;    }
+&nbsp;
+&nbsp;    return &quot;&quot;&quot;
+&nbsp;      |${Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())}
+&nbsp;      |${json.encodeToString(KData(&quot;Bar&quot;, 22, &quot;test&quot;))}
+&nbsp;      |${bs.decodeToString()}
+&nbsp;    &quot;&quot;&quot;
+&nbsp;        .trimMargin()
+&nbsp;  }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -159,7 +206,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-17 12:17</div>
+    <div style="float:right;">generated on 2023-07-18 06:58</div>
 </div>
 </body>
 </html>

@@ -71,7 +71,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -79,7 +79,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/14)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,7 +87,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/83)
+    (0/150)
   </span>
 </td>
 </tr>
@@ -100,15 +100,28 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;import dev.suresh.Greeting
+&nbsp;import dev.suresh.Lang
 &nbsp;import dev.suresh.platform
+&nbsp;import java.util.concurrent.StructuredTaskScope
 &nbsp;
 &nbsp;fun main() {
-<b class="nc">&nbsp;  println(&quot;$platform: ${Greeting().greeting()}&quot;)</b>
-<b class="nc">&nbsp;  ClassLoader.getSystemClassLoader().apply {</b>
-<b class="nc">&nbsp;    println(getResource(&quot;common-main-res.txt&quot;)?.readText())</b>
-<b class="nc">&nbsp;    println(getResource(&quot;common-jvm-res.txt&quot;)?.readText())</b>
-<b class="nc">&nbsp;    println(getResource(&quot;backend-jvm-res.txt&quot;)?.readText())</b>
+<b class="nc">&nbsp;  println(Greeting().greeting())</b>
+<b class="nc">&nbsp;  listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {</b>
+<b class="nc">&nbsp;    println(&quot;common-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot;)</b>
 <b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {</b>
+<b class="nc">&nbsp;    println(&quot;backend-$it --&gt;${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot;)</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  StructuredTaskScope.ShutdownOnFailure().use {</b>
+<b class="nc">&nbsp;    val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} $platform !&quot; }</b>
+<b class="nc">&nbsp;    it.join().throwIfFailed()</b>
+<b class="nc">&nbsp;    println(task.get())</b>
+<b class="nc">&nbsp;  }</b>
+&nbsp;
+<b class="nc">&nbsp;  langFeatures()</b>
+<b class="nc">&nbsp;  stdlibFeatures()</b>
 &nbsp;}
 </code>
 </pre>
@@ -133,7 +146,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-17 12:17</div>
+    <div style="float:right;">generated on 2023-07-18 06:58</div>
 </div>
 </body>
 </html>
