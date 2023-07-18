@@ -3,11 +3,29 @@ $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/web/[root]/index.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
 $dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/web/[root]/js-type-of.html
+$dokka.location://langFeatures/#/PointingToDeclaration/common/[root]/lang-features.html
 $dokka.location://main/#/PointingToDeclaration/web/[root]/main.html
 $dokka.location://mainScope/#/PointingToDeclaration/web/[root]/main-scope.html
 $dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutines.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
+$dokka.location://stdlibFeatures/#/PointingToDeclaration/common/[root]/stdlib-features.html
 $dokka.location://topLevelJsFun/#/PointingToDeclaration/web/[root]/top-level-js-fun.html
+$dokka.location:/MyService///PointingToDeclaration/common/[root]/-my-service/index.html
+$dokka.location:/Person///PointingToDeclaration/common/[root]/-person/index.html
+$dokka.location:/Person/Person/#kotlin.String#kotlin.String/PointingToDeclaration/common/[root]/-person/-person.html
+$dokka.location:/Person/Person/#kotlin.String/PointingToDeclaration/common/[root]/-person/-person.html
+$dokka.location:/Planet.EARTH///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-e-a-r-t-h/index.html
+$dokka.location:/Planet.JUPITER///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-j-u-p-i-t-e-r/index.html
+$dokka.location:/Planet.MARS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-m-a-r-s/index.html
+$dokka.location:/Planet.MERCURY///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-m-e-r-c-u-r-y/index.html
+$dokka.location:/Planet.NEPTUNE///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-n-e-p-t-u-n-e/index.html
+$dokka.location:/Planet.SATURN///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-s-a-t-u-r-n/index.html
+$dokka.location:/Planet.URANUS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-u-r-a-n-u-s/index.html
+$dokka.location:/Planet.VENUS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-v-e-n-u-s/index.html
+$dokka.location:/Planet///PointingToDeclaration/common/[root]/-planet/index.html
+$dokka.location:/Planet/moon/#/PointingToDeclaration/common/[root]/-planet/moon.html
+$dokka.location:/Planet/valueOf/#kotlin.String/PointingToDeclaration/common/[root]/-planet/value-of.html
+$dokka.location:/Planet/values/#/PointingToDeclaration/common/[root]/-planet/values.html
 module:benchmarks
 bench
 module:common
