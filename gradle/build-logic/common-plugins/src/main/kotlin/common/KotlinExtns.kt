@@ -134,6 +134,8 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
     "-Xallow-result-return-type",
     // "-P",
     // "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
+    // "-P",
+    // "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=...dir...",
   )
 }
 
