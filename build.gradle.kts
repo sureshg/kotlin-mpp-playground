@@ -5,5 +5,6 @@ plugins {
 }
 
 // Multi module single coverage report
-// tasks.dokkaHtmlMultiModule { moduleName = project.name }
 dependencies { project.subprojects.forEach { kover(it) } }
+
+tasks.dokkaHtmlMultiModule { moduleName = "Kotlin Multiplatform Playground!" }

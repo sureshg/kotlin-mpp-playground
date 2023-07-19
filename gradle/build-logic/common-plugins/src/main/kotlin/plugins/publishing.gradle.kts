@@ -16,14 +16,17 @@ if (project == rootProject) {
 
 group = libs.versions.group.get()
 
-tasks {
-  cyclonedxBom {
-    includeConfigs = listOf("runtimeClasspath")
-    skipConfigs = listOf("compileClasspath", "testCompileClasspath")
-    destination = project.layout.buildDirectory.dir("sbom").map { it.asFile }
-    outputFormat = "json"
-    includeLicenseText = true
-  }
+val sonatypeUsername: String? by project
+val sonatypePassword: String? by project
+val signingKey: String? by project
+val signingPassword: String? by project
+
+signing {
+  isRequired = sonatypeUsername.isNullOrBlank().not() && sonatypePassword.isNullOrBlank().not()
+  // isPublish = gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
+  useInMemoryPgpKeys(signingKey, signingPassword)
+  // useGpgCmd()
+  sign(publishing.publications)
 }
 
 publishing {
@@ -105,17 +108,15 @@ publishing {
   }
 }
 
-// signing {
-//  setRequired {
-//    gradle.taskGraph.allTasks.any {
-//      it.name.startsWith("publish")
-//    }
-//  }
-//  publishing.publications.configureEach {
-//    sign(this)
-//  }
-//  useGpgCmd()
-// }
+tasks {
+  cyclonedxBom {
+    includeConfigs = listOf("runtimeClasspath")
+    skipConfigs = listOf("compileClasspath", "testCompileClasspath")
+    destination = project.layout.buildDirectory.dir("sbom").map { it.asFile }
+    outputFormat = "json"
+    includeLicenseText = true
+  }
+}
 
 fun MavenPublication.configurePom() {
   val githubUrl = libs.versions.publish.scm.url

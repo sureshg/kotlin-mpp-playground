@@ -51,6 +51,7 @@ kotlinMultiplatform.apply {
 
     // val test by testRuns.existing
     testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
+    // Attribute to distinguish JVM target
     attributes.attribute(mppTargetAttr, "jvm")
   }
 
@@ -60,10 +61,11 @@ kotlinMultiplatform.apply {
       compilerOptions.configure { configureKotlinJvm() }
     }
     testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
+    // Attribute to distinguish Desktop target
     attributes.attribute(mppTargetAttr, "desktop")
   }
 
-  js(IR) {
+  js {
     useEsModules()
     binaries.executable()
 
@@ -71,7 +73,7 @@ kotlinMultiplatform.apply {
       commonWebpackConfig(
           Action {
             // outputFileName = "app.js"
-            cssSupport { enabled.set(true) }
+            cssSupport { enabled = true }
           })
 
       testTask(
@@ -83,6 +85,8 @@ kotlinMultiplatform.apply {
 
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
+
+    compilations.configureEach { kotlinOptions { configureKotlinJs() } }
 
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
@@ -235,6 +239,8 @@ tasks {
   named<Copy>("jvmProcessResources") {
     val jsBrowserDist = named("jsBrowserDistribution")
     from(jsBrowserDist)
+    // filePermissions {}
+    // dirPermissions {}
   }
 
   // Application run should use the jvmJar as classpath
@@ -264,7 +270,7 @@ if (!isNodeJSConfigured.toBoolean()) {
     rootProject.extensions.configure<NodeJsRootExtension> {
       download = true
       isNodeJSConfigured = "true"
-      // nodeVersion = "20.0.0-v8-canaryxxxx"
+      nodeVersion = libs.versions.node.version.get()
       // nodeDownloadBaseUrl = "https://nodejs.org/download/v8-canary"
     }
   }

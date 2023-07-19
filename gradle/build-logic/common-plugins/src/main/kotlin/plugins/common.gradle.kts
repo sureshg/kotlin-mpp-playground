@@ -101,8 +101,8 @@ tasks {
         description = "Generate template classes"
         group = LifecycleBasePlugin.BUILD_TASK_NAME
 
-        // GitHub actions workaround
-        val props = project.properties.toMutableMap()
+        // val props = project.properties.toMutableMap()
+        val props = mutableMapOf<String, Any?>()
         props["git_branch"] = project.findProperty("branch_name")
         props["git_tag"] = project.findProperty("base_tag")
 
@@ -130,7 +130,7 @@ tasks {
 
         filteringCharset = "UTF-8"
         from(project.projectDir.resolve("src/main/templates"))
-        into(project.buildDir.resolve("generated-sources/templates/kotlin/main"))
+        into(project.layout.buildDirectory.dir("generated-sources/templates/kotlin/main"))
         exclude { it.name.startsWith("jte") }
         expand(props)
 

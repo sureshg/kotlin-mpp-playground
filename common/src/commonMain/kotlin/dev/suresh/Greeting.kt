@@ -34,7 +34,7 @@ class Greeting {
 
   private fun kotlinxTests(): String {
     val ba = "Kotlinx".encodeToByteArray()
-    val bs1 = ByteString(ba)
+    val bs1 = ByteString(data = ba)
     val bs2 = "IO".encodeToByteString()
 
     val bs = buildByteString {

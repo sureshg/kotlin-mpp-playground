@@ -1,8 +1,11 @@
+@file:Suppress("UnstableApiUsage")
+
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   `kotlin-dsl`
+  embeddedKotlin("plugin.serialization")
   alias(libs.plugins.jte)
   alias(libs.plugins.bestpractices)
   // alias(libs.plugins.kotlin.dsl)
