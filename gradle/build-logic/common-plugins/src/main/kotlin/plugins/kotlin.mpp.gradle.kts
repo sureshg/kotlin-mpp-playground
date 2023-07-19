@@ -83,6 +83,8 @@ kotlinMultiplatform.apply {
 
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
+
+    testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 
   // Disable wasm by default as some of the common dependencies are not compatible with wasm.

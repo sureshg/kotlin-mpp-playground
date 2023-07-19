@@ -16,6 +16,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
+import org.jetbrains.kotlin.gradle.testing.internal.KotlinTestReport
 import java.nio.file.Path
 
 /** Java version properties. */
@@ -186,6 +187,10 @@ fun LanguageSettingsBuilder.configureKotlinLang() {
 context(Project)
 fun KotlinJvmTest.configureKotlinTest() {
   configureJavaTest()
+}
+
+context(Project)
+fun KotlinTestReport.configureTestReport() {
 }
 
 context(Project)

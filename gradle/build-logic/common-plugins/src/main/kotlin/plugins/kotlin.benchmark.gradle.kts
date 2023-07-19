@@ -1,9 +1,7 @@
 package plugins
 
 import common.libs
-import kotlinx.benchmark.gradle.BenchmarkTarget
-import kotlinx.benchmark.gradle.JvmBenchmarkTarget
-import kotlinx.benchmark.gradle.benchmark
+import kotlinx.benchmark.gradle.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 /**
@@ -36,7 +34,7 @@ benchmark {
       iterations = 5 // number of iterations
       iterationTime = 3 // time in seconds per iteration
       iterationTimeUnit = "ms"
-      advanced("jvmForks", 3)
+      advanced("jvmForks", "definedByJmh")
       advanced("jsUseBridge", true)
     }
   }
@@ -47,6 +45,8 @@ val kotlin = the<KotlinMultiplatformExtension>()
 kotlin.sourceSets.named("commonMain") {
   dependencies { implementation(libs.kotlinx.bench.runtime) }
 }
+
+tasks { withType(JmhBytecodeGeneratorTask::class) {} }
 
 fun BenchmarkTarget.configureJmh() {
   this as JvmBenchmarkTarget
