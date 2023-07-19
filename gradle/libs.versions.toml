@@ -85,6 +85,10 @@ exposed                        = "0.41.1"
 postgresql                     = "42.6.0"
 h2                             = "2.2.220"
 micrometer                     = "1.11.2"
+npm-highlightjs                = "11.8.0"
+npm-kotlin-playground          = "1.28.0"
+npm-xtermjs                    = "5.2.1"
+npm-vega-lite                  = "5.13.0"
 
 # Plugin versions
 benmanes                       = "0.47.0"

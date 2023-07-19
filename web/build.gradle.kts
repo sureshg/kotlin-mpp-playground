@@ -27,10 +27,10 @@ dependencies {
 
   jsMainImplementation(projects.common)
   jsMainImplementation(libs.kotlinx.html)
-  jsMainImplementation(npm("highlight.js", "11.8.0"))
-  // jsMainImplementation(npm("kotlin-playground", "1.28.0"))
-  // jsMainImplementation(npm("xterm", "5.2.1"))
-  // jsMainImplementation(npm("vega-lite", "5.13.0"))
+  jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
+  // jsMainImplementation(npm("kotlin-playground", libs.versions.npm.kotlin.playground.get()))
+  // jsMainImplementation(npm("xterm", libs.versions.npm.xtermjs.get()))
+  // jsMainImplementation(npm("vega-lite", libs.versions.npm.vega.lite.get()))
 }
 
 // kotlin.sourceSets.jsMain.configure {
