@@ -120,8 +120,9 @@ dependencies {
   implementation(libs.build.cyclonedx.plugin)
   implementation(libs.build.foojay.resolver)
   implementation(libs.build.nativeimage.plugin)
+  implementation(libs.build.modulegraph.plugin)
   testImplementation(gradleTestKit())
-
+  // implementation(libs.build.cash.molecule.plugin)
   // implementation(libs.build.mokkery.plugin)
   // implementation(libs.build.jte.plugin)
   // implementation(libs.build.includegit.plugin)

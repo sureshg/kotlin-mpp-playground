@@ -37,6 +37,7 @@ $ ./gradlew :backend:run
 $ ./gradlew :web:jsBrowserProductionRun
 $ ./gradlew :benchmarks:benchmark
 $ ./gradlew publishMavenPublicationToLocalRepository
+$ ./gradlew createModuleGraph
 ```
 
 </details>
@@ -53,6 +54,9 @@ $ ./gradlew publishMavenPublicationToLocalRepository
 - [🎨 Compose Multiplatform Template](https://github.com/JetBrains/compose-multiplatform-template)
 - [📏 Compose Lint Rules](https://slackhq.github.io/compose-lints/rules/)
 
+<!-- ToDO
+* Kotlin Compiler Plugin - https://github.com/Foso/KotlinCompilerPluginExample
+-->
 
 <!-- Badges -->
 
@@ -101,3 +105,32 @@ $ ./gradlew publishMavenPublicationToLocalRepository
 [Kotlin Multiplatform DSL]: https://kotlinlang.org/docs/multiplatform-dsl-reference.html
 
 [simple-icons-logo]: https://simpleicons.org/icons/kotlin.svg
+
+
+### Module Dependency
+
+```mermaid
+%%{
+  init: {
+    'theme': 'neutral'
+  }
+}%%
+
+graph LR
+
+  subgraph compose
+    desktop
+    web
+  end
+  subgraph dep-mgmt
+    bom
+    catalog
+  end
+  web --> common
+  web --> common
+  desktop --> common
+  backend --> common
+  web --> common
+  benchmarks --> common
+
+```

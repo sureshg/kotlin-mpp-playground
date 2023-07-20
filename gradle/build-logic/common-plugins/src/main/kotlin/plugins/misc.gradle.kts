@@ -6,10 +6,11 @@ import org.gradle.kotlin.dsl.*
 plugins {
   java
   wrapper
-  // id("plugins.common")
-  // id("gg.jte.gradle")
   id("com.diffplug.spotless")
   id("com.github.ben-manes.versions")
+  id("dev.iurysouza.modulegraph")
+  // id("plugins.common")
+  // id("gg.jte.gradle")
 }
 
 // jte {
@@ -52,6 +53,11 @@ spotless {
     indentWithSpaces(2)
     endWithNewline()
   }
+}
+
+moduleGraphConfig {
+  readmePath = "./README.md"
+  heading = "### Module Dependency"
 }
 
 tasks {

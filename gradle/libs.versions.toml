@@ -75,6 +75,8 @@ kotlin-logging                 = "5.0.0"
 kotlin-bignum                  = "0.3.8"
 kotlin-diff                    = "0.4.0"
 kotlin-retry                   = "1.0.9"
+cash-molecule                  = "1.0.0"
+cash-turbine                   = "1.0.0"
 kmp-store5                     = "5.0.0-beta01"
 kmp-settings                   = "1.0.0"
 parsus                         = "0.4.0"
@@ -110,6 +112,7 @@ poko-plugin                    = "0.14.0"
 buildkonfig                    = "0.13.3"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.7.4"
+modulegraph                    = "0.4.0"
 
 
 [libraries]
@@ -146,6 +149,8 @@ build-compose-mpp               = { module = "org.jetbrains.compose:compose-grad
 build-buildkonfig-plugin        = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin"          , version.ref = "buildkonfig"}
 build-gmazzo-buildconfig        = { module = "com.github.gmazzo.buildconfig:plugin"                            , version.ref = "gmazzo-buildconfig"}
 build-mokkery-plugin            = { module = "dev.mokkery:mokkery-gradle"                                      , version.ref = "mokkery"}
+build-cash-molecule-plugin      = { module = "app.cash.molecule:molecule-gradle-plugin"                        , version.ref = "cash-molecule"}
+build-modulegraph-plugin        = { module = "dev.iurysouza:modulegraph"                                       , version.ref = "modulegraph"}
 
 # Gradle Dependencies
 kotlin-bom                      = { module = "org.jetbrains.kotlin:kotlin-bom"                          , version.ref = "kotlin"}
@@ -224,6 +229,7 @@ kotlin-codepoints-deluxe        = { module = "de.cketti.unicode:kotlin-codepoint
 kotlin-diff                     = { module = "io.github.petertrr:kotlin-multiplatform-diff"     , version.ref = "kotlin-diff"}
 kotlinx-uuid                    = { module = "app.softwork:kotlinx-uuid-core"                   , version.ref = "kotlinx-uuid" }
 benasher44-uuid                 = { module = "com.benasher44:uuid"                              , version.ref = "benasher44-uuid" }
+cash-turbine                    = { module = "app.cash.turbine:turbine"                         , version.ref = "cash-turbine" }
 store5                          = { module = "org.mobilenativefoundation.store:store5"          , version.ref = "kmp-store5" }
 parsus                          = { module = "me.alllex.parsus:parsus"                          , version.ref = "parsus" }
 cache4k                         = { module = "io.github.reactivecircus.cache4k:cache4k"         , version.ref = "cache4k" }

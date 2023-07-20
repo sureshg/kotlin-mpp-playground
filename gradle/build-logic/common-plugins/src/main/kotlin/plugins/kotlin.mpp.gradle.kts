@@ -20,6 +20,7 @@ plugins {
   id("dev.zacsweers.redacted")
   id("org.jetbrains.dokka")
   id("org.jetbrains.kotlinx.kover")
+  // id("app.cash.molecule")
   // id("dev.mokkery")
 }
 
@@ -141,6 +142,7 @@ kotlinMultiplatform.apply {
       dependencies {
         implementation(kotlin("test"))
         implementation(libs.kotlinx.coroutines.test)
+        implementation(libs.cash.turbine)
       }
     }
 
