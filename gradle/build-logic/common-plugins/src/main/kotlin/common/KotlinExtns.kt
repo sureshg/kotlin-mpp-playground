@@ -210,13 +210,14 @@ fun Test.configureJavaTest() {
   afterSuite(KotlinClosure2({ desc: TestDescriptor, result: TestResult ->
     if (desc.parent == null) { // will match the outermost suite
       println("""
+             |
              |Test Results
              |------------
-             |  Tests     : ${result.resultType} (${result.testCount}
-             |  Successes : ${result.successfulTestCount}
-             |  Failures  : ${result.failedTestCount}
-             |  Skipped   : ${result.skippedTestCount}
-             | """.trimMargin()
+             |Tests     : ${result.resultType} (${result.testCount})
+             |Successes : ${result.successfulTestCount}
+             |Failures  : ${result.failedTestCount}
+             |Skipped   : ${result.skippedTestCount}
+             """.trimMargin()
       )
     }
   }))
