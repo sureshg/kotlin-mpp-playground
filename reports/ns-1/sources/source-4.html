@@ -92,7 +92,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;import kotlin.jvm.JvmInline
+<code class="sourceCode" id="sourceCode">&nbsp;import kotlin.io.encoding.Base64
+&nbsp;import kotlin.jvm.JvmInline
 &nbsp;import kotlin.text.HexFormat
 &nbsp;import kotlin.time.Duration.Companion.microseconds
 &nbsp;import kotlin.time.TimeSource
@@ -168,6 +169,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  val hex = &quot;Kotlin ${KotlinVersion.CURRENT}&quot;.encodeToByteArray().toHexString(hexFormat)
 &nbsp;  println(hex)
 &nbsp;  println(hex.hexToByteArray(hexFormat).decodeToString())
+&nbsp;
+&nbsp;  println(Base64.Mime.encode(&quot;Hello Kotlin!&quot;.encodeToByteArray()))
 &nbsp;}
 </code>
 </pre>
@@ -192,7 +195,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-07-21 09:38</div>
+    <div style="float:right;">generated on 2023-07-21 17:00</div>
 </div>
 </body>
 </html>
