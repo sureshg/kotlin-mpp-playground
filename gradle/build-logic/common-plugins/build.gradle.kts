@@ -34,6 +34,7 @@ kotlin {
       progressiveMode = true
       optIn("kotlin.ExperimentalStdlibApi")
       optIn("kotlin.io.path.ExperimentalPathApi")
+      optIn("kotlin.io.encoding.ExperimentalEncodingApi")
       optIn("kotlin.time.ExperimentalTime")
       optIn("org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi")
       optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl")

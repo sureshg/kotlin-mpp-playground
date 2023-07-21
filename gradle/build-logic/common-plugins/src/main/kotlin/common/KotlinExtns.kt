@@ -179,6 +179,7 @@ fun LanguageSettingsBuilder.configureKotlinLang() {
   optIn("kotlin.contracts.ExperimentalContracts")
   optIn("kotlin.ExperimentalUnsignedTypes")
   optIn("kotlin.io.path.ExperimentalPathApi")
+  optIn("kotlin.io.encoding.ExperimentalEncodingApi")
   optIn("kotlin.time.ExperimentalTime")
   optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
   optIn("kotlinx.serialization.ExperimentalSerializationApi")

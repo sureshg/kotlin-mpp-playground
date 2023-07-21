@@ -1,3 +1,4 @@
+import kotlin.io.encoding.Base64
 import kotlin.jvm.JvmInline
 import kotlin.text.HexFormat
 import kotlin.time.Duration.Companion.microseconds
@@ -74,4 +75,6 @@ fun stdlibFeatures() {
   val hex = "Kotlin ${KotlinVersion.CURRENT}".encodeToByteArray().toHexString(hexFormat)
   println(hex)
   println(hex.hexToByteArray(hexFormat).decodeToString())
+
+  println(Base64.Mime.encode("Hello Kotlin!".encodeToByteArray()))
 }
