@@ -75,7 +75,6 @@ kotlin-logging                 = "5.0.0"
 kotlin-bignum                  = "0.3.8"
 kotlin-diff                    = "0.4.0"
 kotlin-retry                   = "1.0.9"
-cash-molecule                  = "1.0.0"
 cash-turbine                   = "1.0.0"
 kmp-store5                     = "5.0.0-beta01"
 kmp-settings                   = "1.0.0"
@@ -95,7 +94,6 @@ npm-vega-lite                  = "5.13.0"
 
 # Plugin versions
 benmanes                       = "0.47.0"
-compose-mpp                    = "1.5.0-dev1094"
 foojay-resolver                = "0.6.0"
 gradle-enterprise              = "3.14"
 nexus-publish                  = "2.0.0-rc-1"
@@ -113,188 +111,193 @@ buildkonfig                    = "0.13.3"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.7.4"
 modulegraph                    = "0.4.0"
+jetbrains-compose              = "1.5.0-dev1114"
+jetbrains-compose-compiler     = "1.5.0"
+cash-molecule                  = "1.1.0"
 
 
 [libraries]
 # External plugins for precompiled script plugins
-build-kotlin                    = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin"                       , version.ref = "kotlin"}
-build-kotlin-noarg              = { module = "org.jetbrains.kotlin:kotlin-noarg"                               , version.ref = "kotlin"}
-build-kotlin-allopen            = { module = "org.jetbrains.kotlin:kotlin-allopen"                             , version.ref = "kotlin"}
-build-kotlinx-serialization     = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
-build-kotlinx-atomicfu          = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
-build-kotlinx-benchmark         = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
-build-dokka                     = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
-build-kotlin-ksp                = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
-build-ksp-redacted              = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "ksp-redacted"}
-build-benmanesversions          = { module = "com.github.ben-manes:gradle-versions-plugin"                     , version.ref = "benmanes"}
-build-gradle-enterprise         = { module = "com.gradle.enterprise:com.gradle.enterprise.gradle.plugin"       , version.ref = "gradle-enterprise" }
-build-jte-plugin                = { module = "gg.jte:jte-gradle-plugin"                                        , version.ref = "jte"}
-build-nexus-plugin              = { module = "io.github.gradle-nexus:publish-plugin"                           , version.ref = "nexus-publish"}
-build-spotless-plugin           = { module = "com.diffplug.spotless:spotless-plugin-gradle"                    , version.ref = "spotless"}
-build-shadow-plugin             = { module = "com.github.johnrengelman:shadow"                                 , version.ref = "shadow"}
-build-taskinfo                  = { module = "org.barfuin.gradle.taskinfo:gradle-taskinfo"                     , version.ref = "taskinfo" }
-build-dependencyanalysis        = { module = "com.autonomousapps:dependency-analysis-gradle-plugin"            , version.ref = "dependency-analysis" }
-build-bestpractices-plugin      = { module = "com.autonomousapps:plugin-best-practices-plugin"                 , version.ref = "best-practices-plugin" }
-build-semver-plugin             = { module = "com.javiersc.semver:semver-gradle-plugin"                        , version.ref = "semver-plugin" }
-build-zip-prefixer              = { module = "net.e175.klaus:zip-prefixer"                                     , version.ref = "zip-prefixer" }
-build-foojay-resolver           = { module = "org.gradle.toolchains:foojay-resolver"                           , version.ref = "foojay-resolver" }
-build-cyclonedx-plugin          = { module = "org.cyclonedx:cyclonedx-gradle-plugin"                           , version.ref = "cyclonedx-plugin" }
-build-kotlinx-kover             = { module = "org.jetbrains.kotlinx:kover-gradle-plugin"                       , version.ref = "kotlinx-kover" }
-build-nativeimage-plugin        = { module = "org.graalvm.buildtools:native-gradle-plugin"                     , version.ref = "graalvm-nativeimage"}
-build-github-depgraph           = { module = "org.gradle:github-dependency-graph-gradle-plugin"                , version.ref = "github-depgraph"}
-build-wire-plugin               = { module = "com.squareup.wire:wire-gradle-plugin"                            , version.ref = "wire-plugin"}
-build-poko-plugin               = { module = "dev.drewhamilton.poko:poko-gradle-plugin"                        , version.ref = "poko-plugin"}
-build-kotlinx-bincompat         = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin" , version.ref = "kotlinx-bincompat"}
-build-compose-mpp               = { module = "org.jetbrains.compose:compose-gradle-plugin"                     , version.ref = "compose-mpp"}
-build-buildkonfig-plugin        = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin"          , version.ref = "buildkonfig"}
-build-gmazzo-buildconfig        = { module = "com.github.gmazzo.buildconfig:plugin"                            , version.ref = "gmazzo-buildconfig"}
-build-mokkery-plugin            = { module = "dev.mokkery:mokkery-gradle"                                      , version.ref = "mokkery"}
-build-cash-molecule-plugin      = { module = "app.cash.molecule:molecule-gradle-plugin"                        , version.ref = "cash-molecule"}
-build-modulegraph-plugin        = { module = "dev.iurysouza:modulegraph"                                       , version.ref = "modulegraph"}
+build-kotlin                         = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin"                       , version.ref = "kotlin"}
+build-kotlin-noarg                   = { module = "org.jetbrains.kotlin:kotlin-noarg"                               , version.ref = "kotlin"}
+build-kotlin-allopen                 = { module = "org.jetbrains.kotlin:kotlin-allopen"                             , version.ref = "kotlin"}
+build-kotlinx-serialization          = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
+build-kotlinx-atomicfu               = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
+build-kotlinx-benchmark              = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
+build-dokka                          = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
+build-kotlin-ksp                     = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
+build-ksp-redacted                   = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "ksp-redacted"}
+build-benmanesversions               = { module = "com.github.ben-manes:gradle-versions-plugin"                     , version.ref = "benmanes"}
+build-gradle-enterprise              = { module = "com.gradle.enterprise:com.gradle.enterprise.gradle.plugin"       , version.ref = "gradle-enterprise" }
+build-jte-plugin                     = { module = "gg.jte:jte-gradle-plugin"                                        , version.ref = "jte"}
+build-nexus-plugin                   = { module = "io.github.gradle-nexus:publish-plugin"                           , version.ref = "nexus-publish"}
+build-spotless-plugin                = { module = "com.diffplug.spotless:spotless-plugin-gradle"                    , version.ref = "spotless"}
+build-shadow-plugin                  = { module = "com.github.johnrengelman:shadow"                                 , version.ref = "shadow"}
+build-taskinfo                       = { module = "org.barfuin.gradle.taskinfo:gradle-taskinfo"                     , version.ref = "taskinfo" }
+build-dependencyanalysis             = { module = "com.autonomousapps:dependency-analysis-gradle-plugin"            , version.ref = "dependency-analysis" }
+build-bestpractices-plugin           = { module = "com.autonomousapps:plugin-best-practices-plugin"                 , version.ref = "best-practices-plugin" }
+build-semver-plugin                  = { module = "com.javiersc.semver:semver-gradle-plugin"                        , version.ref = "semver-plugin" }
+build-zip-prefixer                   = { module = "net.e175.klaus:zip-prefixer"                                     , version.ref = "zip-prefixer" }
+build-foojay-resolver                = { module = "org.gradle.toolchains:foojay-resolver"                           , version.ref = "foojay-resolver" }
+build-cyclonedx-plugin               = { module = "org.cyclonedx:cyclonedx-gradle-plugin"                           , version.ref = "cyclonedx-plugin" }
+build-kotlinx-kover                  = { module = "org.jetbrains.kotlinx:kover-gradle-plugin"                       , version.ref = "kotlinx-kover" }
+build-nativeimage-plugin             = { module = "org.graalvm.buildtools:native-gradle-plugin"                     , version.ref = "graalvm-nativeimage"}
+build-github-depgraph                = { module = "org.gradle:github-dependency-graph-gradle-plugin"                , version.ref = "github-depgraph"}
+build-wire-plugin                    = { module = "com.squareup.wire:wire-gradle-plugin"                            , version.ref = "wire-plugin"}
+build-poko-plugin                    = { module = "dev.drewhamilton.poko:poko-gradle-plugin"                        , version.ref = "poko-plugin"}
+build-kotlinx-bincompat              = { module = "org.jetbrains.kotlinx.binary-compatibility-validator:org.jetbrains.kotlinx.binary-compatibility-validator.gradle.plugin" , version.ref = "kotlinx-bincompat"}
+build-buildkonfig-plugin             = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin"          , version.ref = "buildkonfig"}
+build-gmazzo-buildconfig             = { module = "com.github.gmazzo.buildconfig:plugin"                            , version.ref = "gmazzo-buildconfig"}
+build-mokkery-plugin                 = { module = "dev.mokkery:mokkery-gradle"                                      , version.ref = "mokkery"}
+build-cash-molecule-plugin           = { module = "app.cash.molecule:molecule-gradle-plugin"                        , version.ref = "cash-molecule"}
+build-modulegraph-plugin             = { module = "dev.iurysouza:modulegraph"                                       , version.ref = "modulegraph"}
+build-jetbrains-compose-mpp          = { module = "org.jetbrains.compose:compose-gradle-plugin"                     , version.ref = "jetbrains-compose"}
+build-jetbrains-compose-runtime      = { module = "org.jetbrains.compose.runtime:runtime"                           , version.ref = "jetbrains-compose"}
+build-jetbrains-compose-compiler     = { module = "org.jetbrains.compose.compiler:compiler"                         , version.ref = "jetbrains-compose-compiler"}
+
 
 # Gradle Dependencies
-kotlin-bom                      = { module = "org.jetbrains.kotlin:kotlin-bom"                          , version.ref = "kotlin"}
-kotlin-stdlib                   = { module = "org.jetbrains.kotlin:kotlin-stdlib"                       , version.ref = "kotlin"}
-kotlin-stdlib-jdk8              = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"                  , version.ref = "kotlin"}
-kotlin-reflect                  = { module = "org.jetbrains.kotlin:kotlin-reflect"                      , version.ref = "kotlin"}
-kotlin-test                     = { module = "org.jetbrains.kotlin:kotlin-test"                         , version.ref = "kotlin"}
-kotlinx-coroutines-core         = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"            , version.ref = "kotlinx-coroutines"}
-kotlinx-coroutines-test         = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test"            , version.ref = "kotlinx-coroutines"}
-kotlinx-coroutines-slf4j        = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-slf4j"           , version.ref = "kotlinx-coroutines"}
-kotlinx-coroutines-debug        = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-debug"           , version.ref = "kotlinx-coroutines"}
-kotlinx-serialization-core      = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core"         , version.ref = "kotlinx-serialization"}
-kotlinx-serialization-json      = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"         , version.ref = "kotlinx-serialization"}
-kotlinx-datetime                = { module = "org.jetbrains.kotlinx:kotlinx-datetime"                   , version.ref = "kotlinx-datetime"}
-kotlinx-atomicfu                = { module = "org.jetbrains.kotlinx:atomicfu"                           , version.ref = "kotlinx-atomicfu"}
-kotlinx-io-core                 = { module = "org.jetbrains.kotlinx:kotlinx-io-core"                    , version.ref = "kotlinx-io"}
-kotlinx-lincheck                = { module = "org.jetbrains.kotlinx:lincheck"                           , version.ref = "kotlinx-lincheck"}
-kotlinx-reflect-lite            = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"               , version.ref = "kotlinx-reflect-lite"}
-kotlinx-collections-immutable   = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable"      , version.ref = "kotlinx-collections-immutable"}
-kotlinx-html                    = { module = "org.jetbrains.kotlinx:kotlinx-html"                       , version.ref = "kotlinx-html"}
-kotlinx-bench-runtime           = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime"          , version.ref = "kotlinx-benchmark"}
+kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                          , version.ref = "kotlin"}
+kotlin-stdlib                        = { module = "org.jetbrains.kotlin:kotlin-stdlib"                       , version.ref = "kotlin"}
+kotlin-stdlib-jdk8                   = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8"                  , version.ref = "kotlin"}
+kotlin-reflect                       = { module = "org.jetbrains.kotlin:kotlin-reflect"                      , version.ref = "kotlin"}
+kotlin-test                          = { module = "org.jetbrains.kotlin:kotlin-test"                         , version.ref = "kotlin"}
+kotlinx-coroutines-core              = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"            , version.ref = "kotlinx-coroutines"}
+kotlinx-coroutines-test              = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test"            , version.ref = "kotlinx-coroutines"}
+kotlinx-coroutines-slf4j             = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-slf4j"           , version.ref = "kotlinx-coroutines"}
+kotlinx-coroutines-debug             = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-debug"           , version.ref = "kotlinx-coroutines"}
+kotlinx-serialization-core           = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core"         , version.ref = "kotlinx-serialization"}
+kotlinx-serialization-json           = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"         , version.ref = "kotlinx-serialization"}
+kotlinx-datetime                     = { module = "org.jetbrains.kotlinx:kotlinx-datetime"                   , version.ref = "kotlinx-datetime"}
+kotlinx-atomicfu                     = { module = "org.jetbrains.kotlinx:atomicfu"                           , version.ref = "kotlinx-atomicfu"}
+kotlinx-io-core                      = { module = "org.jetbrains.kotlinx:kotlinx-io-core"                    , version.ref = "kotlinx-io"}
+kotlinx-lincheck                     = { module = "org.jetbrains.kotlinx:lincheck"                           , version.ref = "kotlinx-lincheck"}
+kotlinx-reflect-lite                 = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"               , version.ref = "kotlinx-reflect-lite"}
+kotlinx-collections-immutable        = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable"      , version.ref = "kotlinx-collections-immutable"}
+kotlinx-html                         = { module = "org.jetbrains.kotlinx:kotlinx-html"                       , version.ref = "kotlinx-html"}
+kotlinx-bench-runtime                = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime"          , version.ref = "kotlinx-benchmark"}
 
-ktor-bom                          = { module = "io.ktor:ktor-bom"                                  , version.ref = "ktor"}
-ktor-serialization                = { module = "io.ktor:ktor-serialization"                        , version.ref = "ktor"}
-ktor-server-core                  = { module = "io.ktor:ktor-server-core"                          , version.ref = "ktor"}
-ktor-server-content-negotiation   = { module = "io.ktor:ktor-server-content-negotiation"           , version.ref = "ktor"}
-ktor-server-metrics-micrometer    = { module = "io.ktor:ktor-server-metrics-micrometer"            , version.ref = "ktor"}
-ktor-server-call-logging          = { module = "io.ktor:ktor-server-call-logging"                  , version.ref = "ktor"}
-ktor-server-swagger               = { module = "io.ktor:ktor-server-swagger"                       , version.ref = "ktor"}
-ktor-server-openapi               = { module = "io.ktor:ktor-server-openapi"                       , version.ref = "ktor"}
-ktor-server-http-redirect         = { module = "io.ktor:ktor-server-http-redirect"                 , version.ref = "ktor"}
-ktor-server-compression           = { module = "io.ktor:ktor-server-compression"                   , version.ref = "ktor"}
-ktor-server-host-common           = { module = "io.ktor:ktor-server-host-common"                   , version.ref = "ktor"}
-ktor-server-resources             = { module = "io.ktor:ktor-server-resources"                     , version.ref = "ktor"}
-ktor-server-auth                  = { module = "io.ktor:ktor-server-auth"                          , version.ref = "ktor"}
-ktor-server-auth-jwt              = { module = "io.ktor:ktor-server-auth-jwt"                      , version.ref = "ktor"}
-ktor-server-jetty                 = { module = "io.ktor:ktor-server-jetty"                         , version.ref = "ktor"}
-ktor-server-netty                 = { module = "io.ktor:ktor-server-netty"                         , version.ref = "ktor"}
-ktor-server-tests                 = { module = "io.ktor:ktor-server-tests"                         , version.ref = "ktor"}
-ktor-server-default-headers       = { module = "io.ktor:ktor-server-default-headers"               , version.ref = "ktor"}
-ktor-server-status-pages          = { module = "io.ktor:ktor-server-status-pages"                  , version.ref = "ktor"}
-ktor-serialization-json           = { module = "io.ktor:ktor-serialization-kotlinx-json"           , version.ref = "ktor"}
+ktor-bom                             = { module = "io.ktor:ktor-bom"                                  , version.ref = "ktor"}
+ktor-serialization                   = { module = "io.ktor:ktor-serialization"                        , version.ref = "ktor"}
+ktor-server-core                     = { module = "io.ktor:ktor-server-core"                          , version.ref = "ktor"}
+ktor-server-content-negotiation      = { module = "io.ktor:ktor-server-content-negotiation"           , version.ref = "ktor"}
+ktor-server-metrics-micrometer       = { module = "io.ktor:ktor-server-metrics-micrometer"            , version.ref = "ktor"}
+ktor-server-call-logging             = { module = "io.ktor:ktor-server-call-logging"                  , version.ref = "ktor"}
+ktor-server-swagger                  = { module = "io.ktor:ktor-server-swagger"                       , version.ref = "ktor"}
+ktor-server-openapi                  = { module = "io.ktor:ktor-server-openapi"                       , version.ref = "ktor"}
+ktor-server-http-redirect            = { module = "io.ktor:ktor-server-http-redirect"                 , version.ref = "ktor"}
+ktor-server-compression              = { module = "io.ktor:ktor-server-compression"                   , version.ref = "ktor"}
+ktor-server-host-common              = { module = "io.ktor:ktor-server-host-common"                   , version.ref = "ktor"}
+ktor-server-resources                = { module = "io.ktor:ktor-server-resources"                     , version.ref = "ktor"}
+ktor-server-auth                     = { module = "io.ktor:ktor-server-auth"                          , version.ref = "ktor"}
+ktor-server-auth-jwt                 = { module = "io.ktor:ktor-server-auth-jwt"                      , version.ref = "ktor"}
+ktor-server-jetty                    = { module = "io.ktor:ktor-server-jetty"                         , version.ref = "ktor"}
+ktor-server-netty                    = { module = "io.ktor:ktor-server-netty"                         , version.ref = "ktor"}
+ktor-server-tests                    = { module = "io.ktor:ktor-server-tests"                         , version.ref = "ktor"}
+ktor-server-default-headers          = { module = "io.ktor:ktor-server-default-headers"               , version.ref = "ktor"}
+ktor-server-status-pages             = { module = "io.ktor:ktor-server-status-pages"                  , version.ref = "ktor"}
+ktor-serialization-json              = { module = "io.ktor:ktor-serialization-kotlinx-json"           , version.ref = "ktor"}
 
-ktor-client-core                  = { module = "io.ktor:ktor-client-core"                         , version.ref = "ktor"}
-ktor-client-cio                   = { module = "io.ktor:ktor-client-cio"                          , version.ref = "ktor"}
-ktor-client-java                  = { module = "io.ktor:ktor-client-java"                         , version.ref = "ktor"}
-ktor-client-okhttp                = { module = "io.ktor:ktor-client-okhttp"                       , version.ref = "ktor"}
-ktor-client-jetty                 = { module = "io.ktor:ktor-client-jetty"                        , version.ref = "ktor"}
-ktor-client-serialization         = { module = "io.ktor:ktor-client-serialization"                , version.ref = "ktor"}
-ktor-client-websockets            = { module = "io.ktor:ktor-client-websockets"                   , version.ref = "ktor"}
-ktor-client-auth                  = { module = "io.ktor:ktor-client-auth"                         , version.ref = "ktor"}
-ktor-client-logging               = { module = "io.ktor:ktor-client-logging"                      , version.ref = "ktor"}
-ktor-client-resources             = { module = "io.ktor:ktor-client-resources"                    , version.ref = "ktor"}
-rsocket-ktor-client               = { module = "io.rsocket.kotlin:rsocket-ktor-client"            , version.ref = "rsocket"}
-rsocket-ktor-server               = { module = "io.rsocket.kotlin:rsocket-ktor-server"            , version.ref = "rsocket"}
+ktor-client-core                     = { module = "io.ktor:ktor-client-core"                         , version.ref = "ktor"}
+ktor-client-cio                      = { module = "io.ktor:ktor-client-cio"                          , version.ref = "ktor"}
+ktor-client-java                     = { module = "io.ktor:ktor-client-java"                         , version.ref = "ktor"}
+ktor-client-okhttp                   = { module = "io.ktor:ktor-client-okhttp"                       , version.ref = "ktor"}
+ktor-client-jetty                    = { module = "io.ktor:ktor-client-jetty"                        , version.ref = "ktor"}
+ktor-client-serialization            = { module = "io.ktor:ktor-client-serialization"                , version.ref = "ktor"}
+ktor-client-websockets               = { module = "io.ktor:ktor-client-websockets"                   , version.ref = "ktor"}
+ktor-client-auth                     = { module = "io.ktor:ktor-client-auth"                         , version.ref = "ktor"}
+ktor-client-logging                  = { module = "io.ktor:ktor-client-logging"                      , version.ref = "ktor"}
+ktor-client-resources                = { module = "io.ktor:ktor-client-resources"                    , version.ref = "ktor"}
+rsocket-ktor-client                  = { module = "io.rsocket.kotlin:rsocket-ktor-client"            , version.ref = "rsocket"}
+rsocket-ktor-server                  = { module = "io.rsocket.kotlin:rsocket-ktor-server"            , version.ref = "rsocket"}
 
-logback-classic                   = { module = "ch.qos.logback:logback-classic"                   , version.ref = "logback"}
-exposeb-bom                       = { module = "org.jetbrains.exposed:exposed-bom"                , version.ref = "exposed"}
-exposed-core                      = { module = "org.jetbrains.exposed:exposed-core"               , version.ref = "exposed"}
-exposed-dao                       = { module = "org.jetbrains.exposed:exposed-dao"                , version.ref = "exposed"}
-exposed-jdbc                      = { module = "org.jetbrains.exposed:exposed-jdbc"               , version.ref = "exposed"}
-exposed-java-time                 = { module = "org.jetbrains.exposed:exposed-java-time"          , version.ref = "exposed"}
-exposed-kotlin-datetime           = { module = "org.jetbrains.exposed:exposed-kotlin-datetime"    , version.ref = "exposed"}
-postgresql                        = { module = "org.postgresql:postgresql"                        , version.ref = "postgresql"}
-micrometer-prometheus             = { module = "io.micrometer:micrometer-registry-prometheus"     , version.ref = "micrometer"}
-h2                                = { module = "com.h2database:h2"                                , version.ref = "h2"}
+logback-classic                      = { module = "ch.qos.logback:logback-classic"                   , version.ref = "logback"}
+exposeb-bom                          = { module = "org.jetbrains.exposed:exposed-bom"                , version.ref = "exposed"}
+exposed-core                         = { module = "org.jetbrains.exposed:exposed-core"               , version.ref = "exposed"}
+exposed-dao                          = { module = "org.jetbrains.exposed:exposed-dao"                , version.ref = "exposed"}
+exposed-jdbc                         = { module = "org.jetbrains.exposed:exposed-jdbc"               , version.ref = "exposed"}
+exposed-java-time                    = { module = "org.jetbrains.exposed:exposed-java-time"          , version.ref = "exposed"}
+exposed-kotlin-datetime              = { module = "org.jetbrains.exposed:exposed-kotlin-datetime"    , version.ref = "exposed"}
+postgresql                           = { module = "org.postgresql:postgresql"                        , version.ref = "postgresql"}
+micrometer-prometheus                = { module = "io.micrometer:micrometer-registry-prometheus"     , version.ref = "micrometer"}
+h2                                   = { module = "com.h2database:h2"                                , version.ref = "h2"}
 
-kotlin-retry                    = { module = "com.michael-bull.kotlin-retry:kotlin-retry"       , version.ref = "kotlin-retry" }
-kotest-core                     = { module = "io.kotest:kotest-assertions-core"                 , version.ref = "kotest"}
-kotest-junit5                   = { module = "io.kotest:kotest-runner-junit5"                   , version.ref = "kotest"}
-intellij-markdown               = { module = "org.jetbrains:markdown"                           , version.ref = "intellij-markdown"}
-kotlin-logging                  = { module = "io.github.oshai:kotlin-logging"                   , version.ref = "kotlin-logging"}
-kotlin-bignum                   = { module = "com.ionspin.kotlin:bignum"                        , version.ref = "kotlin-bignum"}
-kotlin-codepoints               = { module = "de.cketti.unicode:kotlin-codepoints"              , version.ref = "kotlin-codepoints"}
-kotlin-codepoints-deluxe        = { module = "de.cketti.unicode:kotlin-codepoints-deluxe"       , version.ref = "kotlin-codepoints"}
-kotlin-diff                     = { module = "io.github.petertrr:kotlin-multiplatform-diff"     , version.ref = "kotlin-diff"}
-kotlinx-uuid                    = { module = "app.softwork:kotlinx-uuid-core"                   , version.ref = "kotlinx-uuid" }
-benasher44-uuid                 = { module = "com.benasher44:uuid"                              , version.ref = "benasher44-uuid" }
-cash-turbine                    = { module = "app.cash.turbine:turbine"                         , version.ref = "cash-turbine" }
-store5                          = { module = "org.mobilenativefoundation.store:store5"          , version.ref = "kmp-store5" }
-parsus                          = { module = "me.alllex.parsus:parsus"                          , version.ref = "parsus" }
-cache4k                         = { module = "io.github.reactivecircus.cache4k:cache4k"         , version.ref = "cache4k" }
+kotlin-retry                         = { module = "com.michael-bull.kotlin-retry:kotlin-retry"       , version.ref = "kotlin-retry" }
+kotest-core                          = { module = "io.kotest:kotest-assertions-core"                 , version.ref = "kotest"}
+kotest-junit5                        = { module = "io.kotest:kotest-runner-junit5"                   , version.ref = "kotest"}
+intellij-markdown                    = { module = "org.jetbrains:markdown"                           , version.ref = "intellij-markdown"}
+kotlin-logging                       = { module = "io.github.oshai:kotlin-logging"                   , version.ref = "kotlin-logging"}
+kotlin-bignum                        = { module = "com.ionspin.kotlin:bignum"                        , version.ref = "kotlin-bignum"}
+kotlin-codepoints                    = { module = "de.cketti.unicode:kotlin-codepoints"              , version.ref = "kotlin-codepoints"}
+kotlin-codepoints-deluxe             = { module = "de.cketti.unicode:kotlin-codepoints-deluxe"       , version.ref = "kotlin-codepoints"}
+kotlin-diff                          = { module = "io.github.petertrr:kotlin-multiplatform-diff"     , version.ref = "kotlin-diff"}
+kotlinx-uuid                         = { module = "app.softwork:kotlinx-uuid-core"                   , version.ref = "kotlinx-uuid" }
+benasher44-uuid                      = { module = "com.benasher44:uuid"                              , version.ref = "benasher44-uuid" }
+cash-turbine                         = { module = "app.cash.turbine:turbine"                         , version.ref = "cash-turbine" }
+store5                               = { module = "org.mobilenativefoundation.store:store5"          , version.ref = "kmp-store5" }
+parsus                               = { module = "me.alllex.parsus:parsus"                          , version.ref = "parsus" }
+cache4k                              = { module = "io.github.reactivecircus.cache4k:cache4k"         , version.ref = "cache4k" }
 
-ajalt-mordant                   = { module = "com.github.ajalt.mordant:mordant"                 , version.ref = "ajalt-mordant"}
-ajalt-colormath                 = { module = "com.github.ajalt.colormath:colormath"             , version.ref = "ajalt-colormath"}
-jgit                            = { module = "org.eclipse.jgit:org.eclipse.jgit"                , version.ref = "jgit" }
-jte                             = { module = "gg.jte:jte"                                       , version.ref = "jte" }
-jte-runtime                     = { module = "gg.jte:jte-runtime"                               , version.ref = "jte" }
-jte-models                      = { module = "gg.jte:jte-models"                                , version.ref = "jte" }
-jte-native                      = { module = "gg.jte:native-resources"                          , version.ref = "jte" }
-jte-kotlin                      = { module = "gg.jte:jte-kotlin"                                , version.ref = "jte" }
-junit-bom                       = { module = "org.junit:junit-bom"                              , version.ref = "junit"}
-junit-jupiter                   = { module = "org.junit.jupiter:junit-jupiter"                  , version.ref = "junit"}
-junit-jupiter-api               = { module = "org.junit.jupiter:junit-jupiter-api"              , version.ref = "junit"}
-junit-jupiter-engine            = { module = "org.junit.jupiter:junit-jupiter-engine"           , version.ref = "junit"}
-junit-jupiter-params            = { module = "org.junit.jupiter:junit-jupiter-params"           , version.ref = "junit"}
+ajalt-mordant                        = { module = "com.github.ajalt.mordant:mordant"                 , version.ref = "ajalt-mordant"}
+ajalt-colormath                      = { module = "com.github.ajalt.colormath:colormath"             , version.ref = "ajalt-colormath"}
+jgit                                 = { module = "org.eclipse.jgit:org.eclipse.jgit"                , version.ref = "jgit" }
+jte                                  = { module = "gg.jte:jte"                                       , version.ref = "jte" }
+jte-runtime                          = { module = "gg.jte:jte-runtime"                               , version.ref = "jte" }
+jte-models                           = { module = "gg.jte:jte-models"                                , version.ref = "jte" }
+jte-native                           = { module = "gg.jte:native-resources"                          , version.ref = "jte" }
+jte-kotlin                           = { module = "gg.jte:jte-kotlin"                                , version.ref = "jte" }
+junit-bom                            = { module = "org.junit:junit-bom"                              , version.ref = "junit"}
+junit-jupiter                        = { module = "org.junit.jupiter:junit-jupiter"                  , version.ref = "junit"}
+junit-jupiter-api                    = { module = "org.junit.jupiter:junit-jupiter-api"              , version.ref = "junit"}
+junit-jupiter-engine                 = { module = "org.junit.jupiter:junit-jupiter-engine"           , version.ref = "junit"}
+junit-jupiter-params                 = { module = "org.junit.jupiter:junit-jupiter-params"           , version.ref = "junit"}
 
-kobweb-api                      = { module = "com.varabyte.kobweb:kobweb-api"                   , version.ref = "kobweb" }
-kobweb-core                     = { module = "com.varabyte.kobweb:kobweb-core"                  , version.ref = "kobweb" }
-kobweb-silk-core                = { module = "com.varabyte.kobweb:kobweb-silk"                  , version.ref = "kobweb" }
-kobweb-silk-icons-fa            = { module = "com.varabyte.kobweb:kobweb-silk-icons-fa"         , version.ref = "kobweb" }
-kobweb-streams                  = { module = "com.varabyte.kobweb:kobweb-streams"               , version.ref = "kobweb" }
+kobweb-api                           = { module = "com.varabyte.kobweb:kobweb-api"                   , version.ref = "kobweb" }
+kobweb-core                          = { module = "com.varabyte.kobweb:kobweb-core"                  , version.ref = "kobweb" }
+kobweb-silk-core                     = { module = "com.varabyte.kobweb:kobweb-silk"                  , version.ref = "kobweb" }
+kobweb-silk-icons-fa                 = { module = "com.varabyte.kobweb:kobweb-silk-icons-fa"         , version.ref = "kobweb" }
+kobweb-streams                       = { module = "com.varabyte.kobweb:kobweb-streams"               , version.ref = "kobweb" }
 
-graalvm-sdk                     = { module = "org.graalvm.sdk:graal-sdk"                        , version.ref = "graalvm"}
-google-auto-annotations         = { module = "com.google.auto.service:auto-service-annotations" , version.ref = "google-auto-service"}
-google-tink                     = { module = "com.google.crypto.tink:tink"                      , version.ref = "google-tink"}
-ksp-auto-service                = { module = "dev.zacsweers.autoservice:auto-service-ksp"       , version.ref = "ksp-auto-service"}
-koin-core                       = { module = "io.insert-koin:koin-core"                         , version.ref = "koin"}
-koin-ktor                       = { module = "io.insert-koin:koin-ktor"                         , version.ref = "koin"}
-koin-slf4j                      = { module = "io.insert-koin:koin-logger-slf4j"                 , version.ref = "koin"}
-koin-test                       = { module = "io.insert-koin:koin-test"                         , version.ref = "koin"}
-koin-test-junit5                = { module = "io.insert-koin:koin-test-junit5"                  , version.ref = "koin"}
-mockk                           = { module = "io.mockk:mockk"                                   , version.ref = "mockk"}
-classgraph                      = { module = "io.github.classgraph:classgraph"                  , version.ref = "classgraph"}
-jctools-core                    = { module = "org.jctools:jctools-core"                         , version.ref = "jctools"}
-slf4j-api                       = { module = "org.slf4j:slf4j-api"                              , version.ref = "slf4j"}
-slf4j-simple                    = { module = "org.slf4j:slf4j-simple"                           , version.ref = "slf4j"}
-slf4j-nop                       = { module = "org.slf4j:slf4j-nop"                              , version.ref = "slf4j"}
-logback-core                    = { module = "ch.qos.logback:logback-core"                      , version.ref = "logback"}
-slf4j-jpl                       = { module = "org.slf4j:slf4j-jdk-platform-logging"             , version.ref = "slf4j"}
-log4j-bom                       = { module = "org.apache.logging.log4j:log4j-bom"               , version.ref = "log4j"}
-log4j-core                      = { module = "org.apache.logging.log4j:log4j-core"              , version.ref = "log4j"}
-log4j-jpl                       = { module = "org.apache.logging.log4j:log4j-jpl"               , version.ref = "log4j"}
+graalvm-sdk                          = { module = "org.graalvm.sdk:graal-sdk"                        , version.ref = "graalvm"}
+google-auto-annotations              = { module = "com.google.auto.service:auto-service-annotations" , version.ref = "google-auto-service"}
+google-tink                          = { module = "com.google.crypto.tink:tink"                      , version.ref = "google-tink"}
+ksp-auto-service                     = { module = "dev.zacsweers.autoservice:auto-service-ksp"       , version.ref = "ksp-auto-service"}
+koin-core                            = { module = "io.insert-koin:koin-core"                         , version.ref = "koin"}
+koin-ktor                            = { module = "io.insert-koin:koin-ktor"                         , version.ref = "koin"}
+koin-slf4j                           = { module = "io.insert-koin:koin-logger-slf4j"                 , version.ref = "koin"}
+koin-test                            = { module = "io.insert-koin:koin-test"                         , version.ref = "koin"}
+koin-test-junit5                     = { module = "io.insert-koin:koin-test-junit5"                  , version.ref = "koin"}
+mockk                                = { module = "io.mockk:mockk"                                   , version.ref = "mockk"}
+classgraph                           = { module = "io.github.classgraph:classgraph"                  , version.ref = "classgraph"}
+jctools-core                         = { module = "org.jctools:jctools-core"                         , version.ref = "jctools"}
+slf4j-api                            = { module = "org.slf4j:slf4j-api"                              , version.ref = "slf4j"}
+slf4j-simple                         = { module = "org.slf4j:slf4j-simple"                           , version.ref = "slf4j"}
+slf4j-nop                            = { module = "org.slf4j:slf4j-nop"                              , version.ref = "slf4j"}
+logback-core                         = { module = "ch.qos.logback:logback-core"                      , version.ref = "logback"}
+slf4j-jpl                            = { module = "org.slf4j:slf4j-jdk-platform-logging"             , version.ref = "slf4j"}
+log4j-bom                            = { module = "org.apache.logging.log4j:log4j-bom"               , version.ref = "log4j"}
+log4j-core                           = { module = "org.apache.logging.log4j:log4j-core"              , version.ref = "log4j"}
+log4j-jpl                            = { module = "org.apache.logging.log4j:log4j-jpl"               , version.ref = "log4j"}
 
-java-keyring                    = { module = "com.github.javakeyring:java-keyring"              , version.ref = "java-keyring"}
-java-keychain                   = { module = "pt.davidafsilva.apple:jkeychain"                  , version.ref = "java-keychain"}
-webjars-xterm                   = { module = "org.webjars.npm:xterm"                            , version.ref = "webjars-xterm" }
+java-keyring                         = { module = "com.github.javakeyring:java-keyring"              , version.ref = "java-keyring"}
+java-keychain                        = { module = "pt.davidafsilva.apple:jkeychain"                  , version.ref = "java-keychain"}
+webjars-xterm                        = { module = "org.webjars.npm:xterm"                            , version.ref = "webjars-xterm" }
 
-compose-routing                 = { module = "app.softwork:routing-compose"                     , version.ref = "compose-routing" }
-compose-icons-cssgg             = { module = "br.com.devsrsouza.compose.icons:css-gg"                     , version.ref = "compose-icons" }
-compose-icons-weatherIcons      = { module = "br.com.devsrsouza.compose.icons:erikflowers-weather-icons"  , version.ref = "compose-icons" }
-compose-icons-evaIcons          = { module = "br.com.devsrsouza.compose.icons:eva-icons"                  , version.ref = "compose-icons" }
-compose-icons-feather           = { module = "br.com.devsrsouza.compose.icons:feather"                    , version.ref = "compose-icons" }
-compose-icons-fontAwesome       = { module = "br.com.devsrsouza.compose.icons:font-awesome"               , version.ref = "compose-icons" }
-compose-icons-lineAwesome       = { module = "br.com.devsrsouza.compose.icons:line-awesome"               , version.ref = "compose-icons" }
-compose-icons-linea             = { module = "br.com.devsrsouza.compose.icons:linea"                      , version.ref = "compose-icons" }
-compose-icons-octicons          = { module = "br.com.devsrsouza.compose.icons:octicons"                   , version.ref = "compose-icons" }
-compose-icons-simpleIcons       = { module = "br.com.devsrsouza.compose.icons:simple-icons"               , version.ref = "compose-icons" }
-compose-icons-tablerIcons       = { module = "br.com.devsrsouza.compose.icons:tabler-icons"               , version.ref = "compose-icons" }
+compose-routing                      = { module = "app.softwork:routing-compose"                               , version.ref = "compose-routing" }
+compose-icons-cssgg                  = { module = "br.com.devsrsouza.compose.icons:css-gg"                     , version.ref = "compose-icons" }
+compose-icons-weatherIcons           = { module = "br.com.devsrsouza.compose.icons:erikflowers-weather-icons"  , version.ref = "compose-icons" }
+compose-icons-evaIcons               = { module = "br.com.devsrsouza.compose.icons:eva-icons"                  , version.ref = "compose-icons" }
+compose-icons-feather                = { module = "br.com.devsrsouza.compose.icons:feather"                    , version.ref = "compose-icons" }
+compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"               , version.ref = "compose-icons" }
+compose-icons-lineAwesome            = { module = "br.com.devsrsouza.compose.icons:line-awesome"               , version.ref = "compose-icons" }
+compose-icons-linea                  = { module = "br.com.devsrsouza.compose.icons:linea"                      , version.ref = "compose-icons" }
+compose-icons-octicons               = { module = "br.com.devsrsouza.compose.icons:octicons"                   , version.ref = "compose-icons" }
+compose-icons-simpleIcons            = { module = "br.com.devsrsouza.compose.icons:simple-icons"               , version.ref = "compose-icons" }
+compose-icons-tablerIcons            = { module = "br.com.devsrsouza.compose.icons:tabler-icons"               , version.ref = "compose-icons" }
 
-
-kotlin-wrappers-bom                  = { module = "org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom"  , version.ref = "kotlin-wrappers" }
-multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-settings"               , version.ref = "kmp-settings" }
-multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"    , version.ref = "kmp-settings" }
+kotlin-wrappers-bom                  = { module = "org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom"          , version.ref = "kotlin-wrappers" }
+multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-settings"                       , version.ref = "kmp-settings" }
+multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"            , version.ref = "kmp-settings" }
 
 [plugins]
 kotlin-allopen                   = { id = "org.jetbrains.kotlin.plugin.allopen"                   , version.ref = "kotlin"}
@@ -304,7 +307,7 @@ benmanes                         = { id = "com.github.ben-manes.versions"       
 bestpractices                    = { id = "com.autonomousapps.plugin-best-practices-plugin"       , version.ref = "best-practices-plugin" }
 graalvm-nativeimage              = { id = "org.graalvm.buildtools.native"                         , version.ref = "graalvm-nativeimage"}
 buildkonfig                      = { id = "com.codingfeline.buildkonfig"                          , version.ref = "buildkonfig"}
-compose-mpp                      = { id = "org.jetbrains.compos"                                  , version.ref = "compose-mpp"}
+jetbrains-compose-mpp            = { id = "org.jetbrains.compos"                                  , version.ref = "jetbrains-compose"}
 kobweb-application               = { id = "com.varabyte.kobweb.application"                       , version.ref = "kobweb" }
 kobweb-library                   = { id = "com.varabyte.kobweb.library"                           , version.ref = "kobweb" }
 kobwebx-markdown                 = { id = "com.varabyte.kobwebx.markdown"                         , version.ref = "kobweb" }

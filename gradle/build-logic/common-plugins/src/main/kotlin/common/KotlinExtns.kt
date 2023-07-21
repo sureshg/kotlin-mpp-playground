@@ -6,9 +6,10 @@ import org.gradle.api.artifacts.ExternalDependency
 import org.gradle.api.attributes.Attribute
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.compile.JavaCompile
-import org.gradle.api.tasks.testing.Test
+import org.gradle.api.tasks.testing.*
 import org.gradle.api.tasks.testing.logging.*
 import org.gradle.jvm.toolchain.*
+import org.gradle.kotlin.dsl.KotlinClosure2
 import org.gradle.kotlin.dsl.assign
 import org.gradle.plugin.use.PluginDependency
 import org.jetbrains.kotlin.gradle.dsl.*
@@ -199,19 +200,52 @@ fun Test.configureJavaTest() {
   useJUnitPlatform()
   jvmArgs(jvmArguments)
   reports.html.required = true
-  maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
+
   testLogging {
-    events =
-      setOf(
-        TestLogEvent.STANDARD_ERROR,
-        TestLogEvent.FAILED,
-        TestLogEvent.SKIPPED,
+    configureLogEvents()
+  }
+
+  maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
+
+  afterSuite(KotlinClosure2({ desc: TestDescriptor, result: TestResult ->
+    if (desc.parent == null) { // will match the outermost suite
+      println("""
+             |Test Results
+             |------------
+             |  Tests     : ${result.resultType} (${result.testCount}
+             |  Successes : ${result.successfulTestCount}
+             |  Failures  : ${result.failedTestCount}
+             |  Skipped   : ${result.skippedTestCount}
+             | """.trimMargin()
       )
+    }
+  }))
+}
+
+fun TestLoggingContainer.configureLogEvents() {
+  events = setOf(
+    TestLogEvent.FAILED,
+    TestLogEvent.PASSED,
+    TestLogEvent.SKIPPED,
+    TestLogEvent.STANDARD_OUT,
+  )
+  exceptionFormat = TestExceptionFormat.FULL
+  showExceptions = true
+  showCauses = true
+  showStackTraces = true
+  showStandardStreams = true
+
+  // set options for log level DEBUG and INFO
+  debug {
+    events = setOf(
+      TestLogEvent.STARTED,
+      TestLogEvent.FAILED,
+      TestLogEvent.PASSED,
+      TestLogEvent.SKIPPED,
+      TestLogEvent.STANDARD_ERROR,
+      TestLogEvent.STANDARD_OUT
+    )
     exceptionFormat = TestExceptionFormat.FULL
-    showExceptions = true
-    showCauses = true
-    showStackTraces = true
-    showStandardStreams = true
   }
 }
 

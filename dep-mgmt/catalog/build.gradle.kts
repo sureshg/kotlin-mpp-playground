@@ -1,6 +1,6 @@
 plugins {
-  id("plugins.catalog")
-  id("plugins.publishing")
+  plugins.catalog
+  plugins.publishing
 }
 
 description = "Publish gradle version catalog!"

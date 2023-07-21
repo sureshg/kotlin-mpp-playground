@@ -20,7 +20,7 @@ plugins {
   id("dev.zacsweers.redacted")
   id("org.jetbrains.dokka")
   id("org.jetbrains.kotlinx.kover")
-  // id("app.cash.molecule")
+  id("app.cash.molecule")
   // id("dev.mokkery")
 }
 
@@ -80,7 +80,7 @@ kotlinMultiplatform.apply {
       testTask(
           Action {
             enabled = true
-            testLogging.showStandardStreams = true
+            testLogging { configureLogEvents() }
             useKarma { useChromeHeadless() }
           })
 

@@ -1,6 +1,6 @@
 plugins {
   `java-platform`
-  id("plugins.publishing")
+  plugins.publishing
 }
 
 description = "A platform (BOM) used to align all module versions"
