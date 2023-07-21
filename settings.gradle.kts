@@ -21,3 +21,5 @@ include(":compose:desktop")
 include(":dep-mgmt:bom")
 
 include(":dep-mgmt:catalog")
+
+include(":ksp:processor")

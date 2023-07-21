@@ -21,7 +21,9 @@ pluginManagement {
   }
 
   plugins {
-    // id("org.jetbrains.compose").version(extra["compose.version"] as String)
+    // val kspVersion: String by settings
+    // id("com.google.devtools.ksp") version kspVersion apply false
+    // kotlin("multiplatform") version(extra["kotlin.version"] as String) apply false
   }
 
   repositories {

@@ -126,6 +126,9 @@ graph LR
     bom
     catalog
   end
+  subgraph ksp
+    processor
+  end
   web --> common
   web --> common
   desktop --> common
