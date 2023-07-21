@@ -30,6 +30,7 @@ module:benchmarks
 bench
 module:common
 dev.suresh
+dev.suresh.flow
 module:web
 hljs
 xterm
