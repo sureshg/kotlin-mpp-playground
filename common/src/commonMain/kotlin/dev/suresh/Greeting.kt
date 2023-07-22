@@ -15,8 +15,9 @@ import kotlinx.serialization.json.Json
 class Greeting {
 
   val json = Json {
-    isLenient = true
     prettyPrint = true
+    isLenient = true
+    ignoreUnknownKeys = true
   }
 
   fun greeting() =

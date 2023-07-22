@@ -1,4 +1,7 @@
-plugins { plugins.kotlin.mpp }
+plugins {
+  plugins.kotlin.mpp
+  plugins.publishing
+}
 
 kotlin.sourceSets.jvmMain {
   dependencies {

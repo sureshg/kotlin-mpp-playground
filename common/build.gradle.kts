@@ -1,4 +1,4 @@
-import common.addModules
+import common.jvmArguments
 
 plugins {
   application
@@ -9,13 +9,7 @@ description = "Shared common module for all projects"
 
 application {
   mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs +=
-      listOf(
-          "--show-version",
-          "--enable-preview",
-          "--add-modules=$addModules",
-          "--enable-native-access=ALL-UNNAMED",
-      )
+  applicationDefaultJvmArgs += jvmArguments()
 }
 
 buildConfig {

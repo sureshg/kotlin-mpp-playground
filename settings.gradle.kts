@@ -22,4 +22,6 @@ include(":dep-mgmt:bom")
 
 include(":dep-mgmt:catalog")
 
-include(":ksp:processor")
+include(":devtools:ksp:processor")
+
+include(":devtools:compiler:plugin")

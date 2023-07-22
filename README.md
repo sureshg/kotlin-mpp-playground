@@ -34,7 +34,7 @@ $ ./gradlew ciBuild
 ```bash
 $ ./gradlew :common:run
 $ ./gradlew :backend:run
-$ ./gradlew :web:jsBrowserProductionRun
+$ ./gradlew :web:jsBrowserProductionRun -t
 $ ./gradlew :benchmarks:benchmark
 $ ./gradlew publishMavenPublicationToLocalRepository
 $ ./gradlew createModuleGraph
@@ -53,10 +53,6 @@ $ ./gradlew createModuleGraph
 - [🔍 Kotlin Multiplatform Package Search](https://package-search.jetbrains.com/search?query=http&onlyMpp=true)
 - [🎨 Compose Multiplatform Template](https://github.com/JetBrains/compose-multiplatform-template)
 - [📏 Compose Lint Rules](https://slackhq.github.io/compose-lints/rules/)
-
-<!-- ToDO
-* Kotlin Compiler Plugin - https://github.com/Foso/KotlinCompilerPluginExample
--->
 
 <!-- Badges -->
 

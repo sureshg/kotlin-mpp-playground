@@ -109,6 +109,7 @@ dependencies {
   implementation(libs.build.kotlinx.serialization)
   implementation(libs.build.kotlinx.kover)
   implementation(libs.build.kotlinx.benchmark)
+  implementation(libs.build.kotlinx.bincompat)
   implementation(libs.build.dokka)
   implementation(libs.build.ksp.redacted)
   implementation(libs.build.gradle.enterprise)

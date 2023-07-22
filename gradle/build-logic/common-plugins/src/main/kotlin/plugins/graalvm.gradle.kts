@@ -22,11 +22,7 @@ val reportsEnabled = project.hasProperty("reports")
 
 application {
   mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs += buildList {
-    addAll(jvmArguments)
-    add("--show-version")
-    add("--add-modules=$addModules")
-  }
+  applicationDefaultJvmArgs += jvmArguments()
 }
 
 val semverExtn = extensions.getByType<SemverExtension>()
@@ -110,7 +106,7 @@ graalvmNative {
         }
       }
 
-      jvmArgs = listOf("--add-modules=$addModules", "-Xmx4G")
+      jvmArgs = jvmArguments()
       systemProperties = mapOf("java.awt.headless" to "false")
     }
   }

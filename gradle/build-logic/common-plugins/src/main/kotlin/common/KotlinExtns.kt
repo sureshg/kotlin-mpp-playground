@@ -33,11 +33,25 @@ val Project.toolchainVersion
 val Project.toolchainVendor
   get() = libs.versions.java.vendor.map(JvmVendorSpec::matching)
 
-val Project.jvmArguments
-  get() = libs.versions.java.jvmArguments.get().split(",", " ").filter { it.isNotBlank() }
-
 val Project.addModules
   get() = libs.versions.java.addModules.get()
+
+/**
+ * Retrieves all JVM arguments for running (**java**) and compiling (**javac**) java/kotlin code..
+ *
+ * @param compile Flag indicating whether or not to include additional JVM arguments for compilation.
+ *                Defaults to false.
+ * @return A list of JVM arguments for the project.
+ */
+fun Project.jvmArguments(compile: Boolean = false) = buildList {
+  val jvmArgs = libs.versions.java.jvmArguments.get().split(",", " ").filter { it.isNotBlank() }
+  addAll(jvmArgs)
+  add("--add-modules=$addModules")
+  if(compile.not()) {
+    add("--show-version")
+    add("--enable-native-access=ALL-UNNAMED")
+  }
+}
 
 /** Kotlin version properties. */
 val Project.kotlinVersion
@@ -104,22 +118,21 @@ fun JavaCompile.configureJavac() {
     isFork = true
     debugOptions.debugLevel = "source,lines,vars"
     // For Gradle worker daemon.
-    forkOptions.jvmArgs?.addAll(jvmArguments)
+    forkOptions.jvmArgs?.addAll(jvmArguments(compile = true))
+    // Javac options
     compilerArgs.addAll(
-      jvmArguments +
-              listOf(
-                "-Xlint:all",
-                "-parameters",
-                "--add-modules=$addModules",
-                // "-Xlint:-deprecation", // suppress deprecations
-                // "-Xlint:lossy-conversions", // suppress lossy conversions
-                // "-XX:+IgnoreUnrecognizedVMOptions",
-                // "--add-exports",
-                // "java.base/sun.nio.ch=ALL-UNNAMED",
-                // "--patch-module",
-                // "$moduleName=${sourceSets.main.get().output.asPath}",
-                // "-Xplugin:unchecked", // compiler plugin
-              ),
+      jvmArguments(compile = true) + listOf(
+        "-Xlint:all",
+        "-parameters",
+        // "-Xlint:-deprecation",       // suppress deprecations
+        // "-Xlint:lossy-conversions",  // suppress lossy conversions
+        // "-XX:+IgnoreUnrecognizedVMOptions",
+        // "--add-exports",
+        // "java.base/sun.nio.ch=ALL-UNNAMED",
+        // "--patch-module",
+        // "$moduleName=${sourceSets.main.get().output.asPath}",
+        // "-Xplugin:unchecked",       // compiler plugin
+      ),
     )
   }
 }
@@ -193,20 +206,15 @@ fun KotlinJvmTest.configureKotlinTest() {
 }
 
 context(Project)
-fun KotlinTestReport.configureTestReport() {
-}
-
-context(Project)
 fun Test.configureJavaTest() {
   useJUnitPlatform()
-  jvmArgs(jvmArguments)
+  jvmArgs(jvmArguments())
   reports.html.required = true
+  maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
 
   testLogging {
     configureLogEvents()
   }
-
-  maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
 
   afterSuite(KotlinClosure2({ desc: TestDescriptor, result: TestResult ->
     if (desc.parent == null) { // will match the outermost suite
@@ -249,6 +257,10 @@ fun TestLoggingContainer.configureLogEvents() {
     )
     exceptionFormat = TestExceptionFormat.FULL
   }
+}
+
+context(Project)
+fun KotlinTestReport.configureTestReport() {
 }
 
 context(Project)

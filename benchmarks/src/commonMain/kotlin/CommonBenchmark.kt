@@ -29,7 +29,7 @@ class CommonBenchmark {
   }
 
   private fun fail() {
-    TODO("not implemented")
+    error("Not implemented")
   }
 
   @Benchmark

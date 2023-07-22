@@ -82,6 +82,8 @@ tasks {
     // finalizedBy("spotlessApply")
   }
 
+  withType<JavaExec> { jvmArgs(jvmArguments()) }
+
   // configure jvm target for ksp
   withType(KspTaskJvm::class).all {
     compilerOptions { configureKotlinJvm() }

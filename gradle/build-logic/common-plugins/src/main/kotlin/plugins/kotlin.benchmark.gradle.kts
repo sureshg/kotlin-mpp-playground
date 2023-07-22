@@ -1,7 +1,9 @@
 package plugins
 
 import common.libs
-import kotlinx.benchmark.gradle.*
+import kotlinx.benchmark.gradle.BenchmarkTarget
+import kotlinx.benchmark.gradle.KotlinJvmBenchmarkTarget
+import kotlinx.benchmark.gradle.benchmark
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 /**
@@ -46,9 +48,11 @@ kotlin.sourceSets.named("commonMain") {
   dependencies { implementation(libs.kotlinx.bench.runtime) }
 }
 
-tasks { withType(JmhBytecodeGeneratorTask::class) {} }
+tasks {
+  // withType<JmhBytecodeGeneratorTask> { }
+}
 
 fun BenchmarkTarget.configureJmh() {
-  this as JvmBenchmarkTarget
+  this as KotlinJvmBenchmarkTarget
   jmhVersion = libs.versions.jmh.get()
 }
