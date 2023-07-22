@@ -18,8 +18,7 @@ plugins {
   id("com.google.devtools.ksp")
   id("kotlinx-atomicfu")
   id("dev.zacsweers.redacted")
-  id("org.jetbrains.dokka")
-  id("org.jetbrains.kotlinx.kover")
+  id("plugins.kotlin.docs")
   id("app.cash.molecule")
   // id("dev.mokkery")
 }

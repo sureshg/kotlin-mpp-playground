@@ -13,8 +13,7 @@ plugins {
   kotlin("plugin.serialization")
   id("kotlinx-atomicfu")
   id("dev.zacsweers.redacted")
-  id("org.jetbrains.dokka")
-  id("org.jetbrains.kotlinx.kover")
+  id("plugins.kotlin.docs")
   // `test-suite-base`
 }
 
