@@ -67,7 +67,7 @@ val Project.kotlinLangVersion
   get() = libs.versions.kotlin.lang.version.map { KotlinVersion.fromVersion(it) }
 
 /** Kotlin Dependencies extension functions. */
-val Project.isKotlinMPP
+val Project.isKotlinMultiplatformProject
   get() = plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")
 
 val Project.isKotlinJvmProject

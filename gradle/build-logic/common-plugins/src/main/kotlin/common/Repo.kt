@@ -21,6 +21,12 @@ object Repo {
   const val KOTLIN_WASM_EXPERIMENTAL =
       "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental"
 
+  /** The GitHub username */
+  val GITHUB_USER = System.getenv("GITHUB_USER").orEmpty()
+
+  /** GitHub personal access token */
+  val GITHUB_TOKEN = System.getenv("GITHUB_TOKEN").orEmpty()
+
   /**
    * Generates the URL for the GitHub package repository based on the owner and repository name.
    *
@@ -29,7 +35,7 @@ object Repo {
    * @return The URL of the GitHub package repository.
    */
   fun githubPackage(owner: String, repository: String) =
-      "https://maven.pkg.github.com/$owner/$repository"
+      "https://maven.pkg.github.com/${owner.lowercase()}/$repository"
 
   /**
    * Returns the latest download URL for a given [groupId] and [artifactId] from Maven Central.

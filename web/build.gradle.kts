@@ -1,6 +1,9 @@
 import common.commonProjectName
 
-plugins { plugins.kotlin.mpp }
+plugins {
+  plugins.kotlin.mpp
+  plugins.publishing
+}
 
 description = "Web application"
 

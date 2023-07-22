@@ -1,1 +1,4 @@
-plugins { plugins.kotlin.mpp }
+plugins {
+  plugins.kotlin.mpp
+  plugins.publishing
+}

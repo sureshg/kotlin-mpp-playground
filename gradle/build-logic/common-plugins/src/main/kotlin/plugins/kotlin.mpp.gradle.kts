@@ -34,6 +34,7 @@ kotlinMultiplatform.apply {
   targetHierarchy.default()
 
   jvmToolchain { configureJvmToolchain() }
+  withSourcesJar(publish = true)
 
   targets.all {
     // Configure all compilations of all targets
@@ -45,6 +46,7 @@ kotlinMultiplatform.apply {
 
   jvm {
     withJava()
+    // withSourcesJar(publish = false)
     compilations.all {
       compileJavaTaskProvider?.configure { configureJavac() }
       compilerOptions.configure { configureKotlinJvm() }
@@ -122,9 +124,9 @@ kotlinMultiplatform.apply {
       languageSettings { configureKotlinLang() }
       // Apply multiplatform library bom to all source sets
       dependencies {
-        implementation(project.dependencies.enforcedPlatform(libs.kotlin.bom))
-        implementation(project.dependencies.enforcedPlatform(libs.ktor.bom))
-        implementation(project.dependencies.enforcedPlatform(libs.kotlin.wrappers.bom))
+        implementation(project.dependencies.platform(libs.kotlin.bom))
+        implementation(project.dependencies.platform(libs.ktor.bom))
+        implementation(project.dependencies.platform(libs.kotlin.wrappers.bom))
       }
     }
 

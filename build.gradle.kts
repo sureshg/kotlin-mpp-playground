@@ -1,7 +1,7 @@
 plugins {
   plugins.common
   plugins.misc
-  kotlin("multiplatform") apply false
+  // kotlin("multiplatform") apply false
 }
 
 // Multi module single coverage report

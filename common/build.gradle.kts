@@ -3,6 +3,7 @@ import common.jvmArguments
 plugins {
   application
   plugins.kotlin.mpp
+  plugins.publishing
 }
 
 description = "Shared common module for all projects"

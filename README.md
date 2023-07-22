@@ -36,7 +36,7 @@ $ ./gradlew :common:run
 $ ./gradlew :backend:run
 $ ./gradlew :web:jsBrowserProductionRun -t
 $ ./gradlew :benchmarks:benchmark
-$ ./gradlew publishMavenPublicationToLocalRepository
+$ ./gradlew publishAllPublicationsToLocalRepository
 $ ./gradlew createModuleGraph
 ```
 
@@ -122,7 +122,16 @@ graph LR
     bom
     catalog
   end
+  subgraph devtools
+    compiler
+    ksp
+  end
+  subgraph compiler
+    compiler
+    plugin
+  end
   subgraph ksp
+    ksp
     processor
   end
   web --> common

@@ -4,6 +4,7 @@ import common.mppTargetName
 plugins {
   application
   plugins.kotlin.jvm
+  plugins.publishing
 }
 
 description = "Ktor backend application"
