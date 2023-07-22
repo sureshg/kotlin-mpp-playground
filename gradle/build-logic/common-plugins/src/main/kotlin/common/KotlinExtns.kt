@@ -155,6 +155,16 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   )
 }
 
+/**
+ * JVM backend compiler options can be found in,
+ *
+ *  - [K2JVMCompilerArguments.kt](https://github.com/JetBrains/kotlin/blob/master/compiler/cli/cli-common/src/org/jetbrains/kotlin/cli/common/arguments/K2JVMCompilerArguments.kt)
+ *  - [JvmTarget.kt](https://github.com/JetBrains/kotlin/blob/master/compiler/config.jvm/src/org/jetbrains/kotlin/config/JvmTarget.kt)
+ *  - [ApiVersion.kt](https://github.com/JetBrains/kotlin/blob/master/compiler/util/src/org/jetbrains/kotlin/config/ApiVersion.kt#L35)
+ *
+ *    Gradle Kotlin DSL Api/Lang versions,
+ *  - [KotlinDslCompilerPlugins.kt](https://github.com/gradle/gradle/blob/master/subprojects/kotlin-dsl-plugins/src/main/kotlin/org/gradle/kotlin/dsl/plugins/dsl/KotlinDslCompilerPlugins.kt#L63-L64)
+ */
 context(Project)
 fun KotlinJvmCompilerOptions.configureKotlinJvm() {
   jvmTarget = kotlinJvmTarget
@@ -181,6 +191,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
     // "-Xjavac-arguments=\"--add-exports java.base/sun.nio.ch=ALL-UNNAMED\"",
     // "-Xexplicit-api={strict|warning|disable}",
     // "-Xgenerate-strict-metadata-version",
+    // "-Xuse-kapt4",
   )
 }
 
