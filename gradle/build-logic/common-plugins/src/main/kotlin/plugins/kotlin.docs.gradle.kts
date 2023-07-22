@@ -2,10 +2,10 @@ package plugins
 
 import common.kotlinJvmTarget
 import common.libs
+import java.net.URI
 import kotlinx.validation.ApiValidationExtension
 import org.jetbrains.dokka.DokkaConfiguration.Visibility
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
-import java.net.URI
 
 plugins {
   id("org.jetbrains.dokka")
@@ -19,9 +19,7 @@ if (project == rootProject) {
 
 // Configure bincompat validation only if the plugin is applied to the root project.
 plugins.withId("org.jetbrains.kotlinx.binary-compatibility-validator") {
-  extensions.configure<ApiValidationExtension>("apiValidation") {
-    validationDisabled = true
-  }
+  extensions.configure<ApiValidationExtension>("apiValidation") { validationDisabled = true }
 }
 
 tasks {
@@ -43,13 +41,14 @@ tasks {
         remoteLineSuffix = "#L"
       }
 
-      externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.coroutines/")
-      externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.serialization/")
-      externalDocumentationLink(
-        url = "https://kotlinlang.org/api/kotlinx-datetime/",
-        packageListUrl = "https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list",
-      )
-      externalDocumentationLink(url = "https://api.ktor.io/")
+      //  externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.coroutines/")
+      //  externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.serialization/")
+      //  externalDocumentationLink(
+      //      url = "https://kotlinlang.org/api/kotlinx-datetime/",
+      //      packageListUrl =
+      //          "https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list",
+      //  )
+      //  externalDocumentationLink(url = "https://api.ktor.io/")
     }
 
     pluginsMapConfiguration =
