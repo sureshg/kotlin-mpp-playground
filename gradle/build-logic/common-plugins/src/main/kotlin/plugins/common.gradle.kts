@@ -106,18 +106,6 @@ tasks {
         props["git_branch"] = project.findProperty("branch_name")
         props["git_tag"] = project.findProperty("base_tag")
 
-        // Find resolved runtime dependencies
-        val dependencies =
-            project.configurations
-                .named("runtimeClasspath")
-                .get()
-                .resolvedConfiguration
-                .resolvedArtifacts
-                .map { it.moduleVersion.id.toString() }
-                .sorted()
-                .joinToString(System.lineSeparator())
-        props["dependencies"] = dependencies
-
         // Add info from Gradle version catalog
         val versionCatalog = project.catalogs.named("libs")
         props["javaVersion"] = versionCatalog.findVersion("java").get()
