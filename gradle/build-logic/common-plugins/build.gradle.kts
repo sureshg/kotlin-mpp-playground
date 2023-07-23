@@ -93,9 +93,17 @@ dependencies {
   implementation(platform(libs.kotlin.bom))
   implementation(kotlin("stdlib"))
   implementation(libs.kotlinx.coroutines.core)
+  // Http client and JSON serialization
+  implementation(libs.ktor.client.java)
+  implementation(libs.ktor.client.content.negotiation)
+  implementation(libs.ktor.serialization.json)
+  implementation(libs.ktor.client.resources)
+  // Text styling
   implementation(libs.ajalt.mordant)
-  implementation(libs.jte.runtime)
+  // Exec Jar
   implementation(libs.build.zip.prefixer)
+  // Templating
+  implementation(libs.jte.runtime)
   // jteGenerate(libs.jte.models)
   // compileOnly(libs.jte.kotlin)
 
@@ -124,6 +132,7 @@ dependencies {
   implementation(libs.build.nativeimage.plugin)
   implementation(libs.build.modulegraph.plugin)
   implementation(libs.build.cash.molecule.plugin)
+  implementation(libs.build.npm.publish.plugin)
   testImplementation(gradleTestKit())
   // implementation(libs.build.mokkery.plugin)
   // implementation(libs.build.jte.plugin)

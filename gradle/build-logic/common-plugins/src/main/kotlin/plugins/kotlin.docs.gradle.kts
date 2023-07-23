@@ -12,15 +12,17 @@ plugins {
   id("org.jetbrains.kotlinx.kover")
 }
 
-// Apply bincompat validation only to the root project.
+// Apply bin-compat validator plugin to the root project.
 if (project == rootProject) {
   apply(plugin = "org.jetbrains.kotlinx.binary-compatibility-validator")
 }
 
-// Configure bincompat validation only if the plugin is applied to the root project.
+// Configure bin-compat validator.
 plugins.withId("org.jetbrains.kotlinx.binary-compatibility-validator") {
   extensions.configure<ApiValidationExtension>("apiValidation") { validationDisabled = true }
 }
+
+// pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {}
 
 tasks {
   withType<DokkaTaskPartial>().configureEach {

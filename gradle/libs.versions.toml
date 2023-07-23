@@ -91,6 +91,7 @@ h2                             = "2.2.220"
 micrometer                     = "1.11.2"
 swagger-ui                     = "5.1.3"
 config4k                       = "0.6.0"
+apache-commons-imaging         = "1.0-alpha3"
 
 # NPM Dependencies
 npm-highlightjs                = "11.8.0"
@@ -120,6 +121,7 @@ modulegraph                    = "0.4.0"
 jetbrains-compose              = "1.5.0-dev1114"
 jetbrains-compose-compiler     = "1.5.0"
 cash-molecule                  = "1.1.0"
+npm-publish-plugin             = "3.4.0"
 
 
 [libraries]
@@ -160,7 +162,7 @@ build-modulegraph-plugin             = { module = "dev.iurysouza:modulegraph"   
 build-jetbrains-compose-mpp          = { module = "org.jetbrains.compose:compose-gradle-plugin"                     , version.ref = "jetbrains-compose"}
 build-jetbrains-compose-runtime      = { module = "org.jetbrains.compose.runtime:runtime"                           , version.ref = "jetbrains-compose"}
 build-jetbrains-compose-compiler     = { module = "org.jetbrains.compose.compiler:compiler"                         , version.ref = "jetbrains-compose-compiler"}
-
+build-npm-publish-plugin             = { module = "dev.petuska:npm-publish-gradle-plugin"                           , version.ref = "npm-publish-plugin"}
 
 # Gradle Dependencies
 kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                          , version.ref = "kotlin"}
@@ -206,6 +208,7 @@ ktor-server-default-headers          = { module = "io.ktor:ktor-server-default-h
 ktor-server-status-pages             = { module = "io.ktor:ktor-server-status-pages"                         , version.ref = "ktor"}
 ktor-server-auto-head                = { module = "io.ktor:ktor-server-auto-head-response"                   , version.ref = "ktor"}
 ktor-server-forwarded-header         = { module = "io.ktor:ktor-server-forwarded-header"                     , version.ref = "ktor"}
+
 ktor-serialization-json              = { module = "io.ktor:ktor-serialization-kotlinx-json"                  , version.ref = "ktor"}
 ktor-cohort-core                     = { module = "com.sksamuel.cohort:cohort-core"                          , version.ref = "ktor-cohort"}
 ktor-cohort-hikari                   = { module = "com.sksamuel.cohort:cohort-hikari"                        , version.ref = "ktor-cohort"}
@@ -215,8 +218,8 @@ ktor-client-cio                      = { module = "io.ktor:ktor-client-cio"     
 ktor-client-java                     = { module = "io.ktor:ktor-client-java"                                 , version.ref = "ktor"}
 ktor-client-okhttp                   = { module = "io.ktor:ktor-client-okhttp"                               , version.ref = "ktor"}
 ktor-client-jetty                    = { module = "io.ktor:ktor-client-jetty"                                , version.ref = "ktor"}
-ktor-client-serialization            = { module = "io.ktor:ktor-client-serialization"                        , version.ref = "ktor"}
 ktor-client-websockets               = { module = "io.ktor:ktor-client-websockets"                           , version.ref = "ktor"}
+ktor-client-content-negotiation      = { module = "io.ktor:ktor-client-content-negotiation"                  , version.ref = "ktor"}
 ktor-client-auth                     = { module = "io.ktor:ktor-client-auth"                                 , version.ref = "ktor"}
 ktor-client-logging                  = { module = "io.ktor:ktor-client-logging"                              , version.ref = "ktor"}
 ktor-client-resources                = { module = "io.ktor:ktor-client-resources"                            , version.ref = "ktor"}
@@ -314,6 +317,8 @@ kotlin-wrappers-bom                  = { module = "org.jetbrains.kotlin-wrappers
 multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-settings"                       , version.ref = "kmp-settings" }
 multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"            , version.ref = "kmp-settings" }
 
+apache-commons-imaging               = { module = "org.apache.commons:commons-imaging"                         , version.ref = "apache-commons-imaging" }
+
 [bundles]
 ktor-server = [
     "ktor-bom",
@@ -348,11 +353,12 @@ ktor-client = [
     "ktor-client-java",
     "ktor-client-okhttp",
     "ktor-client-jetty",
-    "ktor-client-serialization",
     "ktor-client-websockets",
+    "ktor-client-content-negotiation",
+    "ktor-serialization-json",
+    "ktor-client-resources",
     "ktor-client-auth",
-    "ktor-client-logging",
-    "ktor-client-resources"
+    "ktor-client-logging"
 ]
 
 [plugins]

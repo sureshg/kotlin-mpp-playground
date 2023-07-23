@@ -20,6 +20,7 @@ plugins {
   id("dev.zacsweers.redacted")
   id("plugins.kotlin.docs")
   id("app.cash.molecule")
+  // id("dev.petuska.npm.publish")
   // id("dev.mokkery")
 }
 
@@ -70,6 +71,7 @@ kotlinMultiplatform.apply {
   js {
     useEsModules()
     binaries.executable()
+    // binaries.library()
 
     browser {
       commonWebpackConfig(
@@ -178,6 +180,8 @@ kotlinMultiplatform.apply {
       dependencies {
         implementation(kotlinw("browser"))
         // implementation(kotlinw("web"))
+        // kspDependency("CommonMainMetadata", project(":devtools:ksp:processor"))
+        // kspDependency("Js", project(":devtools:ksp:processor"))
       }
     }
     val jsTest by getting
@@ -225,7 +229,7 @@ tasks {
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
     kotlinMultiplatform.sourceSets.named("${commonProjectName}Main") { kotlin.srcDirs(buildConfig) }
-    maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
+    // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
   // configure jvm target for ksp

@@ -6,5 +6,5 @@ plugins {
 dependencies {
   compileOnly(kotlin("compiler-embeddable"))
   testImplementation(kotlin("compiler-embeddable"))
-  testImplementation("com.github.tschuchortdev:kotlin-compile-testing:+")
+  // testImplementation("dev.zacsweers.kctfork:ksp:+")
 }

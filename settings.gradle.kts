@@ -24,4 +24,11 @@ include(":dep-mgmt:catalog")
 
 include(":devtools:ksp:processor")
 
-include(":devtools:compiler:plugin")
+include(
+    ":devtools:compiler:plugin")
+
+// includeBuild("misc/build") {
+//    dependencySubstitution {
+//        substitute(module("dev.suresh:misc-build")).using(project(":"))
+//    }
+// }
