@@ -56,7 +56,7 @@ tasks {
     pluginsMapConfiguration =
         mapOf(
             "org.jetbrains.dokka.base.DokkaBase" to
-                """{ "footerMessage": "Copyright &copy; 2023 Suresh"}""")
+                """{ "footerMessage": "Copyright &copy; 2023 Dokka"}""")
 
     //  val rootPath = rootProject.rootDir.toPath()
     //  val logoCss = rootPath.resolve("docs/css/logo-styles.css").toString().replace('\\', '/')

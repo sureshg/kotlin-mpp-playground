@@ -1,18 +1,23 @@
 package common
 
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.engine.java.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.resources.*
 import io.ktor.client.plugins.resources.Resources
 import io.ktor.http.*
 import io.ktor.resources.*
 import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
-@Resource("json") class JsonResource()
+@Resource("/users/{name}") class UserReq(val name: String)
 
-object ServiceClient {
+@Serializable data class User(val id: Long, val login: String, val name: String)
+
+object ApiClient {
   fun get() =
       HttpClient(Java) {
         install(Resources)
@@ -32,9 +37,11 @@ object ServiceClient {
         defaultRequest {
           url {
             protocol = URLProtocol.HTTPS
-            host = "app.dev"
+            host = "api.github.com"
           }
         }
         engine { pipelining = true }
       }
+
+  suspend fun user(name: String) = get().get(UserReq(name)).body<User>()
 }
