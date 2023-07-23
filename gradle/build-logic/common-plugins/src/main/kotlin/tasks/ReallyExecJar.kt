@@ -29,7 +29,6 @@ abstract class ReallyExecJar : DefaultTask() {
     description = "Build executable binary"
     group = LifecycleBasePlugin.BUILD_TASK_NAME
     javaOpts.convention(emptyList())
-    // Default executable file name would be the project name.
     execJarFile.convention(project.layout.buildDirectory.file(project.name))
   }
 

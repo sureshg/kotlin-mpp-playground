@@ -17,6 +17,9 @@ plugins {
   // `test-suite-base`
 }
 
+// Apply the regular plugin
+apply(plugin = "plugins.dependency.reports")
+
 java {
   withSourcesJar()
   withJavadocJar()

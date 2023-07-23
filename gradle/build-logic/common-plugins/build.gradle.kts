@@ -64,6 +64,15 @@ gradlePlugin {
       tags = listOf("Generic Plugin", "build-logic")
     }
 
+    // Dependency Reports plugin
+    register("Dependency Reports") {
+      id = "plugins.dependency.reports"
+      implementationClass = "plugins.DepReportsPlugin"
+      displayName = "Dependency Reports plugin"
+      description = "A plugin to list all the resolved artifacts"
+      tags = listOf("Dependency Reports", "build-logic")
+    }
+
     // Uncomment the id to change plugin id for this pre-compiled plugin
     named("plugins.common") {
       // id = "build.plugins.common"

@@ -35,9 +35,19 @@ $ ./gradlew ciBuild
 $ ./gradlew :common:run
 $ ./gradlew :backend:run
 $ ./gradlew :web:jsBrowserProductionRun -t
-$ ./gradlew :benchmarks:benchmark
+
+# Publishing
 $ ./gradlew publishAllPublicationsToLocalRepository
+
+# Benchmark
+$ ./gradlew :benchmarks:benchmark
+
+# Dependency Graph
+$ ./gradlew :backend:listResolvedArtifacts
 $ ./gradlew createModuleGraph
+
+# GitHub Actions lint
+$ actionlint
 ```
 
 </details>
