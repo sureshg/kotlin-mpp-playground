@@ -6,6 +6,7 @@ import io.ktor.client.engine.java.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.compression.*
 import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.cookies.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.plugins.resources.*
 import io.ktor.client.plugins.resources.Resources
@@ -23,6 +24,7 @@ object ApiClient {
   fun get() =
       HttpClient(Java) {
         install(Resources)
+
         install(ContentNegotiation) {
           json(
               Json {
@@ -31,20 +33,27 @@ object ApiClient {
                 ignoreUnknownKeys = true
               })
         }
+
         install(ContentEncoding) {
           deflate(1.0F)
           gzip(0.9F)
         }
+
         install(HttpTimeout) {
           requestTimeoutMillis = 20_000
           connectTimeoutMillis = 5_000
           socketTimeoutMillis = 5_000
         }
+
         install(Logging) {
           logger = Logger.DEFAULT
           level = LogLevel.INFO
         }
+
+        install(HttpCookies)
+
         engine { pipelining = true }
+
         defaultRequest {
           url {
             protocol = URLProtocol.HTTPS
