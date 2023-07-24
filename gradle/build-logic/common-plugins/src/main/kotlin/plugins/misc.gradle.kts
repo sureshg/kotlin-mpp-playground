@@ -48,7 +48,7 @@ spotless {
   }
 
   format("misc") {
-    target("**/*.md", "**/.gitignore")
+    target("**/*.md", "**/.gitignore", "**/.kte")
     trimTrailingWhitespace()
     indentWithSpaces(2)
     endWithNewline()

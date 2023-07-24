@@ -23,11 +23,14 @@ class Greeting {
   fun greeting() =
       """
       | Platform       : Kotlin $platform
-      | Build Time     : ${BuildConfig.time}
+      | Build Time     : ${BuildConfig.buildTime}
       | Build Version  : ${BuildConfig.version}
       | Java Version   : ${BuildConfig.java}
       | Kotlin Version : ${KotlinVersion.CURRENT}
       | Gradle Version : ${BuildConfig.gradle}
+      | Git Hash       : ${BuildConfig.gitHash}
+      | Git Message    : ${BuildConfig.gitMessage}
+      | Git Tag        : ${BuildConfig.gitTags}
       | ${KData("Foo", 20, "test")}
       | ${kotlinxTests()}
       """

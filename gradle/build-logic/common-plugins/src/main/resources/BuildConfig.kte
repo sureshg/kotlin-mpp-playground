@@ -7,14 +7,19 @@
 @param version: String
 @param catalogVersions: Map<String, String>
 @param dependencies: List<String>
+@param gitCommit: Map<String, String>
 
 /* GENERATED, DO NOT EDIT MANUALLY! */
 @if(pkg.isNotBlank())package ${pkg}@endif
 object ${className} {
 
-   const val time = "${LocalDateTime.now().toString()}"
+   const val buildTime = "${LocalDateTime.now().toString()}"
 
    const val version = "${version}"
+
+   @for((k,v) in gitCommit)
+   const val ${k} = "${v}"
+   @endfor
 
    @for((k,v) in catalogVersions)
    const val ${k.camelCase} = "${v}"

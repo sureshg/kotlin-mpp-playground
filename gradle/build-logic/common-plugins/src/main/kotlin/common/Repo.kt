@@ -44,7 +44,6 @@ object Repo {
    * @param artifactId the artifact ID of the Maven artifact
    * @return the latest download URL for the specified Maven artifact
    */
-  fun latestDownloadUrl(groupId: String, artifactId: String): String {
-    return "https://search.maven.org/remote_content?g=${groupId}&a=${artifactId}&v=LATEST"
-  }
+  fun latestDownloadUrl(groupId: String, artifactId: String) =
+      "https://search.maven.org/remote_content?g=${groupId}&a=${artifactId}&v=LATEST"
 }

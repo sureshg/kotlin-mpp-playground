@@ -1,5 +1,6 @@
 package tasks
 
+import com.javiersc.semver.project.gradle.plugin.SemverExtension
 import gg.jte.ContentType
 import gg.jte.TemplateEngine
 import gg.jte.output.StringOutput
@@ -8,9 +9,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.*
-import org.gradle.kotlin.dsl.listProperty
-import org.gradle.kotlin.dsl.mapProperty
-import org.gradle.kotlin.dsl.property
+import org.gradle.kotlin.dsl.*
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 @CacheableTask
@@ -38,14 +37,27 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
     val file = dir.resolve("$className.kt")
     logger.quiet("Generated build config file: ${file.absolutePath}")
 
+    // Get git commit info
+    val gitCommit = run {
+      val commit = project.the<SemverExtension>().commits.get().first()
+      mapOf(
+          "gitHash" to commit.hash,
+          "gitMessage" to commit.message,
+          "gitTimestampEpochSecond" to commit.timestampEpochSecond.toString(),
+          "gitTags" to commit.tags.joinToString(),
+      )
+    }
+
     // the<VersionCatalogsExtension>().named("libs").
     val params =
         mapOf(
             "className" to className,
             "pkg" to pkg,
             "version" to extension.version.get(),
+            "gitCommit" to gitCommit,
             "catalogVersions" to extension.catalogVersions.get(),
-            "dependencies" to extension.dependencies.get())
+            "dependencies" to extension.dependencies.get(),
+        )
 
     val content = StringOutput()
     val tmplEngine =

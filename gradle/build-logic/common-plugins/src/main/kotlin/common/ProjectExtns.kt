@@ -107,6 +107,19 @@ val Project.incubatorModules
   }
 
 /**
+ * Retrieves a map of version aliases and their corresponding versions from the project's version
+ * catalog.
+ *
+ * @param name The name of the version catalog. Defaults to "libs" if not specified.
+ * @return A map where the keys are the version aliases and the values are their corresponding
+ *   versions.
+ */
+fun Project.versionCatalogMapOf(name: String = "libs") = run {
+  val catalog = catalogs.named(name)
+  catalog.versionAliases.associateWith { catalog.findVersion(it).get().toString() }
+}
+
+/**
  * Print all the catalog version strings and it's values.
  *
  * [VersionCatalogsExtension](https://docs.gradle.org/current/userguide/platforms.html#sub:type-unsafe-access-to-catalog)

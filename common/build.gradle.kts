@@ -1,4 +1,5 @@
 import common.jvmArguments
+import common.versionCatalogMapOf
 
 plugins {
   application
@@ -15,9 +16,7 @@ application {
 
 buildConfig {
   version = project.version.toString()
-  val catalog = project.versionCatalogs.named("libs")
-  val catalogMap = catalog.versionAliases.associateWith { catalog.findVersion(it).get().toString() }
-  catalogVersions = catalogMap
+  catalogVersions = project.versionCatalogMapOf()
 }
 
 dependencies {
