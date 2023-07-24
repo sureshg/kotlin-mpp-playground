@@ -105,8 +105,10 @@ dependencies {
   // Http client and JSON serialization
   implementation(libs.ktor.client.java)
   implementation(libs.ktor.client.content.negotiation)
-  implementation(libs.ktor.serialization.json)
+  implementation(libs.ktor.client.encoding)
+  implementation(libs.ktor.client.logging)
   implementation(libs.ktor.client.resources)
+  implementation(libs.ktor.serialization.json)
   // Text styling
   implementation(libs.ajalt.mordant)
   // Exec Jar

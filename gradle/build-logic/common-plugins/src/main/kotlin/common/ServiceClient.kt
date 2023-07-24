@@ -4,7 +4,9 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.java.*
 import io.ktor.client.plugins.*
+import io.ktor.client.plugins.compression.*
 import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.client.plugins.logging.*
 import io.ktor.client.plugins.resources.*
 import io.ktor.client.plugins.resources.Resources
 import io.ktor.http.*
@@ -29,18 +31,27 @@ object ApiClient {
                 ignoreUnknownKeys = true
               })
         }
+        install(ContentEncoding) {
+          deflate(1.0F)
+          gzip(0.9F)
+        }
         install(HttpTimeout) {
           requestTimeoutMillis = 20_000
           connectTimeoutMillis = 5_000
           socketTimeoutMillis = 5_000
         }
+        install(Logging) {
+          logger = Logger.DEFAULT
+          level = LogLevel.INFO
+        }
+        engine { pipelining = true }
         defaultRequest {
           url {
             protocol = URLProtocol.HTTPS
             host = "api.github.com"
           }
         }
-        engine { pipelining = true }
+        followRedirects = true
       }
 
   suspend fun user(name: String) = get().get(UserReq(name)).body<User>()
