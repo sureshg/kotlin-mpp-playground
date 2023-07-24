@@ -121,7 +121,7 @@ modulegraph                    = "0.4.0"
 jetbrains-compose              = "1.5.0-dev1114"
 jetbrains-compose-compiler     = "1.5.0"
 cash-molecule                  = "1.1.0"
-npm-publish-plugin             = "3.4.0"
+npm-publish-plugin             = "3.4.1"
 
 
 [libraries]
