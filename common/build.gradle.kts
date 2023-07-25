@@ -23,18 +23,19 @@ dependencies {
   // Common multiplatform dependencies
   commonMainImplementation(libs.kotlinx.io.core)
   commonMainImplementation(libs.ktor.client.core)
-  commonMainImplementation(libs.ktor.client.logging)
   commonMainImplementation(libs.ktor.client.content.negotiation)
-  commonMainImplementation(libs.ktor.serialization.json)
+  commonMainImplementation(libs.ktor.client.encoding)
+  commonMainImplementation(libs.ktor.client.logging)
   commonMainImplementation(libs.ktor.client.resources)
+  commonMainImplementation(libs.ktor.client.auth)
+  commonMainImplementation(libs.ktor.serialization.json)
   commonMainImplementation(libs.ajalt.colormath)
   commonMainImplementation(libs.benasher44.uuid)
   commonMainImplementation(libs.intellij.markdown)
   commonMainImplementation(libs.kotlin.codepoints.deluxe)
   commonMainImplementation(libs.multiplatform.settings.core)
-  // commonMainImplementation(libs.kotlinx.html)
-  // commonMainImplementation(libs.store5)
 
+  jvmMainApi(libs.kotlin.retry)
   // jvmMainImplementation(libs.slf4j.api)
 }
 
