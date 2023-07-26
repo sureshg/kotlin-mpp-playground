@@ -1,11 +1,15 @@
 package common
 
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.nio.file.Path
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.attributes.Category
+import org.gradle.api.attributes.DocsType
+import org.gradle.api.component.AdhocComponentWithVariants
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.internal.os.OperatingSystem
@@ -142,5 +146,29 @@ fun Project.printTaskGraph() {
     gradle.taskGraph.whenReady {
       allTasks.forEachIndexed { index, task -> println("${index + 1}. ${task.name}") }
     }
+  }
+}
+
+/** Adds [file] as an outgoing variant to publication. */
+fun Project.addFileToJavaComponent(file: File) {
+  // Here's a configuration to declare the outgoing variant
+  val executable by
+      configurations.creating {
+        description = "Declares executable outgoing variant"
+        isCanBeConsumed = true
+        isCanBeResolved = false
+        attributes {
+          // See https://docs.gradle.org/current/userguide/variant_attributes.html
+          attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.LIBRARY))
+          attribute(DocsType.DOCS_TYPE_ATTRIBUTE, objects.named("exe"))
+        }
+      }
+  executable.outgoing.artifact(file) { classifier = "bin" }
+  val javaComponent = components.findByName("java") as AdhocComponentWithVariants
+  javaComponent.addVariantsFromConfiguration(executable) {
+    // dependencies for this variant are considered runtime dependencies
+    mapToMavenScope("runtime")
+    // and also optional dependencies, because we don't want them to leak
+    mapToOptional()
   }
 }

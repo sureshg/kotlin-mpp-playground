@@ -183,6 +183,9 @@ kotlinMultiplatform.apply {
         // kspDependency("CommonMainMetadata", project(":devtools:ksp:processor"))
         // kspDependency("Js", project(":devtools:ksp:processor"))
       }
+
+      // kotlin.srcDir("src/main/kotlin")
+      // resources.srcDir("src/main/resources")
     }
     val jsTest by getting
   }
