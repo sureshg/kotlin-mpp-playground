@@ -4,11 +4,14 @@ import org.gradle.api.*
 import org.gradle.api.file.*
 import org.gradle.api.provider.*
 import org.gradle.api.tasks.*
+import org.gradle.api.tasks.options.Option
 
 @CacheableTask
 abstract class SampleTask : DefaultTask() {
 
-  @get:Input abstract val greeting: Property<String>
+  @get:Input
+  @get:Option(option = "greeting", description = "Greetings Task Property")
+  abstract val greeting: Property<String>
 
   @get:[Input Optional]
   abstract val versions: MapProperty<String, String>
