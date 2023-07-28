@@ -4,6 +4,4 @@ plugins {
   // kotlin("multiplatform") apply false
 }
 
-dependencies { project.subprojects.forEach { kover(it) } }
-
-tasks.dokkaHtmlMultiModule { moduleName = "Kotlin Multiplatform Playground!" }
+description = "Kotlin Multiplatform Playground!"

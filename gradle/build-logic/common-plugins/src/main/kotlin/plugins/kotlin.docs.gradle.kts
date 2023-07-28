@@ -5,6 +5,7 @@ import common.libs
 import java.net.URI
 import kotlinx.validation.ApiValidationExtension
 import org.jetbrains.dokka.DokkaConfiguration.Visibility
+import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 plugins {
@@ -12,9 +13,18 @@ plugins {
   id("org.jetbrains.kotlinx.kover")
 }
 
-// Apply bin-compat validator plugin to the root project.
+// The following plugins and config apply only to a root project.
 if (project == rootProject) {
   apply(plugin = "org.jetbrains.kotlinx.binary-compatibility-validator")
+
+  // For combined Kotlin coverage report
+  dependencies { project.subprojects.forEach { kover(it) } }
+
+  // Dokka multi-module config.
+  tasks.withType<DokkaMultiModuleTask>().configureEach {
+    description = project.description.orEmpty()
+    moduleName = project.name
+  }
 }
 
 // Configure bin-compat validator.
