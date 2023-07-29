@@ -91,7 +91,8 @@ tasks {
   register("cleanAll") {
     description = "Clean all composite builds"
     group = LifecycleBasePlugin.CLEAN_TASK_NAME
-    gradle.includedBuilds.forEach { dependsOn(it.task(":clean")) }
+    dependsOn(gradle.includedBuilds.map { it.task(":clean") })
+    dependsOn(subprojects.map { it.tasks.clean })
   }
 
   wrapper {

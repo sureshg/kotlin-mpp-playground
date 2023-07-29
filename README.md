@@ -25,7 +25,7 @@ $ sdk u java 22.ea-open
 ### Build & Run
 
 ```bash
-$ ./gradlew ciBuild
+$ ./gradlew buildAndPublish
 ```
 
 <details>
@@ -45,6 +45,10 @@ $ ./gradlew :benchmarks:benchmark
 # Dependency Graph
 $ ./gradlew :backend:listResolvedArtifacts
 $ ./gradlew createModuleGraph
+
+# Misc
+$ ./gradlew checkBuildLogicBestPractices
+$ ./gradlew cleanAll
 
 # GitHub Actions lint
 $ actionlint
