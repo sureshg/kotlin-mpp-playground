@@ -29,6 +29,7 @@ concurrency:
 permissions:
   contents: write
   issues: write
+  packages: write
   repository-projects: write
 
 env:

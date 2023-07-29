@@ -38,7 +38,7 @@ publishing {
 
     maven {
       name = "GitHubPackages"
-      url = uri(Repo.githubPackage(libs.versions.publish.dev.name.get(), project.name))
+      url = uri(Repo.githubPackage(libs.versions.publish.dev.name.get(), rootProject.name))
       credentials {
         username = findProperty("gpr.user") as String? ?: Repo.GITHUB_USER
         password = findProperty("gpr.key") as String? ?: Repo.GITHUB_TOKEN
