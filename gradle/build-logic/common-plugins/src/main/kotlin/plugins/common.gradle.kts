@@ -150,6 +150,9 @@ tasks {
     }
   }
 
+  // Set GitHub workflow action output for this build
+  build { finalizedBy(githubActionOutput) }
+
   register("ciBuild") {
     description = "Build with all the reports!"
     val publish = GithubAction.isTagBuild && Platform.isLinux
@@ -161,16 +164,13 @@ tasks {
       add("dokkaHtmlMultiModule")
       if (publish) {
         logger.lifecycle("Publishing task is enabled for this build!")
-        add("publishAllPublicationsToGitHubPackagesRepository")
+        finalizedBy("publishAllPublicationsToGitHubPackagesRepository")
       }
     }
     dependsOn(*ciBuildTasks.toTypedArray())
     named("koverHtmlReport").map { it.mustRunAfter(tasks.build) }
     named("dokkaHtmlMultiModule").map { it.mustRunAfter(tasks.build) }
   }
-
-  // Set GitHub workflow action output for this build
-  build { finalizedBy(githubActionOutput) }
 
   // Task to print the project version
   register("v") {
