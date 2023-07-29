@@ -175,6 +175,14 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      - name: 📦Publish artifacts to GitHub Packages
+        id: gradle-deploy
+        run: |
+          ./gradlew publishAllPublicationsToGitHubPackagesRepository
+        env:
+          GITHUB_USER: ${{ github.repository_owner }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: ⚙️Build Changelog
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v4

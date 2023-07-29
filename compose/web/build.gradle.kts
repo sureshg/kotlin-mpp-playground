@@ -1,3 +1,3 @@
 plugins { plugins.kotlin.mpp }
 
-dependencies { implementation(projects.common) }
+dependencies { commonMainImplementation(projects.common) }
