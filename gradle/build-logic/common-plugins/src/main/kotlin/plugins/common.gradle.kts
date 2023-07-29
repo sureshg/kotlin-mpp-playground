@@ -157,7 +157,7 @@ tasks {
     dependsOn(subprojects.map { it.tasks.build })
     dependsOn(":dokkaHtmlMultiModule", ":koverHtmlReport")
 
-    val publish = Platform.isLinux
+    val publish = GithubAction.isTagBuild && Platform.isLinux
     if (publish) {
       logger.lifecycle("Publishing task is enabled for this build!")
       subprojects.mapNotNull { it.tasks.findByName("publish") }.forEach { dependsOn(it) }
