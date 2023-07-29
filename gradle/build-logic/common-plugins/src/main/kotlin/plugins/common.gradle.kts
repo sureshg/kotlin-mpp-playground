@@ -2,6 +2,7 @@ package plugins
 
 import com.github.ajalt.mordant.rendering.TextColors
 import common.*
+import common.Platform
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.spi.*
@@ -151,8 +152,19 @@ tasks {
 
   register("ciBuild") {
     description = "Build with all the reports!"
-    dependsOn(
-        tasks.build, ":web:build", ":backend:build", "koverHtmlReport", "dokkaHtmlMultiModule")
+    val publish = GithubAction.isTagBuild && Platform.isLinux
+    val ciBuildTasks = buildList {
+      add(tasks.build)
+      add(":web:build")
+      add(":backend:build")
+      add("koverHtmlReport")
+      add("dokkaHtmlMultiModule")
+      if (publish) {
+        logger.lifecycle("Publishing task is enabled for this build!")
+        add("publishAllPublicationsToGitHubPackagesRepository")
+      }
+    }
+    dependsOn(*ciBuildTasks.toTypedArray())
     named("koverHtmlReport").map { it.mustRunAfter(tasks.build) }
     named("dokkaHtmlMultiModule").map { it.mustRunAfter(tasks.build) }
   }

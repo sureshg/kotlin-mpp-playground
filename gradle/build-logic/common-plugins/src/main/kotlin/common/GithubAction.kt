@@ -32,7 +32,7 @@ object GithubAction {
    * @return true if the build is a tag build, false otherwise.
    */
   val isTagBuild
-    get() = Env.GITHUB_REF.startsWith("refs/tags/")
+    get() = isEnabled && Env.GITHUB_REF.startsWith("refs/tags/")
 
   /**
    * Returns the ref name (tag/branch) that triggered the GitHub workflow run.
@@ -42,8 +42,8 @@ object GithubAction {
   val ref
     get() =
         when (isTagBuild) {
-          true -> Env.GITHUB_REF.substringAfter("refs/tags/")
-          false -> Env.GITHUB_REF.substringAfter("refs/heads/")
+          true -> Env.GITHUB_REF?.substringAfter("refs/tags/")
+          false -> Env.GITHUB_REF?.substringAfter("refs/heads/")
         }
 
   /**

@@ -94,6 +94,7 @@ jobs:
           echo "dist_path=$(ls -1 backend/build/distributions/*.zip | head -n 1)" >> "$GITHUB_OUTPUT"
           echo "dist_name=$(ls -1 backend/build/distributions/*.zip | head -n 1 | xargs basename)" >> "$GITHUB_OUTPUT"
         env:
+          GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JOB_CONTEXT: ${{ toJSON(job) }}
           STEPS_CONTEXT: ${{ toJSON(steps) }}
@@ -174,14 +175,6 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
-
-      - name: 📦Publish artifacts to GitHub Packages
-        id: gradle-deploy
-        run: |
-          ./gradlew publishAllPublicationsToGitHubPackagesRepository
-        env:
-          GITHUB_USER: ${{ github.repository_owner }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: ⚙️Build Changelog
         id: github_release
