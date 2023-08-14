@@ -11,6 +11,7 @@ import org.jetbrains.dokka.gradle.DokkaTaskPartial
 plugins {
   id("org.jetbrains.dokka")
   id("org.jetbrains.kotlinx.kover")
+  id("test-report-aggregation")
 }
 
 // The following plugins and config apply only to a root project.

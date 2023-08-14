@@ -89,15 +89,17 @@ tasks {
 
   // Clean all composite builds
   register("cleanAll") {
-    description = "Clean all composite builds"
+    description = "Clean all projects including composite builds"
     group = LifecycleBasePlugin.CLEAN_TASK_NAME
+
     dependsOn(gradle.includedBuilds.map { it.task(":clean") })
-    dependsOn(subprojects.map { it.tasks.clean })
+    subprojects.mapNotNull { it.tasks.findByName("clean") }.forEach { dependsOn(it) }
   }
 
   wrapper {
     gradleVersion = libs.versions.gradle.asProvider().get()
     distributionType = Wrapper.DistributionType.ALL
+    // distributionUrl = "${Repo.GRADLE_DISTRO}/gradle-$gradleVersion-bin.zip"
   }
 
   defaultTasks("clean", "tasks", "--all")

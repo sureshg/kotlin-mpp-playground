@@ -160,13 +160,13 @@ tasks {
     val publish = GithubAction.isTagBuild && Platform.isLinux
     if (publish) {
       logger.lifecycle("Publishing task is enabled for this build!")
-      subprojects.mapNotNull { it.tasks.findByName("publish") }.forEach { dependsOn(it) }
+      subprojects.mapNotNull { it.tasks.findByName(":publish") }.forEach { dependsOn(it) }
     }
   }
 
   // Task to print the project version
   register("v") {
-    description = "Print the ${project.name} version!"
-    doLast { println(project.version.toString()) }
+    description = "Print the ${rootProject.name} version!"
+    doLast { println(rootProject.version.toString()) }
   }
 }

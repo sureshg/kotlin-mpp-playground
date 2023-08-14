@@ -18,17 +18,16 @@ include(":compose:web")
 
 include(":compose:desktop")
 
+// includeBuild("misc/build") {
+//    dependencySubstitution {
+//        substitute(module("dev.suresh:misc-build")).using(project(":"))
+//    }
+// }
+
 include(":dep-mgmt:bom")
 
 include(":dep-mgmt:catalog")
 
 include(":devtools:ksp:processor")
 
-include(
-    ":devtools:compiler:plugin")
-
-// includeBuild("misc/build") {
-//    dependencySubstitution {
-//        substitute(module("dev.suresh:misc-build")).using(project(":"))
-//    }
-// }
+include(":devtools:compiler:plugin")

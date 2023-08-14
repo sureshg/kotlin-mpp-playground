@@ -116,43 +116,42 @@ $ actionlint
 
 [simple-icons-logo]: https://simpleicons.org/icons/kotlin.svg
 
-
 ### Module Dependency
 
 ```mermaid
 %%{
-  init: {
-    'theme': 'neutral'
-  }
+init: {
+'theme': 'neutral'
+}
 }%%
 
 graph LR
 
-  subgraph compose
-    desktop
-    web
-  end
-  subgraph dep-mgmt
-    bom
-    catalog
-  end
-  subgraph devtools
-    compiler
-    ksp
-  end
-  subgraph compiler
-    compiler
-    plugin
-  end
-  subgraph ksp
-    ksp
-    processor
-  end
-  web --> common
-  web --> common
-  desktop --> common
-  backend --> common
-  web --> common
-  benchmarks --> common
+    subgraph compose
+        desktop
+        web
+    end
+    subgraph dep-mgmt
+        bom
+        catalog
+    end
+    subgraph devtools
+        compiler
+        ksp
+    end
+    subgraph compiler
+        compiler
+        plugin
+    end
+    subgraph ksp
+        ksp
+        processor
+    end
+    web --> common
+    web --> common
+    desktop --> common
+    backend --> common
+    web --> common
+    benchmarks --> common
 
 ```
