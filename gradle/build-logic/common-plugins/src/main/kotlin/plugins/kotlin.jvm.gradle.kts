@@ -8,11 +8,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   `java-library`
-  id("com.google.devtools.ksp")
+  com.google.devtools.ksp
   kotlin("jvm")
-  kotlin("plugin.serialization")
-  id("kotlinx-atomicfu")
-  id("dev.zacsweers.redacted")
+  `kotlinx-serialization`
+  `kotlinx-atomicfu`
+  dev.zacsweers.redacted
   id("plugins.kotlin.docs")
   // `test-suite-base`
 }

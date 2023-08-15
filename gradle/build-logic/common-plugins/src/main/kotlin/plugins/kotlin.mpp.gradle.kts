@@ -14,14 +14,14 @@ import tasks.BuildConfigExtension
 
 plugins {
   java
-  kotlin("plugin.serialization")
-  id("com.google.devtools.ksp")
-  id("kotlinx-atomicfu")
-  id("dev.zacsweers.redacted")
+  `kotlinx-serialization`
+  com.google.devtools.ksp
+  `kotlinx-atomicfu`
+  dev.zacsweers.redacted
+  app.cash.molecule
   id("plugins.kotlin.docs")
-  id("app.cash.molecule")
-  // id("dev.petuska.npm.publish")
-  // id("dev.mokkery")
+  // dev.petuska.npm.publish
+  // dev.mokkery
 }
 
 // Workaround for "The root project is not yet available for build" error.

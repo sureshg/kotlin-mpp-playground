@@ -1,3 +1,3 @@
 package settings
 
-// Including Another Settings plugin"
+// Including other settings plugin

@@ -6,9 +6,9 @@ import org.gradle.kotlin.dsl.*
 plugins {
   java
   wrapper
-  id("com.diffplug.spotless")
-  id("com.github.ben-manes.versions")
-  id("dev.iurysouza.modulegraph")
+  com.diffplug.spotless
+  com.github.`ben-manes`.versions
+  dev.iurysouza.modulegraph
   // id("plugins.common")
   // id("gg.jte.gradle")
 }

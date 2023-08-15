@@ -29,15 +29,15 @@ class DepReportsPlugin : Plugin<Project> {
                 val resolvedArtifacts = runtimeClasspath.incoming.artifacts.resolvedArtifacts
 
                 // Transform the artifacts
-                artifactIds.set(resolvedArtifacts.map { it.map(ResolvedArtifactResult::getId) })
-                artifactVariants.set(
-                    resolvedArtifacts.map { it.map(ResolvedArtifactResult::getVariant) })
-                artifactFiles.set(
+                artifactIds = resolvedArtifacts.map { it.map(ResolvedArtifactResult::getId) }
+                artifactVariants =
+                    resolvedArtifacts.map { it.map(ResolvedArtifactResult::getVariant) }
+                artifactFiles =
                     resolvedArtifacts.map {
                       it.map { resolvedArtifactResult ->
                         layout.projectDirectory.file(resolvedArtifactResult.file.absolutePath)
                       }
-                    })
+                    }
                 outputFile.convention(layout.buildDirectory.file("resolved-artifacts.txt"))
               }
         }
@@ -68,10 +68,10 @@ abstract class ListResolvedArtifacts : DefaultTask() {
       ids.forEachIndexed { idx, id ->
         val variant = variants[idx]
         val file = files[idx]
-        it.appendLine("FILE ${file.asFile.name}")
-        it.appendLine("  id: ${id.displayName}")
-        it.appendLine("  variant: ${variant.displayName}")
-        it.appendLine("  size: ${file.asFile.length()}")
+        it.appendLine("File - ${file.asFile.name}")
+        it.appendLine("  Id : ${id.displayName}")
+        it.appendLine("  Variant : ${variant.displayName}")
+        it.appendLine("  Size : ${file.asFile.length()}")
         it.appendLine()
       }
     }

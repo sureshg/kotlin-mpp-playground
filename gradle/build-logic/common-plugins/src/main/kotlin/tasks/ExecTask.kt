@@ -3,6 +3,7 @@ package tasks
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.*
+import org.gradle.kotlin.dsl.*
 
 /**
  * A sample [JavaExec] task that executes class from runtime classpath is as follows:
@@ -30,7 +31,7 @@ abstract class ExecTask : JavaExec() {
 
   init {
     group = "build"
-    mainClass.set("app.Main")
+    mainClass = "app.Main"
     argumentProviders.add { listOf(outputDir.get().asFile.path, sourceFile.get().asFile.path) }
   }
 }

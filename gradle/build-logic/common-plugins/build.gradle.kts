@@ -102,6 +102,7 @@ dependencies {
   implementation(platform(libs.kotlin.bom))
   implementation(kotlin("stdlib"))
   implementation(libs.kotlinx.coroutines.core)
+  implementation(libs.kotlinx.datetime)
   // Http client and JSON serialization
   implementation(libs.ktor.client.java)
   implementation(libs.ktor.client.content.negotiation)

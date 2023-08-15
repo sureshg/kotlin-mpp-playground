@@ -10,8 +10,8 @@ plugins {
   application
   id("plugins.kotlin.jvm")
   id("plugins.misc")
-  id("org.graalvm.buildtools.native")
-  id("com.autonomousapps.dependency-analysis")
+  org.graalvm.buildtools.native
+  com.autonomousapps.`dependency-analysis`
 }
 
 val debugEnabled = project.hasProperty("debug")

@@ -6,7 +6,7 @@ import common.libs
 plugins {
   `maven-publish`
   signing
-  // id("org.cyclonedx.bom")
+  // org.cyclonedx.bom
 }
 
 // Nexus plugin needs to apply to the root project only
@@ -52,7 +52,7 @@ publishing {
     plugins.withId("org.jetbrains.kotlin.multiplatform") {
       val javadocJar by
           tasks.registering(Jar::class) {
-            archiveClassifier.set("javadoc")
+            archiveClassifier = "javadoc"
             duplicatesStrategy = DuplicatesStrategy.WARN
             // contents are deliberately left empty
           }

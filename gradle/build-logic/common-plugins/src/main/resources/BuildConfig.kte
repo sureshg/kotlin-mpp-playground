@@ -1,6 +1,7 @@
 @import common.camelCase
-@import java.time.LocalDateTime
 @import gg.jte.support.ForSupport
+@import kotlinx.datetime.Clock
+@import kotlinx.datetime.*
 
 @param className: String
 @param pkg: String
@@ -13,7 +14,7 @@
 @if(pkg.isNotBlank())package ${pkg}@endif
 object ${className} {
 
-   const val buildTime = "${LocalDateTime.now().toString()}"
+   const val buildTimeUTC = "${Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()}"
 
    const val version = "${version}"
 

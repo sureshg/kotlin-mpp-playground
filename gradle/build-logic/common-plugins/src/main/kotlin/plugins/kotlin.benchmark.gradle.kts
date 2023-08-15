@@ -15,8 +15,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
  */
 plugins {
   id("plugins.kotlin.mpp")
-  id("org.jetbrains.kotlinx.benchmark")
-  id("org.jetbrains.kotlin.plugin.allopen")
+  org.jetbrains.kotlinx.benchmark
+  `kotlin-allopen`
 }
 
 description = "Kotlin benchmarking tests"

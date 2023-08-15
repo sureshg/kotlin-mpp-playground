@@ -13,7 +13,7 @@ import tasks.*
 plugins {
   idea
   application
-  id("com.github.johnrengelman.shadow")
+  com.github.johnrengelman.shadow
   id("plugins.kotlin.docs")
   id("plugins.publishing")
 }

@@ -3,12 +3,13 @@ package settings
 import com.gradle.scan.plugin.PublishedBuildScan
 import common.GithubAction
 import common.Repo
+import org.gradle.api.JavaVersion.VERSION_17
 import org.gradle.kotlin.dsl.*
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
 
 pluginManagement {
-  require(JavaVersion.current().isJava11Compatible) {
-    "This build requires Gradle to be run with at least Java 11"
+  require(JavaVersion.current().isCompatibleWith(VERSION_17)) {
+    "This build requires Gradle to be run with at least Java $VERSION_17"
   }
 
   resolutionStrategy {
@@ -41,7 +42,7 @@ plugins {
   id("org.gradle.toolchains.foojay-resolver")
   // Use semver on all projects
   id("com.javiersc.semver")
-  // Include another pre-compiled settings plugin
+  // Include other pre-compiled settings plugin
   id("settings.include")
 }
 

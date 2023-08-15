@@ -43,6 +43,7 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
       mapOf(
           "gitHash" to commit.hash,
           "gitMessage" to commit.message,
+          "gitFullMessage" to commit.fullMessage.trim(),
           "gitTimestampEpochSecond" to commit.timestampEpochSecond.toString(),
           "gitTags" to commit.tags.joinToString(),
       )

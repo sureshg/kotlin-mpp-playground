@@ -9,9 +9,9 @@ import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
 
 plugins {
-  id("org.jetbrains.dokka")
-  id("org.jetbrains.kotlinx.kover")
-  id("test-report-aggregation")
+  org.jetbrains.dokka
+  org.jetbrains.kotlinx.kover
+  `test-report-aggregation`
 }
 
 // The following plugins and config apply only to a root project.
