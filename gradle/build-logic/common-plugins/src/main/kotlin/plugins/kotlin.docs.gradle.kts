@@ -1,9 +1,12 @@
 package plugins
 
+import common.githubRepo
+import common.githubUser
 import common.kotlinJvmTarget
-import common.libs
 import java.net.URI
 import kotlinx.validation.ApiValidationExtension
+import org.gradle.kotlin.dsl.*
+import org.hildan.github.changelog.plugin.GitHubChangelogExtension
 import org.jetbrains.dokka.DokkaConfiguration.Visibility
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
@@ -16,6 +19,7 @@ plugins {
 
 // The following plugins and config apply only to a root project.
 if (project == rootProject) {
+  apply(plugin = "org.hildan.github.changelog")
   apply(plugin = "org.jetbrains.kotlinx.binary-compatibility-validator")
 
   // For combined Kotlin coverage report
@@ -28,12 +32,14 @@ if (project == rootProject) {
   }
 }
 
-// Configure bin-compat validator.
+// Configure if the plugin is applied to the project.
 plugins.withId("org.jetbrains.kotlinx.binary-compatibility-validator") {
   extensions.configure<ApiValidationExtension>("apiValidation") { validationDisabled = true }
 }
 
-// pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {}
+plugins.withId("org.hildan.github.changelog") {
+  the<GitHubChangelogExtension>().run { githubUser = project.githubUser }
+}
 
 tasks {
   withType<DokkaTaskPartial>().configureEach {
@@ -50,7 +56,7 @@ tasks {
 
       sourceLink {
         localDirectory = rootProject.projectDir
-        remoteUrl = libs.versions.publish.scm.url.map { URI("$it/tree/main").toURL() }
+        remoteUrl = URI("${githubRepo}/tree/main").toURL()
         remoteLineSuffix = "#L"
       }
 

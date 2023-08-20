@@ -133,11 +133,11 @@ kotlinMultiplatform.apply {
 
     val commonMain by getting {
       dependencies {
-        implementation(libs.kotlinx.coroutines.core)
-        implementation(libs.kotlinx.datetime)
-        implementation(libs.kotlinx.atomicfu)
-        implementation(libs.kotlinx.serialization.json)
-        implementation(libs.kotlinx.collections.immutable)
+        api(libs.kotlinx.coroutines.core)
+        api(libs.kotlinx.datetime)
+        api(libs.kotlinx.atomicfu)
+        api(libs.kotlinx.serialization.json)
+        api(libs.kotlinx.collections.immutable)
       }
     }
 

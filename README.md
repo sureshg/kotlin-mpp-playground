@@ -48,6 +48,7 @@ $ ./gradlew createModuleGraph
 
 # Misc
 $ ./gradlew checkBuildLogicBestPractices
+$ ./gradlew generateChangelog
 $ ./gradlew cleanAll
 
 # GitHub Actions lint

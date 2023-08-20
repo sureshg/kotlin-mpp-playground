@@ -1,6 +1,5 @@
 import kotlin.io.encoding.Base64
 import kotlin.jvm.JvmInline
-import kotlin.text.HexFormat
 import kotlin.time.Duration.Companion.microseconds
 import kotlin.time.TimeSource
 

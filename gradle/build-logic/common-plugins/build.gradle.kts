@@ -17,8 +17,6 @@ plugins {
  */
 val dslJavaVersion = libs.versions.kotlin.dsl.jvmtarget
 
-// java { toolchain { languageVersion = dslJavaVersion.map(JavaLanguageVersion::of) } }
-
 tasks {
   withType<KotlinCompile>().configureEach {
     compilerOptions {
@@ -88,7 +86,7 @@ gradlePlugin {
 // Jte is used for generating build config.
 jte {
   contentType = gg.jte.ContentType.Plain
-  sourceDirectory = sourceSets.main.get().resources.srcDirs.firstOrNull()?.toPath()
+  sourceDirectory = sourceSets.main.map { it.resources.srcDirs.first().toPath() }
   generate()
   // jteExtension("gg.jte.models.generator.ModelExtension")
   // jteExtension("gg.jte.nativeimage.NativeResourcesExtension")
@@ -117,8 +115,8 @@ dependencies {
   implementation(libs.build.zip.prefixer)
   // Templating
   implementation(libs.jte.runtime)
-  // jteGenerate(libs.jte.models)
   // compileOnly(libs.jte.kotlin)
+  // jteGenerate(libs.jte.models)
 
   // External plugins deps to use in precompiled script plugins
   // https://docs.gradle.org/current/userguide/custom_plugins.html#applying_external_plugins_in_precompiled_script_plugins
@@ -138,6 +136,7 @@ dependencies {
   implementation(libs.build.spotless.plugin)
   implementation(libs.build.shadow.plugin)
   implementation(libs.build.semver.plugin)
+  implementation(libs.build.github.changelog)
   implementation(libs.build.benmanesversions)
   implementation(libs.build.dependencyanalysis)
   implementation(libs.build.cyclonedx.plugin)
@@ -146,8 +145,8 @@ dependencies {
   implementation(libs.build.modulegraph.plugin)
   implementation(libs.build.cash.molecule.plugin)
   implementation(libs.build.npm.publish.plugin)
+  implementation(libs.build.mokkery.plugin)
+  implementation(libs.build.jte.plugin)
   testImplementation(gradleTestKit())
-  // implementation(libs.build.mokkery.plugin)
-  // implementation(libs.build.jte.plugin)
   // implementation(libs.build.includegit.plugin)
 }

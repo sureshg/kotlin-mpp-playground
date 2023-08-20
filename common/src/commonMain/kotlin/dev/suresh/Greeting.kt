@@ -23,7 +23,7 @@ class Greeting {
   fun greeting() =
       """
       | Platform          : Kotlin $platform
-      | Build Time (UTC)  : ${BuildConfig.buildTimeUTC}
+      | Build Time        : ${BuildConfig.buildTimeLocal}
       | Build Version     : ${BuildConfig.version}
       | Java Version      : ${BuildConfig.java}
       | Kotlin Version    : ${KotlinVersion.CURRENT}

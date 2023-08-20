@@ -150,3 +150,13 @@ dependencies {
 //     outgoing.artifact(shadowJar.flatMap {it.archiveFile})
 //   }
 // }
+
+allprojects {
+  configurations.all {
+    resolutionStrategy.eachDependency {
+      if (requested.name.contains("intellij-coverage")) {
+        // useVersion(libs.versions.intellij.coverage.get())
+      }
+    }
+  }
+}

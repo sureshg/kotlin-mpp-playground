@@ -36,10 +36,16 @@ val Project.toolchainVendor
 val Project.addModules
   get() = libs.versions.java.addModules.get()
 
+val Project.githubUser
+  get() = libs.versions.dev.name.get().lowercase()
+
+val Project.githubRepo
+  get() = "https://github.com/${githubUser}/${rootProject.name}"
+
 /**
  * Retrieves all JVM arguments for running (**java**) and compiling (**javac**) java/kotlin code..
  *
- * @param compile Flag indicating whether or not to include additional JVM arguments for compilation.
+ * @param compile Flag indicating whether to include additional JVM arguments for compilation.
  *                Defaults to false.
  * @return A list of JVM arguments for the project.
  */
@@ -52,6 +58,120 @@ fun Project.jvmArguments(compile: Boolean = false) = buildList {
     add("--enable-native-access=ALL-UNNAMED")
   }
 }
+
+// $ java -XX:+UnlockExperimentalVMOptions -XX:+UnlockDiagnosticVMOptions -XX:+PrintFlagsFinal
+// --version
+// https://docs.oracle.com/en/java/javase/21/docs/specs/man/java.html
+// https://docs.oracle.com/en/java/javase/21/core/java-networking.html#GUID-E6C82625-7C02-4AB3-B15D-0DF8A249CD73
+// https://cs.oswego.edu/dl/jsr166/dist/jsr166.jar
+// https://chriswhocodes.com/hotspot_options_openjdk21.html
+// https://sap.github.io/SapMachine/jfrevents
+
+val Project.cc get() =    listOf(
+  "--show-version",
+  "--enable-preview",
+  "--add-modules=$addModules",
+  "--enable-native-access=ALL-UNNAMED",
+  "-XshowSettings:vm",
+  "-XshowSettings:system",
+  "-XshowSettings:properties",
+  "-Xmx96M",
+  "-XX:+PrintCommandLineFlags",
+  "-XX:+UseZGC",
+  "-XX:+ZGenerational",
+  "-XX:+UseCompressedOops",
+  "-XX:+UnlockExperimentalVMOptions",
+  // os+thread,gc+heap=trace,
+  """-Xlog:cds,safepoint,gc*:
+              |file="$tmp$name-gc-%p-%t.log":
+              |level,tags,time,uptime,pid,tid:
+              |filecount=5,
+              |filesize=10m"""
+    .joinToConfigString(),
+  """-XX:StartFlightRecording=
+              |filename=$tmp$name.jfr,
+              |name=$name,
+              |maxsize=100M,
+              |maxage=1d,
+              |path-to-gc-roots=true,
+              |dumponexit=true,
+              |memory-leaks=gc-roots,
+              |gc=detailed,
+              |+jdk.VirtualThreadStart#enabled=true,
+              |+jdk.VirtualThreadEnd#enabled=true,
+              |jdk.ObjectCount#enabled=true,
+              |jdk.SecurityPropertyModification#enabled=true,
+              |jdk.TLSHandshake#enabled=true,
+              |jdk.X509Certificate#enabled=true,
+              |jdk.X509Validation#enabled=true,
+              |settings=profile"""
+    .joinToConfigString(),
+  "-XX:FlightRecorderOptions:stackdepth=64",
+  "-XX:+HeapDumpOnOutOfMemoryError",
+  "-XX:HeapDumpPath=$tmp$name-%p.hprof",
+  "-XX:ErrorFile=$tmp$name-hs-err-%p.log",
+  "-XX:OnOutOfMemoryError='kill -9 %p'",
+  "-XX:+ExitOnOutOfMemoryError",
+  "-XX:+UnlockDiagnosticVMOptions",
+  "-XX:NativeMemoryTracking=detail",
+  "-XX:+EnableDynamicAgentLoading",
+  "-XX:+LogVMOutput",
+  "-XX:LogFile=$tmp$name-jvm.log",
+  "-Djava.awt.headless=true",
+  "-Djdk.attach.allowAttachSelf=true",
+  "-Djdk.traceVirtualThreadLocals=false",
+  "-Djdk.tracePinnedThreads=full",
+  "-Djava.security.debug=properties",
+  "-Djava.security.egd=file:/dev/./urandom",
+  "-Djdk.includeInExceptions=hostInfo,jar",
+  "-Dkotlinx.coroutines.debug",
+  "-ea",
+  // "--show-module-resolution",
+  // "-XX:+ShowHiddenFrames",
+  // "-XX:+AutoCreateSharedArchive",
+  // "-XX:SharedArchiveFile=$tmp/$name.jsa"
+  // "-verbose:module",
+  // "-XX:ConcGCThreads=2",
+  // "-XX:ZUncommitDelay=60",
+  // "-XX:VMOptionsFile=vm_options",
+  // "-Xlog:gc\*",
+  // "-Xlog:class+load=info,cds=debug,cds+dynamic=info",
+  // "-XX:+IgnoreUnrecognizedVMOptions",
+  // "-XX:MaxRAMPercentage=0.8",
+  // "-XX:+StartAttachListener", // For jcmd Dynamic Attach Mechanism
+  // "-XX:+DisableAttachMechanism",
+  // "-XX:+DebugNonSafepoints",
+  // "-XX:OnOutOfMemoryError="./restart.sh"",
+  // "-XX:SelfDestructTimer=0.05",
+  // "-XX:NativeMemoryTracking=[off|summary|detail]",
+  // "-XX:+PrintNMTStatistics",
+  // "-XX:OnError=\"gdb - %p\"", // Attach gdb on segfault
+  // "-Djava.security.properties=/path/to/custom/java.security", // == to override
+  // "-Duser.timezone=\"PST8PDT\"",
+  // "-Djava.net.preferIPv4Stack=true",
+  // "-Djavax.net.debug=all",
+  // "-Dhttps.protocols=TLSv1.2",
+  // "-Dhttps.agent=$name",
+  // "-Dhttp.keepAlive=true",
+  // "-Dhttp.maxConnections=5",
+  // "-Djava.security.manager=allow",
+  // "-Dfile.encoding=COMPAT", // uses '-Dnative.encoding'
+  // "-Djdbc.drivers=org.postgresql.Driver",
+  // "-Djava.io.tmpdir=/var/data/tmp",
+  // "-Djava.locale.providers=COMPAT,CLDR",
+  // "-Djdk.lang.Process.launchMechanism=vfork",
+  // "-Djdk.tls.maxCertificateChainLength=10",
+  // "-Djdk.tls.maxHandshakeMessageSize=32768",
+  // "--add-exports=java.management/sun.management=ALL-UNNAMED",
+  // "--add-exports=jdk.attach/sun.tools.attach=ALL-UNNAMED",
+  // "--add-opens=java.base/java.net=ALL-UNNAMED",
+  // "--add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED",
+  // "--patch-module java.base="$DIR/jsr166.jar",
+  // "-javaagent:path/to/glowroot.jar",
+  // "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+  // "-agentlib:jdwp=transport=dt_socket,server=n,address=host:5005,suspend=y,onthrow=<FQ
+  // exception class name>,onuncaught=<y/n>"
+)
 
 /** Kotlin version properties. */
 val Project.kotlinVersion
@@ -303,6 +423,7 @@ fun KotlinDependencyHandler.kspDependency(
   )
 }
 
+
 /** Returns the path of the dependency jar in runtime classpath. */
 context(Project)
 val ExternalDependency.dependencyPath get() = configurations
@@ -314,6 +435,7 @@ val ExternalDependency.dependencyPath get() = configurations
   ?.file
   ?.path
   ?: error("Could not find $name in runtime classpath")
+
 
 /** Returns the application `run` command. */
 context(Project)

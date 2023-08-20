@@ -1,6 +1,7 @@
 package plugins
 
 import common.Repo
+import common.githubRepo
 import common.libs
 
 plugins {
@@ -38,7 +39,7 @@ publishing {
 
     maven {
       name = "GitHubPackages"
-      url = uri(Repo.githubPackage(libs.versions.publish.dev.name.get(), rootProject.name))
+      url = uri(Repo.githubPackage(libs.versions.dev.name.get(), rootProject.name))
       credentials {
         username = findProperty("gpr.user") as String? ?: Repo.GITHUB_USER
         password = findProperty("gpr.key") as String? ?: Repo.GITHUB_TOKEN
@@ -108,19 +109,18 @@ publishing {
 }
 
 fun MavenPublication.configurePom() {
-  val githubUrl = libs.versions.publish.scm.url
   pom {
     name = provider { "${project.group}:${project.name}" }
     description = provider { project.description }
     inceptionYear = "2023"
-    url = githubUrl
+    url = githubRepo
 
     developers {
       developer {
-        name = libs.versions.publish.dev.name
-        email = libs.versions.publish.dev.email
-        organization = libs.versions.publish.org.name
-        organizationUrl = libs.versions.publish.org.url
+        name = libs.versions.dev.name
+        email = libs.versions.dev.email
+        organization = libs.versions.org.name
+        organizationUrl = libs.versions.org.url
       }
     }
 
@@ -132,9 +132,9 @@ fun MavenPublication.configurePom() {
     }
 
     scm {
-      url = githubUrl
-      connection = githubUrl.map { "scm:git:$it.git" }
-      developerConnection = githubUrl.map { "scm:git:$it.git" }
+      url = githubRepo
+      connection = "scm:git:$githubRepo.git"
+      developerConnection = "scm:git:$githubRepo.git"
     }
   }
 }

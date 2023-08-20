@@ -1,6 +1,6 @@
 @import common.camelCase
+@import gg.jte.Content
 @import gg.jte.support.ForSupport
-@import kotlinx.datetime.Clock
 @import kotlinx.datetime.*
 
 @param className: String
@@ -12,9 +12,16 @@
 
 /* GENERATED, DO NOT EDIT MANUALLY! */
 @if(pkg.isNotBlank())package ${pkg}@endif
+
+import kotlinx.datetime.*
+
 object ${className} {
 
-   const val buildTimeUTC = "${Clock.System.now().toLocalDateTime(TimeZone.UTC).toString()}"
+   val buildTimeEpochMillis = ${Clock.System.now().toEpochMilliseconds()}
+
+   val buildTimeUTC = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.UTC)
+
+   val buildTimeLocal = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.currentSystemDefault())
 
    const val version = "${version}"
 

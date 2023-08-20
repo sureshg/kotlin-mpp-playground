@@ -29,7 +29,7 @@ val Long.compactFmt: String
 /** Converts a string to camelcase by splitting it by space, dash, underscore, or dot. */
 val String.camelCase: String
   get() =
-      split("[. -_]".toRegex())
+      split("""[.\-_ ]""".toRegex())
           .mapIndexed { idx, s -> if (idx == 0) s else s.replaceFirstChar { it.uppercaseChar() } }
           .joinToString("")
 
