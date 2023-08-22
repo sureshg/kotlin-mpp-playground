@@ -11,7 +11,7 @@ description = "Ktor backend application"
 
 application {
   mainClass = "AppKt"
-  applicationDefaultJvmArgs += jvmArguments()
+  applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
 }
 
 mppTargetName = "jvm"

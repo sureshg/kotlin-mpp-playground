@@ -13,6 +13,7 @@ import io.ktor.client.plugins.resources.Resources
 import io.ktor.http.*
 import io.ktor.resources.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.util.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 
@@ -45,22 +46,36 @@ object ApiClient {
           socketTimeoutMillis = 5_000
         }
 
+        install(HttpCookies)
+
         install(Logging) {
-          logger = Logger.DEFAULT
+          // logger = Logger.SIMPLE
           level = LogLevel.INFO
         }
 
-        install(HttpCookies)
-
         engine { pipelining = true }
+
+        followRedirects = true
 
         defaultRequest {
           url {
             protocol = URLProtocol.HTTPS
             host = "api.github.com"
           }
+          headers.appendIfNameAndValueAbsent(
+              HttpHeaders.ContentType, ContentType.Application.Json.toString())
         }
-        followRedirects = true
+
+        // expectSuccess = false
+        HttpResponseValidator {
+          validateResponse {
+            when (it.status.value) {
+              in 300..399 -> throw RedirectResponseException(it, "Redirect error")
+              in 400..499 -> throw ClientRequestException(it, "Client error")
+              in 500..599 -> throw ServerResponseException(it, "Server error")
+            }
+          }
+        }
       }
 
   suspend fun user(name: String) = get().get(UserReq(name)).body<User>()

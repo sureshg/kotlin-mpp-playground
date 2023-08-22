@@ -72,6 +72,15 @@ fun Path.glob(pattern: String): List<Path> {
 fun String.joinToConfigString(separator: CharSequence = "") =
     trimMargin().lines().joinToString(separator) { it.trim() }
 
+/** Check if it's a non-stable(RC) version. */
+val String.isNonStable: Boolean
+  get() {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { uppercase().contains(it) }
+    val regex = "^[\\d,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(this)
+    return isStable.not()
+  }
+
 /** System property delegate */
 @Suppress("IMPLICIT_CAST_TO_ANY")
 inline fun <reified T> sysProp(): ReadOnlyProperty<Any?, T> = ReadOnlyProperty { _, property ->

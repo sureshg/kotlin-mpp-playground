@@ -22,7 +22,7 @@ val reportsEnabled = project.hasProperty("reports")
 
 application {
   mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs += jvmArguments()
+  applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
 }
 
 val semverExtn = extensions.getByType<SemverExtension>()
@@ -85,6 +85,7 @@ graalvmNative {
           add("--dry-run")
         }
 
+        @Suppress("UnstableApiUsage")
         if (reportsEnabled) {
           add("-H:DashboardDump=${layout.buildDirectory.file(niDashBoardDump).get().asFile.path}")
           add("-H:+DashboardHeap")

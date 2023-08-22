@@ -38,6 +38,7 @@ dependencies {
 
   jvmMainApi(libs.kotlin.retry)
   // jvmMainImplementation(libs.slf4j.api)
+  commonTestApi(libs.ktor.client.mock)
 }
 
 // kotlin.sourceSets.commonMain {
