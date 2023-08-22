@@ -49,7 +49,7 @@ object ApiClient {
         install(HttpCookies)
 
         install(Logging) {
-          // logger = Logger.SIMPLE
+          logger = Logger.DEFAULT
           level = LogLevel.INFO
         }
 

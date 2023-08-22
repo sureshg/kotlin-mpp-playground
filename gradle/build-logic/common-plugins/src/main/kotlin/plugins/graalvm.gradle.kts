@@ -22,7 +22,7 @@ val reportsEnabled = project.hasProperty("reports")
 
 application {
   mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
+  applicationDefaultJvmArgs += jvmArguments()
 }
 
 val semverExtn = extensions.getByType<SemverExtension>()
