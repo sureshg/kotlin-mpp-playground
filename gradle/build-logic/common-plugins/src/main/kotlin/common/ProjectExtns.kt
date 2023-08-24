@@ -125,9 +125,6 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
     addAll(
         listOf(
             "--show-version",
-            "-XshowSettings:vm",
-            "-XshowSettings:system",
-            "-XshowSettings:properties",
             "-XX:+PrintCommandLineFlags",
             "--enable-native-access=ALL-UNNAMED",
             "-Xmx96M",
@@ -180,6 +177,9 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             "-Djdk.includeInExceptions=hostInfo,jar",
             "-Dkotlinx.coroutines.debug",
             // "-ea",
+            // "-XshowSettings:vm",
+            // "-XshowSettings:system",
+            // "-XshowSettings:properties",
             // "--show-module-resolution",
             // "-XX:+ShowHiddenFrames",
             // "-XX:+AutoCreateSharedArchive",
@@ -301,8 +301,8 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   freeCompilerArgs.addAll(
       "-Xcontext-receivers",
       "-Xallow-result-return-type",
-      // "-P",
-      // "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true",
+      "-P",
+      "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}",
       // "-P",
       // "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=...dir...",
   )

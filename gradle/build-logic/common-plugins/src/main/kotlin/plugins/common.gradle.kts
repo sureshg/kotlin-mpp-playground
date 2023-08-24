@@ -47,7 +47,7 @@ application { mainClass = libs.versions.app.mainclass }
 
 @Suppress("UNUSED_VARIABLE")
 tasks {
-  // run.invoke { args(true) }
+  run.invoke { args(true) }
 
   // Prints java module dependencies using jdeps
   val printModuleDeps by registering {

@@ -51,6 +51,9 @@ $ ./gradlew checkBuildLogicBestPractices
 $ ./gradlew generateChangelog
 $ ./gradlew cleanAll
 
+# Upgrade yarn lock file
+$ ./gradlew kotlinUpgradeYarnLock
+
 # GitHub Actions lint
 $ actionlint
 ```

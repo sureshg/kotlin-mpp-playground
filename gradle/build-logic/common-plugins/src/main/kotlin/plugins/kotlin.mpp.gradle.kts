@@ -40,7 +40,7 @@ kotlinMultiplatform.apply {
     // Configure all compilations of all targets
     compilations.all {
       compileTaskProvider.configure { compilerOptions { configureKotlinCommon() } }
-      compilerOptions.configure { configureKotlinCommon() }
+      // compilerOptions.configure { configureKotlinCommon() }
     }
   }
 
@@ -49,7 +49,8 @@ kotlinMultiplatform.apply {
     // withSourcesJar(publish = false)
     compilations.all {
       compileJavaTaskProvider?.configure { configureJavac() }
-      compilerOptions.configure { configureKotlinJvm() }
+      compileTaskProvider.configure { compilerOptions { configureKotlinJvm() } }
+      // compilerOptions.configure { configureKotlinJvm() }
     }
 
     // val test by testRuns.existing
@@ -61,7 +62,7 @@ kotlinMultiplatform.apply {
   jvm("desktop") {
     compilations.all {
       compileJavaTaskProvider?.configure { configureJavac() }
-      compilerOptions.configure { configureKotlinJvm() }
+      compileTaskProvider.configure { compilerOptions { configureKotlinJvm() } }
     }
     testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
     // Attribute to distinguish Desktop target

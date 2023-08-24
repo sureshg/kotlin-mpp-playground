@@ -2,19 +2,19 @@ import common.jvmArguments
 import common.mppTargetName
 
 plugins {
-  application
   plugins.kotlin.jvm
   plugins.publishing
+  application
 }
 
 description = "Ktor backend application"
+
+mppTargetName = "jvm"
 
 application {
   mainClass = "AppKt"
   applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
 }
-
-mppTargetName = "jvm"
 
 dependencies {
   implementation(projects.common)
