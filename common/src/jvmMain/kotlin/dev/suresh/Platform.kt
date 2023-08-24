@@ -7,5 +7,4 @@ import kotlinx.coroutines.asCoroutineDispatcher
 actual val platform: String = "JVM"
 
 /** A coroutine dispatcher that executes tasks on Virtual Threads. */
-val Dispatchers.VT
-  get() = Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
+val Dispatchers.VT by lazy { Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher() }
