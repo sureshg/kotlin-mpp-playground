@@ -40,7 +40,7 @@ $ ./gradlew :web:jsBrowserProductionRun -t
 $ ./gradlew publishAllPublicationsToLocalRepository
 
 # Benchmark
-$ ./gradlew :benchmarks:benchmark
+$ ./gradlew :benchmark:benchmark
 
 # Dependency Graph
 $ ./gradlew :backend:listResolvedArtifacts
@@ -156,6 +156,6 @@ graph LR
   desktop --> common
   backend --> common
   web --> common
-  benchmarks --> common
+  benchmark --> common
 
 ```

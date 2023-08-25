@@ -1,7 +1,7 @@
 ### Run Benchmarks
 
 ```bash
-$ ./gradlew :benchmarks:benchmark
+$ ./gradlew :benchmark:benchmark
 ```
 
 ### Resources

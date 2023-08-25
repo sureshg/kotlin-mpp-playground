@@ -12,7 +12,7 @@ include(":backend")
 
 include(":web")
 
-include(":benchmarks")
+include(":benchmark")
 
 include(":compose:web")
 
