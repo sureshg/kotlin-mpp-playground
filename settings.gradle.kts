@@ -28,6 +28,6 @@ include(":dep-mgmt:bom")
 
 include(":dep-mgmt:catalog")
 
-include(":devtools:ksp:processor")
+include(":meta:ksp:processor")
 
-include(":devtools:compiler:plugin")
+include(":meta:compiler:plugin")

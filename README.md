@@ -139,7 +139,7 @@ graph LR
     bom
     catalog
   end
-  subgraph devtools
+  subgraph meta
     compiler
     ksp
   end

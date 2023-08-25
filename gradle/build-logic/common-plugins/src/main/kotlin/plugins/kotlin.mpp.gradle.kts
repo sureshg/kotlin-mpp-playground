@@ -181,8 +181,8 @@ kotlinMultiplatform.apply {
       dependencies {
         implementation(kotlinw("browser"))
         // implementation(kotlinw("web"))
-        // kspDependency("CommonMainMetadata", project(":devtools:ksp:processor"))
-        // kspDependency("Js", project(":devtools:ksp:processor"))
+        // kspDependency("CommonMainMetadata", project(":meta:ksp:processor"))
+        // kspDependency("Js", project(":meta:ksp:processor"))
       }
 
       // kotlin.srcDir("src/main/kotlin")
