@@ -38,7 +38,7 @@ $dokka.location:/TestProcessor/process/#com.google.devtools.ksp.processing.Resol
 $dokka.location:/TestProcessorProvider///PointingToDeclaration/processor/[root]/-test-processor-provider/index.html
 $dokka.location:/TestProcessorProvider/TestProcessorProvider/#/PointingToDeclaration/processor/[root]/-test-processor-provider/-test-processor-provider.html
 $dokka.location:/TestProcessorProvider/create/#com.google.devtools.ksp.processing.SymbolProcessorEnvironment/PointingToDeclaration/processor/[root]/-test-processor-provider/create.html
-module:benchmarks
+module:benchmark
 bench
 module:common
 dev.suresh
