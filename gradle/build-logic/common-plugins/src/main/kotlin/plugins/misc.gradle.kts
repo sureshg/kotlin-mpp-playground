@@ -78,6 +78,12 @@ tasks {
   withType<AbstractArchiveTask>().configureEach {
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
+    // val `rw-r--r--` = 0b110100100
+    // val `rwxr-xr-x` = 0b111101101
+    // fileMode = `rw-r--r--`
+    // dirMode = `rwxr-xr-x`
+    // filesMatching("**/bin/*") { mode = `rwxr-xr-x` }
+    // filesMatching("**/bin/*.bat") { mode = `rw-r--r--` }
   }
 
   // Run the checkBestPractices check for build-logic included builds.

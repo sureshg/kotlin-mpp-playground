@@ -35,10 +35,10 @@ dependencies {
   commonMainApi(libs.intellij.markdown)
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
+  commonTestApi(libs.ktor.client.mock)
 
   jvmMainApi(libs.kotlin.retry)
   // jvmMainImplementation(libs.slf4j.api)
-  commonTestApi(libs.ktor.client.mock)
 }
 
 // kotlin.sourceSets.commonMain {

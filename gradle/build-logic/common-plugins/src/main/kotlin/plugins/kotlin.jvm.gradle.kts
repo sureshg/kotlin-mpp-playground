@@ -2,6 +2,7 @@ package plugins
 
 import com.google.devtools.ksp.gradle.KspTaskJvm
 import common.*
+import java.util.jar.Attributes
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -104,6 +105,19 @@ tasks {
           "version" to project.version,
       )
     }
+  }
+
+  withType<Jar>().configureEach {
+    manifest {
+      attributes(
+          "Automatic-Module-Name" to project.group,
+          "Built-By" to System.getProperty("user.name"),
+          "Built-JDK" to System.getProperty("java.runtime.version"),
+          Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
+          Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
+      )
+    }
+    duplicatesStrategy = DuplicatesStrategy.WARN
   }
 
   // Javadoc

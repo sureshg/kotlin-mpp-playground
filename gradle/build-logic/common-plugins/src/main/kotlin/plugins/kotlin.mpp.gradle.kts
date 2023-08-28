@@ -173,6 +173,7 @@ kotlinMultiplatform.apply {
       dependencies {
         implementation(project.dependencies.platform(libs.junit.bom))
         implementation(kotlin("test-junit5"))
+        implementation(libs.slf4j.simple)
         implementation(libs.mockk)
       }
     }
@@ -180,7 +181,6 @@ kotlinMultiplatform.apply {
     val jsMain by getting {
       dependencies {
         implementation(kotlinw("browser"))
-        // implementation(kotlinw("web"))
         // kspDependency("CommonMainMetadata", project(":meta:ksp:processor"))
         // kspDependency("Js", project(":meta:ksp:processor"))
       }
