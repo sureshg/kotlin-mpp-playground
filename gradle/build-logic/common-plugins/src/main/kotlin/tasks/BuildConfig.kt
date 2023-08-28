@@ -19,6 +19,8 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
   @get:[OutputDirectory Optional]
   val generatedOutputDir: DirectoryProperty = extension.outputDir
 
+  @get:Internal internal val templateName = "BuildConfig.kte"
+
   init {
     description = "Generate build config class"
     group = LifecycleBasePlugin.BUILD_TASK_NAME
@@ -64,7 +66,7 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
     val tmplEngine =
         TemplateEngine.createPrecompiled(ContentType.Plain).apply { setTrimControlStructures(true) }
 
-    tmplEngine.render("BuildConfig.kte", params, content)
+    tmplEngine.render(templateName, params, content)
     file.writeText(content.toString())
   }
 }

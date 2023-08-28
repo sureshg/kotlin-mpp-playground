@@ -2,6 +2,7 @@
 @import gg.jte.Content
 @import gg.jte.support.ForSupport
 @import kotlinx.datetime.*
+@import java.net.InetAddress
 
 @param className: String
 @param pkg: String
@@ -22,6 +23,16 @@ object ${className} {
    val buildTimeUTC = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.UTC)
 
    val buildTimeLocal = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.currentSystemDefault())
+
+   val buildUser = "${System.getProperty("user.name")}"
+
+   val buildOS = "${System.getProperty("os.name")} ${System.getProperty("os.version")}-${System.getProperty("os.arch")}"
+
+   val buildHost = "${InetAddress.getLocalHost().hostName}"
+
+   val buildJdkVersion = "${System.getProperty("java.runtime.version")}"
+
+   val buildJdkVendor = "${System.getProperty("java.vendor")}"
 
    const val version = "${version}"
 

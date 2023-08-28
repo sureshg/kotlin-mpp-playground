@@ -25,6 +25,10 @@ class Greeting {
       | Platform          : Kotlin $platform
       | Build Time        : ${BuildConfig.buildTimeLocal}
       | Build Version     : ${BuildConfig.version}
+      | Build OS          : ${BuildConfig.buildOS}
+      | Build User        : ${BuildConfig.buildUser}
+      | Build Host        : ${BuildConfig.buildHost}
+      | Build JDK         : ${BuildConfig.buildJdkVersion}
       | Java Version      : ${BuildConfig.java}
       | Kotlin Version    : ${KotlinVersion.CURRENT}
       | Gradle Version    : ${BuildConfig.gradle}

@@ -146,6 +146,6 @@ dependencies {
   implementation(libs.build.npm.publish.plugin)
   implementation(libs.build.mokkery.plugin)
   implementation(libs.build.jte.plugin)
-  testImplementation(gradleTestKit())
   // implementation(libs.build.includegit.plugin)
+  testImplementation(gradleTestKit())
 }
