@@ -27,6 +27,7 @@ $dokka.location:/Planet.SATURN///PointingToDeclaration/{"org.jetbrains.dokka.lin
 $dokka.location:/Planet.URANUS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-u-r-a-n-u-s/index.html
 $dokka.location:/Planet.VENUS///PointingToDeclaration/{"org.jetbrains.dokka.links.EnumEntryDRIExtra":{"key":"org.jetbrains.dokka.links.EnumEntryDRIExtra"}}common/[root]/-planet/-v-e-n-u-s/index.html
 $dokka.location:/Planet///PointingToDeclaration/common/[root]/-planet/index.html
+$dokka.location:/Planet/entries/#/PointingToDeclaration/common/[root]/-planet/entries.html
 $dokka.location:/Planet/moon/#/PointingToDeclaration/common/[root]/-planet/moon.html
 $dokka.location:/Planet/valueOf/#kotlin.String/PointingToDeclaration/common/[root]/-planet/value-of.html
 $dokka.location:/Planet/values/#/PointingToDeclaration/common/[root]/-planet/values.html
