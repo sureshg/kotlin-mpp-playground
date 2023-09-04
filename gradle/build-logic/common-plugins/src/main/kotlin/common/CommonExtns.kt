@@ -6,6 +6,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import kotlin.jvm.optionals.getOrNull
 import kotlin.math.ln
 import kotlin.math.pow
 import kotlin.properties.ReadOnlyProperty
@@ -18,6 +19,35 @@ internal val DEC_FORMAT = DecimalFormat("#.##")
 
 /** OS temp location */
 val tmp: String = "${System.getProperty("java.io.tmpdir")}${File.separator}"
+
+/** Returns the method name contains this call-site */
+inline val methodName
+  get() = StackWalker.getInstance().walk { it.findFirst().getOrNull()?.methodName }
+
+/** Read the [Class] as [ByteArray] */
+fun <T : Class<*>> T.toBytes() =
+    classLoader.getResourceAsStream("${name.replace('.', '/')}.class")?.readBytes()
+
+/**
+ * Returns the actual class URL
+ *
+ * ```
+ * val url = LogManager::class.java.resourcePath
+ * ```
+ */
+val <T : Class<*>> T.resourcePath
+  get() = getResource("$simpleName.class")
+
+/** Run the lambda in the context of the receiver classloader. */
+fun ClassLoader.using(run: () -> Unit) {
+  val cl = Thread.currentThread().contextClassLoader
+  try {
+    Thread.currentThread().contextClassLoader = this
+    run()
+  } finally {
+    Thread.currentThread().contextClassLoader = cl
+  }
+}
 
 /** Returns the file size in a human-readable format. */
 val File.displaySize
@@ -54,6 +84,15 @@ fun Long.byteDisplaySize(si: Boolean = true): String {
     }
   }
 }
+
+fun IntArray.codePointsToString(): String = buildString {
+  for (cp in this@codePointsToString) {
+    appendCodePoint(cp)
+  }
+}
+
+fun IntArray.codePointsToString(separator: String = "") =
+    joinToString(separator) { Character.toString(it) }
 
 /** Find the file ends with given [format] under the directory. */
 fun File.findPkg(format: String?) =

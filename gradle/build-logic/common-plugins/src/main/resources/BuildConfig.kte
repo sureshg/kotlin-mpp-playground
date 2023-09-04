@@ -11,6 +11,8 @@
 @param dependencies: List<String>
 @param gitCommit: Map<String, String>
 
+!{val add = { a:Int, b: Int -> @`${ a + b }` }}
+
 /* GENERATED, DO NOT EDIT MANUALLY! */
 @if(pkg.isNotBlank())package ${pkg}@endif
 
@@ -18,21 +20,23 @@ import kotlinx.datetime.*
 
 object ${className} {
 
-   val buildTimeEpochMillis = ${Clock.System.now().toEpochMilliseconds()}
+   const val addInts = ${add(100, 200)}
+
+   const val buildTimeEpochMillis = ${Clock.System.now().toEpochMilliseconds()}
 
    val buildTimeUTC = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.UTC)
 
    val buildTimeLocal = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.currentSystemDefault())
 
-   val buildUser = "${System.getProperty("user.name")}"
+   const val buildUser = "${System.getProperty("user.name")}"
 
-   val buildOS = "${System.getProperty("os.name")} ${System.getProperty("os.version")}-${System.getProperty("os.arch")}"
+   const val buildOS = "${System.getProperty("os.name")} ${System.getProperty("os.version")}-${System.getProperty("os.arch")}"
 
-   val buildHost = "${InetAddress.getLocalHost().hostName}"
+   const val buildHost = "${InetAddress.getLocalHost().hostName}"
 
-   val buildJdkVersion = "${System.getProperty("java.runtime.version")}"
+   const val buildJdkVersion = "${System.getProperty("java.runtime.version")}"
 
-   val buildJdkVendor = "${System.getProperty("java.vendor")}"
+   const val buildJdkVendor = "${System.getProperty("java.vendor")}"
 
    const val version = "${version}"
 

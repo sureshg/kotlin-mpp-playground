@@ -1,11 +1,12 @@
 package plugins
 
-import com.github.ajalt.mordant.rendering.TextColors
+import com.github.ajalt.mordant.rendering.TextColors.*
 import common.*
 import common.Platform
 import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.spi.*
+import org.gradle.api.publish.plugins.PublishingPlugin.*
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
 import tasks.*
@@ -20,7 +21,7 @@ plugins {
 
 if (hasCleanTask) {
   logger.warn(
-      TextColors.yellow(
+      yellow(
               """
       | CLEANING ALMOST NEVER FIXES YOUR BUILD!
       | Cleaning is often a last-ditch effort to fix perceived build problems that aren't going to
@@ -32,7 +33,9 @@ if (hasCleanTask) {
   )
 }
 
-afterEvaluate { logger.lifecycle(TextColors.magenta("=== Project Configuration Completed ===")) }
+afterEvaluate {}
+
+gradle.projectsEvaluated { logger.lifecycle(magenta("=== Projects Configuration Completed ===")) }
 
 idea {
   module {
@@ -150,17 +153,36 @@ tasks {
     }
   }
 
+  // Auto format all source files
+  processResources { dependsOn(":spotlessApply") }
+
   // Set GitHub workflow action output for this build
   build { finalizedBy(githubActionOutput) }
 
   val buildAndPublish by registering {
     dependsOn(subprojects.map { it.tasks.build })
+    // Starting with column(:) means root project tasks
     dependsOn(":dokkaHtmlMultiModule", ":koverHtmlReport")
 
-    val publish = GithubAction.isTagBuild && Platform.isLinux
-    if (publish) {
-      logger.lifecycle("Publishing task is enabled for this build!")
-      subprojects.mapNotNull { it.tasks.findByName(":publish") }.forEach { dependsOn(it) }
+    when {
+      // Publishing to all repos on GitHub Action tag build
+      GithubAction.isTagBuild && Platform.isLinux -> {
+        logger.lifecycle(magenta("Publishing to all repositories is enabled!"))
+        allprojects
+            .mapNotNull { it.tasks.findByName(PUBLISH_LIFECYCLE_TASK_NAME) }
+            .forEach { dependsOn(it) }
+      }
+
+      // Publish is disabled on GitHub Action PR build
+      GithubAction.isEnabled -> logger.lifecycle(red("Publishing is disabled!"))
+
+      // Publishing to local repo on other platforms
+      else -> {
+        logger.lifecycle(yellow("Publishing to local repo is enabled!"))
+        allprojects
+            .mapNotNull { it.tasks.findByName("publishAllPublicationsToMavenLocal") }
+            .forEach { dependsOn(it) }
+      }
     }
   }
 

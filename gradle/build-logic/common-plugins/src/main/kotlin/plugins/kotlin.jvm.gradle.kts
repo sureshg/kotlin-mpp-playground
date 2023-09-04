@@ -62,7 +62,10 @@ ksp {
   arg("autoserviceKsp.verbose", "true")
 }
 
-redacted { enabled = true }
+redacted {
+  enabled = true
+  replacementString = "█"
+}
 
 kover {
   // useJacoco()
@@ -142,9 +145,11 @@ dependencies {
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.atomicfu)
+  implementation(libs.kotlin.redacted.annotations)
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)
+
   // Test dependencies
   testImplementation(platform(libs.junit.bom))
   testImplementation(kotlin("test-junit5"))

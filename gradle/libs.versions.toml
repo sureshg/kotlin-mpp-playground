@@ -25,7 +25,7 @@ kotlinx-kover                  = "0.7.3"
 kotlinx-io                     = "0.2.1"
 kotlinx-atomicfu               = "0.22.0"
 kotlinx-coroutines             = "1.7.3"
-kotlinx-datetime               = "0.4.0"
+kotlinx-datetime               = "0.4.1"
 kotlinx-serialization          = "1.6.0"
 kotlinx-collections-immutable  = "0.3.5"
 kotlinx-lincheck               = "2.23"
@@ -33,7 +33,9 @@ kotlinx-html                   = "0.9.1"
 kotlinx-benchmark              = "0.4.9"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.13.2"
-kotlin-wrappers                = "1.0.0-pre.620"
+kotlin-wrappers                = "1.0.0-pre.623"
+kotlin-redacted                = "1.6.1"
+ksp-auto-service               = "1.1.0"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "2.1.0"
 ajalt-clikt                    = "4.1.0"
@@ -41,20 +43,19 @@ ajalt-colormath                = "3.3.2"
 compose-routing                = "0.2.12"
 classgraph                     = "4.8.161"
 cache4k                        = "0.11.0"
-dokka                          = "1.8.20"
+dokka                          = "1.9.0"
 intellij-coverage              = "1.0.733"
 intellij-markdown              = "0.5.0"
 jgit                           = "6.5.0.202303070854-r"
-jte                            = "3.0.3"
+jte                            = "3.1.0"
+jimfs                          = "1.3.0"
 junit                          = "5.10.0"
 koin                           = "3.4.1"
 kotest                         = "5.6.2"
 mockk                          = "1.13.7"
-mokkery                        = "1.9.0-1.3.0"
-ksp-auto-service               = "1.1.0"
-ksp-redacted                   = "1.6.0"
+mokkery                        = "1.9.10-1.3.0"
 powerassert                    = "0.13.0"
-slf4j                          = "2.0.7"
+slf4j                          = "2.0.9"
 logback                        = "1.4.8"
 log4j                          = "3.0.0-alpha1"
 jmh                            = "1.37"
@@ -82,7 +83,7 @@ parsus                         = "0.4.0"
 java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.1.0"
-ktor                           = "2.3.3"
+ktor                           = "2.3.4"
 ktor-cohort                    = "2.1.3"
 kobweb                         = "0.13.9"
 exposed                        = "0.41.1"
@@ -114,7 +115,7 @@ foojay-resolver                = "0.7.0"
 gradle-enterprise              = "3.14.1"
 nexus-publish                  = "2.0.0-rc-1"
 shadow                         = "8.1.1"
-spotless                       = "6.20.0"
+spotless                       = "6.21.0"
 semver-plugin                  = "0.5.0-rc.5"
 taskinfo                       = "2.1.0"
 dependency-analysis            = "1.21.0"
@@ -143,10 +144,11 @@ build-kotlin-allopen                 = { module = "org.jetbrains.kotlin:kotlin-a
 build-kotlinx-serialization          = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
 build-kotlinx-atomicfu               = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
 build-kotlinx-benchmark              = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
-build-dokka                          = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
+build-dokka-plugin                   = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
+build-dokka-base                     = { module = "org.jetbrains.dokka:dokka-base"                                  , version.ref = "dokka"}
 build-kotlin-ksp                     = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
 build-powerassert                    = { module = "com.bnorm.power:kotlin-power-assert-gradle"                      , version.ref = "powerassert"}
-build-ksp-redacted                   = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "ksp-redacted"}
+build-redacted-plugin                = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "kotlin-redacted"}
 build-benmanesversions               = { module = "com.github.ben-manes:gradle-versions-plugin"                     , version.ref = "benmanes"}
 build-gradle-enterprise              = { module = "com.gradle.enterprise:com.gradle.enterprise.gradle.plugin"       , version.ref = "gradle-enterprise" }
 build-jte-plugin                     = { module = "gg.jte:jte-gradle-plugin"                                        , version.ref = "jte"}
@@ -178,6 +180,7 @@ build-npm-publish-plugin             = { module = "dev.petuska:npm-publish-gradl
 build-exposed-plugin                 = { module = "gradle.plugin.com.jetbrains.exposed.gradle:plugin"               , version.ref = "exposed-plugin"}
 build-intellij-coverage              = { module = "org.jetbrains.intellij.deps:intellij-coverage-reporter"          , version.ref = "intellij-coverage" }
 build-github-changelog               = { module = "org.hildan.gradle:gradle-github-changelog"                       , version.ref = "github-changelog" }
+build-jimfs                          = { module = "com.google.jimfs:jimfs"                                          , version.ref = "jimfs" }
 
 # Gradle Dependencies
 kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                                 , version.ref = "kotlin"}
@@ -200,6 +203,7 @@ kotlinx-collections-immutable        = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-html                         = { module = "org.jetbrains.kotlinx:kotlinx-html"                              , version.ref = "kotlinx-html"}
 kotlinx-bench-runtime                = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-runtime"                 , version.ref = "kotlinx-benchmark"}
 kotlin-ksp-api                       = { module = "com.google.devtools.ksp:symbol-processing-api"                   , version.ref = "kotlin-ksp"}
+kotlin-redacted-annotations          = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-annotations"     , version.ref = "kotlin-redacted"}
 
 ktor-bom                             = { module = "io.ktor:ktor-bom"                                                , version.ref = "ktor"}
 ktor-serialization                   = { module = "io.ktor:ktor-serialization"                                      , version.ref = "ktor"}

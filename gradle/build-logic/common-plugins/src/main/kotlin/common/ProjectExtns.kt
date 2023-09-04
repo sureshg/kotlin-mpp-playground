@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Path
 import org.gradle.accessors.dm.LibrariesForLibs
+import org.gradle.api.Action
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -131,6 +132,7 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             "-XX:+UseZGC",
             "-XX:+ZGenerational",
             "-XX:+UseCompressedOops",
+            "-XX:+UseStringDeduplication",
             "-XX:+UnlockExperimentalVMOptions",
             // os+thread,gc+heap=trace,
             """-Xlog:cds,safepoint,gc*:
@@ -189,6 +191,7 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             // "-XshowSettings:system",
             // "-XshowSettings:properties",
             // "--show-module-resolution",
+            // "-XX:+UseCompactObjectHeaders",
             // "-XX:+ShowHiddenFrames",
             // "-XX:+AutoCreateSharedArchive",
             // "-XX:SharedArchiveFile=$tmp/$name.jsa"
@@ -613,10 +616,15 @@ fun Project.addFileToJavaComponent(file: File) {
 
 /** Lazy version of [TaskContainer.maybeCreate] */
 inline fun <reified T : Task> TaskContainer.maybeRegister(
-    taskName: String,
-    noinline configAction: T.() -> Unit
+    name: String,
+    action: Action<in T>? = null,
 ) =
-    when (taskName) {
-      in names -> named(taskName, T::class)
-      else -> register(taskName, T::class)
-    }.also { it.configure(configAction) }
+    when (name) {
+      // val taskCollection = withType<T>().matching { it.name == name }
+      in names -> named<T>(name = name)
+      else -> register<T>(name = name)
+    }.also {
+      if (action != null) {
+        it.configure(action)
+      }
+    }

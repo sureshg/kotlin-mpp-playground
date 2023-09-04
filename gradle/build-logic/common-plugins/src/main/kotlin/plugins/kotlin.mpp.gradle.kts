@@ -5,6 +5,7 @@ import common.*
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -98,7 +99,6 @@ kotlinMultiplatform.apply {
 
   // Disable wasm by default as some of the common dependencies are not compatible with wasm.
   if (project.hasProperty("experimental")) {
-
     wasm {
       binaries.executable()
       browser {
@@ -139,6 +139,7 @@ kotlinMultiplatform.apply {
         api(libs.kotlinx.atomicfu)
         api(libs.kotlinx.serialization.json)
         api(libs.kotlinx.collections.immutable)
+        api(libs.kotlin.redacted.annotations)
       }
     }
 
@@ -188,6 +189,7 @@ kotlinMultiplatform.apply {
       // kotlin.srcDir("src/main/kotlin")
       // resources.srcDir("src/main/resources")
     }
+
     val jsTest by getting
   }
 
@@ -206,7 +208,10 @@ atomicfu {
   jvmVariant = "VH"
 }
 
-redacted { enabled = true }
+redacted {
+  enabled = true
+  replacementString = "█"
+}
 
 kover {
   // useJacoco()
@@ -228,11 +233,13 @@ val commonJsResources by
     }
 
 tasks {
+  // Register buildConfig task only for common module
   if (project.name == commonProjectName) {
-    // Register buildConfig task only for common module
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
-    kotlinMultiplatform.sourceSets.named("${commonProjectName}Main") { kotlin.srcDirs(buildConfig) }
+    kotlinMultiplatform.sourceSets.named(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME) {
+      kotlin.srcDirs(buildConfig)
+    }
     // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
