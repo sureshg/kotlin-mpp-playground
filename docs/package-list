@@ -2,6 +2,8 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/processor/[root]/index.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
+$dokka.location://classFileApi/#/PointingToDeclaration/backend/[root]/class-file-api.html
+$dokka.location://getPid/#/PointingToDeclaration/backend/[root]/get-pid.html
 $dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/web/[root]/js-type-of.html
 $dokka.location://langFeatures/#/PointingToDeclaration/common/[root]/lang-features.html
 $dokka.location://main/#/PointingToDeclaration/web/[root]/main.html
