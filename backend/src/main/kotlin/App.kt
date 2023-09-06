@@ -1,6 +1,6 @@
-import dev.suresh.Greeting
-import dev.suresh.Lang
-import dev.suresh.platform
+import dev.suresh.*
+import java.lang.foreign.FunctionDescriptor
+import java.lang.foreign.ValueLayout
 import java.util.concurrent.StructuredTaskScope
 
 fun main() {
@@ -21,4 +21,25 @@ fun main() {
 
   langFeatures()
   stdlibFeatures()
+  classFileApi()
+  getPid()
+}
+
+fun classFileApi() {
+  //  val codeModel =
+  //      Classfile.of()
+  //          .parse(Class.forName("AppKt").toBytes())
+  //          .methods()
+  //          .filter { it.methodName().equalsString("main") }
+  //          .firstNotNullOfOrNull { it.code().getOrNull() }
+  //  codeModel?.elementList()?.forEach { println(it.toString()) }
+}
+
+fun getPid() {
+  val getpidAddr = SYMBOL_LOOKUP.findOrNull("getpid")
+  val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)
+  val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)
+  val pid = getpid.invokeExact() as Int
+  assert(pid.toLong() == ProcessHandle.current().pid())
+  println("getpid() = $pid")
 }

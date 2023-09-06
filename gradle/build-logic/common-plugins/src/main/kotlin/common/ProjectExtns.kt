@@ -122,6 +122,10 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
   val jvmArgs = libs.versions.java.jvmArguments.get().split(",", " ").filter { it.isNotBlank() }
   addAll(jvmArgs)
   add("--add-modules=$addModules")
+  // add("--add-opens=java.base/jdk.internal.classfile=ALL-UNNAMED")
+  // add("--add-opens=java.base/jdk.internal.classfile.constantpool=ALL-UNNAMED")
+  // add("--add-opens=java.base/jdk.internal.classfile.instruction=ALL-UNNAMED")
+  // 'java' arguments.
   if (forAppRun) {
     addAll(
         listOf(
