@@ -529,7 +529,7 @@ val Project.javaToolchainPath
     val jLauncher =
         when (defToolchain != null) {
           true -> javaToolchainSvc?.launcherFor(defToolchain)
-          else -> javaToolchainSvc?.launcherFor { languageVersion = toolchainVersion }
+          else -> javaToolchainSvc?.launcherFor { configureJvmToolchain() }
         }?.orNull
 
     return jLauncher?.metadata?.installationPath?.asFile?.toPath()

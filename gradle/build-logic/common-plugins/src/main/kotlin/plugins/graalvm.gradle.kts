@@ -37,6 +37,7 @@ graalvmNative {
       fallback = false
       verbose = debugEnabled
       quickBuild = quickBuildEnabled
+      richOutput = true
       buildArgs = buildList {
         add("--enable-preview")
         add("--native-image-info")
@@ -48,6 +49,7 @@ graalvmNative {
         add("-H:+ReportExceptionStackTraces")
         add("-EBUILD_NUMBER=${project.version}")
         add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
+        // add("-H:+UnlockExperimentalVMOptions")
         // add("-H:+AddAllCharsets")
         // add("-H:+IncludeAllLocales")
         // add("-H:+IncludeAllTimeZones")
@@ -109,8 +111,20 @@ graalvmNative {
 
       jvmArgs = jvmArguments()
       systemProperties = mapOf("java.awt.headless" to "false")
+      javaLauncher = javaToolchains.launcherFor { configureJvmToolchain() }
     }
   }
+
+  agent {
+    defaultMode = "standard"
+    enabled = true
+    metadataCopy {
+      inputTaskNames.add("run") // Tasks previously executed with the agent attached (test).
+      outputDirectories.add("src/main/resources/META-INF/native-image")
+      mergeWithExisting = true
+    }
+  }
+
   metadataRepository { enabled = true }
   toolchainDetection = false
 }
