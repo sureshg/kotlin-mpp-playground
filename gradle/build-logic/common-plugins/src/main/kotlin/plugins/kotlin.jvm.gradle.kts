@@ -88,11 +88,8 @@ tasks {
     // finalizedBy("spotlessApply")
   }
 
-  withType<JavaExec>().configureEach {
-    if (name != "run") {
-      jvmArgs(jvmArguments())
-    }
-  }
+  // Configure jvm args for JavaExec tasks except `run`
+  withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(jvmArguments()) }
 
   // configure jvm target for ksp
   withType(KspTaskJvm::class).all {
