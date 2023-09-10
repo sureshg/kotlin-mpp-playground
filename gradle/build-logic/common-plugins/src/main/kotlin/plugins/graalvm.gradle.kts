@@ -105,7 +105,7 @@ graalvmNative {
       resources {
         autodetection {
           enabled = true
-          restrictToProjectDependencies = false
+          restrictToProjectDependencies = true
         }
       }
 

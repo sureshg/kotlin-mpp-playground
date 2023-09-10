@@ -151,11 +151,11 @@ graph LR
     ksp
     processor
   end
+  benchmark --> common
   web --> common
   web --> common
   desktop --> common
   backend --> common
   web --> common
-  benchmark --> common
 
 ```

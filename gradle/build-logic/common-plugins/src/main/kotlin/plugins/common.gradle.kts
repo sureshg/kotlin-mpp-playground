@@ -180,7 +180,7 @@ tasks {
       else -> {
         logger.lifecycle(yellow("Publishing to local repo is enabled!"))
         allprojects
-            .mapNotNull { it.tasks.findByName("publishAllPublicationsToMavenLocal") }
+            .mapNotNull { it.tasks.findByName("publishAllPublicationsToLocalRepository") }
             .forEach { dependsOn(it) }
       }
     }

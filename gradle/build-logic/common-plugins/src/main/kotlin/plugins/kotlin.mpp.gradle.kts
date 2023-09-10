@@ -19,8 +19,8 @@ plugins {
   com.google.devtools.ksp
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
-  app.cash.molecule
   id("plugins.kotlin.docs")
+  // app.cash.molecule
   // dev.petuska.npm.publish
   // dev.mokkery
 }
@@ -32,7 +32,7 @@ apply(plugin = "org.jetbrains.kotlin.multiplatform")
 val kotlinMultiplatform = extensions.getByType<KotlinMultiplatformExtension>()
 
 kotlinMultiplatform.apply {
-  targetHierarchy.default()
+  applyDefaultHierarchyTemplate()
 
   jvmToolchain { configureJvmToolchain() }
   withSourcesJar(publish = true)
@@ -99,7 +99,7 @@ kotlinMultiplatform.apply {
 
   // Disable wasm by default as some of the common dependencies are not compatible with wasm.
   if (project.hasProperty("experimental")) {
-    wasm {
+    wasmJs {
       binaries.executable()
       browser {
         commonWebpackConfig(
