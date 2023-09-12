@@ -2,6 +2,7 @@ package plugins
 
 import com.google.devtools.ksp.gradle.KspTaskJvm
 import common.*
+import java.util.jar.Attributes
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
@@ -15,6 +16,7 @@ import tasks.BuildConfigExtension
 
 plugins {
   java
+  `kotlin-multiplatform`
   `kotlinx-serialization`
   com.google.devtools.ksp
   `kotlinx-atomicfu`
@@ -25,15 +27,8 @@ plugins {
   // dev.mokkery
 }
 
-// Workaround for "The root project is not yet available for build" error.
-// https://slack-chats.kotlinlang.org/t/8236845/does-anybody-use-composite-builds-build-logic-with-applying-
-apply(plugin = "org.jetbrains.kotlin.multiplatform")
-
-val kotlinMultiplatform = extensions.getByType<KotlinMultiplatformExtension>()
-
-kotlinMultiplatform.apply {
-  applyDefaultHierarchyTemplate()
-
+kotlin {
+  // applyDefaultHierarchyTemplate()
   jvmToolchain { configureJvmToolchain() }
   withSourcesJar(publish = true)
 
@@ -76,18 +71,16 @@ kotlinMultiplatform.apply {
     // binaries.library()
 
     browser {
-      commonWebpackConfig(
-          Action {
-            // outputFileName = "app.js"
-            cssSupport { enabled = true }
-          })
+      commonWebpackConfig {
+        // outputFileName = "app.js"
+        cssSupport { enabled = true }
+      }
 
-      testTask(
-          Action {
-            enabled = true
-            testLogging { configureLogEvents() }
-            useKarma { useChromeHeadless() }
-          })
+      testTask {
+        enabled = true
+        testLogging { configureLogEvents() }
+        useKarma { useChromeHeadless() }
+      }
 
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
@@ -102,12 +95,11 @@ kotlinMultiplatform.apply {
     wasmJs {
       binaries.executable()
       browser {
-        commonWebpackConfig(
-            Action {
-              devServer =
-                  (devServer ?: KotlinWebpackConfig.DevServer()).copy(
-                      open = mapOf("app" to mapOf("name" to "google chrome")))
-            })
+        commonWebpackConfig {
+          devServer =
+              (devServer ?: KotlinWebpackConfig.DevServer()).copy(
+                  open = mapOf("app" to mapOf("name" to "google chrome")))
+        }
       }
     }
 
@@ -120,8 +112,7 @@ kotlinMultiplatform.apply {
     }
   }
 
-  @Suppress("UNUSED_VARIABLE")
-  this.sourceSets {
+  sourceSets {
     all {
       languageSettings { configureKotlinLang() }
       // Apply multiplatform library bom to all source sets
@@ -140,6 +131,7 @@ kotlinMultiplatform.apply {
         api(libs.kotlinx.serialization.json)
         api(libs.kotlinx.collections.immutable)
         api(libs.kotlin.redacted.annotations)
+        api(libs.parsus)
       }
     }
 
@@ -237,7 +229,7 @@ tasks {
   if (project.name == commonProjectName) {
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
-    kotlinMultiplatform.sourceSets.named(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME) {
+    kotlin.sourceSets.named(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME) {
       kotlin.srcDirs(buildConfig)
     }
     // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
@@ -252,6 +244,19 @@ tasks {
   withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
 
   withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
+
+  withType<Jar>().configureEach {
+    manifest {
+      attributes(
+          "Automatic-Module-Name" to project.group,
+          "Built-By" to System.getProperty("user.name"),
+          "Built-JDK" to System.getProperty("java.runtime.version"),
+          Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
+          Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
+      )
+    }
+    duplicatesStrategy = DuplicatesStrategy.WARN
+  }
 
   // Copy the js app to jvm resource
   named<Copy>("jvmProcessResources") {
@@ -277,18 +282,18 @@ dependencies {
   // add("kspJvm", project(":ksp-processor"))
 }
 
-// A workaround to initialize Node.js and Yarn extensions only once in a multimodule
+// A workaround to initialize Node.js and Yarn extensions only once in a multi-module
 // project by setting extra properties on a root project from a subproject.
 // https://docs.gradle.org/current/userguide/kotlin_dsl.html#extra_properties
-var isNodeJSConfigured: String? by rootProject.extra
+var nodeExtnConfigured: String? by rootProject.extra
 
-if (!isNodeJSConfigured.toBoolean()) {
+if (!nodeExtnConfigured.toBoolean()) {
   // https://kotlinlang.org/docs/js-project-setup.html#use-pre-installed-node-js
   rootProject.plugins.withType<NodeJsRootPlugin> {
     rootProject.extensions.configure<NodeJsRootExtension> {
       download = true
-      isNodeJSConfigured = "true"
       nodeVersion = libs.versions.node.version.get()
+      nodeExtnConfigured = "true"
       // nodeDownloadBaseUrl = "https://nodejs.org/download/v8-canary"
     }
   }
@@ -298,10 +303,9 @@ if (!isNodeJSConfigured.toBoolean()) {
     rootProject.extensions.configure<YarnRootExtension> {
       download = true
       lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
-      isNodeJSConfigured = "true"
-
       yarnLockMismatchReport = YarnLockMismatchReport.WARNING
       yarnLockAutoReplace = false
+      nodeExtnConfigured = "true"
     }
   }
 }
@@ -310,8 +314,8 @@ fun Project.addKspDependencyForAllTargets(
     dependencyNotation: Any,
     configurationNameSuffix: String = ""
 ) {
-  val kotlinMultiplatform = extensions.getByType<KotlinMultiplatformExtension>()
-  kotlinMultiplatform.targets
+  // val kotlin = extensions.getByType<KotlinMultiplatformExtension>()
+  kotlin.targets
       .filter { target ->
         // Don't add KSP for common target, only final platforms
         target.platformType != KotlinPlatformType.common
