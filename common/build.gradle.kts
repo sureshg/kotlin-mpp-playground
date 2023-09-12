@@ -35,14 +35,22 @@ dependencies {
   commonMainApi(libs.intellij.markdown)
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
+  commonMainApi(libs.parsus)
   commonTestApi(libs.ktor.client.mock)
 
+  // JVM specific dependencies
+  jvmMainApi(libs.ktor.client.java)
   jvmMainApi(libs.kotlin.retry)
-  // jvmMainImplementation(libs.slf4j.api)
+  // jvmMainApi(libs.logback.classic)
+
+  // JS specific dependencies
+  jsMainApi(libs.ktor.client.js)
+  jsMainApi(libs.kotlinx.html)
 }
 
-// kotlin.sourceSets.commonMain {
-//    dependencies {
-//        implementation(libs.kotlinx.io.core)
-//    }
-// }
+// Another way to add dependencies to commonMain
+kotlin.sourceSets.commonMain {
+  dependencies {
+    // implementation(libs.kotlinx.io.core)
+  }
+}

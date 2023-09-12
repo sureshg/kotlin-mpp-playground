@@ -126,6 +126,7 @@ github-changelog               = "2.0.0"
 wire-plugin                    = "4.8.0"
 poko-plugin                    = "0.14.0"
 buildkonfig                    = "0.13.3"
+akkurate                       = "0.1.0"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.7.4"
 modulegraph                    = "0.4.0"
@@ -227,14 +228,12 @@ ktor-server-default-headers          = { module = "io.ktor:ktor-server-default-h
 ktor-server-status-pages             = { module = "io.ktor:ktor-server-status-pages"                                , version.ref = "ktor"}
 ktor-server-auto-head                = { module = "io.ktor:ktor-server-auto-head-response"                          , version.ref = "ktor"}
 ktor-server-forwarded-header         = { module = "io.ktor:ktor-server-forwarded-header"                            , version.ref = "ktor"}
-
 ktor-serialization-json              = { module = "io.ktor:ktor-serialization-kotlinx-json"                         , version.ref = "ktor"}
-ktor-cohort-core                     = { module = "com.sksamuel.cohort:cohort-core"                                 , version.ref = "ktor-cohort"}
-ktor-cohort-hikari                   = { module = "com.sksamuel.cohort:cohort-hikari"                               , version.ref = "ktor-cohort"}
 
 ktor-client-core                     = { module = "io.ktor:ktor-client-core"                                   , version.ref = "ktor"}
 ktor-client-cio                      = { module = "io.ktor:ktor-client-cio"                                    , version.ref = "ktor"}
 ktor-client-java                     = { module = "io.ktor:ktor-client-java"                                   , version.ref = "ktor"}
+ktor-client-js                       = { module = "io.ktor:ktor-client-js"                                     , version.ref = "ktor"}
 ktor-client-okhttp                   = { module = "io.ktor:ktor-client-okhttp"                                 , version.ref = "ktor"}
 ktor-client-jetty                    = { module = "io.ktor:ktor-client-jetty"                                  , version.ref = "ktor"}
 ktor-client-serialization            = { module = "io.ktor:ktor-client-serialization"                          , version.ref = "ktor"}
@@ -246,6 +245,8 @@ ktor-client-resources                = { module = "io.ktor:ktor-client-resources
 ktor-client-encoding                 = { module = "io.ktor:ktor-client-encoding"                               , version.ref = "ktor"}
 ktor-client-mock                     = { module = "io.ktor:ktor-client-mock"                                   , version.ref = "ktor"}
 
+ktor-cohort-core                     = { module = "com.sksamuel.cohort:cohort-core"                                 , version.ref = "ktor-cohort"}
+ktor-cohort-hikari                   = { module = "com.sksamuel.cohort:cohort-hikari"                               , version.ref = "ktor-cohort"}
 rsocket-ktor-client                  = { module = "io.rsocket.kotlin:rsocket-ktor-client"                      , version.ref = "rsocket"}
 rsocket-ktor-server                  = { module = "io.rsocket.kotlin:rsocket-ktor-server"                      , version.ref = "rsocket"}
 uri-kmp                              = { module = "com.eygraber:uri-kmp"                                       , version.ref = "uri-kmp"}
@@ -282,6 +283,9 @@ cash-turbine                         = { module = "app.cash.turbine:turbine"    
 store5                               = { module = "org.mobilenativefoundation.store:store5"                    , version.ref = "kmp-store5" }
 parsus                               = { module = "me.alllex.parsus:parsus"                                    , version.ref = "parsus" }
 cache4k                              = { module = "io.github.reactivecircus.cache4k:cache4k"                   , version.ref = "cache4k" }
+
+akkurate-core                        = { module = "dev.nesk.akkurate:akkurate-core"                              , version.ref = "akkurate"}
+akkurate-ksp-plugin                  = { module = "dev.nesk.akkurate:akkurate-ksp-plugin"                        , version.ref = "akkurate"}
 
 ajalt-mordant                        = { module = "com.github.ajalt.mordant:mordant"                           , version.ref = "ajalt-mordant"}
 ajalt-colormath                      = { module = "com.github.ajalt.colormath:colormath"                       , version.ref = "ajalt-colormath"}

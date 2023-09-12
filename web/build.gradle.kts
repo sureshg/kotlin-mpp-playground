@@ -29,7 +29,6 @@ dependencies {
       project(path = ":$commonProjectName", configuration = configurations.commonJsResources.name))
 
   commonMainImplementation(projects.common)
-  jsMainImplementation(libs.kotlinx.html)
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
   // jsMainImplementation(npm("kotlin-playground", libs.versions.npm.kotlin.playground.get()))
   // jsMainImplementation(npm("xterm", libs.versions.npm.xtermjs.get()))

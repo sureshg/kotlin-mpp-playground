@@ -131,7 +131,6 @@ kotlin {
         api(libs.kotlinx.serialization.json)
         api(libs.kotlinx.collections.immutable)
         api(libs.kotlin.redacted.annotations)
-        api(libs.parsus)
       }
     }
 
