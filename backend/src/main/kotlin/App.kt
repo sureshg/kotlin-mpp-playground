@@ -14,7 +14,7 @@ fun main() {
   }
 
   StructuredTaskScope.ShutdownOnFailure().use {
-    val task = it.fork { "Virtual thread on ${Lang("Kotlin")} $platform !" }
+    val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform().name} !" }
     it.join().throwIfFailed()
     println(task.get())
   }

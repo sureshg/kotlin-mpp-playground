@@ -18,6 +18,7 @@ application {
 
 dependencies {
   implementation(projects.common)
+  implementation(libs.logback.classic)
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })
 }

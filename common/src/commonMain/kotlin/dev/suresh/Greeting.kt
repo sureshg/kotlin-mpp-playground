@@ -1,6 +1,5 @@
 package dev.suresh
 
-import BuildConfig
 import dev.zacsweers.redacted.annotations.Redacted
 import kotlinx.datetime.Clock
 import kotlinx.datetime.TimeZone
@@ -20,25 +19,11 @@ class Greeting {
     ignoreUnknownKeys = true
   }
 
-  fun greeting() =
-      """
-      | Platform          : Kotlin $platform
-      | Build Time        : ${BuildConfig.buildTimeLocal}
-      | Build Version     : ${BuildConfig.version}
-      | Build OS          : ${BuildConfig.buildOS}
-      | Build User        : ${BuildConfig.buildUser}
-      | Build Host        : ${BuildConfig.buildHost}
-      | Build JDK         : ${BuildConfig.buildJdkVersion}
-      | Java Version      : ${BuildConfig.java}
-      | Kotlin Version    : ${KotlinVersion.CURRENT}
-      | Gradle Version    : ${BuildConfig.gradle}
-      | Git Hash          : ${BuildConfig.gitHash}
-      | Git Message       : ${BuildConfig.gitMessage}
-      | Git Tag           : ${BuildConfig.gitTags}
-      | ${KData("Foo", 20, "test")}
-      | ${kotlinxTests()}
-      """
-          .trimMargin()
+  fun greeting() = buildString {
+    platform().buildInfo.forEach { (k, v) -> appendLine("$k : $v") }
+    appendLine(KData("Foo", 20, "test"))
+    appendLine(kotlinxTests())
+  }
 
   private fun kotlinxTests(): String {
     val ba = "Kotlinx".encodeToByteArray()

@@ -131,14 +131,23 @@ kotlin {
         api(libs.kotlinx.serialization.json)
         api(libs.kotlinx.collections.immutable)
         api(libs.kotlin.redacted.annotations)
+        api(libs.kotlinx.io.core)
+        api(libs.ktor.client.core)
+        api(libs.ktor.client.content.negotiation)
+        api(libs.ktor.client.encoding)
+        api(libs.ktor.client.logging)
+        api(libs.ktor.client.resources)
+        api(libs.ktor.client.auth)
+        api(libs.ktor.serialization.json)
       }
     }
 
     val commonTest by getting {
       dependencies {
-        implementation(kotlin("test"))
-        implementation(libs.kotlinx.coroutines.test)
-        implementation(libs.cash.turbine)
+        api(kotlin("test"))
+        api(libs.kotlinx.coroutines.test)
+        api(libs.cash.turbine)
+        api(libs.ktor.client.mock)
       }
     }
 
@@ -152,10 +161,12 @@ kotlin {
     val jvmMain by getting {
       // dependsOn(jvmCommon)
       dependencies {
-        implementation(libs.kotlin.stdlib.jdk8)
-        implementation(libs.kotlin.reflect)
-        implementation(libs.google.auto.annotations)
-        implementation(libs.slf4j.api)
+        api(libs.kotlin.stdlib.jdk8)
+        api(libs.kotlin.reflect)
+        api(libs.google.auto.annotations)
+        api(libs.slf4j.api)
+        api(libs.ktor.client.java)
+        api(libs.kotlin.retry)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         kspDependency("jvm", libs.ksp.auto.service)
       }
@@ -172,7 +183,10 @@ kotlin {
 
     val jsMain by getting {
       dependencies {
-        implementation(kotlinw("browser"))
+        api(libs.kotlinx.html)
+        api(libs.ktor.client.js)
+        api(kotlinw("browser"))
+        // implementation(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
         // kspDependency("CommonMainMetadata", project(":meta:ksp:processor"))
         // kspDependency("Js", project(":meta:ksp:processor"))
       }

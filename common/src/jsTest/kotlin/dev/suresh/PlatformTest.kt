@@ -7,6 +7,6 @@ class PlatformTest {
 
   @Test
   fun greetings() {
-    assertTrue(Greeting().greeting().contains("js"), "Check js is mentioned")
+    assertTrue(Greeting().greeting().contains("JS"), "Check js is mentioned")
   }
 }

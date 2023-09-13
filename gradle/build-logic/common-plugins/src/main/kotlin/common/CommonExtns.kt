@@ -1,6 +1,7 @@
 package common
 
 import java.io.File
+import java.lang.reflect.Proxy
 import java.nio.file.FileSystems
 import java.nio.file.Files
 import java.nio.file.Path
@@ -48,6 +49,13 @@ fun ClassLoader.using(run: () -> Unit) {
     Thread.currentThread().contextClassLoader = cl
   }
 }
+
+/** Return a mock object for the type, which throws exception for all method invocations. */
+inline fun <reified T> mock() =
+    Proxy.newProxyInstance(T::class.java.classLoader, arrayOf(T::class.java)) { _, _, _ ->
+      TODO()
+      // InvocationHandler.invokeDefault(proxy, method, args)
+    } as T
 
 /** Returns the file size in a human-readable format. */
 val File.displaySize

@@ -35,10 +35,5 @@ dependencies {
   // jsMainImplementation(npm("vega-lite", libs.versions.npm.vega.lite.get()))
 }
 
-// kotlin.sourceSets.jsMain.configure {
-//  println(implementationConfigurationName)
-//  dependencies { implementation(projects.common) }
-// }
-
 // List all jsMain dependencies
 // configurations.jsMainImplementation.get().allDependencies.forEach { println(it.name) }
