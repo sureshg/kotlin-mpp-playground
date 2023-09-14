@@ -98,7 +98,7 @@ gradleEnterprise {
     termsOfServiceUrl = "https://gradle.com/terms-of-service"
     termsOfServiceAgree = "yes"
 
-    capture { isTaskInputFiles = true }
+    capture { isTaskInputFiles = false }
 
     obfuscation { ipAddresses { addresses -> addresses.map { _ -> "0.0.0.0" } } }
 
