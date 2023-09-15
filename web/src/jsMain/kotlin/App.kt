@@ -1,4 +1,5 @@
 import dev.suresh.Greeting
+import dev.suresh.flow.timerComposeFlow
 import js.promise.await
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
@@ -6,6 +7,7 @@ import kotlinx.browser.document
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.dom.appendText
 import kotlinx.html.div
@@ -42,11 +44,11 @@ suspend fun main() {
   // val promise = Promise.resolve("Promise")
   // root.appendText(promise.await())
 
-  // mainScope.launch {
-  //   println("Starting the timer...")
-  //   val timer = document.getElementById("timer") as HTMLDivElement
-  //   timerComposeFlow().collectLatest { time -> timer.innerText = time.toString() }
-  // }
+  mainScope.launch {
+    println("Starting the timer...")
+    val timer = document.getElementById("timer") as HTMLDivElement
+    timerComposeFlow().collectLatest { timer.innerText = it.toString() }
+  }
 
   topLevelJsFun()
   runCoroutines()

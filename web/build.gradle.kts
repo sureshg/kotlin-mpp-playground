@@ -26,7 +26,10 @@ tasks {
 
 dependencies {
   commonWebResources(
-      project(path = ":$commonProjectName", configuration = configurations.commonJsResources.name))
+      project(
+          path = ":$commonProjectName",
+          // Configuration is defined in common module
+          configuration = configurations.commonJsResources.name))
 
   commonMainImplementation(projects.common)
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))

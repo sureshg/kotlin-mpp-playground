@@ -42,17 +42,20 @@ $ ./gradlew publishAllPublicationsToLocalRepository
 # Benchmark
 $ ./gradlew :benchmark:benchmark
 
-# Dependency Graph
-$ ./gradlew :backend:listResolvedArtifacts
-$ ./gradlew createModuleGraph
-
-# Misc
-$ ./gradlew checkBuildLogicBestPractices
-$ ./gradlew generateChangelog
-$ ./gradlew cleanAll
-
 # Upgrade yarn lock file
 $ ./gradlew kotlinUpgradeYarnLock
+
+# Dependencies
+$ ./gradlew :backend:listResolvedArtifacts
+$ ./gradlew createModuleGraph
+$ ./gradlew generateChangelog
+
+# Clean
+$ ./gradlew cleanAll
+
+# Gradle Best Practices
+$ ./gradlew -p gradle/build-logic :common-plugins:bestPracticesBaseline
+$ ./gradlew checkBuildLogicBestPractices
 
 # GitHub Actions lint
 $ actionlint
@@ -128,34 +131,32 @@ $ actionlint
     'theme': 'neutral'
   }
 }%%
-
 graph LR
-
-  subgraph compose
-    desktop
-    web
-  end
-  subgraph dep-mgmt
-    bom
-    catalog
-  end
-  subgraph meta
-    compiler
-    ksp
-  end
-  subgraph compiler
-    compiler
-    plugin
-  end
-  subgraph ksp
-    ksp
-    processor
-  end
-  benchmark --> common
-  web --> common
-  web --> common
-  desktop --> common
-  backend --> common
-  web --> common
+    subgraph compose
+        desktop
+        web
+    end
+    subgraph dep-mgmt
+        bom
+        catalog
+    end
+    subgraph meta
+        compiler
+        ksp
+    end
+    subgraph compiler
+        compiler
+        plugin
+    end
+    subgraph ksp
+        ksp
+        processor
+    end
+    benchmark --> common
+    web --> common
+    web --> common
+    desktop --> common
+    backend --> common
+    web --> common
 
 ```

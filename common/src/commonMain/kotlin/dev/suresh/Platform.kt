@@ -44,4 +44,6 @@ interface Platform {
               "Git Message" to gitMessage,
               "Git Tag" to gitTags)
         }
+
+  fun env(key: String): String? = null
 }

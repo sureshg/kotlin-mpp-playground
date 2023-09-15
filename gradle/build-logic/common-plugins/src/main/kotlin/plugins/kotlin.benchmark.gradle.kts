@@ -44,9 +44,7 @@ benchmark {
 
 val kotlin = the<KotlinMultiplatformExtension>()
 
-kotlin.sourceSets.named("commonMain") {
-  dependencies { implementation(libs.kotlinx.bench.runtime) }
-}
+kotlin.sourceSets.commonMain { dependencies { implementation(libs.kotlinx.bench.runtime) } }
 
 tasks {
   // withType<JmhBytecodeGeneratorTask> { }

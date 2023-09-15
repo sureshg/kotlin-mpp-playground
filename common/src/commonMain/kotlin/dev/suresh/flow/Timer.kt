@@ -1,10 +1,14 @@
 package dev.suresh.flow
-//
+
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
+import kotlinx.datetime.Clock
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
+
 // import androidx.compose.runtime.*
 // import app.cash.molecule.RecompositionMode
 // import app.cash.molecule.moleculeFlow
-// import kotlinx.coroutines.delay
-// import kotlinx.datetime.*
 //
 // @Composable
 // fun timer(tz: TimeZone): LocalDateTime {
@@ -18,7 +22,14 @@ package dev.suresh.flow
 //   return time
 // }
 //
-// private fun currentTime(tz: TimeZone) = Clock.System.now().toLocalDateTime(tz)
-//
 // fun timerComposeFlow(tz: TimeZone = TimeZone.currentSystemDefault()) =
 //     moleculeFlow(RecompositionMode.Immediate) { timer(tz) }
+
+private fun currentTime(tz: TimeZone) = Clock.System.now().toLocalDateTime(tz)
+
+fun timerComposeFlow(tz: TimeZone = TimeZone.currentSystemDefault()) = flow {
+  while (true) {
+    delay(1000)
+    emit(currentTime(tz))
+  }
+}

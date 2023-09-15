@@ -31,4 +31,6 @@ object JvmPlatform : Platform {
     log.info("Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...")
     Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
   }
+
+  override fun env(key: String): String? = System.getenv(key)
 }

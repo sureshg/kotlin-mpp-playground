@@ -6,7 +6,6 @@ import java.util.jar.Attributes
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -69,7 +68,6 @@ kotlin {
     useEsModules()
     binaries.executable()
     // binaries.library()
-
     browser {
       commonWebpackConfig {
         // outputFileName = "app.js"
@@ -84,13 +82,11 @@ kotlin {
 
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
-
     compilations.configureEach { kotlinOptions { configureKotlinJs() } }
-
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 
-  // Disable wasm by default as some of the common dependencies are not compatible with wasm.
+  // Wasm and native targets are experimental.
   if (project.hasProperty("experimental")) {
     wasmJs {
       binaries.executable()
@@ -123,7 +119,7 @@ kotlin {
       }
     }
 
-    val commonMain by getting {
+    commonMain {
       dependencies {
         api(libs.kotlinx.coroutines.core)
         api(libs.kotlinx.datetime)
@@ -142,7 +138,7 @@ kotlin {
       }
     }
 
-    val commonTest by getting {
+    commonTest {
       dependencies {
         api(kotlin("test"))
         api(libs.kotlinx.coroutines.test)
@@ -157,22 +153,26 @@ kotlin {
     //     implementation(..)
     //   }
     // }
+    //
+    // targets["jvm"].compilations["main"].defaultSourceSet {
+    //   dependsOn(jvmCommon)
+    // }
 
-    val jvmMain by getting {
+    jvmMain {
       // dependsOn(jvmCommon)
       dependencies {
         api(libs.kotlin.stdlib.jdk8)
         api(libs.kotlin.reflect)
         api(libs.google.auto.annotations)
-        api(libs.slf4j.api)
         api(libs.ktor.client.java)
         api(libs.kotlin.retry)
+        api(libs.slf4j.api)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         kspDependency("jvm", libs.ksp.auto.service)
       }
     }
 
-    val jvmTest by getting {
+    jvmTest {
       dependencies {
         implementation(project.dependencies.platform(libs.junit.bom))
         implementation(kotlin("test-junit5"))
@@ -181,7 +181,7 @@ kotlin {
       }
     }
 
-    val jsMain by getting {
+    jsMain {
       dependencies {
         api(libs.kotlinx.html)
         api(libs.ktor.client.js)
@@ -195,7 +195,7 @@ kotlin {
       // resources.srcDir("src/main/resources")
     }
 
-    val jsTest by getting
+    jsTest { kotlin {} }
   }
 
   // kotlinDaemonJvmArgs = jvmArguments
@@ -242,14 +242,12 @@ tasks {
   if (project.name == commonProjectName) {
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
-    kotlin.sourceSets.named(KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME) {
-      kotlin.srcDirs(buildConfig)
-    }
+    kotlin.sourceSets.commonMain { kotlin.srcDirs(buildConfig) }
     // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
   // configure jvm target for ksp
-  withType(KspTaskJvm::class).all {
+  withType<KspTaskJvm>().all {
     compilerOptions { configureKotlinJvm() }
     jvmTargetValidationMode = JvmTargetValidationMode.WARNING
   }
