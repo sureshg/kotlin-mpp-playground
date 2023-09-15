@@ -3,9 +3,9 @@
 #### Run the `Gradle Best Practices` plugin on the build logic:
 
 ```bash
+$ ./gradlew -p gradle/build-logic :common-plugins:bestPracticesBaseline
 $ ./gradlew checkBuildLogicBestPractices
-# OR
-$ ./gradlew -p gradle/build-logic checkBestPractices
+# ./gradlew -p gradle/build-logic checkBestPractices
 ```
 
 #### Submit Dependency Graph to [Github Dependabot](https://github.com/gradle/github-dependency-graph-gradle-plugin)
