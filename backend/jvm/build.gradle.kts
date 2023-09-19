@@ -7,7 +7,7 @@ plugins {
   application
 }
 
-description = "Ktor backend application"
+description = "Ktor backend jvm application"
 
 mppTargetName = "jvm"
 
