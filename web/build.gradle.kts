@@ -1,5 +1,3 @@
-import common.commonProjectName
-
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
@@ -25,11 +23,10 @@ tasks {
 }
 
 dependencies {
-  commonWebResources(
-      project(
-          path = ":$commonProjectName",
-          // Configuration is defined in common module
-          configuration = configurations.commonJsResources.name))
+  // commonWebResources(project(
+  //      path = ":${projects.common.name}",
+  //      configuration =configurations.commonJsResources.name,
+  //      ))
 
   commonMainImplementation(projects.common)
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
