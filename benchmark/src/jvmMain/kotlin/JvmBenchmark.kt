@@ -4,7 +4,7 @@ import java.util.concurrent.TimeUnit
 import jdk.incubator.vector.LongVector
 import org.openjdk.jmh.annotations.*
 
-const val WARMUP_ITERATIONS = 20
+const val WARMUP_ITERATIONS = 5
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
