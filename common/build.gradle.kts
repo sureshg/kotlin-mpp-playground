@@ -14,12 +14,10 @@ application {
   applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
 }
 
-buildConfig {
-  version = project.version.toString()
-  catalogVersions = project.versionCatalogMapOf()
-}
+buildConfig { catalogVersions = project.versionCatalogMapOf() }
 
 dependencies {
+  commonMainApi(libs.arrow.suspendapp)
   commonMainApi(libs.uri.kmp)
   commonMainApi(libs.ajalt.colormath)
   commonMainApi(libs.benasher44.uuid)
@@ -30,10 +28,18 @@ dependencies {
   // jvmMainApi(libs.logback.classic)
 }
 
-// Another way to add dependencies to commonMain
-kotlin.sourceSets.commonMain {
-  // println(implementationConfigurationName)
-  dependencies {
-    // implementation(libs.kotlinx.io.core)
-  }
-}
+// Expose common js resource as configuration to be consumed by other projects
+// https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
+// val commonJsResources by
+//     configurations.creating {
+//       isCanBeConsumed = true
+//       isCanBeResolved = false
+//       attributes { attribute(Attribute.of("commonJSResources", String::class.java), "true") }
+//       attributes {
+//         attribute(
+//             Attribute.of(KotlinPlatformTypeAttribute.uniqueName, String::class.java),
+//             KotlinPlatformTypeAttribute.JS)
+//       }
+//     }
+//
+// artifacts { add(commonJsResources.name, tasks.jsProcessResources) }

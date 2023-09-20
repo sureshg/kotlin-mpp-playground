@@ -16,7 +16,9 @@ object JvmPlatform : Platform {
 
   override val name: String = "JVM"
 
-  override val javaRuntimeVersion: String = System.getProperty("java.runtime.version")
+  override fun env(key: String, def: String?): String? = System.getenv(key) ?: def
+
+  override fun sysProp(key: String, def: String?): String? = System.getProperty(key, def)
 
   override val tzShortId: String
     get() {
@@ -32,5 +34,13 @@ object JvmPlatform : Platform {
     Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
   }
 
-  override fun env(key: String): String? = System.getenv(key)
+  override val osInfo: Map<String, String?>
+    get() =
+        super.osInfo +
+            mapOf(
+                "name" to sysProp("os.name"),
+                "version" to sysProp("os.version"),
+                "arch" to sysProp("os.arch"),
+                "user" to sysProp("user.name"),
+            )
 }

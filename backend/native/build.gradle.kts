@@ -11,9 +11,7 @@ description = "Ktor native application"
 
 kotlin {
   // Remove all the pre-configured targets except common
-  //  targets .filter { it.platformType != KotlinPlatformType.common }.forEach {
-  //        targets.remove(it)
-  // }
+  // targets.filter { it.platformType != KotlinPlatformType.common }.forEach { targets.remove(it) }
 
   macosArm64 {
     binaries { executable(listOf(DEBUG, RELEASE)) { entryPoint = "main" } }

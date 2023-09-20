@@ -51,36 +51,74 @@ plugins {
 dependencyResolutionManagement {
   repositories {
     mavenCentral()
+    kotlinNative()
     nodeJS()
     yarn()
-    // mavenSnapshot()
+    // sonatypeSnapshots()
     // composeMultiplatformDev()
   }
   repositoriesMode = RepositoriesMode.PREFER_SETTINGS
 }
 
+// Workaround for https://youtrack.jetbrains.com/issue/KT-51379
+fun RepositoryHandler.kotlinNative() {
+  exclusiveContent {
+    forRepository {
+      ivy(Repo.KOTLIN_NATIVE) {
+        name = "Kotlin Native"
+        patternLayout {
+          // Download URLs:
+          // https://download.jetbrains.com/kotlin/native/builds/releases/1.9.20/macos-aarch64/kotlin-native-prebuilt-macos-aarch64-1.9.20.tar.gz
+          listOf(
+                  "macos-x86_64",
+                  "macos-aarch64",
+                  "linux-x86_64",
+                  "windows-x86_64",
+              )
+              .forEach { os ->
+                listOf("dev", "releases").forEach { stage ->
+                  artifact("$stage/[revision]/$os/[artifact]-[revision].[ext]")
+                }
+              }
+        }
+        metadataSources { artifact() }
+      }
+    }
+    filter { includeModuleByRegex(".*", ".*kotlin-native-prebuilt.*") }
+  }
+}
+
 fun RepositoryHandler.nodeJS() {
-  // Fix for https://youtrack.jetbrains.com/issue/KT-56300
-  ivy(Repo.NODEJS) {
-    name = "Node.js Distributions"
-    patternLayout { artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
-    metadataSources { artifact() }
-    content { includeModule("org.nodejs", "node") }
+  exclusiveContent {
+    forRepository {
+      ivy(Repo.NODEJS) {
+        name = "Node Distributions at $url"
+        patternLayout { artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
+        metadataSources { artifact() }
+        content { includeModule("org.nodejs", "node") }
+      }
+    }
+    filter { includeGroup("org.nodejs") }
   }
 }
 
 fun RepositoryHandler.yarn() {
-  ivy(Repo.YARN) {
-    name = "Yarn Distributions"
-    patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
-    metadataSources { artifact() }
-    content { includeModule("com.yarnpkg", "yarn") }
+  exclusiveContent {
+    forRepository {
+      ivy(Repo.YARN) {
+        name = "Yarn Distributions at $url"
+        patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
+        metadataSources { artifact() }
+        content { includeModule("com.yarnpkg", "yarn") }
+      }
+    }
+    filter { includeGroup("com.yarnpkg") }
   }
 }
 
-fun RepositoryHandler.mavenSnapshot() {
-  maven(url = Repo.MAVEN_SNAPSHOT)
-  maven(url = Repo.MAVEN_SNAPSHOT_2)
+fun RepositoryHandler.sonatypeSnapshots() {
+  maven(url = Repo.SONATYPE_SNAPSHOT) { mavenContent { snapshotsOnly() } }
+  maven(url = Repo.SONATYPE_SNAPSHOT_01) { mavenContent { snapshotsOnly() } }
 }
 
 /**

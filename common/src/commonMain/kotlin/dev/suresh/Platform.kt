@@ -18,32 +18,49 @@ interface Platform {
   val tzShortId
     get() = TimeZone.currentSystemDefault().id
 
-  val javaRuntimeVersion: String
-    get() = "n/a"
-
   val vtDispatcher
     get() = Dispatchers.Default
 
-  val buildInfo
-    get() =
-        BuildConfig.run {
-          mapOf(
-              "Platform" to "Kotlin $name",
-              "Build Time" to "$buildTimeLocal $tzShortId",
-              "Build Version" to version,
-              "Build OS" to buildOS,
-              "Build User" to buildUser,
-              "Build Host" to buildHost,
-              "Build JDK" to buildJdkVersion,
-              "Java Runtime Version" to javaRuntimeVersion,
-              "Kotlin Runtime Version" to KotlinVersion.CURRENT.toString(),
-              "Java Release version" to java,
-              "Kotlin JVM Target" to kotlinJvmtarget,
-              "Gradle Version" to gradle,
-              "Git Hash" to gitHash,
-              "Git Message" to gitMessage,
-              "Git Tag" to gitTags)
-        }
+  fun env(key: String, def: String? = null): String? = def
 
-  fun env(key: String): String? = null
+  fun sysProp(key: String, def: String? = null): String? = def
+
+  val buildConfig
+    get() = BuildConfig
+
+  val osInfo: Map<String, String?>
+    get() = emptyMap()
+
+  val info
+    get() =
+        with(buildConfig) {
+          mapOf(
+              "app" to
+                  mapOf(
+                      "name" to name,
+                      "description" to description,
+                      "version" to version,
+                  ),
+              "build" to
+                  mapOf(
+                      "time" to "$buildTimeLocal $tzShortId",
+                      "version" to version,
+                      "os" to buildOS,
+                      "user" to buildUser,
+                      "host" to buildHost,
+                      "jdk" to buildJdkVersion,
+                      "gradle" to gradle,
+                      "jdk-vendor" to buildJdkVendor,
+                      "java-release-version" to java,
+                      "kotlin-jvm-target" to kotlinJvmtarget),
+              "runtime" to
+                  mapOf(
+                      "java" to sysProp("java.runtime.version", "n/a"),
+                      "kotlin" to KotlinVersion.CURRENT.toString(),
+                      "platform" to "Kotlin ${this@Platform.name}",
+                  ),
+              "git" to
+                  mapOf("commit-hash" to gitHash, "commit-message" to gitMessage, "tag" to gitTags),
+              "os" to osInfo)
+        }
 }

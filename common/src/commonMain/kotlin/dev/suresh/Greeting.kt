@@ -20,7 +20,7 @@ class Greeting {
   }
 
   fun greeting() = buildString {
-    platform().buildInfo.forEach { (k, v) -> appendLine("$k : $v") }
+    appendLine(json.encodeToString(platform().info))
     appendLine(KData("Foo", 20, "test"))
     appendLine(kotlinxTests())
   }

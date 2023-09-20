@@ -269,14 +269,12 @@ var Project.mppTargetName: String
   }
 
 context(Project)
-
 fun JavaToolchainSpec.configureJvmToolchain() {
   languageVersion = toolchainVersion
   vendor = toolchainVendor
 }
 
 context(Project)
-
 fun JavaCompile.configureJavac() {
   modularity.inferModulePath = true
   options.apply {
@@ -307,7 +305,6 @@ fun JavaCompile.configureJavac() {
 }
 
 context(Project)
-
 fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   apiVersion = kotlinApiVersion
   languageVersion = kotlinLangVersion
@@ -335,7 +332,6 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
  * - [KotlinDslCompilerPlugins.kt](https://github.com/gradle/gradle/blob/master/subprojects/kotlin-dsl-plugins/src/main/kotlin/org/gradle/kotlin/dsl/plugins/dsl/KotlinDslCompilerPlugins.kt#L63-L64)
  */
 context(Project)
-
 fun KotlinJvmCompilerOptions.configureKotlinJvm() {
   jvmTarget = kotlinJvmTarget
   apiVersion = kotlinApiVersion
@@ -366,7 +362,6 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
 }
 
 context(Project)
-
 fun LanguageSettingsBuilder.configureKotlinLang() {
   progressiveMode = true
   languageVersion = kotlinLangVersion.get().version
@@ -383,13 +378,11 @@ fun LanguageSettingsBuilder.configureKotlinLang() {
 }
 
 context(Project)
-
 fun KotlinJvmTest.configureKotlinTest() {
   configureJavaTest()
 }
 
 context(Project)
-
 fun Test.configureJavaTest() {
   useJUnitPlatform()
   jvmArgs(jvmArguments())
@@ -445,11 +438,9 @@ fun TestLoggingContainer.configureLogEvents() {
 }
 
 context(Project)
-
 fun KotlinTestReport.configureTestReport() {}
 
 context(Project)
-
 fun KotlinJsOptions.configureKotlinJs() {
   useEsClasses = true
   // sourceMap = true
@@ -458,7 +449,6 @@ fun KotlinJsOptions.configureKotlinJs() {
 }
 
 context(Project)
-
 fun KotlinNpmInstallTask.configureKotlinNpm() {
   // args.add("--ignore-engines")
 }
@@ -470,7 +460,6 @@ fun KotlinNpmInstallTask.configureKotlinNpm() {
  * @param dependencyNotation The notation of the dependency to add.
  */
 context(Project)
-
 fun KotlinDependencyHandler.kspDependency(
     targetName: String,
     dependencyNotation: Any,
@@ -483,7 +472,6 @@ fun KotlinDependencyHandler.kspDependency(
 
 /** Returns the path of the dependency jar in runtime classpath. */
 context(Project)
-
 val ExternalDependency.dependencyPath
   get() =
       configurations
@@ -493,12 +481,10 @@ val ExternalDependency.dependencyPath
           .resolvedArtifacts
           .find { it.moduleVersion.id.module == module }
           ?.file
-          ?.path
-          ?: error("Could not find $name in runtime classpath")
+          ?.path ?: error("Could not find $name in runtime classpath")
 
 /** Returns the application `run` command. */
 context(Project)
-
 fun Path.appRunCmd(args: List<String>): String {
   val path = layout.projectDirectory.asFile.toPath().relativize(this)
   val newLine = System.lineSeparator()

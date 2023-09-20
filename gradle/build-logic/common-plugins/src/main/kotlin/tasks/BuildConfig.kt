@@ -51,12 +51,22 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
       )
     }
 
+    // Root project properties
+    val rootProjectProps =
+        project.rootProject.run {
+          mapOf(
+              "name" to name,
+              "description" to description,
+              "version" to version.toString(),
+          )
+        }
+
     // the<VersionCatalogsExtension>().named("libs").
     val params =
         mapOf(
             "className" to className,
             "pkg" to pkg,
-            "version" to extension.version.get(),
+            "projectProps" to rootProjectProps,
             "gitCommit" to gitCommit,
             "catalogVersions" to extension.catalogVersions.get(),
             "dependencies" to extension.dependencies.get(),
@@ -75,8 +85,6 @@ open class BuildConfigExtension(@Inject private val project: Project) {
 
   @get:Input val classFqName = project.objects.property<String>().convention("BuildConfig")
 
-  @get:Input val version = project.objects.property<String>().convention(project.version.toString())
-
   @get:Input
   val catalogVersions = project.objects.mapProperty<String, String>().convention(emptyMap())
 
@@ -87,6 +95,9 @@ open class BuildConfigExtension(@Inject private val project: Project) {
       project.objects
           .directoryProperty()
           .convention(project.layout.buildDirectory.dir("generated/buildconfig"))
+
+  // @get:Input val version =
+  // project.objects.property<String>().convention(project.version.toString())
 
   //  @get:[Input Optional]
   //  val additionalFields: MapProperty<String, Any> = project.objects.mapProperty<String, Any>()

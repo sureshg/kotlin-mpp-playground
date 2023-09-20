@@ -6,7 +6,8 @@ rootProject.name = "kotlin-mpp-playground"
 
 listOf(
         "common",
-        "backend",
+        "backend:jvm",
+        // "backend:native",
         "client",
         "web",
         "benchmark",

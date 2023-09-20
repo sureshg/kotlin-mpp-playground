@@ -4,13 +4,15 @@ object Repo {
 
   const val MAVEN_CENTRAL = "https://repo.maven.apache.org/maven2/"
 
-  const val MAVEN_SNAPSHOT = "https://oss.sonatype.org/content/repositories/snapshots/"
+  const val SONATYPE_SNAPSHOT = "https://oss.sonatype.org/content/repositories/snapshots/"
 
-  const val MAVEN_SNAPSHOT_2 = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+  const val SONATYPE_SNAPSHOT_01 = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 
   const val NODEJS = "https://nodejs.org/dist/"
 
   const val YARN = "https://github.com/yarnpkg/yarn/releases/download/"
+
+  const val KOTLIN_NATIVE = "https://download.jetbrains.com/kotlin/native/builds/"
 
   const val COMPOSE_MULTIPLATFORM_DEV = "https://maven.pkg.jetbrains.space/public/p/compose/dev"
 

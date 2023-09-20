@@ -6,21 +6,19 @@
 
 @param className: String
 @param pkg: String
-@param version: String
+@param projectProps: Map<String, String>
+@param gitCommit: Map<String, String>
 @param catalogVersions: Map<String, String>
 @param dependencies: List<String>
-@param gitCommit: Map<String, String>
 
 !{val sysProp = { name: String -> @`${System.getProperty(name)}` }}
-
-!{val env = { name: String -> @`${System.getenv(name)}` }}
 
 /* GENERATED, DO NOT EDIT MANUALLY! */
 @if(pkg.isNotBlank())package ${pkg}@endif
 
 import kotlinx.datetime.*
 
-object ${className} {
+data object ${className} {
 
    const val buildTimeEpochMillis = ${Clock.System.now().toEpochMilliseconds()}
 
@@ -38,7 +36,9 @@ object ${className} {
 
    const val buildJdkVendor = "${sysProp("java.vendor")}"
 
-   const val version = "${version}"
+   @for((k,v) in projectProps)
+   const val ${k.camelCase} = "${v}"
+   @endfor
 
    @for((k,v) in gitCommit)
    const val ${k} = "${v}"

@@ -27,7 +27,6 @@ plugins {
 }
 
 kotlin {
-  // applyDefaultHierarchyTemplate()
   jvmToolchain { configureJvmToolchain() }
   withSourcesJar(publish = true)
 
@@ -86,6 +85,8 @@ kotlin {
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 
+  applyDefaultHierarchyTemplate()
+
   // Wasm and native targets are experimental.
   if (project.hasProperty("experimental")) {
     wasmJs {
@@ -96,14 +97,6 @@ kotlin {
               (devServer ?: KotlinWebpackConfig.DevServer()).copy(
                   open = mapOf("app" to mapOf("name" to "google chrome")))
         }
-      }
-    }
-
-    // Use custom allocator for native targets
-    macosX64("native") {
-      binaries.executable()
-      compilations.configureEach {
-        compilerOptions.configure { freeCompilerArgs.add("-Xallocator=custom") }
       }
     }
   }
@@ -229,14 +222,6 @@ koverReport {
   }
 }
 
-// https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
-val commonJsResources by
-    configurations.creating {
-      isCanBeConsumed = true
-      isCanBeResolved = false
-      attributes.attribute(Attribute.of("commonJSResources", String::class.java), "true")
-    }
-
 tasks {
   // Register buildConfig task only for common module
   if (project.name == commonProjectName) {
@@ -286,8 +271,6 @@ tasks {
     }
   }
 }
-
-artifacts { add(commonJsResources.name, tasks.named("jsProcessResources")) }
 
 dependencies {
   // add("kspJvm", project(":ksp-processor"))

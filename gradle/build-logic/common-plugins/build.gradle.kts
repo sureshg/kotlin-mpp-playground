@@ -147,6 +147,8 @@ dependencies {
   implementation(libs.build.npm.publish.plugin)
   implementation(libs.build.mokkery.plugin)
   implementation(libs.build.jte.plugin)
+  implementation(libs.build.jib.plugin)
+  implementation(libs.build.jib.nativeimage.extn)
   // implementation(libs.build.includegit.plugin)
   testImplementation(gradleTestKit())
 }
