@@ -155,7 +155,7 @@ kotlin {
       // dependsOn(jvmCommon)
       dependencies {
         api(libs.kotlin.stdlib.jdk8)
-        api(libs.kotlin.reflect)
+        api(libs.kotlinx.metadata.jvm)
         api(libs.google.auto.annotations)
         api(libs.ktor.client.java)
         api(libs.kotlin.retry)

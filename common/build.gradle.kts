@@ -25,6 +25,8 @@ dependencies {
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
   commonMainApi(libs.parsus)
+
+  // jvmMainApi(libs.kotlin.reflect)
   // jvmMainApi(libs.logback.classic)
 }
 
