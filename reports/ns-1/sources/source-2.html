@@ -95,16 +95,14 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <code class="sourceCode" id="sourceCode">&nbsp;
 &nbsp;
 &nbsp;
-&nbsp;
-&nbsp;
 &nbsp;/* GENERATED, DO NOT EDIT MANUALLY! */
 &nbsp;
 &nbsp;
 &nbsp;import kotlinx.datetime.*
 &nbsp;
-&nbsp;object BuildConfig {
+&nbsp;data object BuildConfig {
 &nbsp;
-&nbsp;   const val buildTimeEpochMillis = 1694477824994
+&nbsp;   const val buildTimeEpochMillis = 1695484177194
 &nbsp;
 <b class="fc">&nbsp;   val buildTimeUTC = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.UTC)</b>
 &nbsp;
@@ -112,24 +110,30 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;   const val buildUser = &quot;runner&quot;
 &nbsp;
-&nbsp;   const val buildOS = &quot;Linux 5.15.0-1041-azure-amd64&quot;
+&nbsp;   const val buildOS = &quot;Linux 6.2.0-1011-azure-amd64&quot;
 &nbsp;
-&nbsp;   const val buildHost = &quot;fv-az251-384&quot;
+&nbsp;   const val buildHost = &quot;fv-az313-533&quot;
 &nbsp;
-&nbsp;   const val buildJdkVersion = &quot;22-ea+14-1033&quot;
+&nbsp;   const val buildJdkVersion = &quot;22-ea+16-1247&quot;
 &nbsp;
 &nbsp;   const val buildJdkVendor = &quot;Oracle Corporation&quot;
 &nbsp;
-&nbsp;   const val version = &quot;0.8.4.7+27e5a46&quot;
+&nbsp;   
+&nbsp;   const val name = &quot;kotlin-mpp-playground&quot;
+&nbsp;   
+&nbsp;   const val description = &quot;Kotlin Multiplatform Playground!&quot;
+&nbsp;   
+&nbsp;   const val version = &quot;0.8.4.22+002b878&quot;
+&nbsp;   
 &nbsp;
 &nbsp;   
-&nbsp;   const val gitHash = &quot;27e5a466e09865fb623dd72a06f12ee94022ef65&quot;
+&nbsp;   const val gitHash = &quot;002b8781e86aad442c17a2fd4b23669a613b5a3a&quot;
 &nbsp;   
-&nbsp;   const val gitMessage = &quot;chore: kotlin 1.9.20-Beta fixes&quot;
+&nbsp;   const val gitMessage = &quot;chore: fix build &amp; some java 21 features&quot;
 &nbsp;   
-&nbsp;   const val gitFullMessage = &quot;chore: kotlin 1.9.20-Beta fixes&quot;
+&nbsp;   const val gitFullMessage = &quot;chore: fix build &amp; some java 21 features&quot;
 &nbsp;   
-&nbsp;   const val gitTimestampEpochSecond = &quot;1694369501&quot;
+&nbsp;   const val gitTimestampEpochSecond = &quot;1695483917&quot;
 &nbsp;   
 &nbsp;   const val gitTags = &quot;&quot;
 &nbsp;   
@@ -141,9 +145,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val ajaltMordant = &quot;2.1.0&quot;
 &nbsp;   
+&nbsp;   const val akkurate = &quot;0.1.0&quot;
+&nbsp;   
 &nbsp;   const val apacheCommonsImaging = &quot;1.0-alpha3&quot;
 &nbsp;   
 &nbsp;   const val appMainclass = &quot;dev.suresh.MainKt&quot;
+&nbsp;   
+&nbsp;   const val arrowSuspendapp = &quot;0.4.1-alpha.5&quot;
 &nbsp;   
 &nbsp;   const val benasher44Uuid = &quot;0.8.1&quot;
 &nbsp;   
@@ -155,7 +163,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val cache4k = &quot;0.11.0&quot;
 &nbsp;   
-&nbsp;   const val cashMolecule = &quot;1.2.0&quot;
+&nbsp;   const val cashMolecule = &quot;1.2.1&quot;
 &nbsp;   
 &nbsp;   const val cashTurbine = &quot;1.0.0&quot;
 &nbsp;   
@@ -169,7 +177,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val cyclonedxPlugin = &quot;1.7.4&quot;
 &nbsp;   
-&nbsp;   const val dependencyAnalysis = &quot;1.21.0&quot;
+&nbsp;   const val dependencyAnalysis = &quot;1.22.0&quot;
 &nbsp;   
 &nbsp;   const val devEmail = &quot;email@suresh.dev&quot;
 &nbsp;   
@@ -199,11 +207,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val graalvm = &quot;23.0.1&quot;
 &nbsp;   
-&nbsp;   const val graalvmNativeimage = &quot;0.9.26&quot;
+&nbsp;   const val graalvmNativeimage = &quot;0.9.27&quot;
 &nbsp;   
-&nbsp;   const val gradle = &quot;8.3&quot;
+&nbsp;   const val gradle = &quot;8.4-rc-1&quot;
 &nbsp;   
-&nbsp;   const val gradleEnterprise = &quot;3.14.1&quot;
+&nbsp;   const val gradleEnterprise = &quot;3.15&quot;
 &nbsp;   
 &nbsp;   const val group = &quot;dev.suresh&quot;
 &nbsp;   
@@ -213,9 +221,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val hoplite = &quot;2.8.0-RC1&quot;
 &nbsp;   
+&nbsp;   const val includegitPlugin = &quot;0.1.6&quot;
+&nbsp;   
 &nbsp;   const val intellijCoverage = &quot;1.0.733&quot;
 &nbsp;   
-&nbsp;   const val intellijMarkdown = &quot;0.5.0&quot;
+&nbsp;   const val intellijMarkdown = &quot;0.5.1&quot;
 &nbsp;   
 &nbsp;   const val java = &quot;22&quot;
 &nbsp;   
@@ -237,6 +247,10 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val jgit = &quot;6.5.0.202303070854-r&quot;
 &nbsp;   
+&nbsp;   const val jibNativeimageExtn = &quot;0.1.0&quot;
+&nbsp;   
+&nbsp;   const val jibPlugin = &quot;3.4.0&quot;
+&nbsp;   
 &nbsp;   const val jimfs = &quot;1.3.0&quot;
 &nbsp;   
 &nbsp;   const val jmh = &quot;1.37&quot;
@@ -255,7 +269,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val kotest = &quot;5.7.1&quot;
 &nbsp;   
-&nbsp;   const val kotlin = &quot;1.9.20-Beta&quot;
+&nbsp;   const val kotlin = &quot;1.9.20-Beta2&quot;
 &nbsp;   
 &nbsp;   const val kotlinApiVersion = &quot;1.9&quot;
 &nbsp;   
@@ -267,19 +281,19 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val kotlinDslJvmtarget = &quot;17&quot;
 &nbsp;   
-&nbsp;   const val kotlinJvmtarget = &quot;20&quot;
+&nbsp;   const val kotlinJvmtarget = &quot;21&quot;
 &nbsp;   
-&nbsp;   const val kotlinKsp = &quot;1.9.10-1.0.13&quot;
+&nbsp;   const val kotlinKsp = &quot;1.9.20-Beta2-1.0.13&quot;
 &nbsp;   
 &nbsp;   const val kotlinLangVersion = &quot;2.0&quot;
 &nbsp;   
-&nbsp;   const val kotlinLogging = &quot;5.0.0&quot;
+&nbsp;   const val kotlinLogging = &quot;5.1.0&quot;
 &nbsp;   
-&nbsp;   const val kotlinRedacted = &quot;1.6.1&quot;
+&nbsp;   const val kotlinRedacted = &quot;1.7.0-alpha01&quot;
 &nbsp;   
 &nbsp;   const val kotlinRetry = &quot;1.0.9&quot;
 &nbsp;   
-&nbsp;   const val kotlinWrappers = &quot;1.0.0-pre.624&quot;
+&nbsp;   const val kotlinWrappers = &quot;1.0.0-pre.626&quot;
 &nbsp;   
 &nbsp;   const val kotlinxAtomicfu = &quot;0.22.0&quot;
 &nbsp;   
@@ -295,11 +309,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val kotlinxHtml = &quot;0.9.1&quot;
 &nbsp;   
-&nbsp;   const val kotlinxIo = &quot;0.2.1&quot;
+&nbsp;   const val kotlinxIo = &quot;0.3.0&quot;
 &nbsp;   
 &nbsp;   const val kotlinxKover = &quot;0.7.3&quot;
 &nbsp;   
 &nbsp;   const val kotlinxLincheck = &quot;2.23&quot;
+&nbsp;   
+&nbsp;   const val kotlinxMetadata = &quot;0.7.0&quot;
 &nbsp;   
 &nbsp;   const val kotlinxReflectLite = &quot;1.1.0&quot;
 &nbsp;   
@@ -309,7 +325,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val kspAutoService = &quot;1.1.0&quot;
 &nbsp;   
-&nbsp;   const val ktfmt = &quot;0.44&quot;
+&nbsp;   const val ktfmt = &quot;0.46&quot;
 &nbsp;   
 &nbsp;   const val ktor = &quot;2.3.4&quot;
 &nbsp;   
@@ -319,21 +335,23 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val log4j = &quot;3.0.0-alpha1&quot;
 &nbsp;   
-&nbsp;   const val logback = &quot;1.4.8&quot;
+&nbsp;   const val logback = &quot;1.4.11&quot;
 &nbsp;   
 &nbsp;   const val micrometer = &quot;1.11.2&quot;
 &nbsp;   
-&nbsp;   const val mockk = &quot;1.13.7&quot;
+&nbsp;   const val mockk = &quot;1.13.8&quot;
 &nbsp;   
-&nbsp;   const val modulegraph = &quot;0.4.0&quot;
+&nbsp;   const val modulegraph = &quot;0.5.0&quot;
 &nbsp;   
 &nbsp;   const val mokkery = &quot;1.9.10-1.3.0&quot;
 &nbsp;   
 &nbsp;   const val nexusPublish = &quot;2.0.0-rc-1&quot;
 &nbsp;   
-&nbsp;   const val nodeVersion = &quot;20.4.0&quot;
+&nbsp;   const val nodeVersion = &quot;20.6.1&quot;
 &nbsp;   
 &nbsp;   const val npmHighlightjs = &quot;11.8.0&quot;
+&nbsp;   
+&nbsp;   const val npmJsjodaTz = &quot;2.18.0&quot;
 &nbsp;   
 &nbsp;   const val npmKotlinPlayground = &quot;1.28.0&quot;
 &nbsp;   
@@ -347,9 +365,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val orgUrl = &quot;https://suresh.dev&quot;
 &nbsp;   
-&nbsp;   const val palantirJavaformat = &quot;2.33.0&quot;
+&nbsp;   const val palantirJavaformat = &quot;2.38.0&quot;
 &nbsp;   
-&nbsp;   const val parsus = &quot;0.4.0&quot;
+&nbsp;   const val parsus = &quot;0.5.5&quot;
 &nbsp;   
 &nbsp;   const val pokoPlugin = &quot;0.14.0&quot;
 &nbsp;   
@@ -413,7 +431,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-12 00:18</div>
+    <div style="float:right;">generated on 2023-09-23 15:51</div>
 </div>
 </body>
 </html>

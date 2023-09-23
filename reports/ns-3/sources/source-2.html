@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > KData</title>
+  <title>kotlin-mpp-playground Coverage Report > Greeting</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: KData (dev.suresh)</h1>
+<h1>Coverage Summary for Class: Greeting (dev.suresh)</h1>
 
 <table class="coverageStats">
 
@@ -46,21 +46,22 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">KData</td>
+  <td class="name">Greeting</td>
 <td class="coverageStat">
   <span class="percent">
     100%
   </span>
   <span class="absValue">
-    (1/1)
+    (3/3)
   </span>
 </td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (19/19)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,25 +69,37 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     100%
   </span>
   <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    80.5%
-  </span>
-  <span class="absValue">
-    (66/82)
+    (136/136)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">KData$$serializer</td>
+    <td class="name">Greeting$json$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
     <td class="coverageStat"/>
-  </tr>
-  <tr>
-    <td class="name">KData$Companion</td>
-    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -95,15 +108,16 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     100%
   </span>
   <span class="absValue">
-    (1/1)
+    (4/4)
   </span>
 </td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/2)
+    (22/22)
   </span>
 </td>
 <td class="coverageStat">
@@ -111,15 +125,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     100%
   </span>
   <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    80.5%
-  </span>
-  <span class="absValue">
-    (66/82)
+    (145/145)
   </span>
 </td>
 </tr>
@@ -132,7 +138,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;import BuildConfig
 &nbsp;import dev.zacsweers.redacted.annotations.Redacted
 &nbsp;import kotlinx.datetime.Clock
 &nbsp;import kotlinx.datetime.TimeZone
@@ -142,53 +147,39 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import kotlinx.serialization.encodeToString
 &nbsp;import kotlinx.serialization.json.Json
 &nbsp;
-<b class="pc">&nbsp;@Serializable data class KData(val name: String, val age: Int, @Redacted val password: String)</b>
+&nbsp;@Serializable data class KData(val name: String, val age: Int, @Redacted val password: String)
 &nbsp;
-&nbsp;class Greeting {
+<b class="fc">&nbsp;class Greeting {</b>
 &nbsp;
-&nbsp;  val json = Json {
-&nbsp;    prettyPrint = true
-&nbsp;    isLenient = true
-&nbsp;    ignoreUnknownKeys = true
+<b class="fc">&nbsp;  val json = Json {</b>
+<b class="fc">&nbsp;    prettyPrint = true</b>
+<b class="fc">&nbsp;    isLenient = true</b>
+<b class="fc">&nbsp;    ignoreUnknownKeys = true</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  fun greeting() =
-&nbsp;      &quot;&quot;&quot;
-&nbsp;      | Platform          : Kotlin $platform
-&nbsp;      | Build Time        : ${BuildConfig.buildTimeLocal}
-&nbsp;      | Build Version     : ${BuildConfig.version}
-&nbsp;      | Build OS          : ${BuildConfig.buildOS}
-&nbsp;      | Build User        : ${BuildConfig.buildUser}
-&nbsp;      | Build Host        : ${BuildConfig.buildHost}
-&nbsp;      | Build JDK         : ${BuildConfig.buildJdkVersion}
-&nbsp;      | Java Version      : ${BuildConfig.java}
-&nbsp;      | Kotlin Version    : ${KotlinVersion.CURRENT}
-&nbsp;      | Gradle Version    : ${BuildConfig.gradle}
-&nbsp;      | Git Hash          : ${BuildConfig.gitHash}
-&nbsp;      | Git Message       : ${BuildConfig.gitMessage}
-&nbsp;      | Git Tag           : ${BuildConfig.gitTags}
-&nbsp;      | ${KData(&quot;Foo&quot;, 20, &quot;test&quot;)}
-&nbsp;      | ${kotlinxTests()}
-&nbsp;      &quot;&quot;&quot;
-&nbsp;          .trimMargin()
+<b class="fc">&nbsp;  fun greeting() = buildString {</b>
+<b class="fc">&nbsp;    appendLine(json.encodeToString(platform().info))</b>
+<b class="fc">&nbsp;    appendLine(KData(&quot;Foo&quot;, 20, &quot;test&quot;))</b>
+<b class="fc">&nbsp;    appendLine(kotlinxTests())</b>
+<b class="fc">&nbsp;  }</b>
 &nbsp;
 &nbsp;  private fun kotlinxTests(): String {
-&nbsp;    val ba = &quot;Kotlinx&quot;.encodeToByteArray()
-&nbsp;    val bs1 = ByteString(data = ba)
-&nbsp;    val bs2 = &quot;IO&quot;.encodeToByteString()
+<b class="fc">&nbsp;    val ba = &quot;Kotlinx&quot;.encodeToByteArray()</b>
+<b class="fc">&nbsp;    val bs1 = ByteString(data = ba)</b>
+<b class="fc">&nbsp;    val bs2 = &quot;IO&quot;.encodeToByteString()</b>
 &nbsp;
-&nbsp;    val bs = buildByteString {
-&nbsp;      append(bs1)
-&nbsp;      append(&quot; &quot;.encodeToByteArray())
-&nbsp;      append(bs2)
-&nbsp;    }
+<b class="fc">&nbsp;    val bs = buildByteString {</b>
+<b class="fc">&nbsp;      append(bs1)</b>
+<b class="fc">&nbsp;      append(&quot; &quot;.encodeToByteArray())</b>
+<b class="fc">&nbsp;      append(bs2)</b>
+<b class="fc">&nbsp;    }</b>
 &nbsp;
 &nbsp;    return &quot;&quot;&quot;
-&nbsp;      |${Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())}
-&nbsp;      |${json.encodeToString(KData(&quot;Bar&quot;, 22, &quot;test&quot;))}
-&nbsp;      |${bs.decodeToString()}
+<b class="fc">&nbsp;      |${Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())}</b>
+<b class="fc">&nbsp;      |${json.encodeToString(KData(&quot;Bar&quot;, 22, &quot;test&quot;))}</b>
+<b class="fc">&nbsp;      |${bs.decodeToString()}</b>
 &nbsp;    &quot;&quot;&quot;
-&nbsp;        .trimMargin()
+<b class="fc">&nbsp;        .trimMargin()</b>
 &nbsp;  }
 &nbsp;}
 </code>
@@ -214,7 +205,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-12 00:18</div>
+    <div style="float:right;">generated on 2023-09-23 15:51</div>
 </div>
 </body>
 </html>
