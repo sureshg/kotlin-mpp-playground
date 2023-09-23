@@ -132,6 +132,7 @@ tasks {
       addStringOption("-release", javaRelease.get().toString())
       addStringOption("Xdoclint:none", "-quiet")
     }
+    exclude("**/Main.java")
   }
 }
 

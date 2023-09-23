@@ -128,6 +128,7 @@ kotlin {
         api(libs.ktor.client.resources)
         api(libs.ktor.client.auth)
         api(libs.ktor.serialization.json)
+        api(libs.kotlin.logging)
       }
     }
 
@@ -154,12 +155,13 @@ kotlin {
     jvmMain {
       // dependsOn(jvmCommon)
       dependencies {
-        api(libs.kotlin.stdlib.jdk8)
+        // api(libs.kotlin.stdlib)
         api(libs.kotlinx.metadata.jvm)
         api(libs.google.auto.annotations)
         api(libs.ktor.client.java)
         api(libs.kotlin.retry)
         api(libs.slf4j.api)
+        api(libs.kotlinx.coroutines.slf4j)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         kspDependency("jvm", libs.ksp.auto.service)
       }

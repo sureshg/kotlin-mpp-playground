@@ -25,7 +25,7 @@ spotless {
     // googleJavaFormat(libs.versions.google.javaformat.get())
     palantirJavaFormat(libs.versions.palantir.javaformat.get())
     target("**/*.java")
-    targetExclude("**/build/**", "**/.gradle/**")
+    targetExclude("**/build/**", "**/.gradle/**", "**/Main.java")
   }
   // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
 

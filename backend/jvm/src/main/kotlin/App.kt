@@ -1,24 +1,29 @@
 import dev.suresh.*
+import io.github.oshai.kotlinlogging.KotlinLogging
 import java.lang.foreign.FunctionDescriptor
 import java.lang.foreign.ValueLayout
 import java.util.concurrent.StructuredTaskScope
 import kotlinx.datetime.LocalDateTime
 import kotlinx.metadata.jvm.KotlinClassMetadata
 
+val log = KotlinLogging.logger {}
+
 fun main() {
-  println(Greeting().greeting())
+  log.info { (Greeting().greeting()) }
   listOf("main", "jvm", "js").forEach {
-    println("common-$it --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}")
+    log.info { "common-$it --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
   }
 
   listOf("main", "jvm", "js").forEach {
-    println("backend-$it -->${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}")
+    log.info {
+      "backend-$it -->${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}"
+    }
   }
 
   StructuredTaskScope.ShutdownOnFailure().use {
     val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform().name} !" }
     it.join().throwIfFailed()
-    println(task.get())
+    log.info { task.get() }
   }
 
   langFeatures()
@@ -35,7 +40,7 @@ fun getPid() {
   val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)
   val pid = getpid.invokeExact() as Int
   assert(pid.toLong() == ProcessHandle.current().pid())
-  println("getpid() = $pid")
+  log.info { "getpid() = $pid" }
 }
 
 fun kotlinxMetaData() {
@@ -43,11 +48,11 @@ fun kotlinxMetaData() {
   when (val metadata = KotlinClassMetadata.read(metadataAnnotation)) {
     is KotlinClassMetadata.Class -> {
       val klass = metadata.kmClass
-      println(klass.functions.map { it.name })
-      println(klass.properties.map { it.name })
+      log.info { klass.functions.map { it.name } }
+      log.info { klass.properties.map { it.name } }
     }
-    is KotlinClassMetadata.Unknown -> println("Unknown")
-    else -> println("Other")
+    is KotlinClassMetadata.Unknown -> log.info { "Unknown" }
+    else -> log.info { "Other" }
   }
 }
 
@@ -58,5 +63,5 @@ fun classFileApi() {
   //          .methods()
   //          .filter { it.methodName().equalsString("main") }
   //          .firstNotNullOfOrNull { it.code().getOrNull() }
-  //  codeModel?.elementList()?.forEach { println(it.toString()) }
+  //  codeModel?.elementList()?.forEach { log.info {it.toString()} }
 }
