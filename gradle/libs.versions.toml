@@ -34,9 +34,10 @@ kotlinx-benchmark              = "0.4.9"
 kotlinx-metadata               = "0.7.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.13.2"
-kotlin-wrappers                = "1.0.0-pre.626"
+kotlin-wrappers                = "1.0.0-pre.627"
 kotlin-redacted                = "1.7.0-alpha01"
 ksp-auto-service               = "1.1.0"
+gradle-kotlin-dsl              = "4.1.2"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "2.1.0"
 ajalt-clikt                    = "4.1.0"
@@ -151,6 +152,7 @@ build-kotlin-allopen                 = { module = "org.jetbrains.kotlin:kotlin-a
 build-kotlinx-serialization          = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
 build-kotlinx-atomicfu               = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
 build-kotlinx-benchmark              = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
+build-kotlin-dsl                     = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins"                     , version.ref = "gradle-kotlin-dsl"}
 build-dokka-plugin                   = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
 build-dokka-base                     = { module = "org.jetbrains.dokka:dokka-base"                                  , version.ref = "dokka"}
 build-kotlin-ksp                     = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}

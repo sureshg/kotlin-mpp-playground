@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.gradle.kotlin.dsl.support.expectedKotlinDslPluginsVersion
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -23,6 +24,11 @@ tasks {
       jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget)
       freeCompilerArgs.addAll("-Xcontext-receivers")
     }
+  }
+
+  validatePlugins {
+    failOnWarning = true
+    enableStricterValidation = true
   }
 }
 
@@ -149,6 +155,8 @@ dependencies {
   implementation(libs.build.jte.plugin)
   implementation(libs.build.jib.plugin)
   implementation(libs.build.jib.nativeimage.extn)
+  // For using kotlin-dsl in pre-compiled script plugins
+  implementation("${libs.build.kotlin.dsl.get().module}:${expectedKotlinDslPluginsVersion}")
   // implementation(libs.build.includegit.plugin)
   testImplementation(gradleTestKit())
 }

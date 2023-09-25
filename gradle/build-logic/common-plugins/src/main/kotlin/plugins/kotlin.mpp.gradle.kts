@@ -21,8 +21,8 @@ plugins {
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
   id("plugins.kotlin.docs")
+  // org.gradle.kotlin.`kotlin-dsl`
   // app.cash.molecule
-  // dev.petuska.npm.publish
   // dev.mokkery
 }
 
