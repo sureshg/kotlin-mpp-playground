@@ -13,7 +13,7 @@ This repo shows a Gradle multi-project build structure that uses the [Kotlin Mul
 build a [JVM][Kotlin-JVM], [JS][Kotlin-JS], [Desktop][Compose-Multiplatform]
 and [Compose Web (wasm)][Compose-Multiplatform] applications.
 
-### Install OpenJDK EA Build
+### Install OpenJDK 21 Build
 
 ```bash
 # Mac OS
