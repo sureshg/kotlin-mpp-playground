@@ -1,7 +1,7 @@
 package dev.suresh
 
-actual fun platform(): Platform = DesktopPlatform
+actual val platform: TargetPlatform = DesktopPlatform
 
-object DesktopPlatform : Platform {
+object DesktopPlatform : TargetPlatform {
   override val name: String = "Desktop JVM"
 }

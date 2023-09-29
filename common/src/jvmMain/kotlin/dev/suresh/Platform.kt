@@ -8,9 +8,9 @@ import java.util.concurrent.Executors
 import kotlinx.coroutines.asCoroutineDispatcher
 import org.slf4j.LoggerFactory
 
-actual fun platform(): Platform = JvmPlatform
+actual val platform: TargetPlatform = JvmPlatform
 
-object JvmPlatform : Platform {
+object JvmPlatform : TargetPlatform {
 
   private val log = LoggerFactory.getLogger(this::class.java)
 
@@ -33,6 +33,17 @@ object JvmPlatform : Platform {
     log.info("Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...")
     Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
   }
+
+  override val appInfo: Map<String, String>
+    get() =
+        super.appInfo +
+            mapOf(
+                "uptime" to
+                    run {
+                      val processEpochSec =
+                          ProcessHandle.current().info().startInstant().get().epochSecond
+                      epochSecToString(processEpochSec)
+                    })
 
   override val osInfo: Map<String, String?>
     get() =

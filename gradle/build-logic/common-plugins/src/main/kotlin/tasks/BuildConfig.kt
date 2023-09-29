@@ -45,7 +45,7 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
       mapOf(
           "gitHash" to commit.hash,
           "gitMessage" to commit.message,
-          "gitFullMessage" to commit.fullMessage.trim(),
+          "gitFullMessage" to commit.fullMessage,
           "gitTimestampEpochSecond" to commit.timestampEpochSecond.toString(),
           "gitTags" to commit.tags.joinToString(),
       )
@@ -90,7 +90,6 @@ open class BuildConfigExtension(@Inject private val project: Project) {
 
   @get:Input val dependencies = project.objects.listProperty<String>().convention(emptyList())
 
-  @get:Input
   val outputDir =
       project.objects
           .directoryProperty()

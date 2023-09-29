@@ -1,19 +1,21 @@
+@file:JvmName("CommonPlatform")
+
 package dev.suresh
 
 import BuildConfig
+import kotlin.jvm.JvmName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import kotlinx.serialization.json.Json
 
-expect fun platform(): Platform
+expect val platform: TargetPlatform
 
-interface Platform {
+interface TargetPlatform {
 
   val name: String
-
-  val utcTimeNow
-    get() = Clock.System.now().toLocalDateTime(TimeZone.UTC)
 
   val tzShortId
     get() = TimeZone.currentSystemDefault().id
@@ -21,12 +23,16 @@ interface Platform {
   val vtDispatcher
     get() = Dispatchers.Default
 
-  fun env(key: String, def: String? = null): String? = def
-
-  fun sysProp(key: String, def: String? = null): String? = def
-
   val buildConfig
     get() = BuildConfig
+
+  val appInfo
+    get() =
+        mapOf(
+            "name" to name,
+            "description" to buildConfig.description,
+            "version" to buildConfig.version,
+        )
 
   val osInfo: Map<String, String?>
     get() = emptyMap()
@@ -35,12 +41,7 @@ interface Platform {
     get() =
         with(buildConfig) {
           mapOf(
-              "app" to
-                  mapOf(
-                      "name" to name,
-                      "description" to description,
-                      "version" to version,
-                  ),
+              "app" to appInfo,
               "build" to
                   mapOf(
                       "time" to "$buildTimeLocal $tzShortId",
@@ -57,10 +58,41 @@ interface Platform {
                   mapOf(
                       "java" to sysProp("java.runtime.version", "n/a"),
                       "kotlin" to KotlinVersion.CURRENT.toString(),
-                      "platform" to "Kotlin ${this@Platform.name}",
+                      "platform" to "Kotlin ${this@TargetPlatform.name}",
                   ),
               "git" to
-                  mapOf("commit-hash" to gitHash, "commit-message" to gitMessage, "tag" to gitTags),
+                  mapOf(
+                      "commit-hash" to gitHash,
+                      "commit-message" to gitMessage,
+                      "commit-time" to epochSecToString(gitTimestampEpochSecond.toLong()),
+                      "tag" to gitTags),
               "os" to osInfo)
         }
+
+  fun env(key: String, def: String? = null): String? = def
+
+  fun sysProp(key: String, def: String? = null): String? = def
+
+  fun epochSecToString(epochSeconds: Long) =
+      "${Instant.fromEpochSeconds(epochSeconds).toLocalDateTime(TimeZone.currentSystemDefault())} $tzShortId"
 }
+
+/** Common JSON instance for serde of JSON data. */
+val json by lazy {
+  Json {
+    prettyPrint = true
+    isLenient = true
+    ignoreUnknownKeys = true
+    encodeDefaults = true
+    explicitNulls = false
+    decodeEnumsCaseInsensitive = true
+  }
+}
+
+/** Gets the current date and time in UTC timezone. */
+val utcDateTimeNow
+  get() = Clock.System.now().toLocalDateTime(TimeZone.UTC)
+
+/** Gets the current date and time in the system's default time zone. */
+val localDateTimeNow
+  get() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())

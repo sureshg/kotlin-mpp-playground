@@ -2,9 +2,9 @@ package dev.suresh
 
 import kotlinx.browser.window
 
-actual fun platform(): Platform = JsPlatform
+actual val platform: TargetPlatform = JsPlatform
 
-object JsPlatform : Platform {
+object JsPlatform : TargetPlatform {
   override val name: String = "JS"
 
   override val osInfo: Map<String, String?>

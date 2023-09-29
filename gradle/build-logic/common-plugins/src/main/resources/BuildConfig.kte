@@ -41,7 +41,7 @@ data object ${className} {
    @endfor
 
    @for((k,v) in gitCommit)
-   const val ${k} = "${v}"
+   const val ${k} = """${v}"""
    @endfor
 
    @for((k,v) in catalogVersions)
