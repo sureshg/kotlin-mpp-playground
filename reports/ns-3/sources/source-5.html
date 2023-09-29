@@ -80,7 +80,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     100%
   </span>
   <span class="absValue">
-    (2/2)
+    (4/4)
   </span>
 </td>
 </tr>
@@ -94,9 +94,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-<b class="fc">&nbsp;actual fun platform(): Platform = DesktopPlatform</b>
+<b class="fc">&nbsp;actual val platform: TargetPlatform = DesktopPlatform</b>
 &nbsp;
-&nbsp;object DesktopPlatform : Platform {
+&nbsp;object DesktopPlatform : TargetPlatform {
 &nbsp;  override val name: String = &quot;Desktop JVM&quot;
 &nbsp;}
 </code>
@@ -122,7 +122,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-25 21:37</div>
+    <div style="float:right;">generated on 2023-09-29 03:45</div>
 </div>
 </body>
 </html>

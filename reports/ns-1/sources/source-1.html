@@ -439,7 +439,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;  }</b>
 &nbsp;
 <b class="nc">&nbsp;  StructuredTaskScope.ShutdownOnFailure().use {</b>
-<b class="nc">&nbsp;    val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} ${platform().name} !&quot; }</b>
+<b class="nc">&nbsp;    val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} ${platform.name} !&quot; }</b>
 <b class="nc">&nbsp;    it.join().throwIfFailed()</b>
 <b class="nc">&nbsp;    log.info { task.get() }</b>
 <b class="nc">&nbsp;  }</b>
@@ -506,7 +506,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-09-25 21:37</div>
+    <div style="float:right;">generated on 2023-09-29 03:45</div>
 </div>
 </body>
 </html>
