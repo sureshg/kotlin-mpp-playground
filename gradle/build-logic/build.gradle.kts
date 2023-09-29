@@ -1,4 +1,14 @@
-plugins { alias(libs.plugins.benmanes) }
+plugins {
+  idea
+  alias(libs.plugins.benmanes)
+}
+
+idea {
+  module {
+    isDownloadJavadoc = true
+    isDownloadSources = true
+  }
+}
 
 tasks {
   dependencyUpdates { checkConstraints = true }
