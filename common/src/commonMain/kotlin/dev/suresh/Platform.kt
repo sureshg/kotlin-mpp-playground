@@ -29,7 +29,7 @@ interface TargetPlatform {
   val appInfo
     get() =
         mapOf(
-            "name" to name,
+            "name" to buildConfig.name,
             "description" to buildConfig.description,
             "version" to buildConfig.version,
         )
