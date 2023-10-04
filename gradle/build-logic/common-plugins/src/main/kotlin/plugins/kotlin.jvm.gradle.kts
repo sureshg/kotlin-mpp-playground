@@ -150,12 +150,15 @@ dependencies {
 
   // Test dependencies
   testImplementation(platform(libs.junit.bom))
+  testImplementation(platform(libs.testcontainers.bom))
   testImplementation(kotlin("test-junit5"))
   testImplementation(libs.junit.jupiter)
   testImplementation(libs.kotlinx.lincheck)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.slf4j.simple)
   testImplementation(libs.mockk)
+  testImplementation(libs.testcontainers.junit5)
+  testImplementation(libs.testcontainers.postgresql)
 }
 
 // Replace the standard jar with the one built by 'shadowJar' in both api and runtime variants

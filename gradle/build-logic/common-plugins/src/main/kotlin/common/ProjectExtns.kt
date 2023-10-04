@@ -190,6 +190,7 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             "-Dcom.sun.management.jmxremote.authenticate=false",
             "-Dcom.sun.management.jmxremote.ssl=false",
             "-Djava.rmi.server.hostname=0.0.0.0",
+            "-Dio.ktor.development=${project.hasProperty("development")}",
             // "-ea",
             // "-XshowSettings:vm",
             // "-XshowSettings:system",
@@ -386,6 +387,8 @@ context(Project)
 fun Test.configureJavaTest() {
   useJUnitPlatform()
   jvmArgs(jvmArguments())
+  // For JUnit5 @EnabledIfSystemProperty
+  systemProperty("ktorTest", project.hasProperty("ktorTest"))
   reports.html.required = true
   maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
 

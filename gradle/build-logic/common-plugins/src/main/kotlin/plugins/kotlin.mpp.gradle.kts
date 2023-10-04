@@ -170,9 +170,12 @@ kotlin {
     jvmTest {
       dependencies {
         implementation(project.dependencies.platform(libs.junit.bom))
+        implementation(project.dependencies.platform(libs.testcontainers.bom))
         implementation(kotlin("test-junit5"))
         implementation(libs.slf4j.simple)
         implementation(libs.mockk)
+        implementation(libs.testcontainers.junit5)
+        implementation(libs.testcontainers.postgresql)
       }
     }
 
@@ -251,6 +254,7 @@ tasks {
           "Built-JDK" to System.getProperty("java.runtime.version"),
           Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
           Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
+          Attributes.Name.IMPLEMENTATION_VENDOR.toString() to project.group,
       )
     }
     duplicatesStrategy = DuplicatesStrategy.WARN
