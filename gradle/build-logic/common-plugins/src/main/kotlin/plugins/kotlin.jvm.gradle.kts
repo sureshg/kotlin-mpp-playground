@@ -2,7 +2,6 @@ package plugins
 
 import com.google.devtools.ksp.gradle.KspTaskJvm
 import common.*
-import gradle.kotlin.dsl.accessors._90e881109d2356e1dfcdd83b4bd9f4e9.kotlinPowerAssert
 import java.util.jar.Attributes
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
