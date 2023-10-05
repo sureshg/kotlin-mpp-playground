@@ -1,12 +1,13 @@
 import dev.suresh.*
-import io.github.oshai.kotlinlogging.KotlinLogging
 import java.lang.foreign.FunctionDescriptor
 import java.lang.foreign.ValueLayout
 import java.util.concurrent.StructuredTaskScope
+import java.util.concurrent.StructuredTaskScope.Subtask
+import kotlin.time.Duration.Companion.seconds
+import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.toJavaInstant
 import kotlinx.metadata.jvm.KotlinClassMetadata
-
-val log = KotlinLogging.logger {}
 
 fun main() {
   log.info { (Greeting().greeting()) }
@@ -20,18 +21,50 @@ fun main() {
     }
   }
 
-  StructuredTaskScope.ShutdownOnFailure().use {
-    val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform.name} !" }
-    it.join().throwIfFailed()
-    log.info { task.get() }
-  }
-
+  virtualThreads()
   langFeatures()
   stdlibFeatures()
 
   getPid()
   kotlinxMetaData()
   classFileApi()
+}
+
+fun virtualThreads() {
+  val taskList =
+      StructuredTaskScope<String>().use { sts ->
+        val start = Clock.System.now()
+        val tasks =
+            (1..100).map {
+              sts.fork {
+                when (it) {
+                  in 1..40 -> "Task $it"
+                  in 41..60 -> error("Error in task $it")
+                  else -> {
+                    while (!Thread.currentThread().isInterrupted) {
+                      log.debug { "Task $it ..." }
+                    }
+                    "Task $it"
+                  }
+                }
+              }
+            }
+        runCatching { sts.joinUntil(start.plus(2.seconds).toJavaInstant()) }
+        tasks
+      }
+
+  log.info { "Total Tasks: ${taskList.size}" }
+  val states = taskList.groupBy { it.state() }
+  states.forEach { (t, u) -> log.info { "$t --> ${u.size}" } }
+  check(states[Subtask.State.SUCCESS]?.size == 40)
+  check(states[Subtask.State.FAILED]?.size == 20)
+  check(states[Subtask.State.UNAVAILABLE]?.size == 40)
+
+  StructuredTaskScope.ShutdownOnFailure().use {
+    val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform.name} !" }
+    it.join().throwIfFailed()
+    log.info { task.get() }
+  }
 }
 
 fun getPid() {

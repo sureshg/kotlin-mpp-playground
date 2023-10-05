@@ -1,3 +1,4 @@
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.io.encoding.Base64
 import kotlin.jvm.JvmInline
 import kotlin.time.Duration.Companion.microseconds
@@ -14,6 +15,8 @@ enum class Planet(val moon: Int) {
   NEPTUNE(13)
 }
 
+val log = KotlinLogging.logger {}
+
 data object MyService
 
 @JvmInline
@@ -29,12 +32,12 @@ value class Person(private val name: String) {
 }
 
 fun langFeatures() {
-  println(Planet.entries.filter { it.moon == 1 })
+  log.info { Planet.entries.filter { it.moon == 1 } }
   // MyService::class.createInstance() - Throws error
-  println(MyService)
+  log.info { MyService }
 
-  println(Person("Foo"))
-  println(Person("Foo", "Bar"))
+  log.info { Person("Foo") }
+  log.info { Person("Foo", "Bar") }
 }
 
 fun stdlibFeatures() {
@@ -43,16 +46,16 @@ fun stdlibFeatures() {
   val m1 = timeSource.markNow()
 
   val m2 = timeSource.markNow()
-  println(m2.elapsedNow() + 2.microseconds)
-  println(m1 + 2.microseconds)
-  println(m2 - m1)
+  log.info { m2.elapsedNow() + 2.microseconds }
+  log.info { m1 + 2.microseconds }
+  log.info { m2 - m1 }
 
   val regex = """\b(?<city>[A-Za-z\s]+),\s(?<state>[A-Z]{2}),\s(?<areacode>[0-9]{5})\b""".toRegex()
   val match = regex.find("San Jose, CA, 95124")!!
-  println(match.groups)
-  println(match.groups["city"]?.value)
-  println(match.groups["state"]?.value)
-  println(match.groups["areacode"]?.value)
+  log.info { match.groups }
+  log.info { match.groups["city"]?.value }
+  log.info { match.groups["state"]?.value }
+  log.info { match.groups["areacode"]?.value }
 
   val hexFormat = HexFormat {
     upperCase = true
@@ -70,10 +73,10 @@ fun stdlibFeatures() {
     }
   }
 
-  println(123232.toHexString(hexFormat))
+  log.info { 123232.toHexString(hexFormat) }
   val hex = "Kotlin ${KotlinVersion.CURRENT}".encodeToByteArray().toHexString(hexFormat)
-  println(hex)
-  println(hex.hexToByteArray(hexFormat).decodeToString())
+  log.info { hex }
+  log.info { hex.hexToByteArray(hexFormat).decodeToString() }
 
-  println(Base64.Mime.encode("Hello Kotlin!".encodeToByteArray()))
+  log.info { Base64.Mime.encode("Hello Kotlin!".encodeToByteArray()) }
 }

@@ -28,13 +28,13 @@ suspend fun main() {
   copy.onclick = {
     mainScope.launch {
       web.navigator.navigator.clipboard.writeText(root.textContent.orEmpty()).await()
-      println("Copied to clipboard using kotlinx-wrapper APIs!")
+      log.info { "Copied to clipboard using kotlinx-wrapper APIs!" }
     }
   }
 
   val text = Greeting().greeting()
   text.lines().forEach {
-    println(it)
+    log.info { it }
     root.appendText(it)
     root.appendChild(document.createElement("br"))
   }
@@ -45,7 +45,7 @@ suspend fun main() {
   // root.appendText(promise.await())
 
   mainScope.launch {
-    println("Starting the timer...")
+    log.info { "Starting the timer..." }
     val timer = document.getElementById("timer") as HTMLDivElement
     timerComposeFlow().collectLatest { timer.innerText = it.toString() }
   }

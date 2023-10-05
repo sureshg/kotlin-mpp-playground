@@ -20,6 +20,7 @@ plugins {
   com.google.devtools.ksp
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
+  com.bnorm.power.`kotlin-power-assert`
   id("plugins.kotlin.docs")
   // org.gradle.kotlin.`kotlin-dsl`
   // app.cash.molecule
@@ -210,6 +211,8 @@ atomicfu {
   transformJs = true
   jvmVariant = "VH"
 }
+
+kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
 
 redacted {
   enabled = true

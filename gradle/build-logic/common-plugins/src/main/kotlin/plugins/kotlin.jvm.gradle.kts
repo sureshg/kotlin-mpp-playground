@@ -2,6 +2,7 @@ package plugins
 
 import com.google.devtools.ksp.gradle.KspTaskJvm
 import common.*
+import gradle.kotlin.dsl.accessors._90e881109d2356e1dfcdd83b4bd9f4e9.kotlinPowerAssert
 import java.util.jar.Attributes
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
@@ -14,6 +15,7 @@ plugins {
   `kotlinx-serialization`
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
+  com.bnorm.power.`kotlin-power-assert`
   id("plugins.kotlin.docs")
   // `test-suite-base`
 }
@@ -61,6 +63,8 @@ ksp {
   arg("autoserviceKsp.verify", "true")
   arg("autoserviceKsp.verbose", "true")
 }
+
+kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
 
 redacted {
   enabled = true

@@ -2,11 +2,11 @@ import common.jvmArguments
 import common.mppTargetName
 
 plugins {
-  application
   plugins.kotlin.jvm
   plugins.publishing
   alias(libs.plugins.ktor)
   alias(libs.plugins.exposed)
+  application
 }
 
 description = "Ktor backend jvm application"

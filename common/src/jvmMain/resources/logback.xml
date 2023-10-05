@@ -1,0 +1,47 @@
+<configuration>
+
+    <property name="pattern"
+              value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} %-5level %X{remoteHost} [%thread] %logger{16} - %msg%n%rEx"/>
+
+    <appender name="APP1" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/app1.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- weekly rollover -->
+            <fileNamePattern>app1.%d{yyyy-ww}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="APP2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/app2.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>app2.%d{yyyy-ww}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <logger name="dev.suresh" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="io.netty" level="INFO"/>
+    <logger name="Exposed" level="INFO"/>
+</configuration>
