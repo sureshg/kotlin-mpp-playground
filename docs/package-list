@@ -7,13 +7,14 @@ $dokka.location://getPid/#/PointingToDeclaration/jvm/[root]/get-pid.html
 $dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/web/[root]/js-type-of.html
 $dokka.location://kotlinxMetaData/#/PointingToDeclaration/jvm/[root]/kotlinx-meta-data.html
 $dokka.location://langFeatures/#/PointingToDeclaration/common/[root]/lang-features.html
-$dokka.location://log/#/PointingToDeclaration/jvm/[root]/log.html
+$dokka.location://log/#/PointingToDeclaration/common/[root]/log.html
 $dokka.location://main/#/PointingToDeclaration/jvm/[root]/main.html
 $dokka.location://mainScope/#/PointingToDeclaration/web/[root]/main-scope.html
 $dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutines.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/common/[root]/stdlib-features.html
 $dokka.location://topLevelJsFun/#/PointingToDeclaration/web/[root]/top-level-js-fun.html
+$dokka.location://virtualThreads/#/PointingToDeclaration/jvm/[root]/virtual-threads.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
 $dokka.location:/ClassVisitor/defaultHandler/#com.google.devtools.ksp.symbol.KSNode#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/default-handler.html
