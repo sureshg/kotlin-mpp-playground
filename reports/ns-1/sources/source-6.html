@@ -99,7 +99,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;import kotlin.io.encoding.Base64
+<code class="sourceCode" id="sourceCode">&nbsp;import io.github.oshai.kotlinlogging.KotlinLogging
+&nbsp;import kotlin.io.encoding.Base64
 &nbsp;import kotlin.jvm.JvmInline
 &nbsp;import kotlin.time.Duration.Companion.microseconds
 &nbsp;import kotlin.time.TimeSource
@@ -114,6 +115,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  URANUS(62),
 &nbsp;  NEPTUNE(13)
 &nbsp;}
+&nbsp;
+&nbsp;val log = KotlinLogging.logger {}
 &nbsp;
 &nbsp;data object MyService
 &nbsp;
@@ -130,12 +133,12 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;}
 &nbsp;
 &nbsp;fun langFeatures() {
-&nbsp;  println(Planet.entries.filter { it.moon == 1 })
+&nbsp;  log.info { Planet.entries.filter { it.moon == 1 } }
 &nbsp;  // MyService::class.createInstance() - Throws error
-&nbsp;  println(MyService)
+&nbsp;  log.info { MyService }
 &nbsp;
-&nbsp;  println(Person(&quot;Foo&quot;))
-&nbsp;  println(Person(&quot;Foo&quot;, &quot;Bar&quot;))
+&nbsp;  log.info { Person(&quot;Foo&quot;) }
+&nbsp;  log.info { Person(&quot;Foo&quot;, &quot;Bar&quot;) }
 &nbsp;}
 &nbsp;
 &nbsp;fun stdlibFeatures() {
@@ -144,16 +147,16 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  val m1 = timeSource.markNow()
 &nbsp;
 &nbsp;  val m2 = timeSource.markNow()
-&nbsp;  println(m2.elapsedNow() + 2.microseconds)
-&nbsp;  println(m1 + 2.microseconds)
-&nbsp;  println(m2 - m1)
+&nbsp;  log.info { m2.elapsedNow() + 2.microseconds }
+&nbsp;  log.info { m1 + 2.microseconds }
+&nbsp;  log.info { m2 - m1 }
 &nbsp;
 &nbsp;  val regex = &quot;&quot;&quot;\b(?&lt;city&gt;[A-Za-z\s]+),\s(?&lt;state&gt;[A-Z]{2}),\s(?&lt;areacode&gt;[0-9]{5})\b&quot;&quot;&quot;.toRegex()
 &nbsp;  val match = regex.find(&quot;San Jose, CA, 95124&quot;)!!
-&nbsp;  println(match.groups)
-&nbsp;  println(match.groups[&quot;city&quot;]?.value)
-&nbsp;  println(match.groups[&quot;state&quot;]?.value)
-&nbsp;  println(match.groups[&quot;areacode&quot;]?.value)
+&nbsp;  log.info { match.groups }
+&nbsp;  log.info { match.groups[&quot;city&quot;]?.value }
+&nbsp;  log.info { match.groups[&quot;state&quot;]?.value }
+&nbsp;  log.info { match.groups[&quot;areacode&quot;]?.value }
 &nbsp;
 &nbsp;  val hexFormat = HexFormat {
 &nbsp;    upperCase = true
@@ -171,12 +174,12 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;    }
 &nbsp;  }
 &nbsp;
-&nbsp;  println(123232.toHexString(hexFormat))
+&nbsp;  log.info { 123232.toHexString(hexFormat) }
 &nbsp;  val hex = &quot;Kotlin ${KotlinVersion.CURRENT}&quot;.encodeToByteArray().toHexString(hexFormat)
-&nbsp;  println(hex)
-&nbsp;  println(hex.hexToByteArray(hexFormat).decodeToString())
+&nbsp;  log.info { hex }
+&nbsp;  log.info { hex.hexToByteArray(hexFormat).decodeToString() }
 &nbsp;
-&nbsp;  println(Base64.Mime.encode(&quot;Hello Kotlin!&quot;.encodeToByteArray()))
+&nbsp;  log.info { Base64.Mime.encode(&quot;Hello Kotlin!&quot;.encodeToByteArray()) }
 &nbsp;}
 </code>
 </pre>
@@ -201,7 +204,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-04 08:27</div>
+    <div style="float:right;">generated on 2023-10-05 22:40</div>
 </div>
 </body>
 </html>
