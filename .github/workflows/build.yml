@@ -92,8 +92,7 @@ jobs:
         id: gradle-build
         run: |
           ./gradlew buildAndPublish
-          echo "dist_path=$(ls -1 backend/jvm/build/distributions/*.zip | head -n 1)" >> "$GITHUB_OUTPUT"
-          echo "dist_name=$(ls -1 backend/jvm/build/distributions/*.zip | head -n 1 | xargs basename)" >> "$GITHUB_OUTPUT"
+          echo "dist_path=backend/jvm/build/libs/jvm-all.jar" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -108,9 +107,9 @@ jobs:
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
-          name: jvm-all.jar
+          name: ${{ steps.gradle-build.outputs.artifact_name }}
           path: |
-            backend/jvm/build/libs/jvm-all.jar
+            ${{ steps.gradle-build.outputs.dist_path }}
           if-no-files-found: error
 
       - name: 🕸 Deploy the webapp to Github Pages

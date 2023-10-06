@@ -10,10 +10,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.adminRoutes() {
-  authenticate("admin") {
-    staticResources("/resources", ".") { contentType { ContentType.Text.Plain } }
-  }
-
   swaggerUI(path = "swagger", swaggerFile = "openapi/documentation.yaml") {
     version = BuildConfig.swaggerUi
   }

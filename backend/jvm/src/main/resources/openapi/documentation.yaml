@@ -1,0 +1,21 @@
+openapi: "3.0.3"
+info:
+  title: "kotlin_mpp_playground API"
+  description: "kotlin_mpp_playground API"
+  version: "1.0.0"
+servers:
+- url: "https://kotlin_mpp_playground"
+paths:
+  /:
+    get:
+      description: ""
+      responses:
+        "302":
+          description: "Found <br> Redirect"
+          content:
+            text/plain:
+              schema:
+                type: "string"
+              examples:
+                Example#1:
+                  value: "/swagger"

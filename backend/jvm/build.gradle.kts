@@ -21,13 +21,13 @@ application {
 exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
 
 // Configuration to copy webapp to resources
-val webApp by configurations.creating
+val webapp by configurations.creating
 
 tasks {
   val copyWebApp by
       registering(Copy::class) {
-        from(webApp)
-        into(processResources.map { it.destinationDir.resolve(webApp.name) })
+        from(webapp)
+        into(processResources.map { it.destinationDir.resolve(webapp.name) })
       }
   processResources { dependsOn(copyWebApp) }
 }
@@ -44,7 +44,7 @@ dependencies {
   implementation(libs.ktor.server.default.headers)
   implementation(libs.ktor.server.forwarded.header)
   implementation(libs.ktor.server.swagger)
-  implementation(libs.ktor.server.openapi)
+  // implementation(libs.ktor.server.openapi)
   implementation(libs.ktor.server.http.redirect)
   implementation(libs.ktor.server.compression)
   implementation(libs.ktor.server.cors)
@@ -82,7 +82,7 @@ dependencies {
   testImplementation(libs.testcontainers.postgresql)
 
   // Copy web app browserDist
-  webApp(project(path = ":${projects.web.name}", configuration = webApp.name))
+  webapp(project(path = ":${projects.web.name}", configuration = webapp.name))
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })
