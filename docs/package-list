@@ -52,3 +52,7 @@ dev.suresh.flow
 module:web
 hljs
 xterm
+module:jvm
+dev.suresh
+dev.suresh.plugins
+dev.suresh.routes
