@@ -8,6 +8,7 @@ import org.gradle.api.Action
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.ExternalDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.attributes.*
@@ -584,20 +585,19 @@ fun Project.printTaskGraph() {
 }
 
 /** Adds [file] as an outgoing variant to publication. */
+@Suppress("UnstableApiUsage")
 fun Project.addFileToJavaComponent(file: File) {
   // Here's a configuration to declare the outgoing variant
-  val executable by
-      configurations.creating {
+  val executable: Configuration by
+      configurations.consumable("executable") {
         description = "Declares executable outgoing variant"
-        isCanBeConsumed = true
-        isCanBeResolved = false
         attributes {
           // See https://docs.gradle.org/current/userguide/variant_attributes.html
           attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category.LIBRARY))
           attribute(DocsType.DOCS_TYPE_ATTRIBUTE, objects.named("exe"))
         }
+        outgoing { artifact(file) { classifier = "bin" } }
       }
-  executable.outgoing.artifact(file) { classifier = "bin" }
   val javaComponent = components.findByName("java") as AdhocComponentWithVariants
   javaComponent.addVariantsFromConfiguration(executable) {
     // dependencies for this variant are considered runtime dependencies

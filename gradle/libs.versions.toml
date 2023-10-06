@@ -14,7 +14,7 @@ java-addModules                = "jdk.incubator.vector"
 
 # Additional metadata
 group                          = "dev.suresh"
-app-mainclass                  = "MainKt"
+app-mainclass                  = "dev.suresh.AppKt"
 dev-name                       = "sureshg"
 dev-email                      = "email@suresh.dev"
 org-name                       = "suresh.dev"

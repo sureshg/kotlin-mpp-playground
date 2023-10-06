@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import common.jvmArguments
 import common.versionCatalogMapOf
 
@@ -32,16 +34,18 @@ dependencies {
 
 // Expose common js resource as configuration to be consumed by other projects
 // https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
-// val commonJsResources by
-//     configurations.creating {
-//       isCanBeConsumed = true
-//       isCanBeResolved = false
-//       attributes { attribute(Attribute.of("commonJSResources", String::class.java), "true") }
-//       attributes {
-//         attribute(
-//             Attribute.of(KotlinPlatformTypeAttribute.uniqueName, String::class.java),
-//             KotlinPlatformTypeAttribute.JS)
-//       }
-//     }
-//
-// artifacts { add(commonJsResources.name, tasks.jsProcessResources) }
+kotlin.sourceSets.jsMain {
+  val commonJsResources by configurations.consumable("commonJsResources")
+  artifacts { add(commonJsResources.name, tasks.jsProcessResources) }
+}
+
+// configurations {
+//   // Collects dependencies, constraints to be used by Consumable and Resolvable configurations.
+//   val webResources by dependencyScope("webResources")
+//   // Acts as the root of a dependency graph
+//   val webResourcesRuntimeClasspath by
+//       resolvable("webResourcesRuntimeClasspath") { extendsFrom(webResources) }
+//   // Models the outgoing variants of a project component.
+//   val webResourcesRuntimeElements by
+//       consumable("webResourcesRuntimeElements") { extendsFrom(webResources) }
+// }

@@ -20,6 +20,18 @@ application {
 
 exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
 
+// Configuration to copy webapp to resources
+val webApp by configurations.creating
+
+tasks {
+  val copyWebApp by
+      registering(Copy::class) {
+        from(webApp)
+        into(processResources.map { it.destinationDir.resolve(webApp.name) })
+      }
+  processResources { dependsOn(copyWebApp) }
+}
+
 dependencies {
   implementation(projects.common)
   // Server dependencies
@@ -68,6 +80,9 @@ dependencies {
   testImplementation(libs.ktor.server.tests)
   testImplementation(libs.testcontainers.junit5)
   testImplementation(libs.testcontainers.postgresql)
+
+  // Copy web app browserDist
+  webApp(project(path = ":${projects.web.name}", configuration = webApp.name))
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })
