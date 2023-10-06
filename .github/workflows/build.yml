@@ -107,7 +107,7 @@ jobs:
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.gradle-build.outputs.artifact_name }}
+          name: ${{ steps.gradle-build.outputs.name }}.jar
           path: |
             ${{ steps.gradle-build.outputs.dist_path }}
           if-no-files-found: error
