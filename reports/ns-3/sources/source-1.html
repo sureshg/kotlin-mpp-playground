@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > CommonPlatform</title>
+  <title>kotlin-mpp-playground Coverage Report > AppKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: CommonPlatform (dev.suresh)</h1>
+<h1>Coverage Summary for Class: AppKt (dev.suresh)</h1>
 
 <table class="coverageStats">
 
@@ -46,86 +46,114 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">CommonPlatform</td>
+  <td class="name">AppKt</td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    0%
   </span>
   <span class="absValue">
-    (1/3)
+    (0/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    0%
   </span>
   <span class="absValue">
-    (1/3)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    38.9%
+    0%
   </span>
   <span class="absValue">
-    (7/18)
+    (0/7)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">CommonPlatform$json$2</td>
+    <td class="name">AppKt$module$1</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (6/6)
+    (0/5)
   </span>
 </td>
   </tr>
   <tr>
-    <td class="name">CommonPlatform$json$2$1</td>
+    <td class="name">AppKt$module$1$1</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (6/6)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (18/18)
+    (0/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AppKt$module$1$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
   </span>
 </td>
   </tr>
@@ -133,27 +161,27 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    60%
+    0%
   </span>
   <span class="absValue">
-    (3/5)
+    (0/5)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    0%
   </span>
   <span class="absValue">
-    (8/10)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    73.8%
+    0%
   </span>
   <span class="absValue">
-    (31/42)
+    (0/32)
   </span>
 </td>
 </tr>
@@ -166,10 +194,24 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;actual val platform: TargetPlatform = DesktopPlatform
+&nbsp;import io.ktor.server.application.*
+&nbsp;import io.ktor.server.http.content.*
+&nbsp;import io.ktor.server.netty.*
+&nbsp;import io.ktor.server.routing.*
 &nbsp;
-&nbsp;object DesktopPlatform : TargetPlatform {
-&nbsp;  override val name: String = &quot;Desktop JVM&quot;
+&nbsp;fun main(args: Array&lt;String&gt;) {
+<b class="nc">&nbsp;  EngineMain.main(args)</b>
+&nbsp;}
+&nbsp;
+&nbsp;fun Application.module() {
+<b class="nc">&nbsp;  routing {</b>
+<b class="nc">&nbsp;    singlePageApplication {</b>
+<b class="nc">&nbsp;      useResources = true</b>
+<b class="nc">&nbsp;      filesPath = &quot;webApp&quot;</b>
+<b class="nc">&nbsp;      defaultPage = &quot;index.html&quot;</b>
+<b class="nc">&nbsp;      ignoreFiles { it.endsWith(&quot;.log&quot;) }</b>
+&nbsp;    }
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -194,7 +236,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-05 22:40</div>
+    <div style="float:right;">generated on 2023-10-06 09:13</div>
 </div>
 </body>
 </html>
