@@ -145,10 +145,10 @@ tasks {
     group = LifecycleBasePlugin.BUILD_TASK_NAME
     doLast {
       with(GithubAction) {
-        setOutput("name", project.name)
-        setOutput("group", project.group)
-        setOutput("version", project.version)
-        setOutput("artifact_name", "${project.name}-${project.version}")
+        setOutput("name", rootProject.name)
+        setOutput("group", rootProject.group)
+        setOutput("version", rootProject.version)
+        setOutput("artifact_name", "${rootProject.name}-${rootProject.version}")
       }
     }
   }
@@ -160,7 +160,7 @@ tasks {
   build { finalizedBy(githubActionOutput) }
 
   val buildAndPublish by registering {
-    dependsOn(subprojects.map { it.tasks.build })
+    dependsOn(allprojects.map { it.tasks.build })
     // Starting with column(:) means root project tasks
     dependsOn(":dokkaHtmlMultiModule", ":koverHtmlReport")
 
