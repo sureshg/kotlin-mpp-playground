@@ -1,25 +1,29 @@
 package tasks
 
-import com.javiersc.semver.project.gradle.plugin.SemverExtension
+import com.github.ajalt.mordant.rendering.TextColors
+import com.javiersc.semver.project.gradle.plugin.Commit
 import gg.jte.ContentType
 import gg.jte.TemplateEngine
 import gg.jte.output.StringOutput
 import javax.inject.Inject
 import org.gradle.api.DefaultTask
-import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.ProjectLayout
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.tasks.*
 import org.gradle.kotlin.dsl.*
 import org.gradle.language.base.plugins.LifecycleBasePlugin
 
 @CacheableTask
-abstract class BuildConfig @Inject constructor(private val extension: BuildConfigExtension) :
+abstract class BuildConfig @Inject constructor(private val extn: BuildConfigExtension) :
     DefaultTask() {
 
-  @get:[OutputDirectory Optional]
-  val generatedOutputDir: DirectoryProperty = extension.outputDir
+  @get:Input val version = extn.projectVersion
 
   @get:Internal internal val templateName = "BuildConfig.kte"
+
+  @get:[OutputDirectory Optional]
+  val generatedOutputDir: DirectoryProperty = extn.outputDir
 
   init {
     description = "Generate build config class"
@@ -28,20 +32,20 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
 
   @TaskAction
   fun execute() {
-    val dir = generatedOutputDir.get().asFile
+    val dir = generatedOutputDir.asFile.get()
     dir.deleteRecursively()
     dir.mkdirs()
 
-    val fqName = extension.classFqName.get()
+    val fqName = extn.classFqName.get()
     val className = fqName.substringAfterLast('.')
     val pkg = fqName.substringBeforeLast(".", "")
 
     val file = dir.resolve("$className.kt")
-    logger.quiet("Generated build config file: ${file.absolutePath}")
+    logger.quiet(TextColors.yellow("Generated build config file: ${file.path}"))
 
     // Get git commit info
     val gitCommit = run {
-      val commit = project.the<SemverExtension>().commits.get().first()
+      val commit = extn.gitCommit.get()
       mapOf(
           "gitHash" to commit.hash,
           "gitMessage" to commit.message,
@@ -53,13 +57,11 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
 
     // Root project properties
     val rootProjectProps =
-        project.rootProject.run {
-          mapOf(
-              "name" to name,
-              "description" to description,
-              "version" to version.toString(),
-          )
-        }
+        mapOf(
+            "name" to extn.projectName.get(),
+            "description" to extn.projectDesc.get(),
+            "version" to version.get(),
+        )
 
     // the<VersionCatalogsExtension>().named("libs").
     val params =
@@ -68,8 +70,8 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
             "pkg" to pkg,
             "projectProps" to rootProjectProps,
             "gitCommit" to gitCommit,
-            "catalogVersions" to extension.catalogVersions.get(),
-            "dependencies" to extension.dependencies.get(),
+            "catalogVersions" to extn.catalogVersions.get(),
+            "dependencies" to extn.dependencies.get(),
         )
 
     val content = StringOutput()
@@ -78,26 +80,18 @@ abstract class BuildConfig @Inject constructor(private val extension: BuildConfi
 
     tmplEngine.render(templateName, params, content)
     file.writeText(content.toString())
+    // outputs.dirs(generatedOutputDir)
   }
 }
 
-open class BuildConfigExtension(@Inject private val project: Project) {
-
-  @get:Input val classFqName = project.objects.property<String>().convention("BuildConfig")
-
-  @get:Input
-  val catalogVersions = project.objects.mapProperty<String, String>().convention(emptyMap())
-
-  @get:Input val dependencies = project.objects.listProperty<String>().convention(emptyList())
-
+open class BuildConfigExtension @Inject constructor(layout: ProjectLayout, objects: ObjectFactory) {
+  @get:Input val classFqName = objects.property<String>().convention("BuildConfig")
+  @get:Input val projectName = objects.property<String>()
+  @get:Input val projectDesc = objects.property<String>()
+  @get:Input val gitCommit = objects.property<Commit>()
+  @get:Input val catalogVersions = objects.mapProperty<String, String>().convention(emptyMap())
+  @get:Input val dependencies = objects.listProperty<String>().convention(emptyList())
+  val projectVersion = objects.property<String>()
   val outputDir =
-      project.objects
-          .directoryProperty()
-          .convention(project.layout.buildDirectory.dir("generated/buildconfig"))
-
-  // @get:Input val version =
-  // project.objects.property<String>().convention(project.version.toString())
-
-  //  @get:[Input Optional]
-  //  val additionalFields: MapProperty<String, Any> = project.objects.mapProperty<String, Any>()
+      objects.directoryProperty().convention(layout.buildDirectory.dir("generated/buildconfig"))
 }
