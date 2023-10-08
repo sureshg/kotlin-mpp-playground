@@ -143,12 +143,16 @@ tasks {
   val githubActionOutput by registering {
     description = "Set Github workflow action output for this build"
     group = LifecycleBasePlugin.BUILD_TASK_NAME
+
+    val name = project.name
+    val group = project.group
+    val version = project.version
     doLast {
       with(GithubAction) {
-        setOutput("name", rootProject.name)
-        setOutput("group", rootProject.group)
-        setOutput("version", rootProject.version)
-        setOutput("artifact_name", "${rootProject.name}-${rootProject.version}")
+        setOutput("name", name)
+        setOutput("group", group)
+        setOutput("version", version)
+        setOutput("artifact_name", "$name-$version")
       }
     }
   }
