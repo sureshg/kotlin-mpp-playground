@@ -149,7 +149,7 @@ kotlin {
     //   }
     // }
     //
-    // targets["jvm"].compilations["main"].defaultSourceSet {
+    // targets["metadata"].compilations["main"].defaultSourceSet {
     //   dependsOn(jvmCommon)
     // }
 
@@ -236,6 +236,7 @@ tasks {
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
     kotlin.sourceSets.commonMain { kotlin.srcDirs(buildConfig) }
+    // compileKotlinMetadata { dependsOn(buildConfig) }
     // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
