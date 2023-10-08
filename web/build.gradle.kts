@@ -7,7 +7,6 @@ plugins {
 
 description = "Web application"
 
-// Copy common JS resources to webapp
 val jsResources by configurations.creating
 
 tasks {
@@ -22,7 +21,9 @@ tasks {
 dependencies {
   commonMainImplementation(projects.common)
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
+  // Add commonJS resources to web
   jsResources(project(":${projects.common.name}", "commonJsResources"))
+
   // jsMainImplementation(npm("kotlin-playground", libs.versions.npm.kotlin.playground.get()))
   // jsMainImplementation(npm("xterm", libs.versions.npm.xtermjs.get()))
   // jsMainImplementation(npm("vega-lite", libs.versions.npm.vega.lite.get()))
