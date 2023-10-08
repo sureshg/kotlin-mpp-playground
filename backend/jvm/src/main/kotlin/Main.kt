@@ -61,7 +61,7 @@ fun virtualThreads() {
   check(states[Subtask.State.UNAVAILABLE]?.size == 40)
 
   StructuredTaskScope.ShutdownOnFailure().use {
-    val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform().name} !" }
+    val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform.name} !" }
     it.join().throwIfFailed()
     log.info { task.get() }
   }
