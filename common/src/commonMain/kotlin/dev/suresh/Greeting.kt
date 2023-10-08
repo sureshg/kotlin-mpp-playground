@@ -10,7 +10,7 @@ import kotlinx.serialization.encodeToString
 class Greeting {
 
   fun greeting() = buildString {
-    appendLine(json.encodeToString(platform().info))
+    appendLine(json.encodeToString(platform.info))
     appendLine(KData("Foo", 20, "test"))
     appendLine(kotlinxTests())
   }
