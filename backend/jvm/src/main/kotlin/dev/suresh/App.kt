@@ -1,5 +1,6 @@
 package dev.suresh
 
+import BuildConfig
 import dev.suresh.plugins.configureHTTP
 import dev.suresh.plugins.configureSecurity
 import dev.suresh.plugins.configureSerialization
@@ -11,6 +12,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.routing.*
 
 fun main(args: Array<String>) {
+  println("Starting App (${BuildConfig.version})...")
   EngineMain.main(args)
 }
 
