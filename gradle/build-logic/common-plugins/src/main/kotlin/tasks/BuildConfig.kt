@@ -1,6 +1,5 @@
 package tasks
 
-import com.github.ajalt.mordant.rendering.TextColors
 import com.javiersc.semver.project.gradle.plugin.Commit
 import gg.jte.ContentType
 import gg.jte.TemplateEngine
@@ -41,7 +40,7 @@ abstract class BuildConfig @Inject constructor(private val extn: BuildConfigExte
     val pkg = fqName.substringBeforeLast(".", "")
 
     val file = dir.resolve("$className.kt")
-    logger.quiet(TextColors.yellow("Generated build config file: ${file.path}"))
+    logger.quiet("Generated build config file: ${file.path}")
 
     // Get git commit info
     val gitCommit = run {
