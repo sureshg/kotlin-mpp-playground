@@ -71,6 +71,7 @@ kotlin {
     browser {
       commonWebpackConfig {
         // outputFileName = "app.js"
+        // sourceMaps = true
         cssSupport { enabled = true }
       }
 

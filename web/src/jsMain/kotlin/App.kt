@@ -18,6 +18,7 @@ import org.w3c.dom.HTMLButtonElement
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLProgressElement
 import org.w3c.dom.Node
+import web.navigator.navigator
 
 val mainScope = MainScope()
 
@@ -27,7 +28,7 @@ suspend fun main() {
 
   copy.onclick = {
     mainScope.launch {
-      web.navigator.navigator.clipboard.writeText(root.textContent.orEmpty()).await()
+      navigator.clipboard.writeText(root.textContent.orEmpty()).await()
       log.info { "Copied to clipboard using kotlinx-wrapper APIs!" }
     }
   }
