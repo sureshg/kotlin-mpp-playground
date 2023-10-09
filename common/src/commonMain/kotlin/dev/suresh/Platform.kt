@@ -4,16 +4,18 @@ package dev.suresh
 
 import BuildConfig
 import kotlin.jvm.JvmName
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 import kotlinx.serialization.json.Json
 
-expect val platform: TargetPlatform
+expect val platform: Platform
 
-interface TargetPlatform {
+interface Platform {
 
   val name: String
 
@@ -58,7 +60,7 @@ interface TargetPlatform {
                   mapOf(
                       "java" to sysProp("java.runtime.version", "n/a"),
                       "kotlin" to KotlinVersion.CURRENT.toString(),
-                      "platform" to "Kotlin ${this@TargetPlatform.name}",
+                      "platform" to "Kotlin ${this@Platform.name}",
                   ),
               "git" to
                   mapOf(
@@ -96,3 +98,14 @@ val utcDateTimeNow
 /** Gets the current date and time in the system's default time zone. */
 val localDateTimeNow
   get() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+
+/**
+ * Runs the given suspend block on a virtual thread, so that we can call blocking I/O APIs from
+ * coroutines
+ */
+suspend inline fun <T> runOnVirtualThread(crossinline block: suspend CoroutineScope.() -> T): T =
+    withContext(platform.vtDispatcher) { block() }
+
+/** A coroutine scope that uses [Platform.vtDispatcher] as its dispatcher. */
+val virtualThreadScope
+  get() = CoroutineScope(platform.vtDispatcher)

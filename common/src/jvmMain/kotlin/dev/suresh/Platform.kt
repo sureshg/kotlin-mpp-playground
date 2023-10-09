@@ -8,9 +8,9 @@ import java.util.concurrent.Executors
 import kotlinx.coroutines.asCoroutineDispatcher
 import org.slf4j.LoggerFactory
 
-actual val platform: TargetPlatform = JvmPlatform
+actual val platform: Platform = JvmPlatform
 
-object JvmPlatform : TargetPlatform {
+object JvmPlatform : Platform {
 
   private val log = LoggerFactory.getLogger(this::class.java)
 

@@ -16,7 +16,13 @@ application {
   applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
 }
 
-buildConfig { catalogVersions = project.versionCatalogMapOf() }
+buildConfig {
+  projectName = rootProject.name
+  projectVersion = project.version.toString()
+  projectDesc = rootProject.description
+  gitCommit = semver.commits.get().first()
+  catalogVersions = project.versionCatalogMapOf()
+}
 
 dependencies {
   commonMainApi(libs.arrow.suspendapp)
@@ -38,6 +44,10 @@ kotlin.sourceSets.jsMain {
   val commonJsResources by configurations.consumable("commonJsResources")
   artifacts { add(commonJsResources.name, tasks.jsProcessResources) }
 }
+
+// tasks.buildConfig {
+//  outputs.upToDateWhen { false }
+// }
 
 // configurations {
 //   // Collects dependencies, constraints to be used by Consumable and Resolvable configurations.

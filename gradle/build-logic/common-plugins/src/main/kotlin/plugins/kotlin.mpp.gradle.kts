@@ -149,9 +149,13 @@ kotlin {
     //   }
     // }
     //
-    // targets["metadata"].compilations["main"].defaultSourceSet {
-    //   dependsOn(jvmCommon)
-    // }
+
+    // val target = targets.first { it.platformType == KotlinPlatformType.common }
+    // val compilation = target.compilations["main"]
+    // // OR val compilation = targets["metadata"].compilations["main"]
+    // compilation.defaultSourceSet.kotlin.srcDir(buildConfig)
+    // // val newSourceSet = sourceSets.create("gen")
+    // // compilation.defaultSourceSet.dependsOn(newSourceSet)
 
     jvmMain {
       // dependsOn(jvmCommon)
