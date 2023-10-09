@@ -12,7 +12,7 @@ import io.ktor.server.netty.*
 import io.ktor.server.routing.*
 
 fun main(args: Array<String>) {
-  println("Starting App1 ${BuildConfig.version}...")
+  println("Starting App ${BuildConfig.version}...")
   EngineMain.main(args)
 }
 
