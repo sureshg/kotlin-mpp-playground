@@ -49,27 +49,27 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
   <td class="name">CommonPlatform</td>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    20%
   </span>
   <span class="absValue">
-    (1/3)
+    (1/5)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    33.3%
+    20%
   </span>
   <span class="absValue">
-    (1/3)
+    (1/5)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    38.9%
+    18%
   </span>
   <span class="absValue">
-    (7/18)
+    (9/50)
   </span>
 </td>
 </tr>
@@ -129,31 +129,59 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
   </span>
 </td>
   </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
+  <tr>
+    <td class="name">CommonPlatform$runOnVirtualThread$2</td>
 <td class="coverageStat">
   <span class="percent">
-    60%
+    0%
   </span>
   <span class="absValue">
-    (3/5)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    0%
   </span>
   <span class="absValue">
-    (8/10)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    73.8%
+    0%
   </span>
   <span class="absValue">
-    (31/42)
+    (0/25)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    37.5%
+  </span>
+  <span class="absValue">
+    (3/8)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    61.5%
+  </span>
+  <span class="absValue">
+    (8/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (33/99)
   </span>
 </td>
 </tr>
@@ -166,9 +194,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;actual val platform: TargetPlatform = DesktopPlatform
+&nbsp;actual val platform: Platform = DesktopPlatform
 &nbsp;
-&nbsp;object DesktopPlatform : TargetPlatform {
+&nbsp;object DesktopPlatform : Platform {
 &nbsp;  override val name: String = &quot;Desktop JVM&quot;
 &nbsp;}
 </code>
@@ -194,7 +222,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-07 01:53</div>
+    <div style="float:right;">generated on 2023-10-09 01:18</div>
 </div>
 </body>
 </html>
