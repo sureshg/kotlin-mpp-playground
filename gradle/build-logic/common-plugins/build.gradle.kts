@@ -93,7 +93,11 @@ jte {
   contentType = gg.jte.ContentType.Plain
   sourceDirectory = sourceSets.main.map { it.resources.srcDirs.first().toPath() }
   generate()
-  // jteExtension("gg.jte.models.generator.ModelExtension")
+  jteExtension("gg.jte.models.generator.ModelExtension") {
+    property("language", "Kotlin")
+    // property("interfaceAnnotation", "@foo.bar.MyAnnotation")
+    // property("implementationAnnotation", "@foo.bar.MyAnnotation")
+  }
   // jteExtension("gg.jte.nativeimage.NativeResourcesExtension")
   // binaryStaticContent = true
 }
@@ -120,8 +124,8 @@ dependencies {
   implementation(libs.build.zip.prefixer)
   // Templating
   implementation(libs.jte.runtime)
+  jteGenerate(libs.jte.models)
   // compileOnly(libs.jte.kotlin)
-  // jteGenerate(libs.jte.models)
 
   // External plugins deps to use in precompiled script plugins
   // https://docs.gradle.org/current/userguide/custom_plugins.html#applying_external_plugins_in_precompiled_script_plugins
