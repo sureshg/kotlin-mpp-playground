@@ -1,13 +1,17 @@
-import dev.suresh.*
+package dev.suresh
+
+import kotlinx.datetime.Clock
+import kotlinx.datetime.LocalDateTime
+import kotlinx.datetime.toJavaInstant
+import kotlinx.metadata.jvm.KotlinClassMetadata
+import langFeatures
+import log
+import stdlibFeatures
 import java.lang.foreign.FunctionDescriptor
 import java.lang.foreign.ValueLayout
 import java.util.concurrent.StructuredTaskScope
 import java.util.concurrent.StructuredTaskScope.Subtask
 import kotlin.time.Duration.Companion.seconds
-import kotlinx.datetime.Clock
-import kotlinx.datetime.LocalDateTime
-import kotlinx.datetime.toJavaInstant
-import kotlinx.metadata.jvm.KotlinClassMetadata
 
 fun main() {
   log.info { (Greeting().greeting()) }

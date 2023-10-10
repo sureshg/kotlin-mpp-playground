@@ -158,6 +158,7 @@ dependencies {
   implementation(libs.build.npm.publish.plugin)
   implementation(libs.build.mokkery.plugin)
   implementation(libs.build.jte.plugin)
+  // implementation(libs.jte.native)
   implementation(libs.build.jib.plugin)
   implementation(libs.build.jib.nativeimage.extn)
   // For using kotlin-dsl in pre-compiled script plugins

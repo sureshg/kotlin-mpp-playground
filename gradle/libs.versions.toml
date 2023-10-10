@@ -34,7 +34,7 @@ kotlinx-benchmark              = "0.4.9"
 kotlinx-metadata               = "0.7.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.13.2"
-kotlin-wrappers                = "1.0.0-pre.631"
+kotlin-wrappers                = "1.0.0-pre.632"
 kotlin-redacted                = "1.7.0-alpha01"
 ksp-auto-service               = "1.1.0"
 gradle-kotlin-dsl              = "4.1.2"
@@ -69,7 +69,6 @@ google-tink                    = "1.10.0"
 graalvm                        = "23.0.1"
 rsocket                        = "0.15.4"
 jctools                        = "4.0.1"
-compose-icons                  = "1.1.0"
 benasher44-uuid                = "0.8.1"
 kotlinx-uuid                   = "0.0.20"
 kotlin-codepoints              = "0.6.1"
@@ -80,7 +79,7 @@ kotlin-retry                   = "1.0.9"
 uri-kmp                        = "0.0.15"
 cash-turbine                   = "1.0.0"
 kmp-store5                     = "5.0.0-beta01"
-kmp-settings                   = "1.0.0"
+kmp-settings                   = "1.1.0"
 parsus                         = "0.6.0"
 java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
@@ -93,7 +92,7 @@ exposed                        = "0.44.0"
 postgresql                     = "42.6.0"
 hikariCP                       = "5.0.1"
 h2                             = "2.2.220"
-micrometer                     = "1.11.4"
+micrometer                     = "1.11.5"
 swagger-ui                     = "5.1.3"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
@@ -105,6 +104,8 @@ testcontainers                 = "1.19.1"
 kubernetes-client              = "18.0.1"
 reflect-typeparamresolver      = "1.0.2"
 reflect-typetools              = "0.6.3"
+compose-icons                  = "1.1.0"
+compose-html-lazy-layouts      = "0.1.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.8.0"
@@ -199,6 +200,7 @@ kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-b
 kotlin-stdlib                        = { module = "org.jetbrains.kotlin:kotlin-stdlib"                              , version.ref = "kotlin"}
 kotlin-reflect                       = { module = "org.jetbrains.kotlin:kotlin-reflect"                             , version.ref = "kotlin"}
 kotlin-test                          = { module = "org.jetbrains.kotlin:kotlin-test"                                , version.ref = "kotlin"}
+kotlin-test-junit                    = { module = "org.jetbrains.kotlin:kotlin-test-junit"                          , version.ref = "kotlin"}
 kotlinx-metadata-jvm                 = { module = "org.jetbrains.kotlinx:kotlinx-metadata-jvm"                      , version.ref = "kotlinx-metadata"}
 kotlinx-coroutines-core              = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core"                   , version.ref = "kotlinx-coroutines"}
 kotlinx-coroutines-test              = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test"                   , version.ref = "kotlinx-coroutines"}
@@ -356,10 +358,13 @@ compose-icons-linea                  = { module = "br.com.devsrsouza.compose.ico
 compose-icons-octicons               = { module = "br.com.devsrsouza.compose.icons:octicons"                   , version.ref = "compose-icons" }
 compose-icons-simpleIcons            = { module = "br.com.devsrsouza.compose.icons:simple-icons"               , version.ref = "compose-icons" }
 compose-icons-tablerIcons            = { module = "br.com.devsrsouza.compose.icons:tabler-icons"               , version.ref = "compose-icons" }
+compose-html-lazy-layouts            = { module = "dev.opensavvy.compose.lazy:lazy-layouts"                    , version.ref = "compose-html-lazy-layouts" }
 
 kotlin-wrappers-bom                  = { module = "org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom"          , version.ref = "kotlin-wrappers" }
 multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-settings"                       , version.ref = "kmp-settings" }
 multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"            , version.ref = "kmp-settings" }
+multiplatform-settings-no-arg        = { module = "com.russhwolf:multiplatform-settings-no-arg"                , version.ref = "kmp-settings" }
+multiplatform-settings-serialization = { module = "com.russhwolf:multiplatform-settings-serialization"         , version.ref = "kmp-settings" }
 
 apache-commons-imaging               = { module = "org.apache.commons:commons-imaging"                         , version.ref = "apache-commons-imaging" }
 testcontainers-bom                   = { module = "org.testcontainers:testcontainers-bom"                      , version.ref = "testcontainers"}
