@@ -3,12 +3,16 @@ plugins {
   plugins.publishing
 }
 
-kotlin.sourceSets.jvmMain {
-  dependencies {
-    implementation(libs.kotlin.ksp.api)
-    // implementation("com.squareup:kotlinpoet-ksp")
-  }
+kotlin.sourceSets {
+  commonMain { dependencies { implementation(projects.common) } }
 
-  kotlin.srcDir("src/main/kotlin")
-  resources.srcDir("src/main/resources")
+  jvmMain {
+    dependencies {
+      implementation(libs.kotlin.ksp.api)
+      // implementation("com.squareup:kotlinpoet-ksp")
+    }
+
+    kotlin.srcDir("src/main/kotlin")
+    resources.srcDir("src/main/resources")
+  }
 }

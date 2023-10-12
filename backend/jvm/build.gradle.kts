@@ -1,5 +1,4 @@
 import common.jvmArguments
-import common.mppTargetName
 
 plugins {
   plugins.kotlin.jvm
@@ -10,8 +9,6 @@ plugins {
 }
 
 description = "Ktor backend jvm application"
-
-mppTargetName = "jvm"
 
 application {
   mainClass = libs.versions.app.mainclass.get()

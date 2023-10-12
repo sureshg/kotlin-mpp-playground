@@ -136,7 +136,6 @@ graph LR
 
   subgraph backend
     jvm
-    native
   end
   subgraph compose
     desktop
@@ -158,9 +157,12 @@ graph LR
     ksp
     processor
   end
+  plugin --> common
   benchmark --> common
   web --> common
   desktop --> common
-  native --> common
+  client --> common
+  processor --> common
   jvm --> common
+  jvm --> web
 ```

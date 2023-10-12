@@ -25,7 +25,7 @@ allOpen { annotation("org.openjdk.jmh.annotations.State") }
 benchmark {
   targets {
     register("jvm") { configureJmh() }
-    register("desktop") { configureJmh() }
+    // register("desktop") { configureJmh() }
     // register("js")
   }
 

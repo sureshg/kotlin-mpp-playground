@@ -48,21 +48,22 @@ kotlin {
       // compilerOptions.configure { configureKotlinJvm() }
     }
 
+    // ./gradlew jvmRun
+    mainRun { mainClass = libs.versions.app.mainclass.get() }
+
     // val test by testRuns.existing
     testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
-    // Attribute to distinguish JVM target
-    attributes.attribute(mppTargetAttr, "jvm")
   }
 
-  jvm("desktop") {
-    compilations.all {
-      compileJavaTaskProvider?.configure { configureJavac() }
-      compileTaskProvider.configure { compilerOptions { configureKotlinJvm() } }
-    }
-    testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
-    // Attribute to distinguish Desktop target
-    attributes.attribute(mppTargetAttr, "desktop")
-  }
+  //  jvm("desktop") {
+  //    compilations.all {
+  //      compileJavaTaskProvider?.configure { configureJavac() }
+  //      compileTaskProvider.configure { compilerOptions { configureKotlinJvm() } }
+  //    }
+  //    testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
+  //    // Attribute to distinguish Desktop target
+  //    attributes.attribute(mppTargetAttr, "desktop")
+  //  }
 
   js {
     useEsModules()

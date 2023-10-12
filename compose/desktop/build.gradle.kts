@@ -1,7 +1,6 @@
-import common.mppTargetName
-
-plugins { plugins.kotlin.mpp }
-
-mppTargetName = "desktop"
+plugins {
+  plugins.kotlin.mpp
+  plugins.publishing
+}
 
 dependencies { commonMainImplementation(projects.common) }
