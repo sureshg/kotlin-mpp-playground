@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > Lang</title>
+  <title>kotlin-mpp-playground Coverage Report > JvmBenchmarkKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,70 +19,22 @@
 <div class="breadCrumbs">
 Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh</a>
+    <a href="../index.html">bench</a>
 </div>
 
-<h1>Coverage Summary for Class: Lang (dev.suresh)</h1>
+<h1>Coverage Summary for Class: JvmBenchmarkKt (bench)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 <th class="coverageStat 
 ">
-  Class, %
-</th>
-<th class="coverageStat 
-">
-  Method, %
-</th>
-<th class="coverageStat 
-">
   Branch, %
-</th>
-<th class="coverageStat 
-">
-  Line, %
-</th>
-<th class="coverageStat 
-">
-  Instruction, %
 </th>
 </tr>
 <tr>
-  <td class="name">Lang</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
+  <td class="name">JvmBenchmarkKt</td>
     <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/14)
-  </span>
-</td>
 </tr>
 
 </table>
@@ -92,9 +44,41 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh;
+<code class="sourceCode" id="sourceCode">&nbsp;package bench
 &nbsp;
-<b class="nc">&nbsp;public record Lang(String name) {}</b>
+&nbsp;import java.util.concurrent.TimeUnit
+&nbsp;import jdk.incubator.vector.LongVector
+&nbsp;import org.openjdk.jmh.annotations.*
+&nbsp;
+&nbsp;const val WARMUP_ITERATIONS = 5
+&nbsp;
+&nbsp;@State(Scope.Benchmark)
+&nbsp;@BenchmarkMode(Mode.AverageTime)
+&nbsp;@OutputTimeUnit(TimeUnit.NANOSECONDS)
+&nbsp;@Warmup(iterations = WARMUP_ITERATIONS, time = 1, timeUnit = TimeUnit.SECONDS)
+&nbsp;@Measurement(iterations = 1, time = 1, timeUnit = TimeUnit.SECONDS)
+&nbsp;@Fork(value = 1, jvmArgsAppend = [&quot;--add-modules=jdk.incubator.vector&quot;])
+&nbsp;class JvmTestBenchmark {
+&nbsp;
+&nbsp;  private var data = 0.0
+&nbsp;
+&nbsp;  @Setup
+&nbsp;  fun setUp() {
+&nbsp;    data = 3.0
+&nbsp;  }
+&nbsp;
+&nbsp;  @Benchmark
+&nbsp;  fun sqrtBenchmark(): Double {
+&nbsp;    return Math.sqrt(data)
+&nbsp;  }
+&nbsp;
+&nbsp;  @Benchmark
+&nbsp;  fun cosBenchmark(): Double {
+&nbsp;    return Math.cos(data)
+&nbsp;  }
+&nbsp;
+&nbsp;  @Benchmark fun vectorAPI() = LongVector.SPECIES_PREFERRED.length()
+&nbsp;}
 </code>
 </pre>
 </div>
