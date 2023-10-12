@@ -21,7 +21,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-kotlinx-kover                  = "0.7.3"
+kotlinx-kover                  = "0.7.4"
 kotlinx-io                     = "0.3.0"
 kotlinx-atomicfu               = "0.22.0"
 kotlinx-coroutines             = "1.7.3"

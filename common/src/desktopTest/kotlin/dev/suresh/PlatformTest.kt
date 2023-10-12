@@ -7,6 +7,6 @@ class PlatformTest {
 
   @Test
   fun greetings() {
-    assertTrue(Greeting().greeting().contains("JVM")) { "JVM platform check failed!" }
+    assertTrue(Greeting().greeting().contains("Desktop")) { "Desktop platform check failed!" }
   }
 }

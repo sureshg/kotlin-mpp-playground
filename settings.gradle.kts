@@ -8,7 +8,6 @@ listOf(
         "common",
         "backend:jvm",
         // "backend:native",
-        "client",
         "web",
         "benchmark",
         "compose:web",

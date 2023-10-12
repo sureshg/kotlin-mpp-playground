@@ -377,6 +377,7 @@ fun LanguageSettingsBuilder.configureKotlinLang() {
   optIn("kotlinx.serialization.ExperimentalSerializationApi")
   optIn("kotlin.ExperimentalMultiplatform")
   optIn("kotlin.js.ExperimentalJsExport")
+  // optIn("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
 }
 
 context(Project)
