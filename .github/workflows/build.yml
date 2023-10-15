@@ -48,6 +48,13 @@ jobs:
       matrix:
         os: [ ubuntu-latest, macos-latest, windows-latest ]
         jdk: [ ea ]
+        include:
+          - os: macos-latest
+            native_task: :macosArm64Test :macosX64Test
+          - os: windows-latest
+            native_task: :mingwX64Test
+          - os: ubuntu-latest
+            native_task: :linuxX64Test
 
     runs-on: ${{ matrix.os }}
     continue-on-error: false
@@ -81,6 +88,13 @@ jobs:
           java-version: ${{ steps.download-jdk.outputs.version }}
           jdkFile: ${{ steps.download-jdk.outputs.archive }}
           cache: 'gradle'
+
+      - name: 🚄 Cache Kotlin Native Compiler
+        uses: actions/cache@v3
+        with:
+          path: ~/.konan
+          key: ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-konan-
 
       - name: Setup Gradle
         if: ${{ false }}
@@ -175,6 +189,13 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
+
+      - name: 🚄Cache Kotlin Native Compiler
+        uses: actions/cache@v3
+        with:
+          path: ~/.konan
+          key: ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-konan-
 
       - name: ⚙️Build Changelog
         id: github_release

@@ -36,6 +36,11 @@ $ ./gradlew :common:run
 $ ./gradlew :backend:jvm:run
 $ ./gradlew :web:jsBrowserProductionRun -t
 
+# Kotlin Native
+$ ./gradlew :backend:native:macOsUniversalBinary
+$ ./gradlew :backend:native:jibDockerBuild
+$ docker run -it --rm sureshg/native
+
 # Publishing
 $ ./gradlew publishAllPublicationsToLocalRepository
 
@@ -131,38 +136,36 @@ $ actionlint
     'theme': 'neutral'
   }
 }%%
-
 graph LR
-
-  subgraph backend
-    jvm
-  end
-  subgraph compose
-    desktop
-    web
-  end
-  subgraph dep-mgmt
-    bom
-    catalog
-  end
-  subgraph meta
-    compiler
-    ksp
-  end
-  subgraph compiler
-    compiler
-    plugin
-  end
-  subgraph ksp
-    ksp
-    processor
-  end
-  plugin --> common
-  benchmark --> common
-  web --> common
-  desktop --> common
-  client --> common
-  processor --> common
-  jvm --> common
-  jvm --> web
+    subgraph backend
+        jvm
+    end
+    subgraph compose
+        desktop
+        web
+    end
+    subgraph dep-mgmt
+        bom
+        catalog
+    end
+    subgraph meta
+        compiler
+        ksp
+    end
+    subgraph compiler
+        compiler
+        plugin
+    end
+    subgraph ksp
+        ksp
+        processor
+    end
+    plugin --> common
+    benchmark --> common
+    web --> common
+    desktop --> common
+    client --> common
+    processor --> common
+    jvm --> common
+    jvm --> web
 ```

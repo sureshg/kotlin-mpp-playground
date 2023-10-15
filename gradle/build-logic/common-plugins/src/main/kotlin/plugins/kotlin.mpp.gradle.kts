@@ -50,20 +50,11 @@ kotlin {
 
     // ./gradlew jvmRun
     mainRun { mainClass = libs.versions.app.mainclass.get() }
-
     // val test by testRuns.existing
     testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
-  }
 
-  //  jvm("desktop") {
-  //    compilations.all {
-  //      compileJavaTaskProvider?.configure { configureJavac() }
-  //      compileTaskProvider.configure { compilerOptions { configureKotlinJvm() } }
-  //    }
-  //    testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
-  //    // Attribute to distinguish Desktop target
-  //    attributes.attribute(mppTargetAttr, "desktop")
-  //  }
+    // attributes.attribute(mppTargetAttr, "jvm")
+  }
 
   js {
     useEsModules()
@@ -86,6 +77,15 @@ kotlin {
     }
     compilations.configureEach { kotlinOptions { configureKotlinJs() } }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
+  }
+
+  // Enable native target only for common and native projects
+  if (project.name in listOf(commonProjectName, "native")) {
+    linuxX64()
+    // linuxArm64()
+    mingwX64()
+    macosX64()
+    macosArm64()
   }
 
   applyDefaultHierarchyTemplate()

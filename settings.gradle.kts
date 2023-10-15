@@ -6,8 +6,6 @@ rootProject.name = "kotlin-mpp-playground"
 
 listOf(
         "common",
-        "backend:jvm",
-        // "backend:native",
         "client",
         "web",
         "benchmark",
@@ -16,7 +14,10 @@ listOf(
         "dep-mgmt:bom",
         "dep-mgmt:catalog",
         "meta:ksp:processor",
-        "meta:compiler:plugin")
+        "meta:compiler:plugin",
+        "backend:jvm",
+        "backend:native",
+    )
     .forEach {
       include(":$it")
     }

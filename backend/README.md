@@ -5,10 +5,12 @@
 $ ./gradlew :backend:jvm:run
 
 # Native
-$ ./gradlew :backend:native:runDebugExecutable
-$ ./gradlew :backend:native:linkReleaseExecutable
+$ ./gradlew :backend:native:macOsUniversalBinary
 
 # Container
 $ ./gradlew :backend:native:jibDockerBuild
-$ docker run --rm -it sureshg/native
+$ docker run -it --rm sureshg/native
 ```
+
+More Kotlin Native samples can be found
+in [Kotlin GitHub Repo](https://github.com/JetBrains/kotlin/tree/master/kotlin-native/backend.native/tests/samples)

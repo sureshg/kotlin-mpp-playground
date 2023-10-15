@@ -23,6 +23,7 @@ import org.gradle.internal.os.OperatingSystem
 import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.*
 import org.gradle.plugin.use.PluginDependency
+import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
@@ -55,6 +56,9 @@ val Project.debugEnabled
 
 val Project.hasCleanTask
   get() = gradle.startParameter.taskNames.any { it == "clean" }
+
+val Project.hasDokkaTasks
+  get() = gradle.taskGraph.allTasks.filterIsInstance<AbstractDokkaTask>().any()
 
 val Project.isSnapshot
   get() = version.toString().endsWith("SNAPSHOT", true)
