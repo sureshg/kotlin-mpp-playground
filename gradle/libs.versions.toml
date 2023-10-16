@@ -105,7 +105,7 @@ kubernetes-client              = "18.0.1"
 reflect-typeparamresolver      = "1.0.2"
 reflect-typetools              = "0.6.3"
 compose-icons                  = "1.1.0"
-compose-html-lazy-layouts      = "0.1.0"
+compose-html-lazy-layouts      = "0.1.1"
 
 # NPM Dependencies
 npm-highlightjs                = "11.8.0"
