@@ -2,6 +2,7 @@ import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
 import common.Platform
 import common.githubUser
+import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
@@ -57,6 +58,8 @@ tasks {
               TextColors.cyan(
                   "Universal macOS binary created: ${layout.buildDirectory.file(binName).get().asFile.path}"))
         }
+
+        onlyIf { OperatingSystem.current().isMacOsX }
       }
 
   val prepareJib by
