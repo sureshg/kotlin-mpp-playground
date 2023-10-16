@@ -32,9 +32,13 @@ $ ./gradlew buildAndPublish
 <summary>Run Modules</summary>
 
 ```bash
+# Kotlin JVM
 $ ./gradlew :common:run
 $ ./gradlew :backend:jvm:run
+
+# Kotlin JS
 $ ./gradlew :web:jsBrowserProductionRun -t
+$ ./gradlew kotlinUpgradeYarnLock
 
 # Kotlin Native
 $ ./gradlew :backend:native:macOsUniversalBinary
@@ -46,9 +50,6 @@ $ ./gradlew publishAllPublicationsToLocalRepository
 
 # Benchmark
 $ ./gradlew :benchmark:benchmark
-
-# Upgrade yarn lock file
-$ ./gradlew kotlinUpgradeYarnLock
 
 # Dependencies
 $ ./gradlew :backend:jvm:listResolvedArtifacts
@@ -139,6 +140,7 @@ $ actionlint
 graph LR
     subgraph backend
         jvm
+        native
     end
     subgraph compose
         desktop
@@ -165,6 +167,7 @@ graph LR
     web --> common
     desktop --> common
     client --> common
+    native --> common
     processor --> common
     jvm --> common
     jvm --> web
