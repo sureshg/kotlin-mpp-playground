@@ -1,14 +1,11 @@
 package dev.suresh
 
-import kotlin.experimental.ExperimentalNativeApi
 import kotlin.native.Platform as KNPlatform
-import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.toKString
 import platform.posix.getenv
 
 actual val platform: Platform = NativePlatform
 
-@OptIn(ExperimentalNativeApi::class, ExperimentalForeignApi::class)
 object NativePlatform : Platform {
   override val name: String = "Native"
 

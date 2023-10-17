@@ -1,9 +1,7 @@
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
-import common.Platform
 import common.githubUser
 import org.gradle.internal.os.OperatingSystem
-import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
@@ -16,8 +14,6 @@ plugins {
 description = "Ktor native application"
 
 kotlin {
-  // configureHostTarget()
-
   targets.filterIsInstance<KotlinNativeTarget>().forEach {
     it.binaries { executable(listOf(RELEASE)) { entryPoint = "main" } }
     it.compilations.configureEach {
@@ -32,6 +28,39 @@ kotlin {
     // nativeMain { dependencies { api(libs.arrow.suspendapp.ktor) } }
   }
 }
+
+jib {
+  from {
+    image = "debian:stable-slim"
+    // image = "gcr.io/distroless/java-base-debian12"
+    platforms {
+      platform {
+        architecture = "amd64"
+        os = "linux"
+      }
+      // platform {
+      //   architecture = "arm64"
+      //   os = "linux"
+      // }
+    }
+  }
+
+  to {
+    image = "${project.githubUser}/${project.name}"
+    tags = setOf("latest")
+  }
+
+  pluginExtensions {
+    pluginExtension {
+      implementation = JibNativeImageExtension::class.qualifiedName
+      properties = mapOf("imageName" to "app")
+    }
+  }
+  container { mainClass = "MainKt" }
+}
+
+// Workaround for Jib
+sourceSets.maybeCreate("main")
 
 tasks {
   val linkReleaseExecutableLinuxX64 by getting(KotlinNativeLink::class)
@@ -71,59 +100,4 @@ tasks {
       }
 
   jibDockerBuild { dependsOn(prepareJib) }
-}
-
-jib {
-  from {
-    image = "debian:stable-slim"
-    // image = "gcr.io/distroless/java-base-debian12"
-    platforms {
-      platform {
-        architecture = "amd64"
-        os = "linux"
-      }
-    }
-  }
-
-  to {
-    image = "${project.githubUser}/${project.name}"
-    tags = setOf("latest")
-  }
-
-  pluginExtensions {
-    pluginExtension {
-      implementation = JibNativeImageExtension::class.qualifiedName
-      properties = mapOf("imageName" to "app")
-    }
-  }
-  container { mainClass = "MainKt" }
-}
-
-// Workaround for Jib
-sourceSets.maybeCreate("main")
-
-/** Configure Kotlin Native host target for the current OS. */
-fun KotlinMultiplatformExtension.configureHostTarget() {
-  // Remove all non-native targets
-  // targets.filter { it.platformType !in listOf(common, native) }.forEach { targets.remove(it) }
-
-  // Create target for the host platform.
-  val hostTarget =
-      when {
-        Platform.isMac -> macosX64()
-        Platform.isLinux -> linuxX64()
-        Platform.isWin -> mingwX64()
-        else ->
-            throw GradleException(
-                "Host OS '${Platform.currentOS}' is not supported in Kotlin/Native $project.")
-      }
-
-  hostTarget.apply {
-    binaries {
-      executable {
-        entryPoint = "main"
-        runTask?.args()
-      }
-    }
-  }
 }

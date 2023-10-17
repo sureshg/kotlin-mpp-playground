@@ -24,6 +24,13 @@ buildConfig {
   catalogVersions = project.versionCatalogMapOf()
 }
 
+// Expose common js resource as configuration to be consumed by other projects
+// https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
+kotlin.sourceSets.jsMain {
+  val commonJsResources by configurations.consumable("commonJsResources")
+  artifacts { add(commonJsResources.name, tasks.jsProcessResources) }
+}
+
 dependencies {
   commonMainApi(libs.arrow.suspendapp)
   commonMainApi(libs.uri.kmp)
@@ -36,13 +43,6 @@ dependencies {
 
   // jvmMainApi(libs.kotlin.reflect)
   // jvmMainApi(libs.logback.classic)
-}
-
-// Expose common js resource as configuration to be consumed by other projects
-// https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
-kotlin.sourceSets.jsMain {
-  val commonJsResources by configurations.consumable("commonJsResources")
-  artifacts { add(commonJsResources.name, tasks.jsProcessResources) }
 }
 
 // tasks.buildConfig {
