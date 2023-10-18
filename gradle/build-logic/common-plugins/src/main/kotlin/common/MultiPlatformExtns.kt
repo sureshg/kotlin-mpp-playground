@@ -213,7 +213,6 @@ fun KotlinMultiplatformExtension.hostNativeTarget(
               "Host OS '${Platform.currentOS}' is not supported in Kotlin/Native $project.")
     }
 
-context(Project)
 fun KotlinMultiplatformExtension.allNativeTargets(
     configure: KotlinNativeTargetWithHostTests.() -> Unit = {}
 ) {

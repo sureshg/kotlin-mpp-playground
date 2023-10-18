@@ -54,6 +54,9 @@ val Project.commonProjectName
 val Project.debugEnabled
   get() = properties["debug"]?.toString().toBoolean()
 
+val Project.skipTest
+  get() = providers.gradleProperty("skip.test").map(String::toBoolean).getOrElse(false)
+
 val Project.hasCleanTask
   get() = gradle.startParameter.taskNames.any { it == "clean" }
 

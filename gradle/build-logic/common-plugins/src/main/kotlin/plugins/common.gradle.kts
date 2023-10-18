@@ -48,6 +48,15 @@ idea {
 // shadow plugin requires mainClass to be set
 application { mainClass = libs.versions.app.mainclass }
 
+// Skip test tasks on skip.test=true
+if (skipTest) {
+  allprojects {
+    tasks
+        .matching { it.name.endsWith("test", ignoreCase = true) }
+        .configureEach { onlyIf { false } }
+  }
+}
+
 @Suppress("UNUSED_VARIABLE")
 tasks {
   run.invoke { args(true) }
