@@ -105,6 +105,8 @@ jobs:
       - name: 🏗️ Gradle Build & Run
         id: gradle-build
         run: |
+          MKTEMP_PATH="$(dirname "$(mktemp -u)")/"
+          echo "MKTEMP_PATH=$MKTEMP_PATH" >> $GITHUB_ENV
           ./gradlew buildAndPublish
           echo "dist_path=backend/jvm/build/libs/jvm-all.jar" >> "$GITHUB_OUTPUT"
         env:
@@ -174,7 +176,18 @@ jobs:
             git push
             # git push origin HEAD:${{ github.event.repository.default_branch }}
           fi
-  
+
+      - name: 💥 Uploading JVM error logs
+        if: steps.gradle-build.outcome == 'failure' && always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.os }}-jvm-error-logs
+          path: |
+            hs_err*
+            ${{ github.workspace }}/hs_err*
+            ${{ env.MKTEMP_PATH }}/*hs-err*
+          if-no-files-found: warn
+          retention-days: 30
 
   # GitHub Release Action on tag push
   release:
