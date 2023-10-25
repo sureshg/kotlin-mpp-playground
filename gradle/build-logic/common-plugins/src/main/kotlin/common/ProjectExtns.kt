@@ -146,6 +146,7 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             "-XX:+UseCompressedOops",
             "-XX:+UseStringDeduplication",
             "-XX:+UnlockExperimentalVMOptions",
+            "-XX:MaxRAMPercentage=0.8",
             // os+thread,gc+heap=trace,
             """-Xlog:cds,safepoint,gc*:
               |file="$tmp$name-gc-%p-%t.log":
@@ -215,7 +216,6 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             // "-Xlog:gc\*",
             // "-Xlog:class+load=info,cds=debug,cds+dynamic=info",
             // "-XX:+IgnoreUnrecognizedVMOptions",
-            // "-XX:MaxRAMPercentage=0.8",
             // "-XX:+StartAttachListener", // For jcmd Dynamic Attach Mechanism
             // "-XX:+DisableAttachMechanism",
             // "-XX:+DebugNonSafepoints",

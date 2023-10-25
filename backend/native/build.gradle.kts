@@ -78,14 +78,14 @@ tasks {
             binName,
             linkReleaseExecutableMacosX64.binary.outputFile,
             linkReleaseExecutableMacosArm64.binary.outputFile)
-        workingDir = layout.buildDirectory.asFile.get()
+        workingDir = layout.buildDirectory.dir("bin").get().asFile
         group = "Build"
         description = "Builds universal macOS binary"
 
         doLast {
           logger.lifecycle(
               TextColors.cyan(
-                  "Universal macOS binary created: ${layout.buildDirectory.file(binName).get().asFile.path}"))
+                  "Universal macOS binary created: ${workingDir.resolve(binName).absolutePath}"))
         }
 
         onlyIf { OperatingSystem.current().isMacOsX }
@@ -100,4 +100,6 @@ tasks {
       }
 
   jibDockerBuild { dependsOn(prepareJib) }
+
+  // publish { finalizedBy(jibDockerBuild) }
 }

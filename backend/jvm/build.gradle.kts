@@ -1,11 +1,15 @@
+import common.githubUser
+import common.javaVersion
 import common.jvmArguments
+import common.tmp
 
 plugins {
   plugins.kotlin.jvm
   plugins.publishing
+  application
   alias(libs.plugins.ktor)
   alias(libs.plugins.exposed)
-  application
+  com.google.cloud.tools.jib
 }
 
 description = "Ktor backend jvm application"
@@ -13,6 +17,39 @@ description = "Ktor backend jvm application"
 application {
   mainClass = libs.versions.app.mainclass.get()
   applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
+}
+
+ktor { fatJar { archiveFileName = "${project.name}-app.jar" } }
+
+jib {
+  from {
+    image = "openjdk:${javaVersion.get().majorVersion}-slim"
+    platforms {
+      platform {
+        architecture = "arm64"
+        os = "linux"
+      }
+    }
+  }
+
+  to {
+    image = "${project.githubUser}/${project.name}"
+    tags = setOf("latest")
+  }
+
+  container {
+    ports = listOf("8080", "9898")
+    entrypoint = buildList {
+      add("java")
+      addAll(application.applicationDefaultJvmArgs.map { it.replace(tmp, "/tmp/") })
+      add("-cp")
+      add("@/app/jib-classpath-file")
+      add("@/app/jib-main-class-file")
+    }
+    mainClass = application.mainClass.get()
+  }
+
+  containerizingMode = "packaged"
 }
 
 exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
@@ -27,6 +64,8 @@ tasks {
         into(processResources.map { it.destinationDir.resolve(webapp.name) })
       }
   processResources { dependsOn(copyWebApp) }
+
+  // publish { finalizedBy(jibDockerBuild) }
 }
 
 dependencies {

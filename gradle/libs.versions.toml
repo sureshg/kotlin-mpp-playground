@@ -135,8 +135,8 @@ akkurate                       = "0.1.0"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.7.4"
 modulegraph                    = "0.5.0"
-jetbrains-compose              = "1.4.3"
-jetbrains-compose-compiler     = "1.5.2"
+jetbrains-compose              = "1.5.10-rc01"
+jetbrains-compose-compiler     = "1.5.2.1-rc01"
 cash-molecule                  = "1.2.1"
 npm-publish-plugin             = "3.4.1"
 exposed-plugin                 = "0.2.1"
@@ -429,7 +429,7 @@ benmanes                             = { id = "com.github.ben-manes.versions"   
 bestpractices                        = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "best-practices-plugin" }
 graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"                                  , version.ref = "graalvm-nativeimage"}
 buildkonfig                          = { id = "com.codingfeline.buildkonfig"                                   , version.ref = "buildkonfig"}
-jetbrains-compose-mpp                = { id = "org.jetbrains.compos"                                           , version.ref = "jetbrains-compose"}
+jetbrains-compose-mpp                = { id = "org.jetbrains.compose"                                           , version.ref = "jetbrains-compose"}
 kobweb-application                   = { id = "com.varabyte.kobweb.application"                                , version.ref = "kobweb" }
 kobweb-library                       = { id = "com.varabyte.kobweb.library"                                    , version.ref = "kobweb" }
 kobwebx-markdown                     = { id = "com.varabyte.kobwebx.markdown"                                  , version.ref = "kobweb" }

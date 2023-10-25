@@ -35,6 +35,19 @@ $ ./gradlew buildAndPublish
 # Kotlin JVM
 $ ./gradlew :common:run
 $ ./gradlew :backend:jvm:run
+$ docker run \
+        -it \
+        --rm \
+        --pull always \
+        --workdir /app \
+        --publish 8080:8080 \
+        --publish 8081:8081 \
+        --name kotlin-mpp-playground \
+        --mount type=bind,source=$(pwd),destination=/app,readonly \
+        openjdk:22-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
+
+$ ./gradlew :backend:jvm:jibDockerBuild
+$ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
 
 # Kotlin JS
 $ ./gradlew :web:jsBrowserProductionRun -t
@@ -43,7 +56,7 @@ $ ./gradlew kotlinUpgradeYarnLock
 # Kotlin Native
 $ ./gradlew :backend:native:macOsUniversalBinary
 $ ./gradlew :backend:native:jibDockerBuild
-$ docker run -it --rm sureshg/native
+$ docker run -it --rm --name native-app sureshg/native
 
 # Publishing
 $ ./gradlew publishAllPublicationsToLocalRepository

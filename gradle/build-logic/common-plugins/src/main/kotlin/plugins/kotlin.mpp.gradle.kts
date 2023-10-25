@@ -3,6 +3,7 @@ package plugins
 import com.google.devtools.ksp.gradle.KspTaskJvm
 import common.*
 import java.util.jar.Attributes
+import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
@@ -10,6 +11,7 @@ import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.js.yarn.*
 import tasks.BuildConfig
 import tasks.BuildConfigExtension
+import tasks.ReallyExecJar
 
 plugins {
   java
@@ -35,10 +37,8 @@ kotlin {
       // wasmJsTarget()
     }
     "native" -> allNativeTargets()
-    else -> {
-      jvmTarget()
-      jsTarget()
-    }
+    "web" -> jsTarget()
+    else -> jvmTarget()
   }
   applyDefaultHierarchyTemplate()
   // kotlinDaemonJvmArgs = jvmArguments
@@ -106,6 +106,19 @@ tasks {
       )
     }
     duplicatesStrategy = DuplicatesStrategy.WARN
+  }
+
+  plugins.withId("com.github.johnrengelman.shadow") {
+    val buildExecutable by
+        registering(ReallyExecJar::class) {
+          jarFile = named<Jar>("shadowJar").flatMap { it.archiveFile }
+          // javaOpts = application.applicationDefaultJvmArgs
+          javaOpts = named<JavaExec>("run").get().jvmArgs
+          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
+          onlyIf { OperatingSystem.current().isUnix }
+        }
+
+    build { finalizedBy(buildExecutable) }
   }
 
   // Application run should use the jvmJar as classpath

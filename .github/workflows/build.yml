@@ -108,7 +108,7 @@ jobs:
           MKTEMP_PATH="$(dirname "$(mktemp -u)")/"
           echo "MKTEMP_PATH=$MKTEMP_PATH" >> $GITHUB_ENV
           ./gradlew buildAndPublish
-          echo "dist_path=backend/jvm/build/libs/jvm-all.jar" >> "$GITHUB_OUTPUT"
+          # echo "dist_path=backend/jvm/build/libs/jvm-all.jar" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -123,9 +123,9 @@ jobs:
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ steps.gradle-build.outputs.artifact_name }}.jar
+          name: ${{ steps.gradle-build.outputs.artifact_name }}
           path: |
-            ${{ steps.gradle-build.outputs.dist_path }}
+            backend/jvm/build/libs/jvm-app
           if-no-files-found: error
 
       - name: 🕸 Deploy the webapp to Github Pages

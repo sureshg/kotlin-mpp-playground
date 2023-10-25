@@ -30,7 +30,7 @@ pluginManagement {
   repositories {
     mavenCentral()
     gradlePluginPortal()
-    // composeMultiplatformDev()
+    composeMultiplatformDev()
   }
 }
 
@@ -54,8 +54,8 @@ dependencyResolutionManagement {
     kotlinNative()
     nodeJS()
     yarn()
+    composeMultiplatformDev()
     // sonatypeSnapshots()
-    // composeMultiplatformDev()
   }
   repositoriesMode = RepositoriesMode.PREFER_SETTINGS
 }

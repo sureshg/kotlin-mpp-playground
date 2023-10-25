@@ -3,9 +3,11 @@ package plugins
 import com.google.devtools.ksp.gradle.KspTaskJvm
 import common.*
 import java.util.jar.Attributes
+import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import tasks.ReallyExecJar
 
 plugins {
   `java-library`
@@ -121,6 +123,20 @@ tasks {
       )
     }
     duplicatesStrategy = DuplicatesStrategy.WARN
+  }
+
+  plugins.withId("com.github.johnrengelman.shadow") {
+    val buildExecutable by
+        registering(ReallyExecJar::class) {
+          val shadowJar = named<Jar>("shadowJar")
+          jarFile = shadowJar.flatMap { it.archiveFile }
+          // javaOpts = application.applicationDefaultJvmArgs
+          javaOpts = named<JavaExec>("run").get().jvmArgs
+          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
+          onlyIf { OperatingSystem.current().isUnix }
+        }
+
+    build { finalizedBy(buildExecutable) }
   }
 
   // Javadoc
