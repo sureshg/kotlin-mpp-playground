@@ -58,6 +58,11 @@ $ ./gradlew :backend:native:macOsUniversalBinary
 $ ./gradlew :backend:native:jibDockerBuild
 $ docker run -it --rm --name native-app sureshg/native
 
+# Compose Desktop
+$ ./gradlew :compose:desktop:runDistributable
+$ ./gradlew :compose:desktop:packageDistributionForCurrentOS
+$ ./gradlew :compose:desktop:suggestModules
+
 # Publishing
 $ ./gradlew publishAllPublicationsToLocalRepository
 

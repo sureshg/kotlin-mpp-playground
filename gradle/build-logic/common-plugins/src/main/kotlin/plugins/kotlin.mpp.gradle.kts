@@ -65,6 +65,7 @@ redacted {
 
 kover {
   // useJacoco()
+  disable()
 }
 
 koverReport {

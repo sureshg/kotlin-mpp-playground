@@ -1,6 +1,6 @@
 [versions]
 java                           = "22"
-kotlin                         = "1.9.20-RC"
+kotlin                         = "1.9.20-RC2"
 kotlin-ksp                     = "1.9.20-RC-1.0.13"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "17"
@@ -34,7 +34,7 @@ kotlinx-benchmark              = "0.4.9"
 kotlinx-metadata               = "0.7.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.13.2"
-kotlin-wrappers                = "1.0.0-pre.635"
+kotlin-wrappers                = "1.0.0-pre.636"
 kotlin-redacted                = "1.7.0-alpha01"
 ksp-auto-service               = "1.1.0"
 gradle-kotlin-dsl              = "4.1.2"
@@ -135,8 +135,8 @@ akkurate                       = "0.1.0"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.7.4"
 modulegraph                    = "0.5.0"
-jetbrains-compose              = "1.5.10-rc01"
-jetbrains-compose-compiler     = "1.5.2.1-rc01"
+jetbrains-compose              = "1.5.10-rc02"
+jetbrains-compose-compiler     = "1.5.3-rc01"
 cash-molecule                  = "1.2.1"
 npm-publish-plugin             = "3.4.1"
 exposed-plugin                 = "0.2.1"
@@ -429,7 +429,7 @@ benmanes                             = { id = "com.github.ben-manes.versions"   
 bestpractices                        = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "best-practices-plugin" }
 graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"                                  , version.ref = "graalvm-nativeimage"}
 buildkonfig                          = { id = "com.codingfeline.buildkonfig"                                   , version.ref = "buildkonfig"}
-jetbrains-compose-mpp                = { id = "org.jetbrains.compose"                                           , version.ref = "jetbrains-compose"}
+jetbrains-compose-mpp                = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
 kobweb-application                   = { id = "com.varabyte.kobweb.application"                                , version.ref = "kobweb" }
 kobweb-library                       = { id = "com.varabyte.kobweb.library"                                    , version.ref = "kobweb" }
 kobwebx-markdown                     = { id = "com.varabyte.kobwebx.markdown"                                  , version.ref = "kobweb" }
