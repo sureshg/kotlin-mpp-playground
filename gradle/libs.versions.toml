@@ -88,7 +88,7 @@ ktor                           = "2.3.5"
 ktor-cohort                    = "2.2.1"
 arrow-suspendapp               = "0.4.1-alpha.5"
 kobweb                         = "0.13.9"
-exposed                        = "0.44.0"
+exposed                        = "0.44.1"
 postgresql                     = "42.6.0"
 hikariCP                       = "5.0.1"
 h2                             = "2.2.220"
@@ -273,6 +273,9 @@ exposed-dao                          = { module = "org.jetbrains.exposed:exposed
 exposed-jdbc                         = { module = "org.jetbrains.exposed:exposed-jdbc"                         , version.ref = "exposed"}
 exposed-java-time                    = { module = "org.jetbrains.exposed:exposed-java-time"                    , version.ref = "exposed"}
 exposed-kotlin-datetime              = { module = "org.jetbrains.exposed:exposed-kotlin-datetime"              , version.ref = "exposed"}
+exposed-crypt                        = { module = "org.jetbrains.exposed:exposed-crypt"                        , version.ref = "exposed"}
+exposed-json                         = { module = "org.jetbrains.exposed:exposed-json"                         , version.ref = "exposed"}
+exposed-money                        = { module = "org.jetbrains.exposed:exposed-money"                        , version.ref = "exposed"}
 postgresql                           = { module = "org.postgresql:postgresql"                                  , version.ref = "postgresql"}
 hikariCP                             = { module = "com.zaxxer:HikariCP"                                        , version.ref = "hikariCP"}
 micrometer-prometheus                = { module = "io.micrometer:micrometer-registry-prometheus"               , version.ref = "micrometer"}
