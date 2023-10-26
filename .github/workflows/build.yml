@@ -89,18 +89,29 @@ jobs:
           jdkFile: ${{ steps.download-jdk.outputs.archive }}
           cache: 'gradle'
 
+      - name: 🐘 Setup Gradle
+        if: ${{ false }}
+        uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: wrapper
+
+      - name: 🚄 Cache Gradle
+        if: ${{ false }}
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-  
+
       - name: 🚄 Cache Kotlin Native Compiler
         uses: actions/cache@v3
         with:
           path: ~/.konan
           key: ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle*') }}
           restore-keys: ${{ runner.os }}-konan-
-
-      - name: Setup Gradle
-        if: ${{ false }}
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: wrapper
 
       - name: 🏗️ Gradle Build & Run
         id: gradle-build
@@ -202,13 +213,6 @@ jobs:
         with:
           fetch-depth: 0
           submodules: recursive
-
-      - name: 🚄 Cache Kotlin Native Compiler
-        uses: actions/cache@v3
-        with:
-          path: ~/.konan
-          key: ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: ${{ runner.os }}-konan-
 
       - name: ⚙️Build Changelog
         id: github_release
