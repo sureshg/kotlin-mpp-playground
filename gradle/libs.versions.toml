@@ -1,7 +1,7 @@
 [versions]
 java                           = "22"
 kotlin                         = "1.9.20-RC2"
-kotlin-ksp                     = "1.9.20-RC-1.0.13"
+kotlin-ksp                     = "1.9.20-RC2-1.0.13"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "17"
 kotlin-api-version             = "1.9"
@@ -21,7 +21,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-kotlinx-kover                  = "0.7.4"
+kotlinx-kover                  = "0.7.3"
 kotlinx-io                     = "0.3.0"
 kotlinx-atomicfu               = "0.22.0"
 kotlinx-coroutines             = "1.7.3"
