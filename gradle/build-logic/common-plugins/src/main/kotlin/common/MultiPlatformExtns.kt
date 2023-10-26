@@ -220,7 +220,7 @@ fun KotlinMultiplatformExtension.allNativeTargets(
   macosArm64 { configure() }
   linuxX64 { configure() }
   // linuxArm64 { configure() }
-  mingwX64 { configure() }
+  // mingwX64 { configure() }
 }
 
 context(Project)
