@@ -194,11 +194,25 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
+&nbsp;import com.sun.management.OperatingSystemMXBean
+&nbsp;import java.io.File
+&nbsp;import java.lang.management.ManagementFactory
+&nbsp;import java.net.InetAddress
+&nbsp;import java.net.InetSocketAddress
+&nbsp;import java.net.Socket
+&nbsp;import java.net.StandardSocketOptions
+&nbsp;import java.nio.charset.Charset
+&nbsp;import java.security.KeyStore
+&nbsp;import java.security.Security
+&nbsp;import java.time.Duration
 &nbsp;import java.time.Instant
+&nbsp;import java.time.LocalDateTime
 &nbsp;import java.time.ZoneId
 &nbsp;import java.time.format.DateTimeFormatter
 &nbsp;import java.util.*
 &nbsp;import java.util.concurrent.Executors
+&nbsp;import javax.net.ssl.TrustManagerFactory
+&nbsp;import javax.net.ssl.X509TrustManager
 &nbsp;import kotlinx.coroutines.asCoroutineDispatcher
 &nbsp;import org.slf4j.LoggerFactory
 &nbsp;
@@ -249,6 +263,158 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),
 &nbsp;            )
 &nbsp;}
+&nbsp;
+&nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
+&nbsp;  val rt = Runtime.getRuntime()
+&nbsp;  val unit = 1024 * 1024L
+&nbsp;  val heapSize = rt.totalMemory()
+&nbsp;  val heapFreeSize = rt.freeMemory()
+&nbsp;  val heapUsedSize = heapSize - heapFreeSize
+&nbsp;  val heapMaxSize = rt.maxMemory()
+&nbsp;  val osMxBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java)
+&nbsp;  val rtMxBean = ManagementFactory.getRuntimeMXBean()
+&nbsp;
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ Time: ${LocalDateTime.now()}&quot;)</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM] JVM Version              : ${System.getProperty(&quot;java.version&quot;)}&quot;)</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-OS]  Operating System     : ${System.getProperty(&quot;os.name&quot;)}&quot;)</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] CPU Arch             : ${System.getProperty(&quot;os.arch&quot;)}&quot;)</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] Available Processors : ${rt.availableProcessors()}&quot;)</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] System CPU Usage     : ${osMxBean.cpuLoad}&quot;)</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-CPU] JVM CPU Usage        : ${osMxBean.processCpuLoad}&quot;)</b>
+&nbsp;  appendLine(
+&nbsp;      &quot;✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Total Memory                  : ${osMxBean.totalMemorySize / unit} MiB&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Free  Memory                  : ${osMxBean.freeMemorySize / unit} MiB&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Heap Size (Committed) : ${heapSize / unit} MiB&quot;)
+<b class="nc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Free memory in Heap   : ${heapFreeSize/unit} MiB&quot;)</b>
+&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Currently used memory         : ${heapUsedSize/unit} MiB&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Max Heap Size (-Xmx)          : ${heapMaxSize/unit} MiB&quot;)
+&nbsp;
+<b class="nc">&nbsp;  appendLine(&quot;✧✧✧ JVM Input Arguments ✧✧✧&quot;)</b>
+&nbsp;  appendLine(rtMxBean.inputArguments)
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ Processes ✧✧✧&quot;)
+&nbsp;  val ps = ProcessHandle.allProcesses().sorted(ProcessHandle::compareTo).toList()
+&nbsp;  if (debug) {
+&nbsp;    ps.forEach { appendLine(&quot;${it.pid()} : ${it.info()}&quot;) }
+<b class="nc">&nbsp;  } else {</b>
+&nbsp;    appendLine(&quot;Found ${ps.size} processes.&quot;)
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  appendLine(&quot;✧✧✧ Trust stores ✧✧✧&quot;)</b>
+&nbsp;  val caCerts =
+&nbsp;      TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {
+&nbsp;        init(null as KeyStore?)
+&nbsp;        trustManagers.filterIsInstance&lt;X509TrustManager&gt;().flatMap { it.acceptedIssuers.toList() }
+&nbsp;      }
+&nbsp;  caCerts.forEach { appendLine(it.issuerX500Principal) }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ Dns Resolution ✧✧✧&quot;)
+&nbsp;  val dns = InetAddress.getAllByName(&quot;google.com&quot;).toList()
+&nbsp;  dns.forEach { appendLine(it) }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ TimeZones ✧✧✧&quot;)
+&nbsp;  val tz = ZoneId.getAvailableZoneIds()
+&nbsp;  if (debug) {
+&nbsp;    tz.forEach { appendLine(it) }
+&nbsp;  } else {
+&nbsp;    appendLine(&quot;Found ${tz.size} timezones.&quot;)
+&nbsp;  }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ Charsets ✧✧✧&quot;)
+&nbsp;  val cs = Charset.availableCharsets()
+&nbsp;  if (debug) {
+&nbsp;    cs.forEach { (name, charset) -&gt; appendLine(&quot;$name: $charset&quot;) }
+&nbsp;  } else {
+&nbsp;    appendLine(&quot;Found ${cs.size} charsets.&quot;)
+&nbsp;  }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ System Locales ✧✧✧&quot;)
+&nbsp;  val locales = Locale.getAvailableLocales()
+&nbsp;  if (debug) {
+&nbsp;    locales.forEach { appendLine(it) }
+&nbsp;  } else {
+&nbsp;    appendLine(&quot;Found ${locales.size} locales.&quot;)
+&nbsp;  }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ System Countries ✧✧✧&quot;)
+&nbsp;  val countries = Locale.getISOCountries()
+&nbsp;  if (debug) {
+&nbsp;    countries.forEach { appendLine(it) }
+&nbsp;  } else {
+&nbsp;    appendLine(&quot;Found ${countries.size} countries.&quot;)
+&nbsp;  }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ System Currencies ✧✧✧&quot;)
+&nbsp;  val currencies = Currency.getAvailableCurrencies()
+&nbsp;  if (debug) {
+&nbsp;    currencies.forEach { appendLine(it) }
+&nbsp;  } else {
+&nbsp;    appendLine(&quot;Found ${currencies.size} currencies.&quot;)
+&nbsp;  }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ System Languages ✧✧✧&quot;)
+&nbsp;  val languages = Locale.getISOLanguages()
+&nbsp;  if (debug) {
+&nbsp;    languages.forEach { appendLine(it) }
+&nbsp;  } else {
+&nbsp;    appendLine(&quot;Found ${languages.size} languages.&quot;)
+&nbsp;  }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ Env Variables ✧✧✧&quot;)
+&nbsp;  val env = System.getenv()
+&nbsp;  env.forEach { (k: String, v: String) -&gt; appendLine(&quot;$k : $v&quot;) }
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ System Properties ✧✧✧&quot;)
+&nbsp;  val props = System.getProperties()
+&nbsp;  props.forEach { k: Any, v: Any -&gt; appendLine(&quot;$k : $v&quot;) }
+&nbsp;
+&nbsp;  val fmt = HexFormat.ofDelimiter(&quot;, &quot;).withUpperCase().withPrefix(&quot;0x&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ I ❤️ Kotlin = ${fmt.formatHex(&quot;I ❤️ Kotlin&quot;.encodeToByteArray())}&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ LineSeparator  = ${fmt.formatHex(System.lineSeparator().encodeToByteArray())}&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ File PathSeparator = ${fmt.formatHex(File.pathSeparator.encodeToByteArray())}&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ File Separator = ${fmt.formatHex(File.separator.encodeToByteArray())}&quot;)
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ Additional info in exception ✧✧✧&quot;)
+&nbsp;  val ex =
+&nbsp;      runCatching {
+&nbsp;            Security.setProperty(&quot;jdk.includeInExceptions&quot;, &quot;hostInfo,jar&quot;)
+&nbsp;            Socket().use { s -&gt;
+&nbsp;              s.setOption(StandardSocketOptions.SO_REUSEADDR, true)
+&nbsp;              s.setOption(StandardSocketOptions.SO_REUSEPORT, true)
+&nbsp;              s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)
+&nbsp;              // Disable the Nagle algorithm
+&nbsp;              // s.setOption(StandardSocketOptions.TCP_NODELAY, true)
+&nbsp;              // s.setOption(StandardSocketOptions.SO_RCVBUF, 4096)
+&nbsp;              s.soTimeout = 10
+&nbsp;              s.connect(InetSocketAddress(&quot;localhost&quot;, 12345), 10)
+&nbsp;            }
+&nbsp;          }
+&nbsp;          .exceptionOrNull()
+&nbsp;  appendLine(ex?.message)
+&nbsp;  check(ex?.message?.contains(&quot;localhost/127.0.0.1:12345&quot;) == true)
+&nbsp;
+&nbsp;  appendLine(
+&nbsp;      &quot;&quot;&quot;
+&nbsp;      +---------Summary-------+
+&nbsp;      | Processes      : ${ps.size.toString().padEnd(5)}|
+&nbsp;      | Dns Addresses  : ${dns.size.toString().padEnd(5)}|
+&nbsp;      | Trust Stores   : ${caCerts.size.toString().padEnd(5)}|
+&nbsp;      | TimeZones      : ${tz.size.toString().padEnd(5)}|
+&nbsp;      | CharSets       : ${cs.size.toString().padEnd(5)}|
+&nbsp;      | Locales        : ${locales.size.toString().padEnd(5)}|
+&nbsp;      | Countries      : ${countries.size.toString().padEnd(5)}|
+&nbsp;      | Languages      : ${languages.size.toString().padEnd(5)}|
+&nbsp;      | Currencies     : ${currencies.size.toString().padEnd(5)}|
+&nbsp;      | Env Vars       : ${env.size.toString().padEnd(5)}|
+&nbsp;      | Sys Props      : ${props.size.toString().padEnd(5)}|
+&nbsp;      | Virtual Thread : ${Thread.currentThread().isVirtual}|
+&nbsp;      +-----------------------+
+&nbsp;     &quot;&quot;&quot;
+&nbsp;          .trimIndent(),
+&nbsp;  )
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -272,7 +438,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-10-26 00:22</div>
+    <div style="float:right;">generated on 2023-10-26 02:54</div>
 </div>
 </body>
 </html>
