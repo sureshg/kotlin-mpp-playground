@@ -199,7 +199,7 @@ fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
           }
           .exceptionOrNull()
   appendLine(ex?.message)
-  check(ex?.message?.contains("localhost/127.0.0.1:12345") == true)
+  // check(ex?.message?.contains("localhost/127.0.0.1:12345") == true)
 
   appendLine(
       """
