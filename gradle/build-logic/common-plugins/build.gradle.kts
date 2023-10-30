@@ -149,7 +149,6 @@ dependencies {
   implementation(libs.build.github.changelog)
   implementation(libs.build.benmanesversions)
   implementation(libs.build.dependencyanalysis)
-  implementation(libs.build.cyclonedx.plugin)
   implementation(libs.build.foojay.resolver)
   implementation(libs.build.nativeimage.plugin)
   implementation(libs.build.modulegraph.plugin)
@@ -163,5 +162,6 @@ dependencies {
   // For using kotlin-dsl in pre-compiled script plugins
   implementation("${libs.build.kotlin.dsl.get().module}:${expectedKotlinDslPluginsVersion}")
   // implementation(libs.build.includegit.plugin)
+  // implementation(libs.build.cyclonedx.plugin)
   testImplementation(gradleTestKit())
 }
