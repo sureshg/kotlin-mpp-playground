@@ -19,3 +19,13 @@ paths:
               examples:
                 Example#1:
                   value: "/swagger"
+  /info:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "string"
