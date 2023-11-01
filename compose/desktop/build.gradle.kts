@@ -14,6 +14,7 @@ dependencies {
 }
 
 compose {
+  // kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
   // kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
   // kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
 

@@ -99,6 +99,7 @@ jte {
   }
   // jteExtension("gg.jte.nativeimage.NativeResourcesExtension")
   // binaryStaticContent = true
+  // kotlinCompileArgs = arrayOf("-jvm-target", dslJavaVersion.get())
 }
 
 dependencies {
