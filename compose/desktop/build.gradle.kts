@@ -1,5 +1,6 @@
 import common.jvmArguments
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
   plugins.kotlin.mpp
@@ -17,6 +18,8 @@ compose {
   // kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
   // kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
   // kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
+
+  platformTypes = platformTypes.get() - KotlinPlatformType.native
 
   desktop {
     application {

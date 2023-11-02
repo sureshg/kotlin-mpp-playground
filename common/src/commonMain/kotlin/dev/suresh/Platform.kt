@@ -3,6 +3,7 @@
 package dev.suresh
 
 import BuildConfig
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.jvm.JvmName
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -90,6 +91,8 @@ val json by lazy {
     decodeEnumsCaseInsensitive = true
   }
 }
+
+val log = KotlinLogging.logger {}
 
 /** Gets the current date and time in UTC timezone. */
 val utcDateTimeNow

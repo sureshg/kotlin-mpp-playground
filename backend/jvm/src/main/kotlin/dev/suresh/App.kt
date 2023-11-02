@@ -5,8 +5,7 @@ import dev.suresh.plugins.configureHTTP
 import dev.suresh.plugins.configureSecurity
 import dev.suresh.plugins.configureSerialization
 import dev.suresh.plugins.errorRoutes
-import dev.suresh.routes.adminRoutes
-import dev.suresh.routes.webApp
+import dev.suresh.routes.*
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
@@ -24,6 +23,7 @@ fun Application.module() {
   routing {
     adminRoutes()
     webApp()
+    jvmFeatures()
   }
   // CoroutineScope(coroutineContext).launch {}
 }

@@ -1,40 +1,45 @@
-package dev.suresh
+package dev.suresh.lang
 
+import dev.suresh.*
+import io.github.oshai.kotlinlogging.KLogger
 import java.lang.foreign.FunctionDescriptor
 import java.lang.foreign.ValueLayout
 import java.util.concurrent.StructuredTaskScope
-import java.util.concurrent.StructuredTaskScope.Subtask
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.toJavaInstant
 import kotlinx.metadata.jvm.KotlinClassMetadata
 import langFeatures
-import log
 import stdlibFeatures
 
-fun main() {
-  log.info { (Greeting().greeting()) }
-  listOf("main", "jvm", "js").forEach {
-    log.info { "common-$it --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
-  }
+object VThread {
 
-  listOf("main", "jvm", "js").forEach {
-    log.info {
-      "backend-$it -->${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}"
+  context(KLogger)
+  fun virtualThreads() {
+    info { (Greeting().greeting()) }
+    listOf("main", "jvm", "js").forEach {
+      info { "common-$it --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
     }
+
+    listOf("main", "jvm", "js").forEach {
+      info { "backend-$it -->${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}" }
+    }
+
+    structuredConcurrency()
+    langFeatures()
+    stdlibFeatures()
+
+    getPid()
+    kotlinxMetaData()
+    classFileApi()
   }
-
-  virtualThreads()
-  langFeatures()
-  stdlibFeatures()
-
-  getPid()
-  kotlinxMetaData()
-  classFileApi()
 }
 
-fun virtualThreads() {
+context(KLogger)
+fun structuredConcurrency() {
+
+  info { "Structured concurrency..." }
   val taskList =
       StructuredTaskScope<String>().use { sts ->
         val start = Clock.System.now()
@@ -43,10 +48,10 @@ fun virtualThreads() {
               sts.fork {
                 when (it) {
                   in 1..40 -> "Task $it"
-                  in 41..60 -> error("Error in task $it")
+                  in 41..60 -> kotlin.error("Error in task $it")
                   else -> {
                     while (!Thread.currentThread().isInterrupted) {
-                      log.debug { "Task $it ..." }
+                      debug { "Task $it ..." }
                     }
                     "Task $it"
                   }
@@ -57,39 +62,41 @@ fun virtualThreads() {
         tasks
       }
 
-  log.info { "Total Tasks: ${taskList.size}" }
+  info { "Total Tasks: ${taskList.size}" }
   val states = taskList.groupBy { it.state() }
-  states.forEach { (t, u) -> log.info { "$t --> ${u.size}" } }
-  check(states[Subtask.State.SUCCESS]?.size == 40)
-  check(states[Subtask.State.FAILED]?.size == 20)
-  check(states[Subtask.State.UNAVAILABLE]?.size == 40)
+  states.forEach { (t, u) -> info { "$t --> ${u.size}" } }
+  check(states[StructuredTaskScope.Subtask.State.SUCCESS]?.size == 40)
+  check(states[StructuredTaskScope.Subtask.State.FAILED]?.size == 20)
+  check(states[StructuredTaskScope.Subtask.State.UNAVAILABLE]?.size == 40)
 
   StructuredTaskScope.ShutdownOnFailure().use {
     val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform.name} !" }
     it.join().throwIfFailed()
-    log.info { task.get() }
+    info { task.get() }
   }
 }
 
+context(KLogger)
 fun getPid() {
   val getpidAddr = SYMBOL_LOOKUP.findOrNull("getpid")
   val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)
   val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)
   val pid = getpid.invokeExact() as Int
   assert(pid.toLong() == ProcessHandle.current().pid())
-  log.info { "getpid() = $pid" }
+  info { "getpid() = $pid" }
 }
 
+context(KLogger)
 fun kotlinxMetaData() {
   val metadataAnnotation = LocalDateTime::class.java.getAnnotation(Metadata::class.java)
   when (val metadata = KotlinClassMetadata.read(metadataAnnotation)) {
     is KotlinClassMetadata.Class -> {
       val klass = metadata.kmClass
-      log.info { klass.functions.map { it.name } }
-      log.info { klass.properties.map { it.name } }
+      info { klass.functions.map { it.name } }
+      info { klass.properties.map { it.name } }
     }
     is KotlinClassMetadata.Unknown -> log.info { "Unknown" }
-    else -> log.info { "Other" }
+    else -> info { "Other" }
   }
 }
 

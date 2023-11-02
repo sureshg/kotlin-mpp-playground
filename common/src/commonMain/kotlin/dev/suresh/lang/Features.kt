@@ -1,4 +1,4 @@
-import io.github.oshai.kotlinlogging.KotlinLogging
+import dev.suresh.log
 import kotlin.io.encoding.Base64
 import kotlin.jvm.JvmInline
 import kotlin.time.Duration.Companion.microseconds
@@ -14,8 +14,6 @@ enum class Planet(val moon: Int) {
   URANUS(62),
   NEPTUNE(13)
 }
-
-val log = KotlinLogging.logger {}
 
 data object MyService
 
