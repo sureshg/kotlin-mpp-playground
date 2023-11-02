@@ -5,7 +5,6 @@ $dokka.location://App/#/PointingToDeclaration/desktop/[root]/-app.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
 $dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/web/[root]/js-type-of.html
 $dokka.location://langFeatures/#/PointingToDeclaration/common/[root]/lang-features.html
-$dokka.location://log/#/PointingToDeclaration/common/[root]/log.html
 $dokka.location://main/#/PointingToDeclaration/desktop/[root]/main.html
 $dokka.location://main/#kotlin.Array[kotlin.String]/PointingToDeclaration/native/[root]/main.html
 $dokka.location://mainScope/#/PointingToDeclaration/web/[root]/main-scope.html
@@ -72,5 +71,7 @@ hljs
 xterm
 module:jvm
 dev.suresh
+dev.suresh.lang
+dev.suresh.log
 dev.suresh.plugins
 dev.suresh.routes
