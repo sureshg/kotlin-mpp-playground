@@ -8,8 +8,6 @@ rootProject.name = "kotlin-mpp-playground"
 
 include(":common")
 
-include(":client")
-
 include(":web")
 
 include(":benchmark")
@@ -29,7 +27,7 @@ include(":meta:compiler:plugin")
 include(":backend:jvm")
 
 if (Platform.isUnix) {
-  include(":backend:native")
+  // include(":backend:native")
 }
 
 // includeBuild("misc/build") {

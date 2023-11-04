@@ -19,5 +19,9 @@ classes.lst
 *.jsa
 jre/
 
+# Kobweb ignores
+**/.kobweb/*
+!**/.kobweb/conf.yaml
+
 # Gradle release
 cx.json

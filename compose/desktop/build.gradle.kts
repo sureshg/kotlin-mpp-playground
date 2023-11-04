@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
-  alias(libs.plugins.jetbrains.compose.mpp)
+  alias(libs.plugins.jetbrains.compose)
 }
 
 dependencies {

@@ -1,13 +1,13 @@
 [versions]
 java                           = "22"
 kotlin                         = "1.9.20"
-kotlin-ksp                     = "1.9.20-1.0.14"
+kotlin-ksp                     = "1.9.20-1.0.13"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "17"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "1.9"
 gradle                         = "8.4"
-node-version                   = "20.6.1"
+node-version                   = "21.1.0"
 java-vendor                    = "Oracle"
 java-jvmArguments              = "--enable-preview"
 java-addModules                = "jdk.incubator.vector"
@@ -87,7 +87,6 @@ webjars-xterm                  = "5.1.0"
 ktor                           = "2.3.5"
 ktor-cohort                    = "2.2.1"
 arrow-suspendapp               = "0.4.1-alpha.5"
-kobweb                         = "0.13.9"
 exposed                        = "0.44.1"
 postgresql                     = "42.6.0"
 hikariCP                       = "5.0.1"
@@ -135,15 +134,15 @@ akkurate                       = "0.1.0"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.8.0"
 modulegraph                    = "0.5.0"
-jetbrains-compose              = "1.5.10"
-jetbrains-compose-compiler     = "1.5.3"
 cash-molecule                  = "1.3.0"
 npm-publish-plugin             = "3.4.1"
 exposed-plugin                 = "0.2.1"
 jib-plugin                     = "3.4.0"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
-
+jetbrains-compose              = "1.5.10"
+jetbrains-compose-compiler     = "1.5.3"
+kobweb                         = "0.15.0"
 
 [libraries]
 # External plugins for precompiled script plugins
@@ -320,10 +319,12 @@ junit-jupiter-engine                 = { module = "org.junit.jupiter:junit-jupit
 junit-jupiter-params                 = { module = "org.junit.jupiter:junit-jupiter-params"                     , version.ref = "junit"}
 
 kobweb-api                           = { module = "com.varabyte.kobweb:kobweb-api"                             , version.ref = "kobweb" }
-kobweb-core                          = { module = "com.varabyte.kobweb:kobweb-core"                            , version.ref = "kobweb" }
-kobweb-silk-core                     = { module = "com.varabyte.kobweb:kobweb-silk"                            , version.ref = "kobweb" }
-kobweb-silk-icons-fa                 = { module = "com.varabyte.kobweb:kobweb-silk-icons-fa"                   , version.ref = "kobweb" }
-kobweb-streams                       = { module = "com.varabyte.kobweb:kobweb-streams"                         , version.ref = "kobweb" }
+kobweb-core                          = { module = "com.varabyte.kobweb:kobweb-core "                           , version.ref = "kobweb" }
+kobweb-silk                          = { module = "com.varabyte.kobweb:kobweb-silk"                            , version.ref = "kobweb" }
+kobwebx-markdown                     = { module = "com.varabyte.kobwebx:kobwebx-markdown"                      , version.ref = "kobweb" }
+silk-foundation                      = { module = "com.varabyte.kobweb:silk-foundation"                        , version.ref = "kobweb" }
+silk-icons-fa                        = { module = "com.varabyte.kobwebx:silk-icons-fa"                         , version.ref = "kobweb" }
+silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-icons-mdi"                        , version.ref = "kobweb" }
 
 graalvm-sdk                          = { module = "org.graalvm.sdk:graal-sdk"                                  , version.ref = "graalvm"}
 google-auto-annotations              = { module = "com.google.auto.service:auto-service-annotations"           , version.ref = "google-auto-service"}
@@ -432,7 +433,7 @@ benmanes                             = { id = "com.github.ben-manes.versions"   
 bestpractices                        = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "best-practices-plugin" }
 graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"                                  , version.ref = "graalvm-nativeimage"}
 buildkonfig                          = { id = "com.codingfeline.buildkonfig"                                   , version.ref = "buildkonfig"}
-jetbrains-compose-mpp                = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
+jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
 kobweb-application                   = { id = "com.varabyte.kobweb.application"                                , version.ref = "kobweb" }
 kobweb-library                       = { id = "com.varabyte.kobweb.library"                                    , version.ref = "kobweb" }
 kobwebx-markdown                     = { id = "com.varabyte.kobwebx.markdown"                                  , version.ref = "kobweb" }

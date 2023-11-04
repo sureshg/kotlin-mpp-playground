@@ -33,11 +33,12 @@ kotlin {
     commonProjectName -> {
       jvmTarget()
       jsTarget()
-      allNativeTargets()
+      // allNativeTargets()
       // wasmJsTarget()
     }
     "native" -> allNativeTargets()
-    "web" -> jsTarget()
+    "web",
+    "chrome" -> jsTarget()
     else -> jvmTarget()
   }
   applyDefaultHierarchyTemplate()

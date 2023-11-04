@@ -129,7 +129,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
 context(Project)
 fun KotlinMultiplatformExtension.jsTarget() {
   js {
-    useEsModules()
+    // useEsModules()
     binaries.executable()
     // binaries.library()
     browser {

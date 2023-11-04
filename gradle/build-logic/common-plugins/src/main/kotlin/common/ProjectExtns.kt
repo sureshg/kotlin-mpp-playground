@@ -403,6 +403,7 @@ fun Test.configureJavaTest() {
   maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
 
   testLogging { configureLogEvents() }
+  // timeout = 10.minutes.toJavaDuration()
 
   afterSuite(
       KotlinClosure2({ desc: TestDescriptor, result: TestResult ->
@@ -455,7 +456,7 @@ fun KotlinTestReport.configureTestReport() {}
 
 context(Project)
 fun KotlinJsOptions.configureKotlinJs() {
-  useEsClasses = true
+  // useEsClasses = true
   // sourceMap = true
   // sourceMapEmbedSources = "always"
   // freeCompilerArgs += listOf("-Xir-per-module")
