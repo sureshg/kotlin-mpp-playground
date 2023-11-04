@@ -6,7 +6,6 @@ $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[ro
 $dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/web/[root]/js-type-of.html
 $dokka.location://langFeatures/#/PointingToDeclaration/common/[root]/lang-features.html
 $dokka.location://main/#/PointingToDeclaration/desktop/[root]/main.html
-$dokka.location://main/#kotlin.Array[kotlin.String]/PointingToDeclaration/native/[root]/main.html
 $dokka.location://mainScope/#/PointingToDeclaration/web/[root]/main-scope.html
 $dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutines.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
@@ -67,8 +66,8 @@ module:common
 dev.suresh
 dev.suresh.flow
 module:web
-hljs
-xterm
+dev.suresh
+dev.suresh.pages
 module:jvm
 dev.suresh
 dev.suresh.lang
