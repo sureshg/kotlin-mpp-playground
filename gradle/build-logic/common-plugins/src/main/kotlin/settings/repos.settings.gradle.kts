@@ -128,7 +128,7 @@ fun RepositoryHandler.sonatypeSnapshots() {
 fun RepositoryHandler.composeMultiplatformDev() {
   maven(url = Repo.COMPOSE_MULTIPLATFORM_DEV) {
     name = "Jetbrains Compose Multiplatform Development Repository"
-    content { includeGroup("org.jetbrains.compose") }
+    content { includeGroupAndSubgroups("org.jetbrains.compose") }
   }
   maven(url = Repo.KOBWEB) {
     name = "KobWeb Repo"
