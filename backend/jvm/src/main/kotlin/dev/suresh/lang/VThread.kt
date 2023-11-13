@@ -2,8 +2,6 @@ package dev.suresh.lang
 
 import dev.suresh.*
 import io.github.oshai.kotlinlogging.KLogger
-import java.lang.foreign.FunctionDescriptor
-import java.lang.foreign.ValueLayout
 import java.util.concurrent.StructuredTaskScope
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.datetime.Clock
@@ -16,7 +14,7 @@ import stdlibFeatures
 object VThread {
 
   context(KLogger)
-  fun virtualThreads() {
+  suspend fun virtualThreads() = runOnVirtualThread {
     info { (Greeting().greeting()) }
     listOf("main", "jvm", "js").forEach {
       info { "common-$it --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
@@ -29,8 +27,6 @@ object VThread {
     structuredConcurrency()
     langFeatures()
     stdlibFeatures()
-
-    getPid()
     kotlinxMetaData()
     classFileApi()
   }
@@ -38,7 +34,6 @@ object VThread {
 
 context(KLogger)
 fun structuredConcurrency() {
-
   info { "Structured concurrency..." }
   val taskList =
       StructuredTaskScope<String>().use { sts ->
@@ -52,13 +47,14 @@ fun structuredConcurrency() {
                   else -> {
                     while (!Thread.currentThread().isInterrupted) {
                       debug { "Task $it ..." }
+                      Thread.sleep(100)
                     }
                     "Task $it"
                   }
                 }
               }
             }
-        runCatching { sts.joinUntil(start.plus(2.seconds).toJavaInstant()) }
+        runCatching { sts.joinUntil(start.plus(1.seconds).toJavaInstant()) }
         tasks
       }
 
@@ -74,16 +70,6 @@ fun structuredConcurrency() {
     it.join().throwIfFailed()
     info { task.get() }
   }
-}
-
-context(KLogger)
-fun getPid() {
-  val getpidAddr = SYMBOL_LOOKUP.findOrNull("getpid")
-  val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)
-  val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)
-  val pid = getpid.invokeExact() as Int
-  assert(pid.toLong() == ProcessHandle.current().pid())
-  info { "getpid() = $pid" }
 }
 
 context(KLogger)

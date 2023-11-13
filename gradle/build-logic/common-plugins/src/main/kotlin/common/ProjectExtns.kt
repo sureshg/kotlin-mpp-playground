@@ -148,7 +148,7 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             "-XX:+UnlockExperimentalVMOptions",
             "-XX:MaxRAMPercentage=0.8",
             // os+thread,gc+heap=trace,
-            """-Xlog:cds,safepoint,gc*:
+            """-Xlog:cds,safepoint,gc*,stringdedup*:
               |file="$tmp$name-gc-%p-%t.log":
               |level,tags,time,uptime,pid,tid:
               |filecount=5,

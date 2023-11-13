@@ -10,12 +10,15 @@ import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
+import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
 import org.slf4j.event.Level
 
 fun Application.configureHTTP() {
   install(IgnoreTrailingSlash)
+
+  install(PartialContent)
 
   install(AutoHeadResponse)
 

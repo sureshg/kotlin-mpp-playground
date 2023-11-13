@@ -86,6 +86,7 @@ dependencies {
   implementation(libs.ktor.server.cors)
   implementation(libs.ktor.server.host.common)
   implementation(libs.ktor.server.auto.head)
+  implementation(libs.ktor.server.partial.content)
   implementation(libs.ktor.server.resources)
   implementation(libs.ktor.server.auth)
   implementation(libs.ktor.server.auth.jwt)
@@ -109,13 +110,16 @@ dependencies {
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
   implementation(libs.micrometer.prometheus)
+  implementation(libs.ap.loader.all)
   // Logging
   implementation(libs.logback.classic)
+  implementation("io.ktor:ktor-server-partial-content-jvm:2.3.6")
   // Testing
   testImplementation(platform(libs.testcontainers.bom))
   testImplementation(libs.ktor.server.tests)
   testImplementation(libs.testcontainers.junit5)
   testImplementation(libs.testcontainers.postgresql)
+  testImplementation(libs.konsist)
 
   // Copy web app browserDist
   webapp(project(path = ":${projects.web.name}", configuration = webapp.name))

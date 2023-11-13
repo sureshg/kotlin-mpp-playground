@@ -1,9 +1,6 @@
 package dev.suresh.lang
 
-import dev.suresh.LINKER
-import dev.suresh.SYMBOL_LOOKUP
-import dev.suresh.downcallHandle
-import dev.suresh.findOrNull
+import dev.suresh.*
 import io.github.oshai.kotlinlogging.KLogger
 import java.lang.foreign.*
 import java.lang.invoke.MethodHandle
@@ -14,7 +11,7 @@ import java.time.Instant
 object FFM {
 
   context(KLogger)
-  fun memoryLayout() {
+  suspend fun memoryLayout() = runOnVirtualThread {
     memoryAPIs()
     currTime()
     strlen("Hello Panama!")

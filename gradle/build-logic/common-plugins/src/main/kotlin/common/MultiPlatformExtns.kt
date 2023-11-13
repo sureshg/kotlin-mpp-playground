@@ -121,6 +121,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.mockk)
         api(libs.testcontainers.junit5)
         api(libs.testcontainers.postgresql)
+        // api(libs.konsist)
       }
     }
   }
