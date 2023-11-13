@@ -52,7 +52,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,7 +60,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/40)
+    (0/36)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/41)
+    (0/36)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,38 +76,10 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/390)
+    (0/337)
   </span>
 </td>
 </tr>
-  <tr>
-    <td class="name">VThreadKt$getPid$2</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
-  </span>
-</td>
-  </tr>
   <tr>
     <td class="name">VThreadKt$kotlinxMetaData$1</td>
 <td class="coverageStat">
@@ -367,7 +339,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/15)
+    (0/13)
   </span>
 </td>
 <td class="coverageStat">
@@ -375,7 +347,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/40)
+    (0/36)
   </span>
 </td>
 <td class="coverageStat">
@@ -383,7 +355,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/51)
+    (0/45)
   </span>
 </td>
 <td class="coverageStat">
@@ -391,7 +363,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/434)
+    (0/378)
   </span>
 </td>
 </tr>
@@ -406,8 +378,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;import dev.suresh.*
 &nbsp;import io.github.oshai.kotlinlogging.KLogger
-&nbsp;import java.lang.foreign.FunctionDescriptor
-&nbsp;import java.lang.foreign.ValueLayout
 &nbsp;import java.util.concurrent.StructuredTaskScope
 &nbsp;import kotlin.time.Duration.Companion.seconds
 &nbsp;import kotlinx.datetime.Clock
@@ -420,7 +390,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;object VThread {
 &nbsp;
 &nbsp;  context(KLogger)
-&nbsp;  fun virtualThreads() {
+&nbsp;  suspend fun virtualThreads() = runOnVirtualThread {
 &nbsp;    info { (Greeting().greeting()) }
 &nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
 &nbsp;      info { &quot;common-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
@@ -433,8 +403,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;    structuredConcurrency()
 &nbsp;    langFeatures()
 &nbsp;    stdlibFeatures()
-&nbsp;
-&nbsp;    getPid()
 &nbsp;    kotlinxMetaData()
 &nbsp;    classFileApi()
 &nbsp;  }
@@ -442,7 +410,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;context(KLogger)
 &nbsp;fun structuredConcurrency() {
-&nbsp;
 <b class="nc">&nbsp;  info { &quot;Structured concurrency...&quot; }</b>
 <b class="nc">&nbsp;  val taskList =</b>
 <b class="nc">&nbsp;      StructuredTaskScope&lt;String&gt;().use { sts -&gt;</b>
@@ -456,13 +423,14 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;                  else -&gt; {
 <b class="nc">&nbsp;                    while (!Thread.currentThread().isInterrupted) {</b>
 <b class="nc">&nbsp;                      debug { &quot;Task $it ...&quot; }</b>
+<b class="nc">&nbsp;                      Thread.sleep(100)</b>
 &nbsp;                    }
 <b class="nc">&nbsp;                    &quot;Task $it&quot;</b>
 &nbsp;                  }
 &nbsp;                }
 &nbsp;              }
 &nbsp;            }
-<b class="nc">&nbsp;        runCatching { sts.joinUntil(start.plus(2.seconds).toJavaInstant()) }</b>
+<b class="nc">&nbsp;        runCatching { sts.joinUntil(start.plus(1.seconds).toJavaInstant()) }</b>
 <b class="nc">&nbsp;        tasks</b>
 &nbsp;      }
 &nbsp;
@@ -478,16 +446,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;    it.join().throwIfFailed()</b>
 <b class="nc">&nbsp;    info { task.get() }</b>
 <b class="nc">&nbsp;  }</b>
-&nbsp;}
-&nbsp;
-&nbsp;context(KLogger)
-&nbsp;fun getPid() {
-<b class="nc">&nbsp;  val getpidAddr = SYMBOL_LOOKUP.findOrNull(&quot;getpid&quot;)</b>
-<b class="nc">&nbsp;  val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)</b>
-<b class="nc">&nbsp;  val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)</b>
-<b class="nc">&nbsp;  val pid = getpid.invokeExact() as Int</b>
-<b class="nc">&nbsp;  assert(pid.toLong() == ProcessHandle.current().pid())</b>
-<b class="nc">&nbsp;  info { &quot;getpid() = $pid&quot; }</b>
 &nbsp;}
 &nbsp;
 &nbsp;context(KLogger)
@@ -536,7 +494,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-11-08 04:19</div>
+    <div style="float:right;">generated on 2023-11-13 02:36</div>
 </div>
 </body>
 </html>
