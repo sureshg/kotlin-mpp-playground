@@ -36,8 +36,10 @@ kotlin {
   sourceSets.all {
     languageSettings.apply {
       optIn("kotlin.ExperimentalStdlibApi")
-      optIn("kotlin.io.encoding.ExperimentalEncodingApi")
       optIn("kotlin.time.ExperimentalTime")
+      optIn("kotlin.io.encoding.ExperimentalEncodingApi")
+      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
+      optIn("kotlinx.serialization.ExperimentalSerializationApi")
       optIn("org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi")
       optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl")
       optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl")
@@ -110,6 +112,8 @@ dependencies {
   implementation(kotlin("stdlib"))
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.datetime)
+  implementation(libs.kotlinx.serialization.json)
+  implementation(libs.kotlinx.collections.immutable)
   // Http client and JSON serialization
   implementation(libs.ktor.client.java)
   implementation(libs.ktor.client.content.negotiation)

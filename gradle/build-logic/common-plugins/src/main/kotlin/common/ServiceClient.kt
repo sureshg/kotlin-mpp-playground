@@ -32,6 +32,10 @@ object ApiClient {
                 prettyPrint = true
                 isLenient = true
                 ignoreUnknownKeys = true
+                encodeDefaults = true
+                explicitNulls = false
+                decodeEnumsCaseInsensitive = true
+                allowTrailingComma = true
               })
         }
 

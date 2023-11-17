@@ -113,7 +113,6 @@ dependencies {
   implementation(libs.ap.loader.all)
   // Logging
   implementation(libs.logback.classic)
-  implementation("io.ktor:ktor-server-partial-content-jvm:2.3.6")
   // Testing
   testImplementation(platform(libs.testcontainers.bom))
   testImplementation(libs.ktor.server.tests)

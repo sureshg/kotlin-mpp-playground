@@ -1,4 +1,5 @@
 import common.jvmArguments
+import common.kotlinVersion
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
@@ -15,9 +16,10 @@ dependencies {
 }
 
 compose {
-  // kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
+  // Workaround until compose has support for Kotlin 2.0
+  kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
   // kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
-  // kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
+  kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
 
   platformTypes = platformTypes.get() - KotlinPlatformType.native
 

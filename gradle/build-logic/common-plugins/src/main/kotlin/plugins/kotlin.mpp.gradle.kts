@@ -1,6 +1,6 @@
 package plugins
 
-import com.google.devtools.ksp.gradle.KspTaskJvm
+import com.google.devtools.ksp.gradle.*
 import common.*
 import java.util.jar.Attributes
 import org.gradle.internal.os.OperatingSystem
@@ -49,6 +49,7 @@ kotlin {
 ksp {
   arg("autoserviceKsp.verify", "true")
   arg("autoserviceKsp.verbose", "true")
+  allWarningsAsErrors = false
 }
 
 atomicfu {
@@ -86,9 +87,16 @@ tasks {
   }
 
   // configure jvm target for ksp
-  withType<KspTaskJvm>().all {
-    compilerOptions { configureKotlinJvm() }
-    jvmTargetValidationMode = JvmTargetValidationMode.WARNING
+  withType<KspTask>().configureEach {
+    when (this) {
+      is KspTaskMetadata -> compilerOptions { configureKotlinCommon() }
+      is KspTaskJS -> compilerOptions { configureKotlinCommon() }
+      is KspTaskNative -> compilerOptions { configureKotlinCommon() }
+      is KspTaskJvm -> {
+        compilerOptions { configureKotlinJvm() }
+        jvmTargetValidationMode = JvmTargetValidationMode.WARNING
+      }
+    }
   }
 
   withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }

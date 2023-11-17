@@ -1,3 +1,5 @@
+import common.kotlinVersion
+
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
@@ -40,4 +42,10 @@ kotlin {
       }
     }
   }
+}
+
+compose {
+  // Workaround until compose has support for Kotlin 2.0
+  kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
+  kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
 }

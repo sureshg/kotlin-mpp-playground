@@ -324,8 +324,8 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   freeCompilerArgs.addAll(
       "-Xcontext-receivers",
       "-Xallow-result-return-type",
-      "-P",
-      "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}",
+      // "-P",
+      // "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}",
       // "-P",
       // "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=...dir...",
   )
@@ -338,7 +338,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
  * - [ApiVersion.kt](https://github.com/JetBrains/kotlin/blob/master/compiler/util/src/org/jetbrains/kotlin/config/ApiVersion.kt#L35)
  *
  *   Gradle Kotlin DSL Api/Lang versions,
- * - [KotlinDslCompilerPlugins.kt](https://github.com/gradle/gradle/blob/master/subprojects/kotlin-dsl-plugins/src/main/kotlin/org/gradle/kotlin/dsl/plugins/dsl/KotlinDslCompilerPlugins.kt#L63-L64)
+ * - [KotlinDslCompilerPlugins.kt](https://github.com/gradle/gradle/blob/master/platforms/core-configuration/kotlin-dsl-plugins/src/main/kotlin/org/gradle/kotlin/dsl/plugins/dsl/KotlinDslCompilerPlugins.kt#L63-L64)
  */
 context(Project)
 fun KotlinJvmCompilerOptions.configureKotlinJvm() {
@@ -384,7 +384,7 @@ fun LanguageSettingsBuilder.configureKotlinLang() {
   optIn("kotlin.ExperimentalMultiplatform")
   optIn("kotlin.js.ExperimentalJsExport")
   optIn("kotlin.experimental.ExperimentalNativeApi")
-  optIn("kotlinx.cinterop.ExperimentalForeignApi")
+  // optIn("kotlinx.cinterop.ExperimentalForeignApi")
   // optIn("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
 }
 
@@ -456,7 +456,7 @@ fun KotlinTestReport.configureTestReport() {}
 
 context(Project)
 fun KotlinJsOptions.configureKotlinJs() {
-  // useEsClasses = true
+  useEsClasses = true
   // sourceMap = true
   // sourceMapEmbedSources = "always"
   // freeCompilerArgs += listOf("-Xir-per-module")

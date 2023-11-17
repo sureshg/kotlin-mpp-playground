@@ -16,7 +16,6 @@ import kotlin.test.DefaultAsserter.assertEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue
 import kotlinx.coroutines.test.runTest
-import kotlinx.serialization.json.Json
 
 class CommonTest {
 
@@ -35,14 +34,7 @@ class CommonTest {
             }) {
               install(Resources)
 
-              install(ContentNegotiation) {
-                json(
-                    Json {
-                      prettyPrint = true
-                      isLenient = true
-                      ignoreUnknownKeys = true
-                    })
-              }
+              install(ContentNegotiation) { json(json) }
 
               install(ContentEncoding) {
                 deflate(1.0F)

@@ -89,6 +89,7 @@ val json by lazy {
     encodeDefaults = true
     explicitNulls = false
     decodeEnumsCaseInsensitive = true
+    allowTrailingComma = true
   }
 }
 

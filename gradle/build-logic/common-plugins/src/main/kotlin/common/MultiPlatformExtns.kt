@@ -130,7 +130,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
 context(Project)
 fun KotlinMultiplatformExtension.jsTarget() {
   js {
-    // useEsModules()
+    useEsModules()
     binaries.executable()
     // binaries.library()
     browser {
@@ -158,6 +158,7 @@ fun KotlinMultiplatformExtension.jsTarget() {
         api(libs.kotlinx.html)
         api(libs.ktor.client.js)
         api(kotlinw("browser"))
+        api(kotlinw("css"))
         // implementation(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
         // kspDependency("CommonMainMetadata", project(":meta:ksp:processor"))
         // kspDependency("Js", project(":meta:ksp:processor"))
