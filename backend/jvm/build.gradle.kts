@@ -1,7 +1,5 @@
-import common.githubUser
-import common.javaVersion
-import common.jvmArguments
-import common.tmp
+import com.google.devtools.ksp.gradle.KspTask
+import common.*
 
 plugins {
   plugins.kotlin.jvm
@@ -10,6 +8,7 @@ plugins {
   alias(libs.plugins.ktor)
   alias(libs.plugins.exposed)
   com.google.cloud.tools.jib
+  gg.jte.gradle
 }
 
 description = "Ktor backend jvm application"
@@ -52,6 +51,13 @@ jib {
   containerizingMode = "packaged"
 }
 
+jte {
+  contentType = gg.jte.ContentType.Html
+  sourceDirectory =
+      sourceSets.main.map { it.resources.srcDirs.first().resolve("templates").toPath() }
+  generate()
+}
+
 exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
 
 // Configuration to copy webapp to resources
@@ -63,7 +69,12 @@ tasks {
         from(webapp)
         into(processResources.map { it.destinationDir.resolve(webapp.name) })
       }
+
+  // Copy webapp to resources
   processResources { dependsOn(copyWebApp) }
+
+  // Makes sure jte is generated before compilation
+  withType<KspTask>().configureEach { dependsOn(generateJte) }
 
   // publish { finalizedBy(jibDockerBuild) }
 }
@@ -91,6 +102,7 @@ dependencies {
   implementation(libs.ktor.server.auth)
   implementation(libs.ktor.server.auth.jwt)
   implementation(libs.ktor.serialization.json)
+
   // Client dependencies
   implementation(libs.ktor.client.java)
   implementation(libs.ktor.client.content.negotiation)
@@ -98,6 +110,7 @@ dependencies {
   implementation(libs.ktor.client.logging)
   implementation(libs.ktor.client.resources)
   implementation(libs.ktor.client.auth)
+
   // Database
   implementation(libs.exposed.core)
   implementation(libs.exposed.jdbc)
@@ -106,18 +119,29 @@ dependencies {
   implementation(libs.postgresql)
   implementation(libs.hikariCP)
   implementation(libs.sherlock.sql)
+
+  // Templating
+  implementation(libs.jte.runtime)
+  // compileOnly(libs.jte.kotlin)
+  implementation(libs.ktor.server.html)
+  implementation(libs.kotlinx.html)
+  implementation(kotlinw("css"))
+
   // Monitoring
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
   implementation(libs.micrometer.prometheus)
   implementation(libs.ap.loader.all)
+
   // Logging
   implementation(libs.logback.classic)
+
   // Testing
-  testImplementation(platform(libs.testcontainers.bom))
   testImplementation(libs.ktor.server.tests)
   testImplementation(libs.testcontainers.junit5)
   testImplementation(libs.testcontainers.postgresql)
+  testImplementation(libs.testcontainers.k3s)
+  testImplementation(libs.kubernetes.client)
   testImplementation(libs.konsist)
 
   // Copy web app browserDist

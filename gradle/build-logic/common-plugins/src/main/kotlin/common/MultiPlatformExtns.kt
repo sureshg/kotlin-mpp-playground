@@ -26,9 +26,9 @@ fun KotlinMultiplatformExtension.commonTarget() {
       languageSettings { configureKotlinLang() }
       // Apply multiplatform library bom to all source sets
       dependencies {
-        implementation(project.dependencies.platform(libs.kotlin.bom))
-        implementation(project.dependencies.platform(libs.ktor.bom))
-        implementation(project.dependencies.platform(libs.kotlin.wrappers.bom))
+        api(project.dependencies.platform(libs.kotlin.bom))
+        api(project.dependencies.platform(libs.ktor.bom))
+        api(project.dependencies.platform(libs.kotlin.wrappers.bom))
       }
     }
 

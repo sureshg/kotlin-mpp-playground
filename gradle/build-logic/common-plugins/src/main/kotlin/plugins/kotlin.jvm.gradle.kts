@@ -1,6 +1,6 @@
 package plugins
 
-import com.google.devtools.ksp.gradle.KspTaskJvm
+import com.google.devtools.ksp.gradle.*
 import common.*
 import java.util.jar.Attributes
 import org.gradle.internal.os.OperatingSystem
@@ -96,10 +96,17 @@ tasks {
   // Configure jvm args for JavaExec tasks except `run`
   withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(jvmArguments()) }
 
-  // configure jvm target for ksp
-  withType(KspTaskJvm::class).all {
-    compilerOptions { configureKotlinJvm() }
-    jvmTargetValidationMode = JvmTargetValidationMode.WARNING
+  // Configure KSP kotlin compilation tasks
+  withType<KspTask>().configureEach {
+    when (this) {
+      is KspTaskMetadata -> compilerOptions { configureKotlinCommon() }
+      is KspTaskJS -> compilerOptions { configureKotlinCommon() }
+      is KspTaskNative -> compilerOptions { configureKotlinCommon() }
+      is KspTaskJvm -> {
+        compilerOptions { configureKotlinJvm() }
+        jvmTargetValidationMode = JvmTargetValidationMode.WARNING
+      }
+    }
   }
 
   processResources {
@@ -157,6 +164,8 @@ tasks {
 
 dependencies {
   implementation(platform(libs.kotlin.bom))
+  implementation(platform(libs.ktor.bom))
+  implementation(platform(libs.kotlin.wrappers.bom))
   implementation(kotlin("stdlib"))
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.serialization.json)

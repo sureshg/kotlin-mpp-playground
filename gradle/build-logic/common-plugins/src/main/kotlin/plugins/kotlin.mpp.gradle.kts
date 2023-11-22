@@ -86,7 +86,7 @@ tasks {
     // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
-  // configure jvm target for ksp
+  // Configure KSP kotlin compilation tasks
   withType<KspTask>().configureEach {
     when (this) {
       is KspTaskMetadata -> compilerOptions { configureKotlinCommon() }

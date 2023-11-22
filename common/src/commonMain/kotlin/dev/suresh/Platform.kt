@@ -80,6 +80,11 @@ interface Platform {
       "${Instant.fromEpochSeconds(epochSeconds).toLocalDateTime(TimeZone.currentSystemDefault())} $tzShortId"
 }
 
+// Expect classes are not stable
+// expect class Platform {
+//    val name: String
+// }
+
 /** Common JSON instance for serde of JSON data. */
 val json by lazy {
   Json {

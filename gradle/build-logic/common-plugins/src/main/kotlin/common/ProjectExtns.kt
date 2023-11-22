@@ -323,6 +323,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   verbose = true
   freeCompilerArgs.addAll(
       "-Xcontext-receivers",
+      "-Xexpect-actual-classes",
       "-Xallow-result-return-type",
       // "-P",
       // "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}",
@@ -374,6 +375,7 @@ context(Project)
 fun LanguageSettingsBuilder.configureKotlinLang() {
   progressiveMode = true
   languageVersion = kotlinLangVersion.get().version
+  // enableLanguageFeature("ContextReceivers")
   optIn("kotlin.ExperimentalStdlibApi")
   optIn("kotlin.contracts.ExperimentalContracts")
   optIn("kotlin.ExperimentalUnsignedTypes")

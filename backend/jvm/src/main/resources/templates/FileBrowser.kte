@@ -1,0 +1,77 @@
+@import java.nio.file.Path
+@import kotlin.io.path.*
+
+@param docDir: Path
+@param dir: Path
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>File Browser</title>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 1em;
+        }
+
+        h2 {
+            font-weight: 500;
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            display: flex;
+            align-items: center;
+            background-color: #F9F9F9;
+            padding: 0.5em;
+            margin: 0.2em 0;
+            border-radius: 3px;
+            transition: background 0.15s ease-in-out;
+        }
+
+        ul li:hover {
+            background-color: #E9E9E9;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        ul li i {
+            margin-right: 0.5em;
+        }
+
+        .fa-folder::before {
+            content: url("data:image/svg+xml,%3Csvg fill='%23000000' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M19 5.5h-6.28l-0.32 -1a3 3 0 0 0 -2.84 -2H5a3 3 0 0 0 -3 3v13a3 3 0 0 0 3 3h14a3 3 0 0 0 3 -3v-10a3 3 0 0 0 -3 -3Zm1 13a1 1 0 0 1 -1 1H5a1 1 0 0 1 -1 -1v-13a1 1 0 0 1 1 -1h4.56a1 1 0 0 1 0.95 0.68l0.54 1.64a1 1 0 0 0 0.95 0.68h7a1 1 0 0 1 1 1Z'/%3E%3C/svg%3E");
+        }
+
+        .fa-file::before {
+            content: url("data:image/svg+xml,%3Csvg fill='%23000000' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath d='M20 8.94a1.31 1.31 0 0 0 -0.06 -0.27v-0.09a1.07 1.07 0 0 0 -0.19 -0.28l-6 -6a1.07 1.07 0 0 0 -0.28 -0.19h-0.09L13.06 2H7a3 3 0 0 0 -3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3 -3V8.94Zm-6 -3.53L16.59 8H14ZM18 19a1 1 0 0 1 -1 1H7a1 1 0 0 1 -1 -1V5a1 1 0 0 1 1 -1h5v5a1 1 0 0 0 1 1h5Z'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Directory listing for: ${dir.relativeToOrSelf(docDir).pathString}</h2>
+    <ul>
+
+    </ul>
+</div>
+</body>
+</html>
