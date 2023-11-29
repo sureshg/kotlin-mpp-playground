@@ -20,6 +20,15 @@ application {
 
 ktor { fatJar { archiveFileName = "${project.name}-app.jar" } }
 
+jte {
+  contentType = gg.jte.ContentType.Html
+  sourceDirectory =
+      sourceSets.main.map { it.resources.srcDirs.first().resolve("templates").toPath() }
+  generate()
+}
+
+exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
+
 jib {
   from {
     image = "openjdk:${javaVersion.get().majorVersion}-slim"
@@ -50,15 +59,6 @@ jib {
 
   containerizingMode = "packaged"
 }
-
-jte {
-  contentType = gg.jte.ContentType.Html
-  sourceDirectory =
-      sourceSets.main.map { it.resources.srcDirs.first().resolve("templates").toPath() }
-  generate()
-}
-
-exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
 
 // Configuration to copy webapp to resources
 val webapp by configurations.creating
@@ -123,9 +123,18 @@ dependencies {
   // Templating
   implementation(libs.jte.runtime)
   // compileOnly(libs.jte.kotlin)
-  implementation(libs.ktor.server.html)
-  implementation(libs.kotlinx.html)
+  implementation(libs.kotlinx.html) {
+    version { strictly(libs.kotlinx.html.get().version.toString()) }
+    because("Ktor Issue!")
+  }
   implementation(kotlinw("css"))
+  implementation(libs.ktor.server.html)
+  //  constraints {
+  //    implementation(libs.kotlinx.html.get().module.toString()) {
+  //      version { strictly(libs.kotlinx.html.get().version.toString()) }
+  //      because("Ktor Issue!")
+  //    }
+  //  }
 
   // Monitoring
   implementation(libs.ktor.cohort.core)

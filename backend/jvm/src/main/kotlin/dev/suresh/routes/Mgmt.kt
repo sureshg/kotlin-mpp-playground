@@ -165,7 +165,7 @@ fun Route.mgmtRoutes() {
       else ->
           mutex.withLock {
             runOnVirtualThread {
-              val jfrPath = kotlin.io.path.createTempFile("profile", ".jfr")
+              val jfrPath = createTempFile("profile", ".jfr")
               RecordingStream(Configuration.getConfiguration("profile")).use {
                 it.setMaxSize(100 * 1024 * 1024)
                 it.setMaxAge(2.minutes.toJavaDuration())
@@ -210,7 +210,7 @@ fun Route.mgmtRoutes() {
             "com.sun.management:type=HotSpotDiagnostic",
             HotSpotDiagnosticMXBean::class.java)
 
-    val heapDumpPath = kotlin.io.path.createTempFile("heapdump", ".hprof")
+    val heapDumpPath = createTempFile("heapdump", ".hprof")
     heapDumpPath.deleteIfExists()
     hotspot.dumpHeap(heapDumpPath.pathString, true)
     call.response.header(

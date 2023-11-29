@@ -6,7 +6,10 @@ import dev.suresh.plugins.configureHTTP
 import dev.suresh.plugins.configureSecurity
 import dev.suresh.plugins.configureSerialization
 import dev.suresh.plugins.errorRoutes
-import dev.suresh.routes.*
+import dev.suresh.routes.adminRoutes
+import dev.suresh.routes.jvmFeatures
+import dev.suresh.routes.mgmtRoutes
+import dev.suresh.routes.webApp
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*

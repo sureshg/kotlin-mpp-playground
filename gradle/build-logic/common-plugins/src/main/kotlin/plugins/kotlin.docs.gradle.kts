@@ -24,10 +24,12 @@ if (project == rootProject) {
 
   // Combined test & coverage report
   dependencies {
-    project.subprojects.forEach {
-      kover(it)
-      // testReportAggregation(it)
-    }
+    project.subprojects
+        .filter { !it.path.contains(":dep-mgmt") }
+        .forEach {
+          kover(it)
+          testReportAggregation(it)
+        }
   }
 
   // Dokka multi-module config.
