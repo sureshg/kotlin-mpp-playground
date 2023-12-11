@@ -1,15 +1,22 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/processor/[root]/index.html
+$dokka.location://App/#/PointingToDeclaration/desktop/[root]/-app.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
+$dokka.location://debug/#/PointingToDeclaration/desktop/[root]/debug.html
+$dokka.location://debug/androidx.compose.ui.Modifier#androidx.compose.ui.graphics.Color/PointingToDeclaration/desktop/[root]/debug.html
 $dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/web/[root]/js-type-of.html
 $dokka.location://langFeatures/#/PointingToDeclaration/common/[root]/lang-features.html
-$dokka.location://main/#/PointingToDeclaration/web/[root]/main.html
+$dokka.location://main/#/PointingToDeclaration/desktop/[root]/main.html
 $dokka.location://mainScope/#/PointingToDeclaration/web/[root]/main-scope.html
 $dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutines.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
+$dokka.location://scrollingBox/#androidx.compose.ui.Modifier#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/desktop/[root]/scrolling-box.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/common/[root]/stdlib-features.html
+$dokka.location://stroke/#/PointingToDeclaration/desktop/[root]/stroke.html
 $dokka.location://topLevelJsFun/#/PointingToDeclaration/web/[root]/top-level-js-fun.html
+$dokka.location:/Arguments///PointingToDeclaration/jvm/[root]/-arguments/index.html
+$dokka.location:/Arguments/Arguments/#java.lang.String.../PointingToDeclaration/jvm/[root]/-arguments/-arguments.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
 $dokka.location:/ClassVisitor/defaultHandler/#com.google.devtools.ksp.symbol.KSNode#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/default-handler.html
@@ -75,4 +82,3 @@ dev.suresh.log
 dev.suresh.plugins
 dev.suresh.routes
 gg.jte.generated.precompiled
-one.converter
