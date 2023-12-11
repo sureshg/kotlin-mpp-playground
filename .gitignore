@@ -25,3 +25,4 @@ jre/
 
 # Gradle release
 cx.json
+/.profileconfig.json

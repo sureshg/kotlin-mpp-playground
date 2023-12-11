@@ -1,43 +1,39 @@
 package dev.suresh.routes
 
+import Arguments
+import FlameGraph
 import com.sun.management.HotSpotDiagnosticMXBean
 import dev.suresh.jvmRuntimeInfo
 import dev.suresh.plugins.debug
-import dev.suresh.runOnVirtualThread
 import io.ktor.http.*
-import io.ktor.server.application.*
 import io.ktor.server.http.content.*
-import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import java.io.File
 import java.io.PrintStream
 import java.lang.management.ManagementFactory
 import jdk.jfr.Configuration
+import jdk.jfr.FlightRecorder
 import jdk.jfr.consumer.RecordingStream
+import jfr2flame
 import kotlin.io.path.*
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toJavaDuration
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import one.converter.Arguments
-import one.converter.FlameGraph
-import one.converter.jfr2flame
 import one.jfr.JfrReader
-import one.profiler.AsyncProfiler
-import one.profiler.AsyncProfilerLoader
-import one.profiler.Events
 
 private val DEBUG = ScopedValue.newInstance<Boolean>()
 
 val mutex = Mutex()
 
-val profiler: AsyncProfiler? by lazy {
-  val ap = AsyncProfilerLoader.loadOrNull()
-  ap.start(Events.CPU, 1000)
-  ap
-}
+// val profiler: AsyncProfiler? by lazy {
+//  val ap = AsyncProfilerLoader.loadOrNull()
+//  ap.start(Events.CPU, 1000)
+//  ap
+// }
 
 val docRoot = Path(System.getProperty("java.io.tmpdir"))
 
@@ -158,44 +154,57 @@ fun Route.mgmtRoutes() {
   }
 
   get("/profile") {
-    // Run the blocking operation on virtual thread and make sure
-    // only one profile operation is running at a time.
+    // Make sure only one profile operation is running at a time.
     when {
       mutex.isLocked -> call.respondText("Profile operation is already running")
       else ->
           mutex.withLock {
-            runOnVirtualThread {
-              val jfrPath = createTempFile("profile", ".jfr")
-              RecordingStream(Configuration.getConfiguration("profile")).use {
-                it.setMaxSize(100 * 1024 * 1024)
-                it.setMaxAge(2.minutes.toJavaDuration())
-                it.enable("jdk.CPULoad").withPeriod(100.milliseconds.toJavaDuration())
-                it.enable("jdk.JavaMonitorEnter").withStackTrace()
-                it.startAsync()
-                Thread.sleep(5_000)
-                it.dump(jfrPath)
-                println("JFR file written to ${jfrPath.toAbsolutePath()}")
+            val jfrPath = createTempFile("profile", ".jfr")
+            val flightRecorder = FlightRecorder.getFlightRecorder()
+            when (flightRecorder.recordings.isEmpty()) {
+              true -> {
+                println("Starting new JFR recording...")
+                RecordingStream(Configuration.getConfiguration("profile")).use {
+                  it.setMaxSize(100 * 1000 * 1000)
+                  it.setMaxAge(2.minutes.toJavaDuration())
+                  it.enable("jdk.CPULoad").withPeriod(100.milliseconds.toJavaDuration())
+                  it.enable("jdk.JavaMonitorEnter").withStackTrace()
+                  it.startAsync()
+                  Thread.sleep(5.seconds.inWholeMilliseconds)
+                  it.dump(jfrPath)
+                }
               }
-
-              when (call.request.queryParameters.contains("download")) {
-                true -> {
-                  call.response.header(
-                      HttpHeaders.ContentDisposition,
-                      ContentDisposition.Attachment.withParameter(
-                              ContentDisposition.Parameters.FileName, jfrPath.fileName.name)
-                          .toString())
-                  call.respondFile(jfrPath.toFile())
-                }
-                else -> {
-                  val jfr2flame = jfr2flame(JfrReader(jfrPath.pathString), Arguments())
-                  val flameGraph = FlameGraph()
-                  jfr2flame.convert(flameGraph)
-
-                  call.respondOutputStream(contentType = ContentType.Text.Html) {
-                    flameGraph.dump(PrintStream(this))
+              else -> {
+                println("Using existing JFR recording...")
+                flightRecorder.takeSnapshot().use {
+                  if (it.size > 0) {
+                    it.maxSize = 50_000_000
+                    it.maxAge = 2.minutes.toJavaDuration()
+                    it.dump(jfrPath)
                   }
-                  jfrPath.deleteIfExists()
                 }
+              }
+            }
+            println("JFR file written to ${jfrPath.toAbsolutePath()}")
+
+            when (call.request.queryParameters.contains("download")) {
+              true -> {
+                call.response.header(
+                    HttpHeaders.ContentDisposition,
+                    ContentDisposition.Attachment.withParameter(
+                            ContentDisposition.Parameters.FileName, jfrPath.fileName.name)
+                        .toString())
+                call.respondFile(jfrPath.toFile())
+              }
+              else -> {
+                val jfr2flame = jfr2flame(JfrReader(jfrPath.pathString), Arguments())
+                val flameGraph = FlameGraph()
+                jfr2flame.convert(flameGraph)
+
+                call.respondOutputStream(contentType = ContentType.Text.Html) {
+                  flameGraph.dump(PrintStream(this))
+                }
+                jfrPath.deleteIfExists()
               }
             }
           }

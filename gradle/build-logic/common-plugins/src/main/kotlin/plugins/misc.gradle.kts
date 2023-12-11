@@ -20,7 +20,6 @@ plugins {
 // }
 
 // Formatting
-@Suppress("INACCESSIBLE_TYPE")
 spotless {
   java {
     // googleJavaFormat(libs.versions.google.javaformat.get())

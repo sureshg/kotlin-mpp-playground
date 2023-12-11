@@ -5,7 +5,6 @@ import common.*
 import java.util.jar.Attributes
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
-import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import tasks.ReallyExecJar
 
@@ -96,18 +95,8 @@ tasks {
   // Configure jvm args for JavaExec tasks except `run`
   withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(jvmArguments()) }
 
-  // Configure KSP kotlin compilation tasks
-  withType<KspTask>().configureEach {
-    when (this) {
-      is KspTaskMetadata -> compilerOptions { configureKotlinCommon() }
-      is KspTaskJS -> compilerOptions { configureKotlinCommon() }
-      is KspTaskNative -> compilerOptions { configureKotlinCommon() }
-      is KspTaskJvm -> {
-        compilerOptions { configureKotlinJvm() }
-        jvmTargetValidationMode = JvmTargetValidationMode.WARNING
-      }
-    }
-  }
+  // Configure KSP2
+  withType<KspAATask>().configureEach { configureKspConfig() }
 
   processResources {
     inputs.property("version", project.version.toString())

@@ -5,7 +5,6 @@ import common.*
 import java.util.jar.Attributes
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.dsl.*
-import org.jetbrains.kotlin.gradle.dsl.jvm.JvmTargetValidationMode
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.js.yarn.*
@@ -86,18 +85,8 @@ tasks {
     // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
-  // Configure KSP kotlin compilation tasks
-  withType<KspTask>().configureEach {
-    when (this) {
-      is KspTaskMetadata -> compilerOptions { configureKotlinCommon() }
-      is KspTaskJS -> compilerOptions { configureKotlinCommon() }
-      is KspTaskNative -> compilerOptions { configureKotlinCommon() }
-      is KspTaskJvm -> {
-        compilerOptions { configureKotlinJvm() }
-        jvmTargetValidationMode = JvmTargetValidationMode.WARNING
-      }
-    }
-  }
+  // Configure KSP2
+  withType<KspAATask>().configureEach { configureKspConfig() }
 
   withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
 

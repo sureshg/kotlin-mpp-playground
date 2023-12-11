@@ -1,4 +1,3 @@
-package one.converter;
 /*
  * Copyright 2022 Andrei Pangin
  *
@@ -25,21 +24,23 @@ import java.util.regex.Pattern;
 public class Arguments {
     String title = "Flame Graph";
     String highlight;
+    String state;
     Pattern include;
     Pattern exclude;
     double minwidth;
     int skip;
     boolean reverse;
-    boolean cpu;
     boolean alloc;
     boolean live;
     boolean lock;
     boolean threads;
+    boolean classify;
     boolean total;
     boolean lines;
     boolean bci;
     boolean simple;
     boolean dot;
+    boolean norm;
     boolean collapsed;
     long from;
     long to;

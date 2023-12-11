@@ -19,6 +19,45 @@ paths:
               examples:
                 Example#1:
                   value: "/swagger"
+  /browse/{param}:
+    get:
+      description: ""
+      parameters:
+      - name: "param"
+        in: "path"
+        required: true
+        schema:
+          type: "array"
+          items:
+            type: "string"
+      responses:
+        "200":
+          description: "OK <br> A file response"
+          content:
+            application/*:
+              schema:
+                type: "object"
+                format: "binary"
+        "404":
+          description: "Not Found"
+          content:
+            text/html:
+              schema:
+                type: "string"
+  /ffm:
+    get:
+      description: ""
+  /heapdump:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK <br> A file response"
+          content:
+            application/*:
+              schema:
+                type: "object"
+                format: "binary"
   /info:
     get:
       description: ""
@@ -29,3 +68,17 @@ paths:
             '*/*':
               schema:
                 type: "string"
+  /profile:
+    get:
+      description: ""
+      responses:
+        "200":
+          description: "OK <br> A file response"
+          content:
+            application/*:
+              schema:
+                type: "object"
+                format: "binary"
+  /vthreads:
+    get:
+      description: ""

@@ -1,4 +1,4 @@
-import com.google.devtools.ksp.gradle.KspTask
+import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 
 plugins {
@@ -71,10 +71,13 @@ tasks {
       }
 
   // Copy webapp to resources
-  processResources { dependsOn(copyWebApp) }
+  processResources {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    dependsOn(copyWebApp)
+  }
 
   // Makes sure jte is generated before compilation
-  withType<KspTask>().configureEach { dependsOn(generateJte) }
+  withType<KspAATask>().configureEach { dependsOn(generateJte) }
 
   // publish { finalizedBy(jibDockerBuild) }
 }
@@ -124,8 +127,8 @@ dependencies {
   implementation(libs.jte.runtime)
   // compileOnly(libs.jte.kotlin)
   implementation(libs.kotlinx.html) {
-    version { strictly(libs.kotlinx.html.get().version.toString()) }
-    because("Ktor Issue!")
+    // version { strictly(libs.kotlinx.html.get().version.toString()) }
+    // because("Ktor Issue!")
   }
   implementation(kotlinw("css"))
   implementation(libs.ktor.server.html)
@@ -140,7 +143,8 @@ dependencies {
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
   implementation(libs.micrometer.prometheus)
-  implementation(libs.ap.loader.all)
+  implementation(libs.ap.converter)
+  // implementation(libs.ap.loader.all)
 
   // Logging
   implementation(libs.logback.classic)

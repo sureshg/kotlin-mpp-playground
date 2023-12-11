@@ -18,8 +18,8 @@ and [Compose Web (wasm)][Compose-Multiplatform] applications.
 ```bash
 # Mac OS
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 22.ea-open
-$ sdk u java 22.ea-open
+$ sdk i java 23.ea-open
+$ sdk u java 23.ea-open
 ```
 
 ### Build & Run
@@ -44,7 +44,7 @@ $ docker run \
         --publish 8081:8081 \
         --name kotlin-mpp-playground \
         --mount type=bind,source=$(pwd),destination=/app,readonly \
-        openjdk:22-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
+        openjdk:23-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
 
 $ ./gradlew :backend:jvm:jibDockerBuild
 $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
@@ -106,9 +106,9 @@ $ actionlint
 
 <!-- Badges -->
 
-[java_url]: https://jdk.java.net/22/
+[java_url]: https://jdk.java.net/23/
 
-[java_img]: https://img.shields.io/badge/OpenJDK-22-e76f00?logo=openjdk&logoColor=e76f00
+[java_img]: https://img.shields.io/badge/OpenJDK-23-e76f00?logo=openjdk&logoColor=e76f00
 
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 

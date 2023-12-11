@@ -11,10 +11,8 @@ include(":common")
 include(":web")
 
 include(":benchmark")
-
 // include(":compose:web")
-
-// include(":compose:desktop")
+include(":compose:desktop")
 
 include(":dep-mgmt:bom")
 

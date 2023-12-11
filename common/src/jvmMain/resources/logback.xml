@@ -1,4 +1,4 @@
-<configuration>
+<configuration scan="true" scanPeriod="30 seconds">
 
     <property name="pattern"
               value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} %-5level %X{remoteHost} [%thread] %logger{16} - %msg%n%rEx"/>

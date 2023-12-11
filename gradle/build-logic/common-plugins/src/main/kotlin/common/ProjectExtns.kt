@@ -1,5 +1,6 @@
 package common
 
+import com.google.devtools.ksp.gradle.KspAATask
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Path
@@ -330,6 +331,16 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       // "-P",
       // "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=...dir...",
   )
+}
+
+context(Project)
+fun KspAATask.configureKspConfig() {
+  kspConfig.apply {
+    apiVersion = kotlinApiVersion.map { it.version }
+    jvmTarget = kotlinJvmTarget.map { it.target }
+    languageVersion = kotlinLangVersion.map { it.version }
+    allWarningsAsErrors = false
+  }
 }
 
 /**
