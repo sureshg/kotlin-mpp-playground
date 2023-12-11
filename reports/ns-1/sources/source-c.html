@@ -1,0 +1,236 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>kotlin-mpp-playground Coverage Report > TestProcessor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: TestProcessor (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">TestProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/127)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TestProcessor$process$allFiles$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/129)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import com.google.auto.service.AutoService
+&nbsp;import com.google.devtools.ksp.processing.*
+&nbsp;import com.google.devtools.ksp.symbol.KSAnnotated
+&nbsp;import com.google.devtools.ksp.symbol.KSClassDeclaration
+&nbsp;import com.google.devtools.ksp.symbol.KSNode
+&nbsp;import com.google.devtools.ksp.visitor.KSTopDownVisitor
+&nbsp;import java.io.OutputStreamWriter
+&nbsp;
+&nbsp;@AutoService(SymbolProcessorProvider::class)
+&nbsp;class TestProcessorProvider : SymbolProcessorProvider {
+&nbsp;  override fun create(environment: SymbolProcessorEnvironment) =
+&nbsp;      TestProcessor(environment.codeGenerator, environment.logger)
+&nbsp;}
+&nbsp;
+<b class="nc">&nbsp;class TestProcessor(val codeGenerator: CodeGenerator, val logger: KSPLogger) : SymbolProcessor {</b>
+&nbsp;  private var invoked = false
+&nbsp;
+&nbsp;  override fun process(resolver: Resolver): List&lt;KSAnnotated&gt; {
+<b class="nc">&nbsp;    val allFiles = resolver.getAllFiles().map { it.fileName }</b>
+<b class="nc">&nbsp;    logger.warn(allFiles.toList().toString())</b>
+<b class="nc">&nbsp;    if (invoked) {</b>
+<b class="nc">&nbsp;      return emptyList()</b>
+&nbsp;    }
+<b class="nc">&nbsp;    invoked = true</b>
+&nbsp;
+<b class="nc">&nbsp;    codeGenerator</b>
+<b class="nc">&nbsp;        .createNewFile(</b>
+<b class="nc">&nbsp;            dependencies = Dependencies.ALL_FILES,</b>
+<b class="nc">&nbsp;            packageName = &quot;&quot;,</b>
+<b class="nc">&nbsp;            fileName = &quot;Foo&quot;,</b>
+<b class="nc">&nbsp;            extensionName = &quot;kt&quot;)</b>
+<b class="nc">&nbsp;        .use { output -&gt;</b>
+<b class="nc">&nbsp;          OutputStreamWriter(output).use { writer -&gt;</b>
+<b class="nc">&nbsp;            writer.write(&quot;package com.example\n\n&quot;)</b>
+<b class="nc">&nbsp;            writer.write(&quot;class Foo {\n&quot;)</b>
+&nbsp;
+<b class="nc">&nbsp;            val visitor = ClassVisitor()</b>
+<b class="nc">&nbsp;            resolver.getAllFiles().forEach { it.accept(visitor, writer) }</b>
+<b class="nc">&nbsp;            writer.write(&quot;}\n&quot;)</b>
+<b class="nc">&nbsp;          }</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;    return emptyList()</b>
+&nbsp;  }
+&nbsp;}
+&nbsp;
+&nbsp;class ClassVisitor : KSTopDownVisitor&lt;OutputStreamWriter, Unit&gt;() {
+&nbsp;  override fun defaultHandler(node: KSNode, data: OutputStreamWriter) {}
+&nbsp;
+&nbsp;  override fun visitClassDeclaration(
+&nbsp;      classDeclaration: KSClassDeclaration,
+&nbsp;      data: OutputStreamWriter
+&nbsp;  ) {
+&nbsp;    super.visitClassDeclaration(classDeclaration, data)
+&nbsp;    val symbolName = classDeclaration.simpleName.asString().lowercase()
+&nbsp;    data.write(&quot;    val $symbolName = true\n&quot;)
+&nbsp;  }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-11 07:28</div>
+</div>
+</body>
+</html>
