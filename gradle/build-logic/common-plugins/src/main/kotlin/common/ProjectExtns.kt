@@ -149,12 +149,13 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             "-XX:+UnlockExperimentalVMOptions",
             "-XX:MaxRAMPercentage=0.8",
             // os+thread,gc+heap=trace,
-            """-Xlog:cds,safepoint,gc*,stringdedup*:
+            """-Xlog:gc*,stringdedup*:
               |file="$tmp$name-gc-%p-%t.log":
               |level,tags,time,uptime,pid,tid:
               |filecount=5,
               |filesize=10m"""
                 .joinToConfigString(),
+            "-Xlog:class+load:file=${tmp}cds.log:tags",
             """-XX:StartFlightRecording=
               |filename=$tmp$name.jfr,
               |name=$name,
