@@ -129,7 +129,7 @@ jobs:
 
       - name: 📤 Uploading ${{ matrix.os }} build artifacts
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.gradle-build.outputs.artifact_name }}
           path: |
@@ -187,7 +187,7 @@ jobs:
 
       - name: 💥 Uploading JVM error logs
         if: steps.gradle-build.outcome == 'failure' && always()
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-jvm-error-logs
           path: |
