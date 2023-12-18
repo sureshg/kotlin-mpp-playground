@@ -71,6 +71,7 @@ bench
 module:common
 dev.suresh
 dev.suresh.flow
+dev.suresh.http
 module:web
 hljs
 xterm
