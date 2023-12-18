@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > TM</title>
+  <title>kotlin-mpp-playground Coverage Report > VideosKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,15 +19,18 @@
 <div class="breadCrumbs">
 Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.lang</a>
+    <a href="../index.html">dev.suresh.http</a>
 </div>
 
-<h1>Coverage Summary for Class: TM (dev.suresh.lang)</h1>
+<h1>Coverage Summary for Class: VideosKt (dev.suresh.http)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,13 +49,21 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">TM</td>
+  <td class="name">VideosKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/9)
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -61,7 +72,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/25)
+    (0/93)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,66 +80,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/189)
+    (0/198)
   </span>
 </td>
 </tr>
-  <tr>
-    <td class="name">TM$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/10)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/26)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/190)
-  </span>
-</td>
-</tr>
+
 </table>
 
 <br/>
@@ -136,61 +92,152 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
 &nbsp;
-&nbsp;import java.lang.foreign.MemoryLayout
-&nbsp;import java.lang.foreign.MemorySegment
-&nbsp;import java.lang.foreign.ValueLayout
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
-&nbsp;/**
-&nbsp; * Time representing the number of seconds since the Unix Epoch (January 1, 1970, 00:00:00 UTC) into
-&nbsp; * a broken-down UTC representation
-&nbsp; */
-<b class="nc">&nbsp;class TM(private val segment: MemorySegment) {</b>
-&nbsp;  companion object {
-<b class="nc">&nbsp;    val LAYOUT =</b>
-<b class="nc">&nbsp;        MemoryLayout.structLayout(</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT.withName(&quot;sec&quot;),</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT.withName(&quot;min&quot;),</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT.withName(&quot;hour&quot;),</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT.withName(&quot;mday&quot;),</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT.withName(&quot;mon&quot;),</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT.withName(&quot;year&quot;),</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT.withName(&quot;wday&quot;),</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT.withName(&quot;yday&quot;),</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_BOOLEAN.withName(&quot;isdst&quot;),</b>
-<b class="nc">&nbsp;            MemoryLayout.paddingLayout(24))</b>
+&nbsp;@Serializable
+&nbsp;data class Video(
+&nbsp;    val description: String,
+&nbsp;    val sources: List&lt;String&gt;,
+&nbsp;    val subtitle: String,
+&nbsp;    val thumb: String,
+&nbsp;    val title: String,
+&nbsp;    val poster: String? = null,
+&nbsp;)
 &nbsp;
-<b class="nc">&nbsp;    private val yearVH = LAYOUT.varHandle(MemoryLayout.PathElement.groupElement(&quot;year&quot;))</b>
-<b class="nc">&nbsp;    private val monthVH = LAYOUT.varHandle(MemoryLayout.PathElement.groupElement(&quot;mon&quot;))</b>
-<b class="nc">&nbsp;    private val dayVH = LAYOUT.varHandle(MemoryLayout.PathElement.groupElement(&quot;mday&quot;))</b>
-<b class="nc">&nbsp;    private val hourVH = LAYOUT.varHandle(MemoryLayout.PathElement.groupElement(&quot;hour&quot;))</b>
-<b class="nc">&nbsp;    private val minVH = LAYOUT.varHandle(MemoryLayout.PathElement.groupElement(&quot;min&quot;))</b>
-<b class="nc">&nbsp;    private val secVH = LAYOUT.varHandle(MemoryLayout.PathElement.groupElement(&quot;sec&quot;))</b>
-&nbsp;  }
-&nbsp;
-&nbsp;  val year: Int
-<b class="nc">&nbsp;    get() = yearVH.get(segment, 0L) as Int + 1900</b>
-&nbsp;
-&nbsp;  val month: Int
-<b class="nc">&nbsp;    get() = monthVH.get(segment, 0L) as Int + 1</b>
-&nbsp;
-&nbsp;  val day: Int
-<b class="nc">&nbsp;    get() = dayVH.get(segment, 0L) as Int</b>
-&nbsp;
-&nbsp;  val hour: Int
-<b class="nc">&nbsp;    get() = hourVH.get(segment, 0L) as Int</b>
-&nbsp;
-&nbsp;  val min: Int
-<b class="nc">&nbsp;    get() = minVH.get(segment, 0L) as Int</b>
-&nbsp;
-&nbsp;  val sec: Int
-<b class="nc">&nbsp;    get() = secVH.get(segment, 0L) as Int</b>
-&nbsp;
-&nbsp;  override fun toString(): String {
-<b class="nc">&nbsp;    return &quot;TM(year=$year, month=$month, day=$day, hour=$hour, min=$min, sec=$sec)&quot;</b>
-&nbsp;  }
-&nbsp;}
+&nbsp;fun sampleVideoData() =
+<b class="nc">&nbsp;    listOf(</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain&#39;t no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttps://www.bigbuckbunny.org&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Blender Foundation&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;Big Buck Bunny&quot;,</b>
+<b class="nc">&nbsp;            poster = &quot;https://peach.blender.org/wp-content/uploads/bbb-splash.png&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+<b class="nc">&nbsp;            description = &quot;The first Blender Open Movie from 2006&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Blender Foundation&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;Elephant Dream&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;HBO GO now works with Chromecast -- the easiest way to enjoy online video on your TV. For when you want to settle into your Iron Throne to watch the latest episodes. For $35.\nLearn how to use Chromecast with HBO GO and more at google.com/chromecast.&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Google&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;For Bigger Blazes&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for when Batman&#39;s escapes aren&#39;t quite big enough. For $35. Learn how to use Chromecast with Google Play Movies and more at google.com/chromecast.&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Google&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;For Bigger Escape&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;Introducing Chromecast. The easiest way to enjoy online video and music on your TV. For $35.  Find out more at google.com/chromecast.&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Google&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;For Bigger Fun&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for the times that call for bigger joyrides. For $35. Learn how to use Chromecast with YouTube and more at google.com/chromecast.&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Google&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;For Bigger Joyrides&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for when you want to make Buster&#39;s big meltdowns even bigger. For $35. Learn how to use Chromecast with Netflix and more at google.com/chromecast.&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Google&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;For Bigger Meltdowns&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;Sintel is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.\nThis 15 minute film has been realized in the studio of the Amsterdam Blender Institute, by an international team of artists and developers. In addition to that, several crucial technical and creative targets have been realized online, by developers and artists and teams all over the world.\nwww.sintel.org&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Blender Foundation&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;Sintel&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;Smoking Tire takes the all-new Subaru Outback to the highest point we can find in hopes our customer-appreciation Balloon Launch will get some free T-shirts into the hands of our viewers.&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Garage419&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;Subaru Outback On Street And Dirt&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;Tears of Steel was realized with crowd-funding by users of the open source 3D creation tool Blender. Target was to improve and test a complete open and free pipeline for visual effects in film - and to make a compelling sci-fi film in Amsterdam, the Netherlands.  The film itself, and all raw material used for making it, have been released under the Creatieve Commons 3.0 Attribution license. Visit the tearsofsteel.org website to find out more about this, or to purchase the 4-DVD box with a lot of extras.  (CC) Blender Foundation - https://www.tearsofsteel.org&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Blender Foundation&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/TearsOfSteel.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;Tears of Steel&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;The Smoking Tire heads out to Adams Motorsports Park in Riverside, CA to test the most requested car of 2010, the Volkswagen GTI. Will it beat the Mazdaspeed3&#39;s standard-setting lap time? Watch and see...&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Garage419&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/VolkswagenGTIReview.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;Volkswagen GTI Review&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;The Smoking Tire is going on the 2010 Bullrun Live Rally in a 2011 Shelby GT500, and posting a video from the road every single day! The only place to watch them is by subscribing to The Smoking Tire or watching at BlackMagicShine.com&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Garage419&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/WeAreGoingOnBullrun.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;We Are Going On Bullrun&quot;),</b>
+<b class="nc">&nbsp;        Video(</b>
+&nbsp;            description =
+<b class="nc">&nbsp;                &quot;The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.&quot;,</b>
+&nbsp;            sources =
+<b class="nc">&nbsp;                listOf(</b>
+<b class="nc">&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4&quot;),</b>
+<b class="nc">&nbsp;            subtitle = &quot;By Garage419&quot;,</b>
+&nbsp;            thumb =
+<b class="nc">&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/WhatCarCanYouGetForAGrand.jpg&quot;,</b>
+<b class="nc">&nbsp;            title = &quot;What care can you get for a grand?&quot;))</b>
 </code>
 </pre>
 </div>
@@ -214,7 +261,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-18 00:18</div>
+    <div style="float:right;">generated on 2023-12-18 18:19</div>
 </div>
 </body>
 </html>
