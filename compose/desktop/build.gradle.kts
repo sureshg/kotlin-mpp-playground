@@ -11,8 +11,9 @@ plugins {
 
 dependencies {
   commonMainImplementation(projects.common)
-  // jvmMainImplementation(compose.desktop.common)
   jvmMainImplementation(compose.desktop.currentOs)
+  // jvmMainImplementation(compose.desktop.common)
+  // jvmMainImplementation(compose.components.resources)
 }
 
 compose {
@@ -26,7 +27,7 @@ compose {
       mainClass = "MainKt"
       args += buildList { add(project.version.toString()) }
       jvmArgs += buildList {
-        addAll(jvmArguments(forAppRun = true).filterNot { it.contains("java.awt.headless") })
+        addAll(jvmArguments(appRun = true, headless = false))
         add("-Dskiko.fps.enabled=true")
         add("-Dskiko.fps.periodSeconds=2.0")
         add("-Dskiko.fps.longFrames.show=true")

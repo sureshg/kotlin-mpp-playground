@@ -123,11 +123,13 @@ val Project.githubRepo
  * - [Hotspot Options](https://chriswhocodes.com/hotspot_option_differences.html)
  * - [JFR Events](https://sap.github.io/SapMachine/jfrevents)
  *
- * @param forAppRun Specifies if the JVM arguments are to be used for running the application.
- *   Default value is `false`.
+ * @param appRun Specifies if the JVM arguments are to be used for running the application. Default
+ *   value is `false`.
+ * @param headless Specifies if the application is to be run in headless mode. Default value is
+ *   `true`.
  * @return A list of JVM arguments for the project.
  */
-fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
+fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = buildList {
   val jvmArgs = libs.versions.java.jvmArguments.get().split(",", " ").filter { it.isNotBlank() }
   addAll(jvmArgs)
   add("--add-modules=$addModules")
@@ -135,7 +137,7 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
   // add("--add-opens=java.base/jdk.internal.classfile.constantpool=ALL-UNNAMED")
   // add("--add-opens=java.base/jdk.internal.classfile.instruction=ALL-UNNAMED")
   // 'java' arguments.
-  if (forAppRun) {
+  if (appRun) {
     addAll(
         listOf(
             "--show-version",
@@ -184,7 +186,6 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             "-XX:+EnableDynamicAgentLoading",
             "-XX:+LogVMOutput",
             "-XX:LogFile=$tmp$name-jvm.log",
-            "-Djava.awt.headless=true",
             "-Djdk.attach.allowAttachSelf=true",
             "-Djdk.traceVirtualThreadLocals=false",
             "-Djdk.tracePinnedThreads=full",
@@ -254,6 +255,10 @@ fun Project.jvmArguments(forAppRun: Boolean = false) = buildList {
             // "-agentlib:jdwp=transport=dt_socket,server=n,address=host:5005,suspend=y,onthrow=<FQ
             // exception class name>,onuncaught=<y/n>"
         ))
+
+    if (headless) {
+      add("-Djava.awt.headless=true")
+    }
   }
 }
 

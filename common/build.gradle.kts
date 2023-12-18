@@ -13,7 +13,7 @@ description = "Shared common module for all projects"
 
 application {
   mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
+  applicationDefaultJvmArgs += jvmArguments(appRun = true)
 }
 
 buildConfig {

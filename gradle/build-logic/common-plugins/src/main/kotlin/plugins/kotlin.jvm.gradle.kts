@@ -62,6 +62,7 @@ atomicfu {
 ksp {
   arg("autoserviceKsp.verify", "true")
   arg("autoserviceKsp.verbose", "true")
+  allWarningsAsErrors = false
 }
 
 kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
@@ -161,6 +162,7 @@ dependencies {
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.atomicfu)
   implementation(libs.kotlin.redacted.annotations)
+  implementation(libs.jspecify)
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

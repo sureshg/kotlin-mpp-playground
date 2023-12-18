@@ -15,7 +15,7 @@ description = "Ktor backend jvm application"
 
 application {
   mainClass = libs.versions.app.mainclass.get()
-  applicationDefaultJvmArgs += jvmArguments(forAppRun = true)
+  applicationDefaultJvmArgs += jvmArguments(appRun = true)
 }
 
 ktor { fatJar { archiveFileName = "${project.name}-app.jar" } }

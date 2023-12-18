@@ -8,5 +8,6 @@ class PlatformTest {
   @Test
   fun greetings() {
     assertTrue(Greeting().greeting().contains("JVM")) { "JVM platform check failed!" }
+    DOP.run()
   }
 }

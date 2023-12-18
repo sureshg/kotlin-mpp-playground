@@ -107,6 +107,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.kotlin.retry)
         api(libs.slf4j.api)
         api(libs.kotlinx.coroutines.slf4j)
+        api(libs.jspecify)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         kspDependency("jvm", libs.ksp.auto.service)
       }

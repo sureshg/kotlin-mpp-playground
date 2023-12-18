@@ -1,3 +1,4 @@
 package dev.suresh;
 
-public record Lang(String name) {}
+public record Lang(String name) {
+}

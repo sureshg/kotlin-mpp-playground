@@ -1,7 +1,10 @@
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
@@ -10,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -25,7 +29,7 @@ val debug = true
 @Preview
 fun App() {
   var text by remember { mutableStateOf(AnnotatedString("Hello, Compose!")) }
-
+  var showImage by remember { mutableStateOf(false) }
   scrollingBox {
     Column(
         modifier = Modifier.fillMaxWidth().debug(color = Color.Blue),
@@ -66,9 +70,17 @@ fun App() {
                   }
                   appendLine()
                 }
+                showImage = !showImage
               }) {
                 Text(text = "Click")
               }
+
+          AnimatedVisibility(visible = showImage) {
+            Image(
+                painter = painterResource("svg/idea-logo.svg"),
+                contentDescription = "Logo",
+                modifier = Modifier.fillMaxSize())
+          }
         }
   }
 }

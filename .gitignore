@@ -19,10 +19,12 @@ classes.lst
 *.jsa
 jre/
 
+# Kotlin
+**/.kotlin
+
 # Kobweb ignores
 **/.kobweb/*
 !**/.kobweb/conf.yaml
 
 # Gradle release
 cx.json
-/.profileconfig.json
