@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > FFMKt</title>
+  <title>kotlin-mpp-playground Coverage Report > ExtnsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: FFMKt (dev.suresh)</h1>
+<h1>Coverage Summary for Class: ExtnsKt (dev.suresh)</h1>
 
 <table class="coverageStats">
 
@@ -46,22 +46,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">FFMKt</td>
+  <td class="name">ExtnsKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/4)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
+    (0/11)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,12 +60,28 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/37)
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/31)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/289)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">FFMKt$SYMBOL_LOOKUP$2</td>
+    <td class="name">ExtnsKt$codePointsToString$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -89,7 +96,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -97,9 +104,48 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/6)
   </span>
 </td>
+  </tr>
+  <tr>
+    <td class="name">ExtnsKt$methodName$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ExtnsKt$sam$i$java_util_function_Function$0</td>
+    <td class="coverageStat"/>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -108,16 +154,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/5)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/7)
+    (0/13)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,7 +162,23 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/55)
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/308)
   </span>
 </td>
 </tr>
@@ -138,29 +191,88 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;import java.lang.foreign.FunctionDescriptor
-&nbsp;import java.lang.foreign.Linker
-&nbsp;import java.lang.foreign.MemorySegment
-&nbsp;import java.lang.foreign.SymbolLookup
-&nbsp;import java.lang.invoke.MethodHandle
+&nbsp;import java.io.File
+&nbsp;import java.text.DecimalFormat
+&nbsp;import java.text.NumberFormat
 &nbsp;import kotlin.jvm.optionals.getOrNull
+&nbsp;import kotlin.math.ln
+&nbsp;import kotlin.math.pow
 &nbsp;
-<b class="nc">&nbsp;val LINKER: Linker = Linker.nativeLinker()</b>
+<b class="nc">&nbsp;val DEC_FORMAT = DecimalFormat(&quot;#.##&quot;)</b>
 &nbsp;
-<b class="nc">&nbsp;val SYMBOL_LOOKUP: SymbolLookup by lazy {</b>
-<b class="nc">&nbsp;  val stdlib = LINKER.defaultLookup()</b>
-<b class="nc">&nbsp;  val loaderLookup = SymbolLookup.loaderLookup()</b>
-<b class="nc">&nbsp;  SymbolLookup { name -&gt; loaderLookup.find(name).or { stdlib.find(name) } }</b>
+&nbsp;/** Returns the method name contains this call-site */
+&nbsp;inline val methodName
+<b class="nc">&nbsp;  get() = StackWalker.getInstance().walk { it.findFirst().getOrNull()?.methodName }</b>
+&nbsp;
+&nbsp;/** Read the [Class] as [ByteArray] */
+&nbsp;fun &lt;T : Class&lt;*&gt;&gt; T.toBytes() =
+<b class="nc">&nbsp;    classLoader.getResourceAsStream(&quot;${name.replace(&#39;.&#39;, &#39;/&#39;)}.class&quot;)?.readBytes()</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Returns the actual class URL
+&nbsp; *
+&nbsp; * ```
+&nbsp; * val url = LogManager::class.java.resourcePath
+&nbsp; * ```
+&nbsp; */
+&nbsp;val &lt;T : Class&lt;*&gt;&gt; T.resourcePath
+<b class="nc">&nbsp;  get() = getResource(&quot;$simpleName.class&quot;)</b>
+&nbsp;
+&nbsp;/** Run the lambda in the context of the receiver classloader. */
+&nbsp;fun ClassLoader.using(run: () -&gt; Unit) {
+<b class="nc">&nbsp;  val cl = Thread.currentThread().contextClassLoader</b>
+<b class="nc">&nbsp;  try {</b>
+<b class="nc">&nbsp;    Thread.currentThread().contextClassLoader = this</b>
+<b class="nc">&nbsp;    run()</b>
+&nbsp;  } finally {
+<b class="nc">&nbsp;    Thread.currentThread().contextClassLoader = cl</b>
+<b class="nc">&nbsp;  }</b>
 &nbsp;}
 &nbsp;
-<b class="nc">&nbsp;fun SymbolLookup.findOrNull(name: String): MemorySegment? = find(name).getOrNull()</b>
+&nbsp;/** Returns the file size in a human-readable format. */
+&nbsp;val File.displaySize
+<b class="nc">&nbsp;  get() = length().byteDisplaySize()</b>
 &nbsp;
-&nbsp;fun downcallHandle(
-&nbsp;    symbol: String,
-&nbsp;    fdesc: FunctionDescriptor,
-&nbsp;    vararg options: Linker.Option
-&nbsp;): MethodHandle? =
-<b class="nc">&nbsp;    SYMBOL_LOOKUP.findOrNull(symbol).let { LINKER.downcallHandle(it, fdesc, *options) }</b>
+&nbsp;val Long.compactFmt: String
+<b class="nc">&nbsp;  get() = NumberFormat.getCompactNumberInstance().format(this)</b>
+&nbsp;
+&nbsp;/** Converts a string to camelcase by splitting it by space, dash, underscore, or dot. */
+&nbsp;val String.camelCase: String
+&nbsp;  get() =
+<b class="nc">&nbsp;      split(&quot;&quot;&quot;[.\-_ ]&quot;&quot;&quot;.toRegex())</b>
+<b class="nc">&nbsp;          .mapIndexed { idx, s -&gt; if (idx == 0) s else s.replaceFirstChar { it.uppercaseChar() } }</b>
+<b class="nc">&nbsp;          .joinToString(&quot;&quot;)</b>
+&nbsp;
+&nbsp;/**
+&nbsp; * Returns a human-readable version of the Byte size, where the input represents a specific number
+&nbsp; * of bytes.
+&nbsp; * - [SI vs Binary](https://en.wikipedia.org/wiki/Template:Bit_and_byte_prefixes)
+&nbsp; * - [SI](https://en.wikipedia.org/wiki/International_System_of_Units#Prefixes)
+&nbsp; * - [Binary](https://en.wikipedia.org/wiki/Binary_prefix)
+&nbsp; */
+<b class="nc">&nbsp;fun Long.byteDisplaySize(si: Boolean = true): String {</b>
+<b class="nc">&nbsp;  require(this &gt;= 0) { &quot;Bytes can&#39;t be negative&quot; }</b>
+<b class="nc">&nbsp;  val unit = if (si) 1000 else 1024</b>
+<b class="nc">&nbsp;  return when (this &lt; unit) {</b>
+<b class="nc">&nbsp;    true -&gt; &quot;$this B&quot;</b>
+&nbsp;    else -&gt; {
+<b class="nc">&nbsp;      val exp = (ln(toDouble()) / ln(unit.toDouble())).toInt()</b>
+<b class="nc">&nbsp;      val siSymbol = &quot;kMGTPEZY&quot;[exp - 1].toString()</b>
+<b class="nc">&nbsp;      val prefix = if (si) siSymbol else &quot;${siSymbol.uppercase()}i&quot;</b>
+<b class="nc">&nbsp;      val size = this / unit.toDouble().pow(exp)</b>
+<b class="nc">&nbsp;      &quot;${DEC_FORMAT.format(size)} ${prefix}B&quot;</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+&nbsp;
+<b class="nc">&nbsp;fun IntArray.codePointsToString(): String = buildString {</b>
+<b class="nc">&nbsp;  for (cp in this@codePointsToString) {</b>
+<b class="nc">&nbsp;    appendCodePoint(cp)</b>
+&nbsp;  }
+<b class="nc">&nbsp;}</b>
+&nbsp;
+<b class="nc">&nbsp;fun IntArray.codePointsToString(separator: String = &quot;&quot;) =</b>
+<b class="nc">&nbsp;    joinToString(separator) { Character.toString(it) }</b>
 </code>
 </pre>
 </div>
@@ -184,7 +296,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-18 18:19</div>
+    <div style="float:right;">generated on 2023-12-20 05:29</div>
 </div>
 </body>
 </html>

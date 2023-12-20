@@ -65,18 +65,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    92.6%
+    93.4%
   </span>
   <span class="absValue">
-    (63/68)
+    (71/76)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96.5%
+    96.8%
   </span>
   <span class="absValue">
-    (493/511)
+    (536/554)
   </span>
 </td>
 </tr>
@@ -195,18 +195,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    92%
+    92.8%
   </span>
   <span class="absValue">
-    (69/75)
+    (77/83)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    95.9%
+    96.1%
   </span>
   <span class="absValue">
-    (555/579)
+    (598/622)
   </span>
 </td>
 </tr>
@@ -219,8 +219,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh;
 &nbsp;
-&nbsp;import org.jspecify.annotations.NullMarked;
-&nbsp;
 &nbsp;import java.io.*;
 &nbsp;import java.lang.reflect.RecordComponent;
 &nbsp;import java.nio.file.Files;
@@ -228,18 +226,15 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import java.util.List;
 &nbsp;import java.util.concurrent.CompletableFuture;
 &nbsp;
+&nbsp;import static dev.suresh.Expr.eval;
 &nbsp;import static java.lang.System.out;
 &nbsp;import static java.util.FormatProcessor.FMT;
 &nbsp;import static java.util.Objects.requireNonNull;
 &nbsp;
-&nbsp;/**
-&nbsp; * Data Oriented Programming (DOP) in Java
-&nbsp; */
-&nbsp;@NullMarked
 <b class="nc">&nbsp;public class DOP {</b>
 &nbsp;
 &nbsp;    void main() throws Exception {
-<b class="nc">&nbsp;        run();</b>
+<b class="nc">&nbsp;        DOP.run();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    public static void run() throws Exception {
@@ -256,7 +251,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;                Space Escape-\s\s\s\s\s\s\s\s\s\s-end
 &nbsp;                Regex \\S \\d \\D \\w \\W
 &nbsp;                \\d+
-&nbsp;                Escape char: \u0020 \u00A0 \u2000 \u3000 \uFEFF \u200B \u200C \u200D \u2028 \u2029
+&nbsp;                Escape char: \u00A0 \u2000 \u3000 \uFEFF \u200B \u200C \u200D \u2028 \u2029
 &nbsp;                END
 <b class="fc">&nbsp;                &quot;&quot;&quot;.formatted(new Person(&quot;Foo&quot;, 40));</b>
 <b class="fc">&nbsp;        future.complete(textBlock);</b>
@@ -266,6 +261,16 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="fc">&nbsp;        amberReflections();</b>
 <b class="fc">&nbsp;        genericRecordPattern();</b>
 <b class="fc">&nbsp;        serializeRecord();</b>
+&nbsp;
+<b class="fc">&nbsp;        final int count = 10;</b>
+<b class="fc">&nbsp;        Expr expr = new Expr.Add(new Expr.Const.Int(count), new Expr.Const.Long(3));</b>
+<b class="fc">&nbsp;        expr = new Expr.Div(expr, new Expr.Const.Int(2));</b>
+<b class="fc">&nbsp;        expr = new Expr.Add(expr, new Expr.Const.Double(5.0));</b>
+<b class="fc">&nbsp;        String user = FMT.&quot;&quot;&quot;</b>
+&nbsp;                          %05d\{count}
+<b class="fc">&nbsp;                          Eval(\{expr}) = \{eval(expr)}</b>
+<b class="fc">&nbsp;                          &quot;&quot;&quot;.stripIndent();</b>
+<b class="fc">&nbsp;        out.println(user);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    private static void stringTemplates() {
@@ -386,6 +391,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;        };
 &nbsp;    }
 &nbsp;}
+&nbsp;
 </code>
 </pre>
 </div>
@@ -409,7 +415,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-18 18:19</div>
+    <div style="float:right;">generated on 2023-12-20 05:29</div>
 </div>
 </body>
 </html>

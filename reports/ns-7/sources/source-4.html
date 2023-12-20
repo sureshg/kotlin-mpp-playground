@@ -451,7 +451,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;context(KLogger)
 &nbsp;fun kotlinxMetaData() {
 <b class="nc">&nbsp;  val metadataAnnotation = LocalDateTime::class.java.getAnnotation(Metadata::class.java)</b>
-<b class="nc">&nbsp;  when (val metadata = KotlinClassMetadata.read(metadataAnnotation)) {</b>
+<b class="nc">&nbsp;  when (val metadata = KotlinClassMetadata.readLenient(metadataAnnotation)) {</b>
 <b class="nc">&nbsp;    is KotlinClassMetadata.Class -&gt; {</b>
 <b class="nc">&nbsp;      val klass = metadata.kmClass</b>
 <b class="nc">&nbsp;      info { klass.functions.map { it.name } }</b>
@@ -494,7 +494,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-18 18:19</div>
+    <div style="float:right;">generated on 2023-12-20 05:29</div>
 </div>
 </body>
 </html>

@@ -1,0 +1,258 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>kotlin-mpp-playground Coverage Report > EventAggregator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">one.jfr.event</a>
+</div>
+
+<h1>Coverage Summary for Class: EventAggregator (one.jfr.event)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventAggregator</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/256)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">EventAggregator$Visitor</td>
+    <td class="coverageStat"/>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/37)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/256)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;/*
+&nbsp; * Copyright 2021 Andrei Pangin
+&nbsp; *
+&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+&nbsp; * you may not use this file except in compliance with the License.
+&nbsp; * You may obtain a copy of the License at
+&nbsp; *
+&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
+&nbsp; *
+&nbsp; * Unless required by applicable law or agreed to in writing, software
+&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+&nbsp; * See the License for the specific language governing permissions and
+&nbsp; * limitations under the License.
+&nbsp; */
+&nbsp;
+&nbsp;package one.jfr.event;
+&nbsp;
+&nbsp;public class EventAggregator {
+&nbsp;    private static final int INITIAL_CAPACITY = 1024;
+&nbsp;
+&nbsp;    private final boolean threads;
+&nbsp;    private final boolean total;
+&nbsp;    private Event[] keys;
+&nbsp;    private long[] values;
+&nbsp;    private int size;
+&nbsp;
+<b class="nc">&nbsp;    public EventAggregator(boolean threads, boolean total) {</b>
+<b class="nc">&nbsp;        this.threads = threads;</b>
+<b class="nc">&nbsp;        this.total = total;</b>
+<b class="nc">&nbsp;        this.keys = new Event[INITIAL_CAPACITY];</b>
+<b class="nc">&nbsp;        this.values = new long[INITIAL_CAPACITY];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void collect(Event e) {
+<b class="nc">&nbsp;        int mask = keys.length - 1;</b>
+<b class="nc">&nbsp;        int i = hashCode(e) &amp; mask;</b>
+<b class="nc">&nbsp;        while (keys[i] != null) {</b>
+<b class="nc">&nbsp;            if (sameGroup(keys[i], e)) {</b>
+<b class="nc">&nbsp;                values[i] += total ? e.value() : 1;</b>
+&nbsp;                return;
+&nbsp;            }
+<b class="nc">&nbsp;            i = (i + 1) &amp; mask;</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        keys[i] = e;</b>
+<b class="nc">&nbsp;        values[i] = total ? e.value() : 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        if (++size * 2 &gt; keys.length) {</b>
+<b class="nc">&nbsp;            resize(keys.length * 2);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getValue(Event e) {
+<b class="nc">&nbsp;        int mask = keys.length - 1;</b>
+<b class="nc">&nbsp;        int i = hashCode(e) &amp; mask;</b>
+<b class="nc">&nbsp;        while (keys[i] != null &amp;&amp; !sameGroup(keys[i], e)) {</b>
+<b class="nc">&nbsp;            i = (i + 1) &amp; mask;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return values[i];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void forEach(Visitor visitor) {
+<b class="nc">&nbsp;        for (int i = 0; i &lt; keys.length; i++) {</b>
+<b class="nc">&nbsp;            if (keys[i] != null) {</b>
+<b class="nc">&nbsp;                visitor.visit(keys[i], values[i]);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private int hashCode(Event e) {
+<b class="nc">&nbsp;        return e.hashCode() + (threads ? e.tid * 31 : 0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean sameGroup(Event e1, Event e2) {
+<b class="nc">&nbsp;        return e1.stackTraceId == e2.stackTraceId &amp;&amp; (!threads || e1.tid == e2.tid) &amp;&amp; e1.sameGroup(e2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void resize(int newCapacity) {
+<b class="nc">&nbsp;        Event[] newKeys = new Event[newCapacity];</b>
+<b class="nc">&nbsp;        long[] newValues = new long[newCapacity];</b>
+<b class="nc">&nbsp;        int mask = newKeys.length - 1;</b>
+&nbsp;
+<b class="nc">&nbsp;        for (int i = 0; i &lt; keys.length; i++) {</b>
+<b class="nc">&nbsp;            if (keys[i] != null) {</b>
+<b class="nc">&nbsp;                for (int j = hashCode(keys[i]) &amp; mask; ; j = (j + 1) &amp; mask) {</b>
+<b class="nc">&nbsp;                    if (newKeys[j] == null) {</b>
+<b class="nc">&nbsp;                        newKeys[j] = keys[i];</b>
+<b class="nc">&nbsp;                        newValues[j] = values[i];</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        keys = newKeys;</b>
+<b class="nc">&nbsp;        values = newValues;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Visitor {
+&nbsp;        void visit(Event event, long value);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-20 05:29</div>
+</div>
+</body>
+</html>
