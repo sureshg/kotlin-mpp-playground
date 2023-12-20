@@ -11,8 +11,6 @@ include(":common")
 include(":web")
 
 include(":benchmark")
-// include(":compose:web")
-include(":compose:desktop")
 
 include(":dep-mgmt:bom")
 
@@ -23,6 +21,9 @@ include(":meta:ksp:processor")
 include(":meta:compiler:plugin")
 
 include(":backend:jvm")
+
+// include(":compose:web")
+// include(":compose:desktop")
 
 if (Platform.isUnix) {
   // include(":backend:native")

@@ -75,7 +75,7 @@ fun structuredConcurrency() {
 context(KLogger)
 fun kotlinxMetaData() {
   val metadataAnnotation = LocalDateTime::class.java.getAnnotation(Metadata::class.java)
-  when (val metadata = KotlinClassMetadata.read(metadataAnnotation)) {
+  when (val metadata = KotlinClassMetadata.readLenient(metadataAnnotation)) {
     is KotlinClassMetadata.Class -> {
       val klass = metadata.kmClass
       info { klass.functions.map { it.name } }

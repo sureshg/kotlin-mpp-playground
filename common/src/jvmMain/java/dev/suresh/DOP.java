@@ -1,7 +1,5 @@
 package dev.suresh;
 
-import org.jspecify.annotations.NullMarked;
-
 import java.io.*;
 import java.lang.reflect.RecordComponent;
 import java.nio.file.Files;
@@ -9,18 +7,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
+import static dev.suresh.Expr.eval;
 import static java.lang.System.out;
 import static java.util.FormatProcessor.FMT;
 import static java.util.Objects.requireNonNull;
 
-/**
- * Data Oriented Programming (DOP) in Java
- */
-@NullMarked
 public class DOP {
 
     void main() throws Exception {
-        run();
+        DOP.run();
     }
 
     public static void run() throws Exception {
@@ -37,7 +32,7 @@ public class DOP {
                 Space Escape-\s\s\s\s\s\s\s\s\s\s-end
                 Regex \\S \\d \\D \\w \\W
                 \\d+
-                Escape char: \u0020 \u00A0 \u2000 \u3000 \uFEFF \u200B \u200C \u200D \u2028 \u2029
+                Escape char: \u00A0 \u2000 \u3000 \uFEFF \u200B \u200C \u200D \u2028 \u2029
                 END
                 """.formatted(new Person("Foo", 40));
         future.complete(textBlock);
@@ -47,6 +42,16 @@ public class DOP {
         amberReflections();
         genericRecordPattern();
         serializeRecord();
+
+        final int count = 10;
+        Expr expr = new Expr.Add(new Expr.Const.Int(count), new Expr.Const.Long(3));
+        expr = new Expr.Div(expr, new Expr.Const.Int(2));
+        expr = new Expr.Add(expr, new Expr.Const.Double(5.0));
+        String user = FMT."""
+                          %05d\{count}
+                          Eval(\{expr}) = \{eval(expr)}
+                          """.stripIndent();
+        out.println(user);
     }
 
     private static void stringTemplates() {
@@ -167,3 +172,4 @@ public class DOP {
         };
     }
 }
+

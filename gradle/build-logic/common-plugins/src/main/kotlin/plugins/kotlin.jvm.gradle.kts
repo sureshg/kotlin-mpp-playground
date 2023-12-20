@@ -15,7 +15,7 @@ plugins {
   `kotlinx-serialization`
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
-  com.bnorm.power.`kotlin-power-assert`
+  // com.bnorm.power.`kotlin-power-assert`
   id("plugins.kotlin.docs")
   // `test-suite-base`
 }
@@ -65,10 +65,10 @@ ksp {
   allWarningsAsErrors = false
 }
 
-kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
+// kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
 
 redacted {
-  enabled = true
+  enabled = false
   replacementString = "█"
 }
 

@@ -191,6 +191,9 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
       }
       applyBinaryen()
     }
+
+    compilations.configureEach { kotlinOptions { configureKotlinJs() } }
+    testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 }
 

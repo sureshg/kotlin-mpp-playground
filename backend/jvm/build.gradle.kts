@@ -126,10 +126,7 @@ dependencies {
   // Templating
   implementation(libs.jte.runtime)
   // compileOnly(libs.jte.kotlin)
-  implementation(libs.kotlinx.html) {
-    // version { strictly(libs.kotlinx.html.get().version.toString()) }
-    // because("Ktor Issue!")
-  }
+  implementation(libs.kotlinx.html)
   implementation(kotlinw("css"))
   implementation(libs.ktor.server.html)
   //  constraints {
@@ -143,7 +140,7 @@ dependencies {
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
   implementation(libs.micrometer.prometheus)
-  implementation(libs.ap.converter)
+  // implementation(libs.ap.converter)
   // implementation(libs.ap.loader.all)
 
   // Logging

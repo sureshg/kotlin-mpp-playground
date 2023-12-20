@@ -19,7 +19,7 @@ plugins {
   com.google.devtools.ksp
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
-  com.bnorm.power.`kotlin-power-assert`
+  // com.bnorm.power.`kotlin-power-assert`
   id("plugins.kotlin.docs")
   // org.gradle.kotlin.`kotlin-dsl`
   // app.cash.molecule
@@ -38,6 +38,7 @@ kotlin {
     "native" -> allNativeTargets()
     "web",
     "chrome" -> jsTarget()
+    "wasm" -> wasmJsTarget()
     else -> jvmTarget()
   }
   applyDefaultHierarchyTemplate()
@@ -57,10 +58,10 @@ atomicfu {
   jvmVariant = "VH"
 }
 
-kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
+// kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
 
 redacted {
-  enabled = true
+  enabled = false
   replacementString = "█"
 }
 
@@ -143,7 +144,7 @@ if (!nodeExtnConfigured.toBoolean()) {
   rootProject.plugins.withType<NodeJsRootPlugin> {
     rootProject.extensions.configure<NodeJsRootExtension> {
       download = true
-      nodeVersion = libs.versions.node.version.get()
+      version = libs.versions.node.version.get()
       nodeExtnConfigured = "true"
       // nodeDownloadBaseUrl = "https://nodejs.org/download/v8-canary"
     }
