@@ -10,33 +10,10 @@ $dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutin
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/common/[root]/stdlib-features.html
 $dokka.location://topLevelJsFun/#/PointingToDeclaration/web/[root]/top-level-js-fun.html
-$dokka.location:/Arguments///PointingToDeclaration/jvm/[root]/-arguments/index.html
-$dokka.location:/Arguments/Arguments/#java.lang.String.../PointingToDeclaration/jvm/[root]/-arguments/-arguments.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
 $dokka.location:/ClassVisitor/defaultHandler/#com.google.devtools.ksp.symbol.KSNode#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/default-handler.html
 $dokka.location:/ClassVisitor/visitClassDeclaration/#com.google.devtools.ksp.symbol.KSClassDeclaration#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/visit-class-declaration.html
-$dokka.location:/CollapsedStacks///PointingToDeclaration/jvm/[root]/-collapsed-stacks/index.html
-$dokka.location:/CollapsedStacks/CollapsedStacks/#Arguments/PointingToDeclaration/jvm/[root]/-collapsed-stacks/-collapsed-stacks.html
-$dokka.location:/CollapsedStacks/addSample/#java.lang.String[]#long/PointingToDeclaration/jvm/[root]/-collapsed-stacks/add-sample.html
-$dokka.location:/CollapsedStacks/dump/#/PointingToDeclaration/jvm/[root]/-collapsed-stacks/dump.html
-$dokka.location:/FlameGraph///PointingToDeclaration/jvm/[root]/-flame-graph/index.html
-$dokka.location:/FlameGraph/FRAME_C1_COMPILED/#/PointingToDeclaration/jvm/[root]/-flame-graph/-f-r-a-m-e_-c1_-c-o-m-p-i-l-e-d.html
-$dokka.location:/FlameGraph/FRAME_CPP/#/PointingToDeclaration/jvm/[root]/-flame-graph/-f-r-a-m-e_-c-p-p.html
-$dokka.location:/FlameGraph/FRAME_INLINED/#/PointingToDeclaration/jvm/[root]/-flame-graph/-f-r-a-m-e_-i-n-l-i-n-e-d.html
-$dokka.location:/FlameGraph/FRAME_INTERPRETED/#/PointingToDeclaration/jvm/[root]/-flame-graph/-f-r-a-m-e_-i-n-t-e-r-p-r-e-t-e-d.html
-$dokka.location:/FlameGraph/FRAME_JIT_COMPILED/#/PointingToDeclaration/jvm/[root]/-flame-graph/-f-r-a-m-e_-j-i-t_-c-o-m-p-i-l-e-d.html
-$dokka.location:/FlameGraph/FRAME_KERNEL/#/PointingToDeclaration/jvm/[root]/-flame-graph/-f-r-a-m-e_-k-e-r-n-e-l.html
-$dokka.location:/FlameGraph/FRAME_NATIVE/#/PointingToDeclaration/jvm/[root]/-flame-graph/-f-r-a-m-e_-n-a-t-i-v-e.html
-$dokka.location:/FlameGraph/FlameGraph/#Arguments/PointingToDeclaration/jvm/[root]/-flame-graph/-flame-graph.html
-$dokka.location:/FlameGraph/FlameGraph/#java.lang.String.../PointingToDeclaration/jvm/[root]/-flame-graph/-flame-graph.html
-$dokka.location:/FlameGraph/addSample/#java.lang.String[]#long/PointingToDeclaration/jvm/[root]/-flame-graph/add-sample.html
-$dokka.location:/FlameGraph/compare/#FlameGraph.Frame#FlameGraph.Frame/PointingToDeclaration/jvm/[root]/-flame-graph/compare.html
-$dokka.location:/FlameGraph/dump/#/PointingToDeclaration/jvm/[root]/-flame-graph/dump.html
-$dokka.location:/FlameGraph/dump/#java.io.PrintStream/PointingToDeclaration/jvm/[root]/-flame-graph/dump.html
-$dokka.location:/FlameGraph/main/#java.lang.String[]/PointingToDeclaration/jvm/[root]/-flame-graph/main.html
-$dokka.location:/FlameGraph/parse/#/PointingToDeclaration/jvm/[root]/-flame-graph/parse.html
-$dokka.location:/FlameGraph/parse/#java.io.Reader/PointingToDeclaration/jvm/[root]/-flame-graph/parse.html
 $dokka.location:/MyService///PointingToDeclaration/common/[root]/-my-service/index.html
 $dokka.location:/Person///PointingToDeclaration/common/[root]/-person/index.html
 $dokka.location:/Person/Person/#kotlin.String#kotlin.String/PointingToDeclaration/common/[root]/-person/-person.html
@@ -62,11 +39,6 @@ $dokka.location:/TestProcessor/process/#com.google.devtools.ksp.processing.Resol
 $dokka.location:/TestProcessorProvider///PointingToDeclaration/processor/[root]/-test-processor-provider/index.html
 $dokka.location:/TestProcessorProvider/TestProcessorProvider/#/PointingToDeclaration/processor/[root]/-test-processor-provider/-test-processor-provider.html
 $dokka.location:/TestProcessorProvider/create/#com.google.devtools.ksp.processing.SymbolProcessorEnvironment/PointingToDeclaration/processor/[root]/-test-processor-provider/create.html
-$dokka.location:/jfr2flame///PointingToDeclaration/jvm/[root]/jfr2flame/index.html
-$dokka.location:/jfr2flame/convert/#FlameGraph/PointingToDeclaration/jvm/[root]/jfr2flame/convert.html
-$dokka.location:/jfr2flame/convertChunk/#FlameGraph#java.lang.Class<? extends one.jfr.event.Event>/PointingToDeclaration/jvm/[root]/jfr2flame/convert-chunk.html
-$dokka.location:/jfr2flame/jfr2flame/#one.jfr.JfrReader#Arguments/PointingToDeclaration/jvm/[root]/jfr2flame/jfr2flame.html
-$dokka.location:/jfr2flame/main/#java.lang.String[]/PointingToDeclaration/jvm/[root]/jfr2flame/main.html
 module:benchmark
 bench
 module:common
@@ -86,3 +58,4 @@ dev.suresh.routes
 gg.jte.generated.precompiled
 one.jfr
 one.jfr.event
+one.jfr.flame
