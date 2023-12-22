@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > FlameGraph</title>
+  <title>kotlin-mpp-playground Coverage Report > TestProcessor</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: FlameGraph (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: TestProcessor (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">FlameGraph</td>
+  <td class="name">TestProcessor</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/20)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,7 +60,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/112)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/164)
+    (0/22)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,18 +76,27 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/1020)
+    (0/127)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">FlameGraph$Frame</td>
+    <td class="name">TestProcessor$process$allFiles$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -95,23 +104,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/12)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/18)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/75)
+    (0/2)
   </span>
 </td>
   </tr>
@@ -122,7 +115,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/25)
+    (0/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -130,7 +123,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/124)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -138,7 +131,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/182)
+    (0/23)
   </span>
 </td>
 <td class="coverageStat">
@@ -146,7 +139,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/1095)
+    (0/129)
   </span>
 </td>
 </tr>
@@ -157,377 +150,62 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;/*
-&nbsp; * Copyright 2020 Andrei Pangin
-&nbsp; *
-&nbsp; * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-&nbsp; * you may not use this file except in compliance with the License.
-&nbsp; * You may obtain a copy of the License at
-&nbsp; *
-&nbsp; *     http://www.apache.org/licenses/LICENSE-2.0
-&nbsp; *
-&nbsp; * Unless required by applicable law or agreed to in writing, software
-&nbsp; * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-&nbsp; * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-&nbsp; * See the License for the specific language governing permissions and
-&nbsp; * limitations under the License.
-&nbsp; */
+<code class="sourceCode" id="sourceCode">&nbsp;import com.google.auto.service.AutoService
+&nbsp;import com.google.devtools.ksp.processing.*
+&nbsp;import com.google.devtools.ksp.symbol.KSAnnotated
+&nbsp;import com.google.devtools.ksp.symbol.KSClassDeclaration
+&nbsp;import com.google.devtools.ksp.symbol.KSNode
+&nbsp;import com.google.devtools.ksp.visitor.KSTopDownVisitor
+&nbsp;import java.io.OutputStreamWriter
 &nbsp;
-&nbsp;import java.io.BufferedOutputStream;
-&nbsp;import java.io.BufferedReader;
-&nbsp;import java.io.ByteArrayOutputStream;
-&nbsp;import java.io.FileInputStream;
-&nbsp;import java.io.FileOutputStream;
-&nbsp;import java.io.IOException;
-&nbsp;import java.io.InputStream;
-&nbsp;import java.io.InputStreamReader;
-&nbsp;import java.io.PrintStream;
-&nbsp;import java.io.Reader;
-&nbsp;import java.nio.charset.StandardCharsets;
-&nbsp;import java.util.Arrays;
-&nbsp;import java.util.Comparator;
-&nbsp;import java.util.HashMap;
-&nbsp;import java.util.Map;
-&nbsp;import java.util.regex.Pattern;
+&nbsp;@AutoService(SymbolProcessorProvider::class)
+&nbsp;class TestProcessorProvider : SymbolProcessorProvider {
+&nbsp;  override fun create(environment: SymbolProcessorEnvironment) =
+&nbsp;      TestProcessor(environment.codeGenerator, environment.logger)
+&nbsp;}
 &nbsp;
-&nbsp;public class FlameGraph implements Comparator&lt;FlameGraph.Frame&gt; {
-&nbsp;    public static final byte FRAME_INTERPRETED = 0;
-&nbsp;    public static final byte FRAME_JIT_COMPILED = 1;
-&nbsp;    public static final byte FRAME_INLINED = 2;
-&nbsp;    public static final byte FRAME_NATIVE = 3;
-&nbsp;    public static final byte FRAME_CPP = 4;
-&nbsp;    public static final byte FRAME_KERNEL = 5;
-&nbsp;    public static final byte FRAME_C1_COMPILED = 6;
+<b class="nc">&nbsp;class TestProcessor(val codeGenerator: CodeGenerator, val logger: KSPLogger) : SymbolProcessor {</b>
+&nbsp;  private var invoked = false
 &nbsp;
-&nbsp;    private final Arguments args;
-<b class="nc">&nbsp;    private final Map&lt;String, Integer&gt; cpool = new HashMap&lt;&gt;();</b>
-<b class="nc">&nbsp;    private final Frame root = new Frame(getFrameKey(&quot;&quot;, FRAME_NATIVE));</b>
-&nbsp;    private int[] order;
-&nbsp;    private int depth;
-&nbsp;    private int lastLevel;
-&nbsp;    private long lastX;
-&nbsp;    private long lastTotal;
-&nbsp;    private long mintotal;
-&nbsp;
-<b class="nc">&nbsp;    public FlameGraph(Arguments args) {</b>
-<b class="nc">&nbsp;        this.args = args;</b>
+&nbsp;  override fun process(resolver: Resolver): List&lt;KSAnnotated&gt; {
+<b class="nc">&nbsp;    val allFiles = resolver.getAllFiles().map { it.fileName }</b>
+<b class="nc">&nbsp;    logger.warn(allFiles.toList().toString())</b>
+<b class="nc">&nbsp;    if (invoked) {</b>
+<b class="nc">&nbsp;      return emptyList()</b>
 &nbsp;    }
+<b class="nc">&nbsp;    invoked = true</b>
 &nbsp;
-&nbsp;    public FlameGraph(String... args) {
-<b class="nc">&nbsp;        this(new Arguments(args));</b>
-&nbsp;    }
+<b class="nc">&nbsp;    codeGenerator</b>
+<b class="nc">&nbsp;        .createNewFile(</b>
+<b class="nc">&nbsp;            dependencies = Dependencies.ALL_FILES,</b>
+<b class="nc">&nbsp;            packageName = &quot;&quot;,</b>
+<b class="nc">&nbsp;            fileName = &quot;Foo&quot;,</b>
+<b class="nc">&nbsp;            extensionName = &quot;kt&quot;)</b>
+<b class="nc">&nbsp;        .use { output -&gt;</b>
+<b class="nc">&nbsp;          OutputStreamWriter(output).use { writer -&gt;</b>
+<b class="nc">&nbsp;            writer.write(&quot;package com.example\n\n&quot;)</b>
+<b class="nc">&nbsp;            writer.write(&quot;class Foo {\n&quot;)</b>
 &nbsp;
-&nbsp;    public void parse() throws IOException {
-<b class="nc">&nbsp;        parse(new InputStreamReader(new FileInputStream(args.input), StandardCharsets.UTF_8));</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    public void parse(Reader in) throws IOException {
-<b class="nc">&nbsp;        try (BufferedReader br = new BufferedReader(in)) {</b>
-<b class="nc">&nbsp;            for (String line; (line = br.readLine()) != null; ) {</b>
-<b class="nc">&nbsp;                int space = line.lastIndexOf(&#39; &#39;);</b>
-<b class="nc">&nbsp;                if (space &lt;= 0) continue;</b>
-&nbsp;
-<b class="nc">&nbsp;                String[] trace = line.substring(0, space).split(&quot;;&quot;);</b>
-<b class="nc">&nbsp;                long ticks = Long.parseLong(line.substring(space + 1));</b>
-<b class="nc">&nbsp;                addSample(trace, ticks);</b>
-<b class="nc">&nbsp;            }</b>
+<b class="nc">&nbsp;            val visitor = ClassVisitor()</b>
+<b class="nc">&nbsp;            resolver.getAllFiles().forEach { it.accept(visitor, writer) }</b>
+<b class="nc">&nbsp;            writer.write(&quot;}\n&quot;)</b>
+<b class="nc">&nbsp;          }</b>
 <b class="nc">&nbsp;        }</b>
-&nbsp;    }
+<b class="nc">&nbsp;    return emptyList()</b>
+&nbsp;  }
+&nbsp;}
 &nbsp;
-&nbsp;    public void addSample(String[] trace, long ticks) {
-<b class="nc">&nbsp;        if (excludeTrace(trace)) {</b>
-&nbsp;            return;
-&nbsp;        }
+&nbsp;class ClassVisitor : KSTopDownVisitor&lt;OutputStreamWriter, Unit&gt;() {
+&nbsp;  override fun defaultHandler(node: KSNode, data: OutputStreamWriter) {}
 &nbsp;
-<b class="nc">&nbsp;        Frame frame = root;</b>
-<b class="nc">&nbsp;        if (args.reverse) {</b>
-<b class="nc">&nbsp;            for (int i = trace.length; --i &gt;= args.skip; ) {</b>
-<b class="nc">&nbsp;                frame = addChild(frame, trace[i], ticks);</b>
-&nbsp;            }
-&nbsp;        } else {
-<b class="nc">&nbsp;            for (int i = args.skip; i &lt; trace.length; i++) {</b>
-<b class="nc">&nbsp;                frame = addChild(frame, trace[i], ticks);</b>
-&nbsp;            }
-&nbsp;        }
-<b class="nc">&nbsp;        frame.total += ticks;</b>
-<b class="nc">&nbsp;        frame.self += ticks;</b>
-&nbsp;
-<b class="nc">&nbsp;        depth = Math.max(depth, trace.length);</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    public void dump() throws IOException {
-<b class="nc">&nbsp;        if (args.output == null) {</b>
-<b class="nc">&nbsp;            dump(System.out);</b>
-&nbsp;        } else {
-<b class="nc">&nbsp;            try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(args.output), 32768);</b>
-<b class="nc">&nbsp;                 PrintStream out = new PrintStream(bos, false, &quot;UTF-8&quot;)) {</b>
-<b class="nc">&nbsp;                dump(out);</b>
-<b class="nc">&nbsp;            }</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    public void dump(PrintStream out) {
-<b class="nc">&nbsp;        mintotal = (long) (root.total * args.minwidth / 100);</b>
-<b class="nc">&nbsp;        int depth = mintotal &gt; 1 ? root.depth(mintotal) : this.depth + 1;</b>
-&nbsp;
-<b class="nc">&nbsp;        String tail = getResource(&quot;/jfr/flame.html&quot;);</b>
-&nbsp;
-<b class="nc">&nbsp;        tail = printTill(out, tail, &quot;/*height:*/300&quot;);</b>
-<b class="nc">&nbsp;        out.print(Math.min(depth * 16, 32767));</b>
-&nbsp;
-<b class="nc">&nbsp;        tail = printTill(out, tail, &quot;/*title:*/&quot;);</b>
-<b class="nc">&nbsp;        out.print(args.title);</b>
-&nbsp;
-<b class="nc">&nbsp;        tail = printTill(out, tail, &quot;/*reverse:*/false&quot;);</b>
-<b class="nc">&nbsp;        out.print(args.reverse);</b>
-&nbsp;
-<b class="nc">&nbsp;        tail = printTill(out, tail, &quot;/*depth:*/0&quot;);</b>
-<b class="nc">&nbsp;        out.print(depth);</b>
-&nbsp;
-<b class="nc">&nbsp;        tail = printTill(out, tail, &quot;/*cpool:*/&quot;);</b>
-<b class="nc">&nbsp;        printCpool(out);</b>
-&nbsp;
-<b class="nc">&nbsp;        tail = printTill(out, tail, &quot;/*frames:*/&quot;);</b>
-<b class="nc">&nbsp;        printFrame(out, root, 0, 0);</b>
-&nbsp;
-<b class="nc">&nbsp;        tail = printTill(out, tail, &quot;/*highlight:*/&quot;);</b>
-<b class="nc">&nbsp;        out.print(args.highlight != null ? &quot;&#39;&quot; + escape(args.highlight) + &quot;&#39;&quot; : &quot;&quot;);</b>
-&nbsp;
-<b class="nc">&nbsp;        out.print(tail);</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private String printTill(PrintStream out, String data, String till) {
-<b class="nc">&nbsp;        int index = data.indexOf(till);</b>
-<b class="nc">&nbsp;        out.print(data.substring(0, index));</b>
-<b class="nc">&nbsp;        return data.substring(index + till.length());</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private void printCpool(PrintStream out) {
-<b class="nc">&nbsp;        String[] strings = cpool.keySet().toArray(new String[0]);</b>
-<b class="nc">&nbsp;        Arrays.sort(strings);</b>
-<b class="nc">&nbsp;        out.print(&quot;&#39;all&#39;&quot;);</b>
-&nbsp;
-<b class="nc">&nbsp;        order = new int[strings.length];</b>
-<b class="nc">&nbsp;        String s = &quot;&quot;;</b>
-<b class="nc">&nbsp;        for (int i = 1; i &lt; strings.length; i++) {</b>
-<b class="nc">&nbsp;            int prefixLen = Math.min(getCommonPrefix(s, s = strings[i]), 95);</b>
-<b class="nc">&nbsp;            out.print(&quot;,\n&#39;&quot; + escape((char) (prefixLen + &#39; &#39;) + s.substring(prefixLen)) + &quot;&#39;&quot;);</b>
-<b class="nc">&nbsp;            order[cpool.get(s)] = i;</b>
-&nbsp;        }
-&nbsp;
-&nbsp;        // cpool is not used beyond this point
-<b class="nc">&nbsp;        cpool.clear();</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private void printFrame(PrintStream out, Frame frame, int level, long x) {
-<b class="nc">&nbsp;        int nameAndType = order[frame.getTitleIndex()] &lt;&lt; 3 | frame.getType();</b>
-<b class="nc">&nbsp;        boolean hasExtraTypes = (frame.inlined | frame.c1 | frame.interpreted) != 0 &amp;&amp;</b>
-&nbsp;                frame.inlined &lt; frame.total &amp;&amp; frame.interpreted &lt; frame.total;
-&nbsp;
-<b class="nc">&nbsp;        char func = &#39;f&#39;;</b>
-<b class="nc">&nbsp;        if (level == lastLevel + 1 &amp;&amp; x == lastX) {</b>
-<b class="nc">&nbsp;            func = &#39;u&#39;;</b>
-<b class="nc">&nbsp;        } else if (level == lastLevel &amp;&amp; x == lastX + lastTotal) {</b>
-<b class="nc">&nbsp;            func = &#39;n&#39;;</b>
-&nbsp;        }
-&nbsp;
-<b class="nc">&nbsp;        StringBuilder sb = new StringBuilder(24).append(func).append(&#39;(&#39;).append(nameAndType);</b>
-<b class="nc">&nbsp;        if (func == &#39;f&#39;) {</b>
-<b class="nc">&nbsp;            sb.append(&#39;,&#39;).append(level).append(&#39;,&#39;).append(x - lastX);</b>
-&nbsp;        }
-<b class="nc">&nbsp;        if (frame.total != lastTotal || hasExtraTypes) {</b>
-<b class="nc">&nbsp;            sb.append(&#39;,&#39;).append(frame.total);</b>
-<b class="nc">&nbsp;            if (hasExtraTypes) {</b>
-<b class="nc">&nbsp;                sb.append(&#39;,&#39;).append(frame.inlined).append(&#39;,&#39;).append(frame.c1).append(&#39;,&#39;).append(frame.interpreted);</b>
-&nbsp;            }
-&nbsp;        }
-<b class="nc">&nbsp;        sb.append(&#39;)&#39;);</b>
-<b class="nc">&nbsp;        out.println(sb.toString());</b>
-&nbsp;
-<b class="nc">&nbsp;        lastLevel = level;</b>
-<b class="nc">&nbsp;        lastX = x;</b>
-<b class="nc">&nbsp;        lastTotal = frame.total;</b>
-&nbsp;
-<b class="nc">&nbsp;        Frame[] children = frame.values().toArray(Frame.EMPTY_ARRAY);</b>
-<b class="nc">&nbsp;        Arrays.sort(children, this);</b>
-&nbsp;
-<b class="nc">&nbsp;        x += frame.self;</b>
-<b class="nc">&nbsp;        for (Frame child : children) {</b>
-<b class="nc">&nbsp;            if (child.total &gt;= mintotal) {</b>
-<b class="nc">&nbsp;                printFrame(out, child, level + 1, x);</b>
-&nbsp;            }
-<b class="nc">&nbsp;            x += child.total;</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private boolean excludeTrace(String[] trace) {
-<b class="nc">&nbsp;        Pattern include = args.include;</b>
-<b class="nc">&nbsp;        Pattern exclude = args.exclude;</b>
-<b class="nc">&nbsp;        if (include == null &amp;&amp; exclude == null) {</b>
-<b class="nc">&nbsp;            return false;</b>
-&nbsp;        }
-&nbsp;
-<b class="nc">&nbsp;        for (String frame : trace) {</b>
-<b class="nc">&nbsp;            if (exclude != null &amp;&amp; exclude.matcher(frame).matches()) {</b>
-<b class="nc">&nbsp;                return true;</b>
-&nbsp;            }
-<b class="nc">&nbsp;            if (include != null &amp;&amp; include.matcher(frame).matches()) {</b>
-<b class="nc">&nbsp;                include = null;</b>
-<b class="nc">&nbsp;                if (exclude == null) break;</b>
-&nbsp;            }
-&nbsp;        }
-&nbsp;
-<b class="nc">&nbsp;        return include != null;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private int getFrameKey(String title, byte type) {
-<b class="nc">&nbsp;        Integer key = cpool.get(title);</b>
-<b class="nc">&nbsp;        if (key != null) {</b>
-<b class="nc">&nbsp;            return key | type &lt;&lt; 28;</b>
-&nbsp;        } else {
-<b class="nc">&nbsp;            int size = cpool.size();</b>
-<b class="nc">&nbsp;            cpool.put(title, size);</b>
-<b class="nc">&nbsp;            return size | type &lt;&lt; 28;</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    private Frame getChild(Frame frame, String title, byte type) {
-<b class="nc">&nbsp;        int key = getFrameKey(title, type);</b>
-<b class="nc">&nbsp;        Frame child = frame.get(key);</b>
-<b class="nc">&nbsp;        if (child == null) {</b>
-<b class="nc">&nbsp;            frame.put(key, child = new Frame(key));</b>
-&nbsp;        }
-<b class="nc">&nbsp;        return child;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private Frame addChild(Frame frame, String title, long ticks) {
-<b class="nc">&nbsp;        frame.total += ticks;</b>
-&nbsp;
-&nbsp;        Frame child;
-<b class="nc">&nbsp;        if (title.endsWith(&quot;_[j]&quot;)) {</b>
-<b class="nc">&nbsp;            child = getChild(frame, stripSuffix(title), FRAME_JIT_COMPILED);</b>
-<b class="nc">&nbsp;        } else if (title.endsWith(&quot;_[i]&quot;)) {</b>
-<b class="nc">&nbsp;            (child = getChild(frame, stripSuffix(title), FRAME_JIT_COMPILED)).inlined += ticks;</b>
-<b class="nc">&nbsp;        } else if (title.endsWith(&quot;_[k]&quot;)) {</b>
-<b class="nc">&nbsp;            child = getChild(frame, stripSuffix(title), FRAME_KERNEL);</b>
-<b class="nc">&nbsp;        } else if (title.endsWith(&quot;_[1]&quot;)) {</b>
-<b class="nc">&nbsp;            (child = getChild(frame, stripSuffix(title), FRAME_JIT_COMPILED)).c1 += ticks;</b>
-<b class="nc">&nbsp;        } else if (title.endsWith(&quot;_[0]&quot;)) {</b>
-<b class="nc">&nbsp;            (child = getChild(frame, stripSuffix(title), FRAME_JIT_COMPILED)).interpreted += ticks;</b>
-<b class="nc">&nbsp;        } else if (title.contains(&quot;::&quot;) || title.startsWith(&quot;-[&quot;) || title.startsWith(&quot;+[&quot;)) {</b>
-<b class="nc">&nbsp;            child = getChild(frame, title, FRAME_CPP);</b>
-<b class="nc">&nbsp;        } else if (title.indexOf(&#39;/&#39;) &gt; 0 &amp;&amp; title.charAt(0) != &#39;[&#39;</b>
-<b class="nc">&nbsp;                || title.indexOf(&#39;.&#39;) &gt; 0 &amp;&amp; Character.isUpperCase(title.charAt(0))) {</b>
-<b class="nc">&nbsp;            child = getChild(frame, title, FRAME_JIT_COMPILED);</b>
-&nbsp;        } else {
-<b class="nc">&nbsp;            child = getChild(frame, title, FRAME_NATIVE);</b>
-&nbsp;        }
-<b class="nc">&nbsp;        return child;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    static int getCommonPrefix(String a, String b) {
-<b class="nc">&nbsp;        int length = Math.min(a.length(), b.length());</b>
-<b class="nc">&nbsp;        for (int i = 0; i &lt; length; i++) {</b>
-<b class="nc">&nbsp;            if (a.charAt(i) != b.charAt(i) || a.charAt(i) &gt; 127) {</b>
-<b class="nc">&nbsp;                return i;</b>
-&nbsp;            }
-&nbsp;        }
-<b class="nc">&nbsp;        return length;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    static String stripSuffix(String title) {
-<b class="nc">&nbsp;        return title.substring(0, title.length() - 4);</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    static String escape(String s) {
-<b class="nc">&nbsp;        if (s.indexOf(&#39;\\&#39;) &gt;= 0) s = s.replace(&quot;\\&quot;, &quot;\\\\&quot;);</b>
-<b class="nc">&nbsp;        if (s.indexOf(&#39;\&#39;&#39;) &gt;= 0) s = s.replace(&quot;&#39;&quot;, &quot;\\&#39;&quot;);</b>
-<b class="nc">&nbsp;        return s;</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    private static String getResource(String name) {
-<b class="nc">&nbsp;        try (InputStream stream = FlameGraph.class.getResourceAsStream(name)) {</b>
-<b class="nc">&nbsp;            if (stream == null) {</b>
-<b class="nc">&nbsp;                throw new IOException(&quot;No resource found&quot;);</b>
-&nbsp;            }
-&nbsp;
-<b class="nc">&nbsp;            ByteArrayOutputStream result = new ByteArrayOutputStream();</b>
-<b class="nc">&nbsp;            byte[] buffer = new byte[64 * 1024];</b>
-<b class="nc">&nbsp;            for (int length; (length = stream.read(buffer)) != -1; ) {</b>
-<b class="nc">&nbsp;                result.write(buffer, 0, length);</b>
-&nbsp;            }
-<b class="nc">&nbsp;            return result.toString(&quot;UTF-8&quot;);</b>
-<b class="nc">&nbsp;        } catch (IOException e) {</b>
-<b class="nc">&nbsp;            throw new IllegalStateException(&quot;Can&#39;t load resource with name &quot; + name);</b>
-&nbsp;        }
-&nbsp;    }
-&nbsp;
-&nbsp;    @Override
-&nbsp;    public int compare(Frame f1, Frame f2) {
-<b class="nc">&nbsp;        return order[f1.getTitleIndex()] - order[f2.getTitleIndex()];</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    public static void main(String[] cmdline) throws IOException {
-<b class="nc">&nbsp;        Arguments args = new Arguments(cmdline);</b>
-<b class="nc">&nbsp;        if (args.input == null) {</b>
-<b class="nc">&nbsp;            System.out.println(&quot;Usage: java &quot; + FlameGraph.class.getName() + &quot; [options] input.collapsed [output.html]&quot;);</b>
-<b class="nc">&nbsp;            System.out.println();</b>
-<b class="nc">&nbsp;            System.out.println(&quot;Options:&quot;);</b>
-<b class="nc">&nbsp;            System.out.println(&quot;  --title TITLE&quot;);</b>
-<b class="nc">&nbsp;            System.out.println(&quot;  --reverse&quot;);</b>
-<b class="nc">&nbsp;            System.out.println(&quot;  --minwidth PERCENT&quot;);</b>
-<b class="nc">&nbsp;            System.out.println(&quot;  --skip FRAMES&quot;);</b>
-<b class="nc">&nbsp;            System.out.println(&quot;  --include PATTERN&quot;);</b>
-<b class="nc">&nbsp;            System.out.println(&quot;  --exclude PATTERN&quot;);</b>
-<b class="nc">&nbsp;            System.out.println(&quot;  --highlight PATTERN&quot;);</b>
-<b class="nc">&nbsp;            System.exit(1);</b>
-&nbsp;        }
-&nbsp;
-<b class="nc">&nbsp;        FlameGraph fg = new FlameGraph(args);</b>
-<b class="nc">&nbsp;        fg.parse();</b>
-<b class="nc">&nbsp;        fg.dump();</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    static class Frame extends HashMap&lt;Integer, Frame&gt; {
-<b class="nc">&nbsp;        static final Frame[] EMPTY_ARRAY = {};</b>
-&nbsp;
-&nbsp;        final int key;
-&nbsp;        long total;
-&nbsp;        long self;
-&nbsp;        long inlined, c1, interpreted;
-&nbsp;
-<b class="nc">&nbsp;        Frame(int key) {</b>
-<b class="nc">&nbsp;            this.key = key;</b>
-&nbsp;        }
-&nbsp;
-&nbsp;        byte getType() {
-<b class="nc">&nbsp;            if (inlined * 3 &gt;= total) {</b>
-<b class="nc">&nbsp;                return FRAME_INLINED;</b>
-<b class="nc">&nbsp;            } else if (c1 * 2 &gt;= total) {</b>
-<b class="nc">&nbsp;                return FRAME_C1_COMPILED;</b>
-<b class="nc">&nbsp;            } else if (interpreted * 2 &gt;= total) {</b>
-<b class="nc">&nbsp;                return FRAME_INTERPRETED;</b>
-&nbsp;            } else {
-<b class="nc">&nbsp;                return (byte) (key &gt;&gt;&gt; 28);</b>
-&nbsp;            }
-&nbsp;        }
-&nbsp;
-&nbsp;        int getTitleIndex() {
-<b class="nc">&nbsp;            return key &amp; ((1 &lt;&lt; 28) - 1);</b>
-&nbsp;        }
-&nbsp;
-&nbsp;        int depth(long cutoff) {
-<b class="nc">&nbsp;            int depth = 0;</b>
-<b class="nc">&nbsp;            if (size() &gt; 0) {</b>
-<b class="nc">&nbsp;                for (Frame child : values()) {</b>
-<b class="nc">&nbsp;                    if (child.total &gt;= cutoff) {</b>
-<b class="nc">&nbsp;                        depth = Math.max(depth, child.depth(cutoff));</b>
-&nbsp;                    }
-<b class="nc">&nbsp;                }</b>
-&nbsp;            }
-<b class="nc">&nbsp;            return depth + 1;</b>
-&nbsp;        }
-&nbsp;    }
+&nbsp;  override fun visitClassDeclaration(
+&nbsp;      classDeclaration: KSClassDeclaration,
+&nbsp;      data: OutputStreamWriter
+&nbsp;  ) {
+&nbsp;    super.visitClassDeclaration(classDeclaration, data)
+&nbsp;    val symbolName = classDeclaration.simpleName.asString().lowercase()
+&nbsp;    data.write(&quot;    val $symbolName = true\n&quot;)
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -552,7 +230,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-20 05:29</div>
+    <div style="float:right;">generated on 2023-12-22 04:34</div>
 </div>
 </body>
 </html>

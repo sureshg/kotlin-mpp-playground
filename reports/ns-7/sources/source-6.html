@@ -1,0 +1,218 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>kotlin-mpp-playground Coverage Report > VThreadKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.suresh.lang</a>
+</div>
+
+<h1>Coverage Summary for Class: VThreadKt (dev.suresh.lang)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">VThreadKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
+&nbsp;
+&nbsp;import dev.suresh.*
+&nbsp;import io.github.oshai.kotlinlogging.KLogger
+&nbsp;import java.util.concurrent.StructuredTaskScope
+&nbsp;import kotlin.time.Duration.Companion.seconds
+&nbsp;import kotlinx.datetime.Clock
+&nbsp;import kotlinx.datetime.LocalDateTime
+&nbsp;import kotlinx.datetime.toJavaInstant
+&nbsp;import kotlinx.metadata.jvm.KotlinClassMetadata
+&nbsp;import langFeatures
+&nbsp;import stdlibFeatures
+&nbsp;
+&nbsp;object VThread {
+&nbsp;
+&nbsp;  context(KLogger)
+&nbsp;  suspend fun virtualThreads() = runOnVirtualThread {
+&nbsp;    info { (Greeting().greeting()) }
+&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
+&nbsp;      info { &quot;common-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
+&nbsp;    }
+&nbsp;
+&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
+&nbsp;      info { &quot;backend-$it --&gt;${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }
+&nbsp;    }
+&nbsp;
+&nbsp;    structuredConcurrency()
+&nbsp;    langFeatures()
+&nbsp;    stdlibFeatures()
+&nbsp;    kotlinxMetaData()
+&nbsp;    classFileApi()
+&nbsp;  }
+&nbsp;
+&nbsp;  context(KLogger)
+&nbsp;  private fun structuredConcurrency() {
+&nbsp;    info { &quot;Structured concurrency...&quot; }
+&nbsp;    val taskList =
+&nbsp;        StructuredTaskScope&lt;String&gt;().use { sts -&gt;
+&nbsp;          val start = Clock.System.now()
+&nbsp;          val tasks =
+&nbsp;              (1..100).map {
+&nbsp;                sts.fork {
+&nbsp;                  when (it) {
+&nbsp;                    in 1..40 -&gt; &quot;Task $it&quot;
+&nbsp;                    in 41..60 -&gt; kotlin.error(&quot;Error in task $it&quot;)
+&nbsp;                    else -&gt; {
+&nbsp;                      while (!Thread.currentThread().isInterrupted) {
+&nbsp;                        debug { &quot;Task $it ...&quot; }
+&nbsp;                        Thread.sleep(100)
+&nbsp;                      }
+&nbsp;                      &quot;Task $it&quot;
+&nbsp;                    }
+&nbsp;                  }
+&nbsp;                }
+&nbsp;              }
+&nbsp;          runCatching { sts.joinUntil(start.plus(1.seconds).toJavaInstant()) }
+&nbsp;          tasks
+&nbsp;        }
+&nbsp;
+&nbsp;    info { &quot;Total Tasks: ${taskList.size}&quot; }
+&nbsp;    val states = taskList.groupBy { it.state() }
+&nbsp;    states.forEach { (t, u) -&gt; info { &quot;$t --&gt; ${u.size}&quot; } }
+&nbsp;    check(states[StructuredTaskScope.Subtask.State.SUCCESS]?.size == 40)
+&nbsp;    check(states[StructuredTaskScope.Subtask.State.FAILED]?.size == 20)
+&nbsp;    check(states[StructuredTaskScope.Subtask.State.UNAVAILABLE]?.size == 40)
+&nbsp;
+&nbsp;    StructuredTaskScope.ShutdownOnFailure().use {
+&nbsp;      val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} ${platform.name} !&quot; }
+&nbsp;      it.join().throwIfFailed()
+&nbsp;      info { task.get() }
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  context(KLogger)
+&nbsp;  private fun kotlinxMetaData() {
+&nbsp;    val metadataAnnotation = LocalDateTime::class.java.getAnnotation(Metadata::class.java)
+&nbsp;    when (val metadata = KotlinClassMetadata.readLenient(metadataAnnotation)) {
+&nbsp;      is KotlinClassMetadata.Class -&gt; {
+&nbsp;        val klass = metadata.kmClass
+&nbsp;        info { klass.functions.map { it.name } }
+&nbsp;        info { klass.properties.map { it.name } }
+&nbsp;      }
+&nbsp;      is KotlinClassMetadata.Unknown -&gt; log.info { &quot;Unknown&quot; }
+&nbsp;      else -&gt; info { &quot;Other&quot; }
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+&nbsp;
+&nbsp;fun classFileApi() {
+&nbsp;  //  val codeModel =
+&nbsp;  //      Classfile.of()
+&nbsp;  //          .parse(Class.forName(&quot;AppKt&quot;).toBytes())
+&nbsp;  //          .methods()
+&nbsp;  //          .filter { it.methodName().equalsString(&quot;main&quot;) }
+&nbsp;  //          .firstNotNullOfOrNull { it.code().getOrNull() }
+&nbsp;  //  codeModel?.elementList()?.forEach { log.info {it.toString()} }
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-12-22 04:34</div>
+</div>
+</body>
+</html>

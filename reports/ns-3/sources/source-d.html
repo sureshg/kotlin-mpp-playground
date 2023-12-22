@@ -181,13 +181,15 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
 &nbsp;import java.util.concurrent.locks.ReentrantLock
+&nbsp;import kotlin.LazyThreadSafetyMode.NONE
+&nbsp;import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 &nbsp;import kotlin.concurrent.withLock
 &nbsp;
 &nbsp;/**
 &nbsp; * Java Virtual thread friendly Kotlin lazy initialization. The implementation is based on
 &nbsp; * [Javalin Lazy](https://github.com/javalin/javalin/pull/1974) implementation.
 &nbsp; */
-<b class="nc">&nbsp;class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {</b>
+<b class="nc">&nbsp;internal class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {</b>
 <b class="nc">&nbsp;  private companion object {</b>
 <b class="nc">&nbsp;    private object UNINITIALIZED_VALUE</b>
 &nbsp;  }
@@ -212,6 +214,16 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 <b class="nc">&nbsp;  override fun isInitialized() = _value !== UNINITIALIZED_VALUE</b>
 &nbsp;}
+&nbsp;
+&nbsp;/** A virtual thread friendly [kotlin.lazy] implementation. */
+&nbsp;fun &lt;T : Any?&gt; vtLazy(
+&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,
+&nbsp;    initializer: () -&gt; T
+&nbsp;): Lazy&lt;T&gt; =
+&nbsp;    when (threadSafetyMode) {
+&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)
+&nbsp;      else -&gt; lazy(threadSafetyMode, initializer)
+&nbsp;    }
 </code>
 </pre>
 </div>
@@ -235,7 +247,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-20 05:29</div>
+    <div style="float:right;">generated on 2023-12-22 04:34</div>
 </div>
 </body>
 </html>
