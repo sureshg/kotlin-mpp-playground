@@ -3,6 +3,10 @@ package dev.suresh
 import java.io.File
 import java.text.DecimalFormat
 import java.text.NumberFormat
+import java.util.concurrent.Semaphore
+import java.util.concurrent.ThreadFactory
+import jdk.jfr.Event
+import jdk.jfr.FlightRecorder
 import kotlin.jvm.optionals.getOrNull
 import kotlin.math.ln
 import kotlin.math.pow
@@ -82,3 +86,28 @@ fun IntArray.codePointsToString(): String = buildString {
 
 fun IntArray.codePointsToString(separator: String = "") =
     joinToString(separator) { Character.toString(it) }
+
+/** Adds a periodic event to the JFR stream. */
+inline fun <reified T : Event> addPeriodicJFREvent(event: T, crossinline block: T.() -> Unit) {
+  FlightRecorder.addPeriodicEvent(T::class.java) {
+    block(event)
+    event.commit()
+  }
+}
+
+fun semaphoreThreadFactory(s: Semaphore, tf: ThreadFactory = Thread.ofVirtual().factory()) =
+    ThreadFactory {
+      try {
+        s.acquire()
+        tf.newThread {
+          try {
+            it.run()
+          } finally {
+            s.release()
+          }
+        }
+      } catch (e: InterruptedException) {
+        Thread.currentThread().interrupt()
+        throw RuntimeException(e)
+      }
+    }

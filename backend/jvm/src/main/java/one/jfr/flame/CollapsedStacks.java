@@ -1,4 +1,4 @@
-/*
+package one.jfr.flame;/*
  * Copyright 2022 Andrei Pangin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

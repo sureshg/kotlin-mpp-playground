@@ -1,4 +1,4 @@
-/*
+package one.jfr.flame;/*
  * Copyright 2020 Andrei Pangin
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -264,7 +264,7 @@ public class jfr2flame {
         if (args.input == null) {
             System.out.println("Usage: java " + jfr2flame.class.getName() + " [options] input.jfr [output.html]");
             System.out.println();
-            System.out.println("options include all supported FlameGraph options, plus the following:");
+            System.out.println("options include all supported one.jfr.flame.FlameGraph options, plus the following:");
             System.out.println("  --alloc       Allocation Flame Graph");
             System.out.println("  --live        Include only live objects in allocation profile");
             System.out.println("  --lock        Lock contention Flame Graph");

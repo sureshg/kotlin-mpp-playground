@@ -1,13 +1,15 @@
 package dev.suresh
 
 import java.util.concurrent.locks.ReentrantLock
+import kotlin.LazyThreadSafetyMode.NONE
+import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
 import kotlin.concurrent.withLock
 
 /**
  * Java Virtual thread friendly Kotlin lazy initialization. The implementation is based on
  * [Javalin Lazy](https://github.com/javalin/javalin/pull/1974) implementation.
  */
-class ReentrantLazy<T : Any?>(initializer: () -> T) : Lazy<T> {
+internal class ReentrantLazy<T : Any?>(initializer: () -> T) : Lazy<T> {
   private companion object {
     private object UNINITIALIZED_VALUE
   }
@@ -32,3 +34,13 @@ class ReentrantLazy<T : Any?>(initializer: () -> T) : Lazy<T> {
 
   override fun isInitialized() = _value !== UNINITIALIZED_VALUE
 }
+
+/** A virtual thread friendly [kotlin.lazy] implementation. */
+fun <T : Any?> vtLazy(
+    threadSafetyMode: LazyThreadSafetyMode = NONE,
+    initializer: () -> T
+): Lazy<T> =
+    when (threadSafetyMode) {
+      SYNCHRONIZED -> ReentrantLazy(initializer)
+      else -> lazy(threadSafetyMode, initializer)
+    }

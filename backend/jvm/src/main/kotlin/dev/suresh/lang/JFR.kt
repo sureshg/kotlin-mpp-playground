@@ -1,0 +1,82 @@
+package dev.suresh.lang
+
+import dev.suresh.addPeriodicJFREvent
+import dev.suresh.runOnVirtualThread
+import io.github.oshai.kotlinlogging.KLogger
+import java.time.Duration
+import java.util.concurrent.atomic.AtomicBoolean
+import jdk.jfr.*
+import jdk.jfr.consumer.EventStream
+import jdk.jfr.consumer.RecordingStream
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.toJavaDuration
+
+@Name("dev.suresh.Counter")
+@Label("App Counter")
+@Description("App Counter Event")
+@Category("App Event", "Counter")
+@Period("1 s")
+@StackTrace(false)
+class Counter(@Label("Count") private var count: Long = 0) : Event() {
+  fun inc() = count++
+}
+
+object JFR {
+
+  private val started = AtomicBoolean(false)
+
+  context(KLogger)
+  suspend fun recordingStream() = runOnVirtualThread {
+    if (!started.getAndSet(true)) {
+      info { "Adding periodic JFR event..." }
+      addPeriodicJFREvent(Counter()) { inc() }
+    }
+
+    val config = Configuration.getConfiguration("profile")
+    RecordingStream(config).use {
+      info { "RecordingStream started!" }
+      it.setMaxSize(5_000_000)
+      it.enable("jdk.CPULoad").withPeriod(Duration.ofSeconds(1))
+      it.onEvent("jdk.CPULoad") { event ->
+        val cpuLoad = event.getDouble("machineTotal")
+        info { "CPU Load: %.2f".format(cpuLoad) }
+      }
+
+      // Contended classes for more than 10ms
+      it.enable("jdk.JavaMonitorEnter").withThreshold(Duration.ofMillis(10))
+      it.onEvent("jdk.JavaMonitorEnter") { event ->
+        info { "Long held Monitor: ${event.getClass("monitorClass")}" }
+      }
+
+      it.enable("jdk.GarbageCollection")
+      it.enable("jdk.JVMInformation")
+      it.onEvent("jdk.JVMInformation") { event ->
+        val jvmName = event.getString("jvmName")
+        val jvmVersion = event.getString("jvmVersion")
+        info { "JVM: $jvmName, Version: $jvmVersion" }
+      }
+
+      it.enable("dev.suresh.Counter")
+      it.onEvent("dev.suresh.Counter") { event ->
+        val duration = event.duration.toMillis()
+        info { "Count: ${event.getLong("count")}, duration: $duration" }
+
+        // Find correlation events by getting an event window 1 sec before and after the event.
+        if (duration > 500) {
+          EventStream.openRepository().use { es ->
+            es.setStartTime(event.startTime.minus(Duration.ofSeconds(1)))
+            es.setEndTime(event.endTime.plus(Duration.ofSeconds(1)))
+            es.onEvent("jdk.GCPhasePause") { gcEvent ->
+              val gcDuration = gcEvent.duration.toMillis()
+              info { "GC pause of $gcDuration millis during the Counter event!" }
+            }
+          }
+        }
+      }
+
+      it.startAsync()
+      Thread.sleep(3.seconds.toJavaDuration())
+    }
+    info { "RecordingStream done!" }
+  }
+}

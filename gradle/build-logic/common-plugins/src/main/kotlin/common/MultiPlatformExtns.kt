@@ -1,10 +1,15 @@
 package common
 
+import common.Platform.isAarch64
+import common.Platform.isLinux
+import common.Platform.isMac
+import common.Platform.isWin
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithHostTests
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
@@ -198,22 +203,13 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
 }
 
 context(Project)
-fun KotlinMultiplatformExtension.hostNativeTarget(
-    configure: KotlinNativeTargetWithHostTests.() -> Unit = {}
-) =
+fun KotlinMultiplatformExtension.hostNativeTarget(configure: KotlinNativeTarget.() -> Unit = {}) =
     when {
-      Platform.isMac -> {
-        macosX64 { configure() }
-        macosArm64 { configure() }
-      }
-      Platform.isLinux -> {
-        linuxX64 { configure() }
-        // linuxArm64()
-      }
-      Platform.isWin -> mingwX64 { configure() }
-      // targets.filter { it.platformType !in listOf(common, native) }.forEach {
-      //    targets.remove(it)
-      // }
+      isMac && isAarch64 -> macosArm64 { configure() }
+      isMac && !isAarch64 -> macosX64 { configure() }
+      isLinux && isAarch64 -> linuxArm64 { configure() }
+      isLinux && !isAarch64 -> linuxX64 { configure() }
+      isWin -> mingwX64 { configure() }
       else ->
           throw GradleException(
               "Host OS '${Platform.currentOS}' is not supported in Kotlin/Native $project.")
