@@ -111,11 +111,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  suspend fun virtualThreads() = runOnVirtualThread {
 &nbsp;    info { (Greeting().greeting()) }
 &nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
-&nbsp;      info { &quot;common-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
+&nbsp;      info { &quot;Shared-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
 &nbsp;    }
 &nbsp;
 &nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
-&nbsp;      info { &quot;backend-$it --&gt;${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }
+&nbsp;      info { &quot;Backend-$it --&gt;${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }
 &nbsp;    }
 &nbsp;
 &nbsp;    structuredConcurrency()
@@ -212,7 +212,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-27 00:16</div>
+    <div style="float:right;">generated on 2023-12-27 22:04</div>
 </div>
 </body>
 </html>

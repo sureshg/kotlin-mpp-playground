@@ -503,11 +503,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;  suspend fun virtualThreads() = runOnVirtualThread {</b>
 <b class="nc">&nbsp;    info { (Greeting().greeting()) }</b>
 &nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
-<b class="nc">&nbsp;      info { &quot;common-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }</b>
+<b class="nc">&nbsp;      info { &quot;Shared-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
-<b class="nc">&nbsp;      info { &quot;backend-$it --&gt;${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }</b>
+<b class="nc">&nbsp;      info { &quot;Backend-$it --&gt;${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    structuredConcurrency()
@@ -604,7 +604,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-27 00:16</div>
+    <div style="float:right;">generated on 2023-12-27 22:04</div>
 </div>
 </body>
 </html>

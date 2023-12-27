@@ -157,7 +157,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -165,7 +165,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/12)
+    (0/22)
   </span>
 </td>
   </tr>
@@ -185,7 +185,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -193,7 +193,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/22)
+    (0/34)
   </span>
 </td>
   </tr>
@@ -491,7 +491,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/26)
+    (0/29)
   </span>
 </td>
 <td class="coverageStat">
@@ -499,7 +499,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/174)
+    (0/196)
   </span>
 </td>
 </tr>
@@ -512,6 +512,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
 &nbsp;
+&nbsp;import BuildConfig
 &nbsp;import dev.suresh.addPeriodicJFREvent
 &nbsp;import dev.suresh.runOnVirtualThread
 &nbsp;import io.github.oshai.kotlinlogging.KLogger
@@ -526,13 +527,14 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;@Name(&quot;dev.suresh.Counter&quot;)
 &nbsp;@Label(&quot;App Counter&quot;)
 &nbsp;@Description(&quot;App Counter Event&quot;)
-&nbsp;@Category(&quot;App Event&quot;, &quot;Counter&quot;)
+&nbsp;@Category(&quot;Services&quot;, BuildConfig.name)
 &nbsp;@Period(&quot;1 s&quot;)
 &nbsp;@StackTrace(false)
 &nbsp;class Counter(@Label(&quot;Count&quot;) private var count: Long = 0) : Event() {
 &nbsp;  fun inc() = count++
 &nbsp;}
 &nbsp;
+&nbsp;/** Check [JFR Events](https://sap.github.io/SapMachine/jfrevents/) for more details. */
 &nbsp;object JFR {
 &nbsp;
 <b class="nc">&nbsp;  private val started = AtomicBoolean(false)</b>
@@ -550,8 +552,17 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;      it.setMaxSize(5_000_000)
 &nbsp;      it.enable(&quot;jdk.CPULoad&quot;).withPeriod(Duration.ofSeconds(1))
 &nbsp;      it.onEvent(&quot;jdk.CPULoad&quot;) { event -&gt;
-<b class="nc">&nbsp;        val cpuLoad = event.getDouble(&quot;machineTotal&quot;)</b>
-<b class="nc">&nbsp;        info { &quot;CPU Load: %.2f&quot;.format(cpuLoad) }</b>
+<b class="nc">&nbsp;        val jvmUser = event.getFloat(&quot;jvmUser&quot;)</b>
+<b class="nc">&nbsp;        val jvmSystem = event.getFloat(&quot;jvmSystem&quot;)</b>
+<b class="nc">&nbsp;        val machineTotal = event.getFloat(&quot;machineTotal&quot;)</b>
+<b class="nc">&nbsp;        info {</b>
+<b class="nc">&nbsp;          &quot;JVM User: %1$.2f, JVM System: %2$.2f, Machine Total: %3$.2f&quot;</b>
+<b class="nc">&nbsp;              .format(jvmUser, jvmSystem, machineTotal)</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // if (jvmUser &gt; 0.8) {
+&nbsp;        //  it.dump(Path(&quot;cpu-load.jfr&quot;))
+&nbsp;        // }
 &nbsp;      }
 &nbsp;
 &nbsp;      // Contended classes for more than 10ms
@@ -615,7 +626,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-27 00:16</div>
+    <div style="float:right;">generated on 2023-12-27 22:04</div>
 </div>
 </body>
 </html>

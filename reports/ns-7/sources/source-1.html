@@ -94,6 +94,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
 &nbsp;
+&nbsp;import BuildConfig
 &nbsp;import dev.suresh.addPeriodicJFREvent
 &nbsp;import dev.suresh.runOnVirtualThread
 &nbsp;import io.github.oshai.kotlinlogging.KLogger
@@ -108,13 +109,14 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;@Name(&quot;dev.suresh.Counter&quot;)
 &nbsp;@Label(&quot;App Counter&quot;)
 &nbsp;@Description(&quot;App Counter Event&quot;)
-&nbsp;@Category(&quot;App Event&quot;, &quot;Counter&quot;)
+&nbsp;@Category(&quot;Services&quot;, BuildConfig.name)
 &nbsp;@Period(&quot;1 s&quot;)
 &nbsp;@StackTrace(false)
 <b class="nc">&nbsp;class Counter(@Label(&quot;Count&quot;) private var count: Long = 0) : Event() {</b>
 <b class="nc">&nbsp;  fun inc() = count++</b>
 &nbsp;}
 &nbsp;
+&nbsp;/** Check [JFR Events](https://sap.github.io/SapMachine/jfrevents/) for more details. */
 &nbsp;object JFR {
 &nbsp;
 &nbsp;  private val started = AtomicBoolean(false)
@@ -132,8 +134,17 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;      it.setMaxSize(5_000_000)
 &nbsp;      it.enable(&quot;jdk.CPULoad&quot;).withPeriod(Duration.ofSeconds(1))
 &nbsp;      it.onEvent(&quot;jdk.CPULoad&quot;) { event -&gt;
-&nbsp;        val cpuLoad = event.getDouble(&quot;machineTotal&quot;)
-&nbsp;        info { &quot;CPU Load: %.2f&quot;.format(cpuLoad) }
+&nbsp;        val jvmUser = event.getFloat(&quot;jvmUser&quot;)
+&nbsp;        val jvmSystem = event.getFloat(&quot;jvmSystem&quot;)
+&nbsp;        val machineTotal = event.getFloat(&quot;machineTotal&quot;)
+&nbsp;        info {
+&nbsp;          &quot;JVM User: %1$.2f, JVM System: %2$.2f, Machine Total: %3$.2f&quot;
+&nbsp;              .format(jvmUser, jvmSystem, machineTotal)
+&nbsp;        }
+&nbsp;
+&nbsp;        // if (jvmUser &gt; 0.8) {
+&nbsp;        //  it.dump(Path(&quot;cpu-load.jfr&quot;))
+&nbsp;        // }
 &nbsp;      }
 &nbsp;
 &nbsp;      // Contended classes for more than 10ms
@@ -197,7 +208,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-12-27 00:16</div>
+    <div style="float:right;">generated on 2023-12-27 22:04</div>
 </div>
 </body>
 </html>
