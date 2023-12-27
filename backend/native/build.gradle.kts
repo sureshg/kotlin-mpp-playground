@@ -24,7 +24,7 @@ kotlin {
   applyDefaultHierarchyTemplate()
 
   sourceSets {
-    commonMain { dependencies { api(projects.common) } }
+    commonMain { dependencies { api(projects.shared) } }
     // nativeMain { dependencies { api(libs.arrow.suspendapp.ktor) } }
   }
 }

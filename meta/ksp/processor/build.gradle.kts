@@ -4,7 +4,7 @@ plugins {
 }
 
 kotlin.sourceSets {
-  commonMain { dependencies { implementation(projects.common) } }
+  commonMain { dependencies { implementation(projects.shared) } }
 
   jvmMain {
     dependencies {

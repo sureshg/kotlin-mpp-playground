@@ -29,7 +29,7 @@ plugins {
 kotlin {
   commonTarget()
   when (project.name) {
-    commonProjectName -> {
+    sharedProjectName -> {
       jvmTarget()
       jsTarget()
       // allNativeTargets()
@@ -78,7 +78,7 @@ koverReport {
 
 tasks {
   // Register buildConfig task only for common module
-  if (project.name == commonProjectName) {
+  if (project.name == sharedProjectName) {
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
     kotlin.sourceSets.commonMain { kotlin.srcDirs(buildConfig) }

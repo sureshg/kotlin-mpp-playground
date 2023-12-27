@@ -19,10 +19,10 @@ tasks {
 }
 
 dependencies {
-  commonMainImplementation(projects.common)
+  commonMainImplementation(projects.shared)
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
   // Add commonJS resources to web
-  jsResources(project(":${projects.common.name}", "commonJsResources"))
+  jsResources(project(":${projects.shared.name}", "commonJsResources"))
 
   // jsMainImplementation(npm("kotlin-playground", libs.versions.npm.kotlin.playground.get()))
   // jsMainImplementation(npm("xterm", libs.versions.npm.xtermjs.get()))

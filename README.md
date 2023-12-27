@@ -33,7 +33,7 @@ $ ./gradlew buildAndPublish
 
 ```bash
 # Kotlin JVM
-$ ./gradlew :common:run
+$ ./gradlew :shared:run
 $ ./gradlew :backend:jvm:run
 $ docker run \
         -it \
@@ -187,13 +187,13 @@ graph LR
         ksp
         processor
     end
-    plugin --> common
-    benchmark --> common
-    web --> common
-    desktop --> common
-    client --> common
-    native --> common
-    processor --> common
-    jvm --> common
+    plugin --> shared
+    benchmark --> shared
+    web --> shared
+    desktop --> shared
+    client --> shared
+    native --> shared
+    processor --> shared
+    jvm --> shared
     jvm --> web
 ```

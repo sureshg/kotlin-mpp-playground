@@ -6,7 +6,7 @@ plugins { id("settings.repos") }
 
 rootProject.name = "kotlin-mpp-playground"
 
-include(":common")
+include(":shared")
 
 include(":web")
 

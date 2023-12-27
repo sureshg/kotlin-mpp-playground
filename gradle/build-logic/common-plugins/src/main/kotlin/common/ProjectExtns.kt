@@ -48,8 +48,8 @@ internal val Project.catalogs
 val Project.xQuote
   get() = if (OperatingSystem.current().isWindows) """\"""" else """""""
 
-val Project.commonProjectName
-  get() = "common"
+val Project.sharedProjectName
+  get() = "shared"
 
 // val debug: String? by project
 val Project.debugEnabled
@@ -157,7 +157,9 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
               |filecount=5,
               |filesize=10m"""
                 .joinToConfigString(),
-            "-Xlog:class+load:file=${tmp}cds.log:tags",
+            """-Xlog:class+load:file=${tmp}cds.log:
+                |uptime,level,tags,pid:filesize=0"""
+                .joinToConfigString(),
             """-XX:StartFlightRecording=
               |filename=$tmp$name.jfr,
               |name=$name,

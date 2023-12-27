@@ -10,7 +10,7 @@ plugins {
 }
 
 dependencies {
-  commonMainImplementation(projects.common)
+  commonMainImplementation(projects.shared)
   jvmMainImplementation(compose.desktop.currentOs)
   // jvmMainImplementation(compose.desktop.common)
   // jvmMainImplementation(compose.components.resources)

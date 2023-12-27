@@ -1,5 +1,6 @@
 package dev.suresh.lang
 
+import BuildConfig
 import dev.suresh.addPeriodicJFREvent
 import dev.suresh.runOnVirtualThread
 import io.github.oshai.kotlinlogging.KLogger
@@ -14,13 +15,14 @@ import kotlin.time.toJavaDuration
 @Name("dev.suresh.Counter")
 @Label("App Counter")
 @Description("App Counter Event")
-@Category("App Event", "Counter")
+@Category("Services", BuildConfig.name)
 @Period("1 s")
 @StackTrace(false)
 class Counter(@Label("Count") private var count: Long = 0) : Event() {
   fun inc() = count++
 }
 
+/** Check [JFR Events](https://sap.github.io/SapMachine/jfrevents/) for more details. */
 object JFR {
 
   private val started = AtomicBoolean(false)
@@ -38,8 +40,17 @@ object JFR {
       it.setMaxSize(5_000_000)
       it.enable("jdk.CPULoad").withPeriod(Duration.ofSeconds(1))
       it.onEvent("jdk.CPULoad") { event ->
-        val cpuLoad = event.getDouble("machineTotal")
-        info { "CPU Load: %.2f".format(cpuLoad) }
+        val jvmUser = event.getFloat("jvmUser")
+        val jvmSystem = event.getFloat("jvmSystem")
+        val machineTotal = event.getFloat("machineTotal")
+        info {
+          "JVM User: %1$.2f, JVM System: %2$.2f, Machine Total: %3$.2f"
+              .format(jvmUser, jvmSystem, machineTotal)
+        }
+
+        // if (jvmUser > 0.8) {
+        //  it.dump(Path("cpu-load.jfr"))
+        // }
       }
 
       // Contended classes for more than 10ms

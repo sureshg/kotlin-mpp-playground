@@ -1,3 +1,3 @@
 plugins { plugins.kotlin.benchmark }
 
-dependencies { commonMainImplementation(projects.common) }
+dependencies { commonMainImplementation(projects.shared) }

@@ -146,6 +146,8 @@ fun KotlinMultiplatformExtension.jsTarget() {
         cssSupport { enabled = true }
       }
 
+      runTask { sourceMaps = false }
+
       testTask {
         enabled = true
         testLogging { configureLogEvents() }
@@ -181,9 +183,11 @@ fun KotlinMultiplatformExtension.jsTarget() {
 context(Project)
 fun KotlinMultiplatformExtension.wasmJsTarget() {
   wasmJs {
+    useEsModules()
     binaries.executable()
     browser {
       commonWebpackConfig {
+        // outputFileName = "app.js"
         devServer =
             (devServer ?: KotlinWebpackConfig.DevServer()).copy(
                 // open = mapOf("app" to mapOf("name" to "google chrome")),
@@ -195,6 +199,14 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
             )
       }
       applyBinaryen()
+
+      runTask { sourceMaps = false }
+
+      testTask {
+        enabled = true
+        testLogging { configureLogEvents() }
+        useKarma { useChromeHeadless() }
+      }
     }
 
     compilations.configureEach { kotlinOptions { configureKotlinJs() } }

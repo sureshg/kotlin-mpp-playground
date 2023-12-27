@@ -4,7 +4,7 @@ plugins {
 }
 
 dependencies {
-  implementation(projects.common)
+  implementation(projects.shared)
   compileOnly(kotlin("compiler-embeddable"))
   testImplementation(kotlin("compiler-embeddable"))
   // testImplementation("dev.zacsweers.kctfork:ksp:+")

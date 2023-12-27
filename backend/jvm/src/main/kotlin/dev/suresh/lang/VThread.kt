@@ -17,11 +17,11 @@ object VThread {
   suspend fun virtualThreads() = runOnVirtualThread {
     info { (Greeting().greeting()) }
     listOf("main", "jvm", "js").forEach {
-      info { "common-$it --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
+      info { "Shared-$it --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
     }
 
     listOf("main", "jvm", "js").forEach {
-      info { "backend-$it -->${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}" }
+      info { "Backend-$it -->${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}" }
     }
 
     structuredConcurrency()

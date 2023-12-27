@@ -83,7 +83,7 @@ tasks {
 }
 
 dependencies {
-  implementation(projects.common)
+  implementation(projects.shared)
   // Server dependencies
   implementation(libs.ktor.server.core)
   implementation(libs.ktor.server.netty)
