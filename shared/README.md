@@ -1,10 +1,10 @@
-### Run common JVM app
+### Run shared JVM app
 
 ```bash
-$ ./gradlew :common:run
+$ ./gradlew :shared:run
 # or
 $ ./gradlew build
 $ java --enable-preview \
        --add-modules=ALL-SYSTEM \
-       -jar common/build/libs/common-*-all.jar
+       -jar shared/build/libs/common-*-all.jar
 ```
