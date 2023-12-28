@@ -157,11 +157,6 @@ $ actionlint
 ### Module Dependency
 
 ```mermaid
-%%{
-  init: {
-    'theme': 'neutral'
-  }
-}%%
 graph LR
     subgraph backend
         jvm
