@@ -32,13 +32,13 @@ kotlin {
     sharedProjectName -> {
       jvmTarget()
       jsTarget()
-      // allNativeTargets()
       // wasmJsTarget()
+      // allNativeTargets()
     }
-    "native" -> allNativeTargets()
-    "web",
+    "js",
     "chrome" -> jsTarget()
     "wasm" -> wasmJsTarget()
+    "native" -> allNativeTargets()
     else -> jvmTarget()
   }
   applyDefaultHierarchyTemplate()
@@ -105,6 +105,16 @@ tasks {
       )
     }
     duplicatesStrategy = DuplicatesStrategy.WARN
+  }
+
+  withType<ProcessResources>().configureEach {
+    inputs.property("version", project.version.toString())
+    filesMatching("*-res.txt") {
+      expand(
+          "name" to project.name,
+          "version" to project.version,
+      )
+    }
   }
 
   plugins.withId("com.github.johnrengelman.shadow") {

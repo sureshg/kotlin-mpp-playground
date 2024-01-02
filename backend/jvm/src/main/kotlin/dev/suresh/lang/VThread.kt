@@ -16,12 +16,9 @@ object VThread {
   context(KLogger)
   suspend fun virtualThreads() = runOnVirtualThread {
     info { (Greeting().greeting()) }
-    listOf("main", "jvm", "js").forEach {
-      info { "Shared-$it --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
-    }
-
-    listOf("main", "jvm", "js").forEach {
-      info { "Backend-$it -->${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}" }
+    listOf("main", "jvm", "js", "wasm").forEach {
+      info { "Common-$it  --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
+      info { "Backend-$it --> ${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}" }
     }
 
     structuredConcurrency()
@@ -65,7 +62,7 @@ object VThread {
     check(states[StructuredTaskScope.Subtask.State.UNAVAILABLE]?.size == 40)
 
     StructuredTaskScope.ShutdownOnFailure().use {
-      val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform.name} !" }
+      val task = it.fork { "Virtual thread on ${Lang("Kotlin")} ${platform.name}!" }
       it.join().throwIfFailed()
       info { task.get() }
     }

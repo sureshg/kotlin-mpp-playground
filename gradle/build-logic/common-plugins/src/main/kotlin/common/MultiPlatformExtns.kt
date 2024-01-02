@@ -46,14 +46,19 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlinx.collections.immutable)
         api(libs.kotlin.redacted.annotations)
         api(libs.kotlinx.io.core)
-        api(libs.ktor.client.core)
-        api(libs.ktor.client.content.negotiation)
-        api(libs.ktor.client.encoding)
-        api(libs.ktor.client.logging)
-        api(libs.ktor.client.resources)
-        api(libs.ktor.client.auth)
-        api(libs.ktor.serialization.json)
-        api(libs.kotlin.logging)
+        // ToDO: Remove this once once Ktor get wasm support
+        if (project.name != "wasm") {
+          api(libs.ktor.client.core)
+          api(libs.ktor.client.content.negotiation)
+          api(libs.ktor.client.encoding)
+          api(libs.ktor.client.logging)
+          api(libs.ktor.client.resources)
+          api(libs.ktor.client.auth)
+          api(libs.ktor.client.serialization)
+          api(libs.ktor.client.websockets)
+          api(libs.ktor.serialization.json)
+          api(libs.kotlin.logging)
+        }
       }
     }
 
@@ -61,17 +66,13 @@ fun KotlinMultiplatformExtension.commonTarget() {
       dependencies {
         api(kotlin("test"))
         api(libs.kotlinx.coroutines.test)
-        api(libs.cash.turbine)
-        api(libs.ktor.client.mock)
+        if (project.name != "wasm") {
+          api(libs.cash.turbine)
+          api(libs.ktor.client.mock)
+          // api(libs.ktor.client.tests)
+        }
       }
     }
-
-    // val jvmCommon by creating {
-    //   dependsOn(commonMain.get())
-    //   dependencies {
-    //     implementation(..)
-    //   }
-    // }
 
     // val target = targets.first { it.platformType == KotlinPlatformType.common }
     // val compilation = target.compilations["main"]
@@ -141,9 +142,9 @@ fun KotlinMultiplatformExtension.jsTarget() {
     // binaries.library()
     browser {
       commonWebpackConfig {
-        // outputFileName = "app.js"
-        // sourceMaps = true
+        outputFileName = "js-app.js"
         cssSupport { enabled = true }
+        // sourceMaps = true
       }
 
       runTask { sourceMaps = false }
@@ -187,7 +188,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
     binaries.executable()
     browser {
       commonWebpackConfig {
-        // outputFileName = "app.js"
+        outputFileName = "wasm-app.js"
         devServer =
             (devServer ?: KotlinWebpackConfig.DevServer()).copy(
                 // open = mapOf("app" to mapOf("name" to "google chrome")),

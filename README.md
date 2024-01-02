@@ -50,7 +50,7 @@ $ ./gradlew :backend:jvm:jibDockerBuild
 $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
 
 # Kotlin JS
-$ ./gradlew :web:jsBrowserProductionRun -t
+$ ./gradlew :web:js:jsBrowserProductionRun -t
 $ ./gradlew kotlinUpgradeYarnLock
 
 # Kotlin Native

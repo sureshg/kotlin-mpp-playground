@@ -1,1 +1,1 @@
-Resource from commonJs module!
+Resource from "Shared commonJs" module ${version}!

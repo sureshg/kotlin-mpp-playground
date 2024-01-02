@@ -8,7 +8,9 @@ rootProject.name = "kotlin-mpp-playground"
 
 include(":shared")
 
-include(":web")
+include(":web:js")
+
+include(":web:wasm")
 
 include(":benchmark")
 

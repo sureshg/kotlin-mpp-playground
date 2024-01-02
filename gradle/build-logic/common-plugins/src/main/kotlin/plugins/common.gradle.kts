@@ -167,7 +167,9 @@ tasks {
   }
 
   // Auto format all source files
-  processResources { dependsOn(":spotlessApply") }
+  processResources {
+    // dependsOn(":spotlessApply")
+  }
 
   // Set GitHub workflow action output for this build
   build { finalizedBy(githubActionOutput) }

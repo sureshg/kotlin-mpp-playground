@@ -136,12 +136,12 @@ jobs:
             backend/jvm/build/libs/jvm-app
           if-no-files-found: error
 
-      - name: 🕸 Deploy the webapp to Github Pages
+      - name: 🕸 Deploy Wasm & Js webapp to Github Pages
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
         uses: JamesIves/github-pages-deploy-action@v4.5.0
         with:
           branch: gh-pages
-          folder: web/build/dist/js/productionExecutable
+          folder: backend/jvm/build/resources/main/app
           target-folder: app
           clean: true
           commit-message: 'web: Deployed web app'

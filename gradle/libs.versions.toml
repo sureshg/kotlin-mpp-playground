@@ -34,7 +34,7 @@ kotlinx-benchmark              = "0.4.10"
 kotlinx-metadata               = "0.8.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.13.2"
-kotlin-wrappers                = "1.0.0-pre.674"
+kotlin-wrappers                = "1.0.0-pre.676"
 kotlin-redacted                = "1.7.1"
 ktor                           = "3.0.0-beta-1"
 ktor-cohort                    = "2.3.0"
@@ -269,6 +269,7 @@ ktor-client-logging                  = { module = "io.ktor:ktor-client-logging" 
 ktor-client-resources                = { module = "io.ktor:ktor-client-resources"                              , version.ref = "ktor"}
 ktor-client-encoding                 = { module = "io.ktor:ktor-client-encoding"                               , version.ref = "ktor"}
 ktor-client-mock                     = { module = "io.ktor:ktor-client-mock"                                   , version.ref = "ktor"}
+ktor-client-tests                    = { module = "io.ktor:ktor-client-tests"                                  , version.ref = "ktor"}
 
 airlift-aircompressor                = { module = "io.airlift:aircompressor"                                   , version.ref = "airlift-aircompressor"}
 airlift-security                     = { module = "io.airlift:security"                                        , version.ref = "airlift-security"}

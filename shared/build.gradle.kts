@@ -24,11 +24,14 @@ buildConfig {
   catalogVersions = project.versionCatalogMapOf()
 }
 
-// Expose common js resource as configuration to be consumed by other projects
-// https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
-kotlin.sourceSets.jsMain {
-  val commonJsResources by configurations.consumable("commonJsResources")
-  artifacts { add(commonJsResources.name, tasks.jsProcessResources) }
+kotlin.sourceSets {
+  // Expose shared js resource as configuration to be consumed by other projects
+  // https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
+  val sharedJsRes by configurations.consumable("sharedJsResources")
+  val sharedWasmRes by configurations.consumable("sharedWasmResources")
+
+  jsMain { artifacts { add(sharedJsRes.name, tasks.jsProcessResources) } }
+  // wasmJsMain { artifacts { add(sharedWasmRes.name, tasks.wasmJsProcessResources) } }
 }
 
 dependencies {

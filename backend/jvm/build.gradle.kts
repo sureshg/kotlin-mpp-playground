@@ -1,5 +1,6 @@
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
+import kotlin.io.path.Path
 
 plugins {
   plugins.kotlin.jvm
@@ -60,20 +61,29 @@ jib {
   containerizingMode = "packaged"
 }
 
-// Configuration to copy webapp to resources
-val webapp by configurations.creating
+// Configuration to copy JS/Wasm app to resources
+val jsApp by configurations.creating
+val wasmJsApp by configurations.creating
 
 tasks {
-  val copyWebApp by
+  val copyJsApp by
       registering(Copy::class) {
-        from(webapp)
-        into(processResources.map { it.destinationDir.resolve(webapp.name) })
+        from(jsApp)
+        into(processResources.map { it.destinationDir.toPath().resolve(Path("app", "js")) })
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+      }
+
+  val copyWasmApp by
+      registering(Copy::class) {
+        from(wasmJsApp)
+        into(processResources.map { it.destinationDir.toPath().resolve(Path("app", "wasm")) })
+        duplicatesStrategy = DuplicatesStrategy.INCLUDE
       }
 
   // Copy webapp to resources
   processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    dependsOn(copyWebApp)
+    dependsOn(copyJsApp, copyWasmApp)
   }
 
   // Makes sure jte is generated before compilation
@@ -113,6 +123,7 @@ dependencies {
   implementation(libs.ktor.client.logging)
   implementation(libs.ktor.client.resources)
   implementation(libs.ktor.client.auth)
+  implementation(libs.ktor.client.websockets)
 
   // Database
   implementation(libs.exposed.core)
@@ -154,8 +165,9 @@ dependencies {
   testImplementation(libs.kubernetes.client)
   testImplementation(libs.konsist)
 
-  // Copy web app browserDist
-  webapp(project(path = ":${projects.web.name}", configuration = webapp.name))
+  // Copy js and wasm apps
+  jsApp(project(path = projects.web.js.dependencyProject.path, configuration = "jsApp"))
+  wasmJsApp(project(path = projects.web.wasm.dependencyProject.path, configuration = "wasmApp"))
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })

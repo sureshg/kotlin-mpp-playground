@@ -1,1 +1,1 @@
-Resource from backendJVM module ${version}!
+Resource from "Backend jvmMain" module ${version}!

@@ -1,1 +1,1 @@
-Resource from commonMain module!
+Resource from "Shared commonMain" module ${version}!
