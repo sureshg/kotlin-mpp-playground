@@ -408,7 +408,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
   </tr>
   <tr>
-    <td class="name">VThread$virtualThreads$2$3$1</td>
+    <td class="name">VThread$virtualThreads$2$2$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -502,12 +502,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  context(KLogger)
 <b class="nc">&nbsp;  suspend fun virtualThreads() = runOnVirtualThread {</b>
 <b class="nc">&nbsp;    info { (Greeting().greeting()) }</b>
-&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
-<b class="nc">&nbsp;      info { &quot;Shared-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }</b>
-&nbsp;    }
-&nbsp;
-&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
-<b class="nc">&nbsp;      info { &quot;Backend-$it --&gt;${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }</b>
+&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;, &quot;wasm&quot;).forEach {
+<b class="nc">&nbsp;      info { &quot;Common-$it  --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }</b>
+<b class="nc">&nbsp;      info { &quot;Backend-$it --&gt; ${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    structuredConcurrency()
@@ -551,7 +548,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;    check(states[StructuredTaskScope.Subtask.State.UNAVAILABLE]?.size == 40)</b>
 &nbsp;
 <b class="nc">&nbsp;    StructuredTaskScope.ShutdownOnFailure().use {</b>
-<b class="nc">&nbsp;      val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} ${platform.name} !&quot; }</b>
+<b class="nc">&nbsp;      val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} ${platform.name}!&quot; }</b>
 <b class="nc">&nbsp;      it.join().throwIfFailed()</b>
 <b class="nc">&nbsp;      info { task.get() }</b>
 <b class="nc">&nbsp;    }</b>
@@ -604,7 +601,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-01-02 00:17</div>
+    <div style="float:right;">generated on 2024-01-02 05:52</div>
 </div>
 </body>
 </html>

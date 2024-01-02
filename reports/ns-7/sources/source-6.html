@@ -110,12 +110,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  context(KLogger)
 &nbsp;  suspend fun virtualThreads() = runOnVirtualThread {
 &nbsp;    info { (Greeting().greeting()) }
-&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
-&nbsp;      info { &quot;Shared-$it --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
-&nbsp;    }
-&nbsp;
-&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;).forEach {
-&nbsp;      info { &quot;Backend-$it --&gt;${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }
+&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;, &quot;wasm&quot;).forEach {
+&nbsp;      info { &quot;Common-$it  --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
+&nbsp;      info { &quot;Backend-$it --&gt; ${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }
 &nbsp;    }
 &nbsp;
 &nbsp;    structuredConcurrency()
@@ -159,7 +156,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;    check(states[StructuredTaskScope.Subtask.State.UNAVAILABLE]?.size == 40)
 &nbsp;
 &nbsp;    StructuredTaskScope.ShutdownOnFailure().use {
-&nbsp;      val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} ${platform.name} !&quot; }
+&nbsp;      val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} ${platform.name}!&quot; }
 &nbsp;      it.join().throwIfFailed()
 &nbsp;      info { task.get() }
 &nbsp;    }
@@ -212,7 +209,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-01-02 00:17</div>
+    <div style="float:right;">generated on 2024-01-02 05:52</div>
 </div>
 </body>
 </html>
