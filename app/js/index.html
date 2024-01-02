@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+    <meta name="description" content="Kotlin Multiplatform Web Application"/>
+
+    <!-- base href="/app/" target="_blank"-->
+
+    <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/bulma.min.css">
+
+    <!--    Material Fonts & Symbols-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter&display=swap">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link class="codestyle" rel="stylesheet" href="css/hljs/github.min.css">
+    <!-- <link class="codestyle" rel="prefetch alternate stylesheet" href="css/hljs/github-dark.min.css">-->
+    <!-- <link rel="stylesheet" href="css/xterm.css"/>-->
+    <title>Kotlin Multiplatform Web Module</title>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+
+    <script>
+        function topLevelJsFun() {
+            console.log("Hello Kotlin Multiplatform!");
+        }
+    </script>
+</head>
+
+<body>
+<noscript>
+    This page requires JavaScript.
+</noscript>
+
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            <span class="icon-text">
+              <span class="icon">
+                <span class="material-symbols-outlined">code</span>
+              </span>
+              <span>Kotlin Multiplatform</span>
+            </span>
+        </h1>
+        <hr>
+        <p class="subtitle">
+            A sample <a href="https://kotlinlang.org/docs/multiplatform.html">Kotlin Multiplatform</a> web application
+        </p>
+
+        <div class="card">
+            <button id="copy" class="button is-small has-text-centered is-pulled-right">
+               <span class="icon">
+                <span class="material-symbols-outlined">content_copy</span>
+              </span>
+            </button>
+            <div class="card-content" style="overflow-wrap: break-word;">
+                <div id="root" class="language-json"></div>
+            </div>
+        </div>
+        <br/>
+        <div class="notification is-success is-light" id="timer">
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h1 class="title">
+            <span class="icon-text">
+              <span class="icon">
+                <span class="material-symbols-outlined">waves</span>
+              </span>
+              <span>Kotlin Coroutines</span>
+            </span>
+        </h1>
+        <hr>
+        <p class="subtitle">
+            <a href="https://kotlinlang.org/docs/coroutines-guide.html">Kotlin Coroutines</a> demo.
+            Click on progress bar to
+            <mark>cancel</mark>
+        </p>
+
+        <div class="box" id="coroutines">
+        </div>
+    </div>
+</section>
+
+<footer class="footer is-small mt-auto">
+    <div class="content has-text-centered">
+        <span class="icon-text">
+              <span>Built with ❤️ &nbsp;</span>
+              <span> using <a href="https://kotlinlang.org/docs/multiplatform.html">Kotlin Multiplatform.</a></span>
+        </span>
+        <a href="https://github.com/sureshg/kotlin-mpp-playground">
+        <span class="icon-text">
+              <span class="icon">
+                <span class="material-symbols-outlined">code</span>
+              </span>
+              <span>GitHib</span>
+        </span>
+        </a>
+    </div>
+</footer>
+
+<script src="js-app.js"></script>
+</body>
+</html>
