@@ -189,17 +189,19 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
     browser {
       commonWebpackConfig {
         outputFileName = "wasm-app.js"
+        cssSupport { enabled = true }
+        // sourceMaps = true
         devServer =
-            (devServer ?: KotlinWebpackConfig.DevServer()).copy(
-                // open = mapOf("app" to mapOf("name" to "google chrome")),
-                static =
-                    (devServer?.static ?: mutableListOf()).apply {
-                      // Serve sources to debug inside browser
-                      add(project.rootDir.path)
-                    },
-            )
+            (devServer ?: KotlinWebpackConfig.DevServer()).apply {
+              // open = mapOf("app" to mapOf("name" to "google chrome")),
+              static =
+                  (static ?: mutableListOf()).apply {
+                    // Serve sources to debug inside browser
+                    add(project.rootDir.path)
+                  }
+            }
       }
-      applyBinaryen()
+      // applyBinaryen()
 
       runTask { sourceMaps = false }
 
@@ -212,6 +214,11 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
 
     compilations.configureEach { kotlinOptions { configureKotlinJs() } }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
+  }
+
+  sourceSets {
+    wasmJsMain { dependencies {} }
+    wasmJsTest { kotlin {} }
   }
 }
 

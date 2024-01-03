@@ -102,9 +102,9 @@ $ actionlint
 
 ### Resources
 
-- [🔍 Kotlin Multiplatform Package Search](https://package-search.jetbrains.com/search?query=http&onlyMpp=true)
-- [🎨 Compose Multiplatform Template](https://github.com/JetBrains/compose-multiplatform-template)
-- [📏 Compose Lint Rules](https://slackhq.github.io/compose-lints/rules/)
+- [🔍 Kotlin Multiplatform Package Search](https://package-search.jetbrains.com/search?query=ktor&onlyMpp=true)
+- [🎨 Kotlin Multiplatform Wizard](https://kmp.jetbrains.com/)
+- [📏 Jetbrains Compose Rules](https://mrmans0n.github.io/compose-rules/rules/)
 
 <!-- Badges -->
 
@@ -167,9 +167,13 @@ graph LR
         jvm
         native
     end
+    subgraph web
+        js
+        wasm
+    end
     subgraph compose
         desktop
-        web
+        compose-web
     end
     subgraph dep-mgmt
         bom
@@ -188,12 +192,12 @@ graph LR
         processor
     end
     plugin --> shared
-    benchmark --> shared
     web --> shared
     desktop --> shared
-    client --> shared
     native --> shared
     processor --> shared
     jvm --> shared
-    jvm --> web
+    jvm --> js
+    jvm --> wasm
+    benchmark --> shared
 ```
