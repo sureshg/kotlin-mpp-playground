@@ -5,7 +5,7 @@ $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/js/[roo
 $dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/js/[root]/js-type-of.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
 $dokka.location://main/#/PointingToDeclaration/wasm/[root]/main.html
-$dokka.location://mainScope/#/PointingToDeclaration/js/[root]/main-scope.html
+$dokka.location://mainScope/#/PointingToDeclaration/wasm/[root]/main-scope.html
 $dokka.location://runCoroutines/#/PointingToDeclaration/js/[root]/run-coroutines.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/js/[root]/say-hello.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/shared/[root]/stdlib-features.html
