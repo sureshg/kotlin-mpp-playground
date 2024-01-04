@@ -26,7 +26,7 @@ fun Application.configureHTTP() {
 
   install(XForwardedHeaders)
 
-  install(DefaultHeaders) { header("X-Engine", "App-${BuildConfig.version}") }
+  install(DefaultHeaders) { header("X-Engine", "${BuildConfig.name}-${BuildConfig.version}") }
 
   install(Compression) {
     gzip { priority = 1.0 }
