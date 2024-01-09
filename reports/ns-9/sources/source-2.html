@@ -360,7 +360,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 <b class="nc">&nbsp;  install(XForwardedHeaders)</b>
 &nbsp;
-<b class="nc">&nbsp;  install(DefaultHeaders) { header(&quot;X-Engine&quot;, &quot;App-${BuildConfig.version}&quot;) }</b>
+<b class="nc">&nbsp;  install(DefaultHeaders) { header(&quot;X-Engine&quot;, &quot;${BuildConfig.name}-${BuildConfig.version}&quot;) }</b>
 &nbsp;
 <b class="nc">&nbsp;  install(Compression) {</b>
 <b class="nc">&nbsp;    gzip { priority = 1.0 }</b>
@@ -412,7 +412,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-01-09 00:18</div>
+    <div style="float:right;">generated on 2024-01-09 01:23</div>
 </div>
 </body>
 </html>
