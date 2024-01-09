@@ -1,0 +1,113 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Take up remaining vertical space */
+}
+
+.header {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.card {
+    width: 350px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+progress {
+    width: 100%;
+    height: 15px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+progress[value]::-webkit-progress-bar {
+    background-color: #E0E0E0;
+    border-radius: 8px;
+}
+
+progress[value]::-webkit-progress-value {
+    background-color: var(--progress-color);
+    border-radius: 8px;
+}
+
+.info-box {
+    font-size: 18px;
+    font-style: italic;
+    color: #28A745;
+}
+
+#primary {
+    --progress-color: #007BFF;
+}
+
+#link {
+    --progress-color: #17A2B8;
+}
+
+#success {
+    --progress-color: #28A745;
+}
+
+#warning {
+    --progress-color: #FFC107;
+}
+
+#danger {
+    --progress-color: #DC3545;
+}
+
+#info {
+    --progress-color: #6610f2;
+}
+
+#wasm-warning {
+    display: none; /* Hide the card initially */
+}
+
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.footer div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #007bff; /* Link color */
+}
+
+.footer a:hover {
+    color: #0056b3; /* Hover color */
+}
+
+.svg-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
