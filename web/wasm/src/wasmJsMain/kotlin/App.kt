@@ -6,6 +6,7 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.dom.appendText
+import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLProgressElement
 
 val mainScope = MainScope()
@@ -29,7 +30,7 @@ suspend fun main() {
     progressElms.forEach { progress ->
       launch {
         var cancelled = false
-        val pause = Random.nextLong(10, 300)
+        val pause = Random.nextLong(10, 100)
         progress.onclick = { cancelled = !cancelled }
         while (cancelled.not()) {
           delay(pause.milliseconds)
@@ -42,6 +43,17 @@ suspend fun main() {
     }
   }
 
-  val info = document.getElementById("info-box")
+  val info = document.getElementById("info-box") as? HTMLDivElement
   info?.appendText("All coroutines are completed!")
+
+  info?.onclick = {
+    mainScope.launch {
+      val files = document.selectFileFromDisk()
+      info?.appendText("Selected files: $files")
+      files.forEach { file ->
+        val text = file.readAsText()
+        info?.appendText("File content: $text")
+      }
+    }
+  }
 }

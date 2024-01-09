@@ -73,7 +73,7 @@ suspend fun runCoroutines() {
     progressElms.forEach { progress ->
       launch {
         var cancelled = false
-        val pause = Random.nextLong(10, 300)
+        val pause = Random.nextLong(10, 100)
 
         progress.onclick = {
           cancelled = !cancelled

@@ -1,0 +1,29 @@
+.footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.footer div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.footer a {
+    text-decoration: none;
+    color: #007bff; /* Link color */
+}
+
+.footer a:hover {
+    color: #0056b3; /* Hover color */
+}
+
+.svg-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    vertical-align: middle;
+}

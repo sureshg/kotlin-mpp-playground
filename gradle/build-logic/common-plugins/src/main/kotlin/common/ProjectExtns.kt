@@ -143,6 +143,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "--show-version",
             "-XX:+PrintCommandLineFlags",
             "--enable-native-access=ALL-UNNAMED",
+            "-Xms64M",
             "-Xmx96M",
             "-XX:+UseZGC",
             "-XX:+ZGenerational",
@@ -150,6 +151,8 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:+UseStringDeduplication",
             "-XX:+UnlockExperimentalVMOptions",
             "-XX:MaxRAMPercentage=0.8",
+            // "-XX:+UseEpsilonGC",
+            // "-XX:+AlwaysPreTouch",
             // os+thread,gc+heap=trace,
             """-Xlog:gc*,stringdedup*:
               |file="$tmp$name-gc-%p-%t.log":
@@ -157,7 +160,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
               |filecount=5,
               |filesize=10m"""
                 .joinToConfigString(),
-            """-Xlog:class+load:file=${tmp}cds.log:
+            """-Xlog:class+load:file=$tmp$name-cds.log:
                 |uptime,level,tags,pid:filesize=0"""
                 .joinToConfigString(),
             """-XX:StartFlightRecording=
