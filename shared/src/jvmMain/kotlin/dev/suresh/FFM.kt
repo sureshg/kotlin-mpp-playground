@@ -15,6 +15,13 @@ val SYMBOL_LOOKUP: SymbolLookup by lazy {
   SymbolLookup { name -> loaderLookup.find(name).or { stdlib.find(name) } }
 }
 
+val UNSAFE by lazy {
+  sun.misc.Unsafe::class.java.getDeclaredField("theUnsafe").run {
+    isAccessible = true
+    get(null) as sun.misc.Unsafe
+  }
+}
+
 fun SymbolLookup.findOrNull(name: String): MemorySegment? = find(name).getOrNull()
 
 fun downcallHandle(

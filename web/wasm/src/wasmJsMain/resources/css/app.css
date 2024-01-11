@@ -4,7 +4,7 @@ body {
     min-height: 100vh;
     margin: 0;
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f4f4;
+    background-color: #f8f8f8;
 }
 
 .container {
@@ -110,4 +110,22 @@ progress[value]::-webkit-progress-value {
     height: 20px;
     margin-right: 5px;
     vertical-align: middle;
+}
+
+.button-link {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+    margin: 10px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, color 0.3s;
+    display: inline-block; /* Override the flex container column layout */
+}
+
+.button-link:hover {
+    background-color: #4CAF50;
+    color: #fff;
 }
