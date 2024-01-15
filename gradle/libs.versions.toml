@@ -113,7 +113,7 @@ async-profiler                 = "2.9"
 ap-loader-all                  = "2.9-7"
 airlift-aircompressor          = "0.25"
 airlift-security               = "239"
-maven-mima                     = "3.0.0-alpha-1"
+maven-mima                     = "3.0.0-alpha-2"
 maven-archeologist             = "0.0.10"
 
 # NPM Dependencies
