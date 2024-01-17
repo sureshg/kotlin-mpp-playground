@@ -40,6 +40,7 @@ dependencies {
   commonMainApi(libs.ajalt.colormath)
   commonMainApi(libs.benasher44.uuid)
   commonMainApi(libs.intellij.markdown)
+  commonMainApi(libs.kotlinx.jsonpath)
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
   commonMainApi(libs.parsus)

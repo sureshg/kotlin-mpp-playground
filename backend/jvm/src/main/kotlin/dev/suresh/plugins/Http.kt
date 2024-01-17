@@ -39,6 +39,7 @@ fun Application.configureHTTP() {
   install(CORS) {
     anyHost()
     allowHeader(HttpHeaders.ContentType)
+    allowCredentials = true
   }
 
   install(CallLogging) {

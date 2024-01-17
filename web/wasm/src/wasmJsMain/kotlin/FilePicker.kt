@@ -38,7 +38,7 @@ suspend fun File.readAsText(): String = suspendCoroutine { cont ->
 
   reader.onprogress = {
     val percentage = (it.loaded.toDouble() / it.total.toDouble()) * 100
-    println("File loading Progress: $percentage%")
+    log.info { "File loading Progress: $percentage%" }
   }
   reader.readAsText(this, "UTF-8")
 }

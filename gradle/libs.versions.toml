@@ -6,7 +6,7 @@ kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "2.0"
-gradle                         = "8.5"
+gradle                         = "8.6-rc-2"
 node-version                   = "21.5.0"
 java-vendor                    = "Oracle"
 java-jvmArguments              = "--enable-preview"
@@ -34,7 +34,7 @@ kotlinx-benchmark              = "0.4.10"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.13.2"
-kotlin-wrappers                = "1.0.0-pre.683"
+kotlin-wrappers                = "1.0.0-pre.686"
 kotlin-redacted                = "1.7.1"
 ktor                           = "3.0.0-beta-1"
 ktor-cohort                    = "2.3.0"
@@ -75,10 +75,11 @@ jctools                        = "4.0.1"
 benasher44-uuid                = "0.8.2"
 kotlinx-uuid                   = "0.0.20"
 kotlin-codepoints              = "0.6.1"
-kotlin-logging                 = "6.0.2"
+kotlin-logging                 = "6.0.3"
 kotlin-bignum                  = "0.3.8"
 kotlin-diff                    = "0.4.0"
 kotlin-retry                   = "1.0.9"
+kotlinx-jsonpath               = "3.0.1"
 uri-kmp                        = "0.0.15"
 cash-turbine                   = "1.0.0"
 kmp-store5                     = "5.0.0-beta01"
@@ -125,11 +126,11 @@ npm-jsjoda-tz                  = "2.18.0"
 
 # Plugin versions
 benmanes                       = "0.50.0"
-foojay-resolver                = "0.7.0"
+foojay-resolver                = "0.8.0"
 gradle-enterprise              = "3.16.1"
 nexus-publish                  = "2.0.0-rc-1"
 shadow                         = "8.1.1"
-spotless                       = "6.23.3"
+spotless                       = "6.24.0"
 semver-plugin                  = "0.5.0-rc.6"
 taskinfo                       = "2.1.0"
 dependency-analysis            = "1.28.0"
@@ -282,6 +283,7 @@ ktor-cohort-hikari                   = { module = "com.sksamuel.cohort:cohort-hi
 rsocket-ktor-client                  = { module = "io.rsocket.kotlin:rsocket-ktor-client"                      , version.ref = "rsocket"}
 rsocket-ktor-server                  = { module = "io.rsocket.kotlin:rsocket-ktor-server"                      , version.ref = "rsocket"}
 uri-kmp                              = { module = "com.eygraber:uri-kmp"                                       , version.ref = "uri-kmp"}
+kotlinx-jsonpath                     = { module = "com.eygraber:jsonpathkt-kotlinx"                            , version.ref = "kotlinx-jsonpath"}
 
 logback-classic                      = { module = "ch.qos.logback:logback-classic"                             , version.ref = "logback"}
 exposeb-bom                          = { module = "org.jetbrains.exposed:exposed-bom"                          , version.ref = "exposed"}

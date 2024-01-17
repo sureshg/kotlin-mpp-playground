@@ -1,3 +1,4 @@
+import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.browser.document
@@ -11,8 +12,10 @@ import org.w3c.dom.HTMLProgressElement
 
 val mainScope = MainScope()
 
+val log = KotlinLogging.logger {}
+
 suspend fun main() {
-  println("Hello Kotlin WasmJS!")
+  log.info { "Hello Kotlin WasmJS!" }
   coroutineScope {
     val coroutinesElm = document.getElementById("coroutines")
     val progressElms =

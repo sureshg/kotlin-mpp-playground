@@ -46,6 +46,7 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlinx.collections.immutable)
         api(libs.kotlin.redacted.annotations)
         api(libs.kotlinx.io.core)
+        api(libs.kotlin.logging)
         // ToDO: Remove this once once Ktor get wasm support
         if (project.name != "wasm") {
           api(libs.ktor.client.core)
@@ -57,7 +58,6 @@ fun KotlinMultiplatformExtension.commonTarget() {
           api(libs.ktor.client.serialization)
           api(libs.ktor.client.websockets)
           api(libs.ktor.serialization.json)
-          api(libs.kotlin.logging)
         }
       }
     }
