@@ -4,7 +4,6 @@ $dokka.location:////PointingToDeclaration/processor/[root]/index.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/js/[root]/-kotlin-playground.html
 $dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/js/[root]/js-type-of.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
-$dokka.location://log/#/PointingToDeclaration/wasm/[root]/log.html
 $dokka.location://main/#/PointingToDeclaration/wasm/[root]/main.html
 $dokka.location://mainScope/#/PointingToDeclaration/wasm/[root]/main-scope.html
 $dokka.location://readAsText/org.w3c.files.File#/PointingToDeclaration/wasm/[root]/read-as-text.html
