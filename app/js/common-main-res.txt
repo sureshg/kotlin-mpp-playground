@@ -1,1 +1,1 @@
-Resource from "Shared commonMain" module 0.10.0.34+d944f1b!
+Resource from "Shared commonMain" module 0.10.0.36+e58f833!
