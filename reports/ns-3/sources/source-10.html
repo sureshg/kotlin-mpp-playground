@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > AppKt</title>
+  <title>kotlin-mpp-playground Coverage Report > ReentrantLazyKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: AppKt (dev.suresh)</h1>
+<h1>Coverage Summary for Class: ReentrantLazyKt (dev.suresh)</h1>
 
 <table class="coverageStats">
 
@@ -46,35 +46,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">AppKt</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/12)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/33)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">AppKt$module$1</td>
+  <td class="name">ReentrantLazyKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -83,7 +55,14 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     (0/1)
   </span>
 </td>
-    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -97,9 +76,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/12)
+    (0/18)
   </span>
 </td>
+</tr>
+  <tr>
+    <td class="name">ReentrantLazyKt$WhenMappings</td>
+    <td class="coverageStat"/>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -108,16 +91,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/3)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/16)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,7 +99,23 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/45)
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
   </span>
 </td>
 </tr>
@@ -138,44 +128,50 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;import BuildConfig
-&nbsp;import dev.suresh.config.SysConfig
-&nbsp;import dev.suresh.plugins.configureHTTP
-&nbsp;import dev.suresh.plugins.configureSecurity
-&nbsp;import dev.suresh.plugins.configureSerialization
-&nbsp;import dev.suresh.plugins.errorRoutes
-&nbsp;import dev.suresh.routes.adminRoutes
-&nbsp;import dev.suresh.routes.jvmFeatures
-&nbsp;import dev.suresh.routes.mgmtRoutes
-&nbsp;import dev.suresh.routes.webApp
-&nbsp;import io.ktor.server.application.*
-&nbsp;import io.ktor.server.netty.*
-&nbsp;import io.ktor.server.routing.*
-&nbsp;import io.ktor.util.logging.*
+&nbsp;import java.util.concurrent.locks.ReentrantLock
+&nbsp;import kotlin.LazyThreadSafetyMode.NONE
+&nbsp;import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
+&nbsp;import kotlin.concurrent.withLock
 &nbsp;
-&nbsp;fun main(args: Array&lt;String&gt;) =
-<b class="nc">&nbsp;    try {</b>
-<b class="nc">&nbsp;      SysConfig.initSysProperty()</b>
-<b class="nc">&nbsp;      println(&quot;Starting App ${BuildConfig.version}...&quot;)</b>
-<b class="nc">&nbsp;      EngineMain.main(args)</b>
-<b class="nc">&nbsp;    } catch (e: Throwable) {</b>
-<b class="nc">&nbsp;      val log = KtorSimpleLogger(&quot;main&quot;)</b>
-<b class="nc">&nbsp;      log.error(&quot;Failed to start the application: ${e.message}&quot;, e)</b>
+&nbsp;/**
+&nbsp; * Java Virtual thread friendly Kotlin lazy initialization. The implementation is based on
+&nbsp; * [Javalin Lazy](https://github.com/javalin/javalin/pull/1974) implementation.
+&nbsp; */
+&nbsp;internal class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {
+&nbsp;  private companion object {
+&nbsp;    private object UNINITIALIZED_VALUE
+&nbsp;  }
+&nbsp;
+&nbsp;  private var initializer: (() -&gt; T)? = initializer
+&nbsp;
+&nbsp;  @Volatile private var lock: ReentrantLock? = ReentrantLock()
+&nbsp;
+&nbsp;  @Volatile private var _value: Any? = UNINITIALIZED_VALUE
+&nbsp;
+&nbsp;  override val value: T
+&nbsp;    get() {
+&nbsp;      lock?.withLock {
+&nbsp;        if (_value === UNINITIALIZED_VALUE) {
+&nbsp;          this._value = initializer!!.invoke()
+&nbsp;          this.lock = null
+&nbsp;          this.initializer = null
+&nbsp;        }
+&nbsp;      }
+&nbsp;      @Suppress(&quot;UNCHECKED_CAST&quot;) return _value as T
 &nbsp;    }
 &nbsp;
-&nbsp;fun Application.module() {
-<b class="nc">&nbsp;  configureHTTP()</b>
-<b class="nc">&nbsp;  configureSerialization()</b>
-<b class="nc">&nbsp;  configureSecurity()</b>
-<b class="nc">&nbsp;  errorRoutes()</b>
-<b class="nc">&nbsp;  routing {</b>
-<b class="nc">&nbsp;    adminRoutes()</b>
-<b class="nc">&nbsp;    webApp()</b>
-<b class="nc">&nbsp;    jvmFeatures()</b>
-<b class="nc">&nbsp;    mgmtRoutes()</b>
-&nbsp;  }
-&nbsp;  // CoroutineScope(coroutineContext).launch {}
+&nbsp;  override fun isInitialized() = _value !== UNINITIALIZED_VALUE
 &nbsp;}
+&nbsp;
+&nbsp;/** A virtual thread friendly [kotlin.lazy] implementation. */
+&nbsp;fun &lt;T : Any?&gt; vtLazy(
+<b class="nc">&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,</b>
+&nbsp;    initializer: () -&gt; T
+&nbsp;): Lazy&lt;T&gt; =
+<b class="nc">&nbsp;    when (threadSafetyMode) {</b>
+<b class="nc">&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)</b>
+<b class="nc">&nbsp;      else -&gt; lazy(threadSafetyMode, initializer)</b>
+&nbsp;    }
 </code>
 </pre>
 </div>

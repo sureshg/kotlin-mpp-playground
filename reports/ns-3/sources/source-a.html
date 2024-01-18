@@ -96,6 +96,46 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 <b class="nc">&nbsp;public record Lang(String name) {</b>
 &nbsp;}
+&nbsp;
+&nbsp;
+&nbsp;record Model(String name, float temp, int tokens) {
+&nbsp;
+&nbsp;    public static ModelBuilder builder() {
+&nbsp;        return new ModelBuilder();
+&nbsp;    }
+&nbsp;
+&nbsp;    void main() {
+&nbsp;
+&nbsp;        var b = Model.builder().name(&quot;test&quot;).build();
+&nbsp;
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;class ModelBuilder {
+&nbsp;    private String name;
+&nbsp;    private float temp = 0.1f;
+&nbsp;
+&nbsp;    private int tokens = 100;
+&nbsp;
+&nbsp;    public ModelBuilder name(String name) {
+&nbsp;        this.name = name;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ModelBuilder temp(float temp) {
+&nbsp;        this.temp = temp;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ModelBuilder tokens(int tokens) {
+&nbsp;        this.tokens = tokens;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Model build() {
+&nbsp;        return new Model(name, temp, tokens);
+&nbsp;    }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -119,7 +159,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-01-18 00:28</div>
+    <div style="float:right;">generated on 2024-01-18 18:51</div>
 </div>
 </body>
 </html>
