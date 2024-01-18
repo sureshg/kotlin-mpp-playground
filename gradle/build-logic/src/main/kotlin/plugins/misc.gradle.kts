@@ -91,7 +91,7 @@ tasks {
   register("checkBuildLogicBestPractices") {
     description = "Run the checkBestPractices check for build-logic included builds!"
     group = BasePlugin.BUILD_GROUP
-    dependsOn(gradle.includedBuild("build-logic").task(":common-plugins:checkBestPractices"))
+    dependsOn(gradle.includedBuild("build-logic").task(":checkBestPractices"))
   }
 
   // Clean all composite builds

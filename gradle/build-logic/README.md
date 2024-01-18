@@ -3,12 +3,30 @@
 #### Run the `Gradle Best Practices` plugin on the build logic:
 
 ```bash
-$ ./gradlew -p gradle/build-logic :common-plugins:bestPracticesBaseline
+$ ./gradlew -p gradle/build-logic :bestPracticesBaseline
 $ ./gradlew checkBuildLogicBestPractices
 # ./gradlew -p gradle/build-logic checkBestPractices
 ```
 
 #### Submit Dependency Graph to [Github Dependabot](https://github.com/gradle/github-dependency-graph-gradle-plugin)
+
+* init.gradle.kts
+
+```kotlin
+import org.gradle.github.GitHubDependencyGraphPlugin
+
+initscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies { classpath("org.gradle:github-dependency-graph-gradle-plugin:+") }
+}
+
+apply<GitHubDependencyGraphPlugin>()
+```
+
+* Run
 
 ```bash
 $ export GITHUB_DEPENDENCY_GRAPH_JOB_ID="42"

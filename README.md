@@ -83,7 +83,7 @@ $ ./gradlew generateChangelog
 $ ./gradlew cleanAll
 
 # Gradle Best Practices
-$ ./gradlew -p gradle/build-logic :common-plugins:bestPracticesBaseline
+$ ./gradlew -p gradle/build-logic :bestPracticesBaseline
 $ ./gradlew checkBuildLogicBestPractices
 
 # GitHub Actions lint

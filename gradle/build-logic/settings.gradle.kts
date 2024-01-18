@@ -14,5 +14,3 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 rootProject.name = "build-logic"
-
-include("common-plugins")
