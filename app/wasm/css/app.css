@@ -31,6 +31,12 @@ body {
     margin-bottom: 20px;
 }
 
+.info-box {
+    font-size: 18px;
+    font-style: italic;
+    color: #28A745;
+}
+
 progress {
     width: 100%;
     height: 15px;
@@ -46,12 +52,6 @@ progress[value]::-webkit-progress-bar {
 progress[value]::-webkit-progress-value {
     background-color: var(--progress-color);
     border-radius: 8px;
-}
-
-.info-box {
-    font-size: 18px;
-    font-style: italic;
-    color: #28A745;
 }
 
 #primary {
@@ -128,4 +128,36 @@ progress[value]::-webkit-progress-value {
 .button-link:hover {
     background-color: #4CAF50;
     color: #fff;
+}
+
+.drop-box {
+    border: 1px dashed #4CAF50; /* Green color */
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: border 0.3s ease;
+}
+
+.drop-box:hover, .drop-box.drag-over {
+    border: 1px dashed #4CAF50; /* Green color */
+}
+
+.file-input {
+    display: none;
+}
+
+.file-input-label {
+    cursor: pointer;
+    background-color: #4CAF50; /* Green color */
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.drop-box.dragging {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #4CAF50; /* Green color */
+    background-color: rgba(76, 175, 80, 0.1); /* Increase transparency (adjust as needed) */
 }
