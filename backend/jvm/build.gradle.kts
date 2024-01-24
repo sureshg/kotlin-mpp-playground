@@ -151,7 +151,7 @@ dependencies {
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
   implementation(libs.micrometer.prometheus)
-  // implementation(libs.ap.converter)
+  implementation(libs.ap.converter)
   // implementation(libs.ap.loader.all)
 
   // Logging

@@ -1,4 +1,7 @@
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+import org.khronos.webgl.ArrayBuffer
 import org.w3c.dom.Document
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.asList
@@ -21,7 +24,7 @@ suspend fun Document.selectFileFromDisk(accept: String? = null, multiple: Boolea
         accept?.let { this.accept = it }
         onchange = {
           val files = input.files?.asList().orEmpty()
-          cont.resumeWith(Result.success(files))
+          cont.resume(files)
         }
       }
       body?.appendChild(input)
@@ -29,11 +32,16 @@ suspend fun Document.selectFileFromDisk(accept: String? = null, multiple: Boolea
       input.remove()
     }
 
-suspend fun File.readAsText(): String = suspendCoroutine { cont ->
+suspend fun File.readAsText() = suspendCoroutine { cont ->
   val reader = FileReader()
   reader.onload = {
-    val result = it.target.toString()
-    cont.resumeWith(Result.success(result))
+    val target = it.target as? FileReader
+    val result = target?.result as? ArrayBuffer
+    cont.resume(result)
+  }
+
+  reader.onerror = {
+    cont.resumeWithException(IllegalStateException("Error reading the file $name"))
   }
 
   reader.onprogress = {

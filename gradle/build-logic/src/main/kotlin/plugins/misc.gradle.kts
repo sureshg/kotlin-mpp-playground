@@ -23,7 +23,7 @@ plugins {
 spotless {
   java {
     // googleJavaFormat(libs.versions.google.javaformat.get())
-    palantirJavaFormat(libs.versions.palantir.javaformat.get())
+    palantirJavaFormat(libs.versions.palantir.javaformat.get()).formatJavadoc(true)
     target("**/*.java_disabled")
     targetExclude("**/build/**", "**/.gradle/**")
   }

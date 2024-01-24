@@ -1,41 +1,61 @@
 <configuration scan="true" scanPeriod="30 seconds">
+    <import class="ch.qos.logback.classic.encoder.JsonEncoder"/>
+    <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
+    <import class="ch.qos.logback.core.rolling.RollingFileAppender"/>
+    <import class="ch.qos.logback.core.FileAppender"/>
+    <import class="ch.qos.logback.core.ConsoleAppender"/>
+    <import class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"/>
 
     <property name="pattern"
               value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} %-5level %X{remoteHost} [%thread] %logger{16} - %msg%n%rEx"/>
 
-    <appender name="APP1" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="APP1" class="RollingFileAppender">
         <file>${LOG_DIR}/app1.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="TimeBasedRollingPolicy">
             <!-- weekly rollover -->
             <fileNamePattern>app1.%d{yyyy-ww}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
-        <encoder>
+        <encoder class="PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
         </encoder>
     </appender>
 
-    <appender name="APP2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <appender name="APP2" class="RollingFileAppender">
         <file>${LOG_DIR}/app2.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <rollingPolicy class="TimeBasedRollingPolicy">
             <fileNamePattern>app2.%d{yyyy-ww}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
-        <encoder>
+        <encoder class="PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
         </encoder>
     </appender>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
+    <appender name="JSON" class="RollingFileAppender">
+        <file>${LOG_DIR}/app.json</file>
+        <rollingPolicy class="TimeBasedRollingPolicy">
+            <fileNamePattern>app2.%d{yyyy-ww}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="JsonEncoder"/>
+    </appender>
+
+    <appender name="STDOUT" class="ConsoleAppender">
+        <encoder class="PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
+            <outputPatternAsHeader>true</outputPatternAsHeader>
         </encoder>
     </appender>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
+        <!-- appender-ref ref="JSON"/-->
     </root>
 
     <logger name="dev.suresh" level="INFO" additivity="false">

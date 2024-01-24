@@ -1,5 +1,7 @@
 package dev.suresh.routes
 
+import Arguments
+import FlameGraph
 import com.sun.management.HotSpotDiagnosticMXBean
 import dev.suresh.jvmRuntimeInfo
 import dev.suresh.plugins.debug
@@ -13,6 +15,7 @@ import java.lang.management.ManagementFactory
 import jdk.jfr.Configuration
 import jdk.jfr.FlightRecorder
 import jdk.jfr.consumer.RecordingStream
+import jfr2flame
 import kotlin.io.path.*
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
@@ -21,9 +24,6 @@ import kotlin.time.toJavaDuration
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import one.jfr.JfrReader
-import one.jfr.flame.Arguments
-import one.jfr.flame.FlameGraph
-import one.jfr.flame.jfr2flame
 
 private val DEBUG = ScopedValue.newInstance<Boolean>()
 

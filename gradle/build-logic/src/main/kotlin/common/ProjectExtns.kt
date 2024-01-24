@@ -498,7 +498,7 @@ fun KotlinNpmInstallTask.configureKotlinNpm() {
  * @param dependencyNotation The notation of the dependency to add.
  */
 context(Project)
-fun KotlinDependencyHandler.kspDependency(
+fun KotlinDependencyHandler.kspDep(
     targetName: String,
     dependencyNotation: Any,
 ) {

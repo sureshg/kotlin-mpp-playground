@@ -47,6 +47,7 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlin.redacted.annotations)
         api(libs.kotlinx.io.core)
         api(libs.kotlin.logging)
+        api(libs.kotlinx.html)
         // ToDO: Remove this once once Ktor get wasm support
         if (project.name != "wasm") {
           api(libs.ktor.client.core)
@@ -108,14 +109,14 @@ fun KotlinMultiplatformExtension.jvmTarget() {
       dependencies {
         // api(libs.kotlin.stdlib)
         api(libs.kotlinx.metadata.jvm)
-        api(libs.google.auto.annotations)
         api(libs.ktor.client.java)
         api(libs.kotlin.retry)
         api(libs.slf4j.api)
         api(libs.kotlinx.coroutines.slf4j)
         api(libs.jspecify)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
-        kspDependency("jvm", libs.ksp.auto.service)
+        api(libs.google.auto.annotations)
+        // kspDep("jvm", libs.ksp.auto.service)
       }
     }
 
@@ -164,13 +165,12 @@ fun KotlinMultiplatformExtension.jsTarget() {
   sourceSets {
     jsMain {
       dependencies {
-        api(libs.kotlinx.html)
         api(libs.ktor.client.js)
         api(kotlinw("browser"))
         api(kotlinw("css"))
         // implementation(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
-        // kspDependency("CommonMainMetadata", project(":meta:ksp:processor"))
-        // kspDependency("Js", project(":meta:ksp:processor"))
+        // kspDep("CommonMainMetadata", project(":meta:ksp:processor"))
+        // kspDep("Js", project(":meta:ksp:processor"))
       }
 
       // kotlin.srcDir("src/main/kotlin")
@@ -201,7 +201,8 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
                   }
             }
       }
-      // applyBinaryen()
+
+      applyBinaryen()
 
       runTask { sourceMaps = false }
 

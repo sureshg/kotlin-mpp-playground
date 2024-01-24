@@ -1,6 +1,6 @@
 package plugins
 
-import com.google.devtools.ksp.gradle.*
+import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 import java.util.jar.Attributes
 import org.gradle.internal.os.OperatingSystem
@@ -115,8 +115,11 @@ tasks {
           "Automatic-Module-Name" to project.group,
           "Built-By" to System.getProperty("user.name"),
           "Built-JDK" to System.getProperty("java.runtime.version"),
+          "Built-OS" to System.getProperty("os.name"),
+          "Created-By" to "Gradle ${gradle.gradleVersion}",
           Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
           Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
+          Attributes.Name.IMPLEMENTATION_VENDOR.toString() to project.group,
       )
     }
     duplicatesStrategy = DuplicatesStrategy.WARN
