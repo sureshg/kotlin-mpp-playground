@@ -306,6 +306,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.routes
 &nbsp;
+&nbsp;import Arguments
+&nbsp;import FlameGraph
 &nbsp;import com.sun.management.HotSpotDiagnosticMXBean
 &nbsp;import dev.suresh.jvmRuntimeInfo
 &nbsp;import dev.suresh.plugins.debug
@@ -319,6 +321,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import jdk.jfr.Configuration
 &nbsp;import jdk.jfr.FlightRecorder
 &nbsp;import jdk.jfr.consumer.RecordingStream
+&nbsp;import jfr2flame
 &nbsp;import kotlin.io.path.*
 &nbsp;import kotlin.time.Duration.Companion.milliseconds
 &nbsp;import kotlin.time.Duration.Companion.minutes
@@ -327,9 +330,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import kotlinx.coroutines.sync.Mutex
 &nbsp;import kotlinx.coroutines.sync.withLock
 &nbsp;import one.jfr.JfrReader
-&nbsp;import one.jfr.flame.Arguments
-&nbsp;import one.jfr.flame.FlameGraph
-&nbsp;import one.jfr.flame.jfr2flame
 &nbsp;
 <b class="nc">&nbsp;private val DEBUG = ScopedValue.newInstance&lt;Boolean&gt;()</b>
 &nbsp;
@@ -556,7 +556,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-01-24 00:17</div>
+    <div style="float:right;">generated on 2024-01-24 21:11</div>
 </div>
 </body>
 </html>
