@@ -49,6 +49,14 @@ $ docker run \
 $ ./gradlew :backend:jvm:jibDockerBuild
 $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
 
+# Run with AppCDS
+$ java -Xlog:class+load:file=/tmp/cds.log:uptime,level,tags,pid \
+       -XX:+AutoCreateSharedArchive \
+       -XX:SharedArchiveFile=/tmp/app.jsa \
+       -jar backend/jvm/build/libs/jvm-app.jar
+
+# cds-log-parser.jar --logFile=/tmp/cds.log
+
 # Kotlin JS
 $ ./gradlew :web:js:jsBrowserProductionRun -t
 $ ./gradlew kotlinUpgradeYarnLock
