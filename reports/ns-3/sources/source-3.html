@@ -308,39 +308,41 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-OS]  Operating System     : ${System.getProperty(&quot;os.name&quot;)}&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] CPU Arch             : ${System.getProperty(&quot;os.arch&quot;)}&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] Available Processors : ${rt.availableProcessors()}&quot;)
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] System CPU Usage     : ${osMxBean.cpuLoad}&quot;)</b>
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-CPU] JVM CPU Usage        : ${osMxBean.processCpuLoad}&quot;)</b>
-<b class="fc">&nbsp;  appendLine(</b>
+&nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] System CPU Usage     : ${osMxBean.cpuLoad}&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [JVM-CPU] JVM CPU Usage        : ${osMxBean.processCpuLoad}&quot;)
+&nbsp;  appendLine(
 <b class="fc">&nbsp;      &quot;✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}&quot;)</b>
 <b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Total Memory                  : ${osMxBean.totalMemorySize / unit} MiB&quot;)</b>
 <b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Free  Memory                  : ${osMxBean.freeMemorySize / unit} MiB&quot;)</b>
 <b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Heap Size (Committed) : ${heapSize / unit} MiB&quot;)</b>
 <b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Free memory in Heap   : ${heapFreeSize/unit} MiB&quot;)</b>
 <b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Currently used memory         : ${heapUsedSize/unit} MiB&quot;)</b>
-&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Max Heap Size (-Xmx)          : ${heapMaxSize/unit} MiB&quot;)
-&nbsp;
-&nbsp;  appendLine(&quot;✧✧✧ JVM Input Arguments ✧✧✧&quot;)
-<b class="pc">&nbsp;  appendLine(rtMxBean.inputArguments)</b>
-&nbsp;
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Max Heap Size (-Xmx)          : ${heapMaxSize/unit} MiB&quot;)</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ JVM Input Arguments ✧✧✧&quot;)</b>
+&nbsp;  appendLine(rtMxBean.inputArguments)
+&nbsp;  appendLine(&quot;✧✧✧ JVM Main class &amp; Args ✧✧✧&quot;)
+&nbsp;  appendLine(System.getProperty(&quot;sun.java.command&quot;))
+<b class="pc">&nbsp;</b>
 &nbsp;  appendLine(&quot;✧✧✧ Processes ✧✧✧&quot;)
 &nbsp;  val ps = ProcessHandle.allProcesses().sorted(ProcessHandle::compareTo).toList()
-<b class="nc">&nbsp;  if (debug) {</b>
-&nbsp;    ps.forEach { appendLine(&quot;${it.pid()} : ${it.info()}&quot;) }
+&nbsp;  if (debug) {
+<b class="nc">&nbsp;    ps.forEach { appendLine(&quot;${it.pid()} : ${it.info()}&quot;) }</b>
 &nbsp;  } else {
 &nbsp;    appendLine(&quot;Found ${ps.size} processes.&quot;)
-<b class="nc">&nbsp;  }</b>
-&nbsp;
+&nbsp;  }
+<b class="nc">&nbsp;</b>
 &nbsp;  appendLine(&quot;✧✧✧ Trust stores ✧✧✧&quot;)
 &nbsp;  val caCerts =
 &nbsp;      TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {
 &nbsp;        init(null as KeyStore?)
 &nbsp;        trustManagers.filterIsInstance&lt;X509TrustManager&gt;().flatMap { it.acceptedIssuers.toList() }
-<b class="nc">&nbsp;      }</b>
-&nbsp;  caCerts.forEach { appendLine(it.issuerX500Principal) }
+&nbsp;      }
+<b class="nc">&nbsp;  caCerts.forEach { appendLine(it.issuerX500Principal) }</b>
 &nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ Dns Resolution ✧✧✧&quot;)
-<b class="nc">&nbsp;  val dns = InetAddress.getAllByName(&quot;google.com&quot;).toList()</b>
-&nbsp;  dns.forEach { appendLine(it) }
+&nbsp;  val dns = InetAddress.getAllByName(&quot;google.com&quot;).toList()
+<b class="nc">&nbsp;  dns.forEach { appendLine(it) }</b>
 &nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ TimeZones ✧✧✧&quot;)
 &nbsp;  val tz = ZoneId.getAvailableZoneIds()
@@ -466,7 +468,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-01-25 05:39</div>
+    <div style="float:right;">generated on 2024-01-26 17:49</div>
 </div>
 </body>
 </html>

@@ -25,12 +25,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <h1>Coverage Summary for Class: BuildConfig (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -50,14 +47,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </tr>
 <tr>
   <td class="name">BuildConfig</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -84,7 +73,62 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">BuildConfig$Host</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.5%
+  </span>
+  <span class="absValue">
+    (17/19)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -102,39 +146,45 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;data object BuildConfig {
 &nbsp;
-&nbsp;   const val buildTimeEpochMillis = 1706161036652
+&nbsp;   const val buildTimeEpochMillis = 1706291219258
 &nbsp;
 <b class="fc">&nbsp;   val buildTimeUTC = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.UTC)</b>
 &nbsp;
 <b class="fc">&nbsp;   val buildTimeLocal = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.currentSystemDefault())</b>
 &nbsp;
-&nbsp;   const val buildUser = &quot;runner&quot;
+<b class="nc">&nbsp;   object Host {</b>
+&nbsp;         const val user = &quot;runner&quot;
 &nbsp;
-&nbsp;   const val buildOS = &quot;Linux 6.2.0-1018-azure-amd64&quot;
+&nbsp;         const val os = &quot;Linux 6.2.0-1018-azure-amd64&quot;
 &nbsp;
-&nbsp;   const val buildHost = &quot;fv-az695-513&quot;
+&nbsp;         const val name = &quot;fv-az1542-52&quot;
 &nbsp;
-&nbsp;   const val buildJdkVersion = &quot;23-ea+6-400&quot;
+&nbsp;         const val cpuCores = 4
 &nbsp;
-&nbsp;   const val buildJdkVendor = &quot;Oracle Corporation&quot;
+&nbsp;         const val memory = 16757784576
+&nbsp;
+&nbsp;         const val jdkVersion = &quot;23-ea+7-481&quot;
+&nbsp;
+&nbsp;         const val jdkVendor = &quot;Oracle Corporation&quot;
+&nbsp;   }
 &nbsp;
 &nbsp;   
 &nbsp;   const val name = &quot;kotlin-mpp-playground&quot;
 &nbsp;   
 &nbsp;   const val description = &quot;Kotlin Multiplatform Playground!&quot;
 &nbsp;   
-&nbsp;   const val version = &quot;0.10.0.38+1e98470&quot;
+&nbsp;   const val version = &quot;0.10.0.39+f1252d4&quot;
 &nbsp;   
 &nbsp;
 &nbsp;   
-&nbsp;   const val gitHash = &quot;&quot;&quot;1e98470066b9fdc96f116dab5904ee3e76c5a575&quot;&quot;&quot;
+&nbsp;   const val gitHash = &quot;&quot;&quot;f1252d4e46000e07322dd1b1175ea57b447c3c93&quot;&quot;&quot;
 &nbsp;   
-&nbsp;   const val gitMessage = &quot;&quot;&quot;chore: doc update for appcds&quot;&quot;&quot;
+&nbsp;   const val gitMessage = &quot;&quot;&quot;chore: buildconfig changes&quot;&quot;&quot;
 &nbsp;   
-&nbsp;   const val gitFullMessage = &quot;&quot;&quot;chore: doc update for appcds
+&nbsp;   const val gitFullMessage = &quot;&quot;&quot;chore: buildconfig changes
 &nbsp;&quot;&quot;&quot;
 &nbsp;   
-&nbsp;   const val gitTimestampEpochSecond = &quot;&quot;&quot;1706160885&quot;&quot;&quot;
+&nbsp;   const val gitTimestampEpochSecond = &quot;&quot;&quot;1706291049&quot;&quot;&quot;
 &nbsp;   
 &nbsp;   const val gitTags = &quot;&quot;&quot;&quot;&quot;&quot;
 &nbsp;   
@@ -146,7 +196,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val ajaltClikt = &quot;4.1.0&quot;
 &nbsp;   
-&nbsp;   const val ajaltColormath = &quot;3.3.3&quot;
+&nbsp;   const val ajaltColormath = &quot;3.4.0&quot;
 &nbsp;   
 &nbsp;   const val ajaltMordant = &quot;2.2.0&quot;
 &nbsp;   
@@ -270,7 +320,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val jspecify = &quot;0.3.0&quot;
 &nbsp;   
-&nbsp;   const val jte = &quot;3.1.6&quot;
+&nbsp;   const val jte = &quot;3.1.7&quot;
 &nbsp;   
 &nbsp;   const val junit = &quot;5.10.1&quot;
 &nbsp;   
@@ -424,7 +474,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   
 &nbsp;   const val tcpJavanioproxy = &quot;1.6&quot;
 &nbsp;   
-&nbsp;   const val testcontainers = &quot;1.19.3&quot;
+&nbsp;   const val testcontainers = &quot;1.19.4&quot;
 &nbsp;   
 &nbsp;   const val uriKmp = &quot;0.0.16&quot;
 &nbsp;   
@@ -458,7 +508,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-01-25 05:39</div>
+    <div style="float:right;">generated on 2024-01-26 17:49</div>
 </div>
 </body>
 </html>

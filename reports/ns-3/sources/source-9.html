@@ -251,6 +251,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ JVM Input Arguments ✧✧✧&quot;)
 &nbsp;  appendLine(rtMxBean.inputArguments)
+&nbsp;  appendLine(&quot;✧✧✧ JVM Main class &amp; Args ✧✧✧&quot;)
+&nbsp;  appendLine(System.getProperty(&quot;sun.java.command&quot;))
 &nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ Processes ✧✧✧&quot;)
 &nbsp;  val ps = ProcessHandle.allProcesses().sorted(ProcessHandle::compareTo).toList()
@@ -396,7 +398,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-01-25 05:39</div>
+    <div style="float:right;">generated on 2024-01-26 17:49</div>
 </div>
 </body>
 </html>
