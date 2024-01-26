@@ -3,6 +3,8 @@
 @import gg.jte.support.ForSupport
 @import kotlinx.datetime.*
 @import java.net.InetAddress
+@import com.sun.management.OperatingSystemMXBean
+@import java.lang.management.ManagementFactory
 
 @param className: String
 @param pkg: String
@@ -26,15 +28,21 @@ data object ${className} {
 
    val buildTimeLocal = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.currentSystemDefault())
 
-   const val buildUser = "${sysProp("user.name")}"
+   object Host {
+         const val user = "${sysProp("user.name")}"
 
-   const val buildOS = "${sysProp("os.name")} ${sysProp("os.version")}-${sysProp("os.arch")}"
+         const val os = "${sysProp("os.name")} ${sysProp("os.version")}-${sysProp("os.arch")}"
 
-   const val buildHost = "${InetAddress.getLocalHost().hostName}"
+         const val name = "${InetAddress.getLocalHost().hostName}"
 
-   const val buildJdkVersion = "${sysProp("java.runtime.version")}"
+         const val cpuCores = ${Runtime.getRuntime().availableProcessors()}
 
-   const val buildJdkVendor = "${sysProp("java.vendor")}"
+         const val memory = ${ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java).totalMemorySize}
+
+         const val jdkVersion = "${sysProp("java.runtime.version")}"
+
+         const val jdkVendor = "${sysProp("java.vendor")}"
+   }
 
    @for((k,v) in projectProps)
    const val ${k.camelCase} = "${v}"

@@ -99,6 +99,8 @@ fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
 
   appendLine("✧✧✧ JVM Input Arguments ✧✧✧")
   appendLine(rtMxBean.inputArguments)
+  appendLine("✧✧✧ JVM Main class & Args ✧✧✧")
+  appendLine(System.getProperty("sun.java.command"))
 
   appendLine("✧✧✧ Processes ✧✧✧")
   val ps = ProcessHandle.allProcesses().sorted(ProcessHandle::compareTo).toList()

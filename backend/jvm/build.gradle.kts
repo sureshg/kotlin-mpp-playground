@@ -55,6 +55,19 @@ jib {
       add("@/app/jib-classpath-file")
       add("@/app/jib-main-class-file")
     }
+    args = listOf(project.name, project.version.toString())
+    expandClasspathDependencies = true
+    labels =
+        mapOf(
+            "maintainer" to project.githubUser,
+            "org.opencontainers.image.authors" to project.githubUser,
+            "org.opencontainers.image.title" to project.name,
+            "org.opencontainers.image.description" to "🐳 ${project.description}",
+            "org.opencontainers.image.version" to project.version.toString(),
+            "org.opencontainers.image.vendor" to project.githubUser,
+            "org.opencontainers.image.url" to project.githubRepo,
+            "org.opencontainers.image.source" to project.githubRepo,
+            "org.opencontainers.image.licenses" to "Apache-2.0")
     mainClass = application.mainClass.get()
   }
 

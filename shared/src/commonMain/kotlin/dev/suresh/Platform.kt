@@ -3,6 +3,7 @@
 package dev.suresh
 
 import BuildConfig
+import BuildConfig.Host
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.jvm.JvmName
 import kotlinx.coroutines.CoroutineScope
@@ -49,12 +50,14 @@ interface Platform {
                   mapOf(
                       "time" to "$buildTimeLocal $tzShortId",
                       "version" to version,
-                      "os" to buildOS,
-                      "user" to buildUser,
-                      "host" to buildHost,
-                      "jdk" to buildJdkVersion,
+                      "os" to Host.os,
+                      "user" to Host.user,
+                      "host" to Host.name,
+                      "cpu-cores" to Host.cpuCores.toString(),
+                      "memory" to "${Host.memory/(1_000 * 1_000L)} MB",
+                      "jdk" to Host.jdkVersion,
                       "gradle" to gradle,
-                      "jdk-vendor" to buildJdkVendor,
+                      "jdk-vendor" to Host.jdkVendor,
                       "java-release-version" to java,
                       "kotlin-jvm-target" to kotlinJvmtarget),
               "runtime" to

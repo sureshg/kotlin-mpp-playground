@@ -193,7 +193,6 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
         // sourceMaps = true
         devServer =
             (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-              // open = mapOf("app" to mapOf("name" to "google chrome")),
               static =
                   (static ?: mutableListOf()).apply {
                     // Serve sources to debug inside browser
@@ -201,11 +200,9 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
                   }
             }
       }
-
       applyBinaryen()
 
       runTask { sourceMaps = false }
-
       testTask {
         enabled = true
         testLogging { configureLogEvents() }
