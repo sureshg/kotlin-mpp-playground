@@ -48,7 +48,9 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlinx.io.core)
         api(libs.kotlin.logging)
         api(libs.kotlinx.html)
-        // ToDO: Remove this once once Ktor get wasm support
+        api(libs.kotlin.bignum)
+        api(libs.kotlin.bignum.serialization)
+        // TODO: Remove this once Ktor get WASM support
         if (project.name != "wasm") {
           api(libs.ktor.client.core)
           api(libs.ktor.client.content.negotiation)

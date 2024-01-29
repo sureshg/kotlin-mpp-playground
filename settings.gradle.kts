@@ -24,6 +24,8 @@ include(":meta:compiler:plugin")
 
 include(":backend:jvm")
 
+include(":backend:data")
+
 // include(":compose:web")
 // include(":compose:desktop")
 

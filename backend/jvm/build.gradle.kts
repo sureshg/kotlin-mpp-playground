@@ -107,6 +107,7 @@ tasks {
 
 dependencies {
   implementation(projects.shared)
+  implementation(projects.backend.data)
   // Server dependencies
   implementation(libs.ktor.server.core)
   implementation(libs.ktor.server.netty)

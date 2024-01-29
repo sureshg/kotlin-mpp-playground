@@ -97,7 +97,7 @@ $ ./gradlew checkBuildLogicBestPractices
 # GitHub Actions lint
 $ actionlint
 
-# Disabled plugins for K2: Redacted, kotlin-power-assert
+# Disabled plugins for K2: Redacted, KSP Auto Service, kotlin-power-assert
 ```
 
 </details>
