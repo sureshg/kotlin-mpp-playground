@@ -70,6 +70,9 @@ val Project.isSnapshot
 val Project.runsOnCI
   get() = providers.environmentVariable("CI").getOrElse("false").toBoolean()
 
+val Project.composeReportsEnabled
+  get() = hasProperty("composeCompilerReports")
+
 /** Java version properties. */
 val Project.javaVersion
   get() = libs.versions.java.asProvider().map { JavaVersion.toVersion(it) }
@@ -334,14 +337,21 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   suppressWarnings = false
   verbose = true
   freeCompilerArgs.addAll(
-      "-Xcontext-receivers",
-      "-Xexpect-actual-classes",
-      "-Xallow-result-return-type",
-      // "-P",
-      // "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}",
-      // "-P",
-      // "plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=...dir...",
-  )
+      buildList {
+        add("-Xcontext-receivers")
+        add("-Xexpect-actual-classes")
+        add("-Xallow-result-return-type")
+        if (composeReportsEnabled) {
+          val reportPath = layout.buildDirectory.dir("compose_compiler").get().asFile.absolutePath
+          add("-P")
+          add(
+              "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
+          add("-P")
+          add("plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportPath")
+          add("-P")
+          add("plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$reportPath")
+        }
+      })
 }
 
 context(Project)

@@ -19,8 +19,8 @@ object GithubAction {
   /** Return workflow run's URL */
   val workflowRunURL
     get() =
-        when (isEnabled) {
-          true ->
+        when {
+          isEnabled ->
               "${Env.GITHUB_SERVER_URL}/${Env.GITHUB_REPOSITORY}/actions/runs/${Env.GITHUB_RUN_ID}"
           else -> null
         }
@@ -331,7 +331,7 @@ object GithubAction {
 
     /**
      * The name of the action currently running, or the id of a step. For example, for an action,
-     * __repo-owner_name-of-action-repo. GitHub removes special characters, and uses the name __run
+     * __repo-owner_name-of-action-repo.GitHub removes special characters, and uses the name __run
      * when the current step runs a script without an id. If you use the same script or action more
      * than once in the same job, the name will include a suffix that consists of the sequence
      * number preceded by an underscore. For example, the first script you run will have the name
@@ -343,8 +343,9 @@ object GithubAction {
 
     /**
      * The path where an action is located. This property is only supported in composite actions.
-     * You can use this path to access files located in the same repository as the action. For
-     * example, /home/runner/work/_actions/repo-owner/name-of-action-repo/v1.
+     * You can use this path to change directories to where the action is located and access other
+     * files in that same repository. For example,
+     * /home/runner/work/_actions/repo-owner/name-of-action-repo/v1.
      */
     val GITHUB_ACTION_PATH
       get() = getenv("GITHUB_ACTION_PATH")
@@ -367,6 +368,13 @@ object GithubAction {
     val GITHUB_ACTOR
       get() = getenv("GITHUB_ACTOR")
 
+    /**
+     * The account ID of the person or app that triggered the initial workflow run. For
+     * example, 1234567. Note that this is different from the actor username.
+     */
+    val GITHUB_ACTOR_ID
+      get() = getenv("GITHUB_ACTOR_ID")
+
     /** Returns the API URL. For example: https://api.github.com. */
     val GITHUB_API_URL
       get() = getenv("GITHUB_API_URL")
@@ -380,8 +388,8 @@ object GithubAction {
       get() = getenv("GITHUB_BASE_REF")
 
     /**
-     * The path on the runner to the file that sets environment variables from workflow commands.
-     * This file is unique to the current step and changes for each step in a job. For example,
+     * The path on the runner to the file that sets variables from workflow commands. This file is
+     * unique to the current step and changes for each step in a job. For example,
      * /home/runner/work/_temp/_runner_file_commands/set_env_87406d6e-4979-4d42-98e1-3dab1f48b13a.
      * For more information, see "Workflow commands for GitHub Actions."
      */
@@ -416,6 +424,16 @@ object GithubAction {
       get() = getenv("GITHUB_JOB")
 
     /**
+     * The path on the runner to the file that sets the current step's outputs from workflow
+     * commands. This file is unique to the current step and changes for each step in a job. For
+     * example,
+     * /home/runner/work/_temp/_runner_file_commands/set_output_a50ef383-b063-46d9-9157-57953fc9f3f0.
+     * For more information, see "Workflow commands for GitHub Actions."
+     */
+    val GITHUB_OUTPUT
+      get() = getenv("GITHUB_OUTPUT")
+
+    /**
      * The path on the runner to the file that sets system PATH variables from workflow commands.
      * This file is unique to the current step and changes for each step in a job. For example,
      * /home/runner/work/_temp/_runner_file_commands/add_path_899b9445-ad4a-400c-aa89-249f18632cf5.
@@ -439,12 +457,16 @@ object GithubAction {
 
     /**
      * The short ref name of the branch or tag that triggered the workflow run. This value matches
-     * the branch or tag name shown on GitHub. For example, feature-branch-1.
+     * the branch or tag name shown on GitHub. For example, feature-branch-1. For pull requests, the
+     * format is refs/pull/<pr_number>/merge.
      */
     val GITHUB_REF_NAME
       get() = getenv("GITHUB_REF_NAME")
 
-    /** true if branch protections are configured for the ref that triggered the workflow run. */
+    /**
+     * true if branch protections or rulesets are configured for the ref that triggered the workflow
+     * run.
+     */
     val GITHUB_REF_PROTECTED
       get() = getenv("GITHUB_REF_PROTECTED")
 
@@ -456,9 +478,23 @@ object GithubAction {
     val GITHUB_REPOSITORY
       get() = getenv("GITHUB_REPOSITORY")
 
+    /**
+     * The ID of the repository. For example, 123456789. Note that this is different from the
+     * repository name.
+     */
+    val GITHUB_REPOSITORY_ID
+      get() = getenv("GITHUB_REPOSITORY_ID")
+
     /** The repository owner's name. For example, octocat. */
     val GITHUB_REPOSITORY_OWNER
       get() = getenv("GITHUB_REPOSITORY_OWNER")
+
+    /**
+     * The repository owner's account ID. For example, 1234567. Note that this is different from the
+     * owner's name.
+     */
+    val GITHUB_REPOSITORY_OWNER_ID
+      get() = getenv("GITHUB_REPOSITORY_OWNER_ID")
 
     /** The number of days that workflow run logs and artifacts are kept. For example, 90. */
     val GITHUB_RETENTION_DAYS
@@ -502,11 +538,20 @@ object GithubAction {
     /**
      * The path on the runner to the file that contains job summaries from workflow commands. This
      * file is unique to the current step and changes for each step in a job. For example,
-     * /home/rob/runner/_layout/_work/_temp/_runner_file_commands/step_summary_1cb22d7f-5663-41a8-9ffc-13472605c76c.
+     * /home/runner/_layout/_work/_temp/_runner_file_commands/step_summary_1cb22d7f-5663-41a8-9ffc-13472605c76c.
      * For more information, see "Workflow commands for GitHub Actions."
      */
     val GITHUB_STEP_SUMMARY
       get() = getenv("GITHUB_STEP_SUMMARY")
+
+    /**
+     * The username of the user that initiated the workflow run. If the workflow run is a re-run,
+     * this value may differ from github.actor. Any workflow re-runs will use the privileges of
+     * github.actor, even if the actor initiating the re-run (github.triggering_actor) has different
+     * privileges.
+     */
+    val GITHUB_TRIGGERING_ACTOR
+      get() = getenv("GITHUB_TRIGGERING_ACTOR")
 
     /**
      * The name of the workflow. For example, My test workflow. If the workflow file doesn't specify
@@ -514,6 +559,17 @@ object GithubAction {
      */
     val GITHUB_WORKFLOW
       get() = getenv("GITHUB_WORKFLOW")
+
+    /**
+     * The ref path to the workflow. For example,
+     * octocat/hello-world/.github/workflows/my-workflow.yml@refs/heads/my_branch.
+     */
+    val GITHUB_WORKFLOW_REF
+      get() = getenv("GITHUB_WORKFLOW_REF")
+
+    /** The commit SHA for the workflow file. */
+    val GITHUB_WORKFLOW_SHA
+      get() = getenv("GITHUB_WORKFLOW_SHA")
 
     /**
      * The default working directory on the runner for steps, and the default location of your
@@ -537,7 +593,11 @@ object GithubAction {
     val RUNNER_DEBUG
       get() = getenv("RUNNER_DEBUG") == "1"
 
-    /** The name of the runner executing the job. For example, Hosted Agent */
+    /**
+     * The name of the runner executing the job. This name may not be unique in a workflow run as
+     * runners at the repository and organization levels could use the same name. For example,
+     * Hosted Agent
+     */
     val RUNNER_NAME
       get() = getenv("RUNNER_NAME")
 
@@ -558,7 +618,7 @@ object GithubAction {
 
     /**
      * The path to the directory containing preinstalled tools for GitHub-hosted runners. For more
-     * information, see "About GitHub-hosted runners". For example, C:\hostedtoolcache\windows
+     * information, see "Using GitHub-hosted runners". For example, C:\hostedtoolcache\windows
      */
     val RUNNER_TOOL_CACHE
       get() = getenv("RUNNER_TOOL_CACHE")
@@ -578,17 +638,17 @@ object GithubAction {
     val RUNNER_CONTEXT
       get() = getenv("RUNNER_CONTEXT")
 
-    /** OpenJDK 8 Home */
-    val JAVA_HOME_8_X64
-      get() = getenv("JAVA_HOME_8_X64")
-
-    /** OpenJDK 11 Home */
-    val JAVA_HOME_11_X64
-      get() = getenv("JAVA_HOME_11_X64")
-
-    /** OpenJDK 17 Home */
-    val JAVA_HOME_17_X64
-      get() = getenv("JAVA_HOME_17_X64")
+    fun javaHomeFor(version: Int = 21) =
+        when (version) {
+          8,
+          11,
+          17,
+          21 -> {
+            val arch = if (RUNNER_ARCH == "ARM64") RUNNER_ARCH.lowercase() else RUNNER_ARCH
+            getenv("JAVA_HOME_${version}_${arch}")
+          }
+          else -> throw IllegalArgumentException("Unsupported Java version: $version")
+        }
 
     /** Gets the value of the environment variable set in the Github action runner. */
     operator fun get(name: String): String? = getenv(name)
