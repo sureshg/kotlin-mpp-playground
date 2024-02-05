@@ -1,5 +1,3 @@
-import common.Platform
-
 pluginManagement { includeBuild("gradle/build-logic") }
 
 plugins { id("settings.repos") }
@@ -24,14 +22,12 @@ include(":meta:compiler:plugin")
 
 include(":backend:jvm")
 
-include(":backend:data")
+include(
+    ":backend:data")
 
+// include(":backend:native")
 // include(":compose:web")
 // include(":compose:desktop")
-
-if (Platform.isUnix) {
-  // include(":backend:native")
-}
 
 // includeBuild("misc/build") {
 //    dependencySubstitution {

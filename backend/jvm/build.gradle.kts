@@ -33,7 +33,12 @@ exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/sures
 jib {
   from {
     image = "openjdk:${javaVersion.get().majorVersion}-slim"
+
     platforms {
+      platform {
+        architecture = "arm64"
+        os = "linux"
+      }
       platform {
         architecture = "arm64"
         os = "linux"

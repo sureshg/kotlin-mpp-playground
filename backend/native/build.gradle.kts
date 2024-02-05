@@ -1,5 +1,6 @@
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
+import common.githubRepo
 import common.githubUser
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
@@ -37,10 +38,6 @@ jib {
         architecture = "amd64"
         os = "linux"
       }
-      // platform {
-      //   architecture = "arm64"
-      //   os = "linux"
-      // }
     }
   }
 
@@ -55,7 +52,23 @@ jib {
       properties = mapOf("imageName" to "app")
     }
   }
-  container { mainClass = "MainKt" }
+
+  container {
+    ports = listOf("8080", "9898")
+    args = listOf(project.name, project.version.toString())
+    labels =
+        mapOf(
+            "maintainer" to project.githubUser,
+            "org.opencontainers.image.authors" to project.githubUser,
+            "org.opencontainers.image.title" to project.name,
+            "org.opencontainers.image.description" to "🐳 ${project.description}",
+            "org.opencontainers.image.version" to project.version.toString(),
+            "org.opencontainers.image.vendor" to project.githubUser,
+            "org.opencontainers.image.url" to project.githubRepo,
+            "org.opencontainers.image.source" to project.githubRepo,
+            "org.opencontainers.image.licenses" to "Apache-2.0")
+    mainClass = "MainKt"
+  }
 }
 
 // Workaround for Jib

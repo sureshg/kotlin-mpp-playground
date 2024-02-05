@@ -12,16 +12,9 @@ object Repo {
 
   const val YARN = "https://github.com/yarnpkg/yarn/releases/download/"
 
-  const val KOTLIN_NATIVE = "https://download.jetbrains.com/kotlin/native/builds/"
-
   const val COMPOSE_MULTIPLATFORM_DEV = "https://maven.pkg.jetbrains.space/public/p/compose/dev"
 
   const val KOBWEB = "https://us-central1-maven.pkg.dev/varabyte-repos/public"
-
-  const val JETPACK_COMPOSE = "https://androidx.dev/storage/compose-compiler/repository"
-
-  const val KOTLIN_WASM_EXPERIMENTAL =
-      "https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental"
 
   /** The GitHub username */
   val GITHUB_USER = System.getenv("GITHUB_USER").orEmpty()

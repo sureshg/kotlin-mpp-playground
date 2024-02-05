@@ -170,42 +170,38 @@ $ actionlint
     'theme': 'base'
   }
 }%%
+
 graph LR
-    subgraph backend
-        jvm
-        native
-    end
-    subgraph web
-        js
-        wasm
-    end
-    subgraph compose
-        desktop
-        compose-web
-    end
-    subgraph dep-mgmt
-        bom
-        catalog
-    end
-    subgraph meta
-        compiler
-        ksp
-    end
-    subgraph compiler
-        compiler
-        plugin
-    end
-    subgraph ksp
-        ksp
-        processor
-    end
-    plugin --> shared
-    web --> shared
-    desktop --> shared
-    native --> shared
-    processor --> shared
-    jvm --> shared
-    jvm --> js
-    jvm --> wasm
-    benchmark --> shared
+  subgraph backend
+    jvm
+    data
+    native
+  end
+  subgraph meta
+    compiler
+    ksp
+  end
+  subgraph compiler
+    compiler
+    plugin
+  end
+  subgraph ksp
+    ksp
+    processor
+  end
+  subgraph web
+    wasm
+    js
+  end
+  plugin --> shared
+  wasm --> shared
+  benchmark --> shared
+  data --> shared
+  native --> shared
+  processor --> shared
+  jvm --> shared
+  jvm --> data
+  jvm --> js
+  jvm --> wasm
+  js --> shared
 ```

@@ -69,10 +69,7 @@ atomicfu {
 
 // kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
 
-redacted {
-  enabled = false
-  replacementString = "█"
-}
+redacted { replacementString = "█" }
 
 kover {
   // useJacoco()

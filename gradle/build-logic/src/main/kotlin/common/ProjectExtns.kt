@@ -251,7 +251,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-Djdk.lang.Process.launchMechanism=vfork",
             // "-Djdk.tls.maxCertificateChainLength=10",
             // "-Djdk.tls.maxHandshakeMessageSize=32768",
-            // "-Djdk.virtualThreadScheduler.parallelism=",
+            // "-Djdk.virtualThreadScheduler.parallelism=10",
             // "-Djdk.virtualThreadScheduler.maxPoolSize=256",
             // "--add-exports=java.management/sun.management=ALL-UNNAMED",
             // "--add-exports=jdk.attach/sun.tools.attach=ALL-UNNAMED",
@@ -418,7 +418,7 @@ fun LanguageSettingsBuilder.configureKotlinLang() {
   optIn("kotlin.ExperimentalMultiplatform")
   optIn("kotlin.js.ExperimentalJsExport")
   optIn("kotlin.experimental.ExperimentalNativeApi")
-  // optIn("kotlinx.cinterop.ExperimentalForeignApi")
+  optIn("kotlinx.cinterop.ExperimentalForeignApi")
   // optIn("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
 }
 

@@ -3,13 +3,6 @@
 ```bash
 # JVM
 $ ./gradlew :backend:jvm:run
-
-# Native
-$ ./gradlew :backend:native:macOsUniversalBinary
-
-# Container
-$ ./gradlew :backend:native:jibDockerBuild
-$ docker run -it --rm sureshg/native
 ```
 
 ### Misc

@@ -51,41 +51,12 @@ plugins {
 dependencyResolutionManagement {
   repositories {
     mavenCentral()
-    kotlinNative()
     nodeJS()
     yarn()
     composeMultiplatformDev()
     // sonatypeSnapshots()
   }
   repositoriesMode = RepositoriesMode.PREFER_SETTINGS
-}
-
-// Workaround for https://youtrack.jetbrains.com/issue/KT-51379
-fun RepositoryHandler.kotlinNative() {
-  exclusiveContent {
-    forRepository {
-      ivy(Repo.KOTLIN_NATIVE) {
-        name = "Kotlin Native"
-        patternLayout {
-          // Download URLs:
-          // https://download.jetbrains.com/kotlin/native/builds/releases/1.9.20/macos-aarch64/kotlin-native-prebuilt-macos-aarch64-1.9.20.tar.gz
-          listOf(
-                  "macos-x86_64",
-                  "macos-aarch64",
-                  "linux-x86_64",
-                  "windows-x86_64",
-              )
-              .forEach { os ->
-                listOf("dev", "releases").forEach { stage ->
-                  artifact("$stage/[revision]/$os/[artifact]-[revision].[ext]")
-                }
-              }
-        }
-        metadataSources { artifact() }
-      }
-    }
-    filter { includeModuleByRegex(".*", ".*kotlin-native-prebuilt.*") }
-  }
 }
 
 fun RepositoryHandler.nodeJS() {
