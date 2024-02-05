@@ -154,7 +154,7 @@ exposed-plugin                 = "0.2.1"
 jib-plugin                     = "3.4.0"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
-jetbrains-compose              = "1.6.0-beta01"
+jetbrains-compose              = "1.6.0-beta02"
 jetbrains-compose-compiler     = "1.5.7.1"
 kobweb                         = "0.15.2"
 
