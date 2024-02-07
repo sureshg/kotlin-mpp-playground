@@ -61,6 +61,14 @@ moduleGraphConfig {
 }
 
 tasks {
+
+  // Set up git hooks
+  register<Copy>("setUpGitHooks") {
+    group = "help"
+    from("$rootDir/gradle/.githooks")
+    into("$rootDir/.git/hooks")
+  }
+
   // Dependency version updates
   dependencyUpdates {
     checkConstraints = true

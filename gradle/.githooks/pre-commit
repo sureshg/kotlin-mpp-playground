@@ -1,0 +1,15 @@
+#!/bin/sh
+# Auto format Kotlin files in the staging area
+CHANGED_KT_FILES="$(git --no-pager diff --name-only --cached --diff-filter=ACMRTUXB --relative | grep '\.kt[s"]\?$')"
+if [ -z "${CHANGED_KT_FILES}" ]; then
+  echo "No Kotlin staged files."
+else
+  echo "There area some changed files. Running spotless..."
+  ./gradlew :spotlessApply
+  echo "Adding files to Git."
+  echo "${CHANGED_KT_FILES}" | while read -r file; do
+    if [ -f "$file" ]; then
+      git add "$file"
+    fi
+  done
+fi
