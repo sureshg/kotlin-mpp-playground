@@ -52,16 +52,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/12)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +60,23 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/33)
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/219)
   </span>
 </td>
 </tr>
@@ -101,14 +108,14 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
   </span>
 </td>
   </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
+  <tr>
+    <td class="name">AppKt$ssh$2$1$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -117,7 +124,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/16)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,7 +132,42 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/45)
+    (0/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/43)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/234)
   </span>
 </td>
 </tr>
@@ -138,43 +180,64 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;import BuildConfig
-&nbsp;import dev.suresh.config.SysConfig
-&nbsp;import dev.suresh.plugins.configureHTTP
-&nbsp;import dev.suresh.plugins.configureSecurity
-&nbsp;import dev.suresh.plugins.configureSerialization
-&nbsp;import dev.suresh.plugins.errorRoutes
-&nbsp;import dev.suresh.routes.adminRoutes
-&nbsp;import dev.suresh.routes.jvmFeatures
-&nbsp;import dev.suresh.routes.mgmtRoutes
-&nbsp;import dev.suresh.routes.webApp
-&nbsp;import io.ktor.server.application.*
-&nbsp;import io.ktor.server.netty.*
-&nbsp;import io.ktor.server.routing.*
-&nbsp;import io.ktor.util.logging.*
+&nbsp;import com.ionspin.kotlin.bignum.integer.BigInteger
+&nbsp;import com.pty4j.PtyProcessBuilder
+&nbsp;import java.util.concurrent.CountDownLatch
 &nbsp;
-&nbsp;fun main(args: Array&lt;String&gt;) =
-<b class="nc">&nbsp;    try {</b>
-<b class="nc">&nbsp;      SysConfig.initSysProperty()</b>
-<b class="nc">&nbsp;      println(&quot;Starting App ${BuildConfig.version}...&quot;)</b>
-<b class="nc">&nbsp;      EngineMain.main(args)</b>
-<b class="nc">&nbsp;    } catch (e: Throwable) {</b>
-<b class="nc">&nbsp;      val log = KtorSimpleLogger(&quot;main&quot;)</b>
-<b class="nc">&nbsp;      log.error(&quot;Failed to start the application: ${e.message}&quot;, e)</b>
-&nbsp;    }
+&nbsp;fun main() {
+<b class="nc">&nbsp;  println(&quot;Hello Kotlin Data! ${Greeting().greeting()}&quot;)</b>
 &nbsp;
-&nbsp;fun Application.module() {
-<b class="nc">&nbsp;  configureHTTP()</b>
-<b class="nc">&nbsp;  configureSerialization()</b>
-<b class="nc">&nbsp;  configureSecurity()</b>
-<b class="nc">&nbsp;  errorRoutes()</b>
-<b class="nc">&nbsp;  routing {</b>
-<b class="nc">&nbsp;    adminRoutes()</b>
-<b class="nc">&nbsp;    webApp()</b>
-<b class="nc">&nbsp;    jvmFeatures()</b>
-<b class="nc">&nbsp;    mgmtRoutes()</b>
+<b class="nc">&nbsp;  val b1 = BigInteger.parseString(&quot;12345678901234567890&quot;, 10)</b>
+<b class="nc">&nbsp;  val b2 = BigInteger.parseString(&quot;323456789012345678901&quot;, 10)</b>
+<b class="nc">&nbsp;  val s = b1 + b2</b>
+&nbsp;
+<b class="nc">&nbsp;  println(b1.bitLength())</b>
+<b class="nc">&nbsp;  println(b2.bitLength())</b>
+<b class="nc">&nbsp;  println(s)</b>
+<b class="nc">&nbsp;  println(s.bitLength())</b>
+<b class="nc">&nbsp;  ssh()</b>
+&nbsp;}
+&nbsp;
+&nbsp;fun ssh() {
+<b class="nc">&nbsp;  val ptyProcess =</b>
+<b class="nc">&nbsp;      PtyProcessBuilder().run {</b>
+<b class="nc">&nbsp;        setCommand(arrayOf(&quot;/bin/sh&quot;, &quot;-l&quot;))</b>
+<b class="nc">&nbsp;        setEnvironment(mapOf(&quot;TERM&quot; to &quot;xterm-256color&quot;))</b>
+<b class="nc">&nbsp;        setDirectory(System.getProperty(&quot;user.home&quot;))</b>
+<b class="nc">&nbsp;        start()</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;  println(&quot;PTY child process started ${ptyProcess.pid()}, size: ${ptyProcess.winSize}&quot;)</b>
+<b class="nc">&nbsp;  println(ptyProcess.isConsoleMode)</b>
+<b class="nc">&nbsp;  println(ptyProcess.isAlive)</b>
+<b class="nc">&nbsp;  val tos = ptyProcess.outputStream</b>
+<b class="nc">&nbsp;  val tis = ptyProcess.inputReader()</b>
+<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;  val size = 10</b>
+<b class="nc">&nbsp;  val latch = CountDownLatch(size)</b>
+&nbsp;
+<b class="nc">&nbsp;  Thread.ofVirtual().start {</b>
+<b class="nc">&nbsp;    runCatching {</b>
+<b class="nc">&nbsp;      for (i in 1..size) {</b>
+<b class="nc">&nbsp;        tos.write(&quot;echo $i&quot;.encodeToByteArray())</b>
+<b class="nc">&nbsp;        tos.write(byteArrayOf(ptyProcess.enterKeyCode))</b>
+<b class="nc">&nbsp;        tos.flush()</b>
+<b class="nc">&nbsp;        Thread.sleep(100)</b>
+<b class="nc">&nbsp;        latch.countDown()</b>
+&nbsp;      }
+<b class="nc">&nbsp;    }</b>
 &nbsp;  }
-&nbsp;  // CoroutineScope(coroutineContext).launch {}
+&nbsp;
+<b class="nc">&nbsp;  Thread.ofVirtual().start { runCatching { tis.forEachLine { println(it) } } }</b>
+&nbsp;
+<b class="nc">&nbsp;  latch.await()</b>
+<b class="nc">&nbsp;  tos.close()</b>
+<b class="nc">&nbsp;  tis.close()</b>
+&nbsp;
+&nbsp;  // wait until the PTY child process is terminated
+<b class="nc">&nbsp;  val result = ptyProcess.waitFor()</b>
+<b class="nc">&nbsp;  println(&quot;PTY child process terminated with exit code $result&quot;)</b>
+<b class="nc">&nbsp;  ptyProcess.destroyForcibly()</b>
 &nbsp;}
 </code>
 </pre>
@@ -199,7 +262,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-05 17:53</div>
+    <div style="float:right;">generated on 2024-02-07 03:21</div>
 </div>
 </body>
 </html>

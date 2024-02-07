@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > MyService</title>
+  <title>kotlin-mpp-playground Coverage Report > Person</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: MyService (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: Person (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">MyService</td>
+  <td class="name">Person</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,16 +63,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (0/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +71,23 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/56)
   </span>
 </td>
 </tr>
@@ -109,17 +116,17 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  NEPTUNE(13)
 &nbsp;}
 &nbsp;
-<b class="nc">&nbsp;data object MyService</b>
+&nbsp;data object MyService
 &nbsp;
 &nbsp;@JvmInline
-&nbsp;value class Person(private val name: String) {
+<b class="nc">&nbsp;value class Person(private val name: String) {</b>
 &nbsp;  init {
-&nbsp;    check(name.isNotBlank()) { &quot;Name should not be empty&quot; }
+<b class="nc">&nbsp;    check(name.isNotBlank()) { &quot;Name should not be empty&quot; }</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  constructor(firstName: String, lastName: String) : this(&quot;$firstName $lastName&quot;) {
-&nbsp;    check(firstName.isNotBlank()) { &quot;First name should not be empty&quot; }
-&nbsp;    check(lastName.isNotBlank()) { &quot;Last name should not be empty&quot; }
+<b class="nc">&nbsp;  constructor(firstName: String, lastName: String) : this(&quot;$firstName $lastName&quot;) {</b>
+<b class="nc">&nbsp;    check(firstName.isNotBlank()) { &quot;First name should not be empty&quot; }</b>
+<b class="nc">&nbsp;    check(lastName.isNotBlank()) { &quot;Last name should not be empty&quot; }</b>
 &nbsp;  }
 &nbsp;}
 &nbsp;
@@ -195,7 +202,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-05 17:53</div>
+    <div style="float:right;">generated on 2024-02-07 03:21</div>
 </div>
 </body>
 </html>
