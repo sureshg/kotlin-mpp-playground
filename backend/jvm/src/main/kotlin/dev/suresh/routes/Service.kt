@@ -1,7 +1,7 @@
 package dev.suresh.routes
 
+import dev.suresh.JFR
 import dev.suresh.lang.FFM
-import dev.suresh.lang.JFR
 import dev.suresh.lang.VThread
 import dev.suresh.log.RespLogger
 import io.github.oshai.kotlinlogging.KLogger
@@ -14,7 +14,7 @@ import java.io.Writer
 
 private val logger = KotlinLogging.logger {}
 
-fun Route.jvmFeatures() {
+fun Route.services() {
   get("/ffm") {
     call.respondLogStream {
       FFM.memoryLayout()
@@ -35,7 +35,7 @@ fun Route.jvmFeatures() {
 }
 
 suspend fun ApplicationCall.respondLogStream(
-    contentType: ContentType = ContentType.Text.Plain,
+    contentType: ContentType = ContentType.Text.EventStream,
     block: suspend context(KLogger) Writer.() -> Unit
 ) {
   respondTextWriter(contentType = contentType) {

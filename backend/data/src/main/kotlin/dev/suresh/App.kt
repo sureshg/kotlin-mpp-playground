@@ -59,3 +59,26 @@ fun ssh() {
   println("PTY child process terminated with exit code $result")
   ptyProcess.destroyForcibly()
 }
+
+// fun wasm() {
+//  val source =
+//      Source.newBuilder(
+//              "wasm",
+//              """
+//              (module
+//                (func (export "add") (param i32 i32) (result i32)
+//                  local.get 0
+//                  local.get 1
+//                  i32.add)
+//              )
+//              """
+//                  .trimIndent(),
+//              "test")
+//          .build()
+//  Context.newBuilder("wasm").build().use { ctx ->
+//    val wasm = ctx.eval(source)
+//    val add = wasm.getMember("add")
+//    val result = add.execute(10, 20)
+//    println(result)
+//  }
+// }

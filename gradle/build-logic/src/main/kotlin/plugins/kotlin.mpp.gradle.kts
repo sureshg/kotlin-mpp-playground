@@ -19,6 +19,7 @@ plugins {
   com.google.devtools.ksp
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
+  // kotlin("plugin.power-assert")
   // com.bnorm.power.`kotlin-power-assert`
   id("plugins.kotlin.docs")
   // org.gradle.kotlin.`kotlin-dsl`
@@ -67,7 +68,7 @@ atomicfu {
   jvmVariant = "VH"
 }
 
-// kotlinPowerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
+// powerAssert { functions = listOf("kotlin.require", "kotlin.check") }
 
 redacted { replacementString = "█" }
 

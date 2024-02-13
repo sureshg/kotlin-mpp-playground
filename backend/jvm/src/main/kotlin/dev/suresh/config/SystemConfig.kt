@@ -1,6 +1,8 @@
 package dev.suresh.config
 
 import io.ktor.server.config.*
+import kotlin.io.path.Path
+import kotlin.io.path.exists
 import kotlin.reflect.full.withNullability
 import kotlin.reflect.typeOf
 import kotlin.time.Duration
@@ -9,10 +11,11 @@ data object SysConfig {
 
   // Logback log directory
   val LOG_DIR by lazy {
-    val os = System.getProperty("os.name")
-    when {
-      os.startsWith("Mac", ignoreCase = true) -> System.getProperty("user.dir")
-      else -> System.getenv("LOG_DIR").orEmpty().ifBlank { "/log" }
+    System.getenv("LOG_DIR").orEmpty().ifBlank {
+      when {
+        Path("/log").exists() -> "/log"
+        else -> System.getProperty("user.dir")
+      }
     }
   }
 
@@ -20,7 +23,7 @@ data object SysConfig {
    * Initializes the system properties required for the application to run. This should be invoked
    * before the Engine main() method is called.
    */
-  fun initSysProperty() {
+  fun initSysProperties() {
     System.setProperty("jdk.tls.maxCertificateChainLength", "15")
     System.setProperty("jdk.includeInExceptions", "hostInfo")
     System.setProperty("LOG_DIR", LOG_DIR)

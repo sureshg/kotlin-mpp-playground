@@ -1,8 +1,6 @@
-package dev.suresh.lang
+package dev.suresh
 
 import BuildConfig
-import dev.suresh.addPeriodicJFREvent
-import dev.suresh.runOnVirtualThread
 import io.github.oshai.kotlinlogging.KLogger
 import java.time.Duration
 import java.util.concurrent.atomic.AtomicBoolean

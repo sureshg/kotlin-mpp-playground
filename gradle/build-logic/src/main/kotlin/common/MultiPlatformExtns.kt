@@ -185,6 +185,7 @@ fun KotlinMultiplatformExtension.jsTarget() {
 context(Project)
 fun KotlinMultiplatformExtension.wasmJsTarget() {
   wasmJs {
+    moduleName = "wasm-app"
     useEsModules()
     binaries.executable()
     browser {

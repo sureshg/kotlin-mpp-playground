@@ -1,29 +1,25 @@
 package dev.suresh.routes
 
-import Arguments
-import FlameGraph
-import com.sun.management.HotSpotDiagnosticMXBean
+import dev.suresh.Profiling
 import dev.suresh.jvmRuntimeInfo
 import dev.suresh.plugins.debug
 import io.ktor.http.*
+import io.ktor.http.ContentDisposition.Companion.Attachment
+import io.ktor.http.ContentDisposition.Parameters.FileName
+import io.ktor.http.HttpHeaders.ContentDisposition
+import io.ktor.server.application.*
 import io.ktor.server.http.content.*
+import io.ktor.server.plugins.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.websocket.*
+import io.ktor.websocket.*
+import io.ktor.websocket.Frame.*
 import java.io.File
-import java.io.PrintStream
-import java.lang.management.ManagementFactory
-import jdk.jfr.Configuration
-import jdk.jfr.FlightRecorder
-import jdk.jfr.consumer.RecordingStream
-import jfr2flame
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.io.path.*
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Duration.Companion.seconds
-import kotlin.time.toJavaDuration
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import one.jfr.JfrReader
 
 private val DEBUG = ScopedValue.newInstance<Boolean>()
 
@@ -147,78 +143,62 @@ fun Route.mgmtRoutes() {
   }
 
   get("/profile") {
-    when {
-      mutex.isLocked -> call.respondText("Profile operation is already running")
+    when (mutex.isLocked) {
+      true -> call.respondText("Profile operation is already running")
       else ->
           mutex.withLock {
-            val jfrPath = createTempFile("profile", ".jfr")
-            val flightRecorder = FlightRecorder.getFlightRecorder()
-            when (flightRecorder.recordings.isEmpty()) {
-              true ->
-                  RecordingStream(Configuration.getConfiguration("profile")).use {
-                    it.setMaxSize(100 * 1000 * 1000)
-                    it.setMaxAge(2.minutes.toJavaDuration())
-                    it.enable("jdk.CPULoad").withPeriod(100.milliseconds.toJavaDuration())
-                    it.enable("jdk.JavaMonitorEnter").withStackTrace()
-                    it.startAsync()
-                    Thread.sleep(5.seconds.inWholeMilliseconds)
-                    it.dump(jfrPath)
-                  }
-              else ->
-                  flightRecorder.takeSnapshot().use {
-                    if (it.size > 0) {
-                      it.maxSize = 50_000_000
-                      it.maxAge = 2.minutes.toJavaDuration()
-                      it.dump(jfrPath)
-                    }
-                  }
-            }
-
-            println("JFR file written to ${jfrPath.toAbsolutePath()}")
-            // RecordingFile.readAllEvents(jfrPath).isNotEmpty()
-
             when (call.request.queryParameters.contains("download")) {
               true -> {
+                val jfrPath = Profiling.jfrSnapshot()
                 call.response.header(
-                    HttpHeaders.ContentDisposition,
-                    ContentDisposition.Attachment.withParameter(
-                            ContentDisposition.Parameters.FileName, jfrPath.fileName.name)
-                        .toString())
+                    ContentDisposition,
+                    Attachment.withParameter(FileName, jfrPath.fileName.name).toString())
                 call.respondFile(jfrPath.toFile())
-              }
-              else -> {
-                val jfr2flame = jfr2flame(JfrReader(jfrPath.pathString), Arguments())
-                val flameGraph = FlameGraph()
-                jfr2flame.convert(flameGraph)
-
-                call.respondOutputStream(contentType = ContentType.Text.Html) {
-                  flameGraph.dump(PrintStream(this))
-                }
                 jfrPath.deleteIfExists()
               }
+              else ->
+                  call.respondText(contentType = ContentType.Text.Html) { Profiling.flameGraph() }
             }
           }
     }
   }
 
   get("/heapdump") {
-    val server = ManagementFactory.getPlatformMBeanServer()
-    val hotspot =
-        ManagementFactory.newPlatformMXBeanProxy(
-            server,
-            "com.sun.management:type=HotSpotDiagnostic",
-            HotSpotDiagnosticMXBean::class.java)
-
-    val heapDumpPath = createTempFile("heapdump", ".hprof")
-    heapDumpPath.deleteIfExists()
-    hotspot.dumpHeap(heapDumpPath.pathString, true)
+    val heapDumpPath = Profiling.heapdump()
     call.response.header(
-        HttpHeaders.ContentDisposition,
-        ContentDisposition.Attachment.withParameter(
-                ContentDisposition.Parameters.FileName, heapDumpPath.fileName.name)
-            .toString())
+        ContentDisposition,
+        Attachment.withParameter(FileName, heapDumpPath.fileName.name).toString())
     call.respondFile(heapDumpPath.toFile())
     heapDumpPath.deleteIfExists()
+  }
+
+  webSocketRaw("/term") {
+    val ip = call.request.origin.remoteHost
+    application.log.info("Got WebSocket connection from $ip")
+    send("Connected to server using WebSocket: $ip")
+    send("Type 'hi' to proceed")
+
+    // create concurrent hashset
+    val conn = ConcurrentHashMap.newKeySet<Frame>()
+    for (frame in incoming) {
+      when (frame) {
+        is Text -> {
+          val text = frame.readText()
+          application.log.info("Received $text")
+          when (text.lowercase()) {
+            "hi" -> send("Hello, $ip!")
+            "bye" -> {
+              send("Goodbye, $ip. Closing from client!")
+              close(CloseReason(CloseReason.Codes.NORMAL, "Client said BYE"))
+            }
+            else -> send("Sorry, I don't understand")
+          }
+        }
+        is Binary -> application.log.info("Binary frame ${frame.data.decodeToString()}")
+        is Close -> application.log.info("Connection closed from Server")
+        else -> application.log.info("Unknown frame ${frame.frameType}")
+      }
+    }
   }
 }
 

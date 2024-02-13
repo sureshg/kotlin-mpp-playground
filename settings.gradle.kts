@@ -22,8 +22,10 @@ include(":meta:compiler:plugin")
 
 include(":backend:jvm")
 
+include(":backend:data")
+
 include(
-    ":backend:data")
+    ":backend:profiling")
 
 // include(":backend:native")
 // include(":compose:web")

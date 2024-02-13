@@ -35,7 +35,7 @@ spotless {
     target("**/*.kt")
     trimTrailingWhitespace()
     endWithNewline()
-    targetExclude("**/build/**", "**/.gradle/**", "**/JvmFeature.kt")
+    targetExclude("**/build/**", "**/.gradle/**", "**/Service.kt")
     // licenseHeader(rootProject.file("gradle/license-header.txt"))
   }
 

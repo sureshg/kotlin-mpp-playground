@@ -13,6 +13,9 @@ import io.ktor.server.plugins.forwardedheaders.*
 import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
+import io.ktor.server.websocket.*
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.toJavaDuration
 import org.slf4j.event.Level
 
 fun Application.configureHTTP() {
@@ -48,6 +51,13 @@ fun Application.configureHTTP() {
     disableDefaultColors()
     filter { it.isApiRoute }
     mdc("remoteHost") { call -> call.request.origin.remoteHost }
+  }
+
+  install(WebSockets) {
+    pingPeriod = 15.seconds.toJavaDuration()
+    timeout = 15.seconds.toJavaDuration()
+    maxFrameSize = Long.MAX_VALUE
+    masking = false
   }
 }
 

@@ -6,10 +6,7 @@ import dev.suresh.plugins.configureHTTP
 import dev.suresh.plugins.configureSecurity
 import dev.suresh.plugins.configureSerialization
 import dev.suresh.plugins.errorRoutes
-import dev.suresh.routes.adminRoutes
-import dev.suresh.routes.jvmFeatures
-import dev.suresh.routes.mgmtRoutes
-import dev.suresh.routes.webApp
+import dev.suresh.routes.*
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
 import io.ktor.server.routing.*
@@ -17,7 +14,7 @@ import io.ktor.util.logging.*
 
 fun main(args: Array<String>) =
     try {
-      SysConfig.initSysProperty()
+      SysConfig.initSysProperties()
       println("Starting App ${BuildConfig.version}...")
       EngineMain.main(args)
     } catch (e: Throwable) {
@@ -33,7 +30,7 @@ fun Application.module() {
   routing {
     adminRoutes()
     webApp()
-    jvmFeatures()
+    services()
     mgmtRoutes()
   }
   // CoroutineScope(coroutineContext).launch {}

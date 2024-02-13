@@ -28,15 +28,15 @@ kotlinx-coroutines             = "1.8.0-RC2"
 kotlinx-datetime               = "0.5.0"
 kotlinx-serialization          = "1.6.2"
 kotlinx-collections-immutable  = "0.3.7"
-kotlinx-lincheck               = "2.24"
+kotlinx-lincheck               = "2.25"
 kotlinx-html                   = "0.11.0"
 kotlinx-benchmark              = "0.4.10"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.14.0"
-kotlin-wrappers                = "1.0.0-pre.694"
+kotlin-wrappers                = "1.0.0-pre.696"
 kotlin-redacted                = "1.8.0-alpha01"
-kotlinx-multik                 = "0.2.2"
+kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.12.1"
 kotlinx-kandy                  = "0.5.0"
 ktor                           = "3.0.0-beta-1"
@@ -73,7 +73,7 @@ google-javaformat              = "1.19.2"
 palantir-javaformat            = "2.40.0"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.10.0"
-graalvm                        = "23.0.1"
+graalvm                        = "23.1.2"
 jspecify                       = "0.3.0"
 rsocket                        = "0.15.4"
 jctools                        = "4.0.1"
@@ -99,28 +99,32 @@ postgresql                     = "42.7.1"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
 micrometer                     = "1.12.2"
-swagger-ui                     = "5.11.1"
+swagger-ui                     = "5.11.3"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
 shedlock                       = "5.7.0"
 sherlock                       = "0.4.19"
 expiringmap                    = "0.5.10"
 apache-commons-imaging         = "1.0-alpha3"
-testcontainers                 = "1.19.4"
+testcontainers                 = "1.19.5"
 sourceBuddy                    = "2.4.5"
 tcp-javanioproxy               = "1.6"
 konsist                        = "0.13.0"
-kubernetes-client              = "19.0.0"
+kubernetes-client              = "20.0.0"
 reflect-typeparamresolver      = "1.0.2"
 reflect-typetools              = "0.6.3"
 compose-icons                  = "1.1.0"
 compose-html-lazy-layouts      = "0.1.0"
 async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-8"
+openjdk-jmc                    = "8.3.1"
 airlift-aircompressor          = "0.25"
 airlift-security               = "240"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
+jfree-chart                    = "1.5.4"
+jfree-svg                      = "5.0.5"
+xchart                         = "3.8.7"
 
 # NPM Dependencies
 npm-highlightjs                = "11.8.0"
@@ -136,7 +140,7 @@ gradle-enterprise              = "3.16.2"
 nexus-publish                  = "2.0.0-rc-2"
 shadow                         = "8.1.1"
 spotless                       = "6.25.0"
-semver-plugin                  = "0.5.0-rc.6"
+semver-plugin                  = "0.5.0"
 taskinfo                       = "2.1.0"
 dependency-analysis            = "1.29.0"
 best-practices-plugin          = "0.10"
@@ -259,6 +263,7 @@ ktor-server-partial-content          = { module = "io.ktor:ktor-server-partial-c
 ktor-server-auto-head                = { module = "io.ktor:ktor-server-auto-head-response"                          , version.ref = "ktor"}
 ktor-server-forwarded-header         = { module = "io.ktor:ktor-server-forwarded-header"                            , version.ref = "ktor"}
 ktor-server-html                     = { module = "io.ktor:ktor-server-html-builder"                                , version.ref = "ktor"}
+ktor-server-websockets               = { module = "io.ktor:ktor-server-websockets"                                  , version.ref = "ktor"}
 ktor-serialization-json              = { module = "io.ktor:ktor-serialization-kotlinx-json"                         , version.ref = "ktor"}
 
 ktor-client-core                     = { module = "io.ktor:ktor-client-core"                                   , version.ref = "ktor"}
@@ -355,7 +360,9 @@ silk-foundation                      = { module = "com.varabyte.kobweb:silk-foun
 silk-icons-fa                        = { module = "com.varabyte.kobwebx:silk-icons-fa"                         , version.ref = "kobweb" }
 silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-icons-mdi"                        , version.ref = "kobweb" }
 
-graalvm-sdk                          = { module = "org.graalvm.sdk:graal-sdk"                                  , version.ref = "graalvm"}
+graal-sdk                            = { module = "org.graalvm.sdk:graal-sdk"                                  , version.ref = "graalvm"}
+graal-polyglot                       = { module = "org.graalvm.polyglot:polyglot"                              , version.ref = "graalvm"}
+graal-wasm                           = { module = "org.graalvm.polyglot:wasm"                                  , version.ref = "graalvm"}
 google-auto-annotations              = { module = "com.google.auto.service:auto-service-annotations"           , version.ref = "google-auto-service"}
 google-tink                          = { module = "com.google.crypto.tink:tink"                                , version.ref = "google-tink"}
 ksp-auto-service                     = { module = "dev.zacsweers.autoservice:auto-service-ksp"                 , version.ref = "ksp-auto-service"}
@@ -418,6 +425,13 @@ maven-archeologist                   = { module = "com.squareup.tools.build:mave
 
 ap-converter                         = { module = "tools.profiler:async-profiler-converter"                    , version.ref = "async-profiler" }
 ap-loader-all                        = { module = "me.bechberger:ap-loader-all"                                , version.ref = "ap-loader-all"}
+jmc-common                           = { module = "org.openjdk.jmc:common"                                     , version.ref = "openjdk-jmc"}
+jmc-jfr                              = { module = "org.openjdk.jmc:flightrecorder"                             , version.ref = "openjdk-jmc"}
+jmc-jfr-rules                        = { module = "org.openjdk.jmc:flightrecorder.rules"                       , version.ref = "openjdk-jmc"}
+jmc-jfr-rulesjdk                     = { module = "org.openjdk.jmc:flightrecorder.rules.jdk"                   , version.ref = "openjdk-jmc"}
+xchart                               = { module = "org.knowm.xchart:xchart"                                    , version.ref = "xchart"}
+jfree-chart                          = { module = "org.jfree:jfreechart"                                       , version.ref = "jfree-chart"}
+jfree-svg                            = { module = "org.jfree:org.jfree.svg"                                    , version.ref = "jfree-svg"}
 
 [bundles]
 ktor-server = [

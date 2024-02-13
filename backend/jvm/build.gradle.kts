@@ -113,6 +113,7 @@ tasks {
 dependencies {
   implementation(projects.shared)
   implementation(projects.backend.data)
+  implementation(projects.backend.profiling)
   // Server dependencies
   implementation(libs.ktor.server.core)
   implementation(libs.ktor.server.netty)
@@ -133,6 +134,7 @@ dependencies {
   implementation(libs.ktor.server.resources)
   implementation(libs.ktor.server.auth)
   implementation(libs.ktor.server.auth.jwt)
+  implementation(libs.ktor.server.websockets)
   implementation(libs.ktor.serialization.json)
 
   // Client dependencies
@@ -159,19 +161,11 @@ dependencies {
   implementation(libs.kotlinx.html)
   implementation(kotlinw("css"))
   implementation(libs.ktor.server.html)
-  //  constraints {
-  //    implementation(libs.kotlinx.html.get().module.toString()) {
-  //      version { strictly(libs.kotlinx.html.get().version.toString()) }
-  //      because("Ktor Issue!")
-  //    }
-  //  }
 
   // Monitoring
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
   implementation(libs.micrometer.prometheus)
-  implementation(libs.ap.converter)
-  // implementation(libs.ap.loader.all)
 
   // Logging
   implementation(libs.logback.classic)
@@ -190,4 +184,11 @@ dependencies {
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })
+
+  //  constraints {
+  //    implementation(libs.kotlinx.html.get().module.toString()) {
+  //      version { strictly(libs.kotlinx.html.get().version.toString()) }
+  //      because("Ktor Issue!")
+  //    }
+  //  }
 }

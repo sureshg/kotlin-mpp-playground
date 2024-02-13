@@ -8,14 +8,11 @@ kotlin.sourceSets {
 
   jvmMain {
     dependencies {
-      implementation(libs.pty4j.get().toString()) {
-        exclude(group = "org.jetbrains.pty4j", module = "purejavacomm")
-      }
-      implementation(fileTree("lib") { include("*.jar") })
-      // implementation(libs.graal.polyglot)
-      // implementation(libs.graal.wasm)
+      implementation(libs.jmc.common)
+      implementation(libs.jmc.jfr)
+      implementation(libs.ap.converter)
+      // implementation(libs.ap.loader.all)
     }
-
     kotlin.srcDir("src/main/kotlin")
     resources.srcDir("src/main/resources")
   }
