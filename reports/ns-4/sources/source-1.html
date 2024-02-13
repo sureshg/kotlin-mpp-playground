@@ -96,7 +96,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -104,7 +104,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/29)
+    (0/37)
   </span>
 </td>
   </tr>
@@ -131,7 +131,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/51)
+    (0/59)
   </span>
 </td>
 </tr>
@@ -153,6 +153,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.config
 &nbsp;
 &nbsp;import io.ktor.server.config.*
+&nbsp;import kotlin.io.path.Path
+&nbsp;import kotlin.io.path.exists
 &nbsp;import kotlin.reflect.full.withNullability
 &nbsp;import kotlin.reflect.typeOf
 &nbsp;import kotlin.time.Duration
@@ -161,10 +163,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;  // Logback log directory
 <b class="nc">&nbsp;  val LOG_DIR by lazy {</b>
-<b class="nc">&nbsp;    val os = System.getProperty(&quot;os.name&quot;)</b>
-<b class="nc">&nbsp;    when {</b>
-<b class="nc">&nbsp;      os.startsWith(&quot;Mac&quot;, ignoreCase = true) -&gt; System.getProperty(&quot;user.dir&quot;)</b>
-<b class="nc">&nbsp;      else -&gt; System.getenv(&quot;LOG_DIR&quot;).orEmpty().ifBlank { &quot;/log&quot; }</b>
+<b class="nc">&nbsp;    System.getenv(&quot;LOG_DIR&quot;).orEmpty().ifBlank {</b>
+<b class="nc">&nbsp;      when {</b>
+<b class="nc">&nbsp;        Path(&quot;/log&quot;).exists() -&gt; &quot;/log&quot;</b>
+<b class="nc">&nbsp;        else -&gt; System.getProperty(&quot;user.dir&quot;)</b>
+<b class="nc">&nbsp;      }</b>
 &nbsp;    }
 &nbsp;  }
 &nbsp;
@@ -172,7 +175,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   * Initializes the system properties required for the application to run. This should be invoked
 &nbsp;   * before the Engine main() method is called.
 &nbsp;   */
-&nbsp;  fun initSysProperty() {
+&nbsp;  fun initSysProperties() {
 <b class="nc">&nbsp;    System.setProperty(&quot;jdk.tls.maxCertificateChainLength&quot;, &quot;15&quot;)</b>
 <b class="nc">&nbsp;    System.setProperty(&quot;jdk.includeInExceptions&quot;, &quot;hostInfo&quot;)</b>
 <b class="nc">&nbsp;    System.setProperty(&quot;LOG_DIR&quot;, LOG_DIR)</b>
@@ -220,7 +223,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-07 03:21</div>
+    <div style="float:right;">generated on 2024-02-13 03:45</div>
 </div>
 </body>
 </html>

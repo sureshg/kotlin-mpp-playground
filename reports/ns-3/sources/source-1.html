@@ -212,7 +212,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;  println(ptyProcess.isAlive)</b>
 <b class="nc">&nbsp;  val tos = ptyProcess.outputStream</b>
 <b class="nc">&nbsp;  val tis = ptyProcess.inputReader()</b>
-<b class="nc">&nbsp;</b>
+&nbsp;
 <b class="nc">&nbsp;  val size = 10</b>
 <b class="nc">&nbsp;  val latch = CountDownLatch(size)</b>
 &nbsp;
@@ -239,6 +239,29 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;  println(&quot;PTY child process terminated with exit code $result&quot;)</b>
 <b class="nc">&nbsp;  ptyProcess.destroyForcibly()</b>
 &nbsp;}
+&nbsp;
+&nbsp;// fun wasm() {
+&nbsp;//  val source =
+&nbsp;//      Source.newBuilder(
+&nbsp;//              &quot;wasm&quot;,
+&nbsp;//              &quot;&quot;&quot;
+&nbsp;//              (module
+&nbsp;//                (func (export &quot;add&quot;) (param i32 i32) (result i32)
+&nbsp;//                  local.get 0
+&nbsp;//                  local.get 1
+&nbsp;//                  i32.add)
+&nbsp;//              )
+&nbsp;//              &quot;&quot;&quot;
+&nbsp;//                  .trimIndent(),
+&nbsp;//              &quot;test&quot;)
+&nbsp;//          .build()
+&nbsp;//  Context.newBuilder(&quot;wasm&quot;).build().use { ctx -&gt;
+&nbsp;//    val wasm = ctx.eval(source)
+&nbsp;//    val add = wasm.getMember(&quot;add&quot;)
+&nbsp;//    val result = add.execute(10, 20)
+&nbsp;//    println(result)
+&nbsp;//  }
+&nbsp;// }
 </code>
 </pre>
 </div>
@@ -262,7 +285,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-07 03:21</div>
+    <div style="float:right;">generated on 2024-02-13 03:45</div>
 </div>
 </body>
 </html>

@@ -102,6 +102,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.config
 &nbsp;
 &nbsp;import io.ktor.server.config.*
+&nbsp;import kotlin.io.path.Path
+&nbsp;import kotlin.io.path.exists
 &nbsp;import kotlin.reflect.full.withNullability
 &nbsp;import kotlin.reflect.typeOf
 &nbsp;import kotlin.time.Duration
@@ -110,10 +112,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;  // Logback log directory
 &nbsp;  val LOG_DIR by lazy {
-&nbsp;    val os = System.getProperty(&quot;os.name&quot;)
-&nbsp;    when {
-&nbsp;      os.startsWith(&quot;Mac&quot;, ignoreCase = true) -&gt; System.getProperty(&quot;user.dir&quot;)
-&nbsp;      else -&gt; System.getenv(&quot;LOG_DIR&quot;).orEmpty().ifBlank { &quot;/log&quot; }
+&nbsp;    System.getenv(&quot;LOG_DIR&quot;).orEmpty().ifBlank {
+&nbsp;      when {
+&nbsp;        Path(&quot;/log&quot;).exists() -&gt; &quot;/log&quot;
+&nbsp;        else -&gt; System.getProperty(&quot;user.dir&quot;)
+&nbsp;      }
 &nbsp;    }
 &nbsp;  }
 &nbsp;
@@ -121,7 +124,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;   * Initializes the system properties required for the application to run. This should be invoked
 &nbsp;   * before the Engine main() method is called.
 &nbsp;   */
-&nbsp;  fun initSysProperty() {
+&nbsp;  fun initSysProperties() {
 &nbsp;    System.setProperty(&quot;jdk.tls.maxCertificateChainLength&quot;, &quot;15&quot;)
 &nbsp;    System.setProperty(&quot;jdk.includeInExceptions&quot;, &quot;hostInfo&quot;)
 &nbsp;    System.setProperty(&quot;LOG_DIR&quot;, LOG_DIR)
@@ -169,7 +172,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-07 03:21</div>
+    <div style="float:right;">generated on 2024-02-13 03:45</div>
 </div>
 </body>
 </html>
