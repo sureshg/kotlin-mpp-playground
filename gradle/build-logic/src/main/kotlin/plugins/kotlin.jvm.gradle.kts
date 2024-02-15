@@ -15,9 +15,8 @@ plugins {
   `kotlinx-serialization`
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
-  // kotlin("plugin.power-assert")
-  // com.bnorm.power.`kotlin-power-assert`
   id("plugins.kotlin.docs")
+  // kotlin("plugin.power-assert")
   // `test-suite-base`
 }
 
@@ -68,7 +67,10 @@ ksp {
 
 // powerAssert { functions = listOf("kotlin.require", "kotlin.check") }
 
-redacted { replacementString = "█" }
+redacted {
+  enabled = true
+  replacementString = "█"
+}
 
 kover {
   // useJacoco()

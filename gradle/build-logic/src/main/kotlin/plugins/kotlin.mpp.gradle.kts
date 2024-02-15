@@ -19,9 +19,8 @@ plugins {
   com.google.devtools.ksp
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
-  // kotlin("plugin.power-assert")
-  // com.bnorm.power.`kotlin-power-assert`
   id("plugins.kotlin.docs")
+  // kotlin("plugin.power-assert")
   // org.gradle.kotlin.`kotlin-dsl`
   // app.cash.molecule
   // dev.mokkery
@@ -70,7 +69,10 @@ atomicfu {
 
 // powerAssert { functions = listOf("kotlin.require", "kotlin.check") }
 
-redacted { replacementString = "█" }
+redacted {
+  enabled = true
+  replacementString = "█"
+}
 
 kover {
   // useJacoco()

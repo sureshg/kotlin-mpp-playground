@@ -18,6 +18,8 @@ plugins {
   `kotlin-allopen`
 }
 
+group = libs.versions.group.get()
+
 description = "Kotlin benchmarking tests"
 
 allOpen { annotation("org.openjdk.jmh.annotations.State") }
@@ -27,6 +29,7 @@ benchmark {
     register("jvm") { configureJmh() }
     // register("desktop") { configureJmh() }
     // register("js")
+    // register("wasmJs")
   }
 
   configurations {

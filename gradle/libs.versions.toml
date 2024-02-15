@@ -1,19 +1,19 @@
 [versions]
 java                           = "23"
-kotlin                         = "2.0.0-Beta3"
-kotlin-ksp                     = "2.0.0-Beta3-1.0.17"
+kotlin                         = "2.0.0-Beta4"
+kotlin-ksp                     = "2.0.0-Beta4-1.0.17"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "1.9"
 kotlin-lang-version            = "2.0"
 gradle                         = "8.6"
-node-version                   = "21.6.0"
+node-version                   = "21.6.1"
 java-vendor                    = "Oracle"
 java-jvmArguments              = "--enable-preview"
 java-addModules                = "jdk.incubator.vector"
 
 # Additional metadata
-group                          = "dev.suresh"
+group                          = "dev.suresh.kmp"
 app-mainclass                  = "dev.suresh.AppKt"
 dev-name                       = "sureshg"
 dev-email                      = "email@suresh.dev"
@@ -24,7 +24,7 @@ org-url                        = "https://suresh.dev"
 kotlinx-kover                  = "0.7.5"
 kotlinx-io                     = "0.3.1"
 kotlinx-atomicfu               = "0.23.2"
-kotlinx-coroutines             = "1.8.0-RC2"
+kotlinx-coroutines             = "1.8.0"
 kotlinx-datetime               = "0.5.0"
 kotlinx-serialization          = "1.6.2"
 kotlinx-collections-immutable  = "0.3.7"
@@ -34,8 +34,8 @@ kotlinx-benchmark              = "0.4.10"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.14.0"
-kotlin-wrappers                = "1.0.0-pre.696"
-kotlin-redacted                = "1.8.0-alpha01"
+kotlin-wrappers                = "1.0.0-pre.697"
+kotlin-redacted                = "1.8.0-alpha02"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.12.1"
 kotlinx-kandy                  = "0.5.0"
@@ -63,7 +63,6 @@ koin                           = "3.4.1"
 kotest                         = "5.7.1"
 mockk                          = "1.13.9"
 mokkery                        = "1.9.22-1.3.2"
-powerassert                    = "0.13.0"
 slf4j                          = "2.1.0-alpha1"
 logback                        = "1.4.14"
 log4j                          = "3.0.0-alpha1"
@@ -98,12 +97,14 @@ exposed                        = "0.47.0"
 postgresql                     = "42.7.1"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
-micrometer                     = "1.12.2"
-swagger-ui                     = "5.11.3"
+micrometer                     = "1.12.3"
+swagger-ui                     = "5.11.6"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
 shedlock                       = "5.7.0"
 sherlock                       = "0.4.19"
+sqids                          = "0.1.0"
+tsid                           = "2.1.1"
 expiringmap                    = "0.5.10"
 apache-commons-imaging         = "1.0-alpha3"
 testcontainers                 = "1.19.5"
@@ -125,6 +126,7 @@ maven-archeologist             = "0.0.10"
 jfree-chart                    = "1.5.4"
 jfree-svg                      = "5.0.5"
 xchart                         = "3.8.7"
+okapibarcode                   = "0.4.1"
 
 # NPM Dependencies
 npm-highlightjs                = "11.8.0"
@@ -137,6 +139,7 @@ npm-jsjoda-tz                  = "2.18.0"
 benmanes                       = "0.51.0"
 foojay-resolver                = "0.8.0"
 gradle-enterprise              = "3.16.2"
+nmcp                           = "0.0.4"
 nexus-publish                  = "2.0.0-rc-2"
 shadow                         = "8.1.1"
 spotless                       = "6.25.0"
@@ -160,7 +163,7 @@ exposed-plugin                 = "0.2.1"
 jib-plugin                     = "3.4.0"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
-jetbrains-compose              = "1.6.0-beta02"
+jetbrains-compose              = "1.6.0-rc01"
 jetbrains-compose-compiler     = "1.5.8"
 kobweb                         = "0.15.2"
 
@@ -176,11 +179,11 @@ build-kotlin-dsl                     = { module = "org.gradle.kotlin:gradle-kotl
 build-dokka-plugin                   = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
 build-dokka-base                     = { module = "org.jetbrains.dokka:dokka-base"                                  , version.ref = "dokka"}
 build-kotlin-ksp                     = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
-build-powerassert                    = { module = "com.bnorm.power:kotlin-power-assert-gradle"                      , version.ref = "powerassert"}
 build-redacted-plugin                = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "kotlin-redacted"}
 build-benmanesversions               = { module = "com.github.ben-manes:gradle-versions-plugin"                     , version.ref = "benmanes"}
 build-gradle-enterprise              = { module = "com.gradle.enterprise:com.gradle.enterprise.gradle.plugin"       , version.ref = "gradle-enterprise" }
 build-jte-plugin                     = { module = "gg.jte:jte-gradle-plugin"                                        , version.ref = "jte"}
+build-nmcp-plugin                    = { module = "com.gradleup.nmcp:nmcp"                                          , version.ref = "nmcp"}
 build-nexus-plugin                   = { module = "io.github.gradle-nexus:publish-plugin"                           , version.ref = "nexus-publish"}
 build-spotless-plugin                = { module = "com.diffplug.spotless:spotless-plugin-gradle"                    , version.ref = "spotless"}
 build-shadow-plugin                  = { module = "com.github.johnrengelman:shadow"                                 , version.ref = "shadow"}
@@ -311,11 +314,15 @@ postgresql                           = { module = "org.postgresql:postgresql"   
 hikariCP                             = { module = "com.zaxxer:HikariCP"                                        , version.ref = "hikariCP"}
 micrometer-prometheus                = { module = "io.micrometer:micrometer-registry-prometheus"               , version.ref = "micrometer"}
 h2                                   = { module = "com.h2database:h2"                                          , version.ref = "h2"}
+shedlock-jdbc                        = { module = "net.javacrumbs.shedlock:shedlock-provider-jdbc"             , version.ref = "shedlock"}
+sherlock-sql                         = { module = "com.coditory.sherlock:sherlock-sql"                         , version.ref = "sherlock"}
 config4k                             = { module = "io.github.config4k:config4k"                                , version.ref = "config4k"}
 hoplite-hocon                        = { module = "com.sksamuel.hoplite:hoplite-hocon"                         , version.ref = "hoplite"}
 expiringmap                          = { module = "net.jodah:expiringmap"                                      , version.ref = "expiringmap"}
-shedlock-jdbc                        = { module = "net.javacrumbs.shedlock:shedlock-provider-jdbc"             , version.ref = "shedlock"}
-sherlock-sql                         = { module = "com.coditory.sherlock:sherlock-sql"                         , version.ref = "sherlock"}
+
+# Database IDs
+sqids                                = { module = "org.sqids:sqids"                                            , version.ref = "sqids"}
+tsid                                 = { module = "io.hypersistence:hypersistence-tsid"                        , version.ref = "tsid"}
 
 kotlin-retry                         = { module = "com.michael-bull.kotlin-retry:kotlin-retry"                 , version.ref = "kotlin-retry" }
 kotest-core                          = { module = "io.kotest:kotest-assertions-core"                           , version.ref = "kotest"}
@@ -429,53 +436,18 @@ jmc-common                           = { module = "org.openjdk.jmc:common"      
 jmc-jfr                              = { module = "org.openjdk.jmc:flightrecorder"                             , version.ref = "openjdk-jmc"}
 jmc-jfr-rules                        = { module = "org.openjdk.jmc:flightrecorder.rules"                       , version.ref = "openjdk-jmc"}
 jmc-jfr-rulesjdk                     = { module = "org.openjdk.jmc:flightrecorder.rules.jdk"                   , version.ref = "openjdk-jmc"}
+
+# Charts
 xchart                               = { module = "org.knowm.xchart:xchart"                                    , version.ref = "xchart"}
 jfree-chart                          = { module = "org.jfree:jfreechart"                                       , version.ref = "jfree-chart"}
 jfree-svg                            = { module = "org.jfree:org.jfree.svg"                                    , version.ref = "jfree-svg"}
 
-[bundles]
-ktor-server = [
-    "ktor-bom",
-    "ktor-server-core",
-    "ktor-server-content-negotiation",
-    "ktor-server-metrics-micrometer",
-    "ktor-server-call-logging",
-    "ktor-server-cors",
-    "ktor-server-swagger",
-    "ktor-server-openapi",
-    "ktor-server-http-redirect",
-    "ktor-server-compression",
-    "ktor-server-host-common",
-    "ktor-server-resources",
-    "ktor-server-auth",
-    "ktor-server-auth-jwt",
-    "ktor-server-netty",
-    "ktor-server-tests",
-    "ktor-server-default-headers",
-    "ktor-server-status-pages",
-    "ktor-server-auto-head",
-    "ktor-server-forwarded-header",
-    "ktor-serialization-json",
-    "ktor-cohort-core",
-    "ktor-cohort-hikari"
-]
+# Barcode/QrCode
+okapibarcode                         = { module = "uk.org.okapibarcode:okapibarcode"                           , version.ref = "okapibarcode"}
 
-ktor-client = [
-    "ktor-bom",
-    "ktor-client-core",
-    "ktor-client-cio",
-    "ktor-client-java",
-    "ktor-client-okhttp",
-    "ktor-client-jetty",
-    "ktor-client-websockets",
-    "ktor-client-content-negotiation",
-    "ktor-client-encoding",
-    "ktor-serialization-json",
-    "ktor-client-resources",
-    "ktor-client-auth",
-    "ktor-client-logging",
-    "ktor-client-mock"
-]
+[bundles]
+ktor-server = []
+ktor-client = []
 
 [plugins]
 kotlin-allopen                       = { id = "org.jetbrains.kotlin.plugin.allopen"                            , version.ref = "kotlin"}

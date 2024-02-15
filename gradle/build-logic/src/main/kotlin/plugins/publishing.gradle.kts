@@ -1,17 +1,17 @@
 package plugins
 
-import common.Repo
-import common.githubRepo
+import common.*
 import common.libs
 
 plugins {
   `maven-publish`
   signing
+  com.gradleup.nmcp
   // org.cyclonedx.bom
 }
 
 // Nexus plugin needs to apply to the root project only
-if (project == rootProject) {
+if (isRootProject) {
   apply(plugin = "io.github.gradle-nexus.publish-plugin")
 }
 
@@ -28,6 +28,18 @@ signing {
   useInMemoryPgpKeys(signingKey, signingPassword)
   // useGpgCmd()
   sign(publishing.publications)
+}
+
+nmcp {
+  when (isRootProject) {
+    true ->
+        publishAggregation {
+          username = findProperty("mavenCentralUser")?.toString() ?: Repo.MAVEN_CENTRAL_USER
+          password = findProperty("mavenCentralPassword")?.toString() ?: Repo.MAVEN_CENTRAL_PASSWORD
+          publicationType = "USER_MANAGED"
+        }
+    else -> publishAllPublications {}
+  }
 }
 
 publishing {
@@ -71,11 +83,12 @@ publishing {
         configurePom()
       }
 
-      // 2. Add executable jar as an artifact
-      if (project == rootProject) {
-        withType<MavenPublication>().configureEach {
-          // artifact(tasks.buildExecutable)
-        }
+      // Add an executable artifact if exists
+      withType<MavenPublication>().configureEach {
+        // val execJar = tasks.findByName("buildExecutable") as? ReallyExecJar
+        // if (execJar != null) {
+        //   artifact(execJar.execJarFile)
+        // }
       }
     }
 

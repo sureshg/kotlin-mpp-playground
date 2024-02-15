@@ -112,6 +112,9 @@ val Project.isKotlinJvmProject
 val Project.isKotlinJsProject
   get() = plugins.hasPlugin("org.jetbrains.kotlin.js")
 
+val Project.isRootProject
+  get() = this == rootProject
+
 val Project.githubUser
   get() = libs.versions.dev.name.get().lowercase()
 
@@ -154,6 +157,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:+UseStringDeduplication",
             "-XX:+UnlockExperimentalVMOptions",
             "-XX:MaxRAMPercentage=0.8",
+            "-XX:LockingMode=2",
             // "-XX:+UseEpsilonGC",
             // "-XX:+AlwaysPreTouch",
             // os+thread,gc+heap=trace,
@@ -340,7 +344,6 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       buildList {
         add("-Xcontext-receivers")
         add("-Xexpect-actual-classes")
-        add("-Xallow-result-return-type")
         if (composeReportsEnabled) {
           val reportPath = layout.buildDirectory.dir("compose_compiler").get().asFile.absolutePath
           add("-P")
@@ -388,7 +391,6 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
       "-Xjvm-default=all",
       "-Xassertions=jvm",
       "-Xcontext-receivers",
-      "-Xallow-result-return-type",
       "-Xemit-jvm-type-annotations",
       "-Xjspecify-annotations=strict",
       "-Xextended-compiler-checks",

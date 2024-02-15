@@ -18,7 +18,7 @@ plugins {
 }
 
 // The following plugins and config apply only to a root project.
-if (project == rootProject) {
+if (isRootProject) {
   apply(plugin = "org.hildan.github.changelog")
   apply(plugin = "org.jetbrains.kotlinx.binary-compatibility-validator")
 

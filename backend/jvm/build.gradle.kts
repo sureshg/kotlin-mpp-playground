@@ -4,12 +4,12 @@ import kotlin.io.path.Path
 
 plugins {
   plugins.kotlin.jvm
-  plugins.publishing
   application
   alias(libs.plugins.ktor)
   alias(libs.plugins.exposed)
   com.google.cloud.tools.jib
   gg.jte.gradle
+  plugins.publishing
 }
 
 description = "Ktor backend jvm application"
