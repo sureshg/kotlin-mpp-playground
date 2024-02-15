@@ -34,6 +34,16 @@ nmcp {
   when (isRootProject) {
     true ->
         publishAggregation {
+          project(":shared")
+          project(":web:js")
+          project(":web:wasm")
+          project(":dep-mgmt:bom")
+          project(":dep-mgmt:catalog")
+          project(":meta:ksp:processor")
+          project(":meta:compiler:plugin")
+          project(":backend:jvm")
+          project(":backend:data")
+          project(":backend:profiling")
           username = findProperty("mavenCentralUser")?.toString() ?: Repo.MAVEN_CENTRAL_USER
           password = findProperty("mavenCentralPassword")?.toString() ?: Repo.MAVEN_CENTRAL_PASSWORD
           publicationType = "USER_MANAGED"
