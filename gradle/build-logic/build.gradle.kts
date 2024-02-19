@@ -169,6 +169,7 @@ dependencies {
   implementation(libs.build.nexus.plugin)
   implementation(libs.build.spotless.plugin)
   implementation(libs.build.shadow.plugin)
+  implementation(libs.build.mrjar.plugin)
   implementation(libs.build.semver.plugin)
   implementation(libs.build.github.changelog)
   implementation(libs.build.benmanesversions)

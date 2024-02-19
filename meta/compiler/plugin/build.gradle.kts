@@ -3,6 +3,8 @@ plugins {
   plugins.publishing
 }
 
+description = "Kotlin Compiler Plugin"
+
 dependencies {
   implementation(projects.shared)
   compileOnly(kotlin("compiler-embeddable"))

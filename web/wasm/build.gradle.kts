@@ -7,24 +7,21 @@ plugins {
 
 description = "WasmJS Web application"
 
-val wasmResources by configurations.creating
+val sharedResources by configurations.creating
 
 tasks {
-  val copySharedWasmRes by
+  val copySharedResources by
       registering(Copy::class) {
-        from(wasmResources)
+        from(sharedResources)
         into(wasmJsProcessResources.get().destinationDir)
       }
-
-  wasmJsProcessResources { dependsOn(copySharedWasmRes) }
+  wasmJsProcessResources { dependsOn(copySharedResources) }
 }
 
 dependencies {
   commonMainImplementation(projects.shared)
-  // wasmResources(project(
-  //    path = projects.shared.dependencyProject.path,
-  //    configuration = "sharedWasmResources"
-  // ))
+  // sharedResources(project( path = projects.shared.dependencyProject.path, configuration =
+  // "sharedWasmResources"))
 }
 
 // Expose browser dist as configuration to be consumed by other projects

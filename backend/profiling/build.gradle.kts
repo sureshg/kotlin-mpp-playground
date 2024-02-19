@@ -3,6 +3,8 @@ plugins {
   plugins.publishing
 }
 
+description = "JVM Profiling and Monitoring!"
+
 kotlin.sourceSets {
   commonMain { dependencies { implementation(projects.shared) } }
 

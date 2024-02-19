@@ -84,7 +84,7 @@ tasks {
       // val logSvg = rootPath.resolve("docs/img/app-logo.svg").toString()
       customStyleSheets = listOf(file("logo-styles.css"))
       customAssets = listOf(file("app-logo.svg"))
-      footerMessage = "Copyright &copy; 2023 suresh.dev"
+      footerMessage = "Copyright &copy; 2024 suresh.dev"
     }
   }
 }

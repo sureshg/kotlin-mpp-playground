@@ -38,7 +38,7 @@ compose {
         packageName = project.name
         packageVersion = "1.0.0"
         description = "Compose desktop App!"
-        copyright = "© 2023 Suresh"
+        copyright = "© 2024 Suresh"
         vendor = "Suresh"
         modules(
             "java.instrument",

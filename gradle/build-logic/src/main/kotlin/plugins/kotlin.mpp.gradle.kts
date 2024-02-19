@@ -167,7 +167,7 @@ if (!nodeExtnConfigured.toBoolean()) {
       download = true
       version = libs.versions.node.version.get()
       nodeExtnConfigured = "true"
-      // nodeDownloadBaseUrl = "https://nodejs.org/download/v8-canary"
+      // nodeDownloadBaseUrl = "https://nodejs.org/download/nightly"
     }
   }
 

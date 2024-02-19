@@ -17,41 +17,6 @@ if (isRootProject) {
 
 group = libs.versions.group.get()
 
-val sonatypeUsername: String? by project
-val sonatypePassword: String? by project
-val signingKey: String? by project
-val signingPassword: String? by project
-
-signing {
-  isRequired = sonatypeUsername.isNullOrBlank().not() && sonatypePassword.isNullOrBlank().not()
-  // isPublish = gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
-  useInMemoryPgpKeys(signingKey, signingPassword)
-  // useGpgCmd()
-  sign(publishing.publications)
-}
-
-nmcp {
-  when (isRootProject) {
-    true ->
-        publishAggregation {
-          project(":shared")
-          project(":web:js")
-          project(":web:wasm")
-          project(":dep-mgmt:bom")
-          project(":dep-mgmt:catalog")
-          project(":meta:ksp:processor")
-          project(":meta:compiler:plugin")
-          project(":backend:jvm")
-          project(":backend:data")
-          project(":backend:profiling")
-          username = findProperty("mavenCentralUser")?.toString() ?: Repo.MAVEN_CENTRAL_USER
-          password = findProperty("mavenCentralPassword")?.toString() ?: Repo.MAVEN_CENTRAL_PASSWORD
-          publicationType = "USER_MANAGED"
-        }
-    else -> publishAllPublications {}
-  }
-}
-
 publishing {
   repositories {
     maven {
@@ -63,8 +28,9 @@ publishing {
       name = "GitHubPackages"
       url = uri(Repo.githubPackage(libs.versions.dev.name.get(), rootProject.name))
       credentials {
-        username = findProperty("gpr.user") as String? ?: Repo.GITHUB_USER
-        password = findProperty("gpr.key") as String? ?: Repo.GITHUB_TOKEN
+        // findProperty("githubActor")
+        username = githubActor.getOrElse("")
+        password = githubToken.getOrElse("")
       }
     }
   }
@@ -131,11 +97,28 @@ publishing {
   }
 }
 
+nmcp {
+  publishAllPublications {
+    username = mavenCentralUsername
+    password = mavenCentralPassword
+  }
+}
+
+signing {
+  isRequired = hasSigningKey
+  useInMemoryPgpKeys(signingKey.orNull, signingPassword.orNull)
+  sign(publishing.publications)
+  // useGpgCmd()
+  // isPublish = gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
+}
+
+// tasks { withType<Sign>().configureEach { isEnabled = hasSigningKey } }
+
 fun MavenPublication.configurePom() {
   pom {
     name = provider { "${project.group}:${project.name}" }
     description = provider { project.description }
-    inceptionYear = "2023"
+    inceptionYear = "2024"
     url = githubRepo
 
     developers {

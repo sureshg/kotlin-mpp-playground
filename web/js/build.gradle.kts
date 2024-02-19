@@ -7,22 +7,22 @@ plugins {
 
 description = "Kotlin/JS Web application"
 
-val jsResources by configurations.creating
+val sharedResources by configurations.creating
 
 tasks {
-  val copySharedJsRes by
+  val copySharedResources by
       registering(Copy::class) {
-        from(jsResources)
+        from(sharedResources)
         into(jsProcessResources.get().destinationDir)
       }
-  jsProcessResources { dependsOn(copySharedJsRes) }
+  jsProcessResources { dependsOn(copySharedResources) }
 }
 
 dependencies {
   commonMainImplementation(projects.shared)
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
   // Add shared JS resources to web
-  jsResources(
+  sharedResources(
       project(path = projects.shared.dependencyProject.path, configuration = "sharedJsResources"))
 
   // jsMainImplementation(npm("kotlin-playground", libs.versions.npm.kotlin.playground.get()))

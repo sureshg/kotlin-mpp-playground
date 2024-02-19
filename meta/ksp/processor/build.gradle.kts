@@ -3,6 +3,8 @@ plugins {
   plugins.publishing
 }
 
+description = "Kotlin KSP Processor"
+
 kotlin.sourceSets {
   commonMain { dependencies { implementation(projects.shared) } }
 

@@ -121,6 +121,31 @@ val Project.githubUser
 val Project.githubRepo
   get() = "https://github.com/${githubUser}/${rootProject.name}"
 
+/** For publishing to maven central and GitHub */
+val Project.signingKey
+  get() = providers.gradleProperty("signingKey")
+
+val Project.signingKeyId
+  get() = providers.gradleProperty("signingKeyId")
+
+val Project.signingPassword
+  get() = providers.gradleProperty("signingPassword")
+
+val Project.hasSigningKey
+  get() = signingKey.orNull.isNullOrBlank().not() && signingPassword.orNull.isNullOrBlank().not()
+
+val Project.mavenCentralUsername
+  get() = providers.gradleProperty("mavenCentralUsername")
+
+val Project.mavenCentralPassword
+  get() = providers.gradleProperty("mavenCentralPassword")
+
+val Project.githubActor
+  get() = providers.gradleProperty("githubActor")
+
+val Project.githubToken
+  get() = providers.gradleProperty("githubToken")
+
 /**
  * JVM arguments for running (**java**) or compiling (**javac**) java/kotlin build tasks.
  * - [Java-Command](https://docs.oracle.com/en/java/javase/20/docs/specs/man/java.html)

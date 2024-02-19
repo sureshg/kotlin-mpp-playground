@@ -16,17 +16,6 @@ object Repo {
 
   const val KOBWEB = "https://us-central1-maven.pkg.dev/varabyte-repos/public"
 
-  /** For publishing to [Maven Central](https://central.sonatype.com/account) */
-  val MAVEN_CENTRAL_USER = System.getenv("MAVEN_CENTRAL_USER").orEmpty()
-
-  val MAVEN_CENTRAL_PASSWORD = System.getenv("MAVEN_CENTRAL_PASSWORD").orEmpty()
-
-  /** The GitHub username */
-  val GITHUB_USER = System.getenv("GITHUB_USER").orEmpty()
-
-  /** GitHub personal access token */
-  val GITHUB_TOKEN = System.getenv("GITHUB_TOKEN").orEmpty()
-
   /**
    * Generates the URL for the GitHub package repository based on the owner and repository name.
    *

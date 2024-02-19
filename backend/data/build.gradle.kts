@@ -3,6 +3,8 @@ plugins {
   plugins.publishing
 }
 
+description = "Kotlin Data Science!"
+
 kotlin.sourceSets {
   commonMain { dependencies { implementation(projects.shared) } }
 
