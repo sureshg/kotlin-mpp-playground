@@ -106,7 +106,7 @@ nmcp {
 
 signing {
   isRequired = hasSigningKey
-  useInMemoryPgpKeys(signingKey.orNull, signingPassword.orNull)
+  useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
   sign(publishing.publications)
   // useGpgCmd()
   // isPublish = gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
