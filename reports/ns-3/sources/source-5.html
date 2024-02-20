@@ -65,18 +65,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.7%
+    93.4%
   </span>
   <span class="absValue">
-    (74/79)
+    (71/76)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96.6%
+    96.3%
   </span>
   <span class="absValue">
-    (543/562)
+    (541/562)
   </span>
 </td>
 </tr>
@@ -195,18 +195,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93%
+    92.8%
   </span>
   <span class="absValue">
-    (80/86)
+    (77/83)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96%
+    95.7%
   </span>
   <span class="absValue">
-    (605/630)
+    (603/630)
   </span>
 </td>
 </tr>
@@ -293,7 +293,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="pc">&nbsp;        var result = switch (name) {</b>
 <b class="fc">&nbsp;            case FullName(var first, var last) -&gt; STR.&quot;\{first}, \{last}&quot;;</b>
 <b class="nc">&nbsp;            default -&gt; &quot;Invalid name&quot;;</b>
-<b class="fc">&nbsp;        };</b>
+&nbsp;        };
 <b class="fc">&nbsp;        out.println(result);</b>
 &nbsp;
 <b class="pc">&nbsp;        if (name instanceof FullName&lt;?&gt; f) {</b>
@@ -361,7 +361,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="pc">&nbsp;                    case Lang(var name, var year) -&gt; name;</b>
 <b class="fc">&nbsp;                    case Result&lt;?&gt; r -&gt; STR.&quot;Result value: \{r.getOrNull()}&quot;;</b>
 <b class="nc">&nbsp;                    default -&gt; STR.&quot;Invalid serialized data. Expected Result, but found \{rec}&quot;;</b>
-<b class="fc">&nbsp;                };</b>
+&nbsp;                };
 &nbsp;
 <b class="fc">&nbsp;                out.println(STR.&quot;Deserialized record: \{rec}&quot;);</b>
 <b class="fc">&nbsp;                out.println(result);</b>
@@ -373,7 +373,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;                case null -&gt; &quot;n/a&quot;;</b>
 <b class="fc">&nbsp;                case Result.Success&lt;?&gt; s -&gt; s.toString();</b>
 <b class="fc">&nbsp;                case Result.Failure&lt;?&gt; f -&gt; f.toString();</b>
-<b class="fc">&nbsp;            };</b>
+&nbsp;            };
 <b class="fc">&nbsp;            out.println(STR.&quot;Result (Sealed Type): \{result}&quot;);</b>
 &nbsp;        });
 &nbsp;    }
@@ -415,7 +415,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-19 22:46</div>
+    <div style="float:right;">generated on 2024-02-20 00:15</div>
 </div>
 </body>
 </html>
