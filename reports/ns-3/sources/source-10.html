@@ -116,28 +116,28 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import kotlinx.coroutines.asCoroutineDispatcher
 &nbsp;import org.slf4j.LoggerFactory
 &nbsp;
-&nbsp;actual val platform: Platform = JvmPlatform
-<b class="nc">&nbsp;</b>
+<b class="nc">&nbsp;actual val platform: Platform = JvmPlatform</b>
+&nbsp;
 &nbsp;object JvmPlatform : Platform {
+<b class="nc">&nbsp;</b>
+&nbsp;  private val log = LoggerFactory.getLogger(this::class.java)
 &nbsp;
-<b class="nc">&nbsp;  private val log = LoggerFactory.getLogger(this::class.java)</b>
+<b class="fc">&nbsp;  override val name: String = &quot;JVM&quot;</b>
 &nbsp;
-&nbsp;  override val name: String = &quot;JVM&quot;
-<b class="fc">&nbsp;</b>
 &nbsp;  override fun env(key: String, def: String?): String? = System.getenv(key) ?: def
 &nbsp;
-&nbsp;  override fun sysProp(key: String, def: String?): String? = System.getProperty(key, def)
+<b class="fc">&nbsp;  override fun sysProp(key: String, def: String?): String? = System.getProperty(key, def)</b>
 <b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;  override val tzShortId: String</b>
 <b class="fc">&nbsp;    get() {</b>
-<b class="fc">&nbsp;      // ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)</b>
+&nbsp;      // ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)
 &nbsp;      return DateTimeFormatter.ofPattern(&quot;zzz&quot;)
 &nbsp;          .withLocale(Locale.ENGLISH)
-&nbsp;          .withZone(ZoneId.systemDefault())
-<b class="fc">&nbsp;          .format(Instant.now())</b>
+<b class="fc">&nbsp;          .withZone(ZoneId.systemDefault())</b>
+&nbsp;          .format(Instant.now())
 &nbsp;    }
 &nbsp;  /** A coroutine dispatcher that executes tasks on Virtual Threads. */
-&nbsp;  override val vtDispatcher by lazy {
+<b class="fc">&nbsp;  override val vtDispatcher by lazy {</b>
 <b class="fc">&nbsp;    log.info(&quot;Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...&quot;)</b>
 <b class="fc">&nbsp;    Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()</b>
 <b class="fc">&nbsp;  }</b>
@@ -159,23 +159,23 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="fc">&nbsp;            mapOf(</b>
 <b class="fc">&nbsp;                &quot;name&quot; to sysProp(&quot;os.name&quot;),</b>
 <b class="fc">&nbsp;                &quot;version&quot; to sysProp(&quot;os.version&quot;),</b>
-<b class="fc">&nbsp;                &quot;arch&quot; to sysProp(&quot;os.arch&quot;),</b>
-&nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),
+&nbsp;                &quot;arch&quot; to sysProp(&quot;os.arch&quot;),
+<b class="fc">&nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),</b>
 <b class="fc">&nbsp;            )</b>
 <b class="fc">&nbsp;}</b>
 <b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {</b>
 <b class="fc">&nbsp;  val rt = Runtime.getRuntime()</b>
 <b class="fc">&nbsp;  val unit = 1024 * 1024L</b>
-<b class="fc">&nbsp;  val heapSize = rt.totalMemory()</b>
+&nbsp;  val heapSize = rt.totalMemory()
 &nbsp;  val heapFreeSize = rt.freeMemory()
-&nbsp;  val heapUsedSize = heapSize - heapFreeSize
-<b class="nc">&nbsp;  val heapMaxSize = rt.maxMemory()</b>
-&nbsp;  val osMxBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java)
-<b class="fc">&nbsp;  val rtMxBean = ManagementFactory.getRuntimeMXBean()</b>
+<b class="nc">&nbsp;  val heapUsedSize = heapSize - heapFreeSize</b>
+&nbsp;  val heapMaxSize = rt.maxMemory()
+<b class="fc">&nbsp;  val osMxBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java)</b>
+&nbsp;  val rtMxBean = ManagementFactory.getRuntimeMXBean()
 &nbsp;
-&nbsp;  appendLine(&quot;✧✧✧ Time: ${LocalDateTime.now()}&quot;)
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM] JVM Version              : ${System.getProperty(&quot;java.version&quot;)}&quot;)</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ Time: ${LocalDateTime.now()}&quot;)</b>
+&nbsp;  appendLine(&quot;✧✧✧ [JVM] JVM Version              : ${System.getProperty(&quot;java.version&quot;)}&quot;)
 &nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-OS]  Operating System     : ${System.getProperty(&quot;os.name&quot;)}&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] CPU Arch             : ${System.getProperty(&quot;os.arch&quot;)}&quot;)
@@ -340,7 +340,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-20 05:53</div>
+    <div style="float:right;">generated on 2024-02-20 05:59</div>
 </div>
 </body>
 </html>
