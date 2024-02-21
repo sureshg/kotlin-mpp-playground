@@ -10,18 +10,6 @@ plugins {
 
 kobweb { app { index { this.description.set("Kobweb!") } } }
 
-tasks {
-  jsProcessResources {
-    inputs.property("version", project.version.toString())
-    filesMatching("manifest.json") {
-      expand(
-          "name" to project.name,
-          "version" to project.version.toString().substringBeforeLast("."),
-      )
-    }
-  }
-}
-
 kotlin {
   sourceSets {
     commonMain {
@@ -46,5 +34,18 @@ kotlin {
 
 compose {
   kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
+  // kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
   kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
+}
+
+tasks {
+  jsProcessResources {
+    inputs.property("version", project.version.toString())
+    filesMatching("manifest.json") {
+      expand(
+          "name" to project.name,
+          "version" to project.version.toString().substringBeforeLast("."),
+      )
+    }
+  }
 }

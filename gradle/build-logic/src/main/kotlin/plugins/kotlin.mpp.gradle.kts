@@ -36,7 +36,8 @@ kotlin {
       // allNativeTargets()
     }
     "js",
-    "chrome" -> jsTarget()
+    "chrome",
+    "web" -> jsTarget()
     "wasm" -> wasmJsTarget()
     "native" -> allNativeTargets()
     else -> jvmTarget()

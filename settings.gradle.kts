@@ -24,12 +24,17 @@ include(":backend:jvm")
 
 include(":backend:data")
 
-include(
-    ":backend:profiling")
+include(":backend:profiling")
 
-// include(":backend:native")
 // include(":compose:web")
+
 // include(":compose:desktop")
+
+val nativeBuild: String? by settings
+
+if (nativeBuild.toBoolean()) {
+  include(":backend:native")
+}
 
 // includeBuild("misc/build") {
 //    dependencySubstitution {

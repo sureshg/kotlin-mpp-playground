@@ -12,12 +12,12 @@ plugins {
 dependencies {
   commonMainImplementation(projects.shared)
   jvmMainImplementation(compose.desktop.currentOs)
-  // jvmMainImplementation(compose.desktop.common)
-  // jvmMainImplementation(compose.components.resources)
+  jvmMainImplementation(compose.components.resources)
 }
 
 compose {
   kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
+  // kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
   kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
 
   platformTypes = platformTypes.get() - KotlinPlatformType.native

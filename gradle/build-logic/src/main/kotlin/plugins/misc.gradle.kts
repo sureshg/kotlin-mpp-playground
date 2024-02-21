@@ -49,6 +49,7 @@ spotless {
 
   format("misc") {
     target("**/*.md", "**/.gitignore", "**/.kte")
+    targetExclude("**/build/**", "**/.gradle/**")
     trimTrailingWhitespace()
     indentWithSpaces(2)
     endWithNewline()
