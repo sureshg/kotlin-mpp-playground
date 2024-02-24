@@ -6,13 +6,9 @@ object Repo {
 
   const val SONATYPE_SNAPSHOT = "https://oss.sonatype.org/content/repositories/snapshots/"
 
-  const val SONATYPE_SNAPSHOT_01 = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-
   const val NODEJS = "https://nodejs.org/dist/"
 
   const val YARN = "https://github.com/yarnpkg/yarn/releases/download/"
-
-  const val COMPOSE_MULTIPLATFORM_DEV = "https://maven.pkg.jetbrains.space/public/p/compose/dev"
 
   const val KOBWEB = "https://us-central1-maven.pkg.dev/varabyte-repos/public"
 

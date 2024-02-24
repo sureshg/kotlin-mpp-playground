@@ -30,7 +30,7 @@ pluginManagement {
   repositories {
     mavenCentral()
     gradlePluginPortal()
-    composeMultiplatformDev()
+    kobWeb()
   }
 }
 
@@ -51,12 +51,12 @@ plugins {
 dependencyResolutionManagement {
   repositories {
     mavenCentral()
-    nodeJS()
-    yarn()
-    composeMultiplatformDev()
-    // sonatypeSnapshots()
+    kobWeb()
+    google()
   }
-  repositoriesMode = RepositoriesMode.PREFER_SETTINGS
+
+  // Enable back after the KMP Node.js repo fix.
+  // repositoriesMode = RepositoriesMode.PREFER_SETTINGS
 }
 
 fun RepositoryHandler.nodeJS() {
@@ -87,20 +87,15 @@ fun RepositoryHandler.yarn() {
   }
 }
 
-fun RepositoryHandler.sonatypeSnapshots() {
+fun RepositoryHandler.mavenSnapshot() {
   maven(url = Repo.SONATYPE_SNAPSHOT) { mavenContent { snapshotsOnly() } }
-  maven(url = Repo.SONATYPE_SNAPSHOT_01) { mavenContent { snapshotsOnly() } }
 }
 
 /**
- * [Compose-Multiplatform-Compiler](https://github.com/JetBrains/compose-multiplatform/blob/master/VERSIONING.md#using-the-compose-multiplatform-compiler)
+ * [Compose-Multiplatform-Compiler](https://github.com/JetBrains/kotlin-multiplatform-dev-docs/blob/master/topics/compose/compose-compatibility-and-versioning.md)
  */
 @Suppress("UnstableApiUsage")
-fun RepositoryHandler.composeMultiplatformDev() {
-  maven(url = Repo.COMPOSE_MULTIPLATFORM_DEV) {
-    name = "Jetbrains Compose Multiplatform Development Repository"
-    content { includeGroupAndSubgroups("org.jetbrains.compose") }
-  }
+fun RepositoryHandler.kobWeb() {
   maven(url = Repo.KOBWEB) {
     name = "KobWeb Repo"
     content { includeGroupAndSubgroups("com.varabyte") }

@@ -33,7 +33,7 @@ kotlin {
       jvmTarget()
       jsTarget()
       // wasmJsTarget()
-      // allNativeTargets()
+      allNativeTargets()
     }
     "js",
     "chrome",
@@ -152,28 +152,19 @@ tasks {
   }
 }
 
-dependencies {
-  // add("kspJvm", project(":ksp-processor"))
-}
+rootProject.plugins.run {
+  var nodeExtnConfigured: String? by rootProject.extra
 
-// A workaround to initialize Node.js and Yarn extensions only once in a multi-module
-// project by setting extra properties on a root project from a subproject.
-// https://docs.gradle.org/current/userguide/kotlin_dsl.html#extra_properties
-var nodeExtnConfigured: String? by rootProject.extra
-
-if (!nodeExtnConfigured.toBoolean()) {
-  // https://kotlinlang.org/docs/js-project-setup.html#use-pre-installed-node-js
-  rootProject.plugins.withType<NodeJsRootPlugin> {
+  withType<NodeJsRootPlugin> {
     rootProject.extensions.configure<NodeJsRootExtension> {
       download = true
-      version = libs.versions.node.version.get()
       nodeExtnConfigured = "true"
+      // version = libs.versions.node.version.get()
       // nodeDownloadBaseUrl = "https://nodejs.org/download/nightly"
     }
   }
 
-  // https://kotlinlang.org/docs/js-project-setup.html#version-locking-via-kotlin-js-store
-  rootProject.plugins.withType<YarnPlugin> {
+  withType<YarnPlugin> {
     rootProject.extensions.configure<YarnRootExtension> {
       download = true
       lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
@@ -182,4 +173,8 @@ if (!nodeExtnConfigured.toBoolean()) {
       nodeExtnConfigured = "true"
     }
   }
+}
+
+dependencies {
+  // add("kspJvm", project(":ksp-processor"))
 }

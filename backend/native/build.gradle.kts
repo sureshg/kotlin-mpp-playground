@@ -32,7 +32,7 @@ kotlin {
 
 jib {
   from {
-    image = "debian:stable-slim"
+    image = "gcr.io/distroless/base-debian12"
     platforms {
       platform {
         architecture = "amd64"

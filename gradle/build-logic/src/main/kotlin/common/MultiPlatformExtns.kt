@@ -234,14 +234,18 @@ fun KotlinMultiplatformExtension.hostNativeTarget(configure: KotlinNativeTarget.
               "Host OS '${Platform.currentOS}' is not supported in Kotlin/Native $project.")
     }
 
+context(Project)
 fun KotlinMultiplatformExtension.allNativeTargets(
     configure: KotlinNativeTargetWithHostTests.() -> Unit = {}
 ) {
-  macosX64 { configure() }
-  macosArm64 { configure() }
-  linuxX64 { configure() }
-  // linuxArm64 { configure() }
-  // mingwX64 { configure() }
+  val nativeBuild: String? by project
+  if (nativeBuild.toBoolean()) {
+    macosX64 { configure() }
+    macosArm64 { configure() }
+    linuxX64 { configure() }
+    // linuxArm64 { configure() }
+    // mingwX64 { configure() }
+  }
 }
 
 context(Project)

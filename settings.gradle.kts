@@ -26,14 +26,16 @@ include(":backend:data")
 
 include(":backend:profiling")
 
-// include(":compose:web")
-
-// include(":compose:desktop")
-
 val nativeBuild: String? by settings
+val composeBuild: String? by settings
 
 if (nativeBuild.toBoolean()) {
   include(":backend:native")
+}
+
+if (composeBuild.toBoolean()) {
+  include(":compose:desktop")
+  // include(":compose:web")
 }
 
 // includeBuild("misc/build") {

@@ -220,6 +220,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:+HeapDumpOnOutOfMemoryError",
             "-XX:HeapDumpPath=$tmp$name-%p.hprof",
             "-XX:ErrorFile=$tmp$name-hs-err-%p.log",
+            // "-XX:+ErrorFileToStderr",
             "-XX:+ExitOnOutOfMemoryError",
             "-XX:+UnlockDiagnosticVMOptions",
             "-XX:NativeMemoryTracking=detail",
