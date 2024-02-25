@@ -27,6 +27,7 @@ import org.gradle.plugin.use.PluginDependency
 import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
+import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
@@ -319,11 +320,10 @@ fun Provider<PluginDependency>.toDep() = map {
 // https://kotlinlang.org/docs/multiplatform-set-up-targets.html#distinguish-several-targets-for-one-platform
 val mppTargetAttr = Attribute.of("mpp.target.name", String::class.java)
 
-var Project.mppTargetName: String
-  get() = configurations.firstOrNull()?.attributes?.getAttribute(mppTargetAttr).orEmpty()
-  set(value) {
-    configurations.all { attributes.attribute(mppTargetAttr, value) }
-  }
+context(Project)
+fun KotlinTarget.setTargetAttribute() {
+  attributes.attribute(mppTargetAttr, targetName)
+}
 
 context(Project)
 fun JavaToolchainSpec.configureJvmToolchain() {
@@ -375,9 +375,6 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
         add("-Xexpect-actual-classes")
         if (composeReportsEnabled) {
           val reportPath = layout.buildDirectory.dir("compose_compiler").get().asFile.absolutePath
-          add("-P")
-          add(
-              "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
           add("-P")
           add("plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportPath")
           add("-P")
