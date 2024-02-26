@@ -158,8 +158,8 @@ rootProject.plugins.run {
   withType<NodeJsRootPlugin> {
     rootProject.extensions.configure<NodeJsRootExtension> {
       download = true
-      version = libs.versions.nodejs.version.get()
       nodeExtnConfigured = "true"
+      // version = libs.versions.nodejs.version.get()
       // nodeDownloadBaseUrl = "https://nodejs.org/download/nightly"
     }
   }
