@@ -77,12 +77,19 @@ redacted {
 
 kover {
   // useJacoco()
-}
-
-koverReport {
-  defaults {
-    filters { excludes {} }
-    html { title = "${project.name} code coverage report" }
+  reports {
+    total {
+      filters { excludes { classes("dev.suresh.example.*") } }
+      html { title = "${project.name} code coverage report!" }
+      verify {
+        rule {
+          bound {
+            minValue = 0
+            maxValue = 75
+          }
+        }
+      }
+    }
   }
 }
 
@@ -152,25 +159,28 @@ tasks {
   }
 }
 
-rootProject.plugins.run {
-  var nodeExtnConfigured: String? by rootProject.extra
+// Initialize Node.js and Yarn extensions only once in a multi-module project
+var nodeJsEnabled: String? by rootProject.extra
 
-  withType<NodeJsRootPlugin> {
-    rootProject.extensions.configure<NodeJsRootExtension> {
-      download = true
-      nodeExtnConfigured = "true"
-      // version = libs.versions.nodejs.version.get()
-      // nodeDownloadBaseUrl = "https://nodejs.org/download/nightly"
+if (nodeJsEnabled.toBoolean().not()) {
+  rootProject.plugins.run {
+    withType<NodeJsRootPlugin> {
+      rootProject.extensions.configure<NodeJsRootExtension> {
+        download = true
+        nodeJsEnabled = "true"
+        // version = libs.versions.nodejs.version.get()
+        // nodeDownloadBaseUrl = "https://nodejs.org/download/nightly"
+      }
     }
-  }
 
-  withType<YarnPlugin> {
-    rootProject.extensions.configure<YarnRootExtension> {
-      download = true
-      lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
-      yarnLockMismatchReport = YarnLockMismatchReport.WARNING
-      yarnLockAutoReplace = false
-      nodeExtnConfigured = "true"
+    withType<YarnPlugin> {
+      rootProject.extensions.configure<YarnRootExtension> {
+        download = true
+        lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
+        yarnLockMismatchReport = YarnLockMismatchReport.WARNING
+        yarnLockAutoReplace = false
+        nodeJsEnabled = "true"
+      }
     }
   }
 }

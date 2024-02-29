@@ -1,3 +1,5 @@
+import dev.whyoleg.cryptography.CryptographyProvider
+import dev.whyoleg.cryptography.algorithms.digest.SHA512
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
@@ -15,7 +17,11 @@ val mainScope = MainScope()
 val log = KotlinLogging.logger {}
 
 suspend fun main() {
-  log.info { "Hello Kotlin WasmJS!" }
+  log.info { "Kotlin WasmJS!" }
+  val sha512 = CryptographyProvider.Default.get(SHA512).hasher()
+  val hashHex = sha512.hash("Kotlin WasmJS!".encodeToByteArray()).toHexString()
+  log.info { "SHA512 Hash: $hashHex" }
+
   coroutineScope {
     val coroutinesElm = document.getElementById("coroutines")
     val progressElms =

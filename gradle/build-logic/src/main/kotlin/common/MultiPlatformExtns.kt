@@ -50,6 +50,8 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlinx.html)
         api(libs.kotlin.bignum)
         api(libs.kotlin.bignum.serialization)
+        api(libs.kotlin.cryptography.core)
+        api(libs.kotlin.cryptography.random)
         if (project.name != "wasm") {
           api(libs.ktor.client.core)
           api(libs.ktor.client.content.negotiation)
@@ -167,6 +169,7 @@ fun KotlinMultiplatformExtension.jsTarget() {
     jsMain {
       dependencies {
         api(libs.ktor.client.js)
+        api(libs.kotlin.cryptography.webcrypto)
         api(kotlinw("browser"))
         api(kotlinw("css"))
         // implementation(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
@@ -216,7 +219,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
   }
 
   sourceSets {
-    wasmJsMain { dependencies {} }
+    wasmJsMain { dependencies { api(libs.kotlin.cryptography.webcrypto) } }
     wasmJsTest { kotlin {} }
   }
 }
