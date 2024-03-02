@@ -149,7 +149,6 @@ tasks {
   // Javadoc
   javadoc {
     isFailOnError = true
-    modularity.inferModulePath = true
     (options as StandardJavadocDocletOptions).apply {
       encoding = "UTF-8"
       linkSource(true)

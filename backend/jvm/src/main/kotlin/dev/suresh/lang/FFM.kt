@@ -192,6 +192,15 @@ object FFM {
         info { "Not a TTY" }
       }
     }
+
+    /** Atomic access for long[] using a MemorySegment */
+    fun arrayAtomicAccess() {
+      val arr = LongArray(10)
+      val arrSeg = MemorySegment.ofArray(arr)
+      val vh = ValueLayout.JAVA_INT.varHandle()
+      vh.setVolatile(arrSeg, 0L, 69)
+      assert(vh.getVolatile(arrSeg, 0L) as Int == 69)
+    }
   }
 
   /** Reflectively invoke the downcallHandle method on the Linker class. */

@@ -333,7 +333,7 @@ fun JavaToolchainSpec.configureJvmToolchain() {
 
 context(Project)
 fun JavaCompile.configureJavac() {
-  modularity.inferModulePath = true
+
   options.apply {
     encoding = "UTF-8"
     release = javaRelease

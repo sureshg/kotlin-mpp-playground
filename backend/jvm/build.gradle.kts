@@ -107,6 +107,19 @@ tasks {
   // Makes sure jte is generated before compilation
   withType<KspAATask>().configureEach { dependsOn(generateJte) }
 
+  // Enable compilation with Java Module System.
+  compileJava {
+    options.compilerArgumentProviders.add(
+        object : CommandLineArgumentProvider {
+          @InputFiles
+          @PathSensitive(PathSensitivity.RELATIVE)
+          val kotlinClasses = compileKotlin.flatMap { it.destinationDirectory }
+
+          override fun asArguments() =
+              listOf("--patch-module", "$group=${kotlinClasses.get().asFile.absolutePath}")
+        })
+  }
+
   // publish { finalizedBy(jibDockerBuild) }
 }
 
