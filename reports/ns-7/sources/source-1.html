@@ -52,7 +52,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,7 +60,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/22)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/105)
+    (0/110)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,7 +76,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/751)
+    (0/779)
   </span>
 </td>
 </tr>
@@ -435,7 +435,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/21)
+    (0/22)
   </span>
 </td>
 <td class="coverageStat">
@@ -443,7 +443,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/22)
   </span>
 </td>
 <td class="coverageStat">
@@ -451,7 +451,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/125)
+    (0/130)
   </span>
 </td>
 <td class="coverageStat">
@@ -459,7 +459,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/842)
+    (0/870)
   </span>
 </td>
 </tr>
@@ -664,6 +664,15 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;        info { &quot;Not a TTY&quot; }</b>
 &nbsp;      }
 <b class="nc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    /** Atomic access for long[] using a MemorySegment */
+&nbsp;    fun arrayAtomicAccess() {
+<b class="nc">&nbsp;      val arr = LongArray(10)</b>
+<b class="nc">&nbsp;      val arrSeg = MemorySegment.ofArray(arr)</b>
+<b class="nc">&nbsp;      val vh = ValueLayout.JAVA_INT.varHandle()</b>
+<b class="nc">&nbsp;      vh.setVolatile(arrSeg, 0L, 69)</b>
+<b class="nc">&nbsp;      assert(vh.getVolatile(arrSeg, 0L) as Int == 69)</b>
+&nbsp;    }
 &nbsp;  }
 &nbsp;
 &nbsp;  /** Reflectively invoke the downcallHandle method on the Linker class. */
@@ -709,7 +718,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-02-29 21:14</div>
+    <div style="float:right;">generated on 2024-03-02 06:00</div>
 </div>
 </body>
 </html>
