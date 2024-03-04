@@ -205,3 +205,8 @@ dependencies {
   //    }
   //  }
 }
+
+// Remove slf4j simple provider from tests
+// configurations.testImplementation {
+//    exclude(module = libs.slf4j.simple.get().module.toString())
+// }

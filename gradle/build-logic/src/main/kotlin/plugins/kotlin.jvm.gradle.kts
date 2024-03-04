@@ -172,6 +172,7 @@ dependencies {
   implementation(libs.kotlinx.atomicfu)
   implementation(libs.kotlin.redacted.annotations)
   implementation(libs.jspecify)
+  implementation(libs.password4j)
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

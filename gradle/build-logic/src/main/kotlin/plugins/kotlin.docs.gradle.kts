@@ -1,5 +1,6 @@
 package plugins
 
+import com.github.ajalt.mordant.rendering.TextColors.magenta
 import common.*
 import java.net.URI
 import kotlinx.validation.ApiValidationExtension
@@ -10,6 +11,7 @@ import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
+import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
   org.jetbrains.dokka
@@ -37,6 +39,20 @@ if (isRootProject) {
     description = project.description.orEmpty()
     moduleName = project.name
   }
+
+  // Combined test reports
+  val allTestReports by
+      tasks.registering(TestReport::class) {
+        destinationDirectory = layout.buildDirectory.dir("reports/tests/test")
+        allprojects.forEach {
+          testResults.from(it.tasks.withType<Test>(), it.tasks.withType<KotlinTest>())
+        }
+
+        doLast {
+          logger.lifecycle(
+              magenta("All test reports are aggregated in ${destinationDirectory.get()}"))
+        }
+      }
 }
 
 // Configure if the plugin is applied to the project.

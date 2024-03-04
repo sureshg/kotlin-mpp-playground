@@ -33,7 +33,7 @@ kotlinx-benchmark              = "0.4.10"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.14.0"
-kotlin-wrappers                = "1.0.0-pre.706"
+kotlin-wrappers                = "1.0.0-pre.708"
 kotlin-redacted                = "1.8.0-alpha02"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.12.1"
@@ -63,7 +63,8 @@ kotest                         = "5.7.1"
 mockk                          = "1.13.10"
 mokkery                        = "2.0.0-Beta1"
 slf4j                          = "2.1.0-alpha1"
-logback                        = "1.5.1"
+logback                        = "1.5.2"
+logback-tyler                  = "0.4"
 log4j                          = "3.0.0-beta2"
 jmh                            = "1.37"
 mrjar                          = "0.1.1"
@@ -78,11 +79,11 @@ rsocket                        = "0.15.4"
 jctools                        = "4.0.1"
 benasher44-uuid                = "0.8.2"
 kotlinx-uuid                   = "0.0.20"
-kotlin-codepoints              = "0.6.1"
+kotlin-codepoints              = "0.7.0"
 kotlin-logging                 = "6.0.3"
 kotlin-bignum                  = "0.3.9"
 kotlin-diff                    = "0.4.0"
-kotlin-retry                   = "1.0.9"
+kotlin-retry                   = "2.0.0"
 kotlinx-jsonpath               = "3.0.1"
 kotlin-cryptography            = "0.3.0"
 uri-kmp                        = "0.0.16"
@@ -107,6 +108,8 @@ sherlock                       = "0.4.19"
 sqids                          = "0.1.0"
 tsid                           = "2.1.1"
 expiringmap                    = "0.5.10"
+otp                            = "2.0.3"
+password4j                     = "1.8.0"
 apache-commons-imaging         = "1.0-alpha3"
 testcontainers                 = "1.19.6"
 sourceBuddy                    = "2.4.5"
@@ -324,6 +327,8 @@ sherlock-sql                         = { module = "com.coditory.sherlock:sherloc
 config4k                             = { module = "io.github.config4k:config4k"                                , version.ref = "config4k"}
 hoplite-hocon                        = { module = "com.sksamuel.hoplite:hoplite-hocon"                         , version.ref = "hoplite"}
 expiringmap                          = { module = "net.jodah:expiringmap"                                      , version.ref = "expiringmap"}
+password4j                           = { module = "com.password4j:password4j"                                  , version.ref = "password4j"}
+otp-java                             = { module = "com.github.bastiaanjansen:otp-java"                         , version.ref = "otp"}
 
 # Database IDs
 sqids                                = { module = "org.sqids:sqids"                                            , version.ref = "sqids"}
@@ -390,6 +395,7 @@ slf4j-api                            = { module = "org.slf4j:slf4j-api"         
 slf4j-simple                         = { module = "org.slf4j:slf4j-simple"                                     , version.ref = "slf4j"}
 slf4j-nop                            = { module = "org.slf4j:slf4j-nop"                                        , version.ref = "slf4j"}
 logback-core                         = { module = "ch.qos.logback:logback-core"                                , version.ref = "logback"}
+logback-tyler                        = { module = "ch.qos.logback.tyler:tyler-base"                            , version.ref = "logback-tyler"}
 slf4j-jpl                            = { module = "org.slf4j:slf4j-jdk-platform-logging"                       , version.ref = "slf4j"}
 log4j-bom                            = { module = "org.apache.logging.log4j:log4j-bom"                         , version.ref = "log4j"}
 log4j-core                           = { module = "org.apache.logging.log4j:log4j-core"                        , version.ref = "log4j"}

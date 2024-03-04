@@ -166,7 +166,17 @@ jobs:
           folder: build/reports/kover/html
           target-folder: reports
           clean: true
-          commit-message: 'doc: Deployed coverage report'
+          commit-message: 'report: Deployed coverage report'
+
+      - name: 🧪️ Publish test report to Github Pages
+        if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
+        uses: JamesIves/github-pages-deploy-action@v4.5.0
+        with:
+          branch: gh-pages
+          folder: build/reports/tests/test
+          target-folder: tests
+          clean: true
+          commit-message: 'report: Deployed test results'
 
       - name: 📌 Push the changes to Github
         if: ${{ false }}

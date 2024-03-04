@@ -176,8 +176,8 @@ tasks {
 
   val buildAndPublish by registering {
     dependsOn(allprojects.map { it.tasks.build })
-    // Starting with column(:) means root project tasks
-    dependsOn(":dokkaHtmlMultiModule", ":koverHtmlReport")
+    // Root project tasks (testAggregateTestReport)
+    dependsOn(":allTestReports", ":dokkaHtmlMultiModule", ":koverHtmlReport")
 
     when {
       // Publishing to all repos on GitHub Action tag build

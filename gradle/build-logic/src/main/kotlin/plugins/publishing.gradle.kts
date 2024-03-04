@@ -43,7 +43,8 @@ publishing {
           tasks.registering(Jar::class) {
             archiveClassifier = "javadoc"
             duplicatesStrategy = DuplicatesStrategy.WARN
-            // contents are deliberately left empty
+            // Contents are deliberately left empty
+            // from(tasks.named("dokkaJavadoc"))
           }
 
       withType<MavenPublication>().configureEach {

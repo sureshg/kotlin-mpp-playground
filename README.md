@@ -107,6 +107,7 @@ $ actionlint
 - [Web App](https://suresh.dev/kotlin-mpp-playground/app/)
 - [Docs](https://suresh.dev/kotlin-mpp-playground/docs)
 - [Coverage](https://suresh.dev/kotlin-mpp-playground/reports)
+- [Tests](https://suresh.dev/kotlin-mpp-playground/tests)
 
 ### Resources
 

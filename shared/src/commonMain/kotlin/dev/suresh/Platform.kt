@@ -13,7 +13,7 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.serialization.json.ClassDiscriminatorMode
+import kotlinx.serialization.json.ClassDiscriminatorMode.POLYMORPHIC
 import kotlinx.serialization.json.Json
 
 expect val platform: Platform
@@ -99,7 +99,7 @@ val json by lazy {
     explicitNulls = false
     decodeEnumsCaseInsensitive = true
     allowTrailingComma = true
-    classDiscriminatorMode = ClassDiscriminatorMode.POLYMORPHIC
+    classDiscriminatorMode = POLYMORPHIC
   }
 }
 
