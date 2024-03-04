@@ -33,7 +33,8 @@ kotlinx-benchmark              = "0.4.10"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bincompat              = "0.14.0"
-kotlin-wrappers                = "1.0.0-pre.708"
+kotlin-dokka                   = "1.9.20"
+kotlin-wrappers                = "1.0.0-pre.709"
 kotlin-redacted                = "1.8.0-alpha02"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.12.1"
@@ -49,7 +50,6 @@ ajalt-colormath                = "3.4.0"
 compose-routing                = "0.2.13"
 classgraph                     = "4.8.161"
 cache4k                        = "0.11.0"
-dokka                          = "1.9.10"
 intellij-coverage              = "1.0.733"
 intellij-markdown              = "0.6.1"
 jgit                           = "6.5.0.202303070854-r"
@@ -63,7 +63,7 @@ kotest                         = "5.7.1"
 mockk                          = "1.13.10"
 mokkery                        = "2.0.0-Beta1"
 slf4j                          = "2.1.0-alpha1"
-logback                        = "1.5.2"
+logback                        = "1.5.3"
 logback-tyler                  = "0.4"
 log4j                          = "3.0.0-beta2"
 jmh                            = "1.37"
@@ -100,7 +100,7 @@ postgresql                     = "42.7.2"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
 micrometer                     = "1.12.3"
-swagger-ui                     = "5.11.8"
+swagger-ui                     = "5.11.9"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
 shedlock                       = "5.7.0"
@@ -180,8 +180,8 @@ build-kotlinx-serialization          = { module = "org.jetbrains.kotlin:kotlin-s
 build-kotlinx-atomicfu               = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
 build-kotlinx-benchmark              = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
 build-kotlin-dsl                     = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins"                     , version.ref = "gradle-kotlin-dsl"}
-build-dokka-plugin                   = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "dokka"}
-build-dokka-base                     = { module = "org.jetbrains.dokka:dokka-base"                                  , version.ref = "dokka"}
+build-dokka-plugin                   = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "kotlin-dokka"}
+build-dokka-base                     = { module = "org.jetbrains.dokka:dokka-base"                                  , version.ref = "kotlin-dokka"}
 build-kotlin-ksp                     = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
 build-redacted-plugin                = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "kotlin-redacted"}
 build-benmanesversions               = { module = "com.github.ben-manes:gradle-versions-plugin"                     , version.ref = "benmanes"}
