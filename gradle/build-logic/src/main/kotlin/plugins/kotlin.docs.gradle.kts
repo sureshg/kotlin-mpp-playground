@@ -1,10 +1,8 @@
 package plugins
 
-import com.github.ajalt.mordant.rendering.TextColors.magenta
 import common.*
 import java.net.URI
 import kotlinx.validation.ApiValidationExtension
-import org.gradle.kotlin.dsl.*
 import org.hildan.github.changelog.plugin.GitHubChangelogExtension
 import org.jetbrains.dokka.DokkaConfiguration.Visibility
 import org.jetbrains.dokka.base.DokkaBase
@@ -38,6 +36,17 @@ if (isRootProject) {
   tasks.withType<DokkaMultiModuleTask>().configureEach {
     description = project.description.orEmpty()
     moduleName = project.name
+    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
+      // Override the default dokka logo and styles
+      // val rootPath = rootProject.rootDir
+      // customAssets = listOf(rootPath.resolve("app-logo.svg"))
+      // customStyleSheets = listOf(rootPath.resolve("logo-styles.css"))
+      // templatesDir = rootPath.resolve("templates")
+      footerMessage = "Copyright &copy; 2024 suresh.dev"
+      homepageLink = githubRepo
+      separateInheritedMembers = false
+      mergeImplicitExpectActualDeclarations = false
+    }
   }
 
   // Combined test reports
@@ -49,8 +58,7 @@ if (isRootProject) {
         }
 
         doLast {
-          logger.lifecycle(
-              magenta("All test reports are aggregated in ${destinationDirectory.get()}"))
+          logger.lifecycle("All test reports are aggregated in ${destinationDirectory.get()}")
         }
       }
 }
@@ -94,13 +102,8 @@ tasks {
     }
 
     pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-      // Dokka's stylesheets and assets with conflicting names will be overridden.
-      // val rootPath = rootProject.rootDir.toPath()
-      // val logoCss = rootPath.resolve("docs/css/logo-styles.css").toString()
-      // val logSvg = rootPath.resolve("docs/img/app-logo.svg").toString()
-      customStyleSheets = listOf(file("logo-styles.css"))
-      customAssets = listOf(file("app-logo.svg"))
       footerMessage = "Copyright &copy; 2024 suresh.dev"
+      homepageLink = githubRepo
     }
   }
 }
