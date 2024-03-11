@@ -168,7 +168,7 @@ jib-plugin                     = "3.4.1"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 jetbrains-compose              = "1.6.0"
-jetbrains-compose-compiler     = "1.5.9-kt-2.0.0-Beta4"
+jetbrains-compose-compiler     = "1.5.10"
 kobweb                         = "0.16.2"
 
 [libraries]
