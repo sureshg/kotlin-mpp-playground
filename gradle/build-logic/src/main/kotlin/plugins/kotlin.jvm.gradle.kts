@@ -173,6 +173,7 @@ dependencies {
   implementation(libs.kotlin.redacted.annotations)
   implementation(libs.jspecify)
   implementation(libs.password4j)
+  implementation(libs.sslcontext.kickstart)
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

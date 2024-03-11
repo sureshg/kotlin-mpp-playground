@@ -239,7 +239,7 @@ jobs:
           path: release-artifacts
 
       - name: ✨Github Release (version = ${{ needs.build.outputs.version }})
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           # body_path: ${{ github.workspace }}-CHANGELOG.txt
           body: ${{ steps.github_release.outputs.changelog }}

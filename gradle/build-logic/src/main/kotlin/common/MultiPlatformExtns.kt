@@ -71,8 +71,8 @@ fun KotlinMultiplatformExtension.commonTarget() {
       dependencies {
         api(kotlin("test"))
         api(libs.kotlinx.coroutines.test)
+        api(libs.cash.turbine)
         if (project.name != "wasm") {
-          api(libs.cash.turbine)
           api(libs.ktor.client.mock)
           // api(libs.ktor.client.tests)
         }
@@ -118,6 +118,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.kotlinx.coroutines.slf4j)
         api(libs.jspecify)
         api(libs.password4j)
+        api(libs.sslcontext.kickstart)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         api(libs.google.auto.annotations)
         // kspDep("jvm", libs.ksp.auto.service)
