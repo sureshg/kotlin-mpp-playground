@@ -102,7 +102,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
     // ./gradlew jvmRun
     mainRun { mainClass = libs.versions.app.mainclass.get() }
     // val test by testRuns.existing
-    testRuns.configureEach { executionTask.configure { configureKotlinTest() } }
+    testRuns.configureEach { executionTask.configure { configureJavaTest() } }
 
     // attributes.attribute(mppTargetAttr, "jvm")
   }

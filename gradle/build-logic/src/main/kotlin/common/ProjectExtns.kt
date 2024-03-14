@@ -30,7 +30,6 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
-import org.jetbrains.kotlin.gradle.targets.jvm.tasks.KotlinJvmTest
 import org.jetbrains.kotlin.gradle.testing.internal.KotlinTestReport
 
 // val logger = LoggerFactory.getLogger("build-logic")
@@ -451,11 +450,6 @@ fun LanguageSettingsBuilder.configureKotlinLang() {
 }
 
 context(Project)
-fun KotlinJvmTest.configureKotlinTest() {
-  configureJavaTest()
-}
-
-context(Project)
 fun Test.configureJavaTest() {
   useJUnitPlatform()
   jvmArgs(jvmArguments())
@@ -473,14 +467,14 @@ fun Test.configureJavaTest() {
         if (desc.parent == null) { // will match the outermost suite
           println(
               """
-             |
-             |Test Results
-             |------------
-             |Tests     : ${result.resultType} (${result.testCount})
-             |Successes : ${result.successfulTestCount}
-             |Failures  : ${result.failedTestCount}
-             |Skipped   : ${result.skippedTestCount}
-             """
+              |
+              |Test Results
+              |------------
+              |Tests     : ${result.resultType} (${result.testCount})
+              |Successes : ${result.successfulTestCount}
+              |Failures  : ${result.failedTestCount}
+              |Skipped   : ${result.skippedTestCount}
+              """
                   .trimMargin())
         }
       }))

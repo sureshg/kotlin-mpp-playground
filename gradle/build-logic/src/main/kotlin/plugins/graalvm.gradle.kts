@@ -64,7 +64,7 @@ graalvmNative {
               add("--libc=musl")
               // add("-H:CCompilerOption=-Wl,-z,stack-size=2097152")
             }
-            else -> add("-H:+StaticExecutableWithDynamicLibC")
+            else -> add("--static-nolibc")
           }
           add("-H:+StripDebugInfo")
         }
