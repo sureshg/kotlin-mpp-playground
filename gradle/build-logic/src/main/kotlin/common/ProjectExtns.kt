@@ -272,10 +272,16 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-Duser.timezone=\"PST8PDT\"",
             // "-Djava.net.preferIPv4Stack=true",
             // "-Djavax.net.debug=all",
-            // "-Dhttps.protocols=TLSv1.2",
+            // "-Dhttps.protocols=TLSv1.3",
             // "-Dhttps.agent=$name",
             // "-Dhttp.keepAlive=true",
             // "-Dhttp.maxConnections=5",
+            // ----- Java HTTP Client -----
+            // "-Djdk.internal.httpclient.disableHostnameVerification",
+            // "-Djdk.httpclient.HttpClient.log=headers",
+            // "-Djdk.internal.httpclient.debug=false",
+            // "-Djdk.tls.client.protocols=\"TLSv1.2,TLSv1.3\"",
+            // ----- Misc -----
             // "-Djava.security.manager=allow",
             // "-Dfile.encoding=COMPAT", // uses '-Dnative.encoding'
             // "-Djdbc.drivers=org.postgresql.Driver",

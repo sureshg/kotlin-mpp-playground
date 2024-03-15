@@ -48,6 +48,11 @@ $ docker run \
 
 $ ./gradlew :backend:jvm:jibDockerBuild
 $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
+$ docker stats
+
+# Run container tests
+$ ./gradlew :backend:jvm:test -PktorTest
+$ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
 
 # Run with AppCDS
 $ java -Xlog:class+load:file=/tmp/cds.log:uptime,level,tags,pid \
@@ -171,38 +176,37 @@ $ actionlint
     'theme': 'base'
   }
 }%%
-
 graph LR
-  subgraph backend
-    jvm
-    data
-    native
-  end
-  subgraph meta
-    compiler
-    ksp
-  end
-  subgraph compiler
-    compiler
-    plugin
-  end
-  subgraph ksp
-    ksp
-    processor
-  end
-  subgraph web
-    wasm
-    js
-  end
-  plugin --> shared
-  wasm --> shared
-  benchmark --> shared
-  data --> shared
-  native --> shared
-  processor --> shared
-  jvm --> shared
-  jvm --> data
-  jvm --> js
-  jvm --> wasm
-  js --> shared
+    subgraph backend
+        jvm
+        data
+        native
+    end
+    subgraph meta
+        compiler
+        ksp
+    end
+    subgraph compiler
+        compiler
+        plugin
+    end
+    subgraph ksp
+        ksp
+        processor
+    end
+    subgraph web
+        wasm
+        js
+    end
+    plugin --> shared
+    wasm --> shared
+    benchmark --> shared
+    data --> shared
+    native --> shared
+    processor --> shared
+    jvm --> shared
+    jvm --> data
+    jvm --> js
+    jvm --> wasm
+    js --> shared
 ```
