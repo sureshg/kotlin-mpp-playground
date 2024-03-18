@@ -40,8 +40,10 @@ graalvmNative {
       richOutput = true
       buildArgs = buildList {
         add("--enable-preview")
+        add("--enable-native-access=ALL-UNNAMED")
         add("--native-image-info")
-        add("--enable-monitoring=heapdump,jfr,jvmstat")
+        add("--color=auto")
+        add("--enable-monitoring=heapdump,jfr,jvmstat,threaddump,nmt")
         add("--enable-https")
         add("--install-exit-handlers")
         add("--features=graal.aot.RuntimeFeature")

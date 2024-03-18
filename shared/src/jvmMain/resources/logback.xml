@@ -1,11 +1,14 @@
-<configuration scan="true" scanPeriod="30 seconds">
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="15 seconds" debug="false">
     <import class="ch.qos.logback.classic.encoder.JsonEncoder"/>
     <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
     <import class="ch.qos.logback.core.rolling.RollingFileAppender"/>
     <import class="ch.qos.logback.core.FileAppender"/>
     <import class="ch.qos.logback.core.ConsoleAppender"/>
     <import class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"/>
+    <import class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy"/>
 
+    <!-- [%d{ISO8601}] -->
     <property name="pattern"
               value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} %-5level %X{remoteHost} [%thread] %logger{16} - %msg%n%rEx"/>
 
@@ -25,10 +28,13 @@
 
     <appender name="APP2" class="RollingFileAppender">
         <file>${LOG_DIR}/app2.log</file>
-        <rollingPolicy class="TimeBasedRollingPolicy">
+        <rollingPolicy class="SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>app2.%d{yyyy-ww}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>1GB</totalSizeCap>
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 20GB, it will delete old archived file -->
+            <totalSizeCap>20GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
         </rollingPolicy>
         <encoder class="PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
