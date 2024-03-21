@@ -106,7 +106,7 @@ tasks {
   // Configure KSP2
   withType<KspAATask>().configureEach { configureKspConfig() }
 
-  withType<KotlinJsCompile>().configureEach { kotlinOptions { configureKotlinJs() } }
+  withType<KotlinJsCompile>().configureEach { compilerOptions { configureKotlinJs() } }
 
   withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
 

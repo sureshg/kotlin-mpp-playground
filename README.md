@@ -67,7 +67,13 @@ $ ./gradlew :web:js:jsBrowserProductionRun -t
 $ ./gradlew kotlinUpgradeYarnLock
 
 # Kotlin Native
+$ ./gradlew :backend:native:build
+# Arch specific binaries
+$ ./gradlew :backend:native:macosArm64Binaries
+$ ./gradlew :backend:native:macosX64Binaries
+$ ./gradlew :backend:native:linuxX64Binaries
 $ ./gradlew :backend:native:macOsUniversalBinary
+# Native container image
 $ ./gradlew :backend:native:jibDockerBuild
 $ docker run -it --rm --name native-app sureshg/native
 

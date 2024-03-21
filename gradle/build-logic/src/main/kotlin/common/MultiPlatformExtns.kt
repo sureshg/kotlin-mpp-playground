@@ -22,7 +22,6 @@ fun KotlinMultiplatformExtension.commonTarget() {
     // Configure all compilations of all targets
     compilations.all {
       compileTaskProvider.configure { compilerOptions { configureKotlinCommon() } }
-      // compilerOptions.configure { configureKotlinCommon() }
     }
   }
 
@@ -96,7 +95,6 @@ fun KotlinMultiplatformExtension.jvmTarget() {
     compilations.all {
       compileJavaTaskProvider?.configure { configureJavac() }
       compileTaskProvider.configure { compilerOptions { configureKotlinJvm() } }
-      // compilerOptions.configure { configureKotlinJvm() }
     }
 
     // ./gradlew jvmRun
@@ -163,7 +161,9 @@ fun KotlinMultiplatformExtension.jsTarget() {
 
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
-    compilations.configureEach { kotlinOptions { configureKotlinJs() } }
+    compilations.configureEach {
+      compileTaskProvider.configure { compilerOptions { configureKotlinJs() } }
+    }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 
@@ -216,12 +216,19 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
       }
     }
 
-    compilations.configureEach { kotlinOptions { configureKotlinJs() } }
+    compilations.configureEach {
+      compileTaskProvider.configure { compilerOptions { configureKotlinJs() } }
+    }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 
   sourceSets {
-    wasmJsMain { dependencies { api(libs.kotlin.cryptography.webcrypto) } }
+    wasmJsMain {
+      dependencies {
+        // Webcrypto
+        api(libs.kotlin.cryptography.webcrypto)
+      }
+    }
     wasmJsTest { kotlin {} }
   }
 }

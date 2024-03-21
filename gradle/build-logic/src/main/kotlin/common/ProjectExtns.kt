@@ -518,7 +518,7 @@ context(Project)
 fun KotlinTestReport.configureTestReport() {}
 
 context(Project)
-fun KotlinJsOptions.configureKotlinJs() {
+fun KotlinJsCompilerOptions.configureKotlinJs() {
   useEsClasses = true
   // sourceMap = true
   // sourceMapEmbedSources = "always"

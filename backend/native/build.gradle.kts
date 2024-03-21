@@ -12,13 +12,17 @@ plugins {
   com.google.cloud.tools.jib
 }
 
+val appBinName = "app"
+
 description = "Ktor native application"
 
 kotlin {
   targets.filterIsInstance<KotlinNativeTarget>().forEach {
     it.binaries { executable(listOf(RELEASE)) { entryPoint = "main" } }
     it.compilations.configureEach {
-      compilerOptions.configure { freeCompilerArgs.add("-Xallocator=custom") }
+      compileTaskProvider.configure {
+        compilerOptions { freeCompilerArgs.add("-Xallocator=custom") }
+      }
     }
   }
 
@@ -32,7 +36,9 @@ kotlin {
 
 jib {
   from {
-    image = "gcr.io/distroless/base-debian12"
+    // Distroless is not yet supported for Kotlin Native
+    // image = "gcr.io/distroless/base-debian12"
+    image = "debian:unstable-slim"
     platforms {
       platform {
         architecture = "amd64"
@@ -49,7 +55,7 @@ jib {
   pluginExtensions {
     pluginExtension {
       implementation = JibNativeImageExtension::class.qualifiedName
-      properties = mapOf("imageName" to "app")
+      properties = mapOf("imageName" to appBinName)
     }
   }
 
@@ -108,10 +114,20 @@ tasks {
         from(linkReleaseExecutableLinuxX64)
         // Jib native image extension expects the native image to be in "native/nativeCompile"
         into(layout.buildDirectory.dir("native/nativeCompile"))
-        rename { "app" }
+        rename { appBinName }
       }
 
-  jibDockerBuild { dependsOn(prepareJib) }
+  jibDockerBuild {
+    dependsOn(prepareJib)
+    doLast {
+      logger.lifecycle(
+          TextColors.cyan(
+              """
+              |Run: docker run -it --rm --name ${project.name} ${jib?.to?.image}:${jib?.to?.tags?.firstOrNull().orEmpty()}
+              """
+                  .trimMargin()))
+    }
+  }
 
   // publish { finalizedBy(jibDockerBuild) }
 }
