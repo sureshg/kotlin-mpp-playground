@@ -119,7 +119,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.sslcontext.kickstart)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         api(libs.google.auto.annotations)
-        // kspDep("jvm", libs.ksp.auto.service)
+        kspDep("jvm", libs.ksp.auto.service)
       }
     }
 

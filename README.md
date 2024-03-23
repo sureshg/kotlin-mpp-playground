@@ -107,8 +107,6 @@ $ ./gradlew checkBuildLogicBestPractices
 
 # GitHub Actions lint
 $ actionlint
-
-# Disabled plugins for K2: KSP Auto Service
 ```
 
 </details>
