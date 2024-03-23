@@ -1,13 +1,13 @@
 package dev.suresh
 
-import org.junit.jupiter.api.Assertions.assertTrue
+import kotlin.test.assertTrue
 import org.junit.jupiter.api.Test
 
 class PlatformTest {
 
   @Test
   fun greetings() {
-    assertTrue(Greeting().greeting().contains("JVM")) { "JVM platform check failed!" }
+    assertTrue(Greeting().greeting().contains("JVM"), message = "JVM platform check failed!")
     DOP.run()
   }
 }

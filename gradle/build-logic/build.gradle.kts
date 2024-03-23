@@ -157,6 +157,7 @@ dependencies {
   implementation(libs.build.kotlin.ksp)
   implementation(libs.build.kotlinx.atomicfu)
   implementation(libs.build.kotlin.allopen)
+  implementation(libs.build.kotlin.powerassert)
   implementation(libs.build.kotlinx.serialization)
   implementation(libs.build.kotlinx.kover)
   implementation(libs.build.kotlinx.benchmark)

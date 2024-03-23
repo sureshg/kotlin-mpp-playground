@@ -177,6 +177,7 @@ kobweb                         = "0.16.2"
 build-kotlin                         = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin"                       , version.ref = "kotlin"}
 build-kotlin-noarg                   = { module = "org.jetbrains.kotlin:kotlin-noarg"                               , version.ref = "kotlin"}
 build-kotlin-allopen                 = { module = "org.jetbrains.kotlin:kotlin-allopen"                             , version.ref = "kotlin"}
+build-kotlin-powerassert             = { module = "org.jetbrains.kotlin:kotlin-power-assert"                        , version.ref = "kotlin"}
 build-kotlinx-serialization          = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
 build-kotlinx-atomicfu               = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
 build-kotlinx-benchmark              = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
@@ -463,6 +464,7 @@ ktor-server = []
 ktor-client = []
 
 [plugins]
+kotlin-powerassert                   = { id = "org.jetbrains.kotlin.plugin.power-assert"                       , version.ref = "kotlin"}
 kotlin-allopen                       = { id = "org.jetbrains.kotlin.plugin.allopen"                            , version.ref = "kotlin"}
 kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark"                                , version.ref = "kotlinx-benchmark" }
 ktor                                 = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }

@@ -20,7 +20,7 @@ plugins {
   `kotlinx-atomicfu`
   dev.zacsweers.redacted
   id("plugins.kotlin.docs")
-  // kotlin("plugin.power-assert")
+  kotlin("plugin.power-assert")
   // org.gradle.kotlin.`kotlin-dsl`
   // app.cash.molecule
   // dev.mokkery
@@ -68,7 +68,10 @@ atomicfu {
   jvmVariant = "VH"
 }
 
-// powerAssert { functions = listOf("kotlin.require", "kotlin.check") }
+powerAssert {
+  functions = listOf("kotlin.assert", "kotlin.test.assertTrue")
+  excludedSourceSets = listOf("main")
+}
 
 redacted {
   enabled = true
