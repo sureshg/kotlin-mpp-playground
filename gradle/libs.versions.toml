@@ -131,7 +131,7 @@ maven-archeologist             = "0.0.10"
 jfree-chart                    = "1.5.4"
 jfree-svg                      = "5.0.5"
 xchart                         = "3.8.7"
-okapibarcode                   = "0.4.1"
+okapibarcode                   = "0.4.3"
 
 # NPM Dependencies
 npm-highlightjs                = "11.8.0"
