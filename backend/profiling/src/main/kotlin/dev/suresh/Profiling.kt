@@ -27,13 +27,26 @@ object Profiling {
 
   private val log = KotlinLogging.logger {}
 
+  private const val diagnosticObjName = "com.sun.management:type=HotSpotDiagnostic"
+
+  suspend fun threaddump(): Path = runOnVirtualThread {
+    val server = ManagementFactory.getPlatformMBeanServer()
+    val hotspot =
+        ManagementFactory.newPlatformMXBeanProxy(
+            server, diagnosticObjName, HotSpotDiagnosticMXBean::class.java)
+
+    val heapDumpPath = createTempFile("heapdump", ".hprof")
+    heapDumpPath.deleteIfExists()
+    // hotspot.dumpThreads(ThreadDumpFormat.valueOf())
+    hotspot.dumpHeap(heapDumpPath.pathString, true)
+    heapDumpPath
+  }
+
   suspend fun heapdump(): Path = runOnVirtualThread {
     val server = ManagementFactory.getPlatformMBeanServer()
     val hotspot =
         ManagementFactory.newPlatformMXBeanProxy(
-            server,
-            "com.sun.management:type=HotSpotDiagnostic",
-            HotSpotDiagnosticMXBean::class.java)
+            server, diagnosticObjName, HotSpotDiagnosticMXBean::class.java)
 
     val heapDumpPath = createTempFile("heapdump", ".hprof")
     heapDumpPath.deleteIfExists()

@@ -38,7 +38,7 @@ if (isRootProject) {
     moduleName = project.name
     pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
       // Override the default dokka logo and styles
-      // val rootPath = rootProject.rootDir
+      // val rootPath = rootProject.rootDir.toPath()
       // customAssets = listOf(rootPath.resolve("app-logo.svg"))
       // customStyleSheets = listOf(rootPath.resolve("logo-styles.css"))
       // templatesDir = rootPath.resolve("templates")

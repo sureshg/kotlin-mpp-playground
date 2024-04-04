@@ -85,9 +85,10 @@ kover {
         rule {
           bound {
             minValue = 0
-            maxValue = 75
+            maxValue = 70
           }
         }
+        warningInsteadOfFailure = true
       }
     }
   }

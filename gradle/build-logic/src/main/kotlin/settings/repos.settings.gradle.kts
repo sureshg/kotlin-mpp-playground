@@ -1,6 +1,6 @@
 package settings
 
-import com.gradle.scan.plugin.PublishedBuildScan
+import com.gradle.develocity.agent.gradle.scan.PublishedBuildScan
 import common.GithubAction
 import common.Repo
 import org.gradle.api.JavaVersion.VERSION_17
@@ -37,13 +37,22 @@ pluginManagement {
 // Apply the plugins to all projects
 plugins {
   // Gradle build scan
-  id("com.gradle.enterprise")
+  id("com.gradle.develocity")
   // Toolchains resolver using the Foojay Disco API.
   id("org.gradle.toolchains.foojay-resolver")
   // Use semver on all projects
   id("com.javiersc.semver")
   // Include other pre-compiled settings plugin
   id("settings.include")
+}
+
+@Suppress("UnstableApiUsage")
+toolchainManagement {
+  jvm {
+    javaRepositories {
+      repository("foojay") { resolverClass = FoojayToolchainResolver::class.java }
+    }
+  }
 }
 
 // Centralizing repositories declaration
@@ -102,32 +111,29 @@ fun RepositoryHandler.kobWeb() {
   }
 }
 
-gradleEnterprise {
+develocity {
   buildScan {
-    termsOfServiceUrl = "https://gradle.com/terms-of-service"
-    termsOfServiceAgree = "yes"
+    termsOfUseUrl = "https://gradle.com/terms-of-service"
+    termsOfUseAgree = "yes"
 
-    capture { isTaskInputFiles = false }
-
-    obfuscation { ipAddresses { addresses -> addresses.map { _ -> "0.0.0.0" } } }
-
-    if (GithubAction.isEnabled) {
-      publishAlways()
-      isUploadInBackground = false
-      tag("GITHUB_ACTION")
-      buildScanPublished { addJobSummary() }
+    capture {
+      buildLogging = false
+      testLogging = false
     }
+
+    obfuscation {
+      ipAddresses { it.map { _ -> "0.0.0.0" } }
+      hostname { "*******" }
+      username { it.reversed() }
+    }
+
+    publishing.onlyIf { GithubAction.isEnabled }
+    uploadInBackground = false
+    tag("GITHUB_ACTION")
+    buildScanPublished { addJobSummary() }
   }
 }
 
-@Suppress("UnstableApiUsage")
-toolchainManagement {
-  jvm {
-    javaRepositories {
-      repository("foojay") { resolverClass = FoojayToolchainResolver::class.java }
-    }
-  }
-}
 /** Add build scan details to GitHub Job summary report! */
 fun PublishedBuildScan.addJobSummary() =
     with(GithubAction) {
