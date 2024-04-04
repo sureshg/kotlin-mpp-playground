@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > FFM</title>
+  <title>kotlin-mpp-playground Coverage Report > Video</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.lang</a>
+    <a href="../index.html">dev.suresh.http</a>
 </div>
 
-<h1>Coverage Summary for Class: FFM (dev.suresh.lang)</h1>
+<h1>Coverage Summary for Class: Video (dev.suresh.http)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">FFM</td>
+  <td class="name">Video</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/12)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,7 +60,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/22)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/121)
+    (0/7)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,12 +76,12 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/813)
+    (0/161)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">FFM$memoryLayout$$inlined$runOnVirtualThread$1</td>
+    <td class="name">Video$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -91,6 +91,22 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
   </span>
 </td>
     <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -99,7 +115,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/13)
+    (0/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -107,7 +123,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/22)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -115,7 +131,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/121)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -123,7 +139,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/813)
+    (0/163)
   </span>
 </td>
 </tr>
@@ -134,231 +150,152 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
 &nbsp;
-&nbsp;import dev.suresh.*
-&nbsp;import io.github.oshai.kotlinlogging.KLogger
-&nbsp;import java.lang.foreign.*
-&nbsp;import java.lang.invoke.MethodHandle
-&nbsp;import java.lang.invoke.MethodHandles
-&nbsp;import java.lang.invoke.MethodType
-&nbsp;import java.time.Instant
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
-&nbsp;object FFM {
+<b class="nc">&nbsp;@Serializable</b>
+&nbsp;data class Video(
+<b class="nc">&nbsp;    val description: String,</b>
+<b class="nc">&nbsp;    val sources: List&lt;String&gt;,</b>
+<b class="nc">&nbsp;    val subtitle: String,</b>
+<b class="nc">&nbsp;    val thumb: String,</b>
+<b class="nc">&nbsp;    val title: String,</b>
+<b class="nc">&nbsp;    val poster: String? = null,</b>
+&nbsp;)
 &nbsp;
-&nbsp;  context(KLogger)
-<b class="nc">&nbsp;  suspend fun memoryLayout() = runOnVirtualThread {</b>
-&nbsp;    memoryAPIs()
-&nbsp;    currTime()
-&nbsp;    strlen(&quot;Hello Panama!&quot;)
-&nbsp;    getPid()
-&nbsp;    gmtime()
-&nbsp;    terminal()
-&nbsp;    dhReflection()
-&nbsp;  }
-&nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun strlen(str: String) {
-<b class="nc">&nbsp;    val strlenAddr = SYMBOL_LOOKUP.findOrNull(&quot;strlen&quot;)</b>
-<b class="nc">&nbsp;    val strlenDescriptor = FunctionDescriptor.of(ValueLayout.JAVA_INT, AddressLayout.ADDRESS)</b>
-<b class="nc">&nbsp;    val strlen = LINKER.downcallHandle(strlenAddr, strlenDescriptor)</b>
-<b class="nc">&nbsp;    Arena.ofConfined().use { arena -&gt;</b>
-<b class="nc">&nbsp;      val cString = arena.allocateFrom(str)</b>
-<b class="nc">&nbsp;      val strlenResult = strlen.invokeExact(cString) as Int</b>
-<b class="nc">&nbsp;      info { &quot;&quot;&quot;strlen(&quot;$str&quot;) = $strlenResult&quot;&quot;&quot; }</b>
-<b class="nc">&nbsp;    }</b>
-&nbsp;  }
-&nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun currTime() {
-&nbsp;    // Print the current time.
-<b class="nc">&nbsp;    val timeAddr = SYMBOL_LOOKUP.findOrNull(&quot;time&quot;)</b>
-<b class="nc">&nbsp;    val timeDesc = FunctionDescriptor.of(ValueLayout.JAVA_LONG)</b>
-<b class="nc">&nbsp;    val time = LINKER.downcallHandle(timeAddr, timeDesc)</b>
-<b class="nc">&nbsp;    val timeResult = time.invokeExact() as Long</b>
-<b class="nc">&nbsp;    info { &quot;time() = $timeResult epochSecond&quot; }</b>
-&nbsp;  }
-&nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun gmtime() {
-<b class="nc">&nbsp;    val gmtAddr = SYMBOL_LOOKUP.findOrNull(&quot;gmtime&quot;)</b>
-<b class="nc">&nbsp;    val gmtDesc =</b>
-<b class="nc">&nbsp;        FunctionDescriptor.of(</b>
-<b class="nc">&nbsp;            AddressLayout.ADDRESS.withTargetLayout(TM.LAYOUT), AddressLayout.ADDRESS)</b>
-<b class="nc">&nbsp;    val gmtime = LINKER.downcallHandle(gmtAddr, gmtDesc)</b>
-&nbsp;
-<b class="nc">&nbsp;    Arena.ofConfined().use { arena -&gt;</b>
-<b class="nc">&nbsp;      val time = arena.allocate(ValueLayout.JAVA_LONG.byteSize())</b>
-<b class="nc">&nbsp;      time.set(ValueLayout.JAVA_LONG, 0, Instant.now().epochSecond)</b>
-<b class="nc">&nbsp;      val tmSegment = gmtime.invokeExact(time) as MemorySegment</b>
-<b class="nc">&nbsp;      info { &quot;gmtime() = ${TM(tmSegment)}&quot; }</b>
-<b class="nc">&nbsp;    }</b>
-&nbsp;  }
-&nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun getPid() {
-<b class="nc">&nbsp;    val getpidAddr = SYMBOL_LOOKUP.findOrNull(&quot;getpid&quot;)</b>
-<b class="nc">&nbsp;    val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)</b>
-<b class="nc">&nbsp;    val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)</b>
-<b class="nc">&nbsp;    val pid = getpid.invokeExact() as Int</b>
-<b class="nc">&nbsp;    assert(pid.toLong() == ProcessHandle.current().pid())</b>
-<b class="nc">&nbsp;    info { &quot;getpid() = $pid&quot; }</b>
-&nbsp;  }
-&nbsp;
-&nbsp;  /**
-&nbsp;   * Allocate memory for two doubles and initialize it.
-&nbsp;   *
-&nbsp;   * ```c
-&nbsp;   *  Struct Point2D {
-&nbsp;   *    double x;
-&nbsp;   *    double y;
-&nbsp;   *  } point = { 1.0, 2.0 };
-&nbsp;   * ```
-&nbsp;   */
-&nbsp;  context(KLogger)
-&nbsp;  private fun memoryAPIs() {
-<b class="nc">&nbsp;    Arena.ofConfined().use { arena -&gt;</b>
-<b class="nc">&nbsp;      val point = arena.allocate(ValueLayout.JAVA_DOUBLE.byteSize() * 2)</b>
-<b class="nc">&nbsp;      point.set(ValueLayout.JAVA_DOUBLE, 0, 1.0)</b>
-<b class="nc">&nbsp;      point.set(ValueLayout.JAVA_DOUBLE, 8, 2.0)</b>
-<b class="nc">&nbsp;      info { &quot;Point Struct = $point&quot; }</b>
-<b class="nc">&nbsp;      info {</b>
-&nbsp;        &quot;&quot;&quot;Struct {
-<b class="nc">&nbsp;          |  x = ${point.get(ValueLayout.JAVA_DOUBLE, 0)} ,</b>
-<b class="nc">&nbsp;          |  y = ${point.get(ValueLayout.JAVA_DOUBLE, 8)}</b>
-&nbsp;          |}
-&nbsp;         &quot;&quot;&quot;
-<b class="nc">&nbsp;            .trimMargin()</b>
-&nbsp;      }
-<b class="nc">&nbsp;    }</b>
-&nbsp;
-<b class="nc">&nbsp;    val point2D =</b>
-<b class="nc">&nbsp;        MemoryLayout.structLayout(</b>
-<b class="nc">&nbsp;                ValueLayout.JAVA_DOUBLE.withName(&quot;x&quot;),</b>
-<b class="nc">&nbsp;                ValueLayout.JAVA_DOUBLE.withName(&quot;y&quot;),</b>
-&nbsp;            )
-<b class="nc">&nbsp;            .withName(&quot;Point2D&quot;)</b>
-&nbsp;
-&nbsp;    // VarHandle accessors for the struct fields
-<b class="nc">&nbsp;    val x = point2D.varHandle(MemoryLayout.PathElement.groupElement(&quot;x&quot;))</b>
-<b class="nc">&nbsp;    val y = point2D.varHandle(MemoryLayout.PathElement.groupElement(&quot;y&quot;))</b>
-&nbsp;
-<b class="nc">&nbsp;    Arena.ofConfined().use { arena -&gt;</b>
-&nbsp;      // val seg = MemorySegment.allocateNative(8,arena.scope())
-<b class="nc">&nbsp;      val point = arena.allocate(point2D)</b>
-<b class="nc">&nbsp;      x.set(point, 0L, 1.0)</b>
-<b class="nc">&nbsp;      y.set(point, 0L, 2.0)</b>
-<b class="nc">&nbsp;      info { &quot;Point2D segment = $point&quot; }</b>
-<b class="nc">&nbsp;      info {</b>
-&nbsp;        &quot;&quot;&quot;Point2D {
-<b class="nc">&nbsp;          |  x = ${x.get(point, 0L)} ,</b>
-<b class="nc">&nbsp;          |  y = ${y.get(point, 0L)}</b>
-&nbsp;          |}&quot;&quot;&quot;
-<b class="nc">&nbsp;            .trimMargin()</b>
-&nbsp;      }
-<b class="nc">&nbsp;    }</b>
-&nbsp;
-&nbsp;    // Allocate an off-heap region of memory big enough to hold 10 values of the primitive type int,
-&nbsp;    // and fill it with values ranging from 0 to 9
-<b class="nc">&nbsp;    Arena.ofConfined().use { arena -&gt;</b>
-<b class="nc">&nbsp;      val count = 10</b>
-<b class="nc">&nbsp;      val segment = arena.allocate(count * ValueLayout.JAVA_INT.byteSize())</b>
-<b class="nc">&nbsp;      for (i in 0 ..&lt; count) {</b>
-<b class="nc">&nbsp;        segment.setAtIndex(ValueLayout.JAVA_INT, i.toLong(), i)</b>
-&nbsp;      }
-<b class="nc">&nbsp;    }</b>
-&nbsp;  }
-&nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun terminal() {
-<b class="nc">&nbsp;    val winsize =</b>
-<b class="nc">&nbsp;        MemoryLayout.structLayout(</b>
-<b class="nc">&nbsp;                ValueLayout.JAVA_SHORT.withName(&quot;ws_row&quot;),</b>
-<b class="nc">&nbsp;                ValueLayout.JAVA_SHORT.withName(&quot;ws_col&quot;),</b>
-<b class="nc">&nbsp;                ValueLayout.JAVA_SHORT.withName(&quot;ws_xpixel&quot;),</b>
-<b class="nc">&nbsp;                ValueLayout.JAVA_SHORT.withName(&quot;ws_ypixel&quot;),</b>
-&nbsp;            )
-<b class="nc">&nbsp;            .withName(&quot;winsize&quot;)</b>
-&nbsp;
-<b class="nc">&nbsp;    val wsRow = winsize.varHandle(MemoryLayout.PathElement.groupElement(&quot;ws_row&quot;))</b>
-<b class="nc">&nbsp;    val wsCol = winsize.varHandle(MemoryLayout.PathElement.groupElement(&quot;ws_col&quot;))</b>
-<b class="nc">&nbsp;    val wsXpixel = winsize.varHandle(MemoryLayout.PathElement.groupElement(&quot;ws_xpixel&quot;))</b>
-<b class="nc">&nbsp;    val wsYpixel = winsize.varHandle(MemoryLayout.PathElement.groupElement(&quot;ws_ypixel&quot;))</b>
-&nbsp;
-<b class="nc">&nbsp;    val ioctlFun =</b>
-<b class="nc">&nbsp;        FunctionDescriptor.of(</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT,</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_INT,</b>
-<b class="nc">&nbsp;            ValueLayout.JAVA_LONG,</b>
-<b class="nc">&nbsp;            AddressLayout.ADDRESS.withTargetLayout(winsize))</b>
-<b class="nc">&nbsp;    val isAttyFun = FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.JAVA_INT)</b>
-&nbsp;
-&nbsp;    // For capturing the errno value
-<b class="nc">&nbsp;    val ccs = Linker.Option.captureCallState(&quot;errno&quot;)</b>
-<b class="nc">&nbsp;    val csLayout = Linker.Option.captureStateLayout()</b>
-<b class="nc">&nbsp;    val errnoHandle = csLayout?.varHandle(MemoryLayout.PathElement.groupElement(&quot;errno&quot;))</b>
-&nbsp;
-<b class="nc">&nbsp;    val ioctl = downcallHandle(&quot;ioctl&quot;, ioctlFun, ccs, Linker.Option.firstVariadicArg(2))</b>
-<b class="nc">&nbsp;    val isAtty = downcallHandle(&quot;isatty&quot;, isAttyFun)</b>
-&nbsp;
-<b class="nc">&nbsp;    Arena.ofConfined().use { arena -&gt;</b>
-<b class="nc">&nbsp;      val isTerminal = isAtty?.invokeExact(1) as Int != 0</b>
-<b class="nc">&nbsp;      if (isTerminal) {</b>
-<b class="nc">&nbsp;        val winSeg = arena.allocate(winsize)</b>
-<b class="nc">&nbsp;        val capturedState = arena.allocate(csLayout)</b>
-<b class="nc">&nbsp;        val winRet = ioctl?.invokeExact(capturedState, 1, 0x40087468L, winSeg) as Int</b>
-&nbsp;
-<b class="nc">&nbsp;        if (winRet == -1) {</b>
-<b class="nc">&nbsp;          val errno = errnoHandle?.get(capturedState, 0L) as Int</b>
-<b class="nc">&nbsp;          info { &quot;ioctl() errno: $errno&quot; }</b>
-&nbsp;        } else {
-<b class="nc">&nbsp;          info {</b>
-&nbsp;            &quot;&quot;&quot;
-&nbsp;                |winsize {
-<b class="nc">&nbsp;                |  ws_row = ${wsRow.get(winSeg, 0L)}</b>
-<b class="nc">&nbsp;                |  ws_col = ${wsCol.get(winSeg, 0L)}</b>
-<b class="nc">&nbsp;                |  ws_xpixel = ${wsXpixel.get(winSeg, 0L)}</b>
-<b class="nc">&nbsp;                |  ws_ypixel = ${wsYpixel.get(winSeg, 0L)}</b>
-&nbsp;                |}
-&nbsp;                &quot;&quot;&quot;
-<b class="nc">&nbsp;                .trimMargin()</b>
-&nbsp;          }
-&nbsp;        }
-&nbsp;      } else {
-<b class="nc">&nbsp;        info { &quot;Not a TTY&quot; }</b>
-&nbsp;      }
-<b class="nc">&nbsp;    }</b>
-&nbsp;
-&nbsp;    /** Atomic access for long[] using a MemorySegment */
-&nbsp;    fun arrayAtomicAccess() {
-<b class="nc">&nbsp;      val arr = LongArray(10)</b>
-<b class="nc">&nbsp;      val arrSeg = MemorySegment.ofArray(arr)</b>
-<b class="nc">&nbsp;      val vh = ValueLayout.JAVA_INT.varHandle()</b>
-<b class="nc">&nbsp;      vh.setVolatile(arrSeg, 0L, 69)</b>
-<b class="nc">&nbsp;      assert(vh.getVolatile(arrSeg, 0L) as Int == 69)</b>
-&nbsp;    }
-&nbsp;  }
-&nbsp;
-&nbsp;  /** Reflectively invoke the downcallHandle method on the Linker class. */
-&nbsp;  context(KLogger)
-&nbsp;  private fun dhReflection() {
-<b class="nc">&nbsp;    val mh =</b>
-<b class="nc">&nbsp;        MethodHandles.lookup()</b>
-<b class="nc">&nbsp;            .findVirtual(</b>
-<b class="nc">&nbsp;                Linker::class.java,</b>
-<b class="nc">&nbsp;                &quot;downcallHandle&quot;,</b>
-<b class="nc">&nbsp;                MethodType.methodType(</b>
-<b class="nc">&nbsp;                    MethodHandle::class.java,</b>
-<b class="nc">&nbsp;                    FunctionDescriptor::class.java,</b>
-<b class="nc">&nbsp;                    Array&lt;Linker.Option&gt;::class.java,</b>
-&nbsp;                ),
-&nbsp;            )
-<b class="nc">&nbsp;    val handle =</b>
-<b class="nc">&nbsp;        mh.invokeExact(LINKER, FunctionDescriptor.ofVoid(), arrayOf&lt;Linker.Option&gt;())</b>
-&nbsp;            as MethodHandle
-<b class="nc">&nbsp;    info { &quot;Got downcall handle: $handle&quot; }</b>
-&nbsp;  }
-&nbsp;}
+&nbsp;fun sampleVideoData() =
+&nbsp;    listOf(
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;Big Buck Bunny tells the story of a giant rabbit with a heart bigger than himself. When one sunny day three rodents rudely harass him, something snaps... and the rabbit ain&#39;t no bunny anymore! In the typical cartoon tradition he prepares the nasty rodents a comical revenge.\n\nLicensed under the Creative Commons Attribution license\nhttps://www.bigbuckbunny.org&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4&quot;),
+&nbsp;            subtitle = &quot;By Blender Foundation&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg&quot;,
+&nbsp;            title = &quot;Big Buck Bunny&quot;,
+&nbsp;            poster = &quot;https://peach.blender.org/wp-content/uploads/bbb-splash.png&quot;),
+&nbsp;        Video(
+&nbsp;            description = &quot;The first Blender Open Movie from 2006&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4&quot;),
+&nbsp;            subtitle = &quot;By Blender Foundation&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ElephantsDream.jpg&quot;,
+&nbsp;            title = &quot;Elephant Dream&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;HBO GO now works with Chromecast -- the easiest way to enjoy online video on your TV. For when you want to settle into your Iron Throne to watch the latest episodes. For $35.\nLearn how to use Chromecast with HBO GO and more at google.com/chromecast.&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4&quot;),
+&nbsp;            subtitle = &quot;By Google&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerBlazes.jpg&quot;,
+&nbsp;            title = &quot;For Bigger Blazes&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for when Batman&#39;s escapes aren&#39;t quite big enough. For $35. Learn how to use Chromecast with Google Play Movies and more at google.com/chromecast.&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4&quot;),
+&nbsp;            subtitle = &quot;By Google&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerEscapes.jpg&quot;,
+&nbsp;            title = &quot;For Bigger Escape&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;Introducing Chromecast. The easiest way to enjoy online video and music on your TV. For $35.  Find out more at google.com/chromecast.&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4&quot;),
+&nbsp;            subtitle = &quot;By Google&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerFun.jpg&quot;,
+&nbsp;            title = &quot;For Bigger Fun&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for the times that call for bigger joyrides. For $35. Learn how to use Chromecast with YouTube and more at google.com/chromecast.&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4&quot;),
+&nbsp;            subtitle = &quot;By Google&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerJoyrides.jpg&quot;,
+&nbsp;            title = &quot;For Bigger Joyrides&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for when you want to make Buster&#39;s big meltdowns even bigger. For $35. Learn how to use Chromecast with Netflix and more at google.com/chromecast.&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4&quot;),
+&nbsp;            subtitle = &quot;By Google&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/ForBiggerMeltdowns.jpg&quot;,
+&nbsp;            title = &quot;For Bigger Meltdowns&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;Sintel is an independently produced short film, initiated by the Blender Foundation as a means to further improve and validate the free/open source 3D creation suite Blender. With initial funding provided by 1000s of donations via the internet community, it has again proven to be a viable development model for both open 3D technology as for independent animation film.\nThis 15 minute film has been realized in the studio of the Amsterdam Blender Institute, by an international team of artists and developers. In addition to that, several crucial technical and creative targets have been realized online, by developers and artists and teams all over the world.\nwww.sintel.org&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4&quot;),
+&nbsp;            subtitle = &quot;By Blender Foundation&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/Sintel.jpg&quot;,
+&nbsp;            title = &quot;Sintel&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;Smoking Tire takes the all-new Subaru Outback to the highest point we can find in hopes our customer-appreciation Balloon Launch will get some free T-shirts into the hands of our viewers.&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4&quot;),
+&nbsp;            subtitle = &quot;By Garage419&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/SubaruOutbackOnStreetAndDirt.jpg&quot;,
+&nbsp;            title = &quot;Subaru Outback On Street And Dirt&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;Tears of Steel was realized with crowd-funding by users of the open source 3D creation tool Blender. Target was to improve and test a complete open and free pipeline for visual effects in film - and to make a compelling sci-fi film in Amsterdam, the Netherlands.  The film itself, and all raw material used for making it, have been released under the Creatieve Commons 3.0 Attribution license. Visit the tearsofsteel.org website to find out more about this, or to purchase the 4-DVD box with a lot of extras.  (CC) Blender Foundation - https://www.tearsofsteel.org&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4&quot;),
+&nbsp;            subtitle = &quot;By Blender Foundation&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/TearsOfSteel.jpg&quot;,
+&nbsp;            title = &quot;Tears of Steel&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;The Smoking Tire heads out to Adams Motorsports Park in Riverside, CA to test the most requested car of 2010, the Volkswagen GTI. Will it beat the Mazdaspeed3&#39;s standard-setting lap time? Watch and see...&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4&quot;),
+&nbsp;            subtitle = &quot;By Garage419&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/VolkswagenGTIReview.jpg&quot;,
+&nbsp;            title = &quot;Volkswagen GTI Review&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;The Smoking Tire is going on the 2010 Bullrun Live Rally in a 2011 Shelby GT500, and posting a video from the road every single day! The only place to watch them is by subscribing to The Smoking Tire or watching at BlackMagicShine.com&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4&quot;),
+&nbsp;            subtitle = &quot;By Garage419&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/WeAreGoingOnBullrun.jpg&quot;,
+&nbsp;            title = &quot;We Are Going On Bullrun&quot;),
+&nbsp;        Video(
+&nbsp;            description =
+&nbsp;                &quot;The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.The Smoking Tire meets up with Chris and Jorge from CarsForAGrand.com to see just how far $1,000 can go when looking for a car.&quot;,
+&nbsp;            sources =
+&nbsp;                listOf(
+&nbsp;                    &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4&quot;),
+&nbsp;            subtitle = &quot;By Garage419&quot;,
+&nbsp;            thumb =
+&nbsp;                &quot;https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/WhatCarCanYouGetForAGrand.jpg&quot;,
+&nbsp;            title = &quot;What care can you get for a grand?&quot;))
 </code>
 </pre>
 </div>
@@ -382,7 +319,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-04-02 00:20</div>
+    <div style="float:right;">generated on 2024-04-04 08:36</div>
 </div>
 </body>
 </html>
