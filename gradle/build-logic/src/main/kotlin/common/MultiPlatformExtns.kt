@@ -31,6 +31,8 @@ fun KotlinMultiplatformExtension.commonTarget() {
       // Apply multiplatform library bom to all source sets
       dependencies {
         api(project.dependencies.platform(libs.kotlin.bom))
+        api(project.dependencies.platform(libs.kotlinx.coroutines.bom))
+        api(project.dependencies.platform(libs.kotlinx.serialization.bom))
         api(project.dependencies.platform(libs.ktor.bom))
         api(project.dependencies.platform(libs.kotlin.wrappers.bom))
       }

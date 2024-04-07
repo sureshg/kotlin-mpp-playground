@@ -30,7 +30,12 @@ kotlin {
 
   sourceSets {
     commonMain { dependencies { api(projects.shared) } }
-    // nativeMain { dependencies { api(libs.arrow.suspendapp.ktor) } }
+    nativeMain {
+      dependencies {
+        implementation(libs.okio)
+        // api(libs.arrow.suspendapp.ktor)
+      }
+    }
   }
 }
 

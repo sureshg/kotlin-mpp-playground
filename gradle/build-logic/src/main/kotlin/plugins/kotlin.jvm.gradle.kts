@@ -167,6 +167,8 @@ tasks {
 
 dependencies {
   implementation(platform(libs.kotlin.bom))
+  implementation(platform(libs.kotlinx.coroutines.bom))
+  implementation(platform(libs.kotlinx.serialization.bom))
   implementation(platform(libs.ktor.bom))
   implementation(platform(libs.kotlin.wrappers.bom))
   implementation(kotlin("stdlib"))
