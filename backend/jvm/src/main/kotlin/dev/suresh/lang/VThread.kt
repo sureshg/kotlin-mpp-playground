@@ -3,11 +3,11 @@ package dev.suresh.lang
 import dev.suresh.*
 import io.github.oshai.kotlinlogging.KLogger
 import java.util.concurrent.StructuredTaskScope
+import kotlin.metadata.jvm.KotlinClassMetadata
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.datetime.Clock
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.toJavaInstant
-import kotlinx.metadata.jvm.KotlinClassMetadata
 import langFeatures
 import stdlibFeatures
 

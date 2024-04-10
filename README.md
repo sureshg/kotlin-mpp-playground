@@ -64,7 +64,7 @@ $ java -Xlog:class+load:file=/tmp/cds.log:uptime,level,tags,pid \
 
 # Kotlin JS
 $ ./gradlew :web:js:jsBrowserProductionRun -t
-$ ./gradlew kotlinUpgradeYarnLock
+$ ./gradlew kotlinUpgradePackageLock
 
 # Kotlin Native
 $ ./gradlew :backend:native:build

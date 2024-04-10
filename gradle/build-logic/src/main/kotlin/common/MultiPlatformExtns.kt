@@ -112,7 +112,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
       // dependsOn(jvmCommon)
       dependencies {
         // api(libs.kotlin.stdlib)
-        api(libs.kotlinx.metadata.jvm)
+        api(libs.kotlin.metadata.jvm)
         api(libs.ktor.client.java)
         api(libs.slf4j.api)
         api(libs.kotlinx.coroutines.slf4j)
@@ -160,9 +160,10 @@ fun KotlinMultiplatformExtension.jsTarget() {
         testLogging { configureLogEvents() }
         useKarma { useChromeHeadless() }
       }
-
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
+    generateTypeScriptDefinitions()
+
     compilations.configureEach {
       compileTaskProvider.configure { compilerOptions { configureKotlinJs() } }
     }
@@ -195,6 +196,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
     moduleName = "wasm-app"
     useEsModules()
     binaries.executable()
+
     browser {
       commonWebpackConfig {
         outputFileName = "wasm-app.js"
@@ -217,6 +219,8 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
         useKarma { useChromeHeadless() }
       }
     }
+    // Generate .d.ts files
+    generateTypeScriptDefinitions()
 
     compilations.configureEach {
       compileTaskProvider.configure { compilerOptions { configureKotlinJs() } }

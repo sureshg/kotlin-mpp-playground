@@ -3,6 +3,7 @@ package plugins
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 import java.util.jar.Attributes
+import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -71,7 +72,7 @@ powerAssert {
 }
 
 redacted {
-  enabled = true
+  enabled = false
   replacementString = "█"
 }
 
@@ -83,10 +84,8 @@ kover {
       html { title = "${project.name} code coverage report!" }
       verify {
         rule {
-          bound {
-            minValue = 0
-            maxValue = 70
-          }
+          minBound(0, CoverageUnit.LINE)
+          minBound(0, CoverageUnit.BRANCH)
         }
         warningInsteadOfFailure = true
       }

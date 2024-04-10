@@ -129,7 +129,7 @@ class AppTests {
           }
 
       val statusCode = client.get(endPoint).status
-      assertTrue { statusCode.value == 200 }
+      assertTrue(statusCode.value == 200)
     }
   }
 

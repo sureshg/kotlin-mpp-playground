@@ -105,13 +105,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-  
 
-      - name: 🚄 Cache Kotlin Native Compiler
-        uses: actions/cache@v4
-        with:
-          path: ~/.konan
-          key: ${{ runner.os }}-konan-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: ${{ runner.os }}-konan-
-
       - name: 🏗️ Gradle Build & Run
         id: gradle-build
         run: |

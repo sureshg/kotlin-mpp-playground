@@ -99,8 +99,8 @@ tasks {
             "-create",
             "-output",
             binName,
-            linkReleaseExecutableMacosX64.binary.outputFile,
-            linkReleaseExecutableMacosArm64.binary.outputFile)
+            linkReleaseExecutableMacosX64.outputFile.get(),
+            linkReleaseExecutableMacosArm64.outputFile.get())
         workingDir = layout.buildDirectory.dir("bin").get().asFile
         group = "Build"
         description = "Builds universal macOS binary"

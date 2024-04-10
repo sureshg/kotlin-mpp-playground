@@ -82,20 +82,6 @@ fun RepositoryHandler.nodeJS() {
   }
 }
 
-fun RepositoryHandler.yarn() {
-  exclusiveContent {
-    forRepository {
-      ivy(Repo.YARN) {
-        name = "Yarn Distributions at $url"
-        patternLayout { artifact("v[revision]/[artifact](-v[revision]).[ext]") }
-        metadataSources { artifact() }
-        content { includeModule("com.yarnpkg", "yarn") }
-      }
-    }
-    filter { includeGroup("com.yarnpkg") }
-  }
-}
-
 fun RepositoryHandler.mavenSnapshot() {
   maven(url = Repo.SONATYPE_SNAPSHOT) { mavenContent { snapshotsOnly() } }
 }

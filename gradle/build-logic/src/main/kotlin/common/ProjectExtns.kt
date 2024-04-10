@@ -378,6 +378,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       buildList {
         add("-Xcontext-receivers")
         add("-Xexpect-actual-classes")
+        add("-Xskip-prerelease-check")
         if (composeReportsEnabled) {
           val reportPath = layout.buildDirectory.dir("compose_compiler").get().asFile.absolutePath
           add("-P")
@@ -425,6 +426,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
       "-Xemit-jvm-type-annotations",
       "-Xjspecify-annotations=strict",
       "-Xextended-compiler-checks",
+      "-Xskip-prerelease-check",
       // "-Xjdk-release=$javaVersion",
       // "-Xadd-modules=ALL-MODULE-PATH",
       // "-Xmodule-path=",
@@ -527,7 +529,7 @@ fun KotlinJsCompilerOptions.configureKotlinJs() {
 
 context(Project)
 fun KotlinNpmInstallTask.configureKotlinNpm() {
-  // args.add("--ignore-engines")
+  args.add("--ignore-engines")
 }
 
 /**

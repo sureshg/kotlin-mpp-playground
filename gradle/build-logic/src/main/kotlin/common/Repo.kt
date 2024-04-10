@@ -8,8 +8,6 @@ object Repo {
 
   const val NODEJS = "https://nodejs.org/dist/"
 
-  const val YARN = "https://github.com/yarnpkg/yarn/releases/download/"
-
   const val KOBWEB = "https://us-central1-maven.pkg.dev/varabyte-repos/public"
 
   /**

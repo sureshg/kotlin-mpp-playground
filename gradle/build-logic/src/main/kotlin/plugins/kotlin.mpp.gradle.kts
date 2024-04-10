@@ -3,11 +3,12 @@ package plugins
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 import java.util.jar.Attributes
+import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
 import org.gradle.internal.os.OperatingSystem
-import org.jetbrains.kotlin.gradle.dsl.*
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
+import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
-import org.jetbrains.kotlin.gradle.targets.js.yarn.*
 import tasks.BuildConfig
 import tasks.BuildConfigExtension
 import tasks.ReallyExecJar
@@ -21,6 +22,8 @@ plugins {
   dev.zacsweers.redacted
   id("plugins.kotlin.docs")
   kotlin("plugin.power-assert")
+  kotlin("plugin.js-plain-objects")
+  // org.jetbrains.kotlin.plugin.`power-assert`
   // org.gradle.kotlin.`kotlin-dsl`
   // app.cash.molecule
   // dev.mokkery
@@ -74,7 +77,7 @@ powerAssert {
 }
 
 redacted {
-  enabled = true
+  enabled = false
   replacementString = "█"
 }
 
@@ -86,10 +89,8 @@ kover {
       html { title = "${project.name} code coverage report!" }
       verify {
         rule {
-          bound {
-            minValue = 0
-            maxValue = 70
-          }
+          minBound(0, CoverageUnit.LINE)
+          minBound(0, CoverageUnit.BRANCH)
         }
         warningInsteadOfFailure = true
       }
@@ -163,28 +164,23 @@ tasks {
   }
 }
 
-// Initialize Node.js and Yarn extensions only once in a multi-module project
+// Initialize Node.js and NPM extensions only once in a multi-module project
 var nodeJsEnabled: String? by rootProject.extra
 
 if (nodeJsEnabled.toBoolean().not()) {
-  rootProject.plugins.run {
-    withType<NodeJsRootPlugin> {
-      rootProject.extensions.configure<NodeJsRootExtension> {
-        download = true
-        nodeJsEnabled = "true"
-        // version = libs.versions.nodejs.version.get()
-        // nodeDownloadBaseUrl = "https://nodejs.org/download/nightly"
-      }
+  rootProject.plugins.withType<NodeJsRootPlugin> {
+    rootProject.extensions.configure<NodeJsRootExtension> {
+      download = true
+      nodeJsEnabled = "true"
+      // version = libs.versions.nodejs.version.get()
+      // nodeDownloadBaseUrl = "https://nodejs.org/download/nightly"
     }
 
-    withType<YarnPlugin> {
-      rootProject.extensions.configure<YarnRootExtension> {
-        download = true
-        lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
-        yarnLockMismatchReport = YarnLockMismatchReport.WARNING
-        yarnLockAutoReplace = false
-        nodeJsEnabled = "true"
-      }
+    rootProject.extensions.configure<NpmExtension> {
+      lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
+      packageLockMismatchReport = LockFileMismatchReport.WARNING
+      packageLockAutoReplace = false
+      nodeJsEnabled = "true"
     }
   }
 }
