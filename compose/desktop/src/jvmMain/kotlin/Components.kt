@@ -18,7 +18,7 @@ fun Modifier.debug(color: Color = Color.Red) =
             drawBehind {
               drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(8.dp.toPx()))
             }
-        else Modifier)
+        else this)
 
 @Composable
 fun scrollingBox(modifier: Modifier = Modifier, content: @Composable () -> Unit) =

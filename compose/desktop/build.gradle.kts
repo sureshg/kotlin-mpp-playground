@@ -1,5 +1,5 @@
 import common.jvmArguments
-import common.kotlinVersion
+import java.time.Year
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
@@ -13,12 +13,13 @@ dependencies {
   commonMainImplementation(projects.shared)
   jvmMainImplementation(compose.desktop.currentOs)
   jvmMainImplementation(compose.components.resources)
+  jvmMainRuntimeOnly(libs.kotlinx.coroutines.swing)
 }
 
 compose {
-  kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
+  // kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
   // kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
-  kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
+  // kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
 
   platformTypes = platformTypes.get() - KotlinPlatformType.native
 
@@ -27,10 +28,20 @@ compose {
       mainClass = "MainKt"
       args += buildList { add(project.version.toString()) }
       jvmArgs += buildList {
+        // $APPDIR macro is used by jpackage.
+        // To debug _JAVA_LAUNCHER_DEBUG=1
+        add("-splash:${'$'}APPDIR/resources/splash.jpg")
         addAll(jvmArguments(appRun = true, headless = false))
         add("-Dskiko.fps.enabled=true")
         add("-Dskiko.fps.periodSeconds=2.0")
         add("-Dskiko.fps.longFrames.show=true")
+      }
+
+      buildTypes.release.proguard {
+        isEnabled = false
+        optimize = false
+        obfuscate = false
+        // configurationFiles.from(layout.projectDirectory.file("proguard-desktop.pro"))
       }
 
       nativeDistributions {
@@ -38,8 +49,11 @@ compose {
         packageName = project.name
         packageVersion = "1.0.0"
         description = "Compose desktop App!"
-        copyright = "© 2024 Suresh"
+        copyright = "© ${Year.now()} Suresh"
         vendor = "Suresh"
+        appResourcesRootDir = layout.projectDirectory.dir("src/assets")
+        // licenseFile = rootProject.file("LICENSE")
+
         modules(
             "java.instrument",
             "jdk.unsupported",
@@ -48,30 +62,33 @@ compose {
             "jdk.management.agent",
             "jdk.crypto.ec",
             "java.net.http",
-            "jdk.incubator.vector",
         )
 
-        val resRoot = kotlin.sourceSets.jvmMain.get().resources.srcDirs.first()
-
         macOS {
-          iconFile.set(resRoot.resolve("icons/icon-mac.icns"))
-          setDockNameSameAsPackageName = true
+          appStore = false
           bundleID = "${project.group}.${project.name}"
+          setDockNameSameAsPackageName = true
+          iconFile = layout.projectDirectory.file("src/assets/desktop/icon.icns")
 
           notarization {
-            appleID.set("test.app@example.com")
-            password.set("@keychain:NOTARIZATION_PASSWORD")
+            appleID = "test.app@example.com"
+            password = "@keychain:NOTARIZATION_PASSWORD"
           }
         }
 
-        linux { iconFile.set(resRoot.resolve("icons/icon-linux.png")) }
+        linux { layout.projectDirectory.file("src/assets/desktop/icon.png") }
 
         windows {
-          iconFile.set(resRoot.resolve("icons/icon-windows.ico"))
-          menuGroup = "Compose Desktop App"
-          // see https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
-          upgradeUuid = "18159785-d967-4CD2-8885-77BFA97CFA9F"
+          menu = true
+          menuGroup = "" // root
+          perUserInstall = true
+          // https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
+          upgradeUuid = "b4397f87-3196-4991-96f3-0bd8b0adbdfd"
+          iconFile = layout.projectDirectory.file("src/assets/desktop/icon.ico")
         }
+
+        // val resRoot = kotlin.sourceSets.jvmMain.get().resources.srcDirs.first()
+        // resRoot.resolve("gif/particle.gif")
       }
     }
   }

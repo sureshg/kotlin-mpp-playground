@@ -6,6 +6,7 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -21,8 +22,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import java.io.File
 
 val debug = true
+
+val resourcesDir = File(System.getProperty("compose.application.resources.dir", "."))
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -34,9 +38,13 @@ fun App() {
     Column(
         modifier = Modifier.fillMaxWidth().debug(color = Color.Blue),
         horizontalAlignment = Alignment.CenterHorizontally) {
-          Text(
-              text,
-              modifier = Modifier.basicMarquee().fillMaxWidth().align(Alignment.CenterHorizontally))
+          SelectionContainer {
+            Text(
+                text,
+                modifier =
+                    Modifier.basicMarquee().fillMaxWidth().align(Alignment.CenterHorizontally))
+          }
+
           Button(
               onClick = {
                 text = buildAnnotatedString {
@@ -67,6 +75,12 @@ fun App() {
                   append("Compose Multiplatform Compiler Version: ")
                   withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
                     append(BuildConfig.jetbrainsComposeCompiler)
+                  }
+                  appendLine()
+
+                  append("Kotlin Compose Compiler Version: ")
+                  withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
+                    append(BuildConfig.kotlin)
                   }
                   appendLine()
                 }
