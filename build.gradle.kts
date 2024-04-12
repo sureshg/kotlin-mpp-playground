@@ -23,6 +23,7 @@ nmcp {
     project(projects.backend.jvm.dependencyProject.path)
     project(projects.backend.data.dependencyProject.path)
     project(projects.backend.profiling.dependencyProject.path)
+    project(projects.backend.security.dependencyProject.path)
     username = mavenCentralUsername
     password = mavenCentralPassword
     publicationType = "USER_MANAGED"

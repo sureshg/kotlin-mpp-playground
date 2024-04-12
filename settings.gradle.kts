@@ -22,6 +22,8 @@ include(":meta:compiler:plugin")
 
 include(":backend:jvm")
 
+include(":backend:security")
+
 include(":backend:data")
 
 include(":backend:profiling")

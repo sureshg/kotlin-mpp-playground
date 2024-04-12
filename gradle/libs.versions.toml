@@ -34,7 +34,7 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.15.0-Beta.2"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.728"
+kotlin-wrappers                = "1.0.0-pre.729"
 kotlin-redacted                = "1.8.0-alpha03"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
@@ -85,7 +85,7 @@ kotlin-codepoints              = "0.7.0"
 kotlin-logging                 = "6.0.4"
 kotlin-bignum                  = "0.3.9"
 kotlin-diff                    = "0.4.0"
-kotlin-retry                   = "2.0.0"
+kotlin-retry                   = "2.0.1"
 kotlinx-jsonpath               = "3.0.1"
 kotlin-cryptography            = "0.3.0"
 uri-kmp                        = "0.0.18"
@@ -127,6 +127,7 @@ ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "8.3.1"
 airlift-aircompressor          = "0.25"
 airlift-security               = "244"
+directory-keystore             = "1.1.0"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
 jfree-chart                    = "1.5.4"
@@ -310,6 +311,7 @@ arrow-suspendapp-ktor                = { module = "io.arrow-kt:suspendapp-ktor" 
 airlift-aircompressor                = { module = "io.airlift:aircompressor"                                   , version.ref = "airlift-aircompressor"}
 airlift-security                     = { module = "io.airlift:security"                                        , version.ref = "airlift-security"}
 airlift-security-jwks                = { module = "io.airlift:security-jwks"                                   , version.ref = "airlift-security"}
+directory-keystore                   = { module = "com.github.marschall:directory-keystore"                    , version.ref = "directory-keystore"}
 pty4j                                = { module = "org.jetbrains.pty4j:pty4j"                                  , version.ref = "pty4j"}
 sshj                                 = { module = "com.hierynomus:sshj"                                        , version.ref = "sshj"}
 sslcontext-kickstart                 = { module = "io.github.hakky54:sslcontext-kickstart"                     , version.ref = "sslcontext-kickstart"}
@@ -348,6 +350,7 @@ sqids                                = { module = "org.sqids:sqids"             
 tsid                                 = { module = "io.hypersistence:hypersistence-tsid"                        , version.ref = "tsid"}
 
 kotlin-retry                         = { module = "com.michael-bull.kotlin-retry:kotlin-retry"                 , version.ref = "kotlin-retry" }
+kotlin-retry-result                  = { module = "com.michael-bull.kotlin-retry:kotlin-retry-result"          , version.ref = "kotlin-retry" }
 cardiologist                         = { module = "io.github.kevincianfarini.cardiologist:cardiologist"        , version.ref = "cardiologist" }
 kotest-core                          = { module = "io.kotest:kotest-assertions-core"                           , version.ref = "kotest"}
 kotest-junit5                        = { module = "io.kotest:kotest-runner-junit5"                             , version.ref = "kotest"}
