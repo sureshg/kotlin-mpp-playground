@@ -68,6 +68,8 @@ dev.suresh.routes
 gg.jte.generated.precompiled
 module:profiling
 dev.suresh
+module:security
+dev.suresh
 module:js
 hljs
 xterm
