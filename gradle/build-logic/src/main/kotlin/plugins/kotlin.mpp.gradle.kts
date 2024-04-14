@@ -23,7 +23,7 @@ plugins {
   id("plugins.kotlin.docs")
   kotlin("plugin.power-assert")
   kotlin("plugin.js-plain-objects")
-  // org.jetbrains.kotlin.plugin.`power-assert`
+  // io.github.terrakok.`kmp-hierarchy`
   // org.gradle.kotlin.`kotlin-dsl`
   // app.cash.molecule
   // dev.mokkery

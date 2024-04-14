@@ -173,6 +173,7 @@ jib-plugin                     = "3.4.2"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 jetbrains-compose              = "1.6.2"
+kmp-hierarchy                  = "1.1"
 jetbrains-compose-compiler     = "1.5.11-kt-2.0.0-RC1"
 kobweb                         = "0.17.2"
 
@@ -192,6 +193,7 @@ build-dokka-plugin                   = { module = "org.jetbrains.dokka:dokka-gra
 build-dokka-base                     = { module = "org.jetbrains.dokka:dokka-base"                                  , version.ref = "kotlin-dokka"}
 build-kotlin-ksp                     = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
 build-redacted-plugin                = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "kotlin-redacted"}
+build-kmp-hierarchy                  = { module = "io.github.terrakok:kmp-hierarchy"                                , version.ref = "kmp-hierarchy"}
 build-benmanesversions               = { module = "com.github.ben-manes:gradle-versions-plugin"                     , version.ref = "benmanes"}
 build-gradle-develocity              = { module = "com.gradle:develocity-gradle-plugin"                             , version.ref = "gradle-develocity" }
 build-mrjar-plugin                   = { module = "me.champeau.gradle.mrjar:plugin"                                 , version.ref = "mrjar"}

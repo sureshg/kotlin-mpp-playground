@@ -93,7 +93,8 @@ $ ./gradlew publishAllPublicationsToLocalRepository
 # Benchmark
 $ ./gradlew :benchmark:benchmark
 
-# Dependencies
+# KMP hierarchy, Dependencies
+$ ./gradlew :shared:printHierarchy
 $ ./gradlew :backend:jvm:listResolvedArtifacts
 $ ./gradlew createModuleGraph
 $ ./gradlew generateChangelog

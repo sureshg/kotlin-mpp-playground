@@ -186,6 +186,7 @@ dependencies {
   implementation(libs.build.jib.nativeimage.extn)
   // For using kotlin-dsl in pre-compiled script plugins
   implementation("${libs.build.kotlin.dsl.get().module}:${expectedKotlinDslPluginsVersion}")
+  // implementation(libs.build.kmp.hierarchy)
   // implementation(libs.build.includegit.plugin)
   // implementation(libs.build.cyclonedx.plugin)
   testImplementation(gradleTestKit())
