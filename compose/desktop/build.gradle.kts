@@ -62,6 +62,7 @@ compose {
             "jdk.management.agent",
             "jdk.crypto.ec",
             "java.net.http",
+            "jdk.incubator.vector",
         )
 
         macOS {
