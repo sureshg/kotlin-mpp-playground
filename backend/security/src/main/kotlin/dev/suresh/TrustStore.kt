@@ -18,18 +18,27 @@ object TrustStore {
           .map { it.substringAfter("KeyStore.").trim() }
           .distinct()
 
-  fun systemTrustStore(keystoreType: SystemKeyStoreType): KeyStore =
-      KeyStore.getInstance(keystoreType.type).apply { load(null, null) }
-
-  fun systemTrustStore(path: Path): KeyStore {
-    Security.addProvider(DirectoryKeystoreProvider())
-    return KeyStore.getInstance("directory").apply { load(DirectoryLoadStoreParameter(path)) }
-  }
+  fun systemTrustStore(type: TrustStoreType): KeyStore =
+      when (type) {
+        is TrustStoreType.Directory -> {
+          if (Security.getProvider(DirectoryKeystoreProvider.NAME) == null) {
+            Security.addProvider(DirectoryKeystoreProvider())
+          }
+          KeyStore.getInstance(type.name).apply { load(DirectoryLoadStoreParameter(type.path)) }
+        }
+        else -> KeyStore.getInstance(type.name).apply { load(null, null) }
+      }
 }
 
-enum class SystemKeyStoreType(val type: String) {
-  WIN_USER("Windows-MY"),
-  WIN_SYSTEM("Windows-ROOT"),
-  MACOS_USER("KeychainStore"),
-  MACOS_SYSTEM("KeychainStore-ROOT")
+sealed class TrustStoreType(val name: String) {
+
+  data object WIN_USER : TrustStoreType("Windows-MY")
+
+  data object WIN_SYSTEM : TrustStoreType("Windows-ROOT")
+
+  data object MACOS_USER : TrustStoreType("KeychainStore")
+
+  data object MACOS_SYSTEM : TrustStoreType("KeychainStore-ROOT")
+
+  class Directory(val path: Path) : TrustStoreType("Directory")
 }

@@ -174,7 +174,7 @@ jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 jetbrains-compose              = "1.6.2"
 jetbrains-compose-compiler     = "1.5.11-kt-2.0.0-RC1"
-kobweb                         = "0.16.2"
+kobweb                         = "0.17.2"
 
 [libraries]
 # External plugins for precompiled script plugins
