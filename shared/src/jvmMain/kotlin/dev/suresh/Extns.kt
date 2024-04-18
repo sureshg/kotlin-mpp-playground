@@ -31,6 +31,10 @@ fun <T : Class<*>> T.toBytes() =
 val <T : Class<*>> T.resourcePath
   get() = getResource("$simpleName.class")
 
+/** Returns the jar file path of the class */
+val <T : Class<*>> T.jarPath
+  get() = protectionDomain.codeSource.location.toURI().path
+
 /** Run the lambda in the context of the receiver classloader. */
 fun ClassLoader.using(run: () -> Unit) {
   val cl = Thread.currentThread().contextClassLoader
