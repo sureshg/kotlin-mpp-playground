@@ -70,6 +70,7 @@ dev.suresh.config
 dev.suresh.lang
 dev.suresh.log
 dev.suresh.plugins
+dev.suresh.plugins.custom
 dev.suresh.routes
 gg.jte.generated.precompiled
 module:profiling
