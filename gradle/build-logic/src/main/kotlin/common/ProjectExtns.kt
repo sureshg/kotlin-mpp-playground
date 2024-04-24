@@ -339,7 +339,6 @@ fun JavaToolchainSpec.configureJvmToolchain() {
 
 context(Project)
 fun JavaCompile.configureJavac() {
-
   options.apply {
     encoding = "UTF-8"
     release = javaRelease

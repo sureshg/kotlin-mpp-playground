@@ -93,9 +93,25 @@ kover {
   }
 }
 
+// Java agent configuration for jib
+val javaAgent by configurations.creating
+
 tasks {
   // Configure "compileJava" and "compileTestJava" tasks.
-  withType<JavaCompile>().configureEach { configureJavac() }
+  withType<JavaCompile>().configureEach {
+    configureJavac()
+
+    // Add the Kotlin classes to the module path
+    options.compilerArgumentProviders.add(
+        object : CommandLineArgumentProvider {
+          @InputFiles
+          @PathSensitive(PathSensitivity.RELATIVE)
+          val kotlinClasses = compileKotlin.flatMap { it.destinationDirectory }
+
+          override fun asArguments() =
+              listOf("--patch-module", "$group=${kotlinClasses.get().asFile.absolutePath}")
+        })
+  }
 
   withType<KotlinCompile>().configureEach {
     usePreciseJavaTracking = true
@@ -147,6 +163,19 @@ tasks {
         }
 
     build { finalizedBy(buildExecutable) }
+  }
+
+  // Copy OpenTelemetry Java agent for jib
+  plugins.withId("com.google.cloud.tools.jib") {
+    val copyOtelAgent by
+        registering(Copy::class) {
+          from(javaAgent)
+          into(layout.buildDirectory.dir("otel"))
+          rename { "otel-javaagent.jar" }
+          duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        }
+
+    processResources { dependsOn(copyOtelAgent) }
   }
 
   // Javadoc

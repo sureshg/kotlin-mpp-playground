@@ -125,10 +125,13 @@ tasks {
   jibDockerBuild {
     dependsOn(prepareJib)
     doLast {
+      val portMapping = jib?.container?.ports.orEmpty().joinToString(" ") { "-p $it:$it" }
+      val image = jib?.to?.image ?: project.name
+      val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
       logger.lifecycle(
           TextColors.cyan(
               """
-              |Run: docker run -it --rm --name ${project.name} ${jib?.to?.image}:${jib?.to?.tags?.firstOrNull().orEmpty()}
+              |Run: docker run -it --rm --name ${project.name} $portMapping $image:$tag
               """
                   .trimMargin()))
     }

@@ -5,6 +5,7 @@ import dev.suresh.config.SysConfig
 import dev.suresh.plugins.configureHTTP
 import dev.suresh.plugins.configureSecurity
 import dev.suresh.plugins.configureSerialization
+import dev.suresh.plugins.custom.customPlugins
 import dev.suresh.plugins.errorRoutes
 import dev.suresh.routes.*
 import io.ktor.server.application.*
@@ -27,6 +28,7 @@ fun Application.module() {
   configureSerialization()
   configureSecurity()
   errorRoutes()
+  customPlugins()
   routing {
     adminRoutes()
     webApp()

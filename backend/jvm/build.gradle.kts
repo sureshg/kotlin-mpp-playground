@@ -1,3 +1,5 @@
+import com.github.ajalt.mordant.rendering.TextColors
+import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 import kotlin.io.path.Path
@@ -52,16 +54,20 @@ jib {
   }
 
   container {
+    appRoot = "/app"
     ports = listOf("8080", "9898")
     entrypoint = buildList {
       add("java")
       addAll(application.applicationDefaultJvmArgs.map { it.replace(tmp, "/tmp/") })
       add("-cp")
-      add("@/app/jib-classpath-file")
-      add("@/app/jib-main-class-file")
+      add("@${appRoot}/jib-classpath-file")
+      add("@${appRoot}/jib-main-class-file")
     }
+    environment = mapOf("OTEL_JAVAAGENT_ENABLED" to "true")
     args = listOf(project.name, project.version.toString())
+    mainClass = application.mainClass.get()
     expandClasspathDependencies = true
+    format = ImageFormat.OCI
     labels =
         mapOf(
             "maintainer" to project.githubUser,
@@ -73,10 +79,19 @@ jib {
             "org.opencontainers.image.url" to project.githubRepo,
             "org.opencontainers.image.source" to project.githubRepo,
             "org.opencontainers.image.licenses" to "Apache-2.0")
-    mainClass = application.mainClass.get()
   }
 
   containerizingMode = "packaged"
+
+  // Copy OpenTelemetry Java agent into the container
+  extraDirectories {
+    paths {
+      path {
+        setFrom(layout.buildDirectory.dir("otel"))
+        into = "${container.appRoot}/otel"
+      }
+    }
+  }
 }
 
 // Configuration to copy JS/Wasm app to resources
@@ -107,17 +122,18 @@ tasks {
   // Makes sure jte is generated before compilation
   withType<KspAATask>().configureEach { dependsOn(generateJte) }
 
-  // Enable compilation with Java Module System.
-  compileJava {
-    options.compilerArgumentProviders.add(
-        object : CommandLineArgumentProvider {
-          @InputFiles
-          @PathSensitive(PathSensitivity.RELATIVE)
-          val kotlinClasses = compileKotlin.flatMap { it.destinationDirectory }
-
-          override fun asArguments() =
-              listOf("--patch-module", "$group=${kotlinClasses.get().asFile.absolutePath}")
-        })
+  jibDockerBuild {
+    doLast {
+      val portMapping = jib?.container?.ports.orEmpty().joinToString(" ") { "-p $it:$it" }
+      val image = jib?.to?.image ?: project.name
+      val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
+      logger.lifecycle(
+          TextColors.cyan(
+              """
+              |Run: docker run -it --rm --name ${project.name} $portMapping $image:$tag
+              """
+                  .trimMargin()))
+    }
   }
 
   // publish { finalizedBy(jibDockerBuild) }
@@ -175,7 +191,8 @@ dependencies {
   implementation(kotlinw("css"))
   implementation(libs.ktor.server.html)
 
-  // Monitoring
+  // OpenTelemetry
+  javaAgent(libs.otel.instr.javaagent)
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
   implementation(libs.micrometer.prometheus)

@@ -46,12 +46,10 @@ jobs:
       fail-fast: true
       max-parallel: 3
       matrix:
-        os: [ ubuntu-latest, macos-latest, macos-14 ]
+        os: [ ubuntu-latest, macos-latest ]
         jdk: [ ea ]
         include:
           - os: macos-latest
-            native_task: :macosX64Test
-          - os: macos-14
             native_task: :macosArm64Test
           - os: ubuntu-latest
             native_task: :linuxX64Test

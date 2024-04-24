@@ -120,6 +120,6 @@ val localDateTimeNow
 suspend inline fun <T> runOnVirtualThread(crossinline block: suspend CoroutineScope.() -> T): T =
     withContext(platform.vtDispatcher) { block() }
 
-/** A coroutine scope that uses [Platform.vtDispatcher] as its dispatcher. */
+/** Creates a new coroutine scope that uses [Platform.vtDispatcher] as its dispatcher. */
 val virtualThreadScope
   get() = CoroutineScope(platform.vtDispatcher)
