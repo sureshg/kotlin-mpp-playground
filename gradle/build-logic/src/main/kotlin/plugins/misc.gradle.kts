@@ -25,7 +25,7 @@ spotless {
     // googleJavaFormat(libs.versions.google.javaformat.get())
     palantirJavaFormat(libs.versions.palantir.javaformat.get()).formatJavadoc(true)
     target("**/*.java_disabled")
-    targetExclude("**/build/**", "**/.gradle/**")
+    targetExclude("**/build/**")
   }
   // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
 
@@ -33,23 +33,23 @@ spotless {
   kotlin {
     ktfmt(ktfmtVersion)
     target("**/*.kt")
+    targetExclude("**/build/**", "**/Service.kt")
     trimTrailingWhitespace()
     endWithNewline()
-    targetExclude("**/build/**", "**/.gradle/**", "**/Service.kt")
     // licenseHeader(rootProject.file("gradle/license-header.txt"))
   }
 
   kotlinGradle {
     ktfmt(ktfmtVersion)
     target("**/*.gradle.kts")
+    targetExclude("**/build/**")
     trimTrailingWhitespace()
     endWithNewline()
-    targetExclude("**/build/**")
   }
 
   format("misc") {
     target("**/*.md", "**/.gitignore", "**/.kte")
-    targetExclude("**/build/**", "**/.gradle/**")
+    targetExclude("**/build/**")
     trimTrailingWhitespace()
     indentWithSpaces(2)
     endWithNewline()
