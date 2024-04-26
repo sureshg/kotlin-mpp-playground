@@ -8,14 +8,29 @@ import com.lemonappdev.konsist.api.verify.assertTrue
 import io.ktor.client.*
 import io.ktor.client.engine.java.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.config.*
+import io.ktor.server.plugins.callid.*
+import io.ktor.server.plugins.callloging.*
+import io.ktor.server.plugins.statuspages.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.server.testing.*
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlinx.coroutines.slf4j.MDCContext
 import kotlinx.coroutines.test.runTest
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import nl.altindag.ssl.SSLFactory
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty
 import org.slf4j.LoggerFactory
+import org.slf4j.MDC
 import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.PostgreSQLContainer
 import org.testcontainers.containers.output.Slf4jLogConsumer
@@ -50,6 +65,45 @@ class AppTests {
   fun testDB() {
     assertTrue(pg.isRunning())
     println(pg.getJdbcUrl())
+  }
+
+  @Test
+  fun appTest() = testApplication {
+    environment {
+      log = logger
+      config = MapApplicationConfig("ktor.environment" to "test")
+    }
+
+    application {
+      install(CallLogging) {
+        mdc("mdc-uri") { it.request.uri }
+        callIdMdc("call-id")
+        clock { 0 }
+      }
+
+      install(CallId) {
+        generate(10, "abcde12345")
+        verify { it.isNotEmpty() }
+      }
+
+      install(StatusPages) {
+        status(HttpStatusCode.BadRequest) { call, _ -> call.respond("From StatusPages") }
+      }
+    }
+
+    routing {
+      get("/api") {
+        MDC.put("name", "value")
+        withContext(MDCContext()) { call.respond(HttpStatusCode.BadRequest) }
+      }
+    }
+
+    client.get("/api").apply {
+      assertEquals(HttpStatusCode.OK, status)
+      assertEquals("From StatusPages", this.bodyAsText())
+    }
+
+    // TestLogger.messages.forEach { println(it) }
   }
 
   @Test

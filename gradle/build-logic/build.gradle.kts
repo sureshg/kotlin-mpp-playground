@@ -57,6 +57,7 @@ kotlin {
       optIn("kotlin.ExperimentalStdlibApi")
       optIn("kotlin.time.ExperimentalTime")
       optIn("kotlin.io.encoding.ExperimentalEncodingApi")
+      optIn("kotlinx.validation.ExperimentalBCVApi")
       optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
       optIn("kotlinx.serialization.ExperimentalSerializationApi")
       optIn("org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi")
