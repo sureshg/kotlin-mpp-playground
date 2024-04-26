@@ -1,4 +1,5 @@
 import arrow.continuations.SuspendApp
+import dev.suresh.execute
 import dev.suresh.flow.timerComposeFlow
 import dev.suresh.json
 import dev.suresh.platform
@@ -11,4 +12,6 @@ fun main(args: Array<String>) = SuspendApp {
   println(json.encodeToString(platform.info))
   val count = args.firstOrNull()?.toIntOrNull() ?: 5
   timerComposeFlow().take(count).collect(::println)
+  println("Executing command...")
+  execute("ls", "-l").also(::println)
 }

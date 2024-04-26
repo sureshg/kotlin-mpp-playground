@@ -1,4 +1,5 @@
 import com.github.ajalt.mordant.rendering.TextColors
+import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
 import common.githubRepo
 import common.githubUser
@@ -43,7 +44,7 @@ jib {
   from {
     // Distroless is not yet supported for Kotlin Native
     // image = "gcr.io/distroless/base-debian12"
-    image = "debian:unstable-slim"
+    image = "debian:stable-slim"
     platforms {
       platform {
         architecture = "amd64"
@@ -67,6 +68,7 @@ jib {
   container {
     ports = listOf("8080", "9898")
     args = listOf(project.name, project.version.toString())
+    format = ImageFormat.OCI
     labels =
         mapOf(
             "maintainer" to project.githubUser,

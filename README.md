@@ -67,17 +67,31 @@ $ ./gradlew :web:js:jsBrowserProductionRun -t
 $ ./gradlew kotlinUpgradePackageLock
 
 # Kotlin Native
+# -------------
 $ ./gradlew :backend:native:build
 # Arch specific binaries
 $ ./gradlew :backend:native:macosArm64Binaries
 $ ./gradlew :backend:native:macosX64Binaries
-$ ./gradlew :backend:native:linuxX64Binaries
 $ ./gradlew :backend:native:macOsUniversalBinary
 # Native container image
 $ ./gradlew :backend:native:jibDockerBuild
 $ docker run -it --rm --name native-app sureshg/native
 
+# Test linux binary on debian
+$ ./gradlew :backend:native:linuxX64Binaries
+$ docker run  \
+        --platform=linux/amd64 \
+        -it \
+        --rm \
+        --publish 8080:80 \
+        --mount type=bind,source=$(pwd),destination=/app,readonly \
+        debian:stable-slim
+  # /app/backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
+  # libtree -v /app/backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
+
+
 # Kobweb
+# ------
 $ kobweb run -p compose/web
 $ ./gradlew :compose:web:kobwebStart -t
 $ ./gradlew :compose:web:kobwebStop
