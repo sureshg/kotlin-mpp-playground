@@ -102,6 +102,9 @@ $ ./gradlew generateChangelog
 # Clean
 $ ./gradlew cleanAll
 
+# Gradle Daemon
+$ ./gradlew updateDaemonJvm
+
 # Gradle Best Practices
 $ ./gradlew -p gradle/build-logic :bestPracticesBaseline
 $ ./gradlew checkBuildLogicBestPractices

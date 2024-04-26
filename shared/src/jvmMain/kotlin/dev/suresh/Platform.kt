@@ -42,6 +42,7 @@ object JvmPlatform : Platform {
           .withZone(ZoneId.systemDefault())
           .format(Instant.now())
     }
+
   /** A coroutine dispatcher that executes tasks on Virtual Threads. */
   override val vtDispatcher by lazy {
     log.info("Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...")

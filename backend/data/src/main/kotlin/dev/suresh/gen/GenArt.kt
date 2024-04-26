@@ -15,7 +15,7 @@ object GenArt {
     BufferedImage(S, S, TYPE_INT_ARGB).apply {
       createGraphics().apply {
         color = Color(0, 0, 0, 25)
-        for (angle in 0 ..< 360 step 15) {
+        for (angle in 0..<360 step 15) {
           val old = transform
           val centerX = S / 2.0
           val centerY = S / 2.0

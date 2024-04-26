@@ -127,7 +127,7 @@ object FFM {
     Arena.ofConfined().use { arena ->
       val count = 10
       val segment = arena.allocate(count * ValueLayout.JAVA_INT.byteSize())
-      for (i in 0 ..< count) {
+      for (i in 0..<count) {
         segment.setAtIndex(ValueLayout.JAVA_INT, i.toLong(), i)
       }
     }
