@@ -136,8 +136,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;          .withZone(ZoneId.systemDefault())
 <b class="fc">&nbsp;          .format(Instant.now())</b>
 &nbsp;    }
+&nbsp;
 &nbsp;  /** A coroutine dispatcher that executes tasks on Virtual Threads. */
-&nbsp;  override val vtDispatcher by lazy {
+<b class="fc">&nbsp;  override val vtDispatcher by lazy {</b>
 <b class="fc">&nbsp;    log.info(&quot;Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...&quot;)</b>
 <b class="fc">&nbsp;    Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()</b>
 <b class="fc">&nbsp;  }</b>
@@ -159,23 +160,23 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="fc">&nbsp;            mapOf(</b>
 <b class="fc">&nbsp;                &quot;name&quot; to sysProp(&quot;os.name&quot;),</b>
 <b class="fc">&nbsp;                &quot;version&quot; to sysProp(&quot;os.version&quot;),</b>
-<b class="fc">&nbsp;                &quot;arch&quot; to sysProp(&quot;os.arch&quot;),</b>
-&nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),
+&nbsp;                &quot;arch&quot; to sysProp(&quot;os.arch&quot;),
+<b class="fc">&nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),</b>
 <b class="fc">&nbsp;            )</b>
 <b class="fc">&nbsp;}</b>
 <b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {</b>
 <b class="fc">&nbsp;  val rt = Runtime.getRuntime()</b>
 <b class="fc">&nbsp;  val unit = 1024 * 1024L</b>
-<b class="fc">&nbsp;  val heapSize = rt.totalMemory()</b>
+&nbsp;  val heapSize = rt.totalMemory()
 &nbsp;  val heapFreeSize = rt.freeMemory()
-&nbsp;  val heapUsedSize = heapSize - heapFreeSize
-<b class="nc">&nbsp;  val heapMaxSize = rt.maxMemory()</b>
-&nbsp;  val osMxBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java)
-<b class="fc">&nbsp;  val rtMxBean = ManagementFactory.getRuntimeMXBean()</b>
+<b class="nc">&nbsp;  val heapUsedSize = heapSize - heapFreeSize</b>
+&nbsp;  val heapMaxSize = rt.maxMemory()
+<b class="fc">&nbsp;  val osMxBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java)</b>
+&nbsp;  val rtMxBean = ManagementFactory.getRuntimeMXBean()
 &nbsp;
-&nbsp;  appendLine(&quot;✧✧✧ Time: ${LocalDateTime.now()}&quot;)
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM] JVM Version              : ${System.getProperty(&quot;java.version&quot;)}&quot;)</b>
+<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ Time: ${LocalDateTime.now()}&quot;)</b>
+&nbsp;  appendLine(&quot;✧✧✧ [JVM] JVM Version              : ${System.getProperty(&quot;java.version&quot;)}&quot;)
 &nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-OS]  Operating System     : ${System.getProperty(&quot;os.name&quot;)}&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] CPU Arch             : ${System.getProperty(&quot;os.arch&quot;)}&quot;)
@@ -340,7 +341,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-04-26 06:40</div>
+    <div style="float:right;">generated on 2024-04-26 22:59</div>
 </div>
 </body>
 </html>
