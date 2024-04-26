@@ -87,10 +87,14 @@ tasks {
   withType<AbstractArchiveTask>().configureEach {
     isPreserveFileTimestamps = false
     isReproducibleFileOrder = true
-    val `rwxrwxr-x` = 0b111111101
-    val `rw-rw-r--` = 0b110110100
-    dirMode = `rwxrwxr-x`
-    fileMode = `rw-rw-r--`
+    dirPermissions {
+      // 0b111111101
+      unix("rwxrwxr-x")
+    }
+    filePermissions {
+      // 0b110110100
+      unix("rw-rw-r--")
+    }
 
     // filesMatching("**/bin/*") { mode = `rwxr-xr-x` }
     // filesMatching("**/bin/*.bat") { mode = `rw-r--r--` }
