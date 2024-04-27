@@ -96,6 +96,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;import com.sun.management.OperatingSystemMXBean
 &nbsp;import java.io.File
+&nbsp;import java.lang.invoke.MethodHandles
+&nbsp;import java.lang.invoke.MethodType
 &nbsp;import java.lang.management.ManagementFactory
 &nbsp;import java.net.InetAddress
 &nbsp;import java.net.InetSocketAddress
@@ -110,72 +112,107 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import java.time.ZoneId
 &nbsp;import java.time.format.DateTimeFormatter
 &nbsp;import java.util.*
+&nbsp;import java.util.concurrent.ExecutorService
 &nbsp;import java.util.concurrent.Executors
 &nbsp;import javax.net.ssl.TrustManagerFactory
-&nbsp;import javax.net.ssl.X509TrustManager
-&nbsp;import kotlinx.coroutines.asCoroutineDispatcher
+<b class="nc">&nbsp;import javax.net.ssl.X509TrustManager</b>
+&nbsp;import kotlinx.coroutines.*
 &nbsp;import org.slf4j.LoggerFactory
-&nbsp;
-&nbsp;actual val platform: Platform = JvmPlatform
 <b class="nc">&nbsp;</b>
-&nbsp;object JvmPlatform : Platform {
+&nbsp;actual val platform: Platform = JvmPlatform
 &nbsp;
-<b class="nc">&nbsp;  private val log = LoggerFactory.getLogger(this::class.java)</b>
+<b class="fc">&nbsp;object JvmPlatform : Platform {</b>
 &nbsp;
-&nbsp;  override val name: String = &quot;JVM&quot;
+&nbsp;  private val log = LoggerFactory.getLogger(this::class.java)
+&nbsp;
+<b class="fc">&nbsp;  override val name: String = &quot;JVM&quot;</b>
 <b class="fc">&nbsp;</b>
-&nbsp;  override fun env(key: String, def: String?): String? = System.getenv(key) ?: def
-&nbsp;
+<b class="fc">&nbsp;  override fun env(key: String, def: String?): String? = System.getenv(key) ?: def</b>
+<b class="fc">&nbsp;</b>
 &nbsp;  override fun sysProp(key: String, def: String?): String? = System.getProperty(key, def)
-<b class="fc">&nbsp;</b>
-<b class="fc">&nbsp;  override val tzShortId: String</b>
+&nbsp;
+&nbsp;  override val tzShortId: String
 <b class="fc">&nbsp;    get() {</b>
-<b class="fc">&nbsp;      // ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)</b>
+&nbsp;      // ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)
 &nbsp;      return DateTimeFormatter.ofPattern(&quot;zzz&quot;)
 &nbsp;          .withLocale(Locale.ENGLISH)
-&nbsp;          .withZone(ZoneId.systemDefault())
+<b class="fc">&nbsp;          .withZone(ZoneId.systemDefault())</b>
 <b class="fc">&nbsp;          .format(Instant.now())</b>
-&nbsp;    }
-&nbsp;
-&nbsp;  /** A coroutine dispatcher that executes tasks on Virtual Threads. */
-<b class="fc">&nbsp;  override val vtDispatcher by lazy {</b>
-<b class="fc">&nbsp;    log.info(&quot;Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...&quot;)</b>
-<b class="fc">&nbsp;    Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;  /** A coroutine dispatcher that executes tasks on Virtual Threads. */</b>
+<b class="fc">&nbsp;  override val virtualDispatcher: CoroutineDispatcher? by lazy {</b>
+<b class="fc">&nbsp;    runCatching {</b>
+<b class="fc">&nbsp;          log.info(&quot;Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...&quot;)</b>
+<b class="fc">&nbsp;          // Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()</b>
+<b class="fc">&nbsp;          val mh =</b>
+<b class="fc">&nbsp;              MethodHandles.publicLookup()</b>
+<b class="fc">&nbsp;                  .findStatic(</b>
+<b class="fc">&nbsp;                      Executors::class.java,</b>
+<b class="fc">&nbsp;                      &quot;newVirtualThreadPerTaskExecutor&quot;,</b>
+<b class="fc">&nbsp;                      MethodType.methodType(</b>
+<b class="fc">&nbsp;                          ExecutorService::class.java,</b>
+<b class="fc">&nbsp;                      ))</b>
+<b class="fc">&nbsp;          val execService = mh.invokeExact() as ExecutorService</b>
+<b class="fc">&nbsp;          execService.asCoroutineDispatcher()</b>
+<b class="fc">&nbsp;          // Via Reflection</b>
+<b class="fc">&nbsp;          // (Executors::class.java.getMethod(&quot;newVirtualThreadPerTaskExecutor&quot;).invoke(null) as</b>
+<b class="fc">&nbsp;          // ExecutorService).asCoroutineDispatcher()</b>
+&nbsp;        }
+<b class="fc">&nbsp;        .getOrNull()</b>
 <b class="fc">&nbsp;  }</b>
 <b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;  override val appInfo: Map&lt;String, String&gt;</b>
 <b class="fc">&nbsp;    get() =</b>
 <b class="fc">&nbsp;        super.appInfo +</b>
 <b class="fc">&nbsp;            mapOf(</b>
-<b class="fc">&nbsp;                &quot;uptime&quot; to</b>
-<b class="fc">&nbsp;                    run {</b>
-<b class="fc">&nbsp;                      val processEpochSec =</b>
-<b class="fc">&nbsp;                          ProcessHandle.current().info().startInstant().get().epochSecond</b>
+&nbsp;                &quot;uptime&quot; to
+&nbsp;                    run {
+<b class="nc">&nbsp;                      val processEpochSec =</b>
+&nbsp;                          ProcessHandle.current().info().startInstant().get().epochSecond
 <b class="fc">&nbsp;                      epochSecToString(processEpochSec)</b>
-<b class="fc">&nbsp;                    })</b>
-<b class="fc">&nbsp;</b>
+&nbsp;                    })
+&nbsp;
 <b class="fc">&nbsp;  override val osInfo: Map&lt;String, String?&gt;</b>
-<b class="fc">&nbsp;    get() =</b>
-<b class="fc">&nbsp;        super.osInfo +</b>
-<b class="fc">&nbsp;            mapOf(</b>
-<b class="fc">&nbsp;                &quot;name&quot; to sysProp(&quot;os.name&quot;),</b>
-<b class="fc">&nbsp;                &quot;version&quot; to sysProp(&quot;os.version&quot;),</b>
+&nbsp;    get() =
+&nbsp;        super.osInfo +
+&nbsp;            mapOf(
+&nbsp;                &quot;name&quot; to sysProp(&quot;os.name&quot;),
+&nbsp;                &quot;version&quot; to sysProp(&quot;os.version&quot;),
 &nbsp;                &quot;arch&quot; to sysProp(&quot;os.arch&quot;),
-<b class="fc">&nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),</b>
-<b class="fc">&nbsp;            )</b>
-<b class="fc">&nbsp;}</b>
-<b class="fc">&nbsp;</b>
-<b class="fc">&nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {</b>
-<b class="fc">&nbsp;  val rt = Runtime.getRuntime()</b>
-<b class="fc">&nbsp;  val unit = 1024 * 1024L</b>
+&nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),
+&nbsp;            )
+&nbsp;}
+&nbsp;
+&nbsp;val Dispatchers.Virtual
+&nbsp;  get() = platform.virtualDispatcher
+&nbsp;
+&nbsp;val Dispatchers.VirtualOrIO
+&nbsp;  get() = Virtual ?: IO
+&nbsp;
+&nbsp;/**
+&nbsp; * Runs the given suspend block on [Dispatchers.Virtual], so that we can call blocking I/O APIs from
+&nbsp; * coroutines
+&nbsp; */
+&nbsp;suspend inline fun &lt;T&gt; runOnVirtualThread(crossinline block: suspend CoroutineScope.() -&gt; T): T =
+&nbsp;    withContext(Dispatchers.Virtual!!) { block() }
+&nbsp;
+&nbsp;/** Creates a new coroutine scope that uses [Dispatchers.Virtual] as its dispatcher. */
+&nbsp;val virtualThreadScope
+&nbsp;  get() = CoroutineScope(Dispatchers.Virtual!!)
+&nbsp;
+&nbsp;/** Returns the runtime information of the JVM and OS. */
+&nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
+&nbsp;  val rt = Runtime.getRuntime()
+&nbsp;  val unit = 1024 * 1024L
 &nbsp;  val heapSize = rt.totalMemory()
 &nbsp;  val heapFreeSize = rt.freeMemory()
-<b class="nc">&nbsp;  val heapUsedSize = heapSize - heapFreeSize</b>
+&nbsp;  val heapUsedSize = heapSize - heapFreeSize
 &nbsp;  val heapMaxSize = rt.maxMemory()
-<b class="fc">&nbsp;  val osMxBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java)</b>
+&nbsp;  val osMxBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java)
 &nbsp;  val rtMxBean = ManagementFactory.getRuntimeMXBean()
 &nbsp;
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ Time: ${LocalDateTime.now()}&quot;)</b>
+&nbsp;  appendLine(&quot;✧✧✧ Time: ${LocalDateTime.now()}&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [JVM] JVM Version              : ${System.getProperty(&quot;java.version&quot;)}&quot;)
 &nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-OS]  Operating System     : ${System.getProperty(&quot;os.name&quot;)}&quot;)
@@ -341,7 +378,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-04-27 00:01</div>
+    <div style="float:right;">generated on 2024-04-27 08:14</div>
 </div>
 </body>
 </html>

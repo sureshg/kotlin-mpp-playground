@@ -71,23 +71,23 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    87.5%
+    61.8%
   </span>
   <span class="absValue">
-    (21/24)
+    (21/34)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    88.9%
+    69.6%
   </span>
   <span class="absValue">
-    (112/126)
+    (112/161)
   </span>
 </td>
 </tr>
@@ -103,6 +103,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;import com.sun.management.OperatingSystemMXBean
 &nbsp;import java.io.File
+&nbsp;import java.lang.invoke.MethodHandles
+&nbsp;import java.lang.invoke.MethodType
 &nbsp;import java.lang.management.ManagementFactory
 &nbsp;import java.net.InetAddress
 &nbsp;import java.net.InetSocketAddress
@@ -117,10 +119,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import java.time.ZoneId
 &nbsp;import java.time.format.DateTimeFormatter
 &nbsp;import java.util.*
+&nbsp;import java.util.concurrent.ExecutorService
 &nbsp;import java.util.concurrent.Executors
 &nbsp;import javax.net.ssl.TrustManagerFactory
 &nbsp;import javax.net.ssl.X509TrustManager
-&nbsp;import kotlinx.coroutines.asCoroutineDispatcher
+&nbsp;import kotlinx.coroutines.*
 &nbsp;import org.slf4j.LoggerFactory
 &nbsp;
 &nbsp;actual val platform: Platform = JvmPlatform
@@ -145,9 +148,25 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;    }
 &nbsp;
 &nbsp;  /** A coroutine dispatcher that executes tasks on Virtual Threads. */
-<b class="fc">&nbsp;  override val vtDispatcher by lazy {</b>
-<b class="nc">&nbsp;    log.info(&quot;Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...&quot;)</b>
-<b class="nc">&nbsp;    Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()</b>
+<b class="fc">&nbsp;  override val virtualDispatcher: CoroutineDispatcher? by lazy {</b>
+<b class="nc">&nbsp;    runCatching {</b>
+<b class="nc">&nbsp;          log.info(&quot;Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...&quot;)</b>
+&nbsp;          // Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
+<b class="nc">&nbsp;          val mh =</b>
+<b class="nc">&nbsp;              MethodHandles.publicLookup()</b>
+<b class="nc">&nbsp;                  .findStatic(</b>
+<b class="nc">&nbsp;                      Executors::class.java,</b>
+<b class="nc">&nbsp;                      &quot;newVirtualThreadPerTaskExecutor&quot;,</b>
+<b class="nc">&nbsp;                      MethodType.methodType(</b>
+<b class="nc">&nbsp;                          ExecutorService::class.java,</b>
+&nbsp;                      ))
+<b class="nc">&nbsp;          val execService = mh.invokeExact() as ExecutorService</b>
+<b class="nc">&nbsp;          execService.asCoroutineDispatcher()</b>
+&nbsp;          // Via Reflection
+&nbsp;          // (Executors::class.java.getMethod(&quot;newVirtualThreadPerTaskExecutor&quot;).invoke(null) as
+&nbsp;          // ExecutorService).asCoroutineDispatcher()
+&nbsp;        }
+<b class="nc">&nbsp;        .getOrNull()</b>
 &nbsp;  }
 &nbsp;
 &nbsp;  override val appInfo: Map&lt;String, String&gt;
@@ -172,6 +191,24 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;            )
 &nbsp;}
 &nbsp;
+&nbsp;val Dispatchers.Virtual
+&nbsp;  get() = platform.virtualDispatcher
+&nbsp;
+&nbsp;val Dispatchers.VirtualOrIO
+&nbsp;  get() = Virtual ?: IO
+&nbsp;
+&nbsp;/**
+&nbsp; * Runs the given suspend block on [Dispatchers.Virtual], so that we can call blocking I/O APIs from
+&nbsp; * coroutines
+&nbsp; */
+&nbsp;suspend inline fun &lt;T&gt; runOnVirtualThread(crossinline block: suspend CoroutineScope.() -&gt; T): T =
+&nbsp;    withContext(Dispatchers.Virtual!!) { block() }
+&nbsp;
+&nbsp;/** Creates a new coroutine scope that uses [Dispatchers.Virtual] as its dispatcher. */
+&nbsp;val virtualThreadScope
+&nbsp;  get() = CoroutineScope(Dispatchers.Virtual!!)
+&nbsp;
+&nbsp;/** Returns the runtime information of the JVM and OS. */
 &nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
 &nbsp;  val rt = Runtime.getRuntime()
 &nbsp;  val unit = 1024 * 1024L
@@ -348,7 +385,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-04-27 00:01</div>
+    <div style="float:right;">generated on 2024-04-27 08:14</div>
 </div>
 </body>
 </html>

@@ -25,9 +25,12 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <h1>Coverage Summary for Class: CommonPlatform (dev.suresh)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -49,86 +52,39 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
   <td class="name">CommonPlatform</td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (4/8)
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (4/6)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    73.3%
+    84.6%
   </span>
   <span class="absValue">
-    (11/15)
+    (11/13)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    51.2%
+    79.6%
   </span>
   <span class="absValue">
-    (43/84)
+    (43/54)
   </span>
 </td>
 </tr>
-  <tr>
-    <td class="name">CommonPlatform$runOnVirtualThread$2</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/25)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    44.4%
-  </span>
-  <span class="absValue">
-    (4/9)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    68.8%
-  </span>
-  <span class="absValue">
-    (11/16)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    39.4%
-  </span>
-  <span class="absValue">
-    (43/109)
-  </span>
-</td>
-</tr>
+
 </table>
 
 <br/>
@@ -140,6 +96,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;import com.sun.management.OperatingSystemMXBean
 &nbsp;import java.io.File
+&nbsp;import java.lang.invoke.MethodHandles
+&nbsp;import java.lang.invoke.MethodType
 &nbsp;import java.lang.management.ManagementFactory
 &nbsp;import java.net.InetAddress
 &nbsp;import java.net.InetSocketAddress
@@ -154,10 +112,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import java.time.ZoneId
 &nbsp;import java.time.format.DateTimeFormatter
 &nbsp;import java.util.*
+&nbsp;import java.util.concurrent.ExecutorService
 &nbsp;import java.util.concurrent.Executors
 &nbsp;import javax.net.ssl.TrustManagerFactory
 &nbsp;import javax.net.ssl.X509TrustManager
-&nbsp;import kotlinx.coroutines.asCoroutineDispatcher
+&nbsp;import kotlinx.coroutines.*
 &nbsp;import org.slf4j.LoggerFactory
 &nbsp;
 &nbsp;actual val platform: Platform = JvmPlatform
@@ -182,9 +141,25 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;    }
 &nbsp;
 &nbsp;  /** A coroutine dispatcher that executes tasks on Virtual Threads. */
-&nbsp;  override val vtDispatcher by lazy {
-&nbsp;    log.info(&quot;Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...&quot;)
-&nbsp;    Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
+&nbsp;  override val virtualDispatcher: CoroutineDispatcher? by lazy {
+&nbsp;    runCatching {
+&nbsp;          log.info(&quot;Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...&quot;)
+&nbsp;          // Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
+&nbsp;          val mh =
+&nbsp;              MethodHandles.publicLookup()
+&nbsp;                  .findStatic(
+&nbsp;                      Executors::class.java,
+&nbsp;                      &quot;newVirtualThreadPerTaskExecutor&quot;,
+&nbsp;                      MethodType.methodType(
+&nbsp;                          ExecutorService::class.java,
+&nbsp;                      ))
+&nbsp;          val execService = mh.invokeExact() as ExecutorService
+&nbsp;          execService.asCoroutineDispatcher()
+&nbsp;          // Via Reflection
+&nbsp;          // (Executors::class.java.getMethod(&quot;newVirtualThreadPerTaskExecutor&quot;).invoke(null) as
+&nbsp;          // ExecutorService).asCoroutineDispatcher()
+&nbsp;        }
+&nbsp;        .getOrNull()
 &nbsp;  }
 &nbsp;
 &nbsp;  override val appInfo: Map&lt;String, String&gt;
@@ -207,10 +182,28 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;                &quot;arch&quot; to sysProp(&quot;os.arch&quot;),
 &nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),
 &nbsp;            )
-&nbsp;}
+<b class="fc">&nbsp;}</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;val Dispatchers.Virtual</b>
+<b class="fc">&nbsp;  get() = platform.virtualDispatcher</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;val Dispatchers.VirtualOrIO</b>
+<b class="fc">&nbsp;  get() = Virtual ?: IO</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;/**</b>
+<b class="fc">&nbsp; * Runs the given suspend block on [Dispatchers.Virtual], so that we can call blocking I/O APIs from</b>
+&nbsp; * coroutines
+&nbsp; */
+&nbsp;suspend inline fun &lt;T&gt; runOnVirtualThread(crossinline block: suspend CoroutineScope.() -&gt; T): T =
+<b class="fc">&nbsp;    withContext(Dispatchers.Virtual!!) { block() }</b>
 &nbsp;
+&nbsp;/** Creates a new coroutine scope that uses [Dispatchers.Virtual] as its dispatcher. */
+&nbsp;val virtualThreadScope
+<b class="nc">&nbsp;  get() = CoroutineScope(Dispatchers.Virtual!!)</b>
+&nbsp;
+&nbsp;/** Returns the runtime information of the JVM and OS. */
 &nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
-&nbsp;  val rt = Runtime.getRuntime()
+<b class="nc">&nbsp;  val rt = Runtime.getRuntime()</b>
 &nbsp;  val unit = 1024 * 1024L
 &nbsp;  val heapSize = rt.totalMemory()
 &nbsp;  val heapFreeSize = rt.freeMemory()
@@ -228,39 +221,39 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] System CPU Usage     : ${osMxBean.cpuLoad}&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [JVM-CPU] JVM CPU Usage        : ${osMxBean.processCpuLoad}&quot;)
 &nbsp;  appendLine(
-<b class="fc">&nbsp;      &quot;✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}&quot;)</b>
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Total Memory                  : ${osMxBean.totalMemorySize / unit} MiB&quot;)</b>
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Free  Memory                  : ${osMxBean.freeMemorySize / unit} MiB&quot;)</b>
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Heap Size (Committed) : ${heapSize / unit} MiB&quot;)</b>
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Free memory in Heap   : ${heapFreeSize/unit} MiB&quot;)</b>
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Currently used memory         : ${heapUsedSize/unit} MiB&quot;)</b>
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Max Heap Size (-Xmx)          : ${heapMaxSize/unit} MiB&quot;)</b>
-<b class="fc">&nbsp;</b>
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ JVM Input Arguments ✧✧✧&quot;)</b>
-<b class="fc">&nbsp;  appendLine(rtMxBean.inputArguments)</b>
+&nbsp;      &quot;✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Total Memory                  : ${osMxBean.totalMemorySize / unit} MiB&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Free  Memory                  : ${osMxBean.freeMemorySize / unit} MiB&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Heap Size (Committed) : ${heapSize / unit} MiB&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Free memory in Heap   : ${heapFreeSize/unit} MiB&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Currently used memory         : ${heapUsedSize/unit} MiB&quot;)
+&nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Max Heap Size (-Xmx)          : ${heapMaxSize/unit} MiB&quot;)
+&nbsp;
+&nbsp;  appendLine(&quot;✧✧✧ JVM Input Arguments ✧✧✧&quot;)
+&nbsp;  appendLine(rtMxBean.inputArguments)
 &nbsp;  appendLine(&quot;✧✧✧ JVM Main class &amp; Args ✧✧✧&quot;)
 &nbsp;  appendLine(System.getProperty(&quot;sun.java.command&quot;))
 &nbsp;
-<b class="fc">&nbsp;  appendLine(&quot;✧✧✧ Processes ✧✧✧&quot;)</b>
+&nbsp;  appendLine(&quot;✧✧✧ Processes ✧✧✧&quot;)
 &nbsp;  val ps = ProcessHandle.allProcesses().sorted(ProcessHandle::compareTo).toList()
 &nbsp;  if (debug) {
 &nbsp;    ps.forEach { appendLine(&quot;${it.pid()} : ${it.info()}&quot;) }
-<b class="nc">&nbsp;  } else {</b>
+&nbsp;  } else {
 &nbsp;    appendLine(&quot;Found ${ps.size} processes.&quot;)
 &nbsp;  }
 &nbsp;
-<b class="nc">&nbsp;  appendLine(&quot;✧✧✧ Trust stores ✧✧✧&quot;)</b>
+&nbsp;  appendLine(&quot;✧✧✧ Trust stores ✧✧✧&quot;)
 &nbsp;  val caCerts =
 &nbsp;      TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {
 &nbsp;        init(null as KeyStore?)
 &nbsp;        trustManagers.filterIsInstance&lt;X509TrustManager&gt;().flatMap { it.acceptedIssuers.toList() }
 &nbsp;      }
 &nbsp;  caCerts.forEach { appendLine(it.issuerX500Principal) }
-<b class="nc">&nbsp;</b>
+&nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ Dns Resolution ✧✧✧&quot;)
 &nbsp;  val dns = InetAddress.getAllByName(&quot;google.com&quot;).toList()
 &nbsp;  dns.forEach { appendLine(it) }
-<b class="nc">&nbsp;</b>
+&nbsp;
 &nbsp;  appendLine(&quot;✧✧✧ TimeZones ✧✧✧&quot;)
 &nbsp;  val tz = ZoneId.getAvailableZoneIds()
 &nbsp;  if (debug) {
@@ -385,7 +378,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-04-27 00:01</div>
+    <div style="float:right;">generated on 2024-04-27 08:14</div>
 </div>
 </body>
 </html>
