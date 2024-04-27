@@ -2,6 +2,8 @@ package dev.suresh
 
 import com.sun.management.OperatingSystemMXBean
 import java.io.File
+import java.lang.invoke.MethodHandles
+import java.lang.invoke.MethodType
 import java.lang.management.ManagementFactory
 import java.net.InetAddress
 import java.net.InetSocketAddress
@@ -16,10 +18,11 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
+import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import javax.net.ssl.TrustManagerFactory
 import javax.net.ssl.X509TrustManager
-import kotlinx.coroutines.asCoroutineDispatcher
+import kotlinx.coroutines.*
 import org.slf4j.LoggerFactory
 
 actual val platform: Platform = JvmPlatform
@@ -44,9 +47,25 @@ object JvmPlatform : Platform {
     }
 
   /** A coroutine dispatcher that executes tasks on Virtual Threads. */
-  override val vtDispatcher by lazy {
-    log.info("Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...")
-    Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
+  override val virtualDispatcher: CoroutineDispatcher? by lazy {
+    runCatching {
+          log.info("Creating CoroutineDispatcher based on Java VirtualThreadPerTaskExecutor...")
+          // Executors.newVirtualThreadPerTaskExecutor().asCoroutineDispatcher()
+          val mh =
+              MethodHandles.publicLookup()
+                  .findStatic(
+                      Executors::class.java,
+                      "newVirtualThreadPerTaskExecutor",
+                      MethodType.methodType(
+                          ExecutorService::class.java,
+                      ))
+          val execService = mh.invokeExact() as ExecutorService
+          execService.asCoroutineDispatcher()
+          // Via Reflection
+          // (Executors::class.java.getMethod("newVirtualThreadPerTaskExecutor").invoke(null) as
+          // ExecutorService).asCoroutineDispatcher()
+        }
+        .getOrNull()
   }
 
   override val appInfo: Map<String, String>
@@ -71,6 +90,24 @@ object JvmPlatform : Platform {
             )
 }
 
+val Dispatchers.Virtual
+  get() = platform.virtualDispatcher
+
+val Dispatchers.VirtualOrIO
+  get() = Virtual ?: IO
+
+/**
+ * Runs the given suspend block on [Dispatchers.Virtual], so that we can call blocking I/O APIs from
+ * coroutines
+ */
+suspend inline fun <T> runOnVirtualThread(crossinline block: suspend CoroutineScope.() -> T): T =
+    withContext(Dispatchers.Virtual!!) { block() }
+
+/** Creates a new coroutine scope that uses [Dispatchers.Virtual] as its dispatcher. */
+val virtualThreadScope
+  get() = CoroutineScope(Dispatchers.Virtual!!)
+
+/** Returns the runtime information of the JVM and OS. */
 fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
   val rt = Runtime.getRuntime()
   val unit = 1024 * 1024L

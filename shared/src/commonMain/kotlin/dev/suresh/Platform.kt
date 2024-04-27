@@ -6,9 +6,7 @@ import BuildConfig
 import BuildConfig.Host
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.jvm.JvmName
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -25,8 +23,8 @@ interface Platform {
   val tzShortId
     get() = TimeZone.currentSystemDefault().id
 
-  val vtDispatcher
-    get() = Dispatchers.Default
+  val virtualDispatcher: CoroutineDispatcher?
+    get() = null
 
   val buildConfig
     get() = BuildConfig
@@ -112,14 +110,3 @@ val utcDateTimeNow
 /** Gets the current date and time in the system's default time zone. */
 val localDateTimeNow
   get() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
-
-/**
- * Runs the given suspend block on a virtual thread, so that we can call blocking I/O APIs from
- * coroutines
- */
-suspend inline fun <T> runOnVirtualThread(crossinline block: suspend CoroutineScope.() -> T): T =
-    withContext(platform.vtDispatcher) { block() }
-
-/** Creates a new coroutine scope that uses [Platform.vtDispatcher] as its dispatcher. */
-val virtualThreadScope
-  get() = CoroutineScope(platform.vtDispatcher)
