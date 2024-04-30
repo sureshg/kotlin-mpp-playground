@@ -66,10 +66,7 @@ ksp {
   allWarningsAsErrors = false
 }
 
-powerAssert {
-  functions = listOf("kotlin.assert", "kotlin.test.assertTrue")
-  excludedSourceSets = listOf("main")
-}
+powerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
 
 redacted {
   enabled = true
@@ -208,6 +205,7 @@ dependencies {
   implementation(libs.jspecify)
   implementation(libs.password4j)
   implementation(libs.sslcontext.kickstart)
+  implementation(libs.bundles.ajalt)
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

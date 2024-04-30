@@ -50,8 +50,9 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlin.retry)
         api(libs.kotlin.logging)
         api(libs.kotlinx.html)
+        api(libs.bundles.ajalt)
         api(libs.kotlin.bignum)
-        api(libs.kotlin.bignum.serialization)
+        // api(libs.kotlin.bignum.serialization)
         api(libs.kotlin.cryptography.core)
         api(libs.kotlin.cryptography.random)
         if (project.name != "wasm") {
@@ -261,8 +262,8 @@ fun KotlinMultiplatformExtension.allNativeTargets(
     macosX64 { configure() }
     macosArm64 { configure() }
     linuxX64 { configure() }
-    // linuxArm64 { configure() }
-    // mingwX64 { configure() }
+    linuxArm64 {}
+    mingwX64 { configure() }
   }
 }
 

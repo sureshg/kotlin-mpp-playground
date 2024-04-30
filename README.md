@@ -77,17 +77,16 @@ $ ./gradlew :backend:native:macOsUniversalBinary
 $ ./gradlew :backend:native:jibDockerBuild
 $ docker run -it --rm --name native-app sureshg/native
 
-# Test linux binary on debian
-$ ./gradlew :backend:native:linuxX64Binaries
+# Test linux binary on ARM64 MacOS
+$ ./gradlew :backend:native:linuxArm64Binaries
 $ docker run  \
-        --platform=linux/amd64 \
         -it \
         --rm \
         --publish 8080:80 \
         --mount type=bind,source=$(pwd),destination=/app,readonly \
         debian:stable-slim
-  # /app/backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
-  # libtree -v /app/backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
+  # /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
+  # libtree -v /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
 
 
 # Kobweb
@@ -116,7 +115,7 @@ $ ./gradlew generateChangelog
 # Clean
 $ ./gradlew cleanAll
 
-# Gradle Daemon
+# Gradle Daemon Toolchain
 $ ./gradlew updateDaemonJvm
 
 # Gradle Best Practices

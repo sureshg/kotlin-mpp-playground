@@ -34,32 +34,20 @@ kotlin.sourceSets {
   // wasmJsMain { artifacts { add(sharedWasmRes.name, tasks.wasmJsProcessResources) } }
 }
 
+// tasks.buildConfig { outputs.upToDateWhen { false } }
+
 dependencies {
-  commonMainApi(libs.arrow.suspendapp)
   commonMainApi(libs.uri.kmp)
-  commonMainApi(libs.ajalt.colormath)
   commonMainApi(libs.benasher44.uuid)
   commonMainApi(libs.intellij.markdown)
   commonMainApi(libs.kotlinx.jsonpath)
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
-  commonMainApi(libs.parsus)
 
+  // commonMainApi(libs.arrow.suspendapp)
+  // commonMainApi(libs.parsus)
+  // commonMainApi(libs.okio)
+  // commonTestApi(libs.okio.fakefilesystem)
   // jvmMainApi(libs.kotlin.reflect)
   // jvmMainApi(libs.logback.classic)
 }
-
-// tasks.buildConfig {
-//  outputs.upToDateWhen { false }
-// }
-
-// configurations {
-//   // Collects dependencies, constraints to be used by Consumable and Resolvable configurations.
-//   val webResources by dependencyScope("webResources")
-//   // Acts as the root of a dependency graph
-//   val webResourcesRuntimeClasspath by
-//       resolvable("webResourcesRuntimeClasspath") { extendsFrom(webResources) }
-//   // Models the outgoing variants of a project component.
-//   val webResourcesRuntimeElements by
-//       consumable("webResourcesRuntimeElements") { extendsFrom(webResources) }
-// }

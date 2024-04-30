@@ -71,10 +71,7 @@ atomicfu {
   jvmVariant = "VH"
 }
 
-powerAssert {
-  functions = listOf("kotlin.assert", "kotlin.test.assertTrue")
-  excludedSourceSets = listOf("main")
-}
+powerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
 
 redacted {
   enabled = true

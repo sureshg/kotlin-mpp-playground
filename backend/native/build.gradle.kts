@@ -22,7 +22,9 @@ kotlin {
     it.binaries { executable(listOf(RELEASE)) { entryPoint = "main" } }
     it.compilations.configureEach {
       compileTaskProvider.configure {
-        compilerOptions { freeCompilerArgs.add("-Xallocator=custom") }
+        compilerOptions {
+          // freeCompilerArgs.add("-Xruntime-logs=gc=info")
+        }
       }
     }
   }
@@ -33,7 +35,6 @@ kotlin {
     commonMain { dependencies { api(projects.shared) } }
     nativeMain {
       dependencies {
-        implementation(libs.okio)
         // api(libs.arrow.suspendapp.ktor)
       }
     }
@@ -88,7 +89,6 @@ jib {
 sourceSets.maybeCreate("main")
 
 tasks {
-  val linkReleaseExecutableLinuxX64 by getting(KotlinNativeLink::class)
   val linkReleaseExecutableMacosX64 by getting(KotlinNativeLink::class)
   val linkReleaseExecutableMacosArm64 by getting(KotlinNativeLink::class)
 
@@ -116,8 +116,10 @@ tasks {
         onlyIf { OperatingSystem.current().isMacOsX }
       }
 
+  val linkReleaseExecutableLinuxX64 by getting(KotlinNativeLink::class)
   val prepareJib by
       registering(Copy::class) {
+        // from(linkReleaseExecutableLinuxArm64)
         from(linkReleaseExecutableLinuxX64)
         // Jib native image extension expects the native image to be in "native/nativeCompile"
         into(layout.buildDirectory.dir("native/nativeCompile"))

@@ -1,10 +1,10 @@
 [versions]
 java                           = "23"
-kotlin                         = "2.0.0-RC1"
+kotlin                         = "2.0.0-RC2"
 kotlin-ksp                     = "2.0.0-RC1-1.0.20"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
-kotlin-api-version             = "1.9"
+kotlin-api-version             = "2.0"
 kotlin-lang-version            = "2.0"
 gradle                         = "8.8-rc-1"
 java-vendor                    = "Oracle"
@@ -34,7 +34,7 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.15.0-Beta.2"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.734"
+kotlin-wrappers                = "1.0.0-pre.735"
 kotlin-redacted                = "1.9.0-alpha01"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
@@ -51,7 +51,7 @@ ksp-auto-service               = "1.1.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "2.5.0"
-ajalt-clikt                    = "4.1.0"
+ajalt-clikt                    = "4.4.0"
 ajalt-colormath                = "3.5.0"
 compose-routing                = "0.2.14"
 classgraph                     = "4.8.161"
@@ -311,6 +311,7 @@ ktor-client-tests                    = { module = "io.ktor:ktor-client-tests"   
 
 okio-bom                             = { module = "com.squareup.okio:okio-bom"                                 , version.ref = "okio"}
 okio                                 = { module = "com.squareup.okio:okio"                                     , version.ref = "okio"}
+okio-fakefilesystem                  = { module = "com.squareup.okio:okio-fakefilesystem"                       , version.ref = "okio"}
 arrow-suspendapp                     = { module = "io.arrow-kt:suspendapp"                                     , version.ref = "arrow-suspendapp" }
 arrow-suspendapp-ktor                = { module = "io.arrow-kt:suspendapp-ktor"                                , version.ref = "arrow-suspendapp" }
 
@@ -380,6 +381,7 @@ akkurate-ksp-plugin                  = { module = "dev.nesk.akkurate:akkurate-ks
 
 ajalt-mordant                        = { module = "com.github.ajalt.mordant:mordant"                           , version.ref = "ajalt-mordant"}
 ajalt-colormath                      = { module = "com.github.ajalt.colormath:colormath"                       , version.ref = "ajalt-colormath"}
+ajalt-clikt                          = { module = "com.github.ajalt.clikt:clikt"                               , version.ref = "ajalt-clikt"}
 jgit                                 = { module = "org.eclipse.jgit:org.eclipse.jgit"                          , version.ref = "jgit" }
 jte                                  = { module = "gg.jte:jte"                                                 , version.ref = "jte" }
 jte-runtime                          = { module = "gg.jte:jte-runtime"                                         , version.ref = "jte" }
@@ -489,6 +491,7 @@ elastic-otel-javaagent               = { module = "co.elastic.otel:elastic-otel-
 # AI/ML
 
 [bundles]
+ajalt = ["ajalt-mordant", "ajalt-colormath", "ajalt-clikt"]
 ktor-server = []
 ktor-client = []
 
