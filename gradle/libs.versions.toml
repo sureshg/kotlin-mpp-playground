@@ -1,7 +1,7 @@
 [versions]
 java                           = "23"
 kotlin                         = "2.0.0-RC2"
-kotlin-ksp                     = "2.0.0-RC1-1.0.20"
+kotlin-ksp                     = "2.0.0-RC2-1.0.20"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.0"
@@ -34,17 +34,17 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.15.0-Beta.2"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.735"
+kotlin-wrappers                = "1.0.0-pre.736"
 kotlin-redacted                = "1.9.0-alpha01"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
 ktor                           = "3.0.0-beta-1"
-ktor-cohort                    = "2.3.1"
-otel                           = "1.36.0"
+ktor-cohort                    = "2.5.0"
+otel                           = "1.37.0"
 otel-instr                     = "2.3.0"
 otel-alpha                     = "2.3.0-alpha"
-elastic-otel                   = "0.1.0"
+elastic-otel                   = "0.3.0"
 okio                           = "3.9.0"
 sslcontext-kickstart           = "8.3.4"
 ksp-auto-service               = "1.1.0"
@@ -79,7 +79,7 @@ google-javaformat              = "1.22.0"
 palantir-javaformat            = "2.44.0"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.13.0"
-graalvm                        = "24.0.0"
+graalvm                        = "24.0.1"
 jspecify                       = "0.3.0"
 rsocket                        = "0.15.4"
 jctools                        = "4.0.1"
@@ -102,12 +102,12 @@ java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.1.0"
 arrow-suspendapp               = "0.4.1-alpha.5"
-exposed                        = "0.49.0"
+exposed                        = "0.50.0"
 postgresql                     = "42.7.3"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
 micrometer                     = "1.12.5"
-swagger-ui                     = "5.17.1"
+swagger-ui                     = "5.17.3"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
 shedlock                       = "5.13.0"
@@ -169,17 +169,16 @@ buildkonfig                    = "0.13.3"
 akkurate                       = "0.1.0"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.8.0"
-modulegraph                    = "0.8.0"
+modulegraph                    = "0.8.1"
 cash-molecule                  = "1.3.2"
 npm-publish-plugin             = "3.4.2"
 exposed-plugin                 = "0.2.1"
 jib-plugin                     = "3.4.2"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
-jetbrains-compose              = "1.6.10-beta02"
 kmp-hierarchy                  = "1.1"
-jetbrains-compose-compiler     = "1.5.11-kt-2.0.0-RC1"
-kobweb                         = "0.17.2"
+jetbrains-compose              = "1.6.10-beta03"
+kobweb                         = "0.17.3"
 
 [libraries]
 # External plugins for precompiled script plugins
@@ -189,7 +188,7 @@ build-kotlin-allopen                 = { module = "org.jetbrains.kotlin:kotlin-a
 build-kotlin-powerassert             = { module = "org.jetbrains.kotlin:kotlin-power-assert"                        , version.ref = "kotlin"}
 build-kotlin-jsplainobjects          = { module = "org.jetbrains.kotlin:js-plain-objects"                           , version.ref = "kotlin"}
 build-kotlinx-serialization          = { module = "org.jetbrains.kotlin:kotlin-serialization"                       , version.ref = "kotlin"}
-build-kotlin-compose-compiler        = { module = "org.jetbrains.kotlin:kotlin-compose-compiler-plugin"             , version.ref = "kotlin"}
+build-kotlin-compose-compiler        = { module = "org.jetbrains.kotlin:kotlin-compose-compiler-plugin-embeddable"  , version.ref = "kotlin"}
 build-kotlinx-atomicfu               = { module = "org.jetbrains.kotlinx:atomicfu-gradle-plugin"                    , version.ref = "kotlinx-atomicfu"}
 build-kotlinx-benchmark              = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
 build-kotlin-dsl                     = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins"                     , version.ref = "gradle-kotlin-dsl"}
@@ -232,7 +231,6 @@ build-jimfs                          = { module = "com.google.jimfs:jimfs"      
 build-jib-plugin                     = { module = "com.google.cloud.tools:jib-gradle-plugin"                        , version.ref = "jib-plugin" }
 build-jib-nativeimage-extn           = { module = "com.google.cloud.tools:jib-native-image-extension-gradle"        , version.ref = "jib-nativeimage-extn" }
 build-includegit-plugin              = { module = "me.champeau.gradle.includegit:plugin"                            , version.ref = "includegit-plugin" }
-build-jetbrains-compose-runtime      = { module = "org.jetbrains.compose.runtime:runtime"                           , version.ref = "jetbrains-compose"}
 
 # Gradle Dependencies
 kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                                 , version.ref = "kotlin"}
@@ -323,7 +321,7 @@ pty4j                                = { module = "org.jetbrains.pty4j:pty4j"   
 sshj                                 = { module = "com.hierynomus:sshj"                                        , version.ref = "sshj"}
 sslcontext-kickstart                 = { module = "io.github.hakky54:sslcontext-kickstart"                     , version.ref = "sslcontext-kickstart"}
 
-ktor-cohort-core                     = { module = "com.sksamuel.cohort:cohort-core"                            , version.ref = "ktor-cohort"}
+ktor-cohort-core                     = { module = "com.sksamuel.cohort:cohort-ktor"                            , version.ref = "ktor-cohort"}
 ktor-cohort-hikari                   = { module = "com.sksamuel.cohort:cohort-hikari"                          , version.ref = "ktor-cohort"}
 rsocket-ktor-client                  = { module = "io.rsocket.kotlin:rsocket-ktor-client"                      , version.ref = "rsocket"}
 rsocket-ktor-server                  = { module = "io.rsocket.kotlin:rsocket-ktor-server"                      , version.ref = "rsocket"}
@@ -500,6 +498,7 @@ kotlin-powerassert                   = { id = "org.jetbrains.kotlin.plugin.power
 kotlin-allopen                       = { id = "org.jetbrains.kotlin.plugin.allopen"                            , version.ref = "kotlin"}
 kotlin-js-plainobjects               = { id = "org.jetbrains.kotlin.plugin.js-plain-objects"                   , version.ref = "kotlin"}
 kotlin-compose-compiler              = { id = "org.jetbrains.kotlin.plugin.compose"                            , version.ref = "kotlin"}
+jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
 kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark"                                , version.ref = "kotlinx-benchmark" }
 ktor                                 = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }
 exposed                              = { id = "com.jetbrains.exposed.gradle.plugin"                            , version.ref = "exposed-plugin" }
@@ -508,7 +507,6 @@ benmanes                             = { id = "com.github.ben-manes.versions"   
 bestpractices                        = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "best-practices-plugin" }
 graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"                                  , version.ref = "graalvm-nativeimage"}
 buildkonfig                          = { id = "com.codingfeline.buildkonfig"                                   , version.ref = "buildkonfig"}
-jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
 kobweb-application                   = { id = "com.varabyte.kobweb.application"                                , version.ref = "kobweb" }
 kobweb-library                       = { id = "com.varabyte.kobweb.library"                                    , version.ref = "kobweb" }
 kobwebx-markdown                     = { id = "com.varabyte.kobwebx.markdown"                                  , version.ref = "kobweb" }

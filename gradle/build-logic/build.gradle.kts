@@ -182,13 +182,15 @@ dependencies {
   implementation(libs.build.modulegraph.plugin)
   implementation(libs.build.mokkery.plugin)
   implementation(libs.build.jte.plugin)
-  // implementation(libs.jte.native)
   implementation(libs.build.jib.plugin)
   implementation(libs.build.jib.nativeimage.extn)
   // For using kotlin-dsl in pre-compiled script plugins
   implementation("${libs.build.kotlin.dsl.get().module}:${expectedKotlinDslPluginsVersion}")
+  testImplementation(gradleTestKit())
+  // implementation(libs.build.kotlin.compose.compiler)
+  // implementation(libs.jte.native)
   // implementation(libs.build.kmp.hierarchy)
   // implementation(libs.build.includegit.plugin)
   // implementation(libs.build.cyclonedx.plugin)
-  testImplementation(gradleTestKit())
+
 }

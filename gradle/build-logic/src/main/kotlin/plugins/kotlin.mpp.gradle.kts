@@ -23,6 +23,7 @@ plugins {
   id("plugins.kotlin.docs")
   kotlin("plugin.power-assert")
   kotlin("plugin.js-plain-objects")
+  // kotlin("plugin.compose")
   // io.github.terrakok.`kmp-hierarchy`
   // org.gradle.kotlin.`kotlin-dsl`
   // app.cash.molecule

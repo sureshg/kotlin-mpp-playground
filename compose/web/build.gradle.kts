@@ -1,14 +1,13 @@
-import common.kotlinVersion
+import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
+  alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.jetbrains.compose)
-  alias(libs.plugins.kobweb.application)
-  alias(libs.plugins.kobwebx.markdown)
+  // alias(libs.plugins.kobweb.application)
+  // alias(libs.plugins.kobwebx.markdown)
 }
-
-kobweb { app { index { this.description.set("Kobweb!") } } }
 
 kotlin {
   sourceSets {
@@ -32,11 +31,13 @@ kotlin {
   }
 }
 
-compose {
-  kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
-  // kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
-  kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
+composeCompiler {
+  enableStrongSkippingMode = true
+  reportsDestination = layout.buildDirectory.dir("compose_compiler")
+  targetKotlinPlatforms = setOf(KotlinPlatformType.js)
 }
+
+// kobweb { app { index { this.description.set("Kobweb!") } } }
 
 tasks {
   jsProcessResources {

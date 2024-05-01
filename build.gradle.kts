@@ -5,8 +5,9 @@ plugins {
   plugins.common
   plugins.misc
   com.gradleup.nmcp
-  alias(libs.plugins.jetbrains.compose) apply false
   // kotlin("multiplatform") apply false
+  // alias(libs.plugins.kotlin.compose.compiler) apply false
+  // alias(libs.plugins.jetbrains.compose) apply false
 }
 
 description = "Kotlin Multiplatform Playground!"

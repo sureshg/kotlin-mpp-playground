@@ -71,18 +71,6 @@ fun App() {
                     append(BuildConfig.jetbrainsCompose)
                   }
                   appendLine()
-
-                  append("Compose Multiplatform Compiler Version: ")
-                  withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
-                    append(BuildConfig.jetbrainsComposeCompiler)
-                  }
-                  appendLine()
-
-                  append("Kotlin Compose Compiler Version: ")
-                  withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
-                    append(BuildConfig.kotlin)
-                  }
-                  appendLine()
                 }
                 showImage = !showImage
               }) {

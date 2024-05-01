@@ -121,6 +121,7 @@ $ ./gradlew updateDaemonJvm
 # Gradle Best Practices
 $ ./gradlew -p gradle/build-logic :bestPracticesBaseline
 $ ./gradlew checkBuildLogicBestPractices
+$ ./gradlew dependencies
 
 # GitHub Actions lint
 $ actionlint
@@ -194,40 +195,75 @@ $ actionlint
 ```mermaid
 %%{
   init: {
-    'theme': 'base'
+    'theme': 'neutral'
   }
 }%%
+
 graph LR
-    subgraph backend
-        jvm
-        data
-        native
-    end
-    subgraph meta
-        compiler
-        ksp
-    end
-    subgraph compiler
-        compiler
-        plugin
-    end
-    subgraph ksp
-        ksp
-        processor
-    end
-    subgraph web
-        wasm
-        js
-    end
-    plugin --> shared
-    wasm --> shared
-    benchmark --> shared
-    data --> shared
-    native --> shared
-    processor --> shared
-    jvm --> shared
-    jvm --> data
-    jvm --> js
-    jvm --> wasm
-    js --> shared
+  subgraph :backend
+    :backend:native["native"]
+    :backend:data["data"]
+    :backend:profiling["profiling"]
+    :backend:jvm["jvm"]
+    :backend:security["security"]
+  end
+  subgraph :compose
+    :compose:desktop["desktop"]
+    :compose:web["web"]
+  end
+  subgraph :dep-mgmt
+    :dep-mgmt:bom["bom"]
+    :dep-mgmt:catalog["catalog"]
+  end
+  subgraph :meta
+    :meta:compiler["compiler"]
+    :meta:ksp["ksp"]
+  end
+  subgraph :meta:compiler
+    :meta:compiler:plugin["plugin"]
+  end
+  subgraph :meta:ksp
+    :meta:ksp:processor["processor"]
+  end
+  subgraph :web
+    :web:js["js"]
+    :web:wasm["wasm"]
+  end
+  :web:js --> :shared
+  :benchmark --> :shared
+  :backend:native --> :shared
+  :web:wasm --> :shared
+  :compose:desktop --> :shared
+  :meta:compiler:plugin --> :shared
+  :meta:ksp:processor --> :shared
+  :backend:data --> :shared
+  :backend:profiling --> :shared
+  :compose:web --> :shared
+  : --> :backend
+  : --> :benchmark
+  : --> :compose
+  : --> :meta
+  : --> :shared
+  : --> :web
+  : --> :backend:data
+  : --> :backend:jvm
+  : --> :backend:native
+  : --> :backend:profiling
+  : --> :backend:security
+  : --> :compose:desktop
+  : --> :compose:web
+  : --> :meta:compiler
+  : --> :meta:ksp
+  : --> :web:js
+  : --> :web:wasm
+  : --> :meta:compiler:plugin
+  : --> :meta:ksp:processor
+  : --> :dep-mgmt:bom
+  : --> :dep-mgmt:catalog
+  :backend:jvm --> :shared
+  :backend:jvm --> :backend:data
+  :backend:jvm --> :backend:profiling
+  :backend:jvm --> :web:js
+  :backend:jvm --> :web:wasm
+  :backend:security --> :shared
 ```

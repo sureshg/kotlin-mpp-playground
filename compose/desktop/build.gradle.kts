@@ -6,6 +6,7 @@ import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
+  alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.jetbrains.compose)
 }
 
@@ -16,13 +17,13 @@ dependencies {
   jvmMainRuntimeOnly(libs.kotlinx.coroutines.swing)
 }
 
+composeCompiler {
+  enableStrongSkippingMode = true
+  reportsDestination = layout.buildDirectory.dir("compose_compiler")
+  targetKotlinPlatforms = setOf(KotlinPlatformType.jvm)
+}
+
 compose {
-  // kotlinCompilerPlugin = dependencies.compiler.forKotlin(kotlinVersion.get())
-  // kotlinCompilerPlugin = libs.versions.jetbrains.compose.compiler
-  // kotlinCompilerPluginArgs.add("suppressKotlinVersionCompatibilityCheck=${kotlinVersion.get()}")
-
-  platformTypes = platformTypes.get() - KotlinPlatformType.native
-
   desktop {
     application {
       mainClass = "MainKt"
