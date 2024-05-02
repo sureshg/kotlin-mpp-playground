@@ -23,8 +23,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import java.io.File
+import kotlinx.coroutines.MainScope
 
 val debug = true
+
+val mainScope = MainScope()
 
 val resourcesDir = File(System.getProperty("compose.application.resources.dir", "."))
 
@@ -34,6 +37,8 @@ val resourcesDir = File(System.getProperty("compose.application.resources.dir", 
 fun App() {
   var text by remember { mutableStateOf(AnnotatedString("Hello, Compose!")) }
   var showImage by remember { mutableStateOf(false) }
+  val coroutineScope = rememberCoroutineScope()
+
   scrollingBox {
     Column(
         modifier = Modifier.fillMaxWidth().debug(color = Color.Blue),

@@ -88,6 +88,21 @@ $ docker run  \
   # /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
   # libtree -v /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
 
+# Build native binaries on container
+$ docker run \
+         --platform=linux/amd64 \
+         -it \
+         --rm \
+         --pull always \
+         --workdir /app \
+         --name kotlin-native-build \
+         --mount type=bind,source=$(pwd),destination=/app \
+         --mount type=bind,source=${HOME}/.gradle,destination=/root/.gradle \
+         openjdk:23-slim /bin/bash
+# apt update && apt install libtree tree
+# ./gradlew --no-daemon :backend:native:build
+#  backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
+
 
 # Kobweb
 # ------
@@ -190,6 +205,10 @@ $ actionlint
 
 [simple-icons-logo]: https://simpleicons.org/icons/kotlin.svg
 
+
+<details>
+<summary>Module Dependency Graph</summary>
+
 ### Module Dependency
 
 ```mermaid
@@ -198,72 +217,73 @@ $ actionlint
     'theme': 'neutral'
   }
 }%%
-
 graph LR
-  subgraph :backend
-    :backend:native["native"]
-    :backend:data["data"]
-    :backend:profiling["profiling"]
-    :backend:jvm["jvm"]
-    :backend:security["security"]
-  end
-  subgraph :compose
-    :compose:desktop["desktop"]
-    :compose:web["web"]
-  end
-  subgraph :dep-mgmt
-    :dep-mgmt:bom["bom"]
-    :dep-mgmt:catalog["catalog"]
-  end
-  subgraph :meta
-    :meta:compiler["compiler"]
-    :meta:ksp["ksp"]
-  end
-  subgraph :meta:compiler
-    :meta:compiler:plugin["plugin"]
-  end
-  subgraph :meta:ksp
-    :meta:ksp:processor["processor"]
-  end
-  subgraph :web
-    :web:js["js"]
-    :web:wasm["wasm"]
-  end
-  :web:js --> :shared
-  :benchmark --> :shared
-  :backend:native --> :shared
-  :web:wasm --> :shared
-  :compose:desktop --> :shared
-  :meta:compiler:plugin --> :shared
-  :meta:ksp:processor --> :shared
-  :backend:data --> :shared
-  :backend:profiling --> :shared
-  :compose:web --> :shared
-  : --> :backend
-  : --> :benchmark
-  : --> :compose
-  : --> :meta
-  : --> :shared
-  : --> :web
-  : --> :backend:data
-  : --> :backend:jvm
-  : --> :backend:native
-  : --> :backend:profiling
-  : --> :backend:security
-  : --> :compose:desktop
-  : --> :compose:web
-  : --> :meta:compiler
-  : --> :meta:ksp
-  : --> :web:js
-  : --> :web:wasm
-  : --> :meta:compiler:plugin
-  : --> :meta:ksp:processor
-  : --> :dep-mgmt:bom
-  : --> :dep-mgmt:catalog
-  :backend:jvm --> :shared
-  :backend:jvm --> :backend:data
-  :backend:jvm --> :backend:profiling
-  :backend:jvm --> :web:js
-  :backend:jvm --> :web:wasm
-  :backend:security --> :shared
+    subgraph :backend
+        :backend:native["native"]
+        :backend:data["data"]
+        :backend:profiling["profiling"]
+        :backend:jvm["jvm"]
+        :backend:security["security"]
+    end
+    subgraph :compose
+        :compose:desktop["desktop"]
+        :compose:web["web"]
+    end
+    subgraph :dep-mgmt
+        :dep-mgmt:bom["bom"]
+        :dep-mgmt:catalog["catalog"]
+    end
+    subgraph :meta
+        :meta:compiler["compiler"]
+        :meta:ksp["ksp"]
+    end
+    subgraph :meta:compiler
+        :meta:compiler:plugin["plugin"]
+    end
+    subgraph :meta:ksp
+        :meta:ksp:processor["processor"]
+    end
+    subgraph :web
+        :web:js["js"]
+        :web:wasm["wasm"]
+    end
+    :web:js --> :shared
+    :benchmark --> :shared
+    :backend:native --> :shared
+    :web:wasm --> :shared
+    :compose:desktop --> :shared
+    :meta:compiler:plugin --> :shared
+    :meta:ksp:processor --> :shared
+    :backend:data --> :shared
+    :backend:profiling --> :shared
+    :compose:web --> :shared
+    : --> :backend
+    : --> :benchmark
+    : --> :compose
+    : --> :meta
+    : --> :shared
+    : --> :web
+    : --> :backend:data
+    : --> :backend:jvm
+    : --> :backend:native
+    : --> :backend:profiling
+    : --> :backend:security
+    : --> :compose:desktop
+    : --> :compose:web
+    : --> :meta:compiler
+    : --> :meta:ksp
+    : --> :web:js
+    : --> :web:wasm
+    : --> :meta:compiler:plugin
+    : --> :meta:ksp:processor
+    : --> :dep-mgmt:bom
+    : --> :dep-mgmt:catalog
+    :backend:jvm --> :shared
+    :backend:jvm --> :backend:data
+    :backend:jvm --> :backend:profiling
+    :backend:jvm --> :web:js
+    :backend:jvm --> :web:wasm
+    :backend:security --> :shared
 ```
+
+</details>

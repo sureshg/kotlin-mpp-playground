@@ -19,7 +19,15 @@ description = "Ktor native application"
 
 kotlin {
   targets.filterIsInstance<KotlinNativeTarget>().forEach {
-    it.binaries { executable(listOf(RELEASE)) { entryPoint = "main" } }
+    it.binaries {
+      executable(listOf(RELEASE)) {
+        entryPoint = "main"
+        // Alpine(apk add gcompat) - https://youtrack.jetbrains.com/issue/KT-38876
+        // linkerOpts("--as-needed", "--defsym=isnan=isnan")
+        // freeCompilerArgs += listOf("-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh
+        // -lc")
+      }
+    }
     it.compilations.configureEach {
       compileTaskProvider.configure {
         compilerOptions {
