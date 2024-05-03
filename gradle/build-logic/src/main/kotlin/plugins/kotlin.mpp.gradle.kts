@@ -49,6 +49,12 @@ kotlin {
 
   applyDefaultHierarchyTemplate {
     common {
+      group("posix") {
+        // Using group will add the intermediate source sets
+        group("linux")
+        group("apple")
+      }
+
       group("jsCommon") {
         withJs()
         withWasmJs()
