@@ -65,18 +65,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    93.5%
+    93.2%
   </span>
   <span class="absValue">
-    (72/77)
+    (68/73)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96.6%
+    96.2%
   </span>
   <span class="absValue">
-    (540/559)
+    (604/628)
   </span>
 </td>
 </tr>
@@ -108,10 +108,10 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    80%
+    64.9%
   </span>
   <span class="absValue">
-    (24/30)
+    (24/37)
   </span>
 </td>
   </tr>
@@ -195,18 +195,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    92.9%
+    92.5%
   </span>
   <span class="absValue">
-    (78/84)
+    (74/80)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    96%
+    94.7%
   </span>
   <span class="absValue">
-    (602/627)
+    (666/703)
   </span>
 </td>
 </tr>
@@ -228,7 +228,6 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;import static dev.suresh.Expr.eval;
 &nbsp;import static java.lang.System.out;
-&nbsp;import static java.util.FormatProcessor.FMT;
 &nbsp;import static java.util.Objects.requireNonNull;
 &nbsp;
 <b class="nc">&nbsp;public class DOP {</b>
@@ -266,21 +265,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="fc">&nbsp;        Expr expr = new Expr.Add(new Expr.Const.Int(count), new Expr.Const.Long(3));</b>
 <b class="fc">&nbsp;        expr = new Expr.Div(expr, new Expr.Const.Int(2));</b>
 <b class="fc">&nbsp;        expr = new Expr.Add(expr, new Expr.Const.Double(5.0));</b>
-<b class="fc">&nbsp;        String user = FMT.&quot;&quot;&quot;</b>
-&nbsp;                          %05d\{count}
-<b class="fc">&nbsp;                          Eval(\{expr}) = \{eval(expr)}</b>
-<b class="fc">&nbsp;                          &quot;&quot;&quot;.stripIndent();</b>
-<b class="fc">&nbsp;        out.println(user);</b>
+<b class="fc">&nbsp;        out.printf(&quot;Eval(%s) = %d%n&quot;, expr, eval(expr));</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    private static void stringTemplates() {
 <b class="fc">&nbsp;        int x = 10;</b>
 <b class="fc">&nbsp;        int y = 20;</b>
-<b class="fc">&nbsp;        out.println(STR.&quot;\{x} + \{y} = \{x + y}&quot;);</b>
-<b class="fc">&nbsp;        out.println(FMT.&quot;&quot;&quot;</b>
-&nbsp;                0x%04x\{x} + 0x%04x\{y} = 0x%04x\{x + y}
-&nbsp;                %04d\{x} + %04d\{y} = %04d\{x + y}
-&nbsp;                &quot;&quot;&quot;);
+<b class="fc">&nbsp;        out.printf(&quot;x + y = %d%n&quot;, x + y);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    interface Name&lt;T&gt; {
@@ -291,18 +282,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;    private static &lt;T&gt; void print(Name&lt;T&gt; name) {
 <b class="pc">&nbsp;        var result = switch (name) {</b>
-<b class="fc">&nbsp;            case FullName(var first, var last) -&gt; STR.&quot;\{first}, \{last}&quot;;</b>
+<b class="fc">&nbsp;            case FullName(var first, var last) -&gt; &quot;%s, %s&quot;.formatted(first, last);</b>
 <b class="nc">&nbsp;            default -&gt; &quot;Invalid name&quot;;</b>
 <b class="fc">&nbsp;        };</b>
 <b class="fc">&nbsp;        out.println(result);</b>
 &nbsp;
 <b class="pc">&nbsp;        if (name instanceof FullName&lt;?&gt; f) {</b>
-<b class="fc">&nbsp;            out.println(STR.&quot;\{f.firstName()}, \{f.lastName()}&quot;);</b>
+<b class="fc">&nbsp;            out.printf(&quot;%s, %s%n&quot;, f.firstName(), f.lastName());</b>
 &nbsp;        }
 &nbsp;
 &nbsp;        // Named record pattern is not supported
 <b class="pc">&nbsp;        if (name instanceof FullName(var first, var last)) {</b>
-<b class="fc">&nbsp;            out.println(STR.&quot;\{first}, \{last}&quot;);</b>
+<b class="fc">&nbsp;            out.printf(&quot;%s, %s%n&quot;, first, last);</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
@@ -314,13 +305,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;    private static void amberReflections() {
 <b class="fc">&nbsp;        var sealedClazz = Result.class;</b>
-<b class="fc">&nbsp;        out.println(STR.&quot;Result (Interface) -&gt; \{sealedClazz.isInterface()}&quot;);</b>
-<b class="fc">&nbsp;        out.println(STR.&quot;Result (Sealed Class) -&gt; \{sealedClazz.isSealed()}&quot;);</b>
+<b class="fc">&nbsp;        out.printf(&quot;Result (Interface) -&gt; %s%n&quot;, sealedClazz.isInterface());</b>
+<b class="fc">&nbsp;        out.printf(&quot;Result (Sealed Class) -&gt; %s%n&quot;, sealedClazz.isSealed());</b>
 &nbsp;
 <b class="fc">&nbsp;        for (Class&lt;?&gt; permittedSubclass : sealedClazz.getPermittedSubclasses()) {</b>
-<b class="fc">&nbsp;            out.println(STR.&quot;\nPermitted Subclass : \{permittedSubclass.getName()}&quot;);</b>
+<b class="fc">&nbsp;            out.printf(&quot;%nPermitted Subclass : %s%n&quot;, permittedSubclass.getName());</b>
 <b class="pc">&nbsp;            if (permittedSubclass.isRecord()) {</b>
-<b class="fc">&nbsp;                out.println(STR.&quot;\{permittedSubclass.getSimpleName()} record components are,&quot;);</b>
+<b class="fc">&nbsp;                out.printf(&quot;%s record components are,%n&quot;, permittedSubclass.getSimpleName());</b>
 <b class="fc">&nbsp;                for (RecordComponent rc : permittedSubclass.getRecordComponents()) {</b>
 <b class="fc">&nbsp;                    out.println(rc);</b>
 &nbsp;                }
@@ -335,7 +326,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="fc">&nbsp;            Lang {</b>
 <b class="fc">&nbsp;                requireNonNull(name);</b>
 <b class="pc">&nbsp;                if (year &lt;= 0) {</b>
-<b class="nc">&nbsp;                    throw new IllegalArgumentException(STR.&quot;Invalid year \{year}&quot;);</b>
+<b class="nc">&nbsp;                    throw new IllegalArgumentException(&quot;Invalid year %s&quot;.formatted(year));</b>
 &nbsp;                }
 &nbsp;            }
 &nbsp;        }
@@ -347,7 +338,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="fc">&nbsp;            List&lt;Record&gt; recs = List.of(new Lang(&quot;Java&quot;, 25), new Lang(&quot;Kotlin&quot;, 10), (Record) Result.success(100));</b>
 &nbsp;
 <b class="fc">&nbsp;            for (Record rec : recs) {</b>
-<b class="fc">&nbsp;                out.println(STR.&quot;Serializing record: \{rec}&quot;);</b>
+<b class="fc">&nbsp;                out.printf(&quot;Serializing record: %s%n&quot;, rec);</b>
 <b class="fc">&nbsp;                oos.writeObject(rec);</b>
 &nbsp;            }
 <b class="fc">&nbsp;            oos.writeObject(null); // EOF</b>
@@ -359,11 +350,11 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="pc">&nbsp;                var result = switch (rec) {</b>
 <b class="fc">&nbsp;                    case Lang l when l.year &gt;= 20 -&gt; l.toString();</b>
 <b class="pc">&nbsp;                    case Lang(var name, var year) -&gt; name;</b>
-<b class="fc">&nbsp;                    case Result&lt;?&gt; r -&gt; STR.&quot;Result value: \{r.getOrNull()}&quot;;</b>
-<b class="nc">&nbsp;                    default -&gt; STR.&quot;Invalid serialized data. Expected Result, but found \{rec}&quot;;</b>
+<b class="fc">&nbsp;                    case Result&lt;?&gt; r -&gt; &quot;Result value: %s&quot;.formatted(r.getOrNull());</b>
+<b class="nc">&nbsp;                    default -&gt; &quot;Invalid serialized data. Expected Result, but found %s&quot;.formatted(rec);</b>
 <b class="fc">&nbsp;                };</b>
 &nbsp;
-<b class="fc">&nbsp;                out.println(STR.&quot;Deserialized record: \{rec}&quot;);</b>
+<b class="fc">&nbsp;                out.printf(&quot;Deserialized record: %s%n&quot;, rec);</b>
 <b class="fc">&nbsp;                out.println(result);</b>
 &nbsp;            }
 <b class="fc">&nbsp;        }</b>
@@ -374,7 +365,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="fc">&nbsp;                case Result.Success&lt;?&gt; s -&gt; s.toString();</b>
 <b class="fc">&nbsp;                case Result.Failure&lt;?&gt; f -&gt; f.toString();</b>
 <b class="fc">&nbsp;            };</b>
-<b class="fc">&nbsp;            out.println(STR.&quot;Result (Sealed Type): \{result}&quot;);</b>
+<b class="fc">&nbsp;            out.printf(&quot;Result (Sealed Type): %s%n&quot;, result);</b>
 &nbsp;        });
 &nbsp;    }
 &nbsp;
@@ -415,7 +406,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-02 06:59</div>
+    <div style="float:right;">generated on 2024-05-03 04:57</div>
 </div>
 </body>
 </html>

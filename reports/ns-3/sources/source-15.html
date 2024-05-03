@@ -65,18 +65,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25%
+    37.5%
   </span>
   <span class="absValue">
-    (3/12)
+    (3/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    38.8%
+    28.4%
   </span>
   <span class="absValue">
-    (19/49)
+    (19/67)
   </span>
 </td>
 </tr>
@@ -156,18 +156,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    35.7%
+    50%
   </span>
   <span class="absValue">
-    (5/14)
+    (5/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    61%
+    49.5%
   </span>
   <span class="absValue">
-    (47/77)
+    (47/95)
   </span>
 </td>
 </tr>
@@ -215,13 +215,13 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;    }
 &nbsp;
 &nbsp;    default String fString() {
-<b class="nc">&nbsp;        return STR.&quot;&quot;&quot;</b>
-<b class="nc">&nbsp;                ToString  -&gt; \{toString()}</b>
-<b class="nc">&nbsp;                Result    -&gt; \{getOrNull()}</b>
-<b class="nc">&nbsp;                Success   -&gt; \{isSuccess()}</b>
-<b class="nc">&nbsp;                Failure   -&gt; \{isFailure()}</b>
-<b class="nc">&nbsp;                Exception -&gt; \{exceptionOrNull()}</b>
-&nbsp;                &quot;&quot;&quot;;
+<b class="nc">&nbsp;        return &quot;&quot;&quot;</b>
+&nbsp;                ToString  -&gt; %s
+&nbsp;                Result    -&gt; %s
+&nbsp;                Success   -&gt; %s
+&nbsp;                Failure   -&gt; %s
+&nbsp;                Exception -&gt; %s
+<b class="nc">&nbsp;                &quot;&quot;&quot;.formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());</b>
 &nbsp;    }
 &nbsp;
 <b class="fc">&nbsp;    record Success&lt;T&gt;(T value) implements Result&lt;T&gt; {</b>
@@ -253,7 +253,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-02 06:59</div>
+    <div style="float:right;">generated on 2024-05-03 04:57</div>
 </div>
 </body>
 </html>
