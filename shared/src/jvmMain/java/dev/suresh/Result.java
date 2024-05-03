@@ -36,11 +36,11 @@ sealed interface Result<T> extends Serializable {
 
     default String fString() {
         return """
-                ToString  -> %s
-                Result    -> %s
-                Success   -> %s
-                Failure   -> %s
-                Exception -> %s
+                ToString  -> %1$s
+                Result    -> %2$s
+                Success   -> %3$s
+                Failure   -> %4$s
+                Exception -> %5$s
                 """.formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());
     }
 
