@@ -58,16 +58,33 @@ jib {
     ports = listOf("8080", "9898")
     entrypoint = buildList {
       add("java")
+      add("-javaagent:${appRoot}/otel/otel-javaagent.jar")
+      add("-Dotel.service.name=${project.name}")
+      add("-Dotel.traces.exporter=logging")
+      add("-Dotel.metrics.exporter=logging")
+      add("-Dotel.logs.exporter=logging")
+      add("-Dotel.javaagent.logging=application")
+      add("-Dnet.bytebuddy.experimental=true")
+      // add("-Dotel.javaagent.enabled=false")
+      // add("-Dotel.instrumentation.kotlinx-coroutines.enabled=false")
       addAll(application.applicationDefaultJvmArgs.map { it.replace(tmp, "/tmp/") })
       add("-cp")
       add("@${appRoot}/jib-classpath-file")
       add("@${appRoot}/jib-main-class-file")
     }
-    environment = mapOf("OTEL_JAVAAGENT_ENABLED" to "true")
+
+    environment =
+        mapOf(
+            "OTEL_JAVAAGENT_ENABLED" to "false",
+            // "OTEL_RESOURCE_ATTRIBUTES" to
+            // "service.name=${project.name},service.namespace=${project.group},service.instance.id=localhost:8080",
+        )
+
     args = listOf(project.name, project.version.toString())
     mainClass = application.mainClass.get()
     expandClasspathDependencies = true
     format = ImageFormat.OCI
+
     labels =
         mapOf(
             "maintainer" to project.githubUser,
@@ -127,10 +144,12 @@ tasks {
       val portMapping = jib?.container?.ports.orEmpty().joinToString(" ") { "-p $it:$it" }
       val image = jib?.to?.image ?: project.name
       val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
+      val env =
+          jib?.container?.environment.orEmpty().map { "-e ${it.key}=${it.value}" }.joinToString(" ")
       logger.lifecycle(
           TextColors.cyan(
               """
-              |Run: docker run -it --rm --name ${project.name} $portMapping $image:$tag
+              |Run: docker run -it --rm --name ${project.name} $portMapping $env $image:$tag
               """
                   .trimMargin()))
     }
