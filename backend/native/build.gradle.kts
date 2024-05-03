@@ -18,17 +18,19 @@ val appBinName = "app"
 description = "Ktor native application"
 
 kotlin {
-  targets.filterIsInstance<KotlinNativeTarget>().forEach {
-    it.binaries {
-      executable(listOf(RELEASE)) {
+  targets.withType<KotlinNativeTarget>().configureEach {
+    binaries {
+      executable(setOf(RELEASE)) {
         entryPoint = "main"
         // Alpine(apk add gcompat) - https://youtrack.jetbrains.com/issue/KT-38876
         // linkerOpts("--as-needed", "--defsym=isnan=isnan")
         // freeCompilerArgs += listOf("-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh
         // -lc")
       }
+      test(setOf(RELEASE))
     }
-    it.compilations.configureEach {
+
+    compilations.configureEach {
       compileTaskProvider.configure {
         compilerOptions {
           // freeCompilerArgs.add("-Xruntime-logs=gc=info")
@@ -37,7 +39,7 @@ kotlin {
     }
   }
 
-  applyDefaultHierarchyTemplate()
+  // val nativeTargetNames = targets.withType<KotlinNativeTarget>().names
 
   sourceSets {
     commonMain { dependencies { api(projects.shared) } }
@@ -99,6 +101,7 @@ sourceSets.maybeCreate("main")
 tasks {
   val linkReleaseExecutableMacosX64 by getting(KotlinNativeLink::class)
   val linkReleaseExecutableMacosArm64 by getting(KotlinNativeLink::class)
+  // val kotlinNativeTasks = withType<KotlinNativeLink>()
 
   val macOsUniversalBinary by
       creating(Exec::class) {

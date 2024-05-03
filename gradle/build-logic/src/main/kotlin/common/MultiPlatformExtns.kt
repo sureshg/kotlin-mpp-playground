@@ -15,15 +15,13 @@ import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 context(Project)
 fun KotlinMultiplatformExtension.commonTarget() {
+
   jvmToolchain { configureJvmToolchain() }
+
   withSourcesJar(publish = true)
 
-  targets.all {
-    // Configure all compilations of all targets
-    compilations.all {
-      compileTaskProvider.configure { compilerOptions { configureKotlinCommon() } }
-    }
-  }
+  compilerOptions { configureKotlinCommon() }
+  // targets.configureEach {}
 
   sourceSets {
     all {
@@ -51,10 +49,10 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlin.logging)
         api(libs.kotlinx.html)
         api(libs.bundles.ajalt)
-        api(libs.kotlin.bignum)
-        // api(libs.kotlin.bignum.serialization)
         api(libs.kotlin.cryptography.core)
         api(libs.kotlin.cryptography.random)
+        api(libs.kotlin.bignum)
+        // api(libs.kotlin.bignum.serialization)
         if (project.name != "wasm") {
           api(libs.ktor.client.core)
           api(libs.ktor.client.content.negotiation)

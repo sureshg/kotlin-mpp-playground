@@ -373,7 +373,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   progressiveMode = true
   allWarningsAsErrors = false
   suppressWarnings = false
-  verbose = true
+  verbose = false
   freeCompilerArgs.addAll(
       buildList {
         add("-Xcontext-receivers")

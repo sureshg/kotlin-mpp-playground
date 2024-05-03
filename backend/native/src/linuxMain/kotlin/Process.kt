@@ -2,6 +2,7 @@ import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.refTo
 import kotlinx.cinterop.toKString
 import platform.posix.fgets
+import platform.posix.getpass
 import platform.posix.pclose
 import platform.posix.popen
 
@@ -37,3 +38,5 @@ actual fun execute(command: String, vararg args: String): ProcessResult = memSco
   val rawOutput = result.trim().takeIf { it.isNotBlank() }
   ProcessResult(exitCode, rawOutput)
 }
+
+actual fun readPassword(prompt: String) = getpass(prompt)?.toKString()
