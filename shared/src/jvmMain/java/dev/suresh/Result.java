@@ -35,13 +35,13 @@ sealed interface Result<T> extends Serializable {
     }
 
     default String fString() {
-        return STR."""
-                ToString  -> \{toString()}
-                Result    -> \{getOrNull()}
-                Success   -> \{isSuccess()}
-                Failure   -> \{isFailure()}
-                Exception -> \{exceptionOrNull()}
-                """;
+        return """
+                ToString  -> %s
+                Result    -> %s
+                Success   -> %s
+                Failure   -> %s
+                Exception -> %s
+                """.formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());
     }
 
     record Success<T>(T value) implements Result<T> {

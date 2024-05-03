@@ -9,7 +9,6 @@ import java.util.concurrent.CompletableFuture;
 
 import static dev.suresh.Expr.eval;
 import static java.lang.System.out;
-import static java.util.FormatProcessor.FMT;
 import static java.util.Objects.requireNonNull;
 
 public class DOP {
@@ -47,21 +46,13 @@ public class DOP {
         Expr expr = new Expr.Add(new Expr.Const.Int(count), new Expr.Const.Long(3));
         expr = new Expr.Div(expr, new Expr.Const.Int(2));
         expr = new Expr.Add(expr, new Expr.Const.Double(5.0));
-        String user = FMT."""
-                          %05d\{count}
-                          Eval(\{expr}) = \{eval(expr)}
-                          """.stripIndent();
-        out.println(user);
+        out.printf("Eval(%s) = %d%n", expr, eval(expr));
     }
 
     private static void stringTemplates() {
         int x = 10;
         int y = 20;
-        out.println(STR."\{x} + \{y} = \{x + y}");
-        out.println(FMT."""
-                0x%04x\{x} + 0x%04x\{y} = 0x%04x\{x + y}
-                %04d\{x} + %04d\{y} = %04d\{x + y}
-                """);
+        out.printf("x + y = %d%n", x + y);
     }
 
     interface Name<T> {
@@ -72,18 +63,18 @@ public class DOP {
 
     private static <T> void print(Name<T> name) {
         var result = switch (name) {
-            case FullName(var first, var last) -> STR."\{first}, \{last}";
+            case FullName(var first, var last) -> "%s, %s".formatted(first, last);
             default -> "Invalid name";
         };
         out.println(result);
 
         if (name instanceof FullName<?> f) {
-            out.println(STR."\{f.firstName()}, \{f.lastName()}");
+            out.printf("%s, %s%n", f.firstName(), f.lastName());
         }
 
         // Named record pattern is not supported
         if (name instanceof FullName(var first, var last)) {
-            out.println(STR."\{first}, \{last}");
+            out.printf("%s, %s%n", first, last);
         }
     }
 
@@ -95,13 +86,13 @@ public class DOP {
 
     private static void amberReflections() {
         var sealedClazz = Result.class;
-        out.println(STR."Result (Interface) -> \{sealedClazz.isInterface()}");
-        out.println(STR."Result (Sealed Class) -> \{sealedClazz.isSealed()}");
+        out.printf("Result (Interface) -> %s%n", sealedClazz.isInterface());
+        out.printf("Result (Sealed Class) -> %s%n", sealedClazz.isSealed());
 
         for (Class<?> permittedSubclass : sealedClazz.getPermittedSubclasses()) {
-            out.println(STR."\nPermitted Subclass : \{permittedSubclass.getName()}");
+            out.printf("%nPermitted Subclass : %s%n", permittedSubclass.getName());
             if (permittedSubclass.isRecord()) {
-                out.println(STR."\{permittedSubclass.getSimpleName()} record components are,");
+                out.printf("%s record components are,%n", permittedSubclass.getSimpleName());
                 for (RecordComponent rc : permittedSubclass.getRecordComponents()) {
                     out.println(rc);
                 }
@@ -116,7 +107,7 @@ public class DOP {
             Lang {
                 requireNonNull(name);
                 if (year <= 0) {
-                    throw new IllegalArgumentException(STR."Invalid year \{year}");
+                    throw new IllegalArgumentException("Invalid year %s".formatted(year));
                 }
             }
         }
@@ -128,7 +119,7 @@ public class DOP {
             List<Record> recs = List.of(new Lang("Java", 25), new Lang("Kotlin", 10), (Record) Result.success(100));
 
             for (Record rec : recs) {
-                out.println(STR."Serializing record: \{rec}");
+                out.printf("Serializing record: %s%n", rec);
                 oos.writeObject(rec);
             }
             oos.writeObject(null); // EOF
@@ -140,11 +131,11 @@ public class DOP {
                 var result = switch (rec) {
                     case Lang l when l.year >= 20 -> l.toString();
                     case Lang(var name, var year) -> name;
-                    case Result<?> r -> STR."Result value: \{r.getOrNull()}";
-                    default -> STR."Invalid serialized data. Expected Result, but found \{rec}";
+                    case Result<?> r -> "Result value: %s".formatted(r.getOrNull());
+                    default -> "Invalid serialized data. Expected Result, but found %s".formatted(rec);
                 };
 
-                out.println(STR."Deserialized record: \{rec}");
+                out.printf("Deserialized record: %s%n", rec);
                 out.println(result);
             }
         }
@@ -155,7 +146,7 @@ public class DOP {
                 case Result.Success<?> s -> s.toString();
                 case Result.Failure<?> f -> f.toString();
             };
-            out.println(STR."Result (Sealed Type): \{result}");
+            out.printf("Result (Sealed Type): %s%n", result);
         });
     }
 
