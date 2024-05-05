@@ -32,9 +32,9 @@ fun Application.configureHTTP() {
   install(DefaultHeaders) { header("X-Engine", "${BuildConfig.name}-${BuildConfig.version}") }
 
   install(Compression) {
-    gzip { priority = 1.0 }
+    gzip { priority = 10.0 }
     deflate {
-      priority = 10.0
+      priority = 1.0
       minimumSize(1024) // condition
     }
   }
