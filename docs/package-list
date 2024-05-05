@@ -15,6 +15,7 @@ $dokka.location://mainScope/#/PointingToDeclaration/wasm/[root]/main-scope.html
 $dokka.location://readAsText/org.w3c.files.File#/PointingToDeclaration/wasm/[root]/read-as-text.html
 $dokka.location://resourcesDir/#/PointingToDeclaration/desktop/[root]/resources-dir.html
 $dokka.location://runCoroutines/#/PointingToDeclaration/js/[root]/run-coroutines.html
+$dokka.location://runTerminal/#/PointingToDeclaration/js/[root]/run-terminal.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/js/[root]/say-hello.html
 $dokka.location://scrollingBox/#androidx.compose.ui.Modifier#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/desktop/[root]/scrolling-box.html
 $dokka.location://selectFileFromDisk/org.w3c.dom.Document#kotlin.String?#kotlin.Boolean/PointingToDeclaration/wasm/[root]/select-file-from-disk.html
