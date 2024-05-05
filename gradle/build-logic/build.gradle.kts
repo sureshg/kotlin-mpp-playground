@@ -188,6 +188,7 @@ dependencies {
   implementation("${libs.build.kotlin.dsl.get().module}:${expectedKotlinDslPluginsVersion}")
   testImplementation(gradleTestKit())
   // implementation(libs.build.kotlin.compose.compiler)
+  // implementation(libs.build.karakum.plugin)
   // implementation(libs.jte.native)
   // implementation(libs.build.kmp.hierarchy)
   // implementation(libs.build.includegit.plugin)

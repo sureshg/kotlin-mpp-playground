@@ -12,6 +12,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
+import io.ktor.util.*
 import kotlin.test.DefaultAsserter.assertEquals
 import kotlin.test.Test
 import kotlin.test.assertTrue
@@ -27,48 +28,46 @@ class CommonTest {
 
   @Test
   fun httpClient() = runTest {
+    val mockEngine = MockEngine { req ->
+      respondError(HttpStatusCode.BadRequest, "Client Error Response")
+    }
+
     val client =
-        HttpClient(
-            MockEngine { req ->
-              respondError(HttpStatusCode.BadRequest, "Client Error Response")
-            }) {
-              install(Resources)
+        HttpClient(mockEngine) {
+          install(Resources)
+          install(ContentNegotiation) { json(json) }
+          install(ContentEncoding) {
+            deflate(1.0F)
+            gzip(0.9F)
+          }
+          install(HttpTimeout) {
+            requestTimeoutMillis = 5_000
+            connectTimeoutMillis = 5_000
+            socketTimeoutMillis = 5_000
+          }
+          install(HttpCookies)
+          install(Logging) {
+            logger = Logger.DEFAULT
+            level = LogLevel.INFO
+          }
+          engine { pipelining = true }
+          followRedirects = true
+          defaultRequest {
+            headers.appendIfNameAndValueAbsent(
+                HttpHeaders.ContentType, ContentType.Application.Json.toString())
+          }
 
-              install(ContentNegotiation) { json(json) }
-
-              install(ContentEncoding) {
-                deflate(1.0F)
-                gzip(0.9F)
-              }
-
-              install(HttpTimeout) {
-                requestTimeoutMillis = 5_000
-                connectTimeoutMillis = 5_000
-                socketTimeoutMillis = 5_000
-              }
-
-              install(HttpCookies)
-
-              install(Logging) {
-                logger = Logger.DEFAULT
-                level = LogLevel.INFO
-              }
-
-              engine { pipelining = true }
-
-              followRedirects = true
-
-              HttpResponseValidator {
-                validateResponse {
-                  // it.body<String>()
-                  when (it.status.value) {
-                    in 300..399 -> throw RedirectResponseException(it, "Redirect error")
-                    in 400..499 -> throw ClientRequestException(it, "Client error")
-                    in 500..599 -> throw ServerResponseException(it, "Server error")
-                  }
-                }
+          HttpResponseValidator {
+            validateResponse {
+              // it.body<String>()
+              when (it.status.value) {
+                in 300..399 -> throw RedirectResponseException(it, "Redirect error")
+                in 400..499 -> throw ClientRequestException(it, "Client error")
+                in 500..599 -> throw ServerResponseException(it, "Server error")
               }
             }
+          }
+        }
 
     try {
       client.get("/")

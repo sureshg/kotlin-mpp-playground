@@ -3,6 +3,8 @@
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
+  // alias(libs.plugins.karakum)
+  // alias(libs.plugins.seskar)
 }
 
 description = "Kotlin/JS Web application"
@@ -21,12 +23,13 @@ tasks {
 dependencies {
   commonMainImplementation(projects.shared)
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
+  jsMainImplementation(npm("@xterm/xterm", libs.versions.npm.xtermjs.get()))
   // Add shared JS resources to web
   sharedResources(
       project(path = projects.shared.dependencyProject.path, configuration = "sharedJsResources"))
 
+  // jsMainImplementation(libs.seskar.core)
   // jsMainImplementation(npm("kotlin-playground", libs.versions.npm.kotlin.playground.get()))
-  // jsMainImplementation(npm("xterm", libs.versions.npm.xtermjs.get()))
   // jsMainImplementation(npm("vega-lite", libs.versions.npm.vega.lite.get()))
 }
 

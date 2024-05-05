@@ -9,6 +9,7 @@
 
     <link rel="Shortcut Icon" href="favicon.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="css/bulma.min.css">
+    <link rel="stylesheet" href="css/xterm.css"/>
 
     <!--    Material Fonts & Symbols-->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -60,8 +61,7 @@
             </div>
         </div>
         <br/>
-        <div class="notification is-success is-light" id="timer">
-        </div>
+
     </div>
 </section>
 
@@ -81,9 +81,10 @@
             Click on progress bar to
             <mark>cancel</mark>
         </p>
-
-        <div class="box" id="coroutines">
+        <div class="notification is-success is-light" id="timer">
         </div>
+        <div class="box" id="coroutines"></div>
+        <div class="box" id="terminal"></div>
     </div>
 </section>
 

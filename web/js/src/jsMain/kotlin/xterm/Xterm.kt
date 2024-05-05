@@ -1,4 +1,4 @@
-@file:JsModule("xterm")
+@file:JsModule("@xterm/xterm")
 @file:JsNonModule
 @file:Suppress(
     "INTERFACE_WITH_SUPERCLASS",
@@ -8,10 +8,12 @@
 
 package xterm
 
-import kotlin.js.RegExp
-import org.khronos.webgl.*
-import org.w3c.dom.*
-import org.w3c.dom.events.*
+import org.khronos.webgl.Uint8Array
+import org.w3c.dom.HTMLElement
+import org.w3c.dom.HTMLTextAreaElement
+import org.w3c.dom.events.KeyboardEvent
+import org.w3c.dom.events.MouseEvent
+import org.w3c.dom.events.WheelEvent
 
 external interface ITerminalOptions {
   var allowProposedApi: Boolean?
@@ -26,19 +28,7 @@ external interface ITerminalOptions {
     get() = definedExternally
     set(value) = definedExternally
 
-  var bellSound: String?
-    get() = definedExternally
-    set(value) = definedExternally
-
-  var bellStyle: String? /* "none" | "sound" */
-    get() = definedExternally
-    set(value) = definedExternally
-
   var convertEol: Boolean?
-    get() = definedExternally
-    set(value) = definedExternally
-
-  var cols: Number?
     get() = definedExternally
     set(value) = definedExternally
 
@@ -54,7 +44,19 @@ external interface ITerminalOptions {
     get() = definedExternally
     set(value) = definedExternally
 
+  var cursorInactiveStyle: String? /* "outline" | "block" | "bar" | "underline" | "none" */
+    get() = definedExternally
+    set(value) = definedExternally
+
+  var customGlyphs: Boolean?
+    get() = definedExternally
+    set(value) = definedExternally
+
   var disableStdin: Boolean?
+    get() = definedExternally
+    set(value) = definedExternally
+
+  var documentOverride: Any?
     get() = definedExternally
     set(value) = definedExternally
 
@@ -62,7 +64,7 @@ external interface ITerminalOptions {
     get() = definedExternally
     set(value) = definedExternally
 
-  var fastScrollModifier: String? /* "alt" | "ctrl" | "shift" */
+  var fastScrollModifier: String? /* "none" | "alt" | "ctrl" | "shift" */
     get() = definedExternally
     set(value) = definedExternally
 
@@ -88,6 +90,10 @@ external interface ITerminalOptions {
     get() = definedExternally
     set(value) = definedExternally
 
+  var ignoreBracketedPasteMode: Boolean?
+    get() = definedExternally
+    set(value) = definedExternally
+
   var letterSpacing: Number?
     get() = definedExternally
     set(value) = definedExternally
@@ -96,11 +102,15 @@ external interface ITerminalOptions {
     get() = definedExternally
     set(value) = definedExternally
 
-  var linkTooltipHoverDuration: Number?
+  var linkHandler: ILinkHandler?
     get() = definedExternally
     set(value) = definedExternally
 
-  var logLevel: String? /* "debug" | "info" | "warn" | "error" | "off" */
+  var logLevel: String? /* "trace" | "debug" | "info" | "warn" | "error" | "off" */
+    get() = definedExternally
+    set(value) = definedExternally
+
+  var logger: ILogger?
     get() = definedExternally
     set(value) = definedExternally
 
@@ -116,15 +126,11 @@ external interface ITerminalOptions {
     get() = definedExternally
     set(value) = definedExternally
 
-  var rendererType: String? /* "dom" | "canvas" */
+  var rescaleOverlappingGlyphs: Boolean?
     get() = definedExternally
     set(value) = definedExternally
 
   var rightClickSelectsWord: Boolean?
-    get() = definedExternally
-    set(value) = definedExternally
-
-  var rows: Number?
     get() = definedExternally
     set(value) = definedExternally
 
@@ -136,7 +142,15 @@ external interface ITerminalOptions {
     get() = definedExternally
     set(value) = definedExternally
 
+  var scrollOnUserInput: Boolean?
+    get() = definedExternally
+    set(value) = definedExternally
+
   var scrollSensitivity: Number?
+    get() = definedExternally
+    set(value) = definedExternally
+
+  var smoothScrollDuration: Number?
     get() = definedExternally
     set(value) = definedExternally
 
@@ -152,11 +166,29 @@ external interface ITerminalOptions {
     get() = definedExternally
     set(value) = definedExternally
 
+  var windowsPty: IWindowsPty?
+    get() = definedExternally
+    set(value) = definedExternally
+
   var wordSeparator: String?
     get() = definedExternally
     set(value) = definedExternally
 
   var windowOptions: IWindowOptions?
+    get() = definedExternally
+    set(value) = definedExternally
+
+  var overviewRulerWidth: Number?
+    get() = definedExternally
+    set(value) = definedExternally
+}
+
+external interface ITerminalInitOnlyOptions {
+  var cols: Number?
+    get() = definedExternally
+    set(value) = definedExternally
+
+  var rows: Number?
     get() = definedExternally
     set(value) = definedExternally
 }
@@ -178,7 +210,15 @@ external interface ITheme {
     get() = definedExternally
     set(value) = definedExternally
 
-  var selection: String?
+  var selectionBackground: String?
+    get() = definedExternally
+    set(value) = definedExternally
+
+  var selectionForeground: String?
+    get() = definedExternally
+    set(value) = definedExternally
+
+  var selectionInactiveBackground: String?
     get() = definedExternally
     set(value) = definedExternally
 
@@ -245,32 +285,34 @@ external interface ITheme {
   var brightWhite: String?
     get() = definedExternally
     set(value) = definedExternally
+
+  var extendedAnsi: Array<String>?
+    get() = definedExternally
+    set(value) = definedExternally
 }
 
-external interface ILinkMatcherOptions {
-  var matchIndex: Number?
+external interface IWindowsPty {
+  var backend: String? /* "conpty" | "winpty" */
     get() = definedExternally
     set(value) = definedExternally
 
-  var validationCallback: ((uri: String, callback: (isValid: Boolean) -> Unit) -> Unit)?
+  var buildNumber: Number?
     get() = definedExternally
     set(value) = definedExternally
+}
 
-  var tooltipCallback: ((event: MouseEvent, uri: String, location: IViewportRange) -> dynamic)?
-    get() = definedExternally
-    set(value) = definedExternally
+external interface ILogger {
+  fun trace(message: String, vararg args: Any)
 
-  var leaveCallback: (() -> Unit)?
-    get() = definedExternally
-    set(value) = definedExternally
+  fun debug(message: String, vararg args: Any)
 
-  var priority: Number?
-    get() = definedExternally
-    set(value) = definedExternally
+  fun info(message: String, vararg args: Any)
 
-  var willLinkActivate: ((event: MouseEvent, uri: String) -> Boolean)?
-    get() = definedExternally
-    set(value) = definedExternally
+  fun warn(message: String, vararg args: Any)
+
+  fun error(message: String, vararg args: Any)
+
+  fun error(message: Error, vararg args: Any)
 }
 
 external interface IDisposable {
@@ -283,11 +325,56 @@ external interface IEvent<T, U> {
 
 external interface IEvent__1<T> : IEvent<T, Unit>
 
-external interface IMarker : IDisposable {
-  var id: Number
-  var isDisposed: Boolean
-  var line: Number
+external interface IMarker : IDisposableWithEvent {
+  val id: Number
+  val line: Number
+}
+
+external interface IDisposableWithEvent : IDisposable {
   var onDispose: IEvent__1<Unit>
+  val isDisposed: Boolean
+}
+
+external interface IDecoration : IDisposableWithEvent {
+  val marker: IMarker
+  val onRender: IEvent__1<HTMLElement>
+  var element: HTMLElement?
+  var options: Pick<IDecorationOptions, String /* "overviewRulerOptions" */>
+}
+
+external interface IDecorationOverviewRulerOptions {
+  var color: String
+  var position: String? /* "left" | "center" | "right" | "full" */
+    get() = definedExternally
+    set(value) = definedExternally
+}
+
+external interface IDecorationOptions {
+  val marker: IMarker
+  val anchor: String? /* "right" | "left" */
+    get() = definedExternally
+
+  val x: Number?
+    get() = definedExternally
+
+  val width: Number?
+    get() = definedExternally
+
+  val height: Number?
+    get() = definedExternally
+
+  val backgroundColor: String?
+    get() = definedExternally
+
+  val foregroundColor: String?
+    get() = definedExternally
+
+  val layer: String? /* "bottom" | "top" */
+    get() = definedExternally
+
+  var overviewRulerOptions: IDecorationOverviewRulerOptions?
+    get() = definedExternally
+    set(value) = definedExternally
 }
 
 external interface ILocalizableStrings {
@@ -385,47 +472,52 @@ external interface IWindowOptions {
     set(value) = definedExternally
 }
 
-external interface KbEvent {
+external interface `T$0` {
   var key: String
   var domEvent: KeyboardEvent
 }
 
-external interface RenderEvt {
+external interface `T$1` {
   var start: Number
   var end: Number
 }
 
-external interface ScrollEvt {
+external interface `T$2` {
   var cols: Number
   var rows: Number
 }
 
-open external class Terminal(options: ITerminalOptions = definedExternally) : IDisposable {
-  open var element: HTMLElement?
-  open var textarea: HTMLTextAreaElement?
-  open var rows: Number
-  open var cols: Number
-  open var buffer: IBufferNamespace
-  open var markers: Array<IMarker>
-  open var parser: IParser
-  open var unicode: IUnicodeHandling
+external open class Terminal(
+    options: ITerminalOptions /* ITerminalOptions & ITerminalInitOnlyOptions */ = definedExternally
+) : IDisposable {
+  open val element: HTMLElement?
+  open val textarea: HTMLTextAreaElement?
+  open val rows: Number
+  open val cols: Number
+  open val buffer: IBufferNamespace
+  open val markers: Array<IMarker>
+  open val parser: IParser
+  open val unicode: IUnicodeHandling
+  open val modes: IModes
+  open var options: ITerminalOptions
+  open var onBell: IEvent__1<Unit>
   open var onBinary: IEvent__1<String>
   open var onCursorMove: IEvent__1<Unit>
   open var onData: IEvent__1<String>
-
-  open fun onKey(handler: (kbEvent: KbEvent) -> Unit)
-
+  open var onKey: IEvent__1<`T$0`>
   open var onLineFeed: IEvent__1<Unit>
+  open var onRender: IEvent__1<`T$1`>
+  open var onWriteParsed: IEvent__1<Unit>
+  open var onResize: IEvent__1<`T$2`>
   open var onScroll: IEvent__1<Number>
   open var onSelectionChange: IEvent__1<Unit>
-  open var onRender: IEvent__1<RenderEvt>
-  open var onResize: IEvent__1<ScrollEvt>
   open var onTitleChange: IEvent__1<String>
-  open var onBell: IEvent__1<Unit>
 
   open fun blur()
 
   open fun focus()
+
+  open fun input(data: String, wasUserInput: Boolean = definedExternally)
 
   open fun resize(columns: Number, rows: Number)
 
@@ -433,13 +525,7 @@ open external class Terminal(options: ITerminalOptions = definedExternally) : ID
 
   open fun attachCustomKeyEventHandler(customKeyEventHandler: (event: KeyboardEvent) -> Boolean)
 
-  open fun registerLinkMatcher(
-      regex: RegExp,
-      handler: (event: MouseEvent, uri: String) -> Unit,
-      options: ILinkMatcherOptions = definedExternally
-  ): Number
-
-  open fun deregisterLinkMatcher(matcherId: Number)
+  open fun attachCustomWheelEventHandler(customWheelEventHandler: (event: WheelEvent) -> Boolean)
 
   open fun registerLinkProvider(linkProvider: ILinkProvider): IDisposable
 
@@ -449,15 +535,15 @@ open external class Terminal(options: ITerminalOptions = definedExternally) : ID
 
   open fun deregisterCharacterJoiner(joinerId: Number)
 
-  open fun registerMarker(cursorYOffset: Number): IMarker?
+  open fun registerMarker(cursorYOffset: Number = definedExternally): IMarker
 
-  open fun addMarker(cursorYOffset: Number): IMarker?
+  open fun registerDecoration(decorationOptions: IDecorationOptions): IDecoration?
 
   open fun hasSelection(): Boolean
 
   open fun getSelection(): String
 
-  open fun getSelectionPosition(): ISelectionPosition?
+  open fun getSelectionPosition(): IBufferRange?
 
   open fun clearSelection()
 
@@ -483,51 +569,25 @@ open external class Terminal(options: ITerminalOptions = definedExternally) : ID
 
   open fun write(data: String, callback: () -> Unit = definedExternally)
 
+  open fun write(data: String)
+
   open fun write(data: Uint8Array, callback: () -> Unit = definedExternally)
+
+  open fun write(data: Uint8Array)
 
   open fun writeln(data: String, callback: () -> Unit = definedExternally)
 
+  open fun writeln(data: String)
+
   open fun writeln(data: Uint8Array, callback: () -> Unit = definedExternally)
 
-  open fun writeUtf8(data: Uint8Array, callback: () -> Unit = definedExternally)
+  open fun writeln(data: Uint8Array)
 
   open fun paste(data: String)
 
-  open fun getOption(
-      key:
-          String /* "bellSound" | "bellStyle" | "cursorStyle" | "fontFamily" | "logLevel" | "rendererType" | "termName" | "wordSeparator" | "allowTransparency" | "cancelEvents" | "convertEol" | "cursorBlink" | "disableStdin" | "macOptionIsMeta" | "rightClickSelectsWord" | "popOnBell" | "visualBell" | "windowsMode" | "cols" | "fontSize" | "letterSpacing" | "lineHeight" | "rows" | "tabStopWidth" | "scrollback" | "fontWeight" | "fontWeightBold" */
-  ): dynamic /* Any */
-
-  open fun setOption(
-      key:
-          String /* "fontFamily" | "termName" | "bellSound" | "wordSeparator" | "logLevel" | "logLevel" | "logLevel" | "logLevel" | "logLevel" | "bellStyle" | "bellStyle" | "bellStyle" | "bellStyle" | "cursorStyle" | "cursorStyle" | "cursorStyle" */,
-      value:
-          String /* "debug" | "info" | "warn" | "error" | "off" | "none" | "visual" | "sound" | "both" | "block" | "underline" | "bar" */
-  )
-
-  open fun setOption(
-      key: String /* "fontWeight" | "fontWeightBold" */,
-      value:
-          Any? /* "normal" | "bold" | "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900" | Number? */
-  )
-
-  open fun setOption(
-      key:
-          String /* "allowTransparency" | "cancelEvents" | "convertEol" | "cursorBlink" | "disableStdin" | "macOptionIsMeta" | "popOnBell" | "rightClickSelectsWord" | "visualBell" | "windowsMode" */,
-      value: Boolean
-  )
-
-  open fun setOption(
-      key:
-          String /* "fontSize" | "letterSpacing" | "lineHeight" | "tabStopWidth" | "scrollback" | "cols" | "rows" */,
-      value: Number
-  )
-
-  open fun setOption(key: String /* "theme" */, value: ITheme)
-
-  open fun setOption(key: String, value: Any)
-
   open fun refresh(start: Number, end: Number)
+
+  open fun clearTextureAtlas()
 
   open fun reset()
 
@@ -542,13 +602,6 @@ external interface ITerminalAddon : IDisposable {
   fun activate(terminal: Terminal)
 }
 
-external interface ISelectionPosition {
-  var startColumn: Number
-  var startRow: Number
-  var endColumn: Number
-  var endRow: Number
-}
-
 external interface IViewportRange {
   var start: IViewportRangePosition
   var end: IViewportRangePosition
@@ -557,6 +610,16 @@ external interface IViewportRange {
 external interface IViewportRangePosition {
   var x: Number
   var y: Number
+}
+
+external interface ILinkHandler {
+  fun activate(event: MouseEvent, text: String, range: IBufferRange)
+
+  val hover: ((event: MouseEvent, text: String, range: IBufferRange) -> Unit)?
+  val leave: ((event: MouseEvent, text: String, range: IBufferRange) -> Unit)?
+  var allowNonHttpProtocols: Boolean?
+    get() = definedExternally
+    set(value) = definedExternally
 }
 
 external interface ILinkProvider {
@@ -573,13 +636,8 @@ external interface ILink {
   fun activate(event: MouseEvent, text: String)
 
   val hover: ((event: MouseEvent, text: String) -> Unit)?
-    get() = definedExternally
-
   val leave: ((event: MouseEvent, text: String) -> Unit)?
-    get() = definedExternally
-
   val dispose: (() -> Unit)?
-    get() = definedExternally
 }
 
 external interface ILinkDecorations {
@@ -598,28 +656,32 @@ external interface IBufferCellPosition {
 }
 
 external interface IBuffer {
-  var type: String /* "normal" | "alternate" */
-  var cursorY: Number
-  var cursorX: Number
-  var viewportY: Number
-  var baseY: Number
-  var length: Number
+  val type: String /* "normal" | "alternate" */
+  val cursorY: Number
+  val cursorX: Number
+  val viewportY: Number
+  val baseY: Number
+  val length: Number
 
   fun getLine(y: Number): IBufferLine?
 
   fun getNullCell(): IBufferCell
 }
 
+external interface IBufferElementProvider {
+  fun provideBufferElements(): dynamic /* DocumentFragment | HTMLElement */
+}
+
 external interface IBufferNamespace {
-  var active: IBuffer
-  var normal: IBuffer
-  var alternate: IBuffer
+  val active: IBuffer
+  val normal: IBuffer
+  val alternate: IBuffer
   var onBufferChange: IEvent__1<IBuffer>
 }
 
 external interface IBufferLine {
-  var isWrapped: Boolean
-  var length: Number
+  val isWrapped: Boolean
+  val length: Number
 
   fun getCell(x: Number, cell: IBufferCell = definedExternally): IBufferCell?
 
@@ -658,6 +720,10 @@ external interface IBufferCell {
   fun isInverse(): Number
 
   fun isInvisible(): Number
+
+  fun isStrikethrough(): Number
+
+  fun isOverline(): Number
 
   fun isFgRGB(): Boolean
 
@@ -703,14 +769,28 @@ external interface IParser {
 }
 
 external interface IUnicodeVersionProvider {
-  var version: String
+  val version: String
 
   fun wcwidth(codepoint: Number): Number /* 0 | 1 | 2 */
+
+  fun charProperties(codepoint: Number, preceding: Number): Number
 }
 
 external interface IUnicodeHandling {
   fun register(provider: IUnicodeVersionProvider)
 
-  var versions: Array<String>
+  val versions: Array<String>
   var activeVersion: String
+}
+
+external interface IModes {
+  val applicationCursorKeysMode: Boolean
+  val applicationKeypadMode: Boolean
+  val bracketedPasteMode: Boolean
+  val insertMode: Boolean
+  val mouseTrackingMode: String /* "none" | "x10" | "vt200" | "drag" | "any" */
+  val originMode: Boolean
+  val reverseWraparoundMode: Boolean
+  val sendFocusMode: Boolean
+  val wraparoundMode: Boolean
 }

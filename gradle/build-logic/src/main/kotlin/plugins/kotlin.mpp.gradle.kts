@@ -112,7 +112,6 @@ tasks {
     // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
   }
 
-  // Configure KSP2
   withType<KspAATask>().configureEach { configureKspConfig() }
 
   withType<KotlinJsCompile>().configureEach { compilerOptions { configureKotlinJs() } }
@@ -157,6 +156,14 @@ tasks {
 
     build { finalizedBy(buildExecutable) }
   }
+
+  // Apply karakum plugin to JS targets!
+  // val jsTargets = kotlin.targets.matching { it.platformType == KotlinPlatformType.js }
+  // jsTargets.configureEach {
+  //   if (!plugins.hasPlugin(libs.plugins.karakum.get().pluginId)) {
+  //     apply(plugin = libs.plugins.karakum.get().pluginId)
+  //   }
+  // }
 
   // Application run should use the jvmJar as classpath
   plugins.withId("application") {

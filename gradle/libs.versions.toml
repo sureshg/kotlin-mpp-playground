@@ -34,11 +34,13 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.15.0-Beta.2"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.738"
+kotlin-wrappers                = "1.0.0-pre.739"
 kotlin-redacted                = "1.9.0-alpha01"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
+karakum                        = "1.0.0-alpha.40-K2"
+seskar                         = "2.55.1"
 ktor                           = "3.0.0-beta-1"
 ktor-cohort                    = "2.5.0"
 otel                           = "1.37.0"
@@ -67,7 +69,7 @@ junit                          = "5.11.0-M1"
 koin                           = "3.5.6"
 kotest                         = "5.8.1"
 mockk                          = "1.13.10"
-mokkery                        = "2.0.0-Beta3"
+mokkery                        = "2.0.0-RC1"
 slf4j                          = "2.1.0-alpha1"
 logback                        = "1.5.6"
 logback-tyler                  = "0.7"
@@ -142,11 +144,11 @@ twelvemonkeys                  = "3.10.1"
 okapibarcode                   = "0.4.1"
 
 # NPM Dependencies
-npm-highlightjs                = "11.8.0"
-npm-kotlin-playground          = "1.28.0"
-npm-xtermjs                    = "5.2.1"
-npm-vega-lite                  = "5.13.0"
-npm-jsjoda-tz                  = "2.18.0"
+npm-highlightjs                = "11.9.0"
+npm-kotlin-playground          = "1.30.0"
+npm-xtermjs                    = "5.5.0"
+npm-vega-lite                  = "5.18.0"
+npm-jsjoda-tz                  = "2.21.0"
 
 # Plugin versions
 benmanes                       = "0.51.0"
@@ -177,7 +179,7 @@ jib-plugin                     = "3.4.2"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
-jetbrains-compose              = "1.6.10-beta03"
+jetbrains-compose              = "1.6.10-rc01"
 kobweb                         = "0.17.3"
 
 [libraries]
@@ -231,6 +233,7 @@ build-jimfs                          = { module = "com.google.jimfs:jimfs"      
 build-jib-plugin                     = { module = "com.google.cloud.tools:jib-gradle-plugin"                        , version.ref = "jib-plugin" }
 build-jib-nativeimage-extn           = { module = "com.google.cloud.tools:jib-native-image-extension-gradle"        , version.ref = "jib-nativeimage-extn" }
 build-includegit-plugin              = { module = "me.champeau.gradle.includegit:plugin"                            , version.ref = "includegit-plugin" }
+build-karakum-plugin                 = { module = "io.github.sgrishchenko:karakum-gradle-plugin"                    , version.ref = "karakum" }
 
 # Gradle Dependencies
 kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                                 , version.ref = "kotlin"}
@@ -432,6 +435,7 @@ compose-routing                      = { module = "app.softwork:routing-compose"
 compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"               , version.ref = "compose-icons" }
 
 kotlin-wrappers-bom                  = { module = "org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom"          , version.ref = "kotlin-wrappers" }
+seskar-core                          = { module = "io.github.turansky.seskar:seskar-core"                      , version.ref = "seskar"}
 multiplatform-settings-core          = { module = "com.russhwolf:multiplatform-settings"                       , version.ref = "kmp-settings" }
 multiplatform-settings-coroutines    = { module = "com.russhwolf:multiplatform-settings-coroutines"            , version.ref = "kmp-settings" }
 multiplatform-settings-no-arg        = { module = "com.russhwolf:multiplatform-settings-no-arg"                , version.ref = "kmp-settings" }
@@ -502,6 +506,8 @@ jetbrains-compose                    = { id = "org.jetbrains.compose"           
 kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark"                                , version.ref = "kotlinx-benchmark" }
 ktor                                 = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }
 exposed                              = { id = "com.jetbrains.exposed.gradle.plugin"                            , version.ref = "exposed-plugin" }
+karakum                              = { id = "io.github.sgrishchenko.karakum"                                 , version.ref = "karakum" }
+seskar                               = { id = "io.github.turansky.seskar"                                      , version.ref = "seskar" }
 jte                                  = { id = "gg.jte.gradle"                                                  , version.ref = "jte" }
 benmanes                             = { id = "com.github.ben-manes.versions"                                  , version.ref = "benmanes" }
 bestpractices                        = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "best-practices-plugin" }

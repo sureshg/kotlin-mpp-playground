@@ -1,0 +1,14 @@
+{
+  "input": [
+    "<nodeModules>/@types/xterm/index.d.ts"
+  ],
+  "output": "src/jsMain/kotlin/xterm",
+  "libraryName": "@types/xterm",
+  "granularity": "top-level",
+  "moduleNameMapper": {
+    ".*": "xterm"
+  },
+  "namespaceStrategy": {
+    "xterm": "ignore"
+  }
+}
