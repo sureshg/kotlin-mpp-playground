@@ -126,9 +126,9 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;  install(DefaultHeaders) { header(&quot;X-Engine&quot;, &quot;${BuildConfig.name}-${BuildConfig.version}&quot;) }</b>
 &nbsp;
 <b class="nc">&nbsp;  install(Compression) {</b>
-<b class="nc">&nbsp;    gzip { priority = 1.0 }</b>
+<b class="nc">&nbsp;    gzip { priority = 10.0 }</b>
 <b class="nc">&nbsp;    deflate {</b>
-<b class="nc">&nbsp;      priority = 10.0</b>
+<b class="nc">&nbsp;      priority = 1.0</b>
 <b class="nc">&nbsp;      minimumSize(1024) // condition</b>
 &nbsp;    }
 &nbsp;  }
@@ -183,7 +183,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-05 20:33</div>
+    <div style="float:right;">generated on 2024-05-05 22:31</div>
 </div>
 </body>
 </html>
