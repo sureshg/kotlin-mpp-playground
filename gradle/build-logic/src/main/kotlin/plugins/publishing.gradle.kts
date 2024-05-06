@@ -38,7 +38,7 @@ publishing {
   publications {
 
     // Kotlin Multiplatform
-    plugins.withId("org.jetbrains.kotlin.multiplatform") {
+    pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
       val javadocJar by
           tasks.registering(Jar::class) {
             archiveClassifier = "javadoc"
@@ -54,7 +54,7 @@ publishing {
     }
 
     // Kotlin JVM
-    plugins.withId("org.jetbrains.kotlin.jvm") {
+    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
       register<MavenPublication>("maven") {
         from(components["java"])
         configurePom()
@@ -70,7 +70,7 @@ publishing {
     }
 
     // Maven Bom
-    plugins.withId("java-platform") {
+    pluginManager.withPlugin("java-platform") {
       register<MavenPublication>("maven") {
         from(components["javaPlatform"])
         configurePom()
@@ -78,7 +78,7 @@ publishing {
     }
 
     // Gradle version catalog
-    plugins.withId("version-catalog") {
+    pluginManager.withPlugin("version-catalog") {
       register<MavenPublication>("maven") {
         from(components["versionCatalog"])
         configurePom()
@@ -86,7 +86,7 @@ publishing {
     }
 
     // Add Dokka html doc to all publications
-    plugins.withId("org.jetbrains.dokka") {
+    pluginManager.withPlugin("org.jetbrains.dokka") {
       val dokkaHtmlJar by
           tasks.registering(Jar::class) {
             from(tasks.named("dokkaHtml"))

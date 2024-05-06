@@ -176,6 +176,8 @@ tasks {
         compression = Compression.GZIP
         destinationDirectory = project.layout.buildDirectory
         from(nativeCompile.map { it.outputFile })
+        // archiveExtension = "tar.gz"
+        // mustRunAfter(nativeCompile)
         doLast {
           // Set the output for the GitHub native-build action.
           with(GithubAction) {

@@ -148,7 +148,7 @@ tasks {
     duplicatesStrategy = DuplicatesStrategy.WARN
   }
 
-  plugins.withId("com.github.johnrengelman.shadow") {
+  pluginManager.withPlugin("com.github.johnrengelman.shadow") {
     val buildExecutable by
         registering(ReallyExecJar::class) {
           val shadowJar = named<Jar>("shadowJar")
@@ -163,7 +163,7 @@ tasks {
   }
 
   // Copy OpenTelemetry Java agent for jib
-  plugins.withId("com.google.cloud.tools.jib") {
+  pluginManager.withPlugin("com.google.cloud.tools.jib") {
     val copyOtelAgent by
         registering(Copy::class) {
           from(javaAgent)

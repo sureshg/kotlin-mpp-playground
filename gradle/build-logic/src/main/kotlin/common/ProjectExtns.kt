@@ -4,6 +4,7 @@ import com.google.devtools.ksp.gradle.KspAATask
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Path
+import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Action
 import org.gradle.api.JavaVersion
@@ -16,6 +17,7 @@ import org.gradle.api.attributes.*
 import org.gradle.api.component.AdhocComponentWithVariants
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Provider
+import org.gradle.api.tasks.JavaExec
 import org.gradle.api.tasks.TaskContainer
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.*
@@ -68,10 +70,7 @@ val Project.isSnapshot
   get() = version.toString().endsWith("SNAPSHOT", true)
 
 val Project.runsOnCI
-  get() = providers.environmentVariable("CI").getOrElse("false").toBoolean()
-
-val Project.composeReportsEnabled
-  get() = hasProperty("composeCompilerReports")
+  get() = providers.environmentVariable("CI").isPresent
 
 /** Java version properties. */
 val Project.javaVersion
@@ -148,6 +147,28 @@ val Project.githubActor
 
 val Project.githubToken
   get() = providers.gradleProperty("githubToken")
+
+@Suppress("UnstableApiUsage")
+val Project.gradleSystemProperties
+  get() =
+      providers.systemPropertiesPrefixedBy("systemProp.").map {
+        it.mapKeys { (k, _) -> k.substringAfter("systemProp.") }
+      }
+
+/** Adds the give java module to all jvm tasks. Eg: `withModule("jdk.incubator.vector", false)` */
+fun Project.withJavaModule(moduleName: String, supportedInNative: Boolean = false) =
+    tasks.run {
+      val argsToAdd = listOf("--add-modules", moduleName)
+      withType<JavaCompile>().configureEach { options.compilerArgs.addAll(argsToAdd) }
+      withType<Test>().configureEach { jvmArgs(argsToAdd) }
+      withType<JavaExec>().configureEach { jvmArgs(argsToAdd) }
+      if (supportedInNative) {
+        project.pluginManager.withPlugin("org.graalvm.buildtools.native") {
+          val ext = project.extensions.findByType(GraalVMExtension::class.java)
+          ext?.binaries?.all { jvmArgs(argsToAdd) }
+        }
+      }
+    }
 
 /**
  * JVM arguments for running (**java**) or compiling (**javac**) java/kotlin build tasks.
@@ -379,13 +400,8 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
         add("-Xcontext-receivers")
         add("-Xexpect-actual-classes")
         add("-Xskip-prerelease-check")
-        if (composeReportsEnabled) {
-          val reportPath = layout.buildDirectory.dir("compose_compiler").get().asFile.absolutePath
-          add("-P")
-          add("plugin:androidx.compose.compiler.plugins.kotlin:reportsDestination=$reportPath")
-          add("-P")
-          add("plugin:androidx.compose.compiler.plugins.kotlin:metricsDestination=$reportPath")
-        }
+        // add("-P")
+        // add("plugin:...=...")
       })
 }
 

@@ -144,7 +144,7 @@ tasks {
     }
   }
 
-  plugins.withId("com.github.johnrengelman.shadow") {
+  pluginManager.withPlugin("com.github.johnrengelman.shadow") {
     val buildExecutable by
         registering(ReallyExecJar::class) {
           jarFile = named<Jar>("shadowJar").flatMap { it.archiveFile }
@@ -166,7 +166,7 @@ tasks {
   // }
 
   // Application run should use the jvmJar as classpath
-  plugins.withId("application") {
+  pluginManager.withPlugin("application") {
     val jvmJar = named<Jar>("jvmJar")
     named<JavaExec>("run") {
       dependsOn(jvmJar)

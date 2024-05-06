@@ -64,14 +64,14 @@ if (isRootProject) {
 }
 
 // Configure if the plugin is applied to the project.
-plugins.withId("org.jetbrains.kotlinx.binary-compatibility-validator") {
+pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
   extensions.configure<ApiValidationExtension>("apiValidation") {
     validationDisabled = true
     klib { enabled = false }
   }
 }
 
-plugins.withId("org.hildan.github.changelog") {
+pluginManager.withPlugin("org.hildan.github.changelog") {
   the<GitHubChangelogExtension>().run { githubUser = project.githubUser }
 }
 

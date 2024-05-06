@@ -33,8 +33,7 @@ class GenericSettingsPlugin : Plugin<Settings> {
         gradle.beforeProject { pluginManager.apply(GenericProjectPlugin::class) }
 
         // Configure an extension when a plugin is applied.
-        plugins.withId("com.gradle.develocity") {}
-        // OR pluginManager.withPlugin("com.gradle.develocity") {}
+        pluginManager.withPlugin("com.gradle.develocity") {}
 
         // pluginManager.withPlugin("org.graalvm.buildtools.native") {
         //   val graalExt = extensions.findByType(GraalVMExtension::class.java)
