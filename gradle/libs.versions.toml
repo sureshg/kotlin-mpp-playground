@@ -141,7 +141,7 @@ jfree-svg                      = "5.0.5"
 xchart                         = "3.8.7"
 batik                          = "1.17"
 twelvemonkeys                  = "3.10.1"
-okapibarcode                   = "0.4.1"
+okapibarcode                   = "0.4.5"
 
 # NPM Dependencies
 npm-highlightjs                = "11.9.0"
