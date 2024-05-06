@@ -179,7 +179,7 @@ jib-plugin                     = "3.4.2"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
-jetbrains-compose              = "1.6.10-rc01"
+jetbrains-compose              = "1.6.10-dev1613"
 kobweb                         = "0.17.3"
 
 [libraries]
