@@ -7,7 +7,6 @@ $dokka.location://console/#/PointingToDeclaration/wasm/[root]/console.html
 $dokka.location://currentTimeMillis/#/PointingToDeclaration/wasm/[root]/current-time-millis.html
 $dokka.location://debug/#/PointingToDeclaration/desktop/[root]/debug.html
 $dokka.location://debug/androidx.compose.ui.Modifier#androidx.compose.ui.graphics.Color/PointingToDeclaration/desktop/[root]/debug.html
-$dokka.location://jsTypeOf/#kotlin.Any/PointingToDeclaration/js/[root]/js-type-of.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
 $dokka.location://log/#/PointingToDeclaration/wasm/[root]/log.html
 $dokka.location://main/#/PointingToDeclaration/wasm/[root]/main.html
@@ -21,7 +20,6 @@ $dokka.location://scrollingBox/#androidx.compose.ui.Modifier#kotlin.Function0[ko
 $dokka.location://selectFileFromDisk/org.w3c.dom.Document#kotlin.String?#kotlin.Boolean/PointingToDeclaration/wasm/[root]/select-file-from-disk.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/shared/[root]/stdlib-features.html
 $dokka.location://stroke/#/PointingToDeclaration/desktop/[root]/stroke.html
-$dokka.location://topLevelJsFun/#/PointingToDeclaration/js/[root]/top-level-js-fun.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
 $dokka.location:/ClassVisitor/defaultHandler/#com.google.devtools.ksp.symbol.KSNode#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/default-handler.html
@@ -80,4 +78,5 @@ module:security
 dev.suresh
 module:js
 hljs
+interop
 xterm
