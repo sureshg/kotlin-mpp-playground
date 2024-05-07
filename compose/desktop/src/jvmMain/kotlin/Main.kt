@@ -39,6 +39,8 @@ fun App() {
   var showImage by remember { mutableStateOf(false) }
   val coroutineScope = rememberCoroutineScope()
 
+  val resource = resourcesDir.resolve("resource.txt")
+
   scrollingBox {
     Column(
         modifier = Modifier.fillMaxWidth().debug(color = Color.Blue),
@@ -76,6 +78,11 @@ fun App() {
                     append(BuildConfig.jetbrainsCompose)
                   }
                   appendLine()
+
+                  append("Resource: ")
+                  withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
+                    if (resource.exists()) append(resource.readText()) else append("Not found")
+                  }
                 }
                 showImage = !showImage
               }) {

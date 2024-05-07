@@ -161,9 +161,6 @@ fun Project.withJavaModule(moduleName: String, supportedInNative: Boolean = fals
     tasks.run {
       val argsToAdd = listOf("--add-modules", moduleName)
       withType<JavaCompile>().configureEach { options.compilerArgs.addAll(argsToAdd) }
-      withType<KotlinCompile>().configureEach {
-        compilerOptions { freeCompilerArgs.appendAll(argsToAdd) }
-      }
       withType<Test>().configureEach { jvmArgs(argsToAdd) }
       withType<JavaExec>().configureEach { jvmArgs(argsToAdd) }
       if (supportedInNative) {

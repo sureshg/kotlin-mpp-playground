@@ -27,7 +27,7 @@ compose {
   desktop {
     application {
       mainClass = "MainKt"
-      args += buildList { add(project.version.toString()) }
+      args += listOf(project.version.toString())
       jvmArgs += buildList {
         // $APPDIR macro is used by jpackage.
         // To debug _JAVA_LAUNCHER_DEBUG=1
@@ -70,7 +70,7 @@ compose {
           appStore = false
           bundleID = "${project.group}.${project.name}"
           setDockNameSameAsPackageName = true
-          iconFile = layout.projectDirectory.file("src/assets/desktop/icon.icns")
+          iconFile = layout.projectDirectory.file("src/assets/icons/mac.icns")
 
           notarization {
             appleID = "test.app@example.com"
@@ -78,7 +78,7 @@ compose {
           }
         }
 
-        linux { layout.projectDirectory.file("src/assets/desktop/icon.png") }
+        linux { layout.projectDirectory.file("src/assets/icons/linux.png") }
 
         windows {
           menu = true
@@ -86,7 +86,7 @@ compose {
           perUserInstall = true
           // https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
           upgradeUuid = "b4397f87-3196-4991-96f3-0bd8b0adbdfd"
-          iconFile = layout.projectDirectory.file("src/assets/desktop/icon.ico")
+          iconFile = layout.projectDirectory.file("src/assets/icons/win.ico")
         }
 
         // val resRoot = kotlin.sourceSets.jvmMain.get().resources.srcDirs.first()
