@@ -94,34 +94,6 @@ kover {
 val javaAgent by configurations.creating
 
 tasks {
-  // Configure "compileJava" and "compileTestJava" tasks.
-  withType<JavaCompile>().configureEach {
-    configureJavac()
-
-    // Add the Kotlin classes to the module path
-    options.compilerArgumentProviders.add(
-        object : CommandLineArgumentProvider {
-          @InputFiles
-          @PathSensitive(PathSensitivity.RELATIVE)
-          val kotlinClasses = compileKotlin.flatMap { it.destinationDirectory }
-
-          override fun asArguments() =
-              listOf("--patch-module", "$group=${kotlinClasses.get().asFile.absolutePath}")
-        })
-  }
-
-  withType<KotlinCompile>().configureEach {
-    usePreciseJavaTracking = true
-    compilerOptions { configureKotlinJvm() }
-    // finalizedBy("spotlessApply")
-  }
-
-  // Configure jvm args for JavaExec tasks except `run`
-  withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(jvmArguments()) }
-
-  // Configure KSP2
-  withType<KspAATask>().configureEach { configureKspConfig() }
-
   processResources {
     inputs.property("version", project.version.toString())
     filesMatching("*-res.txt") {
@@ -131,6 +103,20 @@ tasks {
       )
     }
   }
+  // Configure "compileJava" and "compileTestJava" tasks.
+  withType<JavaCompile>().configureEach { configureJavac(withKotlin = true) }
+
+  withType<KotlinCompile>().configureEach {
+    compilerOptions { configureKotlinJvm() }
+    usePreciseJavaTracking = true
+    // finalizedBy("spotlessApply")
+  }
+
+  // Configure jvm args for JavaExec tasks except `run`
+  withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(jvmArguments()) }
+
+  // Configure KSP2
+  withType<KspAATask>().configureEach { configureKspConfig() }
 
   withType<Jar>().configureEach {
     manifest {

@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
+import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import tasks.BuildConfig
 import tasks.BuildConfigExtension
 import tasks.ReallyExecJar
@@ -61,6 +62,10 @@ kotlin {
       }
     }
   }
+
+  // To configure specific targets
+  targets.withType<KotlinJvmTarget>().configureEach { compilerOptions {} }
+  // targets.matching { it.platformType == js }.configureEach { apply(plugin = ...) }
 
   // kotlinDaemonJvmArgs = jvmArguments
   // explicitApiWarning()
@@ -155,23 +160,6 @@ tasks {
         }
 
     build { finalizedBy(buildExecutable) }
-  }
-
-  // Apply karakum plugin to JS targets!
-  // val jsTargets = kotlin.targets.matching { it.platformType == KotlinPlatformType.js }
-  // jsTargets.configureEach {
-  //   if (!plugins.hasPlugin(libs.plugins.karakum.get().pluginId)) {
-  //     apply(plugin = libs.plugins.karakum.get().pluginId)
-  //   }
-  // }
-
-  // Application run should use the jvmJar as classpath
-  pluginManager.withPlugin("application") {
-    val jvmJar = named<Jar>("jvmJar")
-    named<JavaExec>("run") {
-      dependsOn(jvmJar)
-      classpath(jvmJar)
-    }
   }
 }
 

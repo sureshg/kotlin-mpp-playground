@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package common
 
 import com.google.devtools.ksp.gradle.KspAATask
@@ -17,8 +19,7 @@ import org.gradle.api.attributes.*
 import org.gradle.api.component.AdhocComponentWithVariants
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.Provider
-import org.gradle.api.tasks.JavaExec
-import org.gradle.api.tasks.TaskContainer
+import org.gradle.api.tasks.*
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.*
 import org.gradle.api.tasks.testing.logging.*
@@ -26,12 +27,12 @@ import org.gradle.internal.os.OperatingSystem
 import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.*
 import org.gradle.plugin.use.PluginDependency
+import org.gradle.process.CommandLineArgumentProvider
 import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.kotlin.gradle.dsl.*
-import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
-import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
-import org.jetbrains.kotlin.gradle.plugin.LanguageSettingsBuilder
+import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.testing.internal.KotlinTestReport
 
 // val logger = LoggerFactory.getLogger("build-logic")
@@ -160,6 +161,9 @@ fun Project.withJavaModule(moduleName: String, supportedInNative: Boolean = fals
     tasks.run {
       val argsToAdd = listOf("--add-modules", moduleName)
       withType<JavaCompile>().configureEach { options.compilerArgs.addAll(argsToAdd) }
+      withType<KotlinCompile>().configureEach {
+        compilerOptions { freeCompilerArgs.appendAll(argsToAdd) }
+      }
       withType<Test>().configureEach { jvmArgs(argsToAdd) }
       withType<JavaExec>().configureEach { jvmArgs(argsToAdd) }
       if (supportedInNative) {
@@ -189,8 +193,6 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
   addAll(jvmArgs)
   add("--add-modules=$addModules")
   // add("--add-opens=java.base/jdk.internal.classfile=ALL-UNNAMED")
-  // add("--add-opens=java.base/jdk.internal.classfile.constantpool=ALL-UNNAMED")
-  // add("--add-opens=java.base/jdk.internal.classfile.instruction=ALL-UNNAMED")
   // 'java' arguments.
   if (appRun) {
     addAll(
@@ -359,7 +361,7 @@ fun JavaToolchainSpec.configureJvmToolchain() {
 }
 
 context(Project)
-fun JavaCompile.configureJavac() {
+fun JavaCompile.configureJavac(withKotlin: Boolean = false) {
   options.apply {
     encoding = "UTF-8"
     release = javaRelease
@@ -374,16 +376,31 @@ fun JavaCompile.configureJavac() {
             listOf(
                 "-Xlint:all",
                 "-parameters",
-                // "-Xlint:-deprecation",       // suppress deprecations
-                // "-Xlint:lossy-conversions",  // suppress lossy conversions
+                // "-Xlint:-deprecation",
+                // "-Xlint:lossy-conversions",
                 // "-XX:+IgnoreUnrecognizedVMOptions",
                 // "--add-exports",
                 // "java.base/sun.nio.ch=ALL-UNNAMED",
                 // "--patch-module",
                 // "$moduleName=${sourceSets.main.get().output.asPath}",
-                // "-Xplugin:unchecked",       // compiler plugin
+                // "-Xplugin:unchecked", // compiler plugin
             ),
     )
+
+    if (withKotlin) {
+      // Add the Kotlin classes to the module path
+      compilerArgumentProviders.add(
+          object : CommandLineArgumentProvider {
+
+            @InputFiles
+            @PathSensitive(PathSensitivity.RELATIVE)
+            val kotlinClasses =
+                tasks.named<KotlinCompile>("compileKotlin").flatMap { it.destinationDirectory }
+
+            override fun asArguments() =
+                listOf("--patch-module", "$group=${kotlinClasses.get().asFile.absolutePath}")
+          })
+    }
   }
 }
 
@@ -395,14 +412,13 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   allWarningsAsErrors = false
   suppressWarnings = false
   verbose = false
-  freeCompilerArgs.addAll(
-      buildList {
-        add("-Xcontext-receivers")
-        add("-Xexpect-actual-classes")
-        add("-Xskip-prerelease-check")
-        // add("-P")
-        // add("plugin:...=...")
-      })
+  freeCompilerArgs.appendAll(
+      "-Xcontext-receivers",
+      "-Xexpect-actual-classes",
+      "-Xskip-prerelease-check",
+      // "-P",
+      // "plugin:...=..."
+  )
 }
 
 context(Project)
@@ -433,7 +449,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
   verbose = true
   allWarningsAsErrors = false
   suppressWarnings = false
-  freeCompilerArgs.addAll(
+  freeCompilerArgs.appendAll(
       "-Xadd-modules=$addModules",
       "-Xjsr305=strict",
       "-Xjvm-default=all",
@@ -443,7 +459,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
       "-Xjspecify-annotations=strict",
       "-Xextended-compiler-checks",
       "-Xskip-prerelease-check",
-      // "-Xjdk-release=$javaVersion",
+      // "-Xjdk-release=${kotlinJvmTarget.get().target}",
       // "-Xadd-modules=ALL-MODULE-PATH",
       // "-Xmodule-path=",
       // "-Xjvm-enable-preview",

@@ -31,7 +31,10 @@ tasks {
   withType<KotlinCompile>().configureEach {
     compilerOptions {
       jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget)
-      freeCompilerArgs.addAll("-Xcontext-receivers")
+      freeCompilerArgs.appendAll(
+          "-Xcontext-receivers",
+          // "-Xjdk-release=${dslJavaVersion.get()}"
+      )
     }
   }
 
