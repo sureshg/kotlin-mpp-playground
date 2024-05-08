@@ -27,7 +27,6 @@ import org.gradle.internal.os.OperatingSystem
 import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.*
 import org.gradle.plugin.use.PluginDependency
-import org.gradle.process.CommandLineArgumentProvider
 import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.*
@@ -358,7 +357,7 @@ fun JavaToolchainSpec.configureJvmToolchain() {
 }
 
 context(Project)
-fun JavaCompile.configureJavac(withKotlin: Boolean = false) {
+fun JavaCompile.configureJavac() {
   options.apply {
     encoding = "UTF-8"
     release = javaRelease
@@ -369,34 +368,26 @@ fun JavaCompile.configureJavac(withKotlin: Boolean = false) {
     forkOptions.jvmArgs?.addAll(jvmArguments())
     // Javac options
     compilerArgs.addAll(
-        jvmArguments() +
-            listOf(
-                "-Xlint:all",
-                "-parameters",
-                // "-Xlint:-deprecation",
-                // "-Xlint:lossy-conversions",
-                // "-XX:+IgnoreUnrecognizedVMOptions",
-                // "--add-exports",
-                // "java.base/sun.nio.ch=ALL-UNNAMED",
-                // "--patch-module",
-                // "$moduleName=${sourceSets.main.get().output.asPath}",
-                // "-Xplugin:unchecked", // compiler plugin
-            ),
-    )
+        buildList {
+          addAll(jvmArguments())
+          add("-Xlint:all")
+          add("-parameters")
+          // add("-Xlint:-deprecation")
+          // add("-Xlint:lossy-conversions")
+          // add("-XX:+IgnoreUnrecognizedVMOptions")
+          // add("--add-exports")
+          // add("java.base/sun.nio.ch=ALL-UNNAMED")
+          // add("--patch-module")
+          // add("$moduleName=${sourceSets.main.get().output.asPath}")
+          // add("-Xplugin:unchecked") // compiler plugin
+        })
 
-    if (withKotlin) {
-      // Add the Kotlin classes to the module path
-      compilerArgumentProviders.add(
-          object : CommandLineArgumentProvider {
-
-            @InputFiles
-            @PathSensitive(PathSensitivity.RELATIVE)
-            val kotlinClasses =
-                tasks.named<KotlinCompile>("compileKotlin").flatMap { it.destinationDirectory }
-
-            override fun asArguments() =
-                listOf("--patch-module", "$group=${kotlinClasses.get().asFile.absolutePath}")
-          })
+    // Add the Kotlin classes to the module path
+    val compileKotlin = tasks.findByName("compileKotlin") as? KotlinCompile
+    if (compileKotlin != null) {
+      compilerArgumentProviders +=
+          PatchModuleArgProvider(
+              provider { project.group.toString() }, compileKotlin.destinationDirectory)
     }
   }
 }

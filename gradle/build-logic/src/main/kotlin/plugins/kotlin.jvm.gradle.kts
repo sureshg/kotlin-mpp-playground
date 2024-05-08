@@ -104,7 +104,7 @@ tasks {
     }
   }
   // Configure "compileJava" and "compileTestJava" tasks.
-  withType<JavaCompile>().configureEach { configureJavac(withKotlin = true) }
+  withType<JavaCompile>().configureEach { configureJavac() }
 
   withType<KotlinCompile>().configureEach {
     compilerOptions { configureKotlinJvm() }
