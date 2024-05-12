@@ -61,7 +61,13 @@ dependencyResolutionManagement {
   repositories {
     mavenCentral()
     kobWeb()
-    google()
+    google {
+      mavenContent {
+        includeGroupAndSubgroups("androidx")
+        includeGroupAndSubgroups("com.android")
+        includeGroupAndSubgroups("com.google")
+      }
+    }
   }
 
   // Enable back after the KMP Node.js repo fix.

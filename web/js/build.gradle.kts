@@ -9,12 +9,12 @@ plugins {
 
 description = "Kotlin/JS Web application"
 
-val sharedResources by configurations.creating
+val sharedRes by configurations.creating
 
 tasks {
   val copySharedResources by
       registering(Copy::class) {
-        from(sharedResources)
+        from(sharedRes)
         into(jsProcessResources.get().destinationDir)
       }
   jsProcessResources { dependsOn(copySharedResources) }
@@ -25,7 +25,7 @@ dependencies {
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
   jsMainImplementation(npm("@xterm/xterm", libs.versions.npm.xtermjs.get()))
   // Add shared JS resources to web
-  sharedResources(
+  sharedRes(
       project(path = projects.shared.dependencyProject.path, configuration = "sharedJsResources"))
 
   // jsMainImplementation(libs.seskar.core)

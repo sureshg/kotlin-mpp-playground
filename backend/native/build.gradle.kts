@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
@@ -5,6 +7,7 @@ import common.githubRepo
 import common.githubUser
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
 plugins {
@@ -20,35 +23,49 @@ description = "Ktor native application"
 kotlin {
   targets.withType<KotlinNativeTarget>().configureEach {
     binaries {
+
+      // Creates Release executable
       executable(setOf(RELEASE)) {
         entryPoint = "main"
+
         // Alpine(apk add gcompat) - https://youtrack.jetbrains.com/issue/KT-38876
         // linkerOpts("--as-needed", "--defsym=isnan=isnan")
         // freeCompilerArgs += listOf("-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh
         // -lc")
+
+        // Add the executable to the maven publication
+        if (buildType == NativeBuildType.RELEASE) {
+          mavenPublication { artifact(outputFile) { classifier = target.targetName } }
+        }
       }
-      test(setOf(RELEASE))
+
+      // Creates test executable
+      test(emptySet())
     }
 
     compilations.configureEach {
       compileTaskProvider.configure {
         compilerOptions {
-          // freeCompilerArgs.add("-Xruntime-logs=gc=info")
+          freeCompilerArgs.appendAll(
+              "-Xverbose-phases=Linker"
+              // "-Xruntime-logs=gc=info"
+              )
         }
       }
     }
   }
 
-  // val nativeTargetNames = targets.withType<KotlinNativeTarget>().names
-
   sourceSets {
     commonMain { dependencies { api(projects.shared) } }
     nativeMain {
       dependencies {
+        api(libs.kmp.appdirs)
         // api(libs.arrow.suspendapp.ktor)
       }
     }
   }
+
+  // val nativeTargetNames = targets.withType<KotlinNativeTarget>().names
 }
 
 jib {
@@ -101,7 +118,6 @@ sourceSets.maybeCreate("main")
 tasks {
   val linkReleaseExecutableMacosX64 by getting(KotlinNativeLink::class)
   val linkReleaseExecutableMacosArm64 by getting(KotlinNativeLink::class)
-  // val kotlinNativeTasks = withType<KotlinNativeLink>()
 
   val macOsUniversalBinary by
       creating(Exec::class) {
@@ -127,6 +143,7 @@ tasks {
         onlyIf { OperatingSystem.current().isMacOsX }
       }
 
+  // Use LinuxX64 for container image
   val linkReleaseExecutableLinuxX64 by getting(KotlinNativeLink::class)
   val prepareJib by
       registering(Copy::class) {

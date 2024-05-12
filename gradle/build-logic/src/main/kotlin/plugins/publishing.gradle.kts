@@ -2,6 +2,7 @@ package plugins
 
 import common.*
 import common.libs
+import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
 plugins {
   `maven-publish`
@@ -36,8 +37,6 @@ publishing {
   }
 
   publications {
-
-    // Kotlin Multiplatform
     pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
       val javadocJar by
           tasks.registering(Jar::class) {
@@ -113,8 +112,6 @@ signing {
   // isPublish = gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
 }
 
-// tasks { withType<Sign>().configureEach { isEnabled = hasSigningKey } }
-
 fun MavenPublication.configurePom() {
   pom {
     name = provider { "${project.group}:${project.name}" }
@@ -150,6 +147,11 @@ tasks {
 
   // Suppressing publication validation errors
   withType<GenerateModuleMetadata> { suppressedValidationErrors.add("enforced-platform") }
+
+  // For publishing kotlin native binaries
+  withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }
+
+  // withType<Sign>().configureEach { isEnabled = hasSigningKey }
 
   // cyclonedxBom {
   //   includeConfigs = listOf("runtimeClasspath")

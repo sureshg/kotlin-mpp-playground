@@ -49,6 +49,7 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlin.logging)
         api(libs.kotlinx.html)
         api(libs.bundles.ajalt)
+        api(libs.kotlinx.jsonpath)
         api(libs.kotlin.cryptography.core)
         api(libs.kotlin.cryptography.random)
         api(libs.kotlin.bignum)

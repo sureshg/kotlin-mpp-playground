@@ -26,6 +26,8 @@ fun main(args: Array<String>): Unit = runBlocking {
   val user = readlnOrNull() ?: "Unknown"
   val password = readPassword("Enter your password: ")
   println(">>> User: $user, Password: $password")
+  buffer()
+  dir()
 }
 
 data class ProcessResult(val code: Int, val rawOutput: String?)

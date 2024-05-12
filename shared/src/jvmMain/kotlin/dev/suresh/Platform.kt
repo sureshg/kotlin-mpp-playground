@@ -230,10 +230,10 @@ fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
               s.setOption(StandardSocketOptions.SO_REUSEADDR, true)
               s.setOption(StandardSocketOptions.SO_REUSEPORT, true)
               s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)
-              // Disable the Nagle algorithm
-              // s.setOption(StandardSocketOptions.TCP_NODELAY, true)
+              // Disable the Nagle algorithm as using it would hurt latency.
+              s.setOption(StandardSocketOptions.TCP_NODELAY, true)
               // s.setOption(StandardSocketOptions.SO_RCVBUF, 4096)
-              s.soTimeout = 10
+              s.soTimeout = 100
               s.connect(InetSocketAddress("localhost", 12345), 10)
             }
           }

@@ -53,6 +53,9 @@ val Project.xQuote
 val Project.sharedProjectName
   get() = "shared"
 
+val Project.isSharedProject
+  get() = name == sharedProjectName
+
 // val debug: String? by project
 val Project.debugEnabled
   get() = properties["debug"]?.toString().toBoolean()
@@ -489,6 +492,7 @@ fun Test.configureJavaTest() {
 
   testLogging { configureLogEvents() }
   // timeout = 10.minutes.toJavaDuration()
+  // filter { setExcludePatterns() }
 
   afterSuite(
       KotlinClosure2({ desc: TestDescriptor, result: TestResult ->

@@ -2,7 +2,6 @@ import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
-import kotlin.io.path.Path
 
 plugins {
   plugins.kotlin.jvm
@@ -113,27 +112,25 @@ jib {
 
 // Configuration to copy JS/Wasm app to resources
 val jsApp by configurations.creating
-val wasmJsApp by configurations.creating
+val wasmApp by configurations.creating
 
 tasks {
-  val copyJsApp by
-      registering(Copy::class) {
-        from(jsApp)
-        into(processResources.map { it.destinationDir.toPath().resolve(Path("app", "js")) })
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
+  val copyTasks =
+      listOf(jsApp, wasmApp).map { cnf ->
+        register<Copy>("copy${cnf.name}") {
+          from(cnf)
+          into(
+              processResources.map {
+                it.destinationDir.toPath().resolve("app", cnf.name.removeSuffix("App"))
+              })
+          duplicatesStrategy = DuplicatesStrategy.INCLUDE
+        }
       }
 
-  val copyWasmApp by
-      registering(Copy::class) {
-        from(wasmJsApp)
-        into(processResources.map { it.destinationDir.toPath().resolve(Path("app", "wasm")) })
-        duplicatesStrategy = DuplicatesStrategy.INCLUDE
-      }
-
-  // Copy webapp to resources
+  // Copy webapps to resources
   processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    dependsOn(copyJsApp, copyWasmApp)
+    dependsOn(copyTasks)
   }
 
   // Makes sure jte is generated before compilation
@@ -229,7 +226,7 @@ dependencies {
 
   // Copy js and wasm apps
   jsApp(project(path = projects.web.js.dependencyProject.path, configuration = "jsApp"))
-  wasmJsApp(project(path = projects.web.wasm.dependencyProject.path, configuration = "wasmApp"))
+  wasmApp(project(path = projects.web.wasm.dependencyProject.path, configuration = "wasmApp"))
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })

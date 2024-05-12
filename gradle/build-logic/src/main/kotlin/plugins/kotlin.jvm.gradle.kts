@@ -94,15 +94,7 @@ kover {
 val javaAgent by configurations.creating
 
 tasks {
-  processResources {
-    inputs.property("version", project.version.toString())
-    filesMatching("*-res.txt") {
-      expand(
-          "name" to project.name,
-          "version" to project.version,
-      )
-    }
-  }
+
   // Configure "compileJava" and "compileTestJava" tasks.
   withType<JavaCompile>().configureEach { configureJavac() }
 
@@ -134,6 +126,29 @@ tasks {
     duplicatesStrategy = DuplicatesStrategy.WARN
   }
 
+  processResources {
+    inputs.property("version", project.version.toString())
+    filesMatching("*-res.txt") {
+      expand(
+          "name" to project.name,
+          "version" to project.version,
+      )
+    }
+  }
+
+  javadoc {
+    isFailOnError = true
+    (options as StandardJavadocDocletOptions).apply {
+      encoding = "UTF-8"
+      linkSource(true)
+      addBooleanOption("-enable-preview", true)
+      addStringOption("-add-modules", addModules)
+      addStringOption("-release", javaRelease.get().toString())
+      addStringOption("Xdoclint:none", "-quiet")
+    }
+    exclude("**/Main.java")
+  }
+
   pluginManager.withPlugin("com.github.johnrengelman.shadow") {
     val buildExecutable by
         registering(ReallyExecJar::class) {
@@ -159,20 +174,6 @@ tasks {
         }
 
     processResources { dependsOn(copyOtelAgent) }
-  }
-
-  // Javadoc
-  javadoc {
-    isFailOnError = true
-    (options as StandardJavadocDocletOptions).apply {
-      encoding = "UTF-8"
-      linkSource(true)
-      addBooleanOption("-enable-preview", true)
-      addStringOption("-add-modules", addModules)
-      addStringOption("-release", javaRelease.get().toString())
-      addStringOption("Xdoclint:none", "-quiet")
-    }
-    exclude("**/Main.java")
   }
 }
 

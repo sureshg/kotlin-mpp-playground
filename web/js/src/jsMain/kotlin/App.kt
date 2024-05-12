@@ -2,7 +2,6 @@ import dev.suresh.Greeting
 import dev.suresh.flow.timerComposeFlow
 import dev.suresh.log
 import interop.topLevelJsFun
-import js.promise.await
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.browser.document
@@ -33,7 +32,7 @@ suspend fun main() {
 
   copy.onclick = {
     mainScope.launch {
-      navigator.clipboard.writeText(root.textContent.orEmpty()).await()
+      navigator.clipboard.writeTextAsync(root.textContent.orEmpty()).await()
       log.info { "Copied to clipboard using kotlinx-wrapper APIs!" }
     }
   }

@@ -14,6 +14,7 @@ dependencies {
   commonMainImplementation(projects.shared)
   jvmMainImplementation(compose.desktop.currentOs)
   jvmMainImplementation(compose.components.resources)
+  jvmMainImplementation(compose.components.uiToolingPreview)
   jvmMainRuntimeOnly(libs.kotlinx.coroutines.swing)
 }
 

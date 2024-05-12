@@ -12,6 +12,8 @@ plugins {
 
 description = "Kotlin Multiplatform Playground!"
 
+val nativeBuild: String? by project
+
 nmcp {
   publishAggregation {
     project(projects.shared.dependencyProject.path)
@@ -25,6 +27,10 @@ nmcp {
     project(projects.backend.data.dependencyProject.path)
     project(projects.backend.profiling.dependencyProject.path)
     project(projects.backend.security.dependencyProject.path)
+
+    if (nativeBuild.toBoolean()) {
+      project(":backend:native")
+    }
     username = mavenCentralUsername
     password = mavenCentralPassword
     publicationType = "USER_MANAGED"

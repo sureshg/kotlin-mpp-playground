@@ -25,22 +25,14 @@ buildConfig {
 }
 
 kotlin.sourceSets {
-  // Expose shared js resource as configuration to be consumed by other projects
-  // https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
-  val sharedJsRes by configurations.consumable("sharedJsResources")
-  val sharedWasmRes by configurations.consumable("sharedWasmResources")
-
-  jsMain { artifacts { add(sharedJsRes.name, tasks.jsProcessResources) } }
-  // wasmJsMain { artifacts { add(sharedWasmRes.name, tasks.wasmJsProcessResources) } }
+  // jsMain {}
+  // wasmJsMain {}
 }
-
-// tasks.buildConfig { outputs.upToDateWhen { false } }
 
 dependencies {
   commonMainApi(libs.uri.kmp)
   commonMainApi(libs.benasher44.uuid)
   commonMainApi(libs.intellij.markdown)
-  commonMainApi(libs.kotlinx.jsonpath)
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
 
@@ -51,3 +43,5 @@ dependencies {
   // jvmMainApi(libs.kotlin.reflect)
   // jvmMainApi(libs.logback.classic)
 }
+
+// tasks.buildConfig { outputs.upToDateWhen { false } }

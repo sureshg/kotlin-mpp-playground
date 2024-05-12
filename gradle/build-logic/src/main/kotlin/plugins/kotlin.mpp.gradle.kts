@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package plugins
 
 import com.google.devtools.ksp.gradle.KspAATask
@@ -37,8 +39,8 @@ kotlin {
     sharedProjectName -> {
       jvmTarget()
       jsTarget()
-      // wasmJsTarget()
       allNativeTargets()
+      // wasmJsTarget()
     }
     "js",
     "chrome",
@@ -109,7 +111,7 @@ kover {
 
 tasks {
   // Register buildConfig task only for common module
-  if (project.name == sharedProjectName) {
+  if (project.isSharedProject) {
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
     kotlin.sourceSets.commonMain { kotlin.srcDirs(buildConfig) }
@@ -160,6 +162,22 @@ tasks {
         }
 
     build { finalizedBy(buildExecutable) }
+  }
+}
+
+// Expose shared js/wasm resource as configuration to be consumed by other projects.
+// Should we really need this?, revisit this later.
+// https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
+artifacts {
+  if (isSharedProject) {
+    tasks.findByName("jsProcessResources")?.let {
+      val sharedJsRes by configurations.consumable("sharedJsResources")
+      add(sharedJsRes.name, tasks.named(it.name))
+    }
+    tasks.findByName("wasmJsProcessResources")?.let {
+      val sharedWasmRes by configurations.consumable("sharedWasmResources")
+      add(sharedWasmRes.name, tasks.named(it.name))
+    }
   }
 }
 

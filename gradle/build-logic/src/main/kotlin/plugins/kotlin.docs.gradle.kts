@@ -95,6 +95,10 @@ tasks {
           remoteLineSuffix = "#L"
         }
 
+        perPackageOption {
+          matchingRegex = ".*internal.*"
+          suppress = true
+        }
         //  externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.coroutines/")
         //  externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.serialization/")
         //  externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx-datetime/",
