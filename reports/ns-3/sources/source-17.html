@@ -254,6 +254,8 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import java.nio.file.Path
 &nbsp;import java.security.KeyStore
 &nbsp;import java.security.Security
+&nbsp;import javax.net.ssl.TrustManagerFactory
+&nbsp;import javax.net.ssl.X509TrustManager
 &nbsp;
 &nbsp;/**
 &nbsp; * JVM can be switched to use a different truststore using **-Djavax.net.ssl.trustStoreType=xxx**
@@ -278,6 +280,22 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;        }
 &nbsp;        else -&gt; KeyStore.getInstance(type.name).apply { load(null, null) }
 &nbsp;      }
+&nbsp;
+&nbsp;  val caCerts =
+&nbsp;      TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {
+&nbsp;        init(null as KeyStore?)
+&nbsp;        // trustManagers.filterIsInstance&lt;X509TrustManager&gt;().flatMap { it.acceptedIssuers.toList()
+&nbsp;        // }
+&nbsp;      }
+&nbsp;
+&nbsp;  /** Returns the default trust managers. This is initialized using JDK&#39;s `cacerts` trust store. */
+&nbsp;  val cacertsTrustManager by lazy {
+&nbsp;    TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {
+&nbsp;      // Use the JDK cacerts
+&nbsp;      init(null as KeyStore?)
+&nbsp;      trustManagers.filterIsInstance&lt;X509TrustManager&gt;()
+&nbsp;    }
+&nbsp;  }
 &nbsp;}
 &nbsp;
 <b class="nc">&nbsp;sealed class TrustStoreType(val name: String) {</b>
@@ -315,7 +333,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-12 06:07</div>
+    <div style="float:right;">generated on 2024-05-12 22:04</div>
 </div>
 </body>
 </html>
