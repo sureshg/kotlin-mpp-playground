@@ -4,6 +4,8 @@ import com.github.marschall.directorykeystore.*
 import java.nio.file.Path
 import java.security.KeyStore
 import java.security.Security
+import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.X509TrustManager
 
 /**
  * JVM can be switched to use a different truststore using **-Djavax.net.ssl.trustStoreType=xxx**
@@ -28,6 +30,22 @@ object TrustStore {
         }
         else -> KeyStore.getInstance(type.name).apply { load(null, null) }
       }
+
+  val caCerts =
+      TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {
+        init(null as KeyStore?)
+        // trustManagers.filterIsInstance<X509TrustManager>().flatMap { it.acceptedIssuers.toList()
+        // }
+      }
+
+  /** Returns the default trust managers. This is initialized using JDK's `cacerts` trust store. */
+  val cacertsTrustManager by lazy {
+    TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {
+      // Use the JDK cacerts
+      init(null as KeyStore?)
+      trustManagers.filterIsInstance<X509TrustManager>()
+    }
+  }
 }
 
 sealed class TrustStoreType(val name: String) {

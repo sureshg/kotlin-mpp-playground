@@ -33,9 +33,12 @@ kotlin {
         // freeCompilerArgs += listOf("-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh
         // -lc")
 
-        // Add the executable to the maven publication
         if (buildType == NativeBuildType.RELEASE) {
-          mavenPublication { artifact(outputFile) { classifier = target.targetName } }
+          mavenPublication {
+            artifact(outputFile) {
+              // classifier = target.targetName
+            }
+          }
         }
       }
 

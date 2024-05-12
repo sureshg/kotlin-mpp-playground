@@ -196,5 +196,4 @@ dependencies {
   // implementation(libs.build.kmp.hierarchy)
   // implementation(libs.build.includegit.plugin)
   // implementation(libs.build.cyclonedx.plugin)
-
 }
