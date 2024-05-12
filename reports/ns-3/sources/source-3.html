@@ -324,10 +324,10 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;              s.setOption(StandardSocketOptions.SO_REUSEADDR, true)
 &nbsp;              s.setOption(StandardSocketOptions.SO_REUSEPORT, true)
 &nbsp;              s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)
-&nbsp;              // Disable the Nagle algorithm
-&nbsp;              // s.setOption(StandardSocketOptions.TCP_NODELAY, true)
+&nbsp;              // Disable the Nagle algorithm as using it would hurt latency.
+&nbsp;              s.setOption(StandardSocketOptions.TCP_NODELAY, true)
 &nbsp;              // s.setOption(StandardSocketOptions.SO_RCVBUF, 4096)
-&nbsp;              s.soTimeout = 10
+&nbsp;              s.soTimeout = 100
 &nbsp;              s.connect(InetSocketAddress(&quot;localhost&quot;, 12345), 10)
 &nbsp;            }
 &nbsp;          }
@@ -378,7 +378,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-12 00:18</div>
+    <div style="float:right;">generated on 2024-05-12 06:07</div>
 </div>
 </body>
 </html>

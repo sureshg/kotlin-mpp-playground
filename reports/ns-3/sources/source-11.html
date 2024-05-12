@@ -65,10 +65,10 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0.9%
+    0.8%
   </span>
   <span class="absValue">
-    (1/117)
+    (1/118)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,7 +76,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0.3%
   </span>
   <span class="absValue">
-    (4/1221)
+    (4/1227)
   </span>
 </td>
 </tr>
@@ -131,7 +131,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0.8%
   </span>
   <span class="absValue">
-    (1/118)
+    (1/119)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0.3%
   </span>
   <span class="absValue">
-    (4/1246)
+    (4/1252)
   </span>
 </td>
 </tr>
@@ -382,10 +382,10 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;              s.setOption(StandardSocketOptions.SO_REUSEADDR, true)</b>
 <b class="nc">&nbsp;              s.setOption(StandardSocketOptions.SO_REUSEPORT, true)</b>
 <b class="nc">&nbsp;              s.setOption(StandardSocketOptions.SO_KEEPALIVE, true)</b>
-&nbsp;              // Disable the Nagle algorithm
-&nbsp;              // s.setOption(StandardSocketOptions.TCP_NODELAY, true)
+&nbsp;              // Disable the Nagle algorithm as using it would hurt latency.
+<b class="nc">&nbsp;              s.setOption(StandardSocketOptions.TCP_NODELAY, true)</b>
 &nbsp;              // s.setOption(StandardSocketOptions.SO_RCVBUF, 4096)
-<b class="nc">&nbsp;              s.soTimeout = 10</b>
+<b class="nc">&nbsp;              s.soTimeout = 100</b>
 <b class="nc">&nbsp;              s.connect(InetSocketAddress(&quot;localhost&quot;, 12345), 10)</b>
 <b class="nc">&nbsp;            }</b>
 <b class="nc">&nbsp;          }</b>
@@ -436,7 +436,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-12 00:18</div>
+    <div style="float:right;">generated on 2024-05-12 06:07</div>
 </div>
 </body>
 </html>
