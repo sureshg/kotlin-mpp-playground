@@ -1,1 +1,1 @@
-Resource from "Shared commonJs" module 0.11.0.65+6ba024d!
+Resource from "Shared commonJs" module 0.11.0.65+7b6a2d4!
