@@ -106,10 +106,12 @@ nmcp {
 
 signing {
   setRequired { hasSigningKey }
-  useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
+  if (hasSigningKey) {
+    useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
+    // useGpgCmd()
+  }
   sign(publishing.publications)
-  // useGpgCmd()
-  // isPublish = gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
+  // gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
 }
 
 fun MavenPublication.configurePom() {
@@ -144,10 +146,10 @@ fun MavenPublication.configurePom() {
 }
 
 tasks {
-  withType<Sign>().configureEach { onlyIf { hasSigningKey } }
-
   // Suppressing publication validation errors
   withType<GenerateModuleMetadata> { suppressedValidationErrors.add("enforced-platform") }
+
+  withType<Sign>().configureEach { onlyIf { hasSigningKey } }
 
   // For publishing kotlin native binaries
   withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }
