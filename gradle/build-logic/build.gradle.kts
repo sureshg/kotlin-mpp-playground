@@ -28,13 +28,14 @@ idea {
 }
 
 tasks {
+  // Restrict the java release version used in Gradle kotlin DSL to avoid
+  // accidentally using higher version JDK API in build scripts.
+  withType<JavaCompile>().configureEach { options.release = dslJavaVersion.map { it.toInt() } }
+
   withType<KotlinCompile>().configureEach {
     compilerOptions {
       jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget)
-      freeCompilerArgs.appendAll(
-          "-Xcontext-receivers",
-          // "-Xjdk-release=${dslJavaVersion.get()}"
-      )
+      freeCompilerArgs.appendAll("-Xcontext-receivers", "-Xjdk-release=${dslJavaVersion.get()}")
     }
   }
 

@@ -2,6 +2,7 @@ import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
+import kotlin.io.path.Path
 
 plugins {
   plugins.kotlin.jvm
@@ -117,12 +118,10 @@ val wasmApp by configurations.creating
 tasks {
   val copyTasks =
       listOf(jsApp, wasmApp).map { cnf ->
+        val appResDir = Path(base = "app", cnf.name.removeSuffix("App"))
         register<Copy>("copy${cnf.name}") {
           from(cnf)
-          into(
-              processResources.map {
-                it.destinationDir.toPath().resolve("app", cnf.name.removeSuffix("App"))
-              })
+          into(processResources.map { it.destinationDir.toPath().resolve(appResDir) })
           duplicatesStrategy = DuplicatesStrategy.INCLUDE
         }
       }
