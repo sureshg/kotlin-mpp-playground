@@ -30,8 +30,8 @@ publishing {
       url = uri(Repo.githubPackage(libs.versions.dev.name.get(), rootProject.name))
       credentials {
         // findProperty("githubActor")
-        username = githubActor.getOrElse("")
-        password = githubToken.getOrElse("")
+        username = githubActor.orNull ?: System.getenv("GITHUB_ACTOR")
+        password = githubToken.orNull ?: System.getenv("GITHUB_TOKEN")
       }
     }
   }
