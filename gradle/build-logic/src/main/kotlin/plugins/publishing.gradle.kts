@@ -151,7 +151,7 @@ tasks {
   // For publishing kotlin native binaries
   withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }
 
-  // withType<Sign>().configureEach { isEnabled = hasSigningKey }
+  withType<Sign>().configureEach { onlyIf { hasSigningKey } }
 
   // cyclonedxBom {
   //   includeConfigs = listOf("runtimeClasspath")
