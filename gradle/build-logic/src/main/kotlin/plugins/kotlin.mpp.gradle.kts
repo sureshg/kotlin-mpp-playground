@@ -39,14 +39,14 @@ kotlin {
     sharedProjectName -> {
       jvmTarget()
       jsTarget()
-      allNativeTargets()
+      allNativeTargets { compilerOptions { configureKotlinNative() } }
       // wasmJsTarget()
     }
     "js",
     "chrome",
     "web" -> jsTarget()
     "wasm" -> wasmJsTarget()
-    "native" -> allNativeTargets()
+    "native" -> allNativeTargets { compilerOptions { configureKotlinNative() } }
     else -> jvmTarget()
   }
 

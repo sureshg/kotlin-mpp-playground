@@ -6,7 +6,6 @@ import java.util.jar.Attributes
 import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import tasks.ReallyExecJar
 
 plugins {
@@ -31,11 +30,12 @@ java {
 }
 
 kotlin {
-  sourceSets.all {
-    languageSettings { configureKotlinLang() }
-    // kotlin.setSrcDirs(listOf("src/kotlin"))
-  }
   jvmToolchain { configureJvmToolchain() }
+  compilerOptions {
+    configureKotlinCommon()
+    configureKotlinJvm()
+  }
+  // sourceSets.all { kotlin.setSrcDirs(listOf("src/kotlin")) }
 }
 
 @Suppress("UnstableApiUsage", "UNUSED_VARIABLE")
@@ -94,15 +94,9 @@ kover {
 val javaAgent by configurations.creating
 
 tasks {
-
   // Configure "compileJava" and "compileTestJava" tasks.
   withType<JavaCompile>().configureEach { configureJavac() }
-
-  withType<KotlinCompile>().configureEach {
-    compilerOptions { configureKotlinJvm() }
-    usePreciseJavaTracking = true
-    // finalizedBy("spotlessApply")
-  }
+  // withType<KotlinJvmCompile>().configureEach { finalizedBy("spotlessApply") }
 
   // Configure jvm args for JavaExec tasks except `run`
   withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(jvmArguments()) }

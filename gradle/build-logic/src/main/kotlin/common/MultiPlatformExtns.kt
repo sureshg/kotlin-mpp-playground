@@ -10,22 +10,17 @@ import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTargetWithHostTests
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 context(Project)
 fun KotlinMultiplatformExtension.commonTarget() {
-
   jvmToolchain { configureJvmToolchain() }
-
-  withSourcesJar(publish = true)
-
   compilerOptions { configureKotlinCommon() }
+  withSourcesJar(publish = true)
   // targets.configureEach {}
 
   sourceSets {
     all {
-      languageSettings { configureKotlinLang() }
       // Apply multiplatform library bom to all source sets
       dependencies {
         api(project.dependencies.platform(libs.kotlin.bom))
@@ -93,11 +88,8 @@ context(Project)
 fun KotlinMultiplatformExtension.jvmTarget() {
   jvm {
     withJava()
-    // withSourcesJar(publish = false)
-    compilations.all {
-      compileJavaTaskProvider?.configure { configureJavac() }
-      compileTaskProvider.configure { compilerOptions { configureKotlinJvm() } }
-    }
+    compilations.configureEach { compileJavaTaskProvider?.configure { configureJavac() } }
+    compilerOptions { configureKotlinJvm() }
 
     // ./gradlew jvmRun
     mainRun { mainClass = libs.versions.app.mainclass.get() }
@@ -154,7 +146,6 @@ fun KotlinMultiplatformExtension.jsTarget() {
       }
 
       runTask { sourceMaps = false }
-
       testTask {
         enabled = true
         testLogging { configureLogEvents() }
@@ -163,10 +154,7 @@ fun KotlinMultiplatformExtension.jsTarget() {
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
     generateTypeScriptDefinitions()
-
-    compilations.configureEach {
-      compileTaskProvider.configure { compilerOptions { configureKotlinJs() } }
-    }
+    compilerOptions { configureKotlinJs() }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 
@@ -221,20 +209,12 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
     }
     // Generate .d.ts files
     generateTypeScriptDefinitions()
-
-    compilations.configureEach {
-      compileTaskProvider.configure { compilerOptions { configureKotlinJs() } }
-    }
+    compilerOptions { configureKotlinJs() }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 
   sourceSets {
-    wasmJsMain {
-      dependencies {
-        // Webcrypto
-        api(libs.kotlin.cryptography.webcrypto)
-      }
-    }
+    wasmJsMain { dependencies { api(libs.kotlin.cryptography.webcrypto) } }
     wasmJsTest { kotlin {} }
   }
 }
@@ -253,15 +233,13 @@ fun KotlinMultiplatformExtension.hostNativeTarget(configure: KotlinNativeTarget.
     }
 
 context(Project)
-fun KotlinMultiplatformExtension.allNativeTargets(
-    configure: KotlinNativeTargetWithHostTests.() -> Unit = {}
-) {
+fun KotlinMultiplatformExtension.allNativeTargets(configure: KotlinNativeTarget.() -> Unit = {}) {
   val nativeBuild: String? by project
   if (nativeBuild.toBoolean()) {
     macosX64 { configure() }
     macosArm64 { configure() }
     linuxX64 { configure() }
-    linuxArm64 {}
+    linuxArm64 { configure() }
     mingwX64 { configure() }
   }
 }

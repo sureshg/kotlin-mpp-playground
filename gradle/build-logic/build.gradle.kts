@@ -2,7 +2,6 @@
 
 import org.gradle.kotlin.dsl.support.expectedKotlinDslPluginsVersion
 import org.jetbrains.kotlin.gradle.dsl.*
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   idea
@@ -14,10 +13,7 @@ plugins {
   // alias(libs.plugins.kotlin.dsl)
 }
 
-/**
- * Java version used in Java toolchains and Kotlin compile JVM target for Gradle precompiled script
- * plugins.
- */
+// Java version used for Kotlin Gradle precompiled script plugins.
 val dslJavaVersion = libs.versions.kotlin.dsl.jvmtarget
 
 idea {
@@ -27,17 +23,29 @@ idea {
   }
 }
 
+kotlin {
+  compilerOptions {
+    jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget)
+    freeCompilerArgs.appendAll("-Xcontext-receivers", "-Xjdk-release=${dslJavaVersion.get()}")
+    optIn =
+        listOf(
+            "kotlin.ExperimentalStdlibApi",
+            "kotlin.time.ExperimentalTime",
+            "kotlin.io.encoding.ExperimentalEncodingApi",
+            "kotlinx.validation.ExperimentalBCVApi",
+            "kotlinx.coroutines.ExperimentalCoroutinesApi",
+            "kotlinx.serialization.ExperimentalSerializationApi",
+            "org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi",
+            "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl",
+            "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl",
+            "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
+  }
+}
+
 tasks {
   // Restrict the java release version used in Gradle kotlin DSL to avoid
   // accidentally using higher version JDK API in build scripts.
   withType<JavaCompile>().configureEach { options.release = dslJavaVersion.map { it.toInt() } }
-
-  withType<KotlinCompile>().configureEach {
-    compilerOptions {
-      jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget)
-      freeCompilerArgs.appendAll("-Xcontext-receivers", "-Xjdk-release=${dslJavaVersion.get()}")
-    }
-  }
 
   validatePlugins {
     failOnWarning = true
@@ -52,23 +60,6 @@ tasks {
 
     allprojects.mapNotNull { it.tasks.findByName("clean") }.forEach { dependsOn(it) }
     doLast { delete(layout.buildDirectory) }
-  }
-}
-
-kotlin {
-  sourceSets.all {
-    languageSettings.apply {
-      optIn("kotlin.ExperimentalStdlibApi")
-      optIn("kotlin.time.ExperimentalTime")
-      optIn("kotlin.io.encoding.ExperimentalEncodingApi")
-      optIn("kotlinx.validation.ExperimentalBCVApi")
-      optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-      optIn("kotlinx.serialization.ExperimentalSerializationApi")
-      optIn("org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi")
-      optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl")
-      optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl")
-      optIn("org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
-    }
   }
 }
 

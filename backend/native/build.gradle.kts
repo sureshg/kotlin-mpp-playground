@@ -23,16 +23,8 @@ description = "Ktor native application"
 kotlin {
   targets.withType<KotlinNativeTarget>().configureEach {
     binaries {
-
-      // Creates Release executable
       executable(setOf(RELEASE)) {
         entryPoint = "main"
-
-        // Alpine(apk add gcompat) - https://youtrack.jetbrains.com/issue/KT-38876
-        // linkerOpts("--as-needed", "--defsym=isnan=isnan")
-        // freeCompilerArgs += listOf("-Xoverride-konan-properties=linkerGccFlags=-lgcc -lgcc_eh
-        // -lc")
-
         if (buildType == NativeBuildType.RELEASE) {
           mavenPublication {
             artifact(outputFile) {
@@ -44,17 +36,6 @@ kotlin {
 
       // Creates test executable
       test(emptySet())
-    }
-
-    compilations.configureEach {
-      compileTaskProvider.configure {
-        compilerOptions {
-          freeCompilerArgs.appendAll(
-              "-Xverbose-phases=Linker"
-              // "-Xruntime-logs=gc=info"
-              )
-        }
-      }
     }
   }
 

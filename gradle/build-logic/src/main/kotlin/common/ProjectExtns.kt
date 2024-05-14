@@ -410,6 +410,21 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       // "-P",
       // "plugin:...=..."
   )
+  optIn =
+      listOf(
+          "kotlin.ExperimentalStdlibApi",
+          "kotlin.contracts.ExperimentalContracts",
+          "kotlin.ExperimentalUnsignedTypes",
+          "kotlin.io.encoding.ExperimentalEncodingApi",
+          "kotlin.time.ExperimentalTime",
+          "kotlinx.coroutines.ExperimentalCoroutinesApi",
+          "kotlinx.serialization.ExperimentalSerializationApi",
+          "kotlin.ExperimentalMultiplatform",
+          "kotlin.js.ExperimentalJsExport",
+          "kotlin.experimental.ExperimentalNativeApi",
+          "kotlinx.cinterop.ExperimentalForeignApi",
+          // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
+      )
 }
 
 context(Project)
@@ -462,22 +477,11 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
 }
 
 context(Project)
-fun LanguageSettingsBuilder.configureKotlinLang() {
-  progressiveMode = true
-  languageVersion = kotlinLangVersion.get().version
-  // enableLanguageFeature("ContextReceivers")
-  optIn("kotlin.ExperimentalStdlibApi")
-  optIn("kotlin.contracts.ExperimentalContracts")
-  optIn("kotlin.ExperimentalUnsignedTypes")
-  optIn("kotlin.io.encoding.ExperimentalEncodingApi")
-  optIn("kotlin.time.ExperimentalTime")
-  optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
-  optIn("kotlinx.serialization.ExperimentalSerializationApi")
-  optIn("kotlin.ExperimentalMultiplatform")
-  optIn("kotlin.js.ExperimentalJsExport")
-  optIn("kotlin.experimental.ExperimentalNativeApi")
-  optIn("kotlinx.cinterop.ExperimentalForeignApi")
-  // optIn("org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi")
+fun KotlinNativeCompilerOptions.configureKotlinNative() {
+  freeCompilerArgs.appendAll(
+      "-Xverbose-phases=Linker"
+      // "-Xruntime-logs=gc=info"
+      )
 }
 
 context(Project)

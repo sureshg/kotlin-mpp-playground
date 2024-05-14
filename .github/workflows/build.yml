@@ -113,12 +113,12 @@ jobs:
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          JOB_CONTEXT: ${{ toJSON(job) }}
-          STEPS_CONTEXT: ${{ toJSON(steps) }}
-          RUNNER_CONTEXT: ${{ toJSON(runner) }}
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-          STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
-          MATRIX_CONTEXT: ${{ toJSON(matrix) }}
+          # JOB_CONTEXT: ${{ toJSON(job) }}
+          # STEPS_CONTEXT: ${{ toJSON(steps) }}
+          # RUNNER_CONTEXT: ${{ toJSON(runner) }}
+          # GITHUB_CONTEXT: ${{ toJSON(github) }}
+          # STRATEGY_CONTEXT: ${{ toJSON(strategy) }}
+          # MATRIX_CONTEXT: ${{ toJSON(matrix) }}
 
       - name: 📤 Uploading ${{ matrix.os }} build artifacts
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
