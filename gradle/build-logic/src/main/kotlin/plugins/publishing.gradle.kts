@@ -144,14 +144,13 @@ fun MavenPublication.configurePom() {
 }
 
 tasks {
+  withType<Sign>().configureEach { onlyIf { hasSigningKey } }
 
   // Suppressing publication validation errors
   withType<GenerateModuleMetadata> { suppressedValidationErrors.add("enforced-platform") }
 
   // For publishing kotlin native binaries
   withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }
-
-  // withType<Sign>().configureEach { onlyIf { hasSigningKey } }
 
   // cyclonedxBom {
   //   includeConfigs = listOf("runtimeClasspath")

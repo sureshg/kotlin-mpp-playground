@@ -108,7 +108,7 @@ jobs:
         run: |
           MKTEMP_PATH="$(dirname "$(mktemp -u)")/"
           echo "MKTEMP_PATH=$MKTEMP_PATH" >> $GITHUB_ENV
-          ./gradlew buildAndPublish --no-daemon --stacktrace
+          ./gradlew buildAndPublish --no-daemon
           # echo "dist_path=backend/jvm/build/libs/jvm-all.jar" >> "$GITHUB_OUTPUT"
         env:
           GITHUB_USER: ${{ github.repository_owner }}
