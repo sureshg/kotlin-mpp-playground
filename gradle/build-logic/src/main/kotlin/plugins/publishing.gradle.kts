@@ -105,7 +105,10 @@ nmcp {
 }
 
 signing {
-  isRequired = hasSigningKey
+  setRequired {
+    logger.lifecycle(">>>>> hasSigningKey : $hasSigningKey")
+    hasSigningKey
+  }
   useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
   sign(publishing.publications)
   // useGpgCmd()
