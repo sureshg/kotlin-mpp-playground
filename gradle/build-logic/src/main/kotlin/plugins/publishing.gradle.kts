@@ -105,10 +105,7 @@ nmcp {
 }
 
 signing {
-  setRequired {
-    logger.lifecycle(">>>>> hasSigningKey : $hasSigningKey")
-    hasSigningKey
-  }
+  setRequired { hasSigningKey }
   useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
   sign(publishing.publications)
   // useGpgCmd()
@@ -154,7 +151,7 @@ tasks {
   // For publishing kotlin native binaries
   withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }
 
-  withType<Sign>().configureEach { onlyIf { hasSigningKey } }
+  // withType<Sign>().configureEach { onlyIf { hasSigningKey } }
 
   // cyclonedxBom {
   //   includeConfigs = listOf("runtimeClasspath")
