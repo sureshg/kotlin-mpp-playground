@@ -1,5 +1,6 @@
 import common.jvmArguments
 import java.time.Year
+import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
@@ -10,12 +11,31 @@ plugins {
   alias(libs.plugins.jetbrains.compose)
 }
 
-dependencies {
-  commonMainImplementation(projects.shared)
-  jvmMainImplementation(compose.desktop.currentOs)
-  jvmMainImplementation(compose.components.resources)
-  jvmMainImplementation(compose.components.uiToolingPreview)
-  jvmMainRuntimeOnly(libs.kotlinx.coroutines.swing)
+kotlin {
+  sourceSets {
+    commonMain.dependencies {
+      implementation(projects.shared)
+      implementation(compose.runtime)
+      implementation(compose.foundation)
+      implementation(compose.material3)
+      implementation(compose.components.resources)
+      implementation(compose.components.uiToolingPreview)
+    }
+
+    commonTest.dependencies {
+      @OptIn(ExperimentalComposeLibrary::class) implementation(compose.uiTest)
+    }
+
+    jvmMain.dependencies {
+      implementation(compose.desktop.currentOs)
+      implementation(libs.kotlinx.coroutines.swing)
+    }
+
+    // jsMain.dependencies {
+    //   implementation(compose.html.core)
+    //   implementation(libs.ktor.client.js)
+    // }
+  }
 }
 
 composeCompiler {
@@ -95,4 +115,7 @@ compose {
       }
     }
   }
+
+  web {}
+  resources {}
 }
