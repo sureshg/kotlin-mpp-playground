@@ -214,8 +214,12 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import androidx.compose.ui.text.buildAnnotatedString
 &nbsp;import androidx.compose.ui.text.font.FontWeight
 &nbsp;import androidx.compose.ui.text.withStyle
+&nbsp;import androidx.compose.ui.unit.dp
 &nbsp;import androidx.compose.ui.window.Window
+&nbsp;import androidx.compose.ui.window.WindowPosition
 &nbsp;import androidx.compose.ui.window.application
+&nbsp;import androidx.compose.ui.window.rememberWindowState
+&nbsp;import java.awt.Dimension
 &nbsp;import java.io.File
 &nbsp;import kotlinx.coroutines.MainScope
 &nbsp;
@@ -294,7 +298,15 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;}</b>
 &nbsp;
 <b class="nc">&nbsp;fun main() = application {</b>
-&nbsp;  Window(title = &quot;App&quot;, onCloseRequest = ::exitApplication) { MaterialTheme { App() } }
+&nbsp;  Window(
+&nbsp;      title = &quot;App&quot;,
+&nbsp;      state =
+&nbsp;          rememberWindowState(
+&nbsp;              width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center)),
+&nbsp;      onCloseRequest = ::exitApplication) {
+&nbsp;        window.minimumSize = Dimension(350, 600)
+&nbsp;        MaterialTheme { App() }
+&nbsp;      }
 &nbsp;}
 </code>
 </pre>
@@ -319,7 +331,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-15 00:17</div>
+    <div style="float:right;">generated on 2024-05-15 01:01</div>
 </div>
 </body>
 </html>

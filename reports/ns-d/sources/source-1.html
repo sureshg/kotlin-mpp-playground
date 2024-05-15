@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > JteFileBrowserGenerated</title>
+  <title>kotlin-mpp-playground Coverage Report > AdminKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">gg.jte.generated.precompiled</a>
+    <a href="../index.html">dev.suresh.routes</a>
 </div>
 
-<h1>Coverage Summary for Class: JteFileBrowserGenerated (gg.jte.generated.precompiled)</h1>
+<h1>Coverage Summary for Class: AdminKt (dev.suresh.routes)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,69 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">JteFileBrowserGenerated</td>
+  <td class="name">AdminKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
     (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AdminKt$adminRoutes$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/27)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -69,63 +125,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/97)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">JteFileBrowserGenerated$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/7)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/38)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/6)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/12)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/135)
+    (0/47)
   </span>
 </td>
 </tr>
@@ -136,27 +136,21 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;@file:Suppress(&quot;ktlint&quot;)
-&nbsp;package gg.jte.generated.precompiled
-&nbsp;import java.nio.file.Path
-&nbsp;import kotlin.io.path.*
-<b class="nc">&nbsp;@Suppress(&quot;UNCHECKED_CAST&quot;, &quot;UNUSED_PARAMETER&quot;)</b>
-&nbsp;class JteFileBrowserGenerated {
-&nbsp;companion object {
-<b class="nc">&nbsp;	@JvmField val JTE_NAME = &quot;FileBrowser.kte&quot;</b>
-<b class="nc">&nbsp;	@JvmField val JTE_LINE_INFO = intArrayOf(0,0,0,1,3,3,3,3,3,70,70,70,70,76,76,76,3,4,4,4,4,4)</b>
-&nbsp;	@JvmStatic fun render(jteOutput:gg.jte.html.HtmlTemplateOutput, jteHtmlInterceptor:gg.jte.html.HtmlInterceptor?, docDir:Path, dir:Path) {
-<b class="nc">&nbsp;		jteOutput.writeContent(&quot;\n&lt;!DOCTYPE html&gt;\n&lt;html lang=\&quot;en\&quot;&gt;\n&lt;head&gt;\n    &lt;title&gt;File Browser&lt;/title&gt;\n    &lt;style&gt;\n        body {\n            font-family: \&quot;Helvetica Neue\&quot;, Helvetica, Arial, sans-serif;\n            margin: 0;\n            padding: 0;\n            background-color: #FFFFFF;\n            color: #333;\n        }\n\n        .container {\n            max-width: 900px;\n            margin: auto;\n            padding: 1em;\n        }\n\n        h2 {\n            font-weight: 500;\n            margin-bottom: 1em;\n        }\n\n        ul {\n            list-style: none;\n            padding: 0;\n            margin: 0;\n        }\n\n        ul li {\n            display: flex;\n            align-items: center;\n            background-color: #F9F9F9;\n            padding: 0.5em;\n            margin: 0.2em 0;\n            border-radius: 3px;\n            transition: background 0.15s ease-in-out;\n        }\n\n        ul li:hover {\n            background-color: #E9E9E9;\n        }\n\n        ul li a {\n            text-decoration: none;\n            color: #333;\n        }\n\n        ul li i {\n            margin-right: 0.5em;\n        }\n\n        .fa-folder::before {\n            content: url(\&quot;data:image/svg+xml,%3Csvg fill=&#39;%23000000&#39; viewBox=&#39;0 0 24 24&#39; xmlns=&#39;http://www.w3.org/2000/svg&#39; width=&#39;24&#39; height=&#39;24&#39;%3E%3Cpath d=&#39;M19 5.5h-6.28l-0.32 -1a3 3 0 0 0 -2.84 -2H5a3 3 0 0 0 -3 3v13a3 3 0 0 0 3 3h14a3 3 0 0 0 3 -3v-10a3 3 0 0 0 -3 -3Zm1 13a1 1 0 0 1 -1 1H5a1 1 0 0 1 -1 -1v-13a1 1 0 0 1 1 -1h4.56a1 1 0 0 1 0.95 0.68l0.54 1.64a1 1 0 0 0 0.95 0.68h7a1 1 0 0 1 1 1Z&#39;/%3E%3C/svg%3E\&quot;);\n        }\n\n        .fa-file::before {\n            content: url(\&quot;data:image/svg+xml,%3Csvg fill=&#39;%23000000&#39; viewBox=&#39;0 0 24 24&#39; xmlns=&#39;http://www.w3.org/2000/svg&#39; width=&#39;24&#39; height=&#39;24&#39;%3E%3Cpath d=&#39;M20 8.94a1.31 1.31 0 0 0 -0.06 -0.27v-0.09a1.07 1.07 0 0 0 -0.19 -0.28l-6 -6a1.07 1.07 0 0 0 -0.28 -0.19h-0.09L13.06 2H7a3 3 0 0 0 -3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3 -3V8.94Zm-6 -3.53L16.59 8H14ZM18 19a1 1 0 0 1 -1 1H7a1 1 0 0 1 -1 -1V5a1 1 0 0 1 1 -1h5v5a1 1 0 0 0 1 1h5Z&#39;/%3E%3C/svg%3E\&quot;);\n        }\n    &lt;/style&gt;\n&lt;/head&gt;\n&lt;body&gt;\n&lt;div class=\&quot;container\&quot;&gt;\n    &lt;h2&gt;Directory listing for: &quot;)</b>
-<b class="nc">&nbsp;		jteOutput.setContext(&quot;h2&quot;, null)</b>
-<b class="nc">&nbsp;		jteOutput.writeUserContent(dir.relativeToOrSelf(docDir).pathString)</b>
-<b class="nc">&nbsp;		jteOutput.writeContent(&quot;&lt;/h2&gt;\n    &lt;ul&gt;\n\n    &lt;/ul&gt;\n&lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;&quot;)</b>
-<b class="nc">&nbsp;	}</b>
-&nbsp;	@JvmStatic fun renderMap(jteOutput:gg.jte.html.HtmlTemplateOutput, jteHtmlInterceptor:gg.jte.html.HtmlInterceptor?, params:Map&lt;String, Any?&gt;) {
-<b class="nc">&nbsp;		val docDir = params[&quot;docDir&quot;] as Path</b>
-<b class="nc">&nbsp;		val dir = params[&quot;dir&quot;] as Path</b>
-<b class="nc">&nbsp;		render(jteOutput, jteHtmlInterceptor, docDir, dir);</b>
-<b class="nc">&nbsp;	}</b>
-&nbsp;}
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.routes
+&nbsp;
+&nbsp;import BuildConfig
+&nbsp;import io.ktor.server.application.*
+&nbsp;import io.ktor.server.plugins.swagger.*
+&nbsp;import io.ktor.server.response.*
+&nbsp;import io.ktor.server.routing.*
+&nbsp;
+&nbsp;fun Route.adminRoutes() {
+<b class="nc">&nbsp;  swaggerUI(path = &quot;swagger&quot;, swaggerFile = &quot;openapi/documentation.yaml&quot;) {</b>
+<b class="nc">&nbsp;    version = BuildConfig.swaggerUi</b>
+<b class="nc">&nbsp;    customStyle(&quot;https://unpkg.com/swagger-ui-themes@3.0.1/themes/3.x/theme-flattop.css&quot;)</b>
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  get(&quot;/&quot;) { call.respondRedirect(&quot;/swagger&quot;) }</b>
 &nbsp;}
 </code>
 </pre>
@@ -181,7 +175,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-15 00:17</div>
+    <div style="float:right;">generated on 2024-05-15 01:01</div>
 </div>
 </body>
 </html>
