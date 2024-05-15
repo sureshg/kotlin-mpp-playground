@@ -45,7 +45,12 @@ kotlin {
 tasks {
   // Restrict the java release version used in Gradle kotlin DSL to avoid
   // accidentally using higher version JDK API in build scripts.
-  withType<JavaCompile>().configureEach { options.release = dslJavaVersion.map { it.toInt() } }
+  compileJava {
+    options.apply {
+      release = dslJavaVersion.map { it.toInt() }
+      isIncremental = true
+    }
+  }
 
   validatePlugins {
     failOnWarning = true
@@ -129,7 +134,6 @@ dependencies {
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.collections.immutable)
-  // Http client and JSON serialization
   implementation(libs.ktor.client.java)
   implementation(libs.ktor.client.content.negotiation)
   implementation(libs.ktor.client.encoding)
@@ -137,11 +141,8 @@ dependencies {
   implementation(libs.ktor.client.resources)
   implementation(libs.ktor.client.auth)
   implementation(libs.ktor.serialization.json)
-  // Text styling
   implementation(libs.ajalt.mordant)
-  // Exec Jar
   implementation(libs.build.zip.prefixer)
-  // Templating
   implementation(libs.jte.runtime)
   jteGenerate(libs.jte.models)
   // compileOnly(libs.jte.kotlin)

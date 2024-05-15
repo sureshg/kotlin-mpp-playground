@@ -95,9 +95,6 @@ tasks {
       // 0b110110100
       unix("rw-rw-r--")
     }
-
-    // filesMatching("**/bin/*") { mode = `rwxr-xr-x` }
-    // filesMatching("**/bin/*.bat") { mode = `rw-r--r--` }
   }
 
   // Run the checkBestPractices check for build-logic included builds.
@@ -112,7 +109,7 @@ tasks {
     description = "Clean all projects including composite builds"
     group = LifecycleBasePlugin.CLEAN_TASK_NAME
 
-    dependsOn(gradle.includedBuilds.map { it.task(":clean") })
+    dependsOn(gradle.includedBuilds.map { it.task(":cleanAll") })
     subprojects.mapNotNull { it.tasks.findByName("clean") }.forEach { dependsOn(it) }
   }
 

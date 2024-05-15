@@ -61,7 +61,7 @@ cache4k                        = "0.11.0"
 intellij-coverage              = "1.0.733"
 intellij-markdown              = "0.7.2"
 jgit                           = "6.5.0.202303070854-r"
-jte                            = "3.1.10"
+jte                            = "3.1.11"
 jimfs                          = "1.3.0"
 sshj                           = "0.38.0"
 pty4j                          = "0.12.26"
@@ -110,7 +110,7 @@ postgresql                     = "42.7.3"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
 micrometer                     = "1.13.0"
-swagger-ui                     = "5.17.7"
+swagger-ui                     = "5.17.10"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
 shedlock                       = "5.13.0"
@@ -143,6 +143,7 @@ xchart                         = "3.8.7"
 batik                          = "1.17"
 twelvemonkeys                  = "3.10.1"
 okapibarcode                   = "0.4.1"
+chasm                          = "0.6.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.9.0"
@@ -333,6 +334,7 @@ rsocket-ktor-client                  = { module = "io.rsocket.kotlin:rsocket-kto
 rsocket-ktor-server                  = { module = "io.rsocket.kotlin:rsocket-ktor-server"                      , version.ref = "rsocket"}
 uri-kmp                              = { module = "com.eygraber:uri-kmp"                                       , version.ref = "uri-kmp"}
 kotlinx-jsonpath                     = { module = "com.eygraber:jsonpathkt-kotlinx"                            , version.ref = "kotlinx-jsonpath"}
+chasm                                = { module = "io.github.charlietap.chasm:chasm"                           , version.ref = "chasm"}
 
 logback-classic                      = { module = "ch.qos.logback:logback-classic"                             , version.ref = "logback"}
 exposeb-bom                          = { module = "org.jetbrains.exposed:exposed-bom"                          , version.ref = "exposed"}
