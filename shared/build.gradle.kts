@@ -24,11 +24,6 @@ buildConfig {
   catalogVersions = project.versionCatalogMapOf()
 }
 
-kotlin.sourceSets {
-  // jsMain {}
-  // wasmJsMain {}
-}
-
 dependencies {
   commonMainApi(libs.uri.kmp)
   commonMainApi(libs.benasher44.uuid)
