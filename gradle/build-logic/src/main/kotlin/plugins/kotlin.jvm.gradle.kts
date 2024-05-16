@@ -96,6 +96,7 @@ val javaAgent by configurations.creating
 tasks {
   // Configure "compileJava" and "compileTestJava" tasks.
   withType<JavaCompile>().configureEach { configureJavac() }
+
   // withType<KotlinJvmCompile>().configureEach { finalizedBy("spotlessApply") }
 
   // Configure jvm args for JavaExec tasks except `run`

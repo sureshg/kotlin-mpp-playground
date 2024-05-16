@@ -9,6 +9,7 @@ plugins {
   plugins.publishing
   alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.jetbrains.compose)
+  // alias(libs.plugins.detekt)
 }
 
 kotlin {
@@ -20,6 +21,7 @@ kotlin {
       implementation(compose.material3)
       implementation(compose.components.resources)
       implementation(compose.components.uiToolingPreview)
+      // project.dependencies.detektPlugins(libs.detekt.compose.rules)
     }
 
     commonTest.dependencies {
