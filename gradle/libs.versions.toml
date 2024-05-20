@@ -21,11 +21,12 @@ org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
 kotlinx-kover                  = "0.8.0"
-kotlinx-io                     = "0.3.4"
+kotlinx-io                     = "0.3.5"
 kotlinx-atomicfu               = "0.24.0"
 kotlinx-coroutines             = "1.8.1"
 kotlinx-datetime               = "0.6.0"
-kotlinx-serialization          = "1.6.3"
+kotlinx-serialization          = "1.7.0-RC"
+kotlinx-rpc                    = "0.1.0"
 kotlinx-collections-immutable  = "0.3.7"
 kotlinx-lincheck               = "2.32"
 kotlinx-html                   = "0.11.0"
@@ -34,7 +35,7 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.15.0-Beta.2"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.748"
+kotlin-wrappers                = "1.0.0-pre.750"
 kotlin-redacted                = "1.9.0-alpha02"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
@@ -44,7 +45,7 @@ seskar                         = "2.55.1"
 ktor                           = "3.0.0-beta-1"
 ktor-cohort                    = "2.5.0"
 otel                           = "1.38.0"
-otel-instr                     = "2.3.0"
+otel-instr                     = "2.4.0"
 otel-alpha                     = "2.3.0-alpha"
 elastic-otel                   = "0.3.2"
 okio                           = "3.9.0"
@@ -52,7 +53,7 @@ sslcontext-kickstart           = "8.3.5"
 ksp-auto-service               = "1.1.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
-ajalt-mordant                  = "2.5.0"
+ajalt-mordant                  = "2.6.0"
 ajalt-clikt                    = "4.4.0"
 ajalt-colormath                = "3.5.0"
 classgraph                     = "4.8.161"
@@ -64,7 +65,7 @@ jte                            = "3.1.11"
 jimfs                          = "1.3.0"
 sshj                           = "0.38.0"
 pty4j                          = "0.12.26"
-junit                          = "5.11.0-M1"
+junit                          = "5.11.0-M2"
 koin                           = "3.5.6"
 kotest                         = "5.9.0"
 mockk                          = "1.13.11"
@@ -155,7 +156,7 @@ npm-jsjoda-tz                  = "2.21.0"
 # Plugin versions
 benmanes                       = "0.51.0"
 foojay-resolver                = "0.8.0"
-gradle-develocity              = "3.17.3"
+gradle-develocity              = "3.17.4"
 nmcp                           = "0.0.7"
 nexus-publish                  = "2.0.0"
 shadow                         = "8.1.1"
@@ -164,7 +165,7 @@ semver-plugin                  = "0.5.1"
 taskinfo                       = "2.1.0"
 dependency-analysis            = "1.31.0"
 best-practices-plugin          = "0.10"
-graalvm-nativeimage            = "0.10.1"
+graalvm-nativeimage            = "0.10.2"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 wire-plugin                    = "4.9.8"
@@ -173,7 +174,7 @@ buildkonfig                    = "0.13.3"
 akkurate                       = "0.1.0"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.8.0"
-modulegraph                    = "0.9.0"
+modulegraph                    = "0.10.0"
 cash-molecule                  = "1.3.2"
 npm-publish-plugin             = "3.4.2"
 exposed-plugin                 = "0.2.1"
@@ -315,6 +316,14 @@ ktor-client-encoding                 = { module = "io.ktor:ktor-client-encoding"
 ktor-client-mock                     = { module = "io.ktor:ktor-client-mock"                                   , version.ref = "ktor"}
 ktor-client-tests                    = { module = "io.ktor:ktor-client-tests"                                  , version.ref = "ktor"}
 
+# krpc
+kotlinx-rpc-runtime                     = { module = "org.jetbrains.kotlinx:kotlinx-rpc-runtime"                    , version.ref = "kotlinx-rpc"}
+kotlinx-rpc-runtime-client              = { module = "org.jetbrains.kotlinx:kotlinx-rpc-runtime-client"             , version.ref = "kotlinx-rpc"}
+kotlinx-rpc-runtime-server              = { module = "org.jetbrains.kotlinx:kotlinx-rpc-runtime-server"             , version.ref = "kotlinx-rpc"}
+kotlinx-rpc-transport-ktor-client       = { module = "org.jetbrains.kotlinx:kotlinx-rpc-transport-ktor-client"      , version.ref = "kotlinx-rpc"}
+kotlinx-rpc-transport-ktor-server       = { module = "org.jetbrains.kotlinx:kotlinx-rpc-transport-ktor-server"      , version.ref = "kotlinx-rpc"}
+kotlinx-rpc-runtime-serialization-json  = { module = "org.jetbrains.kotlinx:kotlinx-rpc-runtime-serialization-json" , version.ref = "kotlinx-rpc"}
+
 okio-bom                             = { module = "com.squareup.okio:okio-bom"                                 , version.ref = "okio"}
 okio                                 = { module = "com.squareup.okio:okio"                                     , version.ref = "okio"}
 okio-fakefilesystem                  = { module = "com.squareup.okio:okio-fakefilesystem"                       , version.ref = "okio"}
@@ -388,6 +397,7 @@ akkurate-core                        = { module = "dev.nesk.akkurate:akkurate-co
 akkurate-ksp-plugin                  = { module = "dev.nesk.akkurate:akkurate-ksp-plugin"                      , version.ref = "akkurate"}
 
 ajalt-mordant                        = { module = "com.github.ajalt.mordant:mordant"                           , version.ref = "ajalt-mordant"}
+ajalt-mordant-coroutines             = { module = "com.github.ajalt.mordant:mordant-coroutines"                , version.ref = "ajalt-mordant"}
 ajalt-colormath                      = { module = "com.github.ajalt.colormath:colormath"                       , version.ref = "ajalt-colormath"}
 ajalt-clikt                          = { module = "com.github.ajalt.clikt:clikt"                               , version.ref = "ajalt-clikt"}
 jgit                                 = { module = "org.eclipse.jgit:org.eclipse.jgit"                          , version.ref = "jgit" }
@@ -501,7 +511,7 @@ elastic-otel-javaagent               = { module = "co.elastic.otel:elastic-otel-
 # AI/ML
 
 [bundles]
-ajalt = ["ajalt-mordant", "ajalt-colormath", "ajalt-clikt"]
+ajalt = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-colormath", "ajalt-clikt"]
 ktor-server = []
 ktor-client = []
 
@@ -512,6 +522,8 @@ kotlin-js-plainobjects               = { id = "org.jetbrains.kotlin.plugin.js-pl
 kotlin-compose-compiler              = { id = "org.jetbrains.kotlin.plugin.compose"                            , version.ref = "kotlin"}
 jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
 kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark"                                , version.ref = "kotlinx-benchmark" }
+kotlinx-rpc                          = { id = "org.jetbrains.kotlinx.rpc.plugin"                               , version.ref = "kotlinx-rpc" }
+kotlinx-rpc-platform                 = { id = "org.jetbrains.kotlinx.rpc.platform"                             , version.ref = "kotlinx-rpc" }
 ktor                                 = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }
 exposed                              = { id = "com.jetbrains.exposed.gradle.plugin"                            , version.ref = "exposed-plugin" }
 karakum                              = { id = "io.github.sgrishchenko.karakum"                                 , version.ref = "karakum" }

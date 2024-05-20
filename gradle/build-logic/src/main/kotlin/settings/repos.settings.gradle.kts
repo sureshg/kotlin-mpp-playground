@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package settings
 
 import com.gradle.develocity.agent.gradle.scan.PublishedBuildScan
@@ -60,7 +62,6 @@ toolchainManagement {
 dependencyResolutionManagement {
   repositories {
     mavenCentral()
-    kobWeb()
     google {
       mavenContent {
         includeGroupAndSubgroups("androidx")
@@ -68,6 +69,7 @@ dependencyResolutionManagement {
         includeGroupAndSubgroups("com.google")
       }
     }
+    kobWeb()
   }
 
   // Enable back after the KMP Node.js repo fix.
@@ -92,14 +94,20 @@ fun RepositoryHandler.mavenSnapshot() {
   maven(url = Repo.SONATYPE_SNAPSHOT) { mavenContent { snapshotsOnly() } }
 }
 
-/**
- * [Compose-Multiplatform-Compiler](https://github.com/JetBrains/kotlin-multiplatform-dev-docs/blob/master/topics/compose/compose-compatibility-and-versioning.md)
- */
-@Suppress("UnstableApiUsage")
 fun RepositoryHandler.kobWeb() {
   maven(url = Repo.KOBWEB) {
     name = "KobWeb Repo"
     content { includeGroupAndSubgroups("com.varabyte") }
+  }
+}
+
+fun RepositoryHandler.kRpc() {
+  maven(url = Repo.KRPC) {
+    name = "Kotlinx RPC"
+    content {
+      includeGroupAndSubgroups("org.jetbrains.kotlinx.rpc")
+      includeGroupAndSubgroups("org.jetbrains.kotlinx:kotlinx-rpc")
+    }
   }
 }
 

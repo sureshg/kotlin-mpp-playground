@@ -61,6 +61,8 @@ fun KotlinMultiplatformExtension.commonTarget() {
           api(libs.ktor.serialization.json)
         }
       }
+      // kotlin.srcDirs()
+      // resources.srcDirs()
     }
 
     commonTest {
@@ -96,7 +98,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
     // val test by testRuns.existing
     testRuns.configureEach { executionTask.configure { configureJavaTest() } }
 
-    // attributes.attribute(mppTargetAttr, "jvm")
+    // attributes.attribute(mppTargetAttr, platformType.name)
   }
 
   sourceSets {
@@ -113,7 +115,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.sslcontext.kickstart)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         api(libs.google.auto.annotations)
-        kspDep("jvm", libs.ksp.auto.service)
+        ksp(libs.ksp.auto.service)
       }
     }
 

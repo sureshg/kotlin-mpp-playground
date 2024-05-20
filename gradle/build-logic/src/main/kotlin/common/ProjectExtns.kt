@@ -202,7 +202,6 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-Xms64M",
             "-Xmx96M",
             "-XX:+UseZGC",
-            "-XX:+ZGenerational",
             "-XX:+UseCompressedOops",
             "-XX:+UseStringDeduplication",
             "-XX:+UnlockExperimentalVMOptions",
@@ -561,20 +560,22 @@ fun KotlinNpmInstallTask.configureKotlinNpm() {
 }
 
 /**
- * Adds a KSP dependency to the specified target in the project.
+ * Adds a KSP dependency to the specified multiplatform sourceset.
  *
- * @param targetName The name of the target to add the dependency to.
  * @param dependencyNotation The notation of the dependency to add.
  */
 context(Project)
-fun KotlinDependencyHandler.kspDep(
-    targetName: String,
-    dependencyNotation: Any,
-) {
-  dependencies.add(
-      "ksp${targetName.replaceFirstChar { it.uppercaseChar() }}",
-      dependencyNotation,
-  )
+fun KotlinSourceSet.ksp(dependencyNotation: Any) {
+  val kspConfiguration =
+      when {
+        name in
+            listOf(
+                KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME,
+                KotlinSourceSet.COMMON_TEST_SOURCE_SET_NAME) -> "commonMainMetadata"
+        name.endsWith("Main") -> name.substringBeforeLast("Main")
+        else -> name
+      }.replaceFirstChar { it.uppercaseChar() }
+  dependencies.add("ksp$kspConfiguration", dependencyNotation)
 }
 
 /** Returns the path of the dependency jar in runtime classpath. */
