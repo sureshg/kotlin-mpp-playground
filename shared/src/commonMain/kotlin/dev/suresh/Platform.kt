@@ -97,6 +97,9 @@ val json by lazy {
     explicitNulls = false
     decodeEnumsCaseInsensitive = true
     allowTrailingComma = true
+    allowSpecialFloatingPointValues = true
+    allowStructuredMapKeys = true
+    allowComments = true
     classDiscriminatorMode = POLYMORPHIC
   }
 }

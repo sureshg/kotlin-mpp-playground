@@ -60,12 +60,12 @@ jib {
       add("java")
       add("-javaagent:${appRoot}/otel/otel-javaagent.jar")
       add("-Dotel.service.name=${project.name}")
-      add("-Dotel.traces.exporter=logging")
-      add("-Dotel.metrics.exporter=logging")
-      add("-Dotel.logs.exporter=logging")
       add("-Dotel.javaagent.logging=application")
       add("-Dnet.bytebuddy.experimental=true")
       // add("-Dotel.javaagent.enabled=false")
+      // add("-Dotel.traces.exporter=logging")
+      // add("-Dotel.metrics.exporter=logging")
+      // add("-Dotel.logs.exporter=logging")
       // add("-Dotel.instrumentation.kotlinx-coroutines.enabled=false")
       addAll(application.applicationDefaultJvmArgs.map { it.replace(tmp, "/tmp/") })
       add("-cp")
@@ -76,6 +76,9 @@ jib {
     environment =
         mapOf(
             "OTEL_JAVAAGENT_ENABLED" to "false",
+            "OTEL_TRACES_EXPORTER" to "logging",
+            "OTEL_METRICS_EXPORTER" to "logging",
+            "OTEL_LOGS_EXPORTER" to "logging",
             // "OTEL_RESOURCE_ATTRIBUTES" to
             // "service.name=${project.name},service.namespace=${project.group},service.instance.id=localhost:8080",
         )
@@ -242,3 +245,6 @@ dependencies {
 // configurations.testImplementation {
 //    exclude(module = libs.slf4j.simple.get().module.toString())
 // }
+
+// JS build output files.
+// tasks.named(jsWebpack).get().outputs.files

@@ -50,6 +50,20 @@ $ ./gradlew :backend:jvm:jibDockerBuild
 $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
 $ docker stats
 
+# With OpenTelemetry
+$ brew tap CtrlSpice/homebrew-otel-desktop-viewer
+$ brew install otel-desktop-viewer
+$ otel-desktop-viewer
+$ docker run -it --rm \
+           --name jvm \
+           -p 8080:8080 \
+           -p 9898:9898 \
+           -e OTEL_JAVAAGENT_ENABLED=true \
+           -e OTEL_TRACES_EXPORTER="otlp" \
+           -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
+           -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
+           sureshg/jvm:latest
+
 # Run container tests
 $ ./gradlew :backend:jvm:test -PktorTest
 $ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
