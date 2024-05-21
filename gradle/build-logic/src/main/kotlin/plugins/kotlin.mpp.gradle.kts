@@ -6,6 +6,7 @@ import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 import java.util.jar.Attributes
 import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
+import kotlinx.kover.gradle.plugin.dsl.GroupingEntityType
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
@@ -101,6 +102,7 @@ kover {
       html { title = "${project.name} code coverage report!" }
       verify {
         rule {
+          groupBy = GroupingEntityType.APPLICATION
           minBound(0, CoverageUnit.LINE)
           minBound(0, CoverageUnit.BRANCH)
         }

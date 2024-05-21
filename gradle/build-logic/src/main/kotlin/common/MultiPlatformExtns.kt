@@ -144,6 +144,7 @@ fun KotlinMultiplatformExtension.jsTarget() {
       commonWebpackConfig {
         outputFileName = "js-app.js"
         cssSupport { enabled = true }
+        // scssSupport { enabled = true }
         // sourceMaps = true
       }
 

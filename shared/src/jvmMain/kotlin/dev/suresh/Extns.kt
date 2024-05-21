@@ -10,6 +10,7 @@ import jdk.jfr.FlightRecorder
 import kotlin.jvm.optionals.getOrNull
 import kotlin.math.ln
 import kotlin.math.pow
+import kotlin.reflect.KProperty
 
 val DEC_FORMAT = DecimalFormat("#.##")
 
@@ -115,3 +116,9 @@ fun semaphoreThreadFactory(s: Semaphore, tf: ThreadFactory = Thread.ofVirtual().
         throw RuntimeException(e)
       }
     }
+
+/** System env var property delegate. */
+object Env {
+  operator fun getValue(thisRef: Any?, property: KProperty<*>): String =
+      System.getenv(property.name) ?: error("${property.name} not passed as environment")
+}
