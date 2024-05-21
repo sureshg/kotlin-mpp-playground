@@ -69,18 +69,18 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    84.6%
+    87.5%
   </span>
   <span class="absValue">
-    (11/13)
+    (14/16)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    79.6%
+    82.5%
   </span>
   <span class="absValue">
-    (43/54)
+    (52/63)
   </span>
 </td>
 </tr>
@@ -192,21 +192,21 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;/**</b>
 <b class="fc">&nbsp; * Runs the given suspend block on [Dispatchers.Virtual], so that we can call blocking I/O APIs from</b>
-&nbsp; * coroutines
-&nbsp; */
-&nbsp;suspend inline fun &lt;T&gt; runOnVirtualThread(crossinline block: suspend CoroutineScope.() -&gt; T): T =
-<b class="fc">&nbsp;    withContext(Dispatchers.Virtual!!) { block() }</b>
+<b class="fc">&nbsp; * coroutines</b>
+<b class="fc">&nbsp; */</b>
+<b class="fc">&nbsp;suspend inline fun &lt;T&gt; runOnVirtualThread(crossinline block: suspend CoroutineScope.() -&gt; T): T =</b>
+&nbsp;    withContext(Dispatchers.Virtual!!) { block() }
 &nbsp;
 &nbsp;/** Creates a new coroutine scope that uses [Dispatchers.Virtual] as its dispatcher. */
-&nbsp;val virtualThreadScope
-<b class="nc">&nbsp;  get() = CoroutineScope(Dispatchers.Virtual!!)</b>
+<b class="fc">&nbsp;val virtualThreadScope</b>
+&nbsp;  get() = CoroutineScope(Dispatchers.Virtual!!)
 &nbsp;
 &nbsp;/** Returns the runtime information of the JVM and OS. */
-&nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
-<b class="nc">&nbsp;  val rt = Runtime.getRuntime()</b>
+<b class="nc">&nbsp;fun jvmRuntimeInfo(debug: Boolean = false) = buildString {</b>
+&nbsp;  val rt = Runtime.getRuntime()
 &nbsp;  val unit = 1024 * 1024L
 &nbsp;  val heapSize = rt.totalMemory()
-&nbsp;  val heapFreeSize = rt.freeMemory()
+<b class="nc">&nbsp;  val heapFreeSize = rt.freeMemory()</b>
 &nbsp;  val heapUsedSize = heapSize - heapFreeSize
 &nbsp;  val heapMaxSize = rt.maxMemory()
 &nbsp;  val osMxBean = ManagementFactory.getPlatformMXBean(OperatingSystemMXBean::class.java)
@@ -378,7 +378,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-21 00:17</div>
+    <div style="float:right;">generated on 2024-05-21 01:13</div>
 </div>
 </body>
 </html>
