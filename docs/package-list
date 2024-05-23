@@ -76,6 +76,9 @@ module:profiling
 dev.suresh
 module:security
 dev.suresh
+dev.suresh.cert
+dev.suresh.security
+dev.suresh.tls
 module:js
 hljs
 interop
