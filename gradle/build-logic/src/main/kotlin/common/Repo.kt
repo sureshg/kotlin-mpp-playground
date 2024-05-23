@@ -10,8 +10,6 @@ object Repo {
 
   const val KOBWEB = "https://us-central1-maven.pkg.dev/varabyte-repos/public"
 
-  const val KRPC = "https://maven.pkg.jetbrains.space/public/p/krpc/maven"
-
   /**
    * Generates the URL for the GitHub package repository based on the owner and repository name.
    *

@@ -101,16 +101,6 @@ fun RepositoryHandler.kobWeb() {
   }
 }
 
-fun RepositoryHandler.kRpc() {
-  maven(url = Repo.KRPC) {
-    name = "Kotlinx RPC"
-    content {
-      includeGroupAndSubgroups("org.jetbrains.kotlinx.rpc")
-      includeGroupAndSubgroups("org.jetbrains.kotlinx:kotlinx-rpc")
-    }
-  }
-}
-
 develocity {
   buildScan {
     termsOfUseUrl = "https://gradle.com/terms-of-service"

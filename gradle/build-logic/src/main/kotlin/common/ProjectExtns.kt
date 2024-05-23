@@ -303,6 +303,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-Djdk.httpclient.HttpClient.log=headers",
             // "-Djdk.internal.httpclient.debug=false",
             // "-Djdk.tls.client.protocols=\"TLSv1.2,TLSv1.3\"",
+            // "-Djsse.enableSNIExtension=false",
             // ----- Misc -----
             // "-Djava.security.manager=allow",
             // "-Dfile.encoding=COMPAT", // uses '-Dnative.encoding'
