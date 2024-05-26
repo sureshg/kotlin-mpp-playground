@@ -1,32 +1,46 @@
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-val stroke = Stroke(width = 2f, pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f))
-
 fun Modifier.debug(color: Color = Color.Red) =
-    then(
-        if (debug)
-            drawBehind {
-              drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(8.dp.toPx()))
-            }
-        else this)
+    then(if (debug) dashedBorder(1.dp, color, 8.dp) else this)
+
+fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modifier = composed {
+  val density = LocalDensity.current
+  val strokeWidthPx = density.run { strokeWidth.toPx() }
+  val cornerRadiusPx = density.run { cornerRadius.toPx() }
+
+  then(
+      Modifier.drawWithCache {
+        onDrawBehind {
+          val stroke =
+              Stroke(
+                  width = strokeWidthPx,
+                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f))
+          drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))
+        }
+      })
+}
 
 @Composable
 fun scrollingBox(modifier: Modifier = Modifier, content: @Composable () -> Unit) =
     BoxWithConstraints {
       val vscrollState = rememberScrollState()
-      Box(
-          modifier =
-              modifier.fillMaxSize().padding(10.dp).debug().verticalScroll(state = vscrollState)) {
-            content()
-          }
+      Box(modifier = modifier.padding(10.dp).fillMaxSize().verticalScroll(state = vscrollState)) {
+        content()
+      }
     }

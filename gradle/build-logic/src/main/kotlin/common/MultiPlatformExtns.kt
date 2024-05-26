@@ -1,6 +1,5 @@
 package common
 
-import common.Platform.isAarch64
 import common.Platform.isLinux
 import common.Platform.isMac
 import common.Platform.isWin
@@ -149,8 +148,6 @@ context(Project)
 fun KotlinMultiplatformExtension.jsTarget() {
   js {
     useEsModules()
-    binaries.executable()
-    // binaries.library()
     browser {
       commonWebpackConfig {
         outputFileName = "js-app.js"
@@ -167,7 +164,9 @@ fun KotlinMultiplatformExtension.jsTarget() {
       }
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
-
+    if (isSharedProject.not()) {
+      binaries.executable()
+    }
     // passAsArgumentToMainFunction(...)
     generateTypeScriptDefinitions()
     compilerOptions { configureKotlinJs() }
@@ -199,8 +198,6 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
   wasmJs {
     moduleName = "wasm-app"
     useEsModules()
-    binaries.executable()
-
     browser {
       commonWebpackConfig {
         outputFileName = "wasm-app.js"
@@ -223,7 +220,9 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
         useKarma { useChromeHeadless() }
       }
     }
-
+    if (isSharedProject.not()) {
+      binaries.executable()
+    }
     generateTypeScriptDefinitions()
     compilerOptions { /* configureKotlinJs() */ }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
@@ -238,10 +237,14 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
 context(Project)
 fun KotlinMultiplatformExtension.hostNativeTarget(configure: KotlinNativeTarget.() -> Unit = {}) =
     when {
-      isMac && isAarch64 -> macosArm64 { configure() }
-      isMac && !isAarch64 -> macosX64 { configure() }
-      isLinux && isAarch64 -> linuxArm64 { configure() }
-      isLinux && !isAarch64 -> linuxX64 { configure() }
+      isMac -> {
+        macosArm64 { configure() }
+        macosX64 { configure() }
+      }
+      isLinux -> {
+        linuxArm64 { configure() }
+        linuxX64 { configure() }
+      }
       isWin -> mingwX64 { configure() }
       else ->
           throw GradleException(

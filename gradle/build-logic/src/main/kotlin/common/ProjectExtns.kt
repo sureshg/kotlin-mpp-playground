@@ -479,7 +479,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
 context(Project)
 fun KotlinNativeCompilerOptions.configureKotlinNative() {
   freeCompilerArgs.appendAll(
-      "-Xverbose-phases=Linker"
+      // "-Xverbose-phases=Linker"
       // "-Xruntime-logs=gc=info"
       )
 }
