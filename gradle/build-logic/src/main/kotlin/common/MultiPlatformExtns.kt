@@ -77,12 +77,17 @@ fun KotlinMultiplatformExtension.commonTarget() {
       }
     }
 
-    // val target = targets.first { it.platformType == KotlinPlatformType.common }
-    // val compilation = target.compilations["main"]
-    // // OR val compilation = targets["metadata"].compilations["main"]
+    // Get target compilations
+    // val commonTarget = targets.first { it.platformType == KotlinPlatformType.common }
+    // OR targets["metadata"]
+    // val compilation = commonTarget.compilations["main"]
+
+    // Add a task output as sourceSet
     // compilation.defaultSourceSet.kotlin.srcDir(buildConfig)
-    // // val newSourceSet = sourceSets.create("gen")
-    // // compilation.defaultSourceSet.dependsOn(newSourceSet)
+
+    // Add new sourceSet
+    // val newSourceSet = sourceSets.create("gen")
+    // compilation.defaultSourceSet.dependsOn(newSourceSet)
   }
 }
 
@@ -94,11 +99,17 @@ fun KotlinMultiplatformExtension.jvmTarget() {
     compilerOptions { configureKotlinJvm() }
 
     // ./gradlew jvmRun
-    mainRun { mainClass = libs.versions.app.mainclass.get() }
+    mainRun {
+      mainClass = libs.versions.app.mainclass.get()
+      val jvmArgs: String? by project
+      args(jvmArgs?.split(",").orEmpty())
+    }
+
     // val test by testRuns.existing
     testRuns.configureEach { executionTask.configure { configureJavaTest() } }
 
     // attributes.attribute(mppTargetAttr, platformType.name)
+    // attributes.attribute(KotlinPlatformType.attribute, KotlinPlatformType.jvm)
   }
 
   sourceSets {
@@ -156,6 +167,8 @@ fun KotlinMultiplatformExtension.jsTarget() {
       }
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
+
+    // passAsArgumentToMainFunction(...)
     generateTypeScriptDefinitions()
     compilerOptions { configureKotlinJs() }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
@@ -210,9 +223,9 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
         useKarma { useChromeHeadless() }
       }
     }
-    // Generate .d.ts files
+
     generateTypeScriptDefinitions()
-    compilerOptions { configureKotlinJs() }
+    compilerOptions { /* configureKotlinJs() */ }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 

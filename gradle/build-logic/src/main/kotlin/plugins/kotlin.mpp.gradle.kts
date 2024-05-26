@@ -8,7 +8,6 @@ import java.util.jar.Attributes
 import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
 import kotlinx.kover.gradle.plugin.dsl.GroupingEntityType
 import org.gradle.internal.os.OperatingSystem
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsCompile
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
@@ -45,7 +44,7 @@ kotlin {
     }
     "js",
     "chrome",
-    "web" -> jsTarget()
+    "html" -> jsTarget()
     "wasm" -> wasmJsTarget()
     "native" -> allNativeTargets { compilerOptions { configureKotlinNative() } }
     else -> jvmTarget()
@@ -124,9 +123,9 @@ tasks {
 
   withType<KspAATask>().configureEach { configureKspConfig() }
 
-  withType<KotlinJsCompile>().configureEach { compilerOptions { configureKotlinJs() } }
-
   withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
+
+  // withType<KotlinJsCompile>().configureEach { }
 
   withType<Jar>().configureEach {
     manifest {

@@ -61,7 +61,7 @@ val Project.debugEnabled
   get() = properties["debug"]?.toString().toBoolean()
 
 val Project.skipTest
-  get() = providers.gradleProperty("skip.test").map(String::toBoolean).getOrElse(false)
+  get() = hasProperty("skip.test")
 
 val Project.hasCleanTask
   get() = gradle.startParameter.taskNames.any { it == "clean" }
@@ -550,9 +550,10 @@ fun KotlinTestReport.configureTestReport() {}
 context(Project)
 fun KotlinJsCompilerOptions.configureKotlinJs() {
   useEsClasses = true
+  freeCompilerArgs.appendAll("-Xir-per-file")
+  // target = "es2015"
   // sourceMap = true
   // sourceMapEmbedSources = "always"
-  // freeCompilerArgs += listOf("-Xir-per-module")
 }
 
 context(Project)
