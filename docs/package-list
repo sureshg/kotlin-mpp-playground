@@ -2,11 +2,14 @@ $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/processor/[root]/index.html
 $dokka.location://App/#/PointingToDeclaration/desktop/[root]/-app.html
+$dokka.location://FileDialog/#java.awt.Frame?#kotlin.Function1[kotlin.collections.List[java.io.File],kotlin.Unit]/PointingToDeclaration/desktop/[root]/-file-dialog.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/js/[root]/-kotlin-playground.html
 $dokka.location://console/#/PointingToDeclaration/wasm/[root]/console.html
 $dokka.location://currentTimeMillis/#/PointingToDeclaration/wasm/[root]/current-time-millis.html
+$dokka.location://dashedBorder/androidx.compose.ui.Modifier#androidx.compose.ui.unit.Dp#androidx.compose.ui.graphics.Color#androidx.compose.ui.unit.Dp/PointingToDeclaration/desktop/[root]/dashed-border.html
 $dokka.location://debug/#/PointingToDeclaration/desktop/[root]/debug.html
 $dokka.location://debug/androidx.compose.ui.Modifier#androidx.compose.ui.graphics.Color/PointingToDeclaration/desktop/[root]/debug.html
+$dokka.location://fileChooser/#java.awt.Frame?/PointingToDeclaration/desktop/[root]/file-chooser.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
 $dokka.location://log/#/PointingToDeclaration/wasm/[root]/log.html
 $dokka.location://main/#/PointingToDeclaration/wasm/[root]/main.html
@@ -19,7 +22,6 @@ $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/js/[root]/sa
 $dokka.location://scrollingBox/#androidx.compose.ui.Modifier#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/desktop/[root]/scrolling-box.html
 $dokka.location://selectFileFromDisk/org.w3c.dom.Document#kotlin.String?#kotlin.Boolean/PointingToDeclaration/wasm/[root]/select-file-from-disk.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/shared/[root]/stdlib-features.html
-$dokka.location://stroke/#/PointingToDeclaration/desktop/[root]/stroke.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
 $dokka.location:/ClassVisitor/defaultHandler/#com.google.devtools.ksp.symbol.KSNode#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/default-handler.html
@@ -79,6 +81,9 @@ dev.suresh
 dev.suresh.cert
 dev.suresh.security
 dev.suresh.tls
+module:html
+dev.suresh
+dev.suresh.pages
 module:js
 hljs
 interop
