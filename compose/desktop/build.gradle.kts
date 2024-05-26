@@ -56,9 +56,12 @@ compose {
         // To debug _JAVA_LAUNCHER_DEBUG=1
         add("-splash:${'$'}APPDIR/resources/splash.jpg")
         addAll(jvmArguments(appRun = true, headless = false))
-        add("-Dskiko.fps.enabled=true")
-        add("-Dskiko.fps.periodSeconds=2.0")
-        add("-Dskiko.fps.longFrames.show=true")
+        // Resource localization
+        // add("-Duser.language=en")
+
+        // add("-Dskiko.fps.enabled=true")
+        // add("-Dskiko.fps.periodSeconds=2.0")
+        // add("-Dskiko.fps.longFrames.show=true")
       }
 
       buildTypes.release.proguard {
