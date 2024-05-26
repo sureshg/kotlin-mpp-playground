@@ -37,7 +37,7 @@ if (nativeBuild.toBoolean()) {
 
 if (composeBuild.toBoolean()) {
   include(":compose:desktop")
-  // include(":compose:web")
+  include(":compose:html")
 }
 
 // includeBuild("misc/build") {

@@ -121,8 +121,8 @@ $ docker run \
 # Kobweb
 # ------
 $ kobweb run -p compose/web
-$ ./gradlew :compose:web:kobwebStart -t
-$ ./gradlew :compose:web:kobwebStop
+$ ./gradlew :compose:html:kobwebStart -t
+$ ./gradlew :compose:html:kobwebStop
 
 # Compose Desktop
 $ ./gradlew :compose:desktop:runDistributable
@@ -241,7 +241,7 @@ graph LR
     end
     subgraph :compose
         :compose:desktop["desktop"]
-        :compose:web["web"]
+        :compose:html["html"]
     end
     subgraph :dep-mgmt
         :dep-mgmt:bom["bom"]
@@ -270,7 +270,7 @@ graph LR
     :meta:ksp:processor --> :shared
     :backend:data --> :shared
     :backend:profiling --> :shared
-    :compose:web --> :shared
+    :compose:html --> :shared
     : --> :backend
     : --> :benchmark
     : --> :compose
@@ -283,7 +283,7 @@ graph LR
     : --> :backend:profiling
     : --> :backend:security
     : --> :compose:desktop
-    : --> :compose:web
+    : --> :compose:html
     : --> :meta:compiler
     : --> :meta:ksp
     : --> :web:js
