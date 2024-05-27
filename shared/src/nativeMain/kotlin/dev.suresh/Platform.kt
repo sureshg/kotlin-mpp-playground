@@ -9,7 +9,7 @@ actual val platform: Platform = NativePlatform
 object NativePlatform : Platform {
   override val name: String = "Native"
 
-  override fun env(key: String, def: String?) = getenv(key)?.toKString() ?: def
+  override fun env(key: String, def: String?) = getenv(key)?.toKStringFromUtf8() ?: def
 
   override val osInfo: Map<String, String?>
     get() =

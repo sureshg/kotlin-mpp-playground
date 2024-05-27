@@ -28,6 +28,7 @@ fun main(args: Array<String>): Unit = runBlocking {
   println(">>> User: $user, Password: $password")
   buffer()
   dir()
+  // MultiplatformSystem.readEnvironmentVariable()
 }
 
 data class ProcessResult(val code: Int, val rawOutput: String?)
