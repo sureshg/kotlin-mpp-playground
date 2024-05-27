@@ -185,7 +185,7 @@ kmp-hierarchy                  = "1.1"
 jetbrains-compose              = "1.6.10"
 kobweb                         = "0.18.0"
 detekt                         = "1.23.6"
-detekt-compose-rules           = "0.4.1"
+detekt-compose-rules           = "0.4.2"
 
 [libraries]
 # External plugins for precompiled script plugins
