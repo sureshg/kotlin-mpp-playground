@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > MainKt</title>
+  <title>kotlin-mpp-playground Coverage Report > FileChooserKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: MainKt (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: FileChooserKt (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 
@@ -46,58 +46,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">MainKt</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/13)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/10)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/54)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/608)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">MainKt$App$1$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
+  <td class="name">FileChooserKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -111,7 +60,58 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/55)
+    (0/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/205)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FileChooserKt$FileDialog$1$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
   </span>
 </td>
   </tr>
@@ -122,7 +122,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/14)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -130,7 +130,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/14)
+    (0/24)
   </span>
 </td>
 <td class="coverageStat">
@@ -138,7 +138,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/57)
+    (0/26)
   </span>
 </td>
 <td class="coverageStat">
@@ -146,7 +146,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/663)
+    (0/226)
   </span>
 </td>
 </tr>
@@ -157,132 +157,50 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;import androidx.compose.animation.AnimatedVisibility
-&nbsp;import androidx.compose.desktop.ui.tooling.preview.Preview
-&nbsp;import androidx.compose.foundation.ExperimentalFoundationApi
-&nbsp;import androidx.compose.foundation.Image
-&nbsp;import androidx.compose.foundation.basicMarquee
-&nbsp;import androidx.compose.foundation.layout.*
-&nbsp;import androidx.compose.foundation.text.selection.SelectionContainer
-&nbsp;import androidx.compose.material.Button
-&nbsp;import androidx.compose.material.FloatingActionButton
-&nbsp;import androidx.compose.material.MaterialTheme
-&nbsp;import androidx.compose.material.Text
-&nbsp;import androidx.compose.material.icons.Icons
-&nbsp;import androidx.compose.material.icons.filled.KeyboardArrowUp
-&nbsp;import androidx.compose.material3.Icon
-&nbsp;import androidx.compose.runtime.*
-&nbsp;import androidx.compose.ui.Alignment
-&nbsp;import androidx.compose.ui.Modifier
-&nbsp;import androidx.compose.ui.graphics.Color
-&nbsp;import androidx.compose.ui.res.painterResource
-&nbsp;import androidx.compose.ui.text.AnnotatedString
-&nbsp;import androidx.compose.ui.text.SpanStyle
-&nbsp;import androidx.compose.ui.text.buildAnnotatedString
-&nbsp;import androidx.compose.ui.text.font.FontWeight
-&nbsp;import androidx.compose.ui.text.withStyle
-&nbsp;import androidx.compose.ui.unit.dp
-&nbsp;import androidx.compose.ui.window.Window
-&nbsp;import androidx.compose.ui.window.WindowPosition
-&nbsp;import androidx.compose.ui.window.application
-&nbsp;import androidx.compose.ui.window.rememberWindowState
-&nbsp;import java.awt.Dimension
+<code class="sourceCode" id="sourceCode">&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.window.AwtWindow
+&nbsp;import java.awt.FileDialog
+&nbsp;import java.awt.Frame
 &nbsp;import java.io.File
-&nbsp;import kotlinx.coroutines.MainScope
+&nbsp;import javax.swing.JFileChooser
+&nbsp;import javax.swing.UIManager
+&nbsp;import javax.swing.filechooser.FileNameExtensionFilter
+&nbsp;import javax.swing.filechooser.FileSystemView
 &nbsp;
-<b class="nc">&nbsp;val debug = true</b>
-&nbsp;
-<b class="nc">&nbsp;val mainScope = MainScope()</b>
-&nbsp;
-<b class="nc">&nbsp;val resourcesDir = File(System.getProperty(&quot;compose.application.resources.dir&quot;, &quot;.&quot;))</b>
-&nbsp;
-&nbsp;@OptIn(ExperimentalFoundationApi::class)
 &nbsp;@Composable
-&nbsp;@Preview
-<b class="nc">&nbsp;fun App() {</b>
-<b class="nc">&nbsp;  val coroutineScope = rememberCoroutineScope()</b>
-<b class="nc">&nbsp;  var text by remember { mutableStateOf(AnnotatedString(&quot;Hello, Compose!&quot;)) }</b>
-<b class="nc">&nbsp;  var showImage by remember { mutableStateOf(false) }</b>
-<b class="nc">&nbsp;  var isOpen by remember { mutableStateOf(false) }</b>
-<b class="nc">&nbsp;  val resource = resourcesDir.resolve(&quot;resource.txt&quot;)</b>
+<b class="nc">&nbsp;fun FileDialog(parent: Frame? = null, onClose: (result: List&lt;File&gt;) -&gt; Unit) =</b>
+<b class="nc">&nbsp;    AwtWindow(</b>
+<b class="nc">&nbsp;        visible = true,</b>
+<b class="nc">&nbsp;        create = {</b>
+<b class="nc">&nbsp;          object : FileDialog(parent, &quot;Choose a file&quot;, LOAD) {</b>
+<b class="nc">&nbsp;            override fun isMultipleMode() = true</b>
 &nbsp;
-<b class="nc">&nbsp;  Column(</b>
-<b class="nc">&nbsp;      modifier = Modifier.fillMaxSize().padding(10.dp).debug(color = Color.Blue),</b>
-<b class="nc">&nbsp;      horizontalAlignment = Alignment.CenterHorizontally,</b>
-<b class="nc">&nbsp;      verticalArrangement = Arrangement.SpaceEvenly) {</b>
-<b class="nc">&nbsp;        SelectionContainer {</b>
-<b class="nc">&nbsp;          Text(</b>
-<b class="nc">&nbsp;              text,</b>
-<b class="nc">&nbsp;              modifier = Modifier.basicMarquee().fillMaxWidth().align(Alignment.CenterHorizontally))</b>
-&nbsp;        }
-&nbsp;
-<b class="nc">&nbsp;        Button(</b>
-<b class="nc">&nbsp;            onClick = {</b>
-<b class="nc">&nbsp;              text = buildAnnotatedString {</b>
-<b class="nc">&nbsp;                append(&quot;Compose Desktop App: &quot;)</b>
-<b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
-<b class="nc">&nbsp;                  append(BuildConfig.version)</b>
-<b class="nc">&nbsp;                }</b>
-<b class="nc">&nbsp;                appendLine()</b>
-&nbsp;
-<b class="nc">&nbsp;                append(&quot;JavaVersion: &quot;)</b>
-<b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
-<b class="nc">&nbsp;                  append(BuildConfig.java)</b>
-<b class="nc">&nbsp;                }</b>
-<b class="nc">&nbsp;                appendLine()</b>
-&nbsp;
-<b class="nc">&nbsp;                append(&quot;Kotlin Version: &quot;)</b>
-<b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
-<b class="nc">&nbsp;                  append(KotlinVersion.CURRENT.toString())</b>
-<b class="nc">&nbsp;                }</b>
-<b class="nc">&nbsp;                appendLine()</b>
-&nbsp;
-<b class="nc">&nbsp;                append(&quot;Compose Multiplatform Version: &quot;)</b>
-<b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
-<b class="nc">&nbsp;                  append(BuildConfig.jetbrainsCompose)</b>
-<b class="nc">&nbsp;                }</b>
-<b class="nc">&nbsp;                appendLine()</b>
-&nbsp;
-<b class="nc">&nbsp;                append(&quot;Resource: &quot;)</b>
-<b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
-<b class="nc">&nbsp;                  if (resource.exists()) append(resource.readText()) else append(&quot;Not found&quot;)</b>
-<b class="nc">&nbsp;                }</b>
-<b class="nc">&nbsp;              }</b>
-<b class="nc">&nbsp;              showImage = !showImage</b>
-&nbsp;            }) {
-&nbsp;              Text(text = &quot;Click&quot;)
+&nbsp;            override fun setVisible(visible: Boolean) {
+<b class="nc">&nbsp;              super.setVisible(visible)</b>
+<b class="nc">&nbsp;              if (visible) {</b>
+<b class="nc">&nbsp;                onClose(files.toList())</b>
+&nbsp;              }
 &nbsp;            }
-&nbsp;
-<b class="nc">&nbsp;        AnimatedVisibility(visible = showImage) {</b>
-&nbsp;          Image(painter = painterResource(&quot;svg/idea-logo.svg&quot;), contentDescription = &quot;Logo&quot;)
-&nbsp;        }
-&nbsp;
-<b class="nc">&nbsp;        FloatingActionButton(</b>
-<b class="nc">&nbsp;            onClick = { isOpen = !isOpen },</b>
-<b class="nc">&nbsp;            modifier = Modifier.padding(5.dp).size(30.dp).align(Alignment.End)) {</b>
-&nbsp;              Icon(Icons.Default.KeyboardArrowUp, &quot;File&quot;)
-&nbsp;            }
-&nbsp;
-<b class="nc">&nbsp;        if (isOpen) {</b>
-<b class="nc">&nbsp;          FileDialog {</b>
-<b class="nc">&nbsp;            println(&quot;Selected Files: $it&quot;)</b>
-<b class="nc">&nbsp;            isOpen = false</b>
 &nbsp;          }
-&nbsp;          // DisposableEffect(isOpen) {// open FileChooser}
-&nbsp;        }
-<b class="nc">&nbsp;      }</b>
-<b class="nc">&nbsp;}</b>
+&nbsp;        },
+<b class="nc">&nbsp;        dispose = FileDialog::dispose)</b>
 &nbsp;
-<b class="nc">&nbsp;fun main() = application {</b>
-&nbsp;  Window(
-&nbsp;      title = &quot;App&quot;,
-&nbsp;      state =
-&nbsp;          rememberWindowState(
-&nbsp;              width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center)),
-&nbsp;      onCloseRequest = ::exitApplication) {
-&nbsp;        window.minimumSize = Dimension(350, 600)
-&nbsp;        MaterialTheme { App() }
-&nbsp;      }
+<b class="nc">&nbsp;fun fileChooser(parent: Frame? = null, onClose: (result: List&lt;File&gt;) -&gt; Unit) {</b>
+<b class="nc">&nbsp;  UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())</b>
+<b class="nc">&nbsp;  val chooser =</b>
+<b class="nc">&nbsp;      JFileChooser(FileSystemView.getFileSystemView()).apply {</b>
+<b class="nc">&nbsp;        currentDirectory = File(System.getProperty(&quot;user.dir&quot;))</b>
+<b class="nc">&nbsp;        fileSelectionMode = JFileChooser.FILES_AND_DIRECTORIES</b>
+<b class="nc">&nbsp;        isMultiSelectionEnabled = true</b>
+<b class="nc">&nbsp;        dialogTitle = &quot;Select a folder&quot;</b>
+<b class="nc">&nbsp;        approveButtonText = &quot;Select&quot;</b>
+<b class="nc">&nbsp;        approveButtonToolTipText = &quot;Select current directory as save destination&quot;</b>
+<b class="nc">&nbsp;        fileFilter = FileNameExtensionFilter(&quot;JPG &amp; GIF Images&quot;, &quot;jpg&quot;, &quot;gif&quot;)</b>
+<b class="nc">&nbsp;      }</b>
+&nbsp;
+<b class="nc">&nbsp;  val files = chooser.selectedFiles.toList()</b>
+<b class="nc">&nbsp;  chooser.isVisible = false</b>
+<b class="nc">&nbsp;  onClose(files)</b>
 &nbsp;}
 </code>
 </pre>
@@ -307,7 +225,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-28 00:18</div>
+    <div style="float:right;">generated on 2024-05-28 01:45</div>
 </div>
 </body>
 </html>
