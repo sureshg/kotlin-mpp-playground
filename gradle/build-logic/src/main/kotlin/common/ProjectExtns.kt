@@ -403,7 +403,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   allWarningsAsErrors = false
   suppressWarnings = false
   verbose = false
-  freeCompilerArgs.appendAll(
+  freeCompilerArgs.addAll(
       "-Xcontext-receivers",
       "-Xexpect-actual-classes",
       "-Xskip-prerelease-check",
@@ -455,7 +455,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
   verbose = true
   allWarningsAsErrors = false
   suppressWarnings = false
-  freeCompilerArgs.appendAll(
+  freeCompilerArgs.addAll(
       "-Xadd-modules=$addModules",
       "-Xjsr305=strict",
       "-Xjvm-default=all",
@@ -478,7 +478,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
 
 context(Project)
 fun KotlinNativeCompilerOptions.configureKotlinNative() {
-  freeCompilerArgs.appendAll(
+  freeCompilerArgs.addAll(
       // "-Xverbose-phases=Linker"
       // "-Xruntime-logs=gc=info"
       )
@@ -550,7 +550,7 @@ fun KotlinTestReport.configureTestReport() {}
 context(Project)
 fun KotlinJsCompilerOptions.configureKotlinJs() {
   useEsClasses = true
-  freeCompilerArgs.appendAll("-Xir-per-file")
+  freeCompilerArgs.addAll("-Xir-per-file")
   // target = "es2015"
   // sourceMap = true
   // sourceMapEmbedSources = "always"

@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeUiApi::class)
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -6,14 +8,11 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Button
-import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowUp
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -44,7 +43,6 @@ fun App() {
   val coroutineScope = rememberCoroutineScope()
   var text by remember { mutableStateOf(AnnotatedString("Hello, Compose!")) }
   var showImage by remember { mutableStateOf(false) }
-  var isOpen by remember { mutableStateOf(false) }
   val resource = resourcesDir.resolve("resource.txt")
 
   Column(
@@ -97,20 +95,7 @@ fun App() {
         AnimatedVisibility(visible = showImage) {
           Image(painter = painterResource("svg/idea-logo.svg"), contentDescription = "Logo")
         }
-
-        FloatingActionButton(
-            onClick = { isOpen = !isOpen },
-            modifier = Modifier.padding(5.dp).size(30.dp).align(Alignment.End)) {
-              Icon(Icons.Default.KeyboardArrowUp, "File")
-            }
-
-        if (isOpen) {
-          FileDialog {
-            println("Selected Files: $it")
-            isOpen = false
-          }
-          // DisposableEffect(isOpen) {// open FileChooser}
-        }
+        DragDropListView()
       }
 }
 

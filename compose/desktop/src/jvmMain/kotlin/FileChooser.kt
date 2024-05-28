@@ -6,6 +6,7 @@ import java.io.File
 import javax.swing.JFileChooser
 import javax.swing.UIManager
 import javax.swing.filechooser.FileNameExtensionFilter
+import javax.swing.filechooser.FileSystemView
 
 @Composable
 fun FileDialog(parent: Frame? = null, onClose: (result: List<File>) -> Unit) =
@@ -25,11 +26,12 @@ fun FileDialog(parent: Frame? = null, onClose: (result: List<File>) -> Unit) =
         },
         dispose = FileDialog::dispose)
 
-fun fileChooser(parent: Frame? = null): List<File> {
+fun fileChooser(parent: Frame? = null, onClose: (result: List<File>) -> Unit) {
   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
   val chooser =
-      JFileChooser().apply {
-        fileSelectionMode = JFileChooser.DIRECTORIES_ONLY
+      JFileChooser(FileSystemView.getFileSystemView()).apply {
+        currentDirectory = File(System.getProperty("user.dir"))
+        fileSelectionMode = JFileChooser.FILES_AND_DIRECTORIES
         isMultiSelectionEnabled = true
         dialogTitle = "Select a folder"
         approveButtonText = "Select"
@@ -37,8 +39,7 @@ fun fileChooser(parent: Frame? = null): List<File> {
         fileFilter = FileNameExtensionFilter("JPG & GIF Images", "jpg", "gif")
       }
 
-  chooser.showOpenDialog(parent)
   val files = chooser.selectedFiles.toList()
   chooser.isVisible = false
-  return files
+  onClose(files)
 }
