@@ -1,6 +1,7 @@
 package dev.suresh
 
 import java.io.File
+import java.lang.StackWalker.Option.RETAIN_CLASS_REFERENCE
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.concurrent.Semaphore
@@ -16,7 +17,10 @@ val DEC_FORMAT = DecimalFormat("#.##")
 
 /** Returns the method name contains this call-site */
 inline val methodName
-  get() = StackWalker.getInstance().walk { it.findFirst().getOrNull()?.methodName }
+  get() =
+      StackWalker.getInstance(RETAIN_CLASS_REFERENCE).walk {
+        it.findFirst().getOrNull()?.methodName
+      }
 
 /** Read the [Class] as [ByteArray] */
 fun <T : Class<*>> T.toBytes() =

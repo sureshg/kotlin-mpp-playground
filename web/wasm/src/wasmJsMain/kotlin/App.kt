@@ -61,7 +61,9 @@ suspend fun main() {
       info?.appendText("Selected files: $files")
       files.forEach { file ->
         val text = file.readAsText()
-        info?.appendText("File content: $text")
+        val buf = file.readAsByteArray()
+        info?.appendText("Text File content: $text")
+        info?.appendText("Binary File content: ${buf?.decodeToString()}")
       }
     }
   }

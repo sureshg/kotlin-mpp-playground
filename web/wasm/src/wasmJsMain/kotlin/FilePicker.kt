@@ -23,8 +23,12 @@ suspend fun Document.selectFileFromDisk(accept: String? = null, multiple: Boolea
         this.multiple = multiple
         accept?.let { this.accept = it }
         onchange = {
-          val files = input.files?.asList().orEmpty()
-          cont.resume(files)
+          try {
+            val files = input.files?.asList().orEmpty()
+            cont.resume(files)
+          } catch (e: Exception) {
+            cont.resumeWithException(e)
+          }
         }
       }
       body?.appendChild(input)
@@ -35,9 +39,13 @@ suspend fun Document.selectFileFromDisk(accept: String? = null, multiple: Boolea
 suspend fun File.readAsText() = suspendCoroutine { cont ->
   val reader = FileReader()
   reader.onload = {
-    val target = it.target as? FileReader
-    val result = target?.result as? ArrayBuffer
-    cont.resume(result)
+    try {
+      val target = it.target as? FileReader
+      val result = target?.result?.unsafeCast<JsString>()
+      cont.resume(result?.toString())
+    } catch (e: Exception) {
+      cont.resumeWithException(e)
+    }
   }
 
   reader.onerror = {
@@ -49,4 +57,27 @@ suspend fun File.readAsText() = suspendCoroutine { cont ->
     log.info { "File loading Progress: $percentage%" }
   }
   reader.readAsText(this, "UTF-8")
+}
+
+suspend fun File.readAsByteArray() = suspendCoroutine { cont ->
+  val reader = FileReader()
+  reader.onload = {
+    try {
+      val target = it.target as? FileReader
+      val result = target?.result?.unsafeCast<ArrayBuffer>()
+      cont.resume(result.toByteArray())
+    } catch (e: Exception) {
+      cont.resumeWithException(e)
+    }
+  }
+
+  reader.onerror = {
+    cont.resumeWithException(IllegalStateException("Error reading the file $name"))
+  }
+
+  reader.onprogress = {
+    val percentage = (it.loaded.toDouble() / it.total.toDouble()) * 100
+    log.info { "File loading Progress: $percentage%" }
+  }
+  reader.readAsArrayBuffer(this)
 }

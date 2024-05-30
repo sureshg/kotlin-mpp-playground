@@ -7,7 +7,6 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.text.DecimalFormat
 import java.text.NumberFormat
-import kotlin.jvm.optionals.getOrNull
 import kotlin.math.ln
 import kotlin.math.pow
 import kotlin.properties.ReadOnlyProperty
@@ -20,10 +19,6 @@ internal val DEC_FORMAT = DecimalFormat("#.##")
 
 /** OS temp location */
 val tmp: String = "${System.getProperty("java.io.tmpdir")}${File.separator}"
-
-/** Returns the method name contains this call-site */
-inline val methodName
-  get() = StackWalker.getInstance().walk { it.findFirst().getOrNull()?.methodName }
 
 /** Read the [Class] as [ByteArray] */
 fun <T : Class<*>> T.toBytes() =
