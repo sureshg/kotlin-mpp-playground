@@ -102,6 +102,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
 &nbsp;import java.io.File
+&nbsp;import java.lang.StackWalker.Option.RETAIN_CLASS_REFERENCE
 &nbsp;import java.text.DecimalFormat
 &nbsp;import java.text.NumberFormat
 &nbsp;import java.util.concurrent.Semaphore
@@ -117,7 +118,10 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;
 &nbsp;/** Returns the method name contains this call-site */
 &nbsp;inline val methodName
-&nbsp;  get() = StackWalker.getInstance().walk { it.findFirst().getOrNull()?.methodName }
+&nbsp;  get() =
+&nbsp;      StackWalker.getInstance(RETAIN_CLASS_REFERENCE).walk {
+&nbsp;        it.findFirst().getOrNull()?.methodName
+&nbsp;      }
 &nbsp;
 &nbsp;/** Read the [Class] as [ByteArray] */
 &nbsp;fun &lt;T : Class&lt;*&gt;&gt; T.toBytes() =
@@ -246,7 +250,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-05-30 00:19</div>
+    <div style="float:right;">generated on 2024-05-30 00:58</div>
 </div>
 </body>
 </html>
