@@ -265,6 +265,8 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-Dcom.sun.management.jmxremote.ssl=false",
             "-Djava.rmi.server.hostname=0.0.0.0",
             "-Dio.ktor.development=${project.hasProperty("development")}",
+            // "--sun-misc-unsafe-memory-access=warn",
+            // "--finalization=enabled",
             // "-XX:OnOutOfMemoryError='kill -9 %p'",
             // "-ea",
             // "-XshowSettings:vm",
