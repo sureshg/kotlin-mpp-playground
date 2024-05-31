@@ -95,6 +95,8 @@ tasks {
           remoteLineSuffix = "#L"
         }
 
+        samples.from("src/test/kotlin")
+
         perPackageOption {
           matchingRegex = ".*internal.*"
           suppress = true

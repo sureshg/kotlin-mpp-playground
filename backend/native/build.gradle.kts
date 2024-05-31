@@ -3,6 +3,7 @@
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
+import common.Platform
 import common.githubRepo
 import common.githubUser
 import org.gradle.internal.os.OperatingSystem
@@ -58,6 +59,10 @@ jib {
     // image = "gcr.io/distroless/base-debian12"
     image = "debian:stable-slim"
     platforms {
+      platform {
+        architecture = "arm64"
+        os = "linux"
+      }
       platform {
         architecture = "amd64"
         os = "linux"
@@ -127,12 +132,16 @@ tasks {
         onlyIf { OperatingSystem.current().isMacOsX }
       }
 
-  // Use LinuxX64 for container image
-  val linkReleaseExecutableLinuxX64 by getting(KotlinNativeLink::class)
   val prepareJib by
       registering(Copy::class) {
-        // from(linkReleaseExecutableLinuxArm64)
-        from(linkReleaseExecutableLinuxX64)
+        // DefaultNativePlatform.getCurrentArchitecture()
+        val containerReleaseExecutable =
+            when {
+              Platform.isAmd64 -> named("linkReleaseExecutableLinuxX64")
+              else -> named("linkReleaseExecutableLinuxArm64")
+            }
+
+        from(containerReleaseExecutable)
         // Jib native image extension expects the native image to be in "native/nativeCompile"
         into(layout.buildDirectory.dir("native/nativeCompile"))
         rename { appBinName }
