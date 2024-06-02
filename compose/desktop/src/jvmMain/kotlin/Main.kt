@@ -11,6 +11,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -26,6 +27,10 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.application
 import androidx.compose.ui.window.rememberWindowState
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import java.awt.Dimension
 import java.io.File
 import kotlinx.coroutines.MainScope
@@ -39,10 +44,10 @@ val resourcesDir = File(System.getProperty("compose.application.resources.dir", 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 @Preview
-fun App() {
+fun Home(navController: NavController) {
   val coroutineScope = rememberCoroutineScope()
-  var text by remember { mutableStateOf(AnnotatedString("Hello, Compose!")) }
-  var showImage by remember { mutableStateOf(false) }
+  var text by rememberSaveable { mutableStateOf(AnnotatedString("Hello, Compose!")) }
+  var showImage by rememberSaveable { mutableStateOf(false) }
   val resource = resourcesDir.resolve("resource.txt")
 
   Column(
@@ -95,8 +100,30 @@ fun App() {
         AnimatedVisibility(visible = showImage) {
           Image(painter = painterResource("svg/idea-logo.svg"), contentDescription = "Logo")
         }
-        DragDropListView()
+
+        Button(onClick = { navController.navigate("FileBrowser") }) { Text("File Browser!") }
       }
+}
+
+@Composable
+fun FileBrowser(modifier: Modifier = Modifier, navController: NavController) {
+  Column(
+      modifier = modifier.fillMaxSize().padding(10.dp).debug(color = Color.Magenta),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.SpaceEvenly) {
+        DragDropListView()
+
+        Button(onClick = { navController.popBackStack() }) { Text("Back") }
+      }
+}
+
+@Composable
+fun App() {
+  val navController = rememberNavController()
+  NavHost(navController = navController, startDestination = "Home") {
+    composable("Home") { Home(navController) }
+    composable("FileBrowser") { FileBrowser(navController = navController) }
+  }
 }
 
 fun main() = application {

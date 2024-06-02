@@ -10,7 +10,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.OutlinedButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FileUpload
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
@@ -61,7 +61,7 @@ fun DragDropBox(modifier: Modifier = Modifier, onDrop: (DragData) -> Unit) {
               enabled = isDragging.not(),
               shape = RoundedCornerShape(10.dp),
               onClick = { fdOpen = !fdOpen }) {
-                Icon(Icons.Filled.FileUpload, "Upload")
+                Icon(Icons.Default.KeyboardArrowUp, "Upload")
                 Text("Select")
               }
 

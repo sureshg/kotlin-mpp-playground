@@ -69,7 +69,7 @@ junit                          = "5.11.0-M2"
 koin                           = "3.5.6"
 kotest                         = "5.9.0"
 mockk                          = "1.13.11"
-mokkery                        = "2.0.0-RC1"
+mokkery                        = "2.0.0"
 slf4j                          = "2.1.0-alpha1"
 logback                        = "1.5.6"
 logback-tyler                  = "0.7"
@@ -157,7 +157,7 @@ npm-jsjoda-tz                  = "2.21.0"
 benmanes                       = "0.51.0"
 foojay-resolver                = "0.8.0"
 gradle-develocity              = "3.17.4"
-nmcp                           = "0.0.7"
+nmcp                           = "0.0.8"
 nexus-publish                  = "2.0.0"
 shadow                         = "8.1.1"
 spotless                       = "6.25.0"
@@ -183,6 +183,7 @@ jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
 jetbrains-compose              = "1.6.10"
+jetbrains-compose-nav          = "2.8.0-alpha02"
 kobweb                         = "0.18.0"
 detekt                         = "1.23.6"
 detekt-compose-rules           = "0.4.2"
@@ -503,11 +504,12 @@ otel-instr-micrometer                = { module = "io.opentelemetry.instrumentat
 elastic-otel-javaagent               = { module = "co.elastic.otel:elastic-otel-javaagent"                                  , version.ref = "elastic-otel"}
 
 # Compose
-compose-html-core                    = { module = "org.jetbrains.compose.html:html-core"                       , version.ref = "jetbrains-compose" }
-compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                      , version.ref = "jetbrains-compose" }
-compose-routing                      = { module = "app.softwork:routing-compose"                               , version.ref = "compose-routing" }
-compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"               , version.ref = "compose-icons" }
-detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                             , version.ref = "detekt-compose-rules" }
+compose-html-core                    = { module = "org.jetbrains.compose.html:html-core"                                    , version.ref = "jetbrains-compose" }
+compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                                   , version.ref = "jetbrains-compose" }
+compose-navigation                   = { module = "org.jetbrains.androidx.navigation:navigation-compose"                    , version.ref = "jetbrains-compose-nav" }
+compose-routing                      = { module = "app.softwork:routing-compose"                                            , version.ref = "compose-routing" }
+compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"                            , version.ref = "compose-icons" }
+detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                                          , version.ref = "detekt-compose-rules" }
 
 # Wasm
 
