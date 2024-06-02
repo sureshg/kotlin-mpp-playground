@@ -4,8 +4,10 @@ $dokka.location:////PointingToDeclaration/processor/[root]/index.html
 $dokka.location://App/#/PointingToDeclaration/desktop/[root]/-app.html
 $dokka.location://DragDropBox/#androidx.compose.ui.Modifier#kotlin.Function1[androidx.compose.ui.DragData,kotlin.Unit]/PointingToDeclaration/desktop/[root]/-drag-drop-box.html
 $dokka.location://DragDropListView/#/PointingToDeclaration/desktop/[root]/-drag-drop-list-view.html
+$dokka.location://FileBrowser/#androidx.compose.ui.Modifier#androidx.navigation.NavController/PointingToDeclaration/desktop/[root]/-file-browser.html
 $dokka.location://FileDialog/#java.awt.Frame?#kotlin.Function1[kotlin.collections.List[java.io.File],kotlin.Unit]/PointingToDeclaration/desktop/[root]/-file-dialog.html
 $dokka.location://FileListView/#androidx.compose.ui.Modifier#kotlin.collections.List[java.nio.file.Path]/PointingToDeclaration/desktop/[root]/-file-list-view.html
+$dokka.location://Home/#androidx.navigation.NavController/PointingToDeclaration/desktop/[root]/-home.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/js/[root]/-kotlin-playground.html
 $dokka.location://console/#/PointingToDeclaration/wasm/[root]/console.html
 $dokka.location://copyInto/kotlin.ByteArray#org.khronos.webgl.Int8Array#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/wasm/[root]/copy-into.html
