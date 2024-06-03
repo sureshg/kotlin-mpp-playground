@@ -134,10 +134,7 @@ val Project.signingPassword
   get() = providers.gradleProperty("signingPassword")
 
 val Project.hasSigningKey
-  get() =
-      signingKeyId.orNull.isNullOrBlank().not() &&
-          signingKey.orNull.isNullOrBlank().not() &&
-          signingPassword.orNull.isNullOrBlank().not()
+  get() = signingKey.orNull.isNullOrBlank().not() && signingPassword.orNull.isNullOrBlank().not()
 
 val Project.mavenCentralUsername
   get() = providers.gradleProperty("mavenCentralUsername")

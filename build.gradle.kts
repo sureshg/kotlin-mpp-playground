@@ -34,11 +34,11 @@ nmcp {
     val composeBuild: String? by project
     if (composeBuild.toBoolean()) {
       project(":compose:desktop")
-      project(":compose:html")
+      // project(":compose:html")
     }
 
     username = mavenCentralUsername
     password = mavenCentralPassword
-    publicationType = "USER_MANAGED"
+    publicationType = "AUTOMATIC"
   }
 }

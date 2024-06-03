@@ -6,6 +6,8 @@ plugins {
   // alias(libs.plugins.kobwebx.markdown)
 }
 
+description = "Compose HTML App"
+
 kotlin {
   sourceSets {
     commonMain {

@@ -2,6 +2,7 @@ package plugins
 
 import common.*
 import common.libs
+import nmcp.NmcpPublishTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
 plugins {
@@ -97,21 +98,20 @@ publishing {
   }
 }
 
+signing {
+  setRequired { hasSigningKey }
+  if (hasSigningKey) {
+    useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
+  }
+  sign(publishing.publications)
+  // gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
+}
+
 nmcp {
   publishAllPublications {
     username = mavenCentralUsername
     password = mavenCentralPassword
   }
-}
-
-signing {
-  setRequired { hasSigningKey }
-  if (hasSigningKey) {
-    useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
-    // useGpgCmd()
-  }
-  sign(publishing.publications)
-  // gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
 }
 
 fun MavenPublication.configurePom() {
@@ -149,7 +149,10 @@ tasks {
   // Suppressing publication validation errors
   withType<GenerateModuleMetadata> { suppressedValidationErrors.add("enforced-platform") }
 
-  withType<Sign>().configureEach { onlyIf { hasSigningKey } }
+  // For maven central portal publications (Might need fix in nmcp)
+  withType<NmcpPublishTask>().configureEach { mustRunAfter(withType<Sign>()) }
+
+  withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<Sign>()) }
 
   // For publishing kotlin native binaries
   withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }

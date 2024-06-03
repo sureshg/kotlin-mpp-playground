@@ -12,6 +12,8 @@ plugins {
   // alias(libs.plugins.detekt)
 }
 
+description = "Compose Desktop App!"
+
 kotlin {
   sourceSets {
     commonMain.dependencies {
