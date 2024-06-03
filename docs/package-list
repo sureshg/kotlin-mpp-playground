@@ -94,9 +94,6 @@ dev.suresh
 dev.suresh.cert
 dev.suresh.security
 dev.suresh.tls
-module:html
-dev.suresh
-dev.suresh.pages
 module:js
 hljs
 interop
