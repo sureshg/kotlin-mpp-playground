@@ -1,7 +1,6 @@
 package plugins
 
 import common.*
-import common.libs
 import nmcp.NmcpPublishTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
@@ -149,13 +148,13 @@ tasks {
   // Suppressing publication validation errors
   withType<GenerateModuleMetadata> { suppressedValidationErrors.add("enforced-platform") }
 
-  // For maven central portal publications (Might need fix in nmcp)
+  // For maven central portal publications - https://github.com/gradle/gradle/issues/26091
   withType<NmcpPublishTask>().configureEach { mustRunAfter(withType<Sign>()) }
 
-  withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<Sign>()) }
+  withType<AbstractPublishToMaven>().configureEach { mustRunAfter(withType<Sign>()) }
 
   // For publishing kotlin native binaries
-  withType<PublishToMavenRepository>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }
+  withType<AbstractPublishToMaven>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }
 
   // cyclonedxBom {
   //   includeConfigs = listOf("runtimeClasspath")

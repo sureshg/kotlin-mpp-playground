@@ -25,136 +25,173 @@ $ sdk u java 23.ea-open
 ### Build & Run
 
 ```bash
+$ ./gradlew build [-Pskip.test]
+# For publishing
 $ ./gradlew buildAndPublish
 ```
 
 <details>
-<summary>Run Modules</summary>
+<summary>Multiplatform Targets</summary>
 
-```bash
-# Kotlin JVM
-$ ./gradlew :shared:run
-$ ./gradlew :backend:jvm:run
-$ docker run \
-        -it \
-        --rm \
-        --pull always \
-        --workdir /app \
-        --publish 8080:8080 \
-        --publish 8081:8081 \
-        --name kotlin-mpp-playground \
-        --mount type=bind,source=$(pwd),destination=/app,readonly \
-        openjdk:23-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
+### JVM
 
-$ ./gradlew :backend:jvm:jibDockerBuild
-$ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
-$ docker stats
+* Build and Run
 
-# With OpenTelemetry
-$ brew tap CtrlSpice/homebrew-otel-desktop-viewer
-$ brew install otel-desktop-viewer
-$ otel-desktop-viewer
-$ docker run -it --rm \
-           --name jvm \
-           -p 8080:8080 \
-           -p 9898:9898 \
-           -e OTEL_JAVAAGENT_ENABLED=true \
-           -e OTEL_TRACES_EXPORTER="otlp" \
-           -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
-           -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
-           sureshg/jvm:latest
+  ```bash
+  $ ./gradlew :backend:jvm:run
+  $ ./gradlew :shared:run
 
-# Run container tests
-$ ./gradlew :backend:jvm:test -PktorTest
-$ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
+  # Benchmark
+  $ ./gradlew :benchmark:benchmark
+  ```
+* Containers
 
-# Run with AppCDS
-$ java -Xlog:class+load:file=/tmp/cds.log:uptime,level,tags,pid \
-       -XX:+AutoCreateSharedArchive \
-       -XX:SharedArchiveFile=/tmp/app.jsa \
-       -jar backend/jvm/build/libs/jvm-app.jar
+  ```bash
+  $ docker run \
+       -it \
+       --rm \
+       --pull always \
+       --workdir /app \
+       --publish 8080:8080 \
+       --publish 8081:8081 \
+       --name kotlin-mpp-playground \
+       --mount type=bind,source=$(pwd),destination=/app,readonly \
+       openjdk:23-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
 
-# cds-log-parser.jar --logFile=/tmp/cds.log
+   $ ./gradlew :backend:jvm:jibDockerBuild
+   $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
+   $ docker stats
+  ```
 
-# Kotlin JS
-$ ./gradlew :web:js:jsBrowserProductionRun -t
-$ ./gradlew kotlinUpgradePackageLock
+* OpenTelemetry
 
-# Kotlin Native
-# -------------
-$ ./gradlew :backend:native:build
-# Arch specific binaries
-$ ./gradlew :backend:native:macosArm64Binaries
-$ ./gradlew :backend:native:macosX64Binaries
-$ ./gradlew :backend:native:macOsUniversalBinary
-# Native container image
-$ ./gradlew :backend:native:jibDockerBuild
-$ docker run -it --rm --name native-app sureshg/native
+  ```bash
+   $ brew tap CtrlSpice/homebrew-otel-desktop-viewer
+   $ brew install otel-desktop-viewer
+   $ otel-desktop-viewer
+   $ docker run -it --rm \
+   --name jvm \
+   -p 8080:8080 \
+   -p 9898:9898 \
+   -e OTEL_JAVAAGENT_ENABLED=true \
+   -e OTEL_TRACES_EXPORTER="otlp" \
+   -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
+   -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
+   sureshg/jvm:latest
+  ```
+* Tests
 
-# Test linux binary on ARM64 MacOS
-$ ./gradlew :backend:native:linuxArm64Binaries
-$ docker run  \
-        -it \
-        --rm \
-        --publish 8080:80 \
-        --mount type=bind,source=$(pwd),destination=/app,readonly \
-        debian:stable-slim
-  # /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
-  # libtree -v /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
+  ```bash
+  $ ./gradlew :backend:jvm:test -PktorTest
+  $ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
+  ```
 
-# Build native binaries on container
-$ docker run \
-         --platform=linux/amd64 \
-         -it \
-         --rm \
-         --pull always \
-         --workdir /app \
-         --name kotlin-native-build \
-         --mount type=bind,source=$(pwd),destination=/app \
-         --mount type=bind,source=${HOME}/.gradle,destination=/root/.gradle \
-         openjdk:23-slim /bin/bash
-# apt update && apt install libtree tree
-# ./gradlew --no-daemon :backend:native:build
-#  backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
+* AppCDS
 
+  ```bash
+  # Run with AppCDS
+  $ java -Xlog:class+load:file=/tmp/cds.log:uptime,level,tags,pid \
+           -XX:+AutoCreateSharedArchive \
+           -XX:SharedArchiveFile=/tmp/app.jsa \
+           -jar backend/jvm/build/libs/jvm-app.jar
 
-# Kobweb
-# ------
-$ kobweb run -p compose/web
-$ ./gradlew :compose:html:kobwebStart -t
-$ ./gradlew :compose:html:kobwebStop
+  # cds-log-parser.jar --logFile=/tmp/cds.log
+  ```
 
-# Compose Desktop
-$ ./gradlew :compose:desktop:runDistributable
-$ ./gradlew :compose:desktop:packageDistributionForCurrentOS
-$ ./gradlew :compose:desktop:suggestModules
+### Wasm/JS
 
-# Publishing
-$ ./gradlew publishAllPublicationsToLocalRepository
+  ```bash
+  # Kotlin JS
+  $ ./gradlew :web:js:jsBrowserProductionRun -t
+  $ ./gradlew kotlinUpgradePackageLock
 
-# Benchmark
-$ ./gradlew :benchmark:benchmark
+  # Kobweb
+  # ------
+  $ kobweb run -p compose/web
+  $ ./gradlew :compose:html:kobwebStart -t
+  $ ./gradlew :compose:html:kobwebStop
+  ```
 
-# KMP hierarchy, Dependencies
-$ ./gradlew :shared:printHierarchy
-$ ./gradlew :backend:jvm:listResolvedArtifacts
-$ ./gradlew createModuleGraph
-$ ./gradlew generateChangelog
+### Native
 
-# Clean
-$ ./gradlew cleanAll
+  ```bash
+  $ ./gradlew :backend:native:build
+  # Arch specific binaries
+  $ ./gradlew :backend:native:macosArm64Binaries
+  $ ./gradlew :backend:native:macosX64Binaries
+  $ ./gradlew :backend:native:macOsUniversalBinary
 
-# Gradle Daemon Toolchain
-$ ./gradlew updateDaemonJvm
+  # Native container image
+  $ ./gradlew :backend:native:jibDockerBuild
+  $ docker run -it --rm --name native-app sureshg/native
 
-# Gradle Best Practices
-$ ./gradlew -p gradle/build-logic :bestPracticesBaseline
-$ ./gradlew checkBuildLogicBestPractices
-$ ./gradlew dependencies
+  # Test linux binary on ARM64 MacOS
+  $ ./gradlew :backend:native:linuxArm64Binaries
+  $ docker run  \
+          -it \
+          --rm \
+          --publish 8080:80 \
+          --mount type=bind,source=$(pwd),destination=/app,readonly \
+          debian:stable-slim
+    # /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
+    # libtree -v /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
 
-# GitHub Actions lint
-$ actionlint
-```
+  # Build native binaries on container
+  $ docker run \
+           --platform=linux/amd64 \
+           -it \
+           --rm \
+           --pull always \
+           --workdir /app \
+           --name kotlin-native-build \
+           --mount type=bind,source=$(pwd),destination=/app \
+           --mount type=bind,source=${HOME}/.gradle,destination=/root/.gradle \
+           openjdk:23-slim /bin/bash
+  # apt update && apt install libtree tree
+  # ./gradlew --no-daemon :backend:native:build
+  #  backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
+  ```
+
+### Compose
+
+  ```bash
+  $ ./gradlew :compose:desktop:runDistributable
+  $ ./gradlew :compose:desktop:packageDistributionForCurrentOS
+  $ ./gradlew :compose:desktop:suggestModules
+  ```
+
+### Publishing
+
+  ```bash
+  $ ./gradlew publishAllPublicationsToLocalRepository
+  $ ./gradlew publishAggregatedPublicationToCentralPortal
+  # For all publications,
+  $ ./gradlew publishAllPublicationsToCentralPortal
+  ```
+
+### Misc
+
+  ```bash
+  # KMP hierarchy, Dependencies
+  $ ./gradlew :shared:printHierarchy
+  $ ./gradlew :backend:jvm:listResolvedArtifacts
+  $ ./gradlew createModuleGraph
+  $ ./gradlew generateChangelog
+
+  # Clean
+  $ ./gradlew cleanAll
+
+  # Gradle Daemon Toolchain
+  $ ./gradlew updateDaemonJvm
+
+  # Gradle Best Practices
+  $ ./gradlew -p gradle/build-logic :bestPracticesBaseline
+  $ ./gradlew checkBuildLogicBestPractices
+  $ ./gradlew dependencies
+
+  # GitHub Actions lint
+  $ actionlint
+  ```
 
 </details>
 
