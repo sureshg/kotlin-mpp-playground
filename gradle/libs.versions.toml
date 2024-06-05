@@ -30,7 +30,7 @@ kotlinx-rpc                    = "0.1.0"
 kotlinx-collections-immutable  = "0.3.7"
 kotlinx-lincheck               = "2.32"
 kotlinx-html                   = "0.11.0"
-kotlinx-benchmark              = "0.4.10"
+kotlinx-benchmark              = "0.4.11"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.15.0-Beta.2"
@@ -105,7 +105,7 @@ java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.1.0"
 arrow-suspendapp               = "0.4.1-alpha.5"
-exposed                        = "0.51.0"
+exposed                        = "0.51.1"
 postgresql                     = "42.7.3"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
@@ -145,6 +145,7 @@ batik                          = "1.17"
 twelvemonkeys                  = "3.10.1"
 okapibarcode                   = "0.4.1"
 chasm                          = "0.6.0"
+kfswatch                       = "1.1.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.9.0"
@@ -160,7 +161,7 @@ gradle-develocity              = "3.17.4"
 nmcp                           = "0.0.8"
 nexus-publish                  = "2.0.0"
 shadow                         = "8.1.1"
-spotless                       = "6.25.0"
+spotless                       = "7.0.0.BETA1"
 semver-plugin                  = "0.5.1"
 taskinfo                       = "2.1.0"
 dependency-analysis            = "1.32.0"
@@ -510,6 +511,9 @@ compose-navigation                   = { module = "org.jetbrains.androidx.naviga
 compose-routing                      = { module = "app.softwork:routing-compose"                                            , version.ref = "compose-routing" }
 compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"                            , version.ref = "compose-icons" }
 detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                                          , version.ref = "detekt-compose-rules" }
+
+# Native
+kfswatch                             = { module = "io.github.irgaly.kfswatch:kfswatch"                                      , version.ref = "kfswatch" }
 
 # Wasm
 
