@@ -62,16 +62,16 @@ $ ./gradlew buildAndPublish
 
   ```bash
   $ docker run \
-       -it \
-       --rm \
-       --pull always \
-       --workdir /app \
-       --publish 8080:8080 \
-       --publish 8081:8081 \
-       --name kotlin-mpp-playground \
-       --mount type=bind,source=$(pwd),destination=/app,readonly \
-       openjdk:23-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
-
+           -it \
+           --rm \
+           --pull always \
+           --workdir /app \
+           --publish 8080:8080 \
+           --publish 8081:8081 \
+           --name kotlin-mpp-playground \
+           --mount type=bind,source=$(pwd),destination=/app,readonly \
+           openjdk:23-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
+    
    $ ./gradlew :backend:jvm:jibDockerBuild
    $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
    $ docker stats
@@ -84,14 +84,14 @@ $ ./gradlew buildAndPublish
    $ brew install otel-desktop-viewer
    $ otel-desktop-viewer
    $ docker run -it --rm \
-   --name jvm \
-   -p 8080:8080 \
-   -p 9898:9898 \
-   -e OTEL_JAVAAGENT_ENABLED=true \
-   -e OTEL_TRACES_EXPORTER="otlp" \
-   -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
-   -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
-   sureshg/jvm:latest
+                --name jvm \
+                -p 8080:8080 \
+                -p 9898:9898 \
+                -e OTEL_JAVAAGENT_ENABLED=true \
+                -e OTEL_TRACES_EXPORTER="otlp" \
+                -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
+                -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
+                sureshg/jvm:latest
   ```
 * Tests
 
@@ -105,9 +105,9 @@ $ ./gradlew buildAndPublish
   ```bash
   # Run with AppCDS
   $ java -Xlog:class+load:file=/tmp/cds.log:uptime,level,tags,pid \
-           -XX:+AutoCreateSharedArchive \
-           -XX:SharedArchiveFile=/tmp/app.jsa \
-           -jar backend/jvm/build/libs/jvm-app.jar
+         -XX:+AutoCreateSharedArchive \
+         -XX:SharedArchiveFile=/tmp/app.jsa \
+         -jar backend/jvm/build/libs/jvm-app.jar
 
   # cds-log-parser.jar --logFile=/tmp/cds.log
   ```
@@ -142,11 +142,11 @@ $ ./gradlew buildAndPublish
   # Test linux binary on ARM64 MacOS
   $ ./gradlew :backend:native:linuxArm64Binaries
   $ docker run  \
-          -it \
-          --rm \
-          --publish 8080:80 \
-          --mount type=bind,source=$(pwd),destination=/app,readonly \
-          debian:stable-slim
+           -it \
+           --rm \
+           --publish 8080:80 \
+           --mount type=bind,source=$(pwd),destination=/app,readonly \
+           debian:stable-slim
     # /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
     # libtree -v /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
 
