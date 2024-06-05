@@ -4,9 +4,9 @@ Kotlin Multiplatform Playground!
 [![GitHub Workflow Status][gha_badge]][gha_url]
 [![OpenJDK Version][java_img]][java_url]
 [![Kotlin release][kt_img]][kt_url]
+[![Maven Central Version][maven_img]][maven_url]
 [![Ktor][ktor_img]][ktor_url]
-[![Compose Multiplatform][cmp_img]][cmp_url]
-[![Kobweb][kobweb_img]][kobweb_url]
+[![Compose MP][cmp_img]][cmp_url]
 [![Style guide][ktfmt_img]][ktfmt_url]
 
 This repo shows a Gradle multi-project build structure that uses the [Kotlin Multiplatform][Kotlin Multiplatform] to
@@ -232,6 +232,12 @@ $ ./gradlew buildAndPublish
 
 [kt_img]: https://img.shields.io/github/v/release/Jetbrains/kotlin?include_prereleases&color=7f53ff&label=Kotlin&logo=kotlin&logoColor=7f53ff
 
+[maven_img]: https://img.shields.io/maven-central/v/dev.suresh.kmp/shared?logo=apachemaven&logoColor=cd2237&color=cd2237
+
+[maven_url]: https://central.sonatype.com/search?q=dev.suresh.kmp&namespace=dev.suresh.kmp
+
+[maven_dl]: https://search.maven.org/remote_content?g=dev.suresh.kmp&a=shared&v=LATEST
+
 [gha_url]: https://github.com/sureshg/kotlin-mpp-playground/actions/workflows/build.yml
 
 [gha_badge]: https://img.shields.io/github/actions/workflow/status/sureshg/kotlin-mpp-playground/build.yml?branch=main&color=green&label=Build&logo=Github-Actions&logoColor=green
@@ -246,7 +252,7 @@ $ ./gradlew buildAndPublish
 
 [cmp_url]: https://github.com/JetBrains/compose-multiplatform/releases
 
-[cmp_img]: https://img.shields.io/github/v/release/JetBrains/compose-multiplatform?color=3cdc84&include_prereleases&label=Compose%20Multiplatform&logo=JetpackCompose&logoColor=3cdc84
+[cmp_img]: https://img.shields.io/github/v/release/JetBrains/compose-multiplatform?color=3cdc84&label=Compose%20MP&logo=JetpackCompose&logoColor=3cdc84
 
 [kobweb_url]: https://github.com/varabyte/kobweb/releases
 
