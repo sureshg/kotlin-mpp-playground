@@ -44,6 +44,20 @@ $ ./gradlew buildAndPublish
   # Benchmark
   $ ./gradlew :benchmark:benchmark
   ```
+* GraalVM Native Image
+
+  ```bash
+  $ sdk u java graalvm-ce-dev
+  $ ./gradlew :backend:jvm:nativeCompile
+  $ backend/jvm/build/native/nativeCompile/jvm
+
+  # To generate the native image configurations
+  $ ./gradlew :backend:jvm:run -Pagent
+  $ curl http://localhost:8080/shutdown
+  $ ./gradlew :backend:jvm:metadataCopy
+
+  ```
+
 * Containers
 
   ```bash

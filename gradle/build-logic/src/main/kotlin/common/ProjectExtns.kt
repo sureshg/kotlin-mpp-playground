@@ -355,7 +355,7 @@ fun KotlinTarget.setTargetAttribute() {
 context(Project)
 fun JavaToolchainSpec.configureJvmToolchain() {
   languageVersion = toolchainVersion
-  vendor = toolchainVendor
+  // vendor = toolchainVendor
 }
 
 context(Project)

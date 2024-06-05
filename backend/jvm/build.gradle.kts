@@ -11,6 +11,7 @@ plugins {
   alias(libs.plugins.exposed)
   com.google.cloud.tools.jib
   gg.jte.gradle
+  plugins.graalvm
   plugins.publishing
 }
 

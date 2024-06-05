@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 package plugins
 
 import com.javiersc.semver.project.gradle.plugin.SemverExtension
@@ -8,10 +10,8 @@ import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
 plugins {
   application
-  id("plugins.kotlin.jvm")
-  id("plugins.misc")
   org.graalvm.buildtools.native
-  com.autonomousapps.`dependency-analysis`
+  // com.autonomousapps.`dependency-analysis`
 }
 
 val debugEnabled = project.hasProperty("debug")
@@ -19,11 +19,7 @@ val quickBuildEnabled = project.hasProperty("quick")
 val nativeBundleEnabled = project.hasProperty("bundle")
 val muslEnabled = project.hasProperty("musl")
 val reportsEnabled = project.hasProperty("reports")
-
-application {
-  mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs += jvmArguments()
-}
+val agentEnabled = project.hasProperty("agent")
 
 val semverExtn = extensions.getByType<SemverExtension>()
 
@@ -31,7 +27,7 @@ graalvmNative {
   binaries {
     named("main") {
       imageName = project.name
-      mainClass = application.mainClass
+      mainClass = libs.versions.app.mainclass
       useFatJar = false
       sharedLibrary = false
       fallback = false
@@ -46,11 +42,11 @@ graalvmNative {
         add("--enable-monitoring=heapdump,jfr,jvmstat,threaddump,nmt")
         add("--enable-https")
         add("--install-exit-handlers")
-        add("--features=graal.aot.RuntimeFeature")
         add("-R:MaxHeapSize=64m")
         add("-H:+ReportExceptionStackTraces")
         add("-EBUILD_NUMBER=${project.version}")
         add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
+        // add("--features=graal.aot.RuntimeFeature")
         // add("-H:+UnlockExperimentalVMOptions")
         // add("-H:+AddAllCharsets")
         // add("-H:+IncludeAllLocales")
@@ -89,13 +85,7 @@ graalvmNative {
           add("--dry-run")
         }
 
-        @Suppress("UnstableApiUsage")
         if (reportsEnabled) {
-          add("-H:DashboardDump=${layout.buildDirectory.file(niDashBoardDump).get().asFile.path}")
-          add("-H:+DashboardHeap")
-          add("-H:+DashboardCode")
-          // add("-H:+DashboardPretty")
-          // add("-H:+DashboardAll")
           if (java.toolchain.vendor.get().matches("Oracle.*")) {
             add("-H:+BuildReport")
           }
@@ -119,7 +109,7 @@ graalvmNative {
 
   agent {
     defaultMode = "standard"
-    enabled = true
+    enabled = agentEnabled
     metadataCopy {
       inputTaskNames.add("run") // Tasks previously executed with the agent attached (test).
       outputDirectories.add("src/main/resources/META-INF/native-image")
@@ -184,7 +174,6 @@ tasks {
             setOutput("version", project.version)
             setOutput("native_image_name", archiveFileName.get())
             setOutput("native_image_path", archiveFile.get().asFile.absolutePath)
-            setOutput("native_image_dashboard", "$niDashBoardDump.bgv")
           }
 
           val binFile = archiveFile.get().asFile
@@ -195,8 +184,7 @@ tasks {
 
   nativeCompile { finalizedBy(archiveTgz) }
 
-  dependencyAnalysis { issues { this.all { onAny { severity("warn") } } } }
-
+  // dependencyAnalysis { issues { this.all { onAny { severity("warn") } } } }
   // shadowJar { mergeServiceFiles() }
 }
 
@@ -218,15 +206,9 @@ val niArchiveName
     append(".tar.gz")
   }
 
-val niDashBoardDump
-  get() = "${project.name}-${project.version}"
-
 dependencies {
   // Dependencies required for native-image build. Use "graalCompileOnly" for compile only deps.
   // "graalCompileOnly"(libs.graalvm.sdk)
-  "graalImplementation"(libs.classgraph)
+  // "graalImplementation"(libs.classgraph)
   nativeImageCompileOnly(graal.output)
-
-  // kapt(libs.graalvm.hint.processor)
-  // compileOnly(libs.graalvm.hint.annotations)
 }
