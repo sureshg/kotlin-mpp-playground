@@ -71,7 +71,7 @@ $ ./gradlew buildAndPublish
            --name kotlin-mpp-playground \
            --mount type=bind,source=$(pwd),destination=/app,readonly \
            openjdk:23-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
-    
+
    $ ./gradlew :backend:jvm:jibDockerBuild
    $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
    $ docker stats

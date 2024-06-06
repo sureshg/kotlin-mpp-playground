@@ -1,7 +1,7 @@
 [versions]
 java                           = "23"
 kotlin                         = "2.0.0"
-kotlin-ksp                     = "2.0.0-1.0.21"
+kotlin-ksp                     = "2.0.0-1.0.22"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.0"
