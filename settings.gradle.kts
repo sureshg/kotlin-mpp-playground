@@ -30,6 +30,7 @@ include(":backend:profiling")
 
 val nativeBuild: String? by settings
 val composeBuild: String? by settings
+val springBoot: String? by settings
 
 if (nativeBuild.toBoolean()) {
   include(":backend:native")
@@ -38,6 +39,10 @@ if (nativeBuild.toBoolean()) {
 if (composeBuild.toBoolean()) {
   include(":compose:desktop")
   // include(":compose:html")
+}
+
+if (springBoot.toBoolean()) {
+  include(":backend:boot")
 }
 
 // includeBuild("misc/build") {

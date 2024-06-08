@@ -1,0 +1,1 @@
+var s="var s=%1$s%2$s%1$s;printf(s,(char)34,s);/exit";printf(s,(char)34,s);/exit

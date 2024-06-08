@@ -1,0 +1,34 @@
+### RSocket demo app
+STREAM /rsocket
+Host: wss://demo.rsocket.io/rsocket
+Content-Type: application/json
+Metadata-Type: application/json
+Setup-Data: hello
+
+### RSocket response
+RSOCKET /
+Host: localhost:7000
+Content-Type: text/plain
+
+Hello
+
+### Request/Stream
+STREAM /
+Host: localhost:7000
+Content-Type: text/plain
+
+Hello
+
+### FireAndForget
+FNF /
+Host: localhost:7000
+Content-Type: text/plain
+
+Hello
+
+### Spring Boot RSocket hello
+RSOCKET hello
+Host: localhost:7000
+Content-Type: text/plain
+
+Hello

@@ -1,0 +1,131 @@
+strict: true
+dev_addr: localhost:8000
+
+site_name: OpenJDK PlayGround
+site_url: https://suresh.dev/kotlin-mpp-playground
+site_description: A sample repo to test the latest OpenJDK releases for both Java and Kotlin.
+site_author: Suresh
+
+site_dir: docs
+docs_dir: kotlin-mpp-playground
+
+repo_name: sureshg/kotlin-mpp-playground
+repo_url: https://github.com/sureshg/kotlin-mpp-playground
+remote_branch: master
+edit_uri: edit/master/docs/apidoc
+
+copyright: 'Made with ❤️ by Suresh'
+
+# Customization
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: "https://github.com/sureshg/kotlin-mpp-playground"
+      name: GitHub
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/sur3shg
+      name: Twitter
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/r/sureshg/kotlin-mpp-playground
+
+# Configuration
+theme:
+  name: 'material'
+  # custom_dir: docs/overrides
+
+  # 404 page
+  static_templates:
+    - 404.html
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  favicon: images/favicon.png
+  logo: images/logo.png
+
+  language: en
+  features:
+    - tabs
+
+  palette:
+    - primary: deep purple
+    - accent: white
+    - scheme: default
+      primary: deep purple
+      accent: white
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+
+    - scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+
+  feature:
+    tabs: true
+
+  font:
+    text: Roboto Regular 400
+    code: Roboto Mono
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+# Extensions
+markdown_extensions:
+  - markdown.extensions.admonition
+  - markdown.extensions.attr_list
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: squidfunk
+      repo: mkdocs-material
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
+  - smarty
+  - tables
+
+# Page tree
+nav:
+  - '🌿 Home': Overview.md
+  - '🚀 Getting started':
+      - Installation: Overview.md
+  - '🌸 Build':
+      - '🌿 Build': https://github.com/sureshg/kotlin-mpp-playground/actions
+      - '🌸 Github': https://github.com/sureshg/kotlin-mpp-playground
+  - '🥑 Changelog':
+      - Release notes: CHANGELOG.md

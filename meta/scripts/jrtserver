@@ -1,0 +1,20 @@
+#!/usr/bin/env java --enable-preview --source 24
+
+import com.sun.net.httpserver.SimpleFileServer;
+import com.sun.net.httpserver.SimpleFileServer.OutputLevel;
+
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.nio.file.FileSystems;
+
+void main() {
+    var jrtFS = FileSystems.getFileSystem(URI.create("jrt:/"));
+    // Paths.get(URI.create("jrt:/"))
+    var modules = jrtFS.getPath("/modules");
+    var fileServer = SimpleFileServer.createFileServer(
+            new InetSocketAddress(8080),
+            modules,
+            OutputLevel.VERBOSE);
+    System.out.printf("Visit http://localhost:%d/ to see the file server!%n", fileServer.getAddress().getPort());
+    fileServer.start();
+}

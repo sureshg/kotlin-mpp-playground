@@ -1,5 +1,5 @@
 [versions]
-java                           = "23"
+java                           = "24"
 kotlin                         = "2.0.0"
 kotlin-ksp                     = "2.0.0-1.0.22"
 kotlin-jvmtarget               = "22"
@@ -42,6 +42,8 @@ kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
 karakum                        = "1.0.0-alpha.40-K2"
 seskar                         = "2.80.0"
+spring-boot                    = "3.3.0"
+spring-depmgmt                 = "1.1.5"
 ktor                           = "3.0.0-beta-1"
 ktor-cohort                    = "2.5.1"
 otel                           = "1.38.0"
@@ -49,8 +51,8 @@ otel-instr                     = "2.4.0"
 otel-alpha                     = "2.3.0-alpha"
 elastic-otel                   = "0.3.2"
 okio                           = "3.9.0"
-sslcontext-kickstart           = "8.3.5"
-ksp-auto-service               = "1.1.0"
+sslcontext-kickstart           = "8.3.6"
+ksp-auto-service               = "1.2.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "2.6.0"
@@ -145,7 +147,7 @@ batik                          = "1.17"
 twelvemonkeys                  = "3.10.1"
 okapibarcode                   = "0.4.1"
 chasm                          = "0.6.0"
-kfswatch                       = "1.1.0"
+kfswatch                       = "1.2.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.9.0"
@@ -546,3 +548,5 @@ detekt                               = { id = "io.github.detekt.gradle.compiler-
 kobweb-application                   = { id = "com.varabyte.kobweb.application"                                , version.ref = "kobweb" }
 kobweb-library                       = { id = "com.varabyte.kobweb.library"                                    , version.ref = "kobweb" }
 kobwebx-markdown                     = { id = "com.varabyte.kobwebx.markdown"                                  , version.ref = "kobweb" }
+spring-boot                          = { id = "org.springframework.boot"                                       , version.ref = "spring-boot" }
+spring-depmgmt                       = { id = "io.spring.dependency-management"                                , version.ref = "spring-depmgmt" }

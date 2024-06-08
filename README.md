@@ -18,8 +18,8 @@ and [Compose Web (wasm)][Compose-Multiplatform] applications.
 ```bash
 # Mac OS
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 23.ea-open
-$ sdk u java 23.ea-open
+$ sdk i java 24.ea-open
+$ sdk u java 24.ea-open
 ```
 
 ### Build & Run
@@ -70,7 +70,7 @@ $ ./gradlew buildAndPublish
            --publish 8081:8081 \
            --name kotlin-mpp-playground \
            --mount type=bind,source=$(pwd),destination=/app,readonly \
-           openjdk:23-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
+           openjdk:24-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
 
    $ ./gradlew :backend:jvm:jibDockerBuild
    $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
@@ -160,7 +160,7 @@ $ ./gradlew buildAndPublish
            --name kotlin-native-build \
            --mount type=bind,source=$(pwd),destination=/app \
            --mount type=bind,source=${HOME}/.gradle,destination=/root/.gradle \
-           openjdk:23-slim /bin/bash
+           openjdk:24-slim /bin/bash
   # apt update && apt install libtree tree
   # ./gradlew --no-daemon :backend:native:build
   #  backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
@@ -224,9 +224,9 @@ $ ./gradlew buildAndPublish
 
 <!-- Badges -->
 
-[java_url]: https://jdk.java.net/23/
+[java_url]: https://jdk.java.net/24/
 
-[java_img]: https://img.shields.io/badge/OpenJDK-23-e76f00?logo=openjdk&logoColor=e76f00
+[java_img]: https://img.shields.io/badge/OpenJDK-24-e76f00?logo=openjdk&logoColor=e76f00
 
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 

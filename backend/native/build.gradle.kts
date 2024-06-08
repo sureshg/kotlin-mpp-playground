@@ -36,7 +36,7 @@ kotlin {
       }
 
       // Creates test executable
-      test(emptySet())
+      test(setOf(RELEASE))
     }
   }
 
@@ -45,6 +45,7 @@ kotlin {
     nativeMain {
       dependencies {
         api(libs.kmp.appdirs)
+        api(libs.kfswatch)
         // api(libs.arrow.suspendapp.ktor)
       }
     }
