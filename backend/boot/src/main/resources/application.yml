@@ -1,0 +1,28 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+
+spring:
+  application:
+    name: boot
+
+  threads:
+    virtual:
+      enabled: true
+
+  sql:
+    init:
+      mode: always
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydb
+    driver-class-name: org.h2.Driver
+    username: user
+    password: secret
+
+
