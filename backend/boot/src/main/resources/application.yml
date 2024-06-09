@@ -21,7 +21,6 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/mydb
-    driver-class-name: org.h2.Driver
     username: user
     password: secret
 

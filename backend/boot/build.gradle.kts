@@ -4,7 +4,7 @@ plugins {
   alias(libs.plugins.spring.depmgmt)
   org.graalvm.buildtools.native
   `kotlin-spring`
-  plugins.publishing
+  // plugins.publishing
 }
 
 description = "Kotlin SpringBoot app"
@@ -22,3 +22,14 @@ dependencies {
   // implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
   // developmentOnly("org.springframework.boot:spring-boot-docker-compose")
 }
+
+// Fix for https://github.com/Kotlin/dokka/issues/3472
+// configurations
+//     .matching { it.name.startsWith("dokka") }
+//     .configureEach {
+//       resolutionStrategy.eachDependency {
+//         if (requested.group.startsWith("com.fasterxml.jackson")) {
+//           useVersion("2.15.3")
+//         }
+//       }
+//     }

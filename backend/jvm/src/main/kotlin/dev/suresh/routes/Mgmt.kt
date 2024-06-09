@@ -16,6 +16,7 @@ import io.ktor.server.websocket.*
 import io.ktor.websocket.*
 import io.ktor.websocket.Frame.*
 import java.io.File
+import java.lang.ScopedValue.CallableOp
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.io.path.*
 import kotlinx.coroutines.sync.Mutex
@@ -32,7 +33,8 @@ fun Route.mgmtRoutes() {
   staticFiles(remotePath = "/tmp", dir = docRoot.toFile())
 
   get("/info") {
-    call.respond(ScopedValue.where(DEBUG, call.debug).get { jvmRuntimeInfo(DEBUG.get()) })
+    call.respond(
+        ScopedValue.where(DEBUG, call.debug).call(CallableOp { jvmRuntimeInfo(DEBUG.get()) }))
   }
 
   get("/browse/{param...}") {

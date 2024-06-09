@@ -110,7 +110,7 @@ tasks {
     group = LifecycleBasePlugin.CLEAN_TASK_NAME
 
     dependsOn(gradle.includedBuilds.map { it.task(":cleanAll") })
-    subprojects.mapNotNull { it.tasks.findByName("clean") }.forEach { dependsOn(it) }
+    allprojects.mapNotNull { it.tasks.findByName("clean") }.forEach { dependsOn(it) }
   }
 
   wrapper {

@@ -490,6 +490,7 @@ fun Test.configureJavaTest() {
   // For JUnit5 @EnabledIfSystemProperty
   systemProperty("ktorTest", project.hasProperty("ktorTest"))
   systemProperty("k8sTest", project.hasProperty("k8sTest"))
+  systemProperty("spring.classformat.ignore", true)
   reports.html.required = true
   maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
 
