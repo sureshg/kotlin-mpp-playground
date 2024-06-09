@@ -178,6 +178,20 @@ $ ./gradlew buildAndPublish
 
   ```bash
   $ ./gradlew publishAllPublicationsToLocalRepository
+
+  # Maven Central Publishing
+  # https://central.sonatype.org/publish/publish-portal-gradle/#alternatives
+  # https://vanniktech.github.io/gradle-maven-publish-plugin/central/#in-memory-gpg-key
+  $ gpg --export-secret-keys --armor XXXXXXXX | grep -v '\-\-' | grep -v '^=.' | tr -d '\n'
+  # OR
+  $ gpg --export-secret-keys --armor XXXXXXXX | awk 'NR == 1 { print "SIGNING_KEY=" } 1' ORS='\\n'
+  # User Password from - https://central.sonatype.com/account
+  $ export ORG_GRADLE_PROJECT_mavenCentralUsername=<Username>
+  $ export ORG_GRADLE_PROJECT_mavenCentralPassword=<Token>
+  $ export ORG_GRADLE_PROJECT_signingKeyId=<GPG Key ID>
+  $ export ORG_GRADLE_PROJECT_signingPassword=<Password>
+  $ export ORG_GRADLE_PROJECT_signingKey=$(gpg --export-secret-keys --armor ${ORG_GRADLE_PROJECT_signingKeyId} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n')
+
   $ ./gradlew publishAggregatedPublicationToCentralPortal
   # For all publications,
   $ ./gradlew publishAllPublicationsToCentralPortal
