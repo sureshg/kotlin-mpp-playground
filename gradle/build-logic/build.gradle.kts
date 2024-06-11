@@ -26,7 +26,12 @@ idea {
 kotlin {
   compilerOptions {
     jvmTarget = dslJavaVersion.map(JvmTarget::fromTarget)
-    freeCompilerArgs.addAll("-Xcontext-receivers", "-Xjdk-release=${dslJavaVersion.get()}")
+    freeCompilerArgs.addAll(
+        "-Xcontext-receivers",
+        "-Xjdk-release=${dslJavaVersion.get()}",
+        "-Xno-param-assertions",
+        "-Xno-call-assertions",
+        "-Xno-receiver-assertions")
     optIn =
         listOf(
             "kotlin.ExperimentalStdlibApi",

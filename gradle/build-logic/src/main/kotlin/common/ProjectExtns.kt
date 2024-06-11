@@ -464,6 +464,10 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
       "-Xjspecify-annotations=strict",
       "-Xextended-compiler-checks",
       "-Xskip-prerelease-check",
+      // Remove null check intrinsics from bytecode
+      "-Xno-param-assertions",
+      "-Xno-call-assertions",
+      "-Xno-receiver-assertions",
       // "-Xjdk-release=${kotlinJvmTarget.get().target}",
       // "-Xadd-modules=ALL-MODULE-PATH",
       // "-Xmodule-path=",
