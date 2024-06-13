@@ -14,7 +14,6 @@ plugins {
   // com.autonomousapps.`dependency-analysis`
 }
 
-val debugEnabled = project.hasProperty("debug")
 val quickBuildEnabled = project.hasProperty("quick")
 val nativeBundleEnabled = project.hasProperty("bundle")
 val muslEnabled = project.hasProperty("musl")
