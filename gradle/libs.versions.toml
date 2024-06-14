@@ -159,7 +159,7 @@ npm-jsjoda-tz                  = "2.21.0"
 # Plugin versions
 benmanes                       = "0.51.0"
 foojay-resolver                = "0.8.0"
-gradle-develocity              = "3.17.4"
+gradle-develocity              = "3.17.5"
 nmcp                           = "0.0.8"
 nexus-publish                  = "2.0.0"
 shadow                         = "8.1.1"
