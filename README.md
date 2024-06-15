@@ -1,4 +1,4 @@
-Kotlin Multiplatform Playground!
+🎨 Kotlin Multiplatform Playground!
 ----------
 
 [![GitHub Workflow Status][gha_badge]][gha_url]
@@ -26,12 +26,12 @@ $ sdk u java 24.ea-open
 
 ```bash
 $ ./gradlew build [-Pskip.test]
-# For publishing
-$ ./gradlew buildAndPublish
+# Run the app
+$ ./gradlew :backend:jvm:run
 ```
 
 <details>
-<summary>Multiplatform Targets</summary>
+<summary> <b>Multiplatform Targets</b></summary>
 
 ### JVM
 
@@ -120,7 +120,6 @@ $ ./gradlew buildAndPublish
   $ ./gradlew kotlinUpgradePackageLock
 
   # Kobweb
-  # ------
   $ kobweb run -p compose/web
   $ ./gradlew :compose:html:kobwebStart -t
   $ ./gradlew :compose:html:kobwebStop
@@ -179,15 +178,18 @@ $ ./gradlew buildAndPublish
   ```bash
   $ ./gradlew publishAllPublicationsToLocalRepository
 
+  # Publishing to all repo except Central
+  $ ./gradlew buildAndPublish
+
   # Maven Central Publishing
   # https://central.sonatype.org/publish/publish-portal-gradle/#alternatives
   # https://vanniktech.github.io/gradle-maven-publish-plugin/central/#in-memory-gpg-key
   $ gpg --export-secret-keys --armor XXXXXXXX | grep -v '\-\-' | grep -v '^=.' | tr -d '\n'
   # OR
   $ gpg --export-secret-keys --armor XXXXXXXX | awk 'NR == 1 { print "SIGNING_KEY=" } 1' ORS='\\n'
-  # User Password from - https://central.sonatype.com/account
-  $ export ORG_GRADLE_PROJECT_mavenCentralUsername=<Username>
-  $ export ORG_GRADLE_PROJECT_mavenCentralPassword=<Token>
+
+  $ export ORG_GRADLE_PROJECT_mavenCentralUsername=<Username from https://central.sonatype.com/account>
+  $ export ORG_GRADLE_PROJECT_mavenCentralPassword=<Token from https://central.sonatype.com/account>
   $ export ORG_GRADLE_PROJECT_signingKeyId=<GPG Key ID>
   $ export ORG_GRADLE_PROJECT_signingPassword=<Password>
   $ export ORG_GRADLE_PROJECT_signingKey=$(gpg --export-secret-keys --armor ${ORG_GRADLE_PROJECT_signingKeyId} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n')

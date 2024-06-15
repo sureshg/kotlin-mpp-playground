@@ -54,6 +54,10 @@ graalvmNative {
         // add("--enable-url-protocols=http,https,jar,unix")
         // add("--initialize-at-build-time=kotlinx,kotlin,org.slf4j")
 
+        // EA build options
+        add("-H:+CompactingOldGen")
+        add("-Os")
+
         if (Platform.isLinux) {
           when {
             muslEnabled -> {
