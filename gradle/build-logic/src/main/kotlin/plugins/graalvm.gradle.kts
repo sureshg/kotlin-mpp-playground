@@ -46,7 +46,6 @@ graalvmNative {
         add("-EBUILD_NUMBER=${project.version}")
         add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
         // add("--features=graal.aot.RuntimeFeature")
-        // add("-H:+UnlockExperimentalVMOptions")
         // add("-H:+AddAllCharsets")
         // add("-H:+IncludeAllLocales")
         // add("-H:+IncludeAllTimeZones")
@@ -54,7 +53,8 @@ graalvmNative {
         // add("--enable-url-protocols=http,https,jar,unix")
         // add("--initialize-at-build-time=kotlinx,kotlin,org.slf4j")
 
-        // EA build options
+        // Experimental options
+        add("-H:+UnlockExperimentalVMOptions")
         add("-H:+CompactingOldGen")
         add("-Os")
 
