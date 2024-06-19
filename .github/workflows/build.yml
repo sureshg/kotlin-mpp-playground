@@ -247,3 +247,9 @@ jobs:
           fail_on_unmatched_files: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: Create release and upload dists
+      #   run: |
+      #     gh release create "${{ github.ref_name }}" ${{ github.workspace }}/release-artifacts/**/*.dmg -t "${{ github.ref_name }}" --generate-notes
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

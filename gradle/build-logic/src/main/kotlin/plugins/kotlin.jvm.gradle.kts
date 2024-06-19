@@ -184,7 +184,6 @@ dependencies {
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.datetime)
-  implementation(libs.kotlinx.atomicfu)
   implementation(libs.kotlin.redacted.annotations)
   implementation(libs.jspecify)
   implementation(libs.password4j)

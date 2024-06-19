@@ -1,7 +1,10 @@
+import common.Platform
 import common.jvmArguments
 import java.time.Year
+import kotlin.io.path.listDirectoryEntries
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
+import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
@@ -127,4 +130,29 @@ compose {
 
   web {}
   resources {}
+}
+
+tasks {
+  val renameDmg by
+      registering(Copy::class) {
+        group = "distribution"
+        description = "Rename the DMG file"
+
+        val packageDmg = named<AbstractJPackageTask>("packageReleaseDmg")
+        // build/compose/binaries/main-release/dmg/*.dmg
+        val fromFile =
+            packageDmg.map {
+              it.appImage
+                  .get()
+                  .dir("../dmg")
+                  .asFile
+                  .toPath()
+                  .listDirectoryEntries("${project.name}*.dmg")
+                  .single()
+            }
+
+        from(fromFile)
+        into(fromFile.map { it.parent })
+        rename { "${project.name}-${Platform.currentArch}-$version.dmg" }
+      }
 }

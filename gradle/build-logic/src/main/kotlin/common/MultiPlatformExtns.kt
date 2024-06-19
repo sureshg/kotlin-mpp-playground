@@ -34,7 +34,6 @@ fun KotlinMultiplatformExtension.commonTarget() {
       dependencies {
         api(libs.kotlinx.coroutines.core)
         api(libs.kotlinx.datetime)
-        api(libs.kotlinx.atomicfu)
         api(libs.kotlinx.serialization.json)
         api(libs.kotlinx.collections.immutable)
         api(libs.kotlin.redacted.annotations)
@@ -209,6 +208,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
                   (static ?: mutableListOf()).apply {
                     // Serve sources to debug inside browser
                     add(project.rootDir.path)
+                    add(project.projectDir.path)
                   }
             }
       }
