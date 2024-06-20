@@ -97,6 +97,7 @@ kotlin-retry                   = "2.0.1"
 kotlinx-jsonpath               = "3.0.2"
 kotlin-cryptography            = "0.3.1"
 uri-kmp                        = "0.0.18"
+urlencoder                     = "1.5.0"
 cash-turbine                   = "1.1.0"
 cardiologist                   = "0.2.2"
 kmp-store5                     = "5.0.0-beta01"
@@ -348,6 +349,7 @@ ktor-cohort-hikari                   = { module = "com.sksamuel.cohort:cohort-hi
 rsocket-ktor-client                  = { module = "io.rsocket.kotlin:rsocket-ktor-client"                      , version.ref = "rsocket"}
 rsocket-ktor-server                  = { module = "io.rsocket.kotlin:rsocket-ktor-server"                      , version.ref = "rsocket"}
 uri-kmp                              = { module = "com.eygraber:uri-kmp"                                       , version.ref = "uri-kmp"}
+urlencoder                           = { module = "net.thauvin.erik.urlencoder:urlencoder-lib"                 , version.ref = "urlencoder"}
 kotlinx-jsonpath                     = { module = "com.eygraber:jsonpathkt-kotlinx"                            , version.ref = "kotlinx-jsonpath"}
 chasm                                = { module = "io.github.charlietap.chasm:chasm"                           , version.ref = "chasm"}
 

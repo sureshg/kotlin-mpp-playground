@@ -31,6 +31,7 @@ dependencies {
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
 
+  // commonMainApi(libs.urlencoder)
   // commonMainApi(libs.arrow.suspendapp)
   // commonMainApi(libs.parsus)
   // commonMainApi(libs.okio)
