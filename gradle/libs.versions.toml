@@ -1,7 +1,7 @@
 [versions]
 java                           = "24"
 kotlin                         = "2.0.20-Beta1"
-kotlin-ksp                     = "2.0.0-1.0.22"
+kotlin-ksp                     = "2.0.20-Beta1-1.0.22"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.0"
@@ -187,7 +187,7 @@ includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
 jetbrains-compose              = "1.6.11"
 jetbrains-compose-nav          = "2.8.0-alpha02"
-kobweb                         = "0.18.0"
+kobweb                         = "0.18.1"
 detekt                         = "1.23.6"
 detekt-compose-rules           = "0.4.2"
 
