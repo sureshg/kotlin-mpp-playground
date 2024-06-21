@@ -63,8 +63,8 @@ class AppTests {
 
   @Test
   fun testDB() {
-    assertTrue(pg.isRunning())
-    println(pg.getJdbcUrl())
+    assertTrue(pg.isRunning)
+    println(pg.jdbcUrl)
   }
 
   @Test
