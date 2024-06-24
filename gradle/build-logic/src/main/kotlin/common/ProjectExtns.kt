@@ -117,6 +117,9 @@ val Project.isKotlinJsProject
 val Project.isRootProject
   get() = this == rootProject
 
+val Project.orgName
+  get() = libs.versions.org.name.get()
+
 val Project.githubUser
   get() = libs.versions.dev.name.get().lowercase()
 

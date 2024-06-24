@@ -4,6 +4,8 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.java.*
 import io.ktor.client.plugins.*
+import io.ktor.client.plugins.auth.*
+import io.ktor.client.plugins.auth.providers.*
 import io.ktor.client.plugins.compression.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.cookies.*
@@ -25,7 +27,6 @@ object ApiClient {
   fun get() =
       HttpClient(Java) {
         install(Resources)
-
         install(ContentNegotiation) {
           json(
               Json {
@@ -44,9 +45,16 @@ object ApiClient {
           gzip(0.9F)
         }
 
+        install(HttpRequestRetry) {
+          maxRetries = 2
+          retryOnException(retryOnTimeout = true)
+          retryOnServerErrors()
+          constantDelay(millis = 1_000)
+        }
+
         install(HttpTimeout) {
-          requestTimeoutMillis = 20_000
-          connectTimeoutMillis = 5_000
+          connectTimeoutMillis = 10_000
+          requestTimeoutMillis = 5_000
           socketTimeoutMillis = 5_000
         }
 
@@ -54,20 +62,29 @@ object ApiClient {
 
         install(Logging) {
           logger = Logger.DEFAULT
-          level = LogLevel.INFO
+          level = LogLevel.ALL
+          sanitizeHeader { header -> header == HttpHeaders.Authorization }
         }
 
         engine { pipelining = true }
 
         followRedirects = true
 
-        defaultRequest {
-          url {
-            protocol = URLProtocol.HTTPS
-            host = "api.github.com"
-          }
+        install(UserAgent) { agent = "Service Client" }
+
+        install(DefaultRequest) {
+          url("https://api.github.com")
           headers.appendIfNameAndValueAbsent(
               HttpHeaders.ContentType, ContentType.Application.Json.toString())
+        }
+
+        install(Auth) {
+          basic {
+            credentials {
+              sendWithoutRequest { true }
+              BasicAuthCredentials(username = "", password = "")
+            }
+          }
         }
 
         // expectSuccess = false

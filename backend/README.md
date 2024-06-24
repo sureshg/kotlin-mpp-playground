@@ -5,6 +5,10 @@
 $ ./gradlew :backend:jvm:run
 ```
 
+### OpenTelemetry
+
+* [Prometheus Java client Sample](https://prometheus.github.io/client_java/otel/otlp/)
+
 ### Misc
 
 * [JFR Speedscope](https://github.com/parttimenerd/jfrtofp/blob/main/src/main/kotlin/me/bechberger/jfrtofp/other)
