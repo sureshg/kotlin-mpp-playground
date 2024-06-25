@@ -13,8 +13,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
 plugins {
   plugins.kotlin.mpp
-  plugins.publishing
   com.google.cloud.tools.jib
+  plugins.publishing
 }
 
 val appBinName = "app"
@@ -148,20 +148,7 @@ tasks {
         rename { appBinName }
       }
 
-  jibDockerBuild {
-    dependsOn(prepareJib)
-    doLast {
-      val portMapping = jib?.container?.ports.orEmpty().joinToString(" ") { "-p $it:$it" }
-      val image = jib?.to?.image ?: project.name
-      val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
-      logger.lifecycle(
-          TextColors.cyan(
-              """
-              |Run: docker run -it --rm --name ${project.name} $portMapping $image:$tag
-              """
-                  .trimMargin()))
-    }
-  }
+  jibDockerBuild { dependsOn(prepareJib) }
 
   // publish { finalizedBy(jibDockerBuild) }
 }

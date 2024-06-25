@@ -1,5 +1,6 @@
 package plugins
 
+import com.google.cloud.tools.jib.gradle.JibExtension
 import common.*
 import nmcp.NmcpPublishTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
@@ -93,6 +94,20 @@ publishing {
           }
 
       withType<MavenPublication>().configureEach { artifact(dokkaHtmlJar) }
+    }
+  }
+}
+
+// Configures GHCR credentials for Jib
+pluginManager.withPlugin("com.google.cloud.tools.jib") {
+  the<JibExtension>().run {
+    to {
+      if (image.orEmpty().startsWith("ghcr.io", ignoreCase = true)) {
+        auth {
+          username = githubActor.orNull ?: System.getenv("GITHUB_ACTOR")
+          password = githubToken.orNull ?: System.getenv("GITHUB_TOKEN")
+        }
+      }
     }
   }
 }

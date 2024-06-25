@@ -50,6 +50,9 @@ internal val Project.catalogs
 val Project.xQuote
   get() = if (OperatingSystem.current().isWindows) """\"""" else """""""
 
+val Project.isRootProject
+  get() = this == rootProject
+
 val Project.sharedProjectName
   get() = "shared"
 
@@ -104,19 +107,6 @@ val Project.kotlinApiVersion
 val Project.kotlinLangVersion
   get() = libs.versions.kotlin.lang.version.map { KotlinVersion.fromVersion(it) }
 
-/** Kotlin Dependencies extension functions. */
-val Project.isKotlinMultiplatformProject
-  get() = plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")
-
-val Project.isKotlinJvmProject
-  get() = plugins.hasPlugin("org.jetbrains.kotlin.jvm")
-
-val Project.isKotlinJsProject
-  get() = plugins.hasPlugin("org.jetbrains.kotlin.js")
-
-val Project.isRootProject
-  get() = this == rootProject
-
 val Project.orgName
   get() = libs.versions.org.name.get()
 
@@ -151,6 +141,16 @@ val Project.githubActor
 val Project.githubToken
   get() = providers.gradleProperty("githubToken")
 
+/** Kotlin Dependencies extension functions. */
+val Project.isKotlinMultiplatformProject
+  get() = plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")
+
+val Project.isKotlinJvmProject
+  get() = plugins.hasPlugin("org.jetbrains.kotlin.jvm")
+
+val Project.isKotlinJsProject
+  get() = plugins.hasPlugin("org.jetbrains.kotlin.js")
+
 @Suppress("UnstableApiUsage")
 val Project.gradleSystemProperties
   get() =
@@ -167,8 +167,7 @@ fun Project.withJavaModule(moduleName: String, supportedInNative: Boolean = fals
       withType<JavaExec>().configureEach { jvmArgs(argsToAdd) }
       if (supportedInNative) {
         project.pluginManager.withPlugin("org.graalvm.buildtools.native") {
-          val ext = project.extensions.findByType(GraalVMExtension::class.java)
-          ext?.binaries?.all { jvmArgs(argsToAdd) }
+          the<GraalVMExtension>().binaries.all { jvmArgs(argsToAdd) }
         }
       }
     }

@@ -118,7 +118,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingKeyId: ${{ secrets.GPG_SECRET_KEY_ID }}
           ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_SECRET_KEY }}
           ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_SECRET_KEY_PASSWORD }}
-          ORG_GRADLE_PROJECT_githubActor: ${{ github.repository_owner }}
+          ORG_GRADLE_PROJECT_githubActor: ${{ github.actor }}
           ORG_GRADLE_PROJECT_githubToken: ${{ secrets.GITHUB_TOKEN }}
           # JOB_CONTEXT: ${{ toJSON(job) }}
           # STEPS_CONTEXT: ${{ toJSON(steps) }}

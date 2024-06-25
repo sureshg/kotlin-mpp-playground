@@ -1,5 +1,7 @@
 package plugins
 
+import com.github.ajalt.mordant.rendering.TextColors
+import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 import java.util.jar.Attributes
@@ -171,6 +173,27 @@ tasks {
         }
 
     processResources { dependsOn(copyOtelAgent) }
+
+    // Docker command to run the image
+    withType<BuildDockerTask>().configureEach {
+      doLast {
+        val portMapping = jib?.container?.ports.orEmpty().joinToString(" ") { "-p $it:$it" }
+        val image = jib?.to?.image ?: project.name
+        val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
+        val env =
+            jib?.container
+                ?.environment
+                .orEmpty()
+                .map { "-e ${it.key}=${it.value}" }
+                .joinToString(" ")
+        logger.lifecycle(
+            TextColors.cyan(
+                """
+                |Run: docker run -it --rm --name ${project.name} $portMapping $env $image:$tag
+                """
+                    .trimMargin()))
+      }
+    }
   }
 }
 

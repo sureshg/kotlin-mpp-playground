@@ -1,4 +1,3 @@
-import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
@@ -140,22 +139,6 @@ tasks {
 
   // Makes sure jte is generated before compilation
   withType<KspAATask>().configureEach { dependsOn(generateJte) }
-
-  jibDockerBuild {
-    doLast {
-      val portMapping = jib?.container?.ports.orEmpty().joinToString(" ") { "-p $it:$it" }
-      val image = jib?.to?.image ?: project.name
-      val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
-      val env =
-          jib?.container?.environment.orEmpty().map { "-e ${it.key}=${it.value}" }.joinToString(" ")
-      logger.lifecycle(
-          TextColors.cyan(
-              """
-              |Run: docker run -it --rm --name ${project.name} $portMapping $env $image:$tag
-              """
-                  .trimMargin()))
-    }
-  }
 
   // publish { finalizedBy(jibDockerBuild) }
 }
