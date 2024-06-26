@@ -25,7 +25,7 @@ kotlinx-io                     = "0.4.0"
 kotlinx-atomicfu               = "0.24.0"
 kotlinx-coroutines             = "1.8.1"
 kotlinx-datetime               = "0.6.0"
-kotlinx-serialization          = "1.7.0"
+kotlinx-serialization          = "1.7.1"
 kotlinx-rpc                    = "0.1.0"
 kotlinx-collections-immutable  = "0.3.7"
 kotlinx-lincheck               = "2.32"
@@ -35,7 +35,7 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.15.0-Beta.2"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.761"
+kotlin-wrappers                = "1.0.0-pre.763"
 kotlin-redacted                = "1.9.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
@@ -49,7 +49,7 @@ ktor-cohort                    = "2.5.1"
 otel                           = "1.39.0"
 otel-instr                     = "2.5.0"
 otel-alpha                     = "2.3.0-alpha"
-elastic-otel                   = "0.3.2"
+elastic-otel                   = "0.4.0"
 okio                           = "3.9.0"
 sslcontext-kickstart           = "8.3.6"
 ksp-auto-service               = "1.2.0"
@@ -66,12 +66,12 @@ jgit                           = "6.5.0.202303070854-r"
 jte                            = "3.1.12"
 jimfs                          = "1.3.0"
 sshj                           = "0.38.0"
-pty4j                          = "0.12.29"
+pty4j                          = "0.12.34"
 junit                          = "5.11.0-M2"
 koin                           = "3.5.6"
 kotest                         = "5.9.0"
 mockk                          = "1.13.11"
-mokkery                        = "2.1.0"
+mokkery                        = "2.1.1"
 slf4j                          = "2.1.0-alpha1"
 logback                        = "1.5.6"
 logback-tyler                  = "0.7"
@@ -89,7 +89,7 @@ rsocket                        = "0.16.0"
 jctools                        = "4.0.1"
 benasher44-uuid                = "0.8.4"
 kotlinx-uuid                   = "0.0.25"
-kotlin-codepoints              = "0.8.0"
+kotlin-codepoints              = "0.9.0"
 kotlin-logging                 = "7.0.0"
 kotlin-bignum                  = "0.3.9"
 kotlin-diff                    = "0.6.0"
@@ -108,7 +108,7 @@ java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.1.0"
 arrow-suspendapp               = "0.4.1-alpha.5"
-exposed                        = "0.51.1"
+exposed                        = "0.52.0"
 postgresql                     = "42.7.3"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
@@ -188,7 +188,7 @@ includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
 jetbrains-compose              = "1.6.11"
 jetbrains-compose-nav          = "2.8.0-alpha02"
-kobweb                         = "0.18.1"
+kobweb                         = "0.18.2"
 detekt                         = "1.23.6"
 detekt-compose-rules           = "0.4.2"
 
@@ -263,6 +263,7 @@ kotlinx-coroutines-debug             = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-serialization-bom            = { module = "org.jetbrains.kotlinx:kotlinx-serialization-bom"                 , version.ref = "kotlinx-serialization" }
 kotlinx-serialization-core           = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core"                , version.ref = "kotlinx-serialization"}
 kotlinx-serialization-json           = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"                , version.ref = "kotlinx-serialization"}
+kotlinx-serialization-json-io        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-io"             , version.ref = "kotlinx-serialization"}
 kotlinx-datetime                     = { module = "org.jetbrains.kotlinx:kotlinx-datetime"                          , version.ref = "kotlinx-datetime"}
 kotlinx-atomicfu                     = { module = "org.jetbrains.kotlinx:atomicfu"                                  , version.ref = "kotlinx-atomicfu"}
 kotlinx-io-core                      = { module = "org.jetbrains.kotlinx:kotlinx-io-core"                           , version.ref = "kotlinx-io"}
@@ -525,8 +526,8 @@ kfswatch                             = { module = "io.github.irgaly.kfswatch:kfs
 
 [bundles]
 ajalt = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-colormath", "ajalt-clikt"]
-ktor-server = []
-ktor-client = []
+keystore = ["sslcontext-kickstart", "directory-keystore"]
+
 
 [plugins]
 kotlin-powerassert                   = { id = "org.jetbrains.kotlin.plugin.power-assert"                       , version.ref = "kotlin"}

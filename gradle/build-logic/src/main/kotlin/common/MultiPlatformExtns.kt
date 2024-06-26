@@ -34,10 +34,11 @@ fun KotlinMultiplatformExtension.commonTarget() {
       dependencies {
         api(libs.kotlinx.coroutines.core)
         api(libs.kotlinx.datetime)
+        api(libs.kotlinx.io.core)
         api(libs.kotlinx.serialization.json)
+        api(libs.kotlinx.serialization.json.io)
         api(libs.kotlinx.collections.immutable)
         api(libs.kotlin.redacted.annotations)
-        api(libs.kotlinx.io.core)
         api(libs.kotlin.retry)
         api(libs.kotlin.logging)
         api(libs.kotlinx.html)
@@ -121,7 +122,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.kotlinx.coroutines.slf4j)
         api(libs.jspecify)
         api(libs.password4j)
-        api(libs.sslcontext.kickstart)
+        api(libs.bundles.keystore)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         api(libs.google.auto.annotations)
         ksp(libs.ksp.auto.service)

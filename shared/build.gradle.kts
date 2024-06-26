@@ -34,8 +34,6 @@ dependencies {
   // commonMainApi(libs.urlencoder)
   // commonMainApi(libs.arrow.suspendapp)
   // commonMainApi(libs.parsus)
-  // commonMainApi(libs.okio)
-  // commonTestApi(libs.okio.fakefilesystem)
   // jvmMainApi(libs.kotlin.reflect)
   // jvmMainApi(libs.logback.classic)
 }

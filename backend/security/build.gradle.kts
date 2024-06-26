@@ -9,8 +9,6 @@ kotlin.sourceSets {
   commonMain { dependencies { implementation(projects.shared) } }
 
   jvmMain {
-    dependencies { implementation(libs.directory.keystore) }
-
     kotlin.srcDir("src/main/kotlin")
     resources.srcDir("src/main/resources")
   }
