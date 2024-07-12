@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > CustomSSLSocketFactoryKt</title>
+  <title>: Coverage Report > CustomSSLSocketFactory</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -17,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
     <a href="../index.html">dev.suresh.tls</a>
 </div>
 
-<h1>Coverage Summary for Class: CustomSSLSocketFactoryKt (dev.suresh.tls)</h1>
+<h1>Coverage Summary for Class: CustomSSLSocketFactory (dev.suresh.tls)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">CustomSSLSocketFactoryKt</td>
+  <td class="name">CustomSSLSocketFactory</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/8)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -72,7 +72,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/16)
+    (0/72)
   </span>
 </td>
 </tr>
@@ -99,40 +99,40 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp;import javax.net.ssl.SSLSocket
 &nbsp;import javax.net.ssl.SSLSocketFactory
 &nbsp;
-&nbsp;class CustomSSLSocketFactory(private val delegate: SSLSocketFactory) : SSLSocketFactory() {
-&nbsp;  override fun getDefaultCipherSuites(): Array&lt;String&gt; = delegate.defaultCipherSuites
+<b class="nc">&nbsp;class CustomSSLSocketFactory(private val delegate: SSLSocketFactory) : SSLSocketFactory() {</b>
+<b class="nc">&nbsp;  override fun getDefaultCipherSuites(): Array&lt;String&gt; = delegate.defaultCipherSuites</b>
 &nbsp;
-&nbsp;  override fun getSupportedCipherSuites(): Array&lt;String&gt; = delegate.supportedCipherSuites
+<b class="nc">&nbsp;  override fun getSupportedCipherSuites(): Array&lt;String&gt; = delegate.supportedCipherSuites</b>
 &nbsp;
 &nbsp;  override fun createSocket(s: Socket, host: String, port: Int, autoClose: Boolean): Socket =
-&nbsp;      delegate.createSocket(s, host, port, autoClose).apply { reConfigure() }
+<b class="nc">&nbsp;      delegate.createSocket(s, host, port, autoClose).apply { reConfigure() }</b>
 &nbsp;
 &nbsp;  override fun createSocket(host: String, port: Int): Socket =
-&nbsp;      delegate.createSocket(host, port).apply { reConfigure() }
+<b class="nc">&nbsp;      delegate.createSocket(host, port).apply { reConfigure() }</b>
 &nbsp;
 &nbsp;  override fun createSocket(
 &nbsp;      host: String,
 &nbsp;      port: Int,
 &nbsp;      localHost: InetAddress,
 &nbsp;      localPort: Int
-&nbsp;  ): Socket = delegate.createSocket(host, port, localHost, localPort).apply { reConfigure() }
+<b class="nc">&nbsp;  ): Socket = delegate.createSocket(host, port, localHost, localPort).apply { reConfigure() }</b>
 &nbsp;
 &nbsp;  override fun createSocket(host: InetAddress, port: Int): Socket =
-&nbsp;      delegate.createSocket(host, port).apply { reConfigure() }
+<b class="nc">&nbsp;      delegate.createSocket(host, port).apply { reConfigure() }</b>
 &nbsp;
 &nbsp;  override fun createSocket(
 &nbsp;      address: InetAddress,
 &nbsp;      port: Int,
 &nbsp;      localAddress: InetAddress,
 &nbsp;      localPort: Int
-&nbsp;  ): Socket = delegate.createSocket(address, port, localAddress, localPort).apply { reConfigure() }
+<b class="nc">&nbsp;  ): Socket = delegate.createSocket(address, port, localAddress, localPort).apply { reConfigure() }</b>
 &nbsp;}
 &nbsp;
 &nbsp;fun Socket.reConfigure() {
-<b class="nc">&nbsp;  val sslSock = this as SSLSocket</b>
-<b class="nc">&nbsp;  val sslParams = sslSock.sslParameters</b>
-<b class="nc">&nbsp;  sslParams.serverNames = emptyList()</b>
-<b class="nc">&nbsp;  sslParameters = sslParams</b>
+&nbsp;  val sslSock = this as SSLSocket
+&nbsp;  val sslParams = sslSock.sslParameters
+&nbsp;  sslParams.serverNames = emptyList()
+&nbsp;  sslParameters = sslParams
 &nbsp;}
 </code>
 </pre>
@@ -157,7 +157,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-07 00:23</div>
+    <div style="float:right;">generated on 2024-07-12 05:53</div>
 </div>
 </body>
 </html>

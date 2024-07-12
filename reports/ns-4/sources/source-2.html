@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > PemExtnsKt</title>
+  <title>: Coverage Report > PemExtnsKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -17,7 +17,7 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
     <a href="../index.html">dev.suresh.cert</a>
 </div>
@@ -79,7 +79,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/52)
+    (0/50)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,7 +87,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/304)
+    (0/302)
   </span>
 </td>
 </tr>
@@ -217,7 +217,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 &nbsp; * @return list of [X509Certificate]
 &nbsp; */
 &nbsp;fun readCertChain(certChain: String) =
-<b class="nc">&nbsp;    try {</b>
+&nbsp;    try {
 <b class="nc">&nbsp;      CERT_PATTERN.findAll(certChain)</b>
 <b class="nc">&nbsp;          .map {</b>
 <b class="nc">&nbsp;            val base64Text = it.groupValues[1]</b>
@@ -225,7 +225,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 <b class="nc">&nbsp;            certFactory.generateCertificate(buffer.inputStream()) as X509Certificate</b>
 &nbsp;          }
 <b class="nc">&nbsp;          .toList()</b>
-<b class="nc">&nbsp;    } catch (e: Exception) {</b>
+&nbsp;    } catch (e: Exception) {
 <b class="nc">&nbsp;      throw IllegalStateException(&quot;Can&#39;t read the PEM certificate, cert data is invalid&quot;, e)</b>
 &nbsp;    }
 &nbsp;
@@ -259,7 +259,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-07 00:23</div>
+    <div style="float:right;">generated on 2024-07-12 05:53</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>kotlin-mpp-playground Coverage Report > AliasKeyManager</title>
+  <title>: Coverage Report > HackersDelightKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -17,12 +17,12 @@
 <body>
 <div class="content">
 <div class="breadCrumbs">
-Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.tls</a>
+    <a href="../index.html">dev.suresh.lang</a>
 </div>
 
-<h1>Coverage Summary for Class: AliasKeyManager (dev.suresh.tls)</h1>
+<h1>Coverage Summary for Class: HackersDelightKt (dev.suresh.lang)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 </th>
 </tr>
 <tr>
-  <td class="name">AliasKeyManager</td>
+  <td class="name">HackersDelightKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -80,7 +80,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
     0%
   </span>
   <span class="absValue">
-    (0/10)
+    (0/18)
   </span>
 </td>
 </tr>
@@ -92,24 +92,34 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.tls
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
 &nbsp;
-&nbsp;import java.net.Socket
-&nbsp;import java.security.Principal
-&nbsp;import javax.net.ssl.X509KeyManager
+&nbsp;const val HAS_SEMI = 0x3B_3B_3B_3B_3B_3B_3B_3BL
 &nbsp;
 &nbsp;/**
-&nbsp; * A [X509KeyManager] implementation which selects the client private key for client authentication
-&nbsp; * based on given key alias name.
+&nbsp; * Has a zero byte in a long, copied straight from
+&nbsp; * [Hackers Delight](https://doc.lagout.org/security/Hackers%20Delight.pdf)
+&nbsp; *
+&nbsp; * Unlike in Java, hexadecimal integer literals in Kotlin can&#39;t represent negative values. So we
+&nbsp; * have to use [ULong] for literal values greater than [Long.MAX_VALUE]
+&nbsp; *
+&nbsp; * Eg:
+&nbsp; * ```kotlin
+&nbsp; *     val long = 0x80_80_80_80_80_80_80_80u.toLong()
+&nbsp; *     println(long.toString(16))
+&nbsp; *     println(long.toString(2))
+&nbsp; *     println(long.toULong().toString(16))
+&nbsp; *     println(long.toULong().toString(2))
+&nbsp; * ```
+&nbsp; *
+&nbsp; * Also see - [Stanford BitHacks](https://graphics.stanford.edu/~seander/bithacks.html)
 &nbsp; */
-<b class="nc">&nbsp;class AliasKeyManager(private val delegate: X509KeyManager, private val aliasName: String) :</b>
-&nbsp;    X509KeyManager by delegate {
-&nbsp;  override fun chooseClientAlias(
-&nbsp;      keyType: Array&lt;String&gt;,
-&nbsp;      issuers: Array&lt;Principal&gt;,
-&nbsp;      socket: Socket
-<b class="nc">&nbsp;  ): String = aliasName</b>
-&nbsp;}
+&nbsp;inline val Long.hasZeroByte
+<b class="nc">&nbsp;  get() = (this - 0x0101010101010101L) and this.inv() and 0x80_80_80_80_80_80_80_80u.toLong() != 0L</b>
+&nbsp;
+&nbsp;/** Check if a semi-column(0x3B) present in any of the eight bytes. */
+&nbsp;inline val Long.hasSemi
+<b class="nc">&nbsp;  get() = (this xor HAS_SEMI).hasZeroByte</b>
 </code>
 </pre>
 </div>
@@ -133,7 +143,7 @@ Current scope: kotlin-mpp-playground<span class="separator">|</span>    <a href=
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-07 00:23</div>
+    <div style="float:right;">generated on 2024-07-12 05:53</div>
 </div>
 </body>
 </html>
