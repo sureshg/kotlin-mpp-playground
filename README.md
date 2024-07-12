@@ -39,7 +39,7 @@ $ ./gradlew :backend:jvm:run
 
   ```bash
   $ ./gradlew :backend:jvm:run
-  $ ./gradlew :shared:run
+  $ ./gradlew :shared:jvmRun
 
   # Benchmark
   $ ./gradlew :benchmark:benchmark
@@ -93,12 +93,6 @@ $ ./gradlew :backend:jvm:run
                 -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
                 sureshg/jvm:latest
   ```
-* Tests
-
-  ```bash
-  $ ./gradlew :backend:jvm:test -PktorTest
-  $ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
-  ```
 
 * AppCDS
 
@@ -107,9 +101,23 @@ $ ./gradlew :backend:jvm:run
   $ java -Xlog:class+load:file=/tmp/cds.log:uptime,level,tags,pid \
          -XX:+AutoCreateSharedArchive \
          -XX:SharedArchiveFile=/tmp/app.jsa \
-         -jar backend/jvm/build/libs/jvm-app.jar
+         -jar backend/jvm/build/libs/jvm-all.jar
 
   # cds-log-parser.jar --logFile=/tmp/cds.log
+  ```
+
+* Tests
+
+  ```bash
+  $ ./gradlew :backend:jvm:test -PktorTest
+  $ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
+  ```
+
+* Binary Compatibility
+
+  ```bash
+  $ ./gradlew :backend:security:apiDump
+  $ ./gradlew :backend:security:apiCheck
   ```
 
 ### Wasm/JS
@@ -221,6 +229,9 @@ $ ./gradlew :backend:jvm:run
 
   # GitHub Actions lint
   $ actionlint
+
+  # ToDo
+  # Enable es2015 for configureKotlinJs
   ```
 
 </details>

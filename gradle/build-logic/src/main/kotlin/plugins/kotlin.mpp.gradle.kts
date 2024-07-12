@@ -4,9 +4,10 @@ package plugins
 
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
-import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
-import kotlinx.kover.gradle.plugin.dsl.GroupingEntityType
+import kotlinx.validation.ApiValidationExtension
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
@@ -17,11 +18,10 @@ import tasks.BuildConfigExtension
 import tasks.ReallyExecJar
 
 plugins {
-  java
   `kotlin-multiplatform`
   `kotlinx-serialization`
   com.google.devtools.ksp
-  `kotlinx-atomicfu`
+  org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
   id("plugins.kotlin.docs")
   kotlin("plugin.power-assert")
@@ -93,26 +93,8 @@ redacted {
   replacementString = "█"
 }
 
-kover {
-  // useJacoco()
-  reports {
-    total {
-      filters { excludes { classes("dev.suresh.example.*") } }
-      html { title = "${project.name} code coverage report!" }
-      verify {
-        rule {
-          groupBy = GroupingEntityType.APPLICATION
-          minBound(0, CoverageUnit.LINE)
-          minBound(0, CoverageUnit.BRANCH)
-        }
-        warningInsteadOfFailure = true
-      }
-    }
-  }
-}
-
 tasks {
-  // Register buildConfig task only for common module
+  // Register buildConfig task only for project's common module
   if (project.isSharedProject) {
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
@@ -132,8 +114,10 @@ tasks {
       attributes(
           "Automatic-Module-Name" to project.group,
           "Built-By" to System.getProperty("user.name"),
-          "Built-JDK" to System.getProperty("java.runtime.version"),
-          "Built-OS" to System.getProperty("os.name"),
+          "Built-Jdk" to System.getProperty("java.runtime.version"),
+          "Built-OS" to
+              "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}",
+          "Build-Timestamp" to DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()),
           "Created-By" to "Gradle ${gradle.gradleVersion}",
           Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
           Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
@@ -150,6 +134,13 @@ tasks {
           "name" to project.name,
           "version" to project.version,
       )
+    }
+  }
+
+  pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
+    configure<ApiValidationExtension> {
+      validationDisabled = false
+      klib { enabled = true }
     }
   }
 

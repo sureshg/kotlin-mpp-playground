@@ -1,16 +1,47 @@
 package plugins
 
-import common.libs
+import com.github.ajalt.mordant.rendering.TextColors.*
+import common.*
 import org.gradle.kotlin.dsl.*
 
 plugins {
-  java
+  id("plugins.common")
+  idea
   wrapper
-  com.diffplug.spotless
   com.github.`ben-manes`.versions
   dev.iurysouza.modulegraph
-  // id("plugins.common")
+  id("plugins.kotlin.docs")
+  id("plugins.publishing")
   // id("gg.jte.gradle")
+}
+
+if (hasCleanTask) {
+  logger.warn(
+      yellow(
+              """
+            | CLEANING ALMOST NEVER FIXES YOUR BUILD!
+            | Cleaning is often a last-ditch effort to fix perceived build problems that aren't going to
+            | actually be fixed by cleaning. What cleaning will do though is make your next few builds
+            | significantly slower because all the incremental compilation data has to be regenerated,
+            | so you're really just making your day worse.
+            """)
+          .trimMargin(),
+  )
+}
+
+gradle.projectsEvaluated { logger.lifecycle(magenta("=== Projects Configuration Completed ===")) }
+
+idea {
+  module {
+    isDownloadJavadoc = false
+    isDownloadSources = false
+  }
+  project.vcs = "Git"
+}
+
+moduleGraphConfig {
+  readmePath = "./README.md"
+  heading = "### Module Dependency"
 }
 
 // jte {
@@ -19,57 +50,16 @@ plugins {
 //   generate()
 // }
 
-// Formatting
-spotless {
-  java {
-    // googleJavaFormat(libs.versions.google.javaformat.get())
-    palantirJavaFormat(libs.versions.palantir.javaformat.get()).formatJavadoc(true)
-    target("**/*.java_disabled")
-    targetExclude("**/build/**")
+// Skip test tasks on skip.test=true
+if (skipTest) {
+  allprojects {
+    tasks
+        .matching { it.name.endsWith("test", ignoreCase = true) }
+        .configureEach { onlyIf { false } }
   }
-  // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
-
-  val ktfmtVersion = libs.versions.ktfmt.get()
-  kotlin {
-    ktfmt(ktfmtVersion)
-    target("**/*.kt")
-    targetExclude("**/build/**", "**/Service.kt")
-    trimTrailingWhitespace()
-    endWithNewline()
-    // licenseHeader(rootProject.file("gradle/license-header.txt"))
-  }
-
-  kotlinGradle {
-    ktfmt(ktfmtVersion)
-    target("**/*.gradle.kts")
-    targetExclude("**/build/**")
-    trimTrailingWhitespace()
-    endWithNewline()
-  }
-
-  format("misc") {
-    target("**/*.md", "**/.gitignore", "**/.kte")
-    targetExclude("**/build/**")
-    trimTrailingWhitespace()
-    indentWithSpaces(2)
-    endWithNewline()
-  }
-}
-
-moduleGraphConfig {
-  readmePath = "./README.md"
-  heading = "### Module Dependency"
 }
 
 tasks {
-
-  // Set up git hooks
-  register<Copy>("setUpGitHooks") {
-    group = "help"
-    from("$rootDir/gradle/.githooks")
-    into("$rootDir/.git/hooks")
-  }
-
   // Dependency version updates
   dependencyUpdates {
     checkConstraints = true
@@ -95,6 +85,13 @@ tasks {
       // 0b110110100
       unix("rw-rw-r--")
     }
+  }
+
+  // Set up git hooks
+  register<Copy>("setUpGitHooks") {
+    group = "help"
+    from("$rootDir/gradle/.githooks")
+    into("$rootDir/.git/hooks")
   }
 
   // Run the checkBestPractices check for build-logic included builds.

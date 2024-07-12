@@ -7,55 +7,16 @@ import java.io.PrintWriter
 import java.io.StringWriter
 import java.util.spi.*
 import org.gradle.api.publish.plugins.PublishingPlugin.*
-import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
 import tasks.*
 
 plugins {
-  idea
   application
   com.github.johnrengelman.shadow
-  id("plugins.kotlin.docs")
-  id("plugins.publishing")
 }
 
-if (hasCleanTask) {
-  logger.warn(
-      yellow(
-              """
-      | CLEANING ALMOST NEVER FIXES YOUR BUILD!
-      | Cleaning is often a last-ditch effort to fix perceived build problems that aren't going to
-      | actually be fixed by cleaning. What cleaning will do though is make your next few builds
-      | significantly slower because all the incremental compilation data has to be regenerated,
-      | so you're really just making your day worse.
-      """)
-          .trimMargin(),
-  )
-}
-
-afterEvaluate {}
-
-gradle.projectsEvaluated { logger.lifecycle(magenta("=== Projects Configuration Completed ===")) }
-
-idea {
-  module {
-    isDownloadJavadoc = false
-    isDownloadSources = false
-  }
-  project.vcs = "Git"
-}
-
-// shadow plugin requires mainClass to be set
+// shadow plugin requires the main class
 application { mainClass = libs.versions.app.mainclass }
-
-// Skip test tasks on skip.test=true
-if (skipTest) {
-  allprojects {
-    tasks
-        .matching { it.name.endsWith("test", ignoreCase = true) }
-        .configureEach { onlyIf { false } }
-  }
-}
 
 @Suppress("UNUSED_VARIABLE")
 tasks {
@@ -88,7 +49,7 @@ tasks {
       val modules = out.toString()
       logger.quiet(
           """
-          |Application modules for OpenJDK-${java.toolchain.languageVersion.get()} are,
+          |Application modules for OpenJDK-${javaRelease.get()} are,
           |${modules.split(",")
                      .mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
                      .joinToString(System.lineSeparator())}
@@ -98,15 +59,6 @@ tasks {
 
     dependsOn("shadowJar")
   }
-
-  val buildExecutable by
-      registering(ReallyExecJar::class) {
-        val shadowJar = named("shadowJar", Jar::class) // project.tasks.shadowJar
-        jarFile = shadowJar.flatMap { it.archiveFile }
-        // javaOpts = application.applicationDefaultJvmArgs
-        javaOpts = run.get().jvmArgs
-        onlyIf { OperatingSystem.current().isUnix }
-      }
 
   // val versionCatalog = the<VersionCatalogsExtension>().named("libs")
   val copyTemplates by
@@ -141,14 +93,6 @@ tasks {
   // Add the generated templates to the source set.
   sourceSets { main { java.srcDirs(copyTemplates) } }
 
-  // jdeprscan task configuration
-  val jdepExtn = extensions.create<JdeprscanExtension>("jdeprscan")
-  val jdeprscan = register<Jdeprscan>("jdeprscan", jdepExtn)
-  jdeprscan {
-    val shadowJar by existing(Jar::class)
-    jarFile = shadowJar.flatMap { it.archiveFile }
-  }
-
   val githubActionOutput by registering {
     description = "Set Github workflow action output for this build"
     group = LifecycleBasePlugin.BUILD_TASK_NAME
@@ -164,11 +108,6 @@ tasks {
         setOutput("artifact_name", "$name-$version")
       }
     }
-  }
-
-  // Auto format all source files
-  processResources {
-    // dependsOn(":spotlessApply")
   }
 
   // Set GitHub workflow action output for this build
@@ -199,6 +138,19 @@ tasks {
             .forEach { dependsOn(it) }
       }
     }
+  }
+
+  // Auto-format all source files
+  processResources {
+    // dependsOn(":spotlessApply")
+  }
+
+  // jdeprscan task configuration
+  val jdepExtn = extensions.create<JdeprscanExtension>("jdeprscan")
+  val jdeprscan = register<Jdeprscan>("jdeprscan", jdepExtn)
+  jdeprscan {
+    val shadowJar by existing(Jar::class)
+    jarFile = shadowJar.flatMap { it.archiveFile }
   }
 
   // Task to print the project version

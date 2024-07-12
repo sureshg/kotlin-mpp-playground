@@ -23,91 +23,88 @@ val agentEnabled = project.hasProperty("agent")
 val semverExtn = extensions.getByType<SemverExtension>()
 
 graalvmNative {
-  binaries {
-    named("main") {
-      imageName = project.name
-      mainClass = libs.versions.app.mainclass
-      useFatJar = false
-      sharedLibrary = false
-      fallback = false
-      verbose = debugEnabled
-      quickBuild = quickBuildEnabled
-      richOutput = true
-      buildArgs = buildList {
-        add("--enable-preview")
-        add("--enable-native-access=ALL-UNNAMED")
-        add("--native-image-info")
-        add("--color=auto")
-        add("--enable-monitoring=heapdump,jfr,jvmstat,threaddump,nmt")
-        add("--enable-https")
-        add("--install-exit-handlers")
-        add("-R:MaxHeapSize=64m")
-        add("-H:+ReportExceptionStackTraces")
-        add("-EBUILD_NUMBER=${project.version}")
-        add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
-        // add("--features=graal.aot.RuntimeFeature")
-        // add("-H:+AddAllCharsets")
-        // add("-H:+IncludeAllLocales")
-        // add("-H:+IncludeAllTimeZones")
-        // add("-H:IncludeResources=.*(message\\.txt|\\app.properties)\$")
-        // add("--enable-url-protocols=http,https,jar,unix")
-        // add("--initialize-at-build-time=kotlinx,kotlin,org.slf4j")
+  binaries.all {
+    imageName = project.name
+    useFatJar = false
+    sharedLibrary = false
+    fallback = false
+    verbose = debugEnabled
+    quickBuild = quickBuildEnabled
+    richOutput = true
+    buildArgs = buildList {
+      add("--enable-preview")
+      add("--enable-native-access=ALL-UNNAMED")
+      add("--native-image-info")
+      add("--color=auto")
+      add("--enable-monitoring=heapdump,jfr,jvmstat,threaddump,nmt")
+      add("--enable-https")
+      add("--install-exit-handlers")
+      add("-R:MaxHeapSize=64m")
+      add("-H:+ReportExceptionStackTraces")
+      add("-EBUILD_NUMBER=${project.version}")
+      add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
+      // add("--features=graal.aot.RuntimeFeature")
+      // add("-H:+AddAllCharsets")
+      // add("-H:+IncludeAllLocales")
+      // add("-H:+IncludeAllTimeZones")
+      // add("-H:IncludeResources=.*(message\\.txt|\\app.properties)\$")
+      // add("--enable-url-protocols=http,https,jar,unix")
+      // add("--initialize-at-build-time=kotlinx,kotlin,org.slf4j")
 
-        // Experimental options
-        add("-H:+UnlockExperimentalVMOptions")
-        add("-H:+CompactingOldGen")
-        add("-Os")
+      // Experimental options
+      add("-H:+UnlockExperimentalVMOptions")
+      add("-H:+CompactingOldGen")
+      add("-Os")
 
-        if (Platform.isLinux) {
-          when {
-            muslEnabled -> {
-              add("--static")
-              add("--libc=musl")
-              // add("-H:CCompilerOption=-Wl,-z,stack-size=2097152")
-            }
-            else -> add("--static-nolibc")
+      if (Platform.isLinux) {
+        when {
+          muslEnabled -> {
+            add("--static")
+            add("--libc=musl")
+            // add("-H:CCompilerOption=-Wl,-z,stack-size=2097152")
           }
-          add("-H:+StripDebugInfo")
+          else -> add("--static-nolibc")
         }
-
-        // Use the compatibility mode when build image on GitHub Actions.
-        when (GithubAction.isEnabled) {
-          true -> add("-march=compatibility")
-          else -> add("-march=native")
-        }
-
-        if (debugEnabled) {
-          add("-H:+TraceNativeToolUsage")
-          add("-H:+TraceSecurityServices")
-          add("--trace-class-initialization=kotlin.annotation.AnnotationRetention")
-          // add("--debug-attach")
-        }
-
-        if (nativeBundleEnabled) {
-          add("--bundle-create")
-          add("--dry-run")
-        }
-
-        if (reportsEnabled) {
-          if (java.toolchain.vendor.get().matches("Oracle.*")) {
-            add("-H:+BuildReport")
-          }
-        }
-        // https://www.graalvm.org/dev/reference-manual/native-image/overview/BuildOptions/
-        // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
+        add("-H:+StripDebugInfo")
       }
 
-      resources {
-        autodetection {
-          enabled = true
-          restrictToProjectDependencies = true
-        }
+      // Use the compatibility mode when build image on GitHub Actions.
+      when (GithubAction.isEnabled) {
+        true -> add("-march=compatibility")
+        else -> add("-march=native")
       }
 
-      jvmArgs = jvmArguments()
-      systemProperties = mapOf("java.awt.headless" to "false")
-      javaLauncher = javaToolchains.launcherFor { configureJvmToolchain() }
+      if (debugEnabled) {
+        add("-H:+TraceNativeToolUsage")
+        add("-H:+TraceSecurityServices")
+        add("--trace-class-initialization=kotlin.annotation.AnnotationRetention")
+        // add("--debug-attach")
+      }
+
+      if (nativeBundleEnabled) {
+        add("--bundle-create")
+        add("--dry-run")
+      }
+
+      if (reportsEnabled) {
+        if (java.toolchain.vendor.get().matches("Oracle.*")) {
+          add("-H:+BuildReport")
+        }
+      }
+      // https://www.graalvm.org/dev/reference-manual/native-image/overview/BuildOptions/
+      // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
     }
+
+    // resources {
+    //   autodetection {
+    //     enabled = false
+    //     restrictToProjectDependencies = true
+    //   }
+    // }
+
+    jvmArgs = jvmArguments()
+    systemProperties = mapOf("java.awt.headless" to "false")
+    javaLauncher = javaToolchains.launcherFor { configureJvmToolchain() }
   }
 
   agent {

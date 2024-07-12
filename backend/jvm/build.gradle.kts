@@ -21,7 +21,7 @@ application {
   applicationDefaultJvmArgs += jvmArguments(appRun = true)
 }
 
-ktor { fatJar { archiveFileName = "${project.name}-app.jar" } }
+ktor { fatJar { archiveFileName = "${project.name}-all.jar" } }
 
 jte {
   contentType = gg.jte.ContentType.Html

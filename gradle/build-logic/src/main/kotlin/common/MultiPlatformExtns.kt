@@ -97,11 +97,11 @@ fun KotlinMultiplatformExtension.jvmTarget() {
     compilations.configureEach { compileJavaTaskProvider?.configure { configureJavac() } }
     compilerOptions { configureKotlinJvm() }
 
-    // ./gradlew jvmRun
     mainRun {
-      mainClass = libs.versions.app.mainclass.get()
+      mainClass = libs.versions.app.mainclass
       val jvmArgs: String? by project
-      args(jvmArgs?.split(",").orEmpty())
+      val args = jvmArgs?.split(",") ?: jvmArguments(appRun = true)
+      setArgs(args)
     }
 
     // val test by testRuns.existing
@@ -147,7 +147,6 @@ fun KotlinMultiplatformExtension.jvmTarget() {
 context(Project)
 fun KotlinMultiplatformExtension.jsTarget() {
   js {
-    useEsModules()
     browser {
       commonWebpackConfig {
         outputFileName = "js-app.js"
@@ -180,9 +179,8 @@ fun KotlinMultiplatformExtension.jsTarget() {
         api(libs.kotlin.cryptography.webcrypto)
         api(kotlinw("browser"))
         api(kotlinw("css"))
-        // implementation(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
-        // kspDep("CommonMainMetadata", project(":meta:ksp:processor"))
-        // kspDep("Js", project(":meta:ksp:processor"))
+        // api(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
+        // ksp(project(":meta:ksp:processor"))
       }
 
       // kotlin.srcDir("src/main/kotlin")
@@ -197,7 +195,6 @@ context(Project)
 fun KotlinMultiplatformExtension.wasmJsTarget() {
   wasmJs {
     moduleName = "wasm-app"
-    useEsModules()
     browser {
       commonWebpackConfig {
         outputFileName = "wasm-app.js"
@@ -207,7 +204,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
             (devServer ?: KotlinWebpackConfig.DevServer()).apply {
               static =
                   (static ?: mutableListOf()).apply {
-                    // Serve sources to debug inside browser
+                    // Serve sources to debug inside the browser
                     add(project.rootDir.path)
                     add(project.projectDir.path)
                   }
@@ -225,7 +222,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
       binaries.executable()
     }
     generateTypeScriptDefinitions()
-    compilerOptions { /* configureKotlinJs() */ }
+    compilerOptions { configureKotlinJs() }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
   }
 

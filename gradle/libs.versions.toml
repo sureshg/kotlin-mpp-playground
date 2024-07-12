@@ -1,12 +1,12 @@
 [versions]
 java                           = "24"
-kotlin                         = "2.0.20-Beta1"
-kotlin-ksp                     = "2.0.20-Beta1-1.0.22"
+kotlin                         = "2.0.20-Beta2"
+kotlin-ksp                     = "2.0.20-Beta2-1.0.23"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.0"
 kotlin-lang-version            = "2.0"
-gradle                         = "8.9-rc-1"
+gradle                         = "8.9"
 java-vendor                    = "Oracle"
 java-jvmArguments              = "--enable-preview"
 java-addModules                = "jdk.incubator.vector"
@@ -20,9 +20,9 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-kotlinx-kover                  = "0.8.1"
+kotlinx-kover                  = "0.8.2"
 kotlinx-io                     = "0.4.0"
-kotlinx-atomicfu               = "0.24.0"
+kotlinx-atomicfu               = "0.25.0"
 kotlinx-coroutines             = "1.8.1"
 kotlinx-datetime               = "0.6.0"
 kotlinx-serialization          = "1.7.1"
@@ -33,15 +33,15 @@ kotlinx-html                   = "0.11.0"
 kotlinx-benchmark              = "0.4.11"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlinx-bcv                    = "0.15.0-Beta.2"
+kotlinx-bcv                    = "0.15.1"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.763"
+kotlin-wrappers                = "1.0.0-pre.773"
 kotlin-redacted                = "1.9.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
 karakum                        = "1.0.0-alpha.40-K2"
-seskar                         = "3.0.0"
+seskar                         = "3.2.0"
 spring-boot                    = "3.3.1"
 spring-depmgmt                 = "1.1.5"
 ktor                           = "3.0.0-beta-1"
@@ -55,9 +55,9 @@ sslcontext-kickstart           = "8.3.6"
 ksp-auto-service               = "1.2.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
-ajalt-mordant                  = "2.6.0"
+ajalt-mordant                  = "2.7.0"
 ajalt-clikt                    = "4.4.0"
-ajalt-colormath                = "3.5.0"
+ajalt-colormath                = "3.6.0"
 classgraph                     = "4.8.174"
 cache4k                        = "0.11.0"
 intellij-coverage              = "1.0.754"
@@ -82,7 +82,7 @@ ktfmt                          = "0.50"
 google-javaformat              = "1.22.0"
 palantir-javaformat            = "2.47.0"
 google-auto-service            = "1.1.1"
-google-tink                    = "1.13.0"
+google-tink                    = "1.14.0"
 graalvm                        = "24.0.1"
 jspecify                       = "0.3.0"
 rsocket                        = "0.16.0"
@@ -100,7 +100,7 @@ uri-kmp                        = "0.0.18"
 urlencoder                     = "1.5.0"
 cash-turbine                   = "1.1.0"
 cardiologist                   = "0.2.2"
-kmp-store5                     = "5.0.0-beta01"
+kmp-store5                     = "5.1.0-alpha04"
 kmp-settings                   = "1.1.1"
 kmp-appdirs                    = "1.2.0"
 parsus                         = "0.6.1"
@@ -112,7 +112,7 @@ exposed                        = "0.52.0"
 postgresql                     = "42.7.3"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
-micrometer                     = "1.13.1"
+micrometer                     = "1.13.2"
 swagger-ui                     = "5.17.12"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
@@ -137,7 +137,7 @@ async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.0.0"
 airlift-aircompressor          = "0.27"
-airlift-security               = "249"
+airlift-security               = "250"
 directory-keystore             = "1.1.0"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
@@ -155,7 +155,7 @@ npm-highlightjs                = "11.9.0"
 npm-kotlin-playground          = "1.30.0"
 npm-xtermjs                    = "5.5.0"
 npm-vega-lite                  = "5.18.0"
-npm-jsjoda-tz                  = "2.21.0"
+npm-jsjoda-tz                  = "2.21.1"
 
 # Plugin versions
 benmanes                       = "0.51.0"
@@ -180,17 +180,17 @@ gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.8.0"
 modulegraph                    = "0.10.0"
 cash-molecule                  = "1.4.3"
-npm-publish-plugin             = "3.4.2"
+npm-publish-plugin             = "3.4.3"
 exposed-plugin                 = "0.2.1"
 jib-plugin                     = "3.4.3"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
-jetbrains-compose              = "1.6.11"
-jetbrains-compose-nav          = "2.8.0-alpha02"
+jetbrains-compose              = "1.7.0-alpha01"
+jetbrains-compose-nav          = "2.8.0-alpha08"
 kobweb                         = "0.18.2"
 detekt                         = "1.23.6"
-detekt-compose-rules           = "0.4.2"
+detekt-compose-rules           = "0.4.5"
 
 [libraries]
 # External plugins for precompiled script plugins
@@ -265,7 +265,6 @@ kotlinx-serialization-core           = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-serialization-json           = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json"                , version.ref = "kotlinx-serialization"}
 kotlinx-serialization-json-io        = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json-io"             , version.ref = "kotlinx-serialization"}
 kotlinx-datetime                     = { module = "org.jetbrains.kotlinx:kotlinx-datetime"                          , version.ref = "kotlinx-datetime"}
-kotlinx-atomicfu                     = { module = "org.jetbrains.kotlinx:atomicfu"                                  , version.ref = "kotlinx-atomicfu"}
 kotlinx-io-core                      = { module = "org.jetbrains.kotlinx:kotlinx-io-core"                           , version.ref = "kotlinx-io"}
 kotlinx-lincheck                     = { module = "org.jetbrains.kotlinx:lincheck"                                  , version.ref = "kotlinx-lincheck"}
 kotlinx-reflect-lite                 = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"                      , version.ref = "kotlinx-reflect-lite"}
@@ -534,10 +533,11 @@ kotlin-powerassert                   = { id = "org.jetbrains.kotlin.plugin.power
 kotlin-allopen                       = { id = "org.jetbrains.kotlin.plugin.allopen"                            , version.ref = "kotlin"}
 kotlin-js-plainobjects               = { id = "org.jetbrains.kotlin.plugin.js-plain-objects"                   , version.ref = "kotlin"}
 kotlin-compose-compiler              = { id = "org.jetbrains.kotlin.plugin.compose"                            , version.ref = "kotlin"}
-jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
+kotlinx-atomicfu                     = { id = "org.jetbrains.kotlinx.atomicfu"                                 , version.ref = "kotlinx-atomicfu"}
 kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark"                                , version.ref = "kotlinx-benchmark" }
 kotlinx-rpc                          = { id = "org.jetbrains.kotlinx.rpc.plugin"                               , version.ref = "kotlinx-rpc" }
 kotlinx-rpc-platform                 = { id = "org.jetbrains.kotlinx.rpc.platform"                             , version.ref = "kotlinx-rpc" }
+jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
 ktor                                 = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }
 exposed                              = { id = "com.jetbrains.exposed.gradle.plugin"                            , version.ref = "exposed-plugin" }
 karakum                              = { id = "io.github.sgrishchenko.karakum"                                 , version.ref = "karakum" }

@@ -48,7 +48,6 @@ kotlin {
 }
 
 composeCompiler {
-  enableStrongSkippingMode = true
   reportsDestination = layout.buildDirectory.dir("compose_compiler")
   targetKotlinPlatforms = setOf(KotlinPlatformType.jvm)
 }
@@ -121,6 +120,15 @@ compose {
           upgradeUuid = "b4397f87-3196-4991-96f3-0bd8b0adbdfd"
           iconFile = layout.projectDirectory.file("src/assets/icons/win.ico")
         }
+
+        fileAssociation(
+            mimeType = "text/kotlin",
+            extension = "kot",
+            description = "Kotlin Source File",
+            macOSIconFile = project.file("src/assets/icons/mac.icns"),
+            windowsIconFile = project.file("src/assets/icons/win.ico"),
+            linuxIconFile = project.file("src/assets/icons/linux.png"),
+        )
 
         // val resRoot = kotlin.sourceSets.jvmMain.get().resources.srcDirs.first()
         // resRoot.resolve("gif/particle.gif")

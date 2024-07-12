@@ -1,20 +1,13 @@
 @file:Suppress("UnstableApiUsage")
 
-import common.jvmArguments
 import common.versionCatalogMapOf
 
 plugins {
-  application
   plugins.kotlin.mpp
   plugins.publishing
 }
 
 description = "Shared common module for all projects"
-
-application {
-  mainClass = libs.versions.app.mainclass
-  applicationDefaultJvmArgs += jvmArguments(appRun = true)
-}
 
 buildConfig {
   projectName = rootProject.name

@@ -40,8 +40,9 @@ kotlin {
             "kotlinx.validation.ExperimentalBCVApi",
             "kotlinx.coroutines.ExperimentalCoroutinesApi",
             "kotlinx.serialization.ExperimentalSerializationApi",
+            "kotlinx.validation.ExperimentalBCVApi",
             "org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi",
-            "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl",
+            "org.jetbrains.kotlin.gradle.ExperimentalWasmDsl",
             "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl",
             "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
   }
@@ -152,7 +153,7 @@ dependencies {
   // compileOnly(libs.jte.kotlin)
 
   // External plugins deps to use in precompiled script plugins
-  // https://docs.gradle.org/current/userguide/custom_plugins.html#applying_external_plugins_in_precompiled_script_plugins
+  // https://docs.gradle.org/current/userguide/implementing_gradle_plugins_precompiled.html#sec:applying_external_plugins
   implementation(libs.build.kotlin)
   // OR implementation(kotlin("gradle-plugin"))
   implementation(libs.build.kotlin.ksp)

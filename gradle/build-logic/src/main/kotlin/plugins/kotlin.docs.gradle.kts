@@ -2,7 +2,6 @@ package plugins
 
 import common.*
 import java.net.URI
-import kotlinx.validation.ApiValidationExtension
 import org.hildan.github.changelog.plugin.GitHubChangelogExtension
 import org.jetbrains.dokka.DokkaConfiguration.Visibility
 import org.jetbrains.dokka.base.DokkaBase
@@ -13,23 +12,17 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
   org.jetbrains.dokka
-  org.jetbrains.kotlinx.kover
+  com.diffplug.spotless
   `test-report-aggregation`
 }
 
 // The following plugins and config apply only to a root project.
 if (isRootProject) {
   apply(plugin = "org.hildan.github.changelog")
-  apply(plugin = "org.jetbrains.kotlinx.binary-compatibility-validator")
 
-  // Combined test & coverage report
+  // Combined test report
   dependencies {
-    project.subprojects
-        .filter { !it.path.contains(":dep-mgmt") }
-        .forEach {
-          kover(it)
-          testReportAggregation(it)
-        }
+    allprojects.filter { !it.path.contains(":dep-mgmt") }.forEach { testReportAggregation(it) }
   }
 
   // Dokka multi-module config.
@@ -63,16 +56,44 @@ if (isRootProject) {
       }
 }
 
-// Configure if the plugin is applied to the project.
-pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
-  extensions.configure<ApiValidationExtension>("apiValidation") {
-    validationDisabled = true
-    klib { enabled = false }
-  }
+pluginManager.withPlugin("org.hildan.github.changelog") {
+  configure<GitHubChangelogExtension> { githubUser = project.githubUser }
 }
 
-pluginManager.withPlugin("org.hildan.github.changelog") {
-  the<GitHubChangelogExtension>().run { githubUser = project.githubUser }
+spotless {
+  java {
+    // googleJavaFormat(libs.versions.google.javaformat.get())
+    palantirJavaFormat(libs.versions.palantir.javaformat.get()).formatJavadoc(true)
+    target("**/*.java_disabled")
+    targetExclude("**/build/**")
+  }
+  // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
+
+  val ktfmtVersion = libs.versions.ktfmt.get()
+  kotlin {
+    ktfmt(ktfmtVersion)
+    target("**/*.kt")
+    targetExclude("**/build/**", "**/Service.kt")
+    trimTrailingWhitespace()
+    endWithNewline()
+    // licenseHeader(rootProject.file("gradle/license-header.txt"))
+  }
+
+  kotlinGradle {
+    ktfmt(ktfmtVersion)
+    target("**/*.gradle.kts")
+    targetExclude("**/build/**")
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+
+  format("misc") {
+    target("**/*.md", "**/.gitignore", "**/.kte")
+    targetExclude("**/build/**")
+    trimTrailingWhitespace()
+    indentWithSpaces(2)
+    endWithNewline()
+  }
 }
 
 tasks {

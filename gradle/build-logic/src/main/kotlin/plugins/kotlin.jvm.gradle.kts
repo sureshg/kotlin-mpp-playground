@@ -4,9 +4,9 @@ import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
-import kotlinx.kover.gradle.plugin.dsl.CoverageUnit
-import kotlinx.kover.gradle.plugin.dsl.GroupingEntityType
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
 import tasks.ReallyExecJar
@@ -16,7 +16,7 @@ plugins {
   com.google.devtools.ksp
   kotlin("jvm")
   `kotlinx-serialization`
-  `kotlinx-atomicfu`
+  org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
   id("plugins.kotlin.docs")
   kotlin("plugin.power-assert")
@@ -76,24 +76,6 @@ redacted {
   replacementString = "█"
 }
 
-kover {
-  // useJacoco()
-  reports {
-    total {
-      filters { excludes { classes("dev.suresh.example.*") } }
-      html { title = "${project.name} code coverage report!" }
-      verify {
-        rule {
-          groupBy = GroupingEntityType.APPLICATION
-          minBound(0, CoverageUnit.LINE)
-          minBound(0, CoverageUnit.BRANCH)
-        }
-        warningInsteadOfFailure = true
-      }
-    }
-  }
-}
-
 // Java agent configuration for jib
 val javaAgent by configurations.creating
 
@@ -114,8 +96,10 @@ tasks {
       attributes(
           "Automatic-Module-Name" to project.group,
           "Built-By" to System.getProperty("user.name"),
-          "Built-JDK" to System.getProperty("java.runtime.version"),
-          "Built-OS" to System.getProperty("os.name"),
+          "Built-Jdk" to System.getProperty("java.runtime.version"),
+          "Built-OS" to
+              "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}",
+          "Build-Timestamp" to DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()),
           "Created-By" to "Gradle ${gradle.gradleVersion}",
           Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
           Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
@@ -138,7 +122,7 @@ tasks {
   javadoc {
     isFailOnError = true
     (options as StandardJavadocDocletOptions).apply {
-      encoding = "UTF-8"
+      encoding = Charsets.UTF_8.name()
       linkSource(true)
       addBooleanOption("-enable-preview", true)
       addStringOption("-add-modules", addModules)

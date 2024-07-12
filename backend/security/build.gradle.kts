@@ -1,5 +1,6 @@
 plugins {
   plugins.kotlin.mpp
+  `binary-compatibility-validator`
   plugins.publishing
 }
 

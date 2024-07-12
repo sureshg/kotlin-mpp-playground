@@ -5,6 +5,7 @@ package settings
 import com.gradle.develocity.agent.gradle.scan.PublishedBuildScan
 import common.GithubAction
 import common.Repo
+import kotlinx.kover.gradle.aggregation.settings.dsl.KoverSettingsExtension
 import org.gradle.api.JavaVersion.VERSION_17
 import org.gradle.kotlin.dsl.*
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
@@ -38,23 +39,12 @@ pluginManagement {
 
 // Apply the plugins to all projects
 plugins {
-  // Gradle build scan
   id("com.gradle.develocity")
-  // Toolchains resolver using the Foojay Disco API.
   id("org.gradle.toolchains.foojay-resolver")
-  // Use semver on all projects
+  id("org.jetbrains.kotlinx.kover.aggregation")
   id("com.javiersc.semver")
   // Include other pre-compiled settings plugin
   id("settings.include")
-}
-
-@Suppress("UnstableApiUsage")
-toolchainManagement {
-  jvm {
-    javaRepositories {
-      repository("foojay") { resolverClass = FoojayToolchainResolver::class.java }
-    }
-  }
 }
 
 // Centralizing repositories declaration
@@ -74,6 +64,43 @@ dependencyResolutionManagement {
 
   // Enable back after the KMP Node.js repo fix.
   // repositoriesMode = RepositoriesMode.PREFER_SETTINGS
+}
+
+@Suppress("UnstableApiUsage")
+toolchainManagement {
+  jvm {
+    javaRepositories {
+      repository("foojay") { resolverClass = FoojayToolchainResolver::class.java }
+    }
+  }
+}
+
+configure<KoverSettingsExtension> {
+  enableCoverage()
+  reports { excludedClasses.addAll("*.generated.*", "dev.suresh.example.*") }
+}
+
+develocity {
+  buildScan {
+    termsOfUseUrl = "https://gradle.com/terms-of-service"
+    termsOfUseAgree = "yes"
+
+    capture {
+      buildLogging = false
+      testLogging = false
+    }
+
+    obfuscation {
+      ipAddresses { it.map { _ -> "0.0.0.0" } }
+      hostname { "*******" }
+      username { it.reversed() }
+    }
+
+    publishing.onlyIf { GithubAction.isEnabled }
+    uploadInBackground = false
+    tag("GITHUB_ACTION")
+    buildScanPublished { addJobSummary() }
+  }
 }
 
 fun RepositoryHandler.nodeJS() {
@@ -98,29 +125,6 @@ fun RepositoryHandler.kobWeb() {
   maven(url = Repo.KOBWEB) {
     name = "KobWeb Repo"
     content { includeGroupAndSubgroups("com.varabyte") }
-  }
-}
-
-develocity {
-  buildScan {
-    termsOfUseUrl = "https://gradle.com/terms-of-service"
-    termsOfUseAgree = "yes"
-
-    capture {
-      buildLogging = false
-      testLogging = false
-    }
-
-    obfuscation {
-      ipAddresses { it.map { _ -> "0.0.0.0" } }
-      hostname { "*******" }
-      username { it.reversed() }
-    }
-
-    publishing.onlyIf { GithubAction.isEnabled }
-    uploadInBackground = false
-    tag("GITHUB_ACTION")
-    buildScanPublished { addJobSummary() }
   }
 }
 

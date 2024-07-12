@@ -15,6 +15,37 @@ plugins {
 // Nexus plugin needs to apply to the root project only
 if (isRootProject) {
   apply(plugin = "io.github.gradle-nexus.publish-plugin")
+
+  nmcp {
+    publishAggregation {
+      project(":shared")
+      project(":dep-mgmt:bom")
+      project(":dep-mgmt:catalog")
+      project(":meta:ksp:processor")
+      project(":meta:compiler:plugin")
+      project(":backend:jvm")
+      project(":backend:data")
+      project(":backend:profiling")
+      project(":backend:security")
+      project(":web:js")
+      project(":web:wasm")
+
+      val nativeBuild: String? by project
+      if (nativeBuild.toBoolean()) {
+        project(":backend:native")
+      }
+
+      val composeBuild: String? by project
+      if (composeBuild.toBoolean()) {
+        project(":compose:desktop")
+        // project(":compose:html")
+      }
+
+      username = mavenCentralUsername
+      password = mavenCentralPassword
+      publicationType = "AUTOMATIC"
+    }
+  }
 }
 
 group = libs.versions.group.get()
@@ -38,6 +69,7 @@ publishing {
   }
 
   publications {
+    // Kotlin Multiplatform
     pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
       val javadocJar by
           tasks.registering(Jar::class) {
@@ -47,6 +79,7 @@ publishing {
             // from(tasks.named("dokkaJavadoc"))
           }
 
+      // KMP will automatically create the publications
       withType<MavenPublication>().configureEach {
         artifact(javadocJar)
         configurePom()
@@ -100,7 +133,7 @@ publishing {
 
 // Configures GHCR credentials for Jib
 pluginManager.withPlugin("com.google.cloud.tools.jib") {
-  the<JibExtension>().run {
+  configure<JibExtension> {
     to {
       if (image.orEmpty().startsWith("ghcr.io", ignoreCase = true)) {
         auth {

@@ -67,7 +67,7 @@ val Project.skipTest
   get() = hasProperty("skip.test")
 
 val Project.hasCleanTask
-  get() = gradle.startParameter.taskNames.any { it == "clean" }
+  get() = gradle.startParameter.taskNames.any { it in listOf("clean", "cleanAll") }
 
 val Project.hasDokkaTasks
   get() = gradle.taskGraph.allTasks.filterIsInstance<AbstractDokkaTask>().any()
@@ -167,7 +167,7 @@ fun Project.withJavaModule(moduleName: String, supportedInNative: Boolean = fals
       withType<JavaExec>().configureEach { jvmArgs(argsToAdd) }
       if (supportedInNative) {
         project.pluginManager.withPlugin("org.graalvm.buildtools.native") {
-          the<GraalVMExtension>().binaries.all { jvmArgs(argsToAdd) }
+          configure<GraalVMExtension> { binaries.all { jvmArgs(argsToAdd) } }
         }
       }
     }
@@ -207,7 +207,6 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:MaxRAMPercentage=0.8",
             // "-XX:+UseEpsilonGC",
             // "-XX:+AlwaysPreTouch",
-            // os+thread,gc+heap=trace,
             """-Xlog:gc*,stringdedup*:
               |file="$tmp$name-gc-%p-%t.log":
               |level,tags,time,uptime,pid,tid:
@@ -217,6 +216,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             """-Xlog:class+load:file=$tmp$name-cds.log:
                 |uptime,level,tags,pid:filesize=0"""
                 .joinToConfigString(),
+            // java -XX:StartFlightRecording:help
             """-XX:StartFlightRecording=
               |filename=$tmp$name.jfr,
               |name=$name,
@@ -363,7 +363,7 @@ fun JavaToolchainSpec.configureJvmToolchain() {
 context(Project)
 fun JavaCompile.configureJavac() {
   options.apply {
-    encoding = "UTF-8"
+    encoding = Charsets.UTF_8.name()
     release = javaRelease
     isIncremental = true
     isFork = true
@@ -555,8 +555,7 @@ fun KotlinTestReport.configureTestReport() {}
 
 context(Project)
 fun KotlinJsCompilerOptions.configureKotlinJs() {
-  useEsClasses = true
-  freeCompilerArgs.addAll("-Xir-per-file")
+  // freeCompilerArgs.addAll("-Xir-per-file")
   // target = "es2015"
   // sourceMap = true
   // sourceMapEmbedSources = "always"
