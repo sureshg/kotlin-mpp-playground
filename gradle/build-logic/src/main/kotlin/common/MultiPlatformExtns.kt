@@ -47,7 +47,7 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlin.cryptography.core)
         api(libs.kotlin.cryptography.random)
         api(libs.kotlin.bignum)
-        // api(libs.kotlin.bignum.serialization)
+        api(libs.kotlin.bignum.serialization)
         if (project.name != "wasm") {
           api(libs.ktor.client.core)
           api(libs.ktor.client.content.negotiation)
