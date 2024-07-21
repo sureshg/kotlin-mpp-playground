@@ -139,12 +139,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.routes
 &nbsp;
 &nbsp;import BuildConfig
-&nbsp;import io.ktor.server.application.*
 &nbsp;import io.ktor.server.plugins.swagger.*
 &nbsp;import io.ktor.server.response.*
 &nbsp;import io.ktor.server.routing.*
 &nbsp;
-&nbsp;fun Route.adminRoutes() {
+&nbsp;fun Routing.adminRoutes() {
 <b class="nc">&nbsp;  swaggerUI(path = &quot;swagger&quot;, swaggerFile = &quot;openapi/documentation.yaml&quot;) {</b>
 <b class="nc">&nbsp;    version = BuildConfig.swaggerUi</b>
 <b class="nc">&nbsp;    customStyle(&quot;https://unpkg.com/swagger-ui-themes@3.0.1/themes/3.x/theme-flattop.css&quot;)</b>
@@ -175,7 +174,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-21 00:22</div>
+    <div style="float:right;">generated on 2024-07-21 10:31</div>
 </div>
 </body>
 </html>

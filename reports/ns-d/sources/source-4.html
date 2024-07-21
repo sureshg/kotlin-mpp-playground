@@ -157,11 +157,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.response.*
 &nbsp;import io.ktor.server.routing.*
 &nbsp;
-&nbsp;fun Route.webApp() {
+&nbsp;fun Routing.webApp() {
 <b class="nc">&nbsp;  webApp(&quot;/app&quot;, &quot;app&quot;)</b>
 &nbsp;}
 &nbsp;
-&nbsp;fun Route.webApp(remotePath: String, basePackage: String) {
+&nbsp;fun Routing.webApp(remotePath: String, basePackage: String) {
 <b class="nc">&nbsp;  staticResources(remotePath, basePackage) {</b>
 <b class="nc">&nbsp;    exclude { it.path.endsWith(&quot;.log&quot;) }</b>
 <b class="nc">&nbsp;    default(&quot;index.html&quot;)</b>
@@ -195,7 +195,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-21 00:22</div>
+    <div style="float:right;">generated on 2024-07-21 10:31</div>
 </div>
 </body>
 </html>
