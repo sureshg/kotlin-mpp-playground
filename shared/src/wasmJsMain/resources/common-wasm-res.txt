@@ -1,0 +1,1 @@
+Resource from "Shared commonWasm" module ${version}!

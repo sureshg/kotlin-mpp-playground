@@ -2,7 +2,6 @@
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.desktop.ui.tooling.preview.Preview
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
@@ -41,7 +40,6 @@ val mainScope = MainScope()
 
 val resourcesDir = File(System.getProperty("compose.application.resources.dir", "."))
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 @Preview
 fun Home(navController: NavController) {

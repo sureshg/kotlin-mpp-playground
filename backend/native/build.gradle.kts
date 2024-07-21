@@ -46,7 +46,14 @@ kotlin {
       dependencies {
         api(libs.kmp.appdirs)
         api(libs.kfswatch)
+        // api(libs.ktor.server.cio)
         // api(libs.arrow.suspendapp.ktor)
+      }
+    }
+
+    nativeTest {
+      dependencies {
+        // api(libs.ktor.server.test.host)
       }
     }
   }

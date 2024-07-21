@@ -14,31 +14,19 @@ import java.io.Writer
 
 private val logger = KotlinLogging.logger {}
 
-fun Route.services() {
-  get("/ffm") {
-    call.respondLogStream {
-      FFM.memoryLayout()
-    }
-  }
+fun Routing.services() {
+  get("/ffm") { call.respondLogStream { FFM.memoryLayout() } }
 
-  get("/vthreads") {
-    call.respondLogStream {
-      VThread.virtualThreads()
-    }
-  }
+  get("/vthreads") { call.respondLogStream { VThread.virtualThreads() } }
 
-  get("/jfr") {
-    call.respondLogStream {
-      JFR.recordingStream()
-    }
-  }
+  get("/jfr") { call.respondLogStream { JFR.recordingStream() } }
 }
 
 suspend fun ApplicationCall.respondLogStream(
     contentType: ContentType = ContentType.Text.EventStream,
-    block: suspend context(KLogger) Writer.() -> Unit
+    block:
+        suspend context(KLogger)
+        Writer.() -> Unit
 ) {
-  respondTextWriter(contentType = contentType) {
-    block(RespLogger(this, logger), this)
-  }
+  respondTextWriter(contentType = contentType) { block(RespLogger(this, logger), this) }
 }

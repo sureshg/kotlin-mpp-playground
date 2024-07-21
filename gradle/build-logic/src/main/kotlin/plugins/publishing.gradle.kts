@@ -27,8 +27,7 @@ if (isRootProject) {
       project(":backend:data")
       project(":backend:profiling")
       project(":backend:security")
-      project(":web:js")
-      project(":web:wasm")
+      project(":web")
 
       val nativeBuild: String? by project
       if (nativeBuild.toBoolean()) {

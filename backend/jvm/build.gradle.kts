@@ -131,7 +131,6 @@ tasks {
         }
       }
 
-  // Copy webapps to resources
   processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     dependsOn(copyTasks)
@@ -155,6 +154,7 @@ dependencies {
   implementation(libs.ktor.server.content.negotiation)
   implementation(libs.ktor.server.metrics.micrometer)
   implementation(libs.ktor.server.call.logging)
+  implementation(libs.ktor.server.call.id)
   implementation(libs.ktor.server.status.pages)
   implementation(libs.ktor.server.default.headers)
   implementation(libs.ktor.server.forwarded.header)
@@ -170,6 +170,7 @@ dependencies {
   implementation(libs.ktor.server.auth)
   implementation(libs.ktor.server.auth.jwt)
   implementation(libs.ktor.server.websockets)
+  implementation(libs.ktor.server.sse)
   implementation(libs.ktor.serialization.json)
 
   // Client dependencies
@@ -207,7 +208,7 @@ dependencies {
   implementation(libs.logback.classic)
 
   // Testing
-  testImplementation(libs.ktor.server.tests)
+  testImplementation(libs.ktor.server.test.host)
   testImplementation(libs.testcontainers.junit5)
   testImplementation(libs.testcontainers.postgresql)
   testImplementation(libs.testcontainers.k3s)
@@ -215,8 +216,8 @@ dependencies {
   testImplementation(libs.konsist)
 
   // Copy js and wasm apps
-  jsApp(project(path = projects.web.js.dependencyProject.path, configuration = "jsApp"))
-  wasmApp(project(path = projects.web.wasm.dependencyProject.path, configuration = "wasmApp"))
+  jsApp(project(path = projects.web.dependencyProject.path, configuration = "jsApp"))
+  wasmApp(project(path = projects.web.dependencyProject.path, configuration = "wasmApp"))
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })

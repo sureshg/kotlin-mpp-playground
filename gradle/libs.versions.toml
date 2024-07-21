@@ -20,10 +20,10 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-kotlinx-kover                  = "0.8.2"
+kotlinx-kover                  = "0.8.3"
 kotlinx-io                     = "0.5.1"
 kotlinx-atomicfu               = "0.25.0"
-kotlinx-coroutines             = "1.8.1"
+kotlinx-coroutines             = "1.9.0-RC"
 kotlinx-datetime               = "0.6.0"
 kotlinx-serialization          = "1.7.1"
 kotlinx-rpc                    = "0.1.0"
@@ -33,9 +33,9 @@ kotlinx-html                   = "0.11.0"
 kotlinx-benchmark              = "0.4.11"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlinx-bcv                    = "0.15.1"
+kotlinx-bcv                    = "0.16.2"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.773"
+kotlin-wrappers                = "1.0.0-pre.778"
 kotlin-redacted                = "1.9.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
@@ -44,10 +44,10 @@ karakum                        = "1.0.0-alpha.40-K2"
 seskar                         = "3.2.0"
 spring-boot                    = "3.3.1"
 spring-depmgmt                 = "1.1.5"
-ktor                           = "3.0.0-beta-1"
+ktor                           = "3.0.0-beta-2"
 ktor-cohort                    = "2.5.1"
-otel                           = "1.39.0"
-otel-instr                     = "2.5.0"
+otel                           = "1.40.0"
+otel-instr                     = "2.6.0"
 otel-alpha                     = "2.3.0-alpha"
 elastic-otel                   = "0.4.0"
 okio                           = "3.9.0"
@@ -84,7 +84,7 @@ palantir-javaformat            = "2.47.0"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.14.0"
 graalvm                        = "24.0.1"
-jspecify                       = "0.3.0"
+jspecify                       = "1.0.0"
 rsocket                        = "0.16.0"
 jctools                        = "4.0.1"
 benasher44-uuid                = "0.8.4"
@@ -113,7 +113,7 @@ postgresql                     = "42.7.3"
 hikariCP                       = "5.1.0"
 h2                             = "2.2.220"
 micrometer                     = "1.13.2"
-swagger-ui                     = "5.17.12"
+swagger-ui                     = "5.17.14"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
 shedlock                       = "5.13.0"
@@ -124,7 +124,7 @@ expiringmap                    = "0.5.10"
 otp                            = "2.0.3"
 password4j                     = "1.8.2"
 apache-commons-imaging         = "1.0-alpha3"
-testcontainers                 = "1.19.8"
+testcontainers                 = "1.20.0"
 sourceBuddy                    = "2.5.0"
 tcp-javanioproxy               = "1.6"
 konsist                        = "0.15.1"
@@ -151,10 +151,10 @@ chasm                          = "0.6.0"
 kfswatch                       = "1.2.0"
 
 # NPM Dependencies
-npm-highlightjs                = "11.9.0"
+npm-highlightjs                = "11.10.0"
 npm-kotlin-playground          = "1.30.0"
 npm-xtermjs                    = "5.5.0"
-npm-vega-lite                  = "5.18.0"
+npm-vega-lite                  = "5.19.0"
 npm-jsjoda-tz                  = "2.21.1"
 
 # Plugin versions
@@ -191,9 +191,10 @@ jetbrains-compose-nav          = "2.8.0-alpha08"
 kobweb                         = "0.18.2"
 detekt                         = "1.23.6"
 detekt-compose-rules           = "0.4.5"
+mappie                         = "0.5.0"
 
 [libraries]
-# External plugins for precompiled script plugins
+# External plugins for precompiled script plugins (build-logic)
 # https://plugins.gradle.org/plugin/org.jetbrains.kotlin.multiplatform
 build-kotlin                         = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin"                       , version.ref = "kotlin"}
 build-kotlin-noarg                   = { module = "org.jetbrains.kotlin:kotlin-noarg"                               , version.ref = "kotlin"}
@@ -281,9 +282,13 @@ jspecify                             = { module = "org.jspecify:jspecify"       
 ktor-bom                             = { module = "io.ktor:ktor-bom"                                                , version.ref = "ktor"}
 ktor-serialization                   = { module = "io.ktor:ktor-serialization"                                      , version.ref = "ktor"}
 ktor-server-core                     = { module = "io.ktor:ktor-server-core"                                        , version.ref = "ktor"}
+ktor-server-cio                      = { module = "io.ktor:ktor-server-cio"                                         , version.ref = "ktor"}
+ktor-server-jetty                    = { module = "io.ktor:ktor-server-jetty"                                       , version.ref = "ktor"}
+ktor-server-netty                    = { module = "io.ktor:ktor-server-netty"                                       , version.ref = "ktor"}
 ktor-server-content-negotiation      = { module = "io.ktor:ktor-server-content-negotiation"                         , version.ref = "ktor"}
 ktor-server-metrics-micrometer       = { module = "io.ktor:ktor-server-metrics-micrometer"                          , version.ref = "ktor"}
 ktor-server-call-logging             = { module = "io.ktor:ktor-server-call-logging"                                , version.ref = "ktor"}
+ktor-server-call-id                  = { module = "io.ktor:ktor-server-call-id"                                     , version.ref = "ktor"}
 ktor-server-cors                     = { module = "io.ktor:ktor-server-cors"                                        , version.ref = "ktor"}
 ktor-server-swagger                  = { module = "io.ktor:ktor-server-swagger"                                     , version.ref = "ktor"}
 ktor-server-openapi                  = { module = "io.ktor:ktor-server-openapi"                                     , version.ref = "ktor"}
@@ -293,9 +298,6 @@ ktor-server-host-common              = { module = "io.ktor:ktor-server-host-comm
 ktor-server-resources                = { module = "io.ktor:ktor-server-resources"                                   , version.ref = "ktor"}
 ktor-server-auth                     = { module = "io.ktor:ktor-server-auth"                                        , version.ref = "ktor"}
 ktor-server-auth-jwt                 = { module = "io.ktor:ktor-server-auth-jwt"                                    , version.ref = "ktor"}
-ktor-server-jetty                    = { module = "io.ktor:ktor-server-jetty"                                       , version.ref = "ktor"}
-ktor-server-netty                    = { module = "io.ktor:ktor-server-netty"                                       , version.ref = "ktor"}
-ktor-server-tests                    = { module = "io.ktor:ktor-server-tests"                                       , version.ref = "ktor"}
 ktor-server-default-headers          = { module = "io.ktor:ktor-server-default-headers"                             , version.ref = "ktor"}
 ktor-server-status-pages             = { module = "io.ktor:ktor-server-status-pages"                                , version.ref = "ktor"}
 ktor-server-partial-content          = { module = "io.ktor:ktor-server-partial-content"                             , version.ref = "ktor"}
@@ -303,6 +305,8 @@ ktor-server-auto-head                = { module = "io.ktor:ktor-server-auto-head
 ktor-server-forwarded-header         = { module = "io.ktor:ktor-server-forwarded-header"                            , version.ref = "ktor"}
 ktor-server-html                     = { module = "io.ktor:ktor-server-html-builder"                                , version.ref = "ktor"}
 ktor-server-websockets               = { module = "io.ktor:ktor-server-websockets"                                  , version.ref = "ktor"}
+ktor-server-sse                      = { module = "io.ktor:ktor-server-sse"                                         , version.ref = "ktor"}
+ktor-server-test-host                = { module = "io.ktor:ktor-server-test-host"                                   , version.ref = "ktor"}
 ktor-serialization-json              = { module = "io.ktor:ktor-serialization-kotlinx-json"                         , version.ref = "ktor"}
 
 ktor-client-core                     = { module = "io.ktor:ktor-client-core"                                   , version.ref = "ktor"}
@@ -398,6 +402,7 @@ store5                               = { module = "org.mobilenativefoundation.st
 parsus                               = { module = "me.alllex.parsus:parsus"                                    , version.ref = "parsus" }
 cache4k                              = { module = "io.github.reactivecircus.cache4k:cache4k"                   , version.ref = "cache4k" }
 
+mappie-api                           = { module = "tech.mappie:mappie-api"                                     , version.ref = "mappie" }
 konsist                              = { module = "com.lemonappdev:konsist"                                    , version.ref = "konsist" }
 akkurate-core                        = { module = "dev.nesk.akkurate:akkurate-core"                            , version.ref = "akkurate"}
 akkurate-ksp-plugin                  = { module = "dev.nesk.akkurate:akkurate-ksp-plugin"                      , version.ref = "akkurate"}
@@ -529,6 +534,7 @@ keystore = ["sslcontext-kickstart", "directory-keystore"]
 
 
 [plugins]
+kotlin-multiplatform                 = { id = "org.jetbrains.kotlin.multiplatform"                             , version.ref = "kotlin"}
 kotlin-powerassert                   = { id = "org.jetbrains.kotlin.plugin.power-assert"                       , version.ref = "kotlin"}
 kotlin-allopen                       = { id = "org.jetbrains.kotlin.plugin.allopen"                            , version.ref = "kotlin"}
 kotlin-js-plainobjects               = { id = "org.jetbrains.kotlin.plugin.js-plain-objects"                   , version.ref = "kotlin"}
@@ -553,3 +559,4 @@ kobweb-library                       = { id = "com.varabyte.kobweb.library"     
 kobwebx-markdown                     = { id = "com.varabyte.kobwebx.markdown"                                  , version.ref = "kobweb" }
 spring-boot                          = { id = "org.springframework.boot"                                       , version.ref = "spring-boot" }
 spring-depmgmt                       = { id = "io.spring.dependency-management"                                , version.ref = "spring-depmgmt" }
+mappie                               = { id = "tech.mappie.plugin"                                             , version.ref = "mappie" }

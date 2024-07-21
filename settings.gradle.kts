@@ -6,19 +6,9 @@ rootProject.name = "kotlin-mpp-playground"
 
 include(":shared")
 
-include(":web:js")
-
-include(":web:wasm")
-
-include(":benchmark")
-
 include(":dep-mgmt:bom")
 
 include(":dep-mgmt:catalog")
-
-include(":meta:ksp:processor")
-
-include(":meta:compiler:plugin")
 
 include(":backend:jvm")
 
@@ -27,6 +17,14 @@ include(":backend:security")
 include(":backend:data")
 
 include(":backend:profiling")
+
+include(":web")
+
+include(":benchmark")
+
+include(":meta:ksp:processor")
+
+include(":meta:compiler:plugin")
 
 val nativeBuild: String? by settings
 val composeBuild: String? by settings

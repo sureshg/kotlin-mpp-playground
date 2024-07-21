@@ -50,6 +50,7 @@ $ ./gradlew :backend:jvm:run
   $ sdk u java graalvm-ce-dev
   $ ./gradlew :backend:jvm:nativeCompile
   $ backend/jvm/build/native/nativeCompile/jvm
+  $ strings -a backend/jvm/build/native/nativeCompile/jvm | grep "cn="
 
   # To generate the native image configurations
   $ ./gradlew :backend:jvm:run -Pagent
@@ -110,6 +111,7 @@ $ ./gradlew :backend:jvm:run
 
   ```bash
   $ ./gradlew :backend:jvm:test -PktorTest
+  $ ./gradlew :backend:jvm:test -Pk8sTest
   $ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
   ```
 
@@ -124,7 +126,8 @@ $ ./gradlew :backend:jvm:run
 
   ```bash
   # Kotlin JS
-  $ ./gradlew :web:js:jsBrowserProductionRun -t
+  $ ./gradlew :web:jsBrowserProductionRun -t
+  $ ./gradlew :web:wasmJsBrowserProductionRun -t
   $ ./gradlew kotlinUpgradePackageLock
 
   # Kobweb

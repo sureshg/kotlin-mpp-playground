@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import org.gradle.kotlin.dsl.support.expectedKotlinDslPluginsVersion
 import org.jetbrains.kotlin.gradle.dsl.*
 
 plugins {
@@ -135,7 +134,7 @@ dependencies {
   // https://github.com/gradle/gradle/issues/15383#issuecomment-779893192
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
   implementation(platform(libs.kotlin.bom))
-  implementation(kotlin("stdlib"))
+  implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.collections.immutable)
@@ -185,13 +184,14 @@ dependencies {
   implementation(libs.build.jte.plugin)
   implementation(libs.build.jib.plugin)
   implementation(libs.build.jib.nativeimage.extn)
-  // For using kotlin-dsl in pre-compiled script plugins
-  implementation("${libs.build.kotlin.dsl.get().module}:${expectedKotlinDslPluginsVersion}")
-  testImplementation(gradleTestKit())
   // implementation(libs.build.kotlin.compose.compiler)
   // implementation(libs.build.karakum.plugin)
   // implementation(libs.jte.native)
   // implementation(libs.build.kmp.hierarchy)
   // implementation(libs.build.includegit.plugin)
   // implementation(libs.build.cyclonedx.plugin)
+
+  // For using kotlin-dsl in pre-compiled script plugins
+  // implementation("${libs.build.kotlin.dsl.get().module}:${expectedKotlinDslPluginsVersion}")
+  // testImplementation(gradleTestKit())
 }

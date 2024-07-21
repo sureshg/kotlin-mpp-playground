@@ -14,8 +14,8 @@ import kotlinx.benchmark.gradle.benchmark
  */
 plugins {
   id("plugins.kotlin.mpp")
+  kotlin("plugin.allopen")
   org.jetbrains.kotlinx.benchmark
-  `kotlin-allopen`
 }
 
 group = libs.versions.group.get()

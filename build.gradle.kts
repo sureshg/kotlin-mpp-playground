@@ -1,6 +1,7 @@
 plugins {
   plugins.root
-  // kotlin("multiplatform") apply false
+  // alias(libs.plugins.kotlin.multiplatform) apply false
+  // id(libs.plugins.kotlin.multiplatform.get().pluginId)
   // alias(libs.plugins.kotlin.compose.compiler) apply false
 }
 

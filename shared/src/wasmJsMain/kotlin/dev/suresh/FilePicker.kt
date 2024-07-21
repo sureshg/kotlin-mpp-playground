@@ -1,3 +1,5 @@
+package dev.suresh
+
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
@@ -7,6 +9,7 @@ import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.asList
 import org.w3c.files.File
 import org.w3c.files.FileReader
+import toByteArray
 
 /**
  * The code is adapted from
@@ -49,7 +52,7 @@ suspend fun File.readAsText() = suspendCoroutine { cont ->
   }
 
   reader.onerror = {
-    cont.resumeWithException(IllegalStateException("Error reading the file $name"))
+    cont.resumeWithException(IllegalStateException("Error reading the file '$name' as text!"))
   }
 
   reader.onprogress = {
@@ -72,7 +75,7 @@ suspend fun File.readAsByteArray() = suspendCoroutine { cont ->
   }
 
   reader.onerror = {
-    cont.resumeWithException(IllegalStateException("Error reading the file $name"))
+    cont.resumeWithException(IllegalStateException("Error reading the file '$name' as byte array!"))
   }
 
   reader.onprogress = {

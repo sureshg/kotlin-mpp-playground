@@ -18,14 +18,14 @@ import tasks.BuildConfigExtension
 import tasks.ReallyExecJar
 
 plugins {
-  `kotlin-multiplatform`
-  `kotlinx-serialization`
+  kotlin("multiplatform")
+  kotlin("plugin.serialization")
+  kotlin("plugin.power-assert")
+  kotlin("plugin.js-plain-objects")
+  id("plugins.kotlin.docs")
   com.google.devtools.ksp
   org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
-  id("plugins.kotlin.docs")
-  kotlin("plugin.power-assert")
-  kotlin("plugin.js-plain-objects")
   // kotlin("plugin.compose")
   // io.github.terrakok.`kmp-hierarchy`
   // org.gradle.kotlin.`kotlin-dsl`
@@ -39,14 +39,15 @@ kotlin {
     sharedProjectName -> {
       jvmTarget()
       jsTarget()
+      wasmJsTarget()
       allNativeTargets { compilerOptions { configureKotlinNative() } }
-      // wasmJsTarget()
     }
-    "js",
-    "chrome",
-    "html" -> jsTarget()
-    "wasm" -> wasmJsTarget()
     "native" -> allNativeTargets { compilerOptions { configureKotlinNative() } }
+    "html" -> jsTarget()
+    "web" -> {
+      jsTarget()
+      wasmJsTarget()
+    }
     else -> jvmTarget()
   }
 
@@ -159,17 +160,17 @@ tasks {
 }
 
 // Expose shared js/wasm resource as configuration to be consumed by other projects.
-// Should we really need this?, revisit this later.
 // https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
 artifacts {
   if (isSharedProject) {
     tasks.findByName("jsProcessResources")?.let {
-      val sharedJsRes by configurations.consumable("sharedJsResources")
-      add(sharedJsRes.name, tasks.named(it.name))
+      val sharedJsResources by configurations.consumable("sharedJsResources")
+      add(sharedJsResources.name, provider { it })
     }
+
     tasks.findByName("wasmJsProcessResources")?.let {
-      val sharedWasmRes by configurations.consumable("sharedWasmResources")
-      add(sharedWasmRes.name, tasks.named(it.name))
+      val sharedWasmResources by configurations.consumable("sharedWasmResources")
+      add(sharedWasmResources.name, provider { it })
     }
   }
 }

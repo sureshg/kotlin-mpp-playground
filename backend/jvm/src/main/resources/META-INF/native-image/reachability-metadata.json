@@ -166,20 +166,12 @@
       "type":"io.ktor.server.application.Application"
     },
     {
-      "type":"io.ktor.server.application.PluginBuilder$onDefaultPhaseWithMessage$1",
-      "methods":[{"name":"invoke","parameterTypes":["io.ktor.util.pipeline.Pipeline"] }]
+      "type":"io.ktor.server.application.PluginBuilder",
+      "methods":[{"name":"onDefaultPhaseWithMessage","parameterTypes":["java.util.List","io.ktor.util.pipeline.PipelinePhase","java.lang.String","kotlin.jvm.functions.Function2","kotlin.jvm.functions.Function4"] }]
     },
     {
       "type":"io.ktor.server.application.hooks.CallFailed",
       "methods":[{"name":"install","parameterTypes":["io.ktor.server.application.ApplicationCallPipeline","kotlin.jvm.functions.Function3"] }]
-    },
-    {
-      "type":"io.ktor.server.application.hooks.CallFailed$install$1",
-      "fields":[{"name":"label"}]
-    },
-    {
-      "type":"io.ktor.server.application.hooks.CallFailed$install$1$1",
-      "fields":[{"name":"label"}]
     },
     {
       "type":"io.ktor.server.application.hooks.CallSetup",
@@ -197,27 +189,11 @@
       "fields":[{"name":"label"}]
     },
     {
-      "type":"io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1",
-      "fields":[{"name":"label"}]
-    },
-    {
-      "type":"io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1$invokeSuspend$$inlined$execute$1",
-      "fields":[{"name":"label"}]
-    },
-    {
       "type":"io.ktor.server.netty.NettyApplicationCall",
       "fields":[{"name":"messageReleased"}]
     },
     {
       "type":"io.ktor.server.netty.NettyApplicationCallHandler"
-    },
-    {
-      "type":"io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1",
-      "fields":[{"name":"label"}]
-    },
-    {
-      "type":"io.ktor.server.netty.NettyApplicationCallHandler$handleRequest$1$invokeSuspend$$inlined$execute$1",
-      "fields":[{"name":"label"}]
     },
     {
       "type":"io.ktor.server.netty.NettyChannelInitializer"
@@ -238,27 +214,19 @@
       "type":"io.ktor.server.netty.http1.NettyHttp1Handler"
     },
     {
-      "type":"io.ktor.server.plugins.callloging.CallLoggingKt$logCallsWithMDC$1",
+      "type":"io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$1$invokeSuspend$$inlined$withMDC$1",
       "fields":[{"name":"label"}]
     },
     {
-      "type":"io.ktor.server.plugins.callloging.CallLoggingKt$logCallsWithMDC$1$invokeSuspend$$inlined$withMDC$1",
-      "fields":[{"name":"label"}]
-    },
-    {
-      "type":"io.ktor.server.plugins.callloging.MDCHookKt$MDCHook$1",
+      "type":"io.ktor.server.plugins.calllogging.MDCHookKt$MDCHook$1",
       "methods":[{"name":"install","parameterTypes":["io.ktor.server.application.ApplicationCallPipeline","kotlin.jvm.functions.Function3"] }]
-    },
-    {
-      "type":"io.ktor.server.plugins.callloging.MDCHookKt$MDCHook$1$install$1",
-      "fields":[{"name":"label"}]
     },
     {
       "type":"io.ktor.server.plugins.statuspages.BeforeFallback",
       "methods":[{"name":"install","parameterTypes":["io.ktor.server.application.ApplicationCallPipeline","kotlin.jvm.functions.Function2"] }]
     },
     {
-      "type":"io.ktor.server.routing.Routing$Plugin",
+      "type":"io.ktor.server.routing.RoutingRoot$Plugin",
       "methods":[{"name":"install","parameterTypes":["io.ktor.server.application.Application","kotlin.jvm.functions.Function1"] }]
     },
     {
@@ -266,28 +234,15 @@
       "fields":[{"name":"current"}]
     },
     {
-      "type":"io.ktor.utils.io.ByteBufferChannel",
-      "fields":[{"name":"_closed"},{"name":"_readOp"},{"name":"_state"},{"name":"_writeOp"}]
+      "type":"io.ktor.util.internal.LockFreeLinkedListNode",
+      "fields":[{"name":"_next"},{"name":"_prev"},{"name":"_removedRef"}]
     },
     {
-      "type":"io.ktor.utils.io.core.internal.ChunkBuffer",
-      "fields":[{"name":"nextRef"},{"name":"refCount"}]
+      "type":"io.ktor.utils.io.ByteChannel",
+      "fields":[{"name":"_closedCause"},{"name":"suspensionSlot"}]
     },
     {
-      "type":"io.ktor.utils.io.internal.CancellableReusableContinuation",
-      "fields":[{"name":"jobCancellationHandler"},{"name":"state"}]
-    },
-    {
-      "type":"io.ktor.utils.io.internal.RingBufferCapacity",
-      "fields":[{"name":"_availableForRead$internal"},{"name":"_availableForWrite$internal"},{"name":"_pendingToFlush"}]
-    },
-    {
-      "type":"io.ktor.utils.io.jvm.javaio.BlockingAdapter",
-      "fields":[{"name":"state"}]
-    },
-    {
-      "type":"io.ktor.utils.io.jvm.javaio.PollersKt",
-      "methods":[{"name":"isParkingAllowed","parameterTypes":[] },{"name":"prohibitParking","parameterTypes":[] }]
+      "type":"io.ktor.utils.io.jvm.javaio.PollersKt"
     },
     {
       "type":"io.ktor.utils.io.pool.DefaultPool",
@@ -651,10 +606,6 @@
       "fields":[{"name":"base"},{"name":"cellsBusy"}]
     },
     {
-      "type":"java.util.concurrent.atomic.Striped64$Cell",
-      "fields":[{"name":"value"}]
-    },
-    {
       "type":"java.util.logging.LogManager",
       "methods":[{"name":"getLoggingMXBean","parameterTypes":[] }]
     },
@@ -778,10 +729,6 @@
       "fields":[{"name":"_delayed$volatile"},{"name":"_isCompleted$volatile"},{"name":"_queue$volatile"}]
     },
     {
-      "type":"kotlinx.coroutines.InvokeOnCancelling",
-      "fields":[{"name":"_invoked$volatile"}]
-    },
-    {
       "type":"kotlinx.coroutines.JobSupport",
       "fields":[{"name":"_parentHandle$volatile"},{"name":"_state$volatile"}]
     },
@@ -794,8 +741,19 @@
       "fields":[{"name":"_closeCause$volatile"},{"name":"bufferEnd$volatile"},{"name":"bufferEndSegment$volatile"},{"name":"closeHandler$volatile"},{"name":"completedExpandBuffersAndPauseFlag$volatile"},{"name":"receiveSegment$volatile"},{"name":"receivers$volatile"},{"name":"sendSegment$volatile"},{"name":"sendersAndCloseStatus$volatile"}]
     },
     {
-      "type":"kotlinx.coroutines.internal.AtomicOp",
-      "fields":[{"name":"_consensus$volatile"}]
+      "type":"kotlinx.coroutines.debug.internal.ByteBuddyDynamicAttach"
+    },
+    {
+      "type":"kotlinx.coroutines.debug.internal.ConcurrentWeakMap",
+      "fields":[{"name":"_size$volatile"},{"name":"core$volatile"}]
+    },
+    {
+      "type":"kotlinx.coroutines.debug.internal.ConcurrentWeakMap$Core",
+      "fields":[{"name":"load$volatile"}]
+    },
+    {
+      "type":"kotlinx.coroutines.debug.internal.DebugProbesImpl$DebugProbesImpl$VolatileWrapper$atomicfu$private",
+      "fields":[{"name":"installations$volatile"},{"name":"sequenceNumber$volatile"}]
     },
     {
       "type":"kotlinx.coroutines.internal.ConcurrentLinkedListNode",
@@ -1067,10 +1025,10 @@
     "glob":"app\/js\/index.html"
   },{
     "module":"",
-    "glob":"app\/js\/js-app.js"
+    "glob":"app\/js\/logo\/kotlin-logo.svg"
   },{
     "module":"",
-    "glob":"app\/js\/logo\/kotlin-logo.svg"
+    "glob":"app\/js\/web.js"
   },{
     "module":"",
     "glob":"app\/wasm\/css\/app.css"
@@ -1079,13 +1037,13 @@
     "glob":"app\/wasm\/index.html"
   },{
     "module":"",
+    "glob":"app\/wasm\/kotlin-mpp-playground-web-wasm-js.wasm"
+  },{
+    "module":"",
     "glob":"app\/wasm\/logo\/kotlin-logo.svg"
   },{
     "module":"",
-    "glob":"app\/wasm\/wasm-app.js"
-  },{
-    "module":"",
-    "glob":"app\/wasm\/wasm-app.wasm"
+    "glob":"app\/wasm\/web.js"
   },{
     "module":"",
     "glob":"application.conf"

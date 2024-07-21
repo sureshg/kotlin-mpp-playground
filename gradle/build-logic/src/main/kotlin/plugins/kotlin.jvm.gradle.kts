@@ -13,13 +13,13 @@ import tasks.ReallyExecJar
 
 plugins {
   `java-library`
-  com.google.devtools.ksp
   kotlin("jvm")
-  `kotlinx-serialization`
+  kotlin("plugin.serialization")
+  kotlin("plugin.power-assert")
+  com.google.devtools.ksp
   org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
   id("plugins.kotlin.docs")
-  kotlin("plugin.power-assert")
   // `test-suite-base`
 }
 

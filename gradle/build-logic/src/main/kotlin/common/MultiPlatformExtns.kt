@@ -1,8 +1,5 @@
 package common
 
-import common.Platform.isLinux
-import common.Platform.isMac
-import common.Platform.isWin
 import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
@@ -48,17 +45,15 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(libs.kotlin.cryptography.random)
         api(libs.kotlin.bignum)
         api(libs.kotlin.bignum.serialization)
-        if (project.name != "wasm") {
-          api(libs.ktor.client.core)
-          api(libs.ktor.client.content.negotiation)
-          api(libs.ktor.client.encoding)
-          api(libs.ktor.client.logging)
-          api(libs.ktor.client.resources)
-          api(libs.ktor.client.auth)
-          api(libs.ktor.client.serialization)
-          api(libs.ktor.client.websockets)
-          api(libs.ktor.serialization.json)
-        }
+        api(libs.ktor.client.core)
+        api(libs.ktor.client.content.negotiation)
+        api(libs.ktor.client.encoding)
+        api(libs.ktor.client.logging)
+        api(libs.ktor.client.resources)
+        api(libs.ktor.client.auth)
+        api(libs.ktor.client.serialization)
+        api(libs.ktor.client.websockets)
+        api(libs.ktor.serialization.json)
       }
       // kotlin.srcDirs()
       // resources.srcDirs()
@@ -68,11 +63,9 @@ fun KotlinMultiplatformExtension.commonTarget() {
       dependencies {
         api(kotlin("test"))
         api(libs.kotlinx.coroutines.test)
+        api(libs.ktor.client.tests)
+        api(libs.ktor.client.mock)
         api(libs.cash.turbine)
-        if (project.name != "wasm") {
-          api(libs.ktor.client.mock)
-          // api(libs.ktor.client.tests)
-        }
       }
     }
 
@@ -134,8 +127,8 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(project.dependencies.platform(libs.junit.bom))
         api(project.dependencies.platform(libs.testcontainers.bom))
         api(kotlin("test-junit5"))
-        api(libs.slf4j.simple)
         api(libs.mockk)
+        api(libs.slf4j.simple)
         api(libs.testcontainers.junit5)
         api(libs.testcontainers.postgresql)
         // api(libs.konsist)
@@ -149,8 +142,8 @@ fun KotlinMultiplatformExtension.jsTarget() {
   js {
     browser {
       commonWebpackConfig {
-        outputFileName = "js-app.js"
         cssSupport { enabled = true }
+        // outputFileName = "js-app.js"
         // scssSupport { enabled = true }
         // sourceMaps = true
       }
@@ -161,12 +154,13 @@ fun KotlinMultiplatformExtension.jsTarget() {
         testLogging { configureLogEvents() }
         useKarma { useChromeHeadless() }
       }
+
       // distribution { outputDirectory = file("$projectDir/docs") }
     }
+
     if (isSharedProject.not()) {
       binaries.executable()
     }
-    // passAsArgumentToMainFunction(...)
     generateTypeScriptDefinitions()
     compilerOptions { configureKotlinJs() }
     testRuns.configureEach { executionTask.configure { configureTestReport() } }
@@ -176,7 +170,6 @@ fun KotlinMultiplatformExtension.jsTarget() {
     jsMain {
       dependencies {
         api(libs.ktor.client.js)
-        api(libs.kotlin.cryptography.webcrypto)
         api(kotlinw("browser"))
         api(kotlinw("css"))
         // api(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
@@ -194,11 +187,11 @@ fun KotlinMultiplatformExtension.jsTarget() {
 context(Project)
 fun KotlinMultiplatformExtension.wasmJsTarget() {
   wasmJs {
-    moduleName = "wasm-app"
+    // moduleName = "wasm-app"
     browser {
       commonWebpackConfig {
-        outputFileName = "wasm-app.js"
         cssSupport { enabled = true }
+        // outputFileName = "wasm-app.js"
         // sourceMaps = true
         devServer =
             (devServer ?: KotlinWebpackConfig.DevServer()).apply {
@@ -218,6 +211,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
         useKarma { useChromeHeadless() }
       }
     }
+
     if (isSharedProject.not()) {
       binaries.executable()
     }
@@ -227,7 +221,12 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
   }
 
   sourceSets {
-    wasmJsMain { dependencies { api(libs.kotlin.cryptography.webcrypto) } }
+    wasmJsMain {
+      dependencies {
+        api(libs.ktor.client.js)
+        // api(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
+      }
+    }
     wasmJsTest { kotlin {} }
   }
 }
@@ -235,15 +234,15 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
 context(Project)
 fun KotlinMultiplatformExtension.hostNativeTarget(configure: KotlinNativeTarget.() -> Unit = {}) =
     when {
-      isMac -> {
+      Platform.isMac -> {
         macosArm64 { configure() }
         macosX64 { configure() }
       }
-      isLinux -> {
+      Platform.isLinux -> {
         linuxArm64 { configure() }
         linuxX64 { configure() }
       }
-      isWin -> mingwX64 { configure() }
+      Platform.isWin -> mingwX64 { configure() }
       else ->
           throw GradleException(
               "Host OS '${Platform.currentOS}' is not supported in Kotlin/Native $project.")
