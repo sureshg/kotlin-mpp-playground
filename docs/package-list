@@ -8,41 +8,38 @@ $dokka.location://FileBrowser/#androidx.compose.ui.Modifier#androidx.navigation.
 $dokka.location://FileDialog/#java.awt.Frame?#kotlin.Function1[kotlin.collections.List[java.io.File],kotlin.Unit]/PointingToDeclaration/desktop/[root]/-file-dialog.html
 $dokka.location://FileListView/#androidx.compose.ui.Modifier#kotlin.collections.List[java.nio.file.Path]/PointingToDeclaration/desktop/[root]/-file-list-view.html
 $dokka.location://Home/#androidx.navigation.NavController/PointingToDeclaration/desktop/[root]/-home.html
-$dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/js/[root]/-kotlin-playground.html
-$dokka.location://console/#/PointingToDeclaration/wasm/[root]/console.html
-$dokka.location://copyInto/kotlin.ByteArray#org.khronos.webgl.Int8Array#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/wasm/[root]/copy-into.html
-$dokka.location://copyInto/org.khronos.webgl.Int8Array#kotlin.ByteArray#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/wasm/[root]/copy-into.html
-$dokka.location://currentTimeMillis/#/PointingToDeclaration/wasm/[root]/current-time-millis.html
+$dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
+$dokka.location://console/#/PointingToDeclaration/shared/[root]/console.html
+$dokka.location://copyInto/kotlin.ByteArray#org.khronos.webgl.Int8Array#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/shared/[root]/copy-into.html
+$dokka.location://copyInto/org.khronos.webgl.Int8Array#kotlin.ByteArray#kotlin.Int#kotlin.Int#kotlin.Int/PointingToDeclaration/shared/[root]/copy-into.html
+$dokka.location://currentTimeMillis/#/PointingToDeclaration/shared/[root]/current-time-millis.html
 $dokka.location://dashedBorder/androidx.compose.ui.Modifier#androidx.compose.ui.unit.Dp#androidx.compose.ui.graphics.Color#androidx.compose.ui.unit.Dp/PointingToDeclaration/desktop/[root]/dashed-border.html
 $dokka.location://debug/#/PointingToDeclaration/desktop/[root]/debug.html
 $dokka.location://debug/androidx.compose.ui.Modifier#androidx.compose.ui.graphics.Color/PointingToDeclaration/desktop/[root]/debug.html
 $dokka.location://fileChooser/#java.awt.Frame?#kotlin.Function1[kotlin.collections.List[java.io.File],kotlin.Unit]/PointingToDeclaration/desktop/[root]/file-chooser.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
-$dokka.location://log/#/PointingToDeclaration/wasm/[root]/log.html
-$dokka.location://main/#/PointingToDeclaration/wasm/[root]/main.html
-$dokka.location://mainScope/#/PointingToDeclaration/wasm/[root]/main-scope.html
-$dokka.location://readAsByteArray/org.w3c.files.File#/PointingToDeclaration/wasm/[root]/read-as-byte-array.html
-$dokka.location://readAsText/org.w3c.files.File#/PointingToDeclaration/wasm/[root]/read-as-text.html
+$dokka.location://log/#/PointingToDeclaration/web/[root]/log.html
+$dokka.location://main/#/PointingToDeclaration/desktop/[root]/main.html
+$dokka.location://mainScope/#/PointingToDeclaration/desktop/[root]/main-scope.html
 $dokka.location://resourcesDir/#/PointingToDeclaration/desktop/[root]/resources-dir.html
-$dokka.location://runCoroutines/#/PointingToDeclaration/js/[root]/run-coroutines.html
-$dokka.location://runTerminal/#/PointingToDeclaration/js/[root]/run-terminal.html
-$dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/js/[root]/say-hello.html
+$dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutines.html
+$dokka.location://runTerminal/#/PointingToDeclaration/web/[root]/run-terminal.html
+$dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
 $dokka.location://scrollingBox/#androidx.compose.ui.Modifier#kotlin.Function0[kotlin.Unit]/PointingToDeclaration/desktop/[root]/scrolling-box.html
-$dokka.location://selectFileFromDisk/org.w3c.dom.Document#kotlin.String?#kotlin.Boolean/PointingToDeclaration/wasm/[root]/select-file-from-disk.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/shared/[root]/stdlib-features.html
-$dokka.location://toArrayBuffer/kotlin.ByteArray#/PointingToDeclaration/wasm/[root]/to-array-buffer.html
-$dokka.location://toByteArray/org.khronos.webgl.ArrayBuffer?#/PointingToDeclaration/wasm/[root]/to-byte-array.html
-$dokka.location://toByteArray/org.khronos.webgl.Int8Array#/PointingToDeclaration/wasm/[root]/to-byte-array.html
-$dokka.location://toInt8Array/kotlin.ByteArray#/PointingToDeclaration/wasm/[root]/to-int8-array.html
+$dokka.location://toArrayBuffer/kotlin.ByteArray#/PointingToDeclaration/shared/[root]/to-array-buffer.html
+$dokka.location://toByteArray/org.khronos.webgl.ArrayBuffer?#/PointingToDeclaration/shared/[root]/to-byte-array.html
+$dokka.location://toByteArray/org.khronos.webgl.Int8Array#/PointingToDeclaration/shared/[root]/to-byte-array.html
+$dokka.location://toInt8Array/kotlin.ByteArray#/PointingToDeclaration/shared/[root]/to-int8-array.html
 $dokka.location://toPngImage/androidx.compose.ui.graphics.painter.Painter#java.io.File/PointingToDeclaration/desktop/[root]/to-png-image.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
 $dokka.location:/ClassVisitor/defaultHandler/#com.google.devtools.ksp.symbol.KSNode#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/default-handler.html
 $dokka.location:/ClassVisitor/visitClassDeclaration/#com.google.devtools.ksp.symbol.KSClassDeclaration#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/visit-class-declaration.html
-$dokka.location:/Console///PointingToDeclaration/wasm/[root]/-console/index.html
-$dokka.location:/Console/Console/#/PointingToDeclaration/wasm/[root]/-console/-console.html
-$dokka.location:/Console/log/#kotlin.String?/PointingToDeclaration/wasm/[root]/-console/log.html
-$dokka.location:/Console/log/#kotlin.js.JsAny?/PointingToDeclaration/wasm/[root]/-console/log.html
+$dokka.location:/Console///PointingToDeclaration/shared/[root]/-console/index.html
+$dokka.location:/Console/Console/#/PointingToDeclaration/shared/[root]/-console/-console.html
+$dokka.location:/Console/log/#kotlin.String?/PointingToDeclaration/shared/[root]/-console/log.html
+$dokka.location:/Console/log/#kotlin.js.JsAny?/PointingToDeclaration/shared/[root]/-console/log.html
 $dokka.location:/MyService///PointingToDeclaration/shared/[root]/-my-service/index.html
 $dokka.location:/Person///PointingToDeclaration/shared/[root]/-person/index.html
 $dokka.location:/Person/Person/#kotlin.String#kotlin.String/PointingToDeclaration/shared/[root]/-person/-person.html
@@ -75,6 +72,10 @@ dev.suresh
 dev.suresh.flow
 dev.suresh.http
 dev.suresh.lang
+module:web
+hljs
+interop
+xterm
 module:data
 dev.suresh
 dev.suresh.gen
@@ -94,7 +95,3 @@ dev.suresh
 dev.suresh.cert
 dev.suresh.security
 dev.suresh.tls
-module:js
-hljs
-interop
-xterm
