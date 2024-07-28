@@ -1,8 +1,14 @@
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.graphics.toAwtImage
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.window.AwtWindow
 import java.awt.FileDialog
 import java.awt.Frame
+import java.awt.image.BufferedImage
 import java.io.File
+import javax.imageio.ImageIO
 import javax.swing.JFileChooser
 import javax.swing.UIManager
 import javax.swing.filechooser.FileNameExtensionFilter
@@ -42,4 +48,12 @@ fun fileChooser(parent: Frame? = null, onClose: (result: List<File>) -> Unit) {
   val files = chooser.selectedFiles.toList()
   chooser.isVisible = false
   onClose(files)
+}
+
+fun Painter.toPngImage(file: File) {
+  val img = toAwtImage(Density(1f), LayoutDirection.Ltr)
+  BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB).run {
+    graphics.drawImage(img, 0, 0, null)
+    ImageIO.write(this, "png", file)
+  }
 }

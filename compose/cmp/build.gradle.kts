@@ -40,10 +40,7 @@ kotlin {
       implementation(libs.kotlinx.coroutines.swing)
     }
 
-    // jsMain.dependencies {
-    //   implementation(compose.html.core)
-    //   implementation(libs.ktor.client.js)
-    // }
+    jsMain.dependencies { implementation(compose.html.core) }
   }
 }
 
@@ -136,8 +133,16 @@ compose {
     }
   }
 
+  resources {
+    publicResClass = true
+    packageOfResClass = "dev.suresh.compose.res"
+    // val sourceSet = kotlin.sourceSets.commonMain
+    // customDirectory(
+    //     sourceSetName = sourceSet.name,
+    //     directoryProvider = layout.dir(sourceSet.map { it.resources.srcDirs.first() }))
+  }
+
   web {}
-  resources {}
 }
 
 tasks {

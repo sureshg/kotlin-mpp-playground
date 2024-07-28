@@ -106,8 +106,8 @@ fun DragDropListView() {
       DragDropBox { dragData ->
         if (dragData is DragData.FilesList) {
           val newPaths =
-              dragData.readFiles().mapNotNull {
-                URI(it).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
+              dragData.readFiles().mapNotNull { fPath ->
+                URI(fPath).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
               }
           droppedPaths = (newPaths + droppedPaths).distinct()
         }

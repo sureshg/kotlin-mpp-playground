@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalComposeUiApi::class)
-
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.desktop.ui.tooling.preview.Preview
 import androidx.compose.foundation.Image
@@ -7,15 +5,15 @@ import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material3.ElevatedButton
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -30,13 +28,12 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import dev.suresh.compose.res.Res
+import dev.suresh.compose.res.ic_fluent_rocket_24_filled
+import dev.suresh.compose.res.idea_logo
 import java.awt.Dimension
 import java.io.File
-import kotlinx.coroutines.MainScope
-
-val debug = true
-
-val mainScope = MainScope()
+import org.jetbrains.compose.resources.painterResource
 
 val resourcesDir = File(System.getProperty("compose.application.resources.dir", "."))
 
@@ -96,10 +93,17 @@ fun Home(navController: NavController) {
             }
 
         AnimatedVisibility(visible = showImage) {
-          Image(painter = painterResource("svg/idea-logo.svg"), contentDescription = "Logo")
+          Image(painter = painterResource(Res.drawable.idea_logo), contentDescription = "Logo")
         }
 
-        Button(onClick = { navController.navigate("FileBrowser") }) { Text("File Browser!") }
+        ElevatedButton(onClick = { navController.navigate("FileBrowser") }) {
+          Icon(
+              painter = painterResource(Res.drawable.ic_fluent_rocket_24_filled),
+              contentDescription = "File Browser",
+              modifier = Modifier.size(24.dp))
+          Spacer(modifier = Modifier.width(5.dp))
+          Text("File Browser!")
+        }
       }
 }
 
@@ -110,18 +114,25 @@ fun FileBrowser(modifier: Modifier = Modifier, navController: NavController) {
       horizontalAlignment = Alignment.CenterHorizontally,
       verticalArrangement = Arrangement.SpaceEvenly) {
         DragDropListView()
-
         Button(onClick = { navController.popBackStack() }) { Text("Back") }
       }
 }
 
 @Composable
 fun App() {
-  val navController = rememberNavController()
-  NavHost(navController = navController, startDestination = "Home") {
-    composable("Home") { Home(navController) }
-    composable("FileBrowser") { FileBrowser(navController = navController) }
-  }
+  SaveToBitmap(
+      onSave = {
+        // val img = it.toAwtImage()
+        // val file = File("screenshot.png")
+        // ImageIO.write(img, "png", file)
+        // println("Saved the screenshot to ${file.absolutePath}")
+      }) {
+        val navController = rememberNavController()
+        NavHost(navController = navController, startDestination = "Home") {
+          composable("Home") { Home(navController) }
+          composable("FileBrowser") { FileBrowser(navController = navController) }
+        }
+      }
 }
 
 fun main() = application {

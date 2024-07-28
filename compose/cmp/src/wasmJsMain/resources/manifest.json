@@ -1,0 +1,13 @@
+{
+  "name": "Compose Web App",
+  "icons": [
+    {
+      "src": "/images/compose.svg",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "white"
+}
