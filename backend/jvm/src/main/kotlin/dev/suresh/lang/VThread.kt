@@ -3,6 +3,7 @@ package dev.suresh.lang
 import dev.suresh.*
 import io.github.oshai.kotlinlogging.KLogger
 import java.util.concurrent.StructuredTaskScope
+import java.util.stream.Gatherers
 import kotlin.metadata.jvm.KotlinClassMetadata
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.datetime.Clock
@@ -26,6 +27,7 @@ object VThread {
     stdlibFeatures()
     kotlinxMetaData()
     classFileApi()
+    info { "Concurrent Gatherers: ${gatherers().size}" }
   }
 
   context(KLogger)
@@ -66,6 +68,11 @@ object VThread {
       it.join().throwIfFailed()
       info { task.get() }
     }
+  }
+
+  private fun gatherers(): List<String> {
+    val mapGatherer = Gatherers.mapConcurrent<Int, String>(10) { "$it-concurrent" }
+    return (1..100).toList().stream().gather(mapGatherer).toList()
   }
 
   context(KLogger)
