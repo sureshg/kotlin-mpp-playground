@@ -28,9 +28,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import dev.suresh.compose.res.Res
-import dev.suresh.compose.res.ic_fluent_rocket_24_filled
-import dev.suresh.compose.res.idea_logo
+import dev.suresh.compose.res.*
 import java.awt.Dimension
 import java.io.File
 import org.jetbrains.compose.resources.painterResource
