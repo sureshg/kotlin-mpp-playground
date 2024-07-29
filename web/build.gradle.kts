@@ -1,5 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.github.ajalt.mordant.rendering.TextColors
+
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
@@ -17,33 +19,40 @@ dependencies {
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
   jsMainImplementation(npm("@xterm/xterm", libs.versions.npm.xtermjs.get()))
   jsMainImplementation(libs.kotlin.cryptography.webcrypto)
-  wasmJsMainImplementation(libs.kotlin.cryptography.webcrypto)
   // jsMainImplementation(libs.seskar.core)
+  wasmJsMainImplementation(libs.kotlin.cryptography.webcrypto)
 
-  sharedJsRes(project(path = ":shared", configuration = "sharedJsResources"))
-  sharedWasmRes(project(path = ":shared", configuration = "sharedWasmResources"))
+  sharedJsRes(
+      project(path = projects.shared.dependencyProject.path, configuration = "sharedJsResources"))
+  sharedWasmRes(
+      project(path = projects.shared.dependencyProject.path, configuration = "sharedWasmResources"))
 }
 
 tasks {
   val copySharedJsResources by
       registering(Sync::class) {
-        group = "Build"
         from(sharedJsRes)
         into(jsProcessResources.get().destinationDir)
         includeEmptyDirs = false
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
       }
-  jsProcessResources { mustRunAfter(copySharedJsResources) }
-
   val copySharedWasmResources by
       registering(Sync::class) {
-        group = "Build"
         from(sharedWasmRes)
         into(wasmJsProcessResources.get().destinationDir)
         includeEmptyDirs = false
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
       }
-  wasmJsProcessResources { mustRunAfter(copySharedWasmResources) }
+
+  jsProcessResources {
+    logger.quiet(TextColors.gray("◈ Copying shared JS resources"))
+    dependsOn(copySharedJsResources)
+  }
+
+  wasmJsProcessResources {
+    logger.quiet(TextColors.gray("◈ Copying shared Wasm resources"))
+    dependsOn(copySharedWasmResources)
+  }
 }
 
 artifacts {
