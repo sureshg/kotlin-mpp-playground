@@ -1,7 +1,7 @@
+import kotlin.wasm.unsafe.UnsafeWasmMemoryApi
+import kotlin.wasm.unsafe.withScopedMemoryAllocator
 import org.khronos.webgl.ArrayBuffer
 import org.khronos.webgl.Int8Array
-import org.khronos.webgl.get
-import org.khronos.webgl.set
 
 /** JavaScript console class */
 external class Console : JsAny {
@@ -17,32 +17,28 @@ fun currentTimeMillis(): Long = currentTimeMillisJs().toLong()
 
 private fun currentTimeMillisJs(): Double = js("new Date().getTime()")
 
-fun Int8Array.copyInto(
-    output: ByteArray,
-    inputOffset: Int = 0,
-    outputOffset: Int = 0,
-    length: Int = this.length
-) = repeat(length) { output[outputOffset + it] = this[inputOffset + it] }
+fun ArrayBuffer?.toByteArray() =
+    this?.run {
+      val source = Int8Array(this, 0, byteLength)
+      jsInt8ArrayToKotlinByteArray(source)
+    }
 
-fun Int8Array.toByteArray(): ByteArray {
-  val buf = ByteArray(length)
-  copyInto(buf)
-  return buf
+@JsFun(
+    """ (src, size, dstAddr) => {
+          const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
+          mem8.set(src);
+         }
+         """)
+internal external fun jsExportInt8ArrayToWasm(src: Int8Array, size: Int, dstAddr: Int)
+
+internal fun jsInt8ArrayToKotlinByteArray(x: Int8Array): ByteArray {
+  val size = x.length
+
+  @OptIn(UnsafeWasmMemoryApi::class)
+  return withScopedMemoryAllocator { allocator ->
+    val memBuffer = allocator.allocate(size)
+    val dstAddress = memBuffer.address.toInt()
+    jsExportInt8ArrayToWasm(x, size, dstAddress)
+    ByteArray(size) { i -> (memBuffer + i).loadByte() }
+  }
 }
-
-fun ByteArray.copyInto(
-    output: Int8Array,
-    inputOffset: Int = 0,
-    outputOffset: Int = 0,
-    length: Int = this.size
-) = repeat(length) { output[outputOffset + it] = this[inputOffset + it] }
-
-fun ByteArray.toInt8Array(): Int8Array {
-  val arr = Int8Array(size)
-  copyInto(arr)
-  return arr
-}
-
-fun ArrayBuffer?.toByteArray() = this?.run { Int8Array(this).toByteArray() }
-
-fun ByteArray.toArrayBuffer() = toInt8Array().buffer
