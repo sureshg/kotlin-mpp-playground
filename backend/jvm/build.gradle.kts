@@ -6,11 +6,12 @@ import kotlin.io.path.Path
 plugins {
   plugins.kotlin.jvm
   application
-  alias(libs.plugins.ktor)
-  alias(libs.plugins.exposed)
   com.google.cloud.tools.jib
   gg.jte.gradle
   plugins.graalvm
+  io.github.goooler.shadow
+  alias(libs.plugins.ktor)
+  alias(libs.plugins.exposed)
   plugins.publishing
 }
 
@@ -18,7 +19,7 @@ description = "Ktor backend jvm application"
 
 application {
   mainClass = libs.versions.app.mainclass.get()
-  applicationDefaultJvmArgs += jvmArguments(appRun = true)
+  applicationDefaultJvmArgs += project.jvmRunArgs
 }
 
 ktor { fatJar { archiveFileName = "${project.name}-all.jar" } }
@@ -124,7 +125,7 @@ tasks {
   val copyTasks =
       listOf(jsApp, wasmApp).map { cnf ->
         val appResDir = Path(base = "app", cnf.name.removeSuffix("App"))
-        register<Copy>("copy${cnf.name}") {
+        register<Sync>("copy${cnf.name}") {
           from(cnf)
           into(processResources.map { it.destinationDir.toPath().resolve(appResDir) })
           duplicatesStrategy = DuplicatesStrategy.INCLUDE
