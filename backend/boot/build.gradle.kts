@@ -1,3 +1,5 @@
+import common.jvmRunArgs
+
 plugins {
   plugins.kotlin.jvm
   alias(libs.plugins.spring.boot)
@@ -8,6 +10,8 @@ plugins {
 }
 
 description = "Kotlin SpringBoot app"
+
+springBoot { buildInfo {} }
 
 dependencies {
   implementation("org.springframework.boot:spring-boot-starter-web")
@@ -33,3 +37,5 @@ dependencies {
 //         }
 //       }
 //     }
+
+tasks { bootRun { jvmArgs = project.jvmRunArgs } }
