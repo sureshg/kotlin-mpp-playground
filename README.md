@@ -39,6 +39,9 @@ $ ./gradlew :backend:jvm:run
 
   ```bash
   $ ./gradlew :backend:jvm:run
+  $ ./gradlew :backend:jvm:build
+  $ ./gradlew :backend:jvm:jdeprscan
+  $ ./gradlew :backend:jvm:printModuleDeps
   $ ./gradlew :shared:jvmRun
 
   # Benchmark
@@ -50,7 +53,6 @@ $ ./gradlew :backend:jvm:run
   $ sdk u java graalvm-ce-dev
   $ ./gradlew :backend:jvm:nativeCompile
   $ backend/jvm/build/native/nativeCompile/jvm
-  $ strings -a backend/jvm/build/native/nativeCompile/jvm | grep "cn="
 
   # To generate the native image configurations
   $ ./gradlew :backend:jvm:run -Pagent
@@ -125,7 +127,6 @@ $ ./gradlew :backend:jvm:run
 ### Wasm/JS
 
   ```bash
-  # Kotlin JS
   $ ./gradlew :web:jsBrowserProductionRun -t
   $ ./gradlew :web:wasmJsBrowserProductionRun -t
   $ ./gradlew kotlinUpgradePackageLock
@@ -179,9 +180,13 @@ $ ./gradlew :backend:jvm:run
 ### Compose
 
   ```bash
-  $ ./gradlew :compose:desktop:runDistributable
-  $ ./gradlew :compose:desktop:packageDistributionForCurrentOS
-  $ ./gradlew :compose:desktop:suggestModules
+  # Compose Desktop
+  $ ./gradlew :compose:cmp:runDistributable
+  $ ./gradlew :compose:cmp:packageDistributionForCurrentOS
+  $ ./gradlew :compose:cmp:suggestModules
+
+  # Compose Web
+  $ ./gradlew :compose:cmp:wasmJsBrowserProductionRun -t
   ```
 
 ### Publishing
