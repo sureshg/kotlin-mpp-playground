@@ -38,6 +38,7 @@ kotlin {
     jvmMain.dependencies {
       implementation(compose.desktop.currentOs)
       implementation(libs.kotlinx.coroutines.swing)
+      implementation(libs.slf4j.simple)
     }
 
     jsMain.dependencies { implementation(compose.html.core) }
