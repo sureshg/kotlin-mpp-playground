@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material3.ElevatedButton
 import androidx.compose.runtime.*
@@ -20,10 +19,7 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPosition
-import androidx.compose.ui.window.application
-import androidx.compose.ui.window.rememberWindowState
+import androidx.compose.ui.window.*
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -106,23 +102,11 @@ fun Home(navController: NavController) {
 }
 
 @Composable
-fun FileBrowser(modifier: Modifier = Modifier, navController: NavController) {
-  Column(
-      modifier = modifier.fillMaxSize().padding(10.dp).debug(color = Color.Magenta),
-      horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.SpaceEvenly) {
-        DragDropListView()
-        Button(onClick = { navController.popBackStack() }) { Text("Back") }
-      }
-}
-
-@Composable
 fun App() {
   SaveToBitmap(
       onSave = {
-        // val img = it.toAwtImage()
         // val file = File("screenshot.png")
-        // ImageIO.write(img, "png", file)
+        // it.toPngImage(file.toPath())
         // println("Saved the screenshot to ${file.absolutePath}")
       }) {
         val navController = rememberNavController()
@@ -130,6 +114,17 @@ fun App() {
           composable("Home") { Home(navController) }
           composable("FileBrowser") { FileBrowser(navController = navController) }
         }
+      }
+}
+
+@Composable
+fun FileBrowser(modifier: Modifier = Modifier, navController: NavController) {
+  Column(
+      modifier = modifier.fillMaxSize().padding(10.dp).debug(color = Color.Magenta),
+      horizontalAlignment = Alignment.CenterHorizontally,
+      verticalArrangement = Arrangement.SpaceEvenly) {
+        DragDropListView()
+        Button(onClick = { navController.popBackStack() }) { Text("Back") }
       }
 }
 
@@ -141,6 +136,6 @@ fun main() = application {
               width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center)),
       onCloseRequest = ::exitApplication) {
         window.minimumSize = Dimension(350, 600)
-        MaterialTheme { App() }
+        AppTheme { App() }
       }
 }
