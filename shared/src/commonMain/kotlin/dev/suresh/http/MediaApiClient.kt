@@ -41,70 +41,69 @@ class MediaApiClient(val timeout: Timeout = Timeout.DEFAULT, val retry: Retry = 
 
   private val log = KotlinLogging.logger {}
 
-  private val client =
-      HttpClient {
-        install(Resources)
-        install(ContentNegotiation) { json(dev.suresh.json) }
+  private val client = HttpClient {
+    install(Resources)
+    install(ContentNegotiation) { json(dev.suresh.json) }
 
-        install(ContentEncoding) {
-          deflate(1.0F)
-          gzip(0.9F)
-        }
+    install(ContentEncoding) {
+      deflate(1.0F)
+      gzip(0.9F)
+    }
 
-        install(HttpRequestRetry) {
-          maxRetries = retry.attempts
-          retryOnException(retryOnTimeout = true)
-          retryOnServerErrors()
-          constantDelay(millis = retry.maxDelay.inWholeMilliseconds)
-        }
+    install(HttpRequestRetry) {
+      maxRetries = retry.attempts
+      retryOnException(retryOnTimeout = true)
+      retryOnServerErrors()
+      constantDelay(millis = retry.maxDelay.inWholeMilliseconds)
+    }
 
-        install(HttpTimeout) {
-          connectTimeoutMillis = timeout.connection.inWholeMilliseconds
-          requestTimeoutMillis = timeout.read.inWholeMilliseconds
-          socketTimeoutMillis = timeout.write.inWholeMilliseconds
-        }
+    install(HttpTimeout) {
+      connectTimeoutMillis = timeout.connection.inWholeMilliseconds
+      requestTimeoutMillis = timeout.read.inWholeMilliseconds
+      socketTimeoutMillis = timeout.write.inWholeMilliseconds
+    }
 
-        install(HttpCookies)
+    install(HttpCookies)
 
-        install(Logging) {
-          logger = Logger.DEFAULT
-          level = LogLevel.INFO
-          sanitizeHeader { header -> header == HttpHeaders.Authorization }
-        }
+    install(Logging) {
+      logger = Logger.DEFAULT
+      level = LogLevel.INFO
+      sanitizeHeader { header -> header == HttpHeaders.Authorization }
+    }
 
-        engine { pipelining = true }
+    engine { pipelining = true }
 
-        followRedirects = true
+    followRedirects = true
 
-        install(UserAgent) { agent = "Image API Client" }
+    install(UserAgent) { agent = "Image API Client" }
 
-        install(DefaultRequest) {
-          url("https://suresh.dev/")
-          headers.appendIfNameAndValueAbsent(
-              HttpHeaders.ContentType, ContentType.Application.Json.toString())
-        }
+    install(DefaultRequest) {
+      url("https://suresh.dev/")
+      headers.appendIfNameAndValueAbsent(
+          HttpHeaders.ContentType, ContentType.Application.Json.toString())
+    }
 
-        // install(Auth) {
-        //   basic {
-        //     credentials {
-        //       sendWithoutRequest { true }
-        //       BasicAuthCredentials(username = "", password = "")
-        //     }
-        //   }
-        // }
-        //
-        // expectSuccess = false
-        //
-        // HttpResponseValidator {
-        //   validateResponse {
-        //     when (it.status.value) {
-        //       in 300..399 -> throw RedirectResponseException(it, "Redirect error")
-        //       in 400..499 -> throw ClientRequestException(it, "Client error")
-        //       in 500..599 -> throw ServerResponseException(it, "Server error")
-        //     }
-        //   }
-        // }
-      }
+    // install(Auth) {
+    //   basic {
+    //     credentials {
+    //       sendWithoutRequest { true }
+    //       BasicAuthCredentials(username = "", password = "")
+    //     }
+    //   }
+    // }
+    //
+    // expectSuccess = false
+    //
+    // HttpResponseValidator {
+    //   validateResponse {
+    //     when (it.status.value) {
+    //       in 300..399 -> throw RedirectResponseException(it, "Redirect error")
+    //       in 400..499 -> throw ClientRequestException(it, "Client error")
+    //       in 500..599 -> throw ServerResponseException(it, "Server error")
+    //     }
+    //   }
+    // }
+  }
 
   suspend fun images() = client.get(ImgRes()).body<List<Image>>()
 

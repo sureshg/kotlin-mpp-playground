@@ -218,9 +218,14 @@ $ ./gradlew :backend:jvm:run
 ### Misc
 
   ```bash
-  # KMP hierarchy, Dependencies
-  $ ./gradlew :shared:printHierarchy
+  # Dependency Insight
+  $ ./gradlew dependencies
+  $ ./gradlew :shared:dependencies --configuration testRuntimeClasspath
+  $ ./gradlew -q :shared:dependencyInsight --dependency slf4j-api --configuration RuntimeClasspath
   $ ./gradlew :backend:jvm:listResolvedArtifacts
+
+  # KMP hierarchy and module graphs
+  $ ./gradlew :shared:printHierarchy
   $ ./gradlew createModuleGraph
   $ ./gradlew generateChangelog
 
@@ -233,7 +238,6 @@ $ ./gradlew :backend:jvm:run
   # Gradle Best Practices
   $ ./gradlew -p gradle/build-logic :bestPracticesBaseline
   $ ./gradlew checkBuildLogicBestPractices
-  $ ./gradlew dependencies
 
   # GitHub Actions lint
   $ actionlint
