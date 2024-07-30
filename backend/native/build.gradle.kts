@@ -44,9 +44,9 @@ kotlin {
     commonMain { dependencies { api(projects.shared) } }
     nativeMain {
       dependencies {
+        api(libs.ktor.client.cio)
         api(libs.kmp.appdirs)
         api(libs.kfswatch)
-        // api(libs.ktor.server.cio)
         // api(libs.arrow.suspendapp.ktor)
       }
     }

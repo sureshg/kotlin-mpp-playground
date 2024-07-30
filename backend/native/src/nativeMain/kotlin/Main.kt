@@ -1,4 +1,5 @@
 import dev.suresh.flow.timerComposeFlow
+import dev.suresh.http.MediaApiClient
 import dev.suresh.json
 import dev.suresh.platform
 import kotlin.reflect.typeOf
@@ -6,6 +7,12 @@ import kotlin.time.Duration
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
+
+data class ProcessResult(val code: Int, val rawOutput: String?)
+
+expect fun execute(command: String, vararg args: String): ProcessResult
+
+expect fun readPassword(prompt: String): String?
 
 fun main(args: Array<String>): Unit = runBlocking {
   println("Kotlin Native App: ${BuildConfig.version}")
@@ -29,13 +36,11 @@ fun main(args: Array<String>): Unit = runBlocking {
   buffer()
   dir()
   // MultiplatformSystem.readEnvironmentVariable()
+
+  val client = MediaApiClient()
+  val images = client.images()
+  println("Found ${images.size} images")
 }
-
-data class ProcessResult(val code: Int, val rawOutput: String?)
-
-expect fun execute(command: String, vararg args: String): ProcessResult
-
-expect fun readPassword(prompt: String): String?
 
 inline fun <reified T> prop(prop: T): String {
   val ktype = typeOf<T>()
