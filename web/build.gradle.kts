@@ -45,12 +45,12 @@ tasks {
       }
 
   jsProcessResources {
-    logger.quiet(TextColors.gray("◈ Copying shared JS resources"))
+    logger.quiet(TextColors.gray("◈ Configuring shared JS resources"))
     dependsOn(copySharedJsResources)
   }
 
   wasmJsProcessResources {
-    logger.quiet(TextColors.gray("◈ Copying shared Wasm resources"))
+    logger.quiet(TextColors.gray("◈ Configuring shared Wasm resources"))
     dependsOn(copySharedWasmResources)
   }
 }

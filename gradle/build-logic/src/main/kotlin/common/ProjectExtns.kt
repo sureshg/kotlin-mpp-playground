@@ -145,12 +145,6 @@ val Project.githubToken
 val Project.isKotlinMultiplatformProject
   get() = plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")
 
-val Project.isKotlinJvmProject
-  get() = plugins.hasPlugin("org.jetbrains.kotlin.jvm")
-
-val Project.isKotlinJsProject
-  get() = plugins.hasPlugin("org.jetbrains.kotlin.js")
-
 @Suppress("UnstableApiUsage")
 val Project.gradleSystemProperties
   get() =
@@ -334,6 +328,16 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
 }
 
 /**
+ * JVM arguments for running java/kotlin applications. If the user has provided a custom
+ * *jvmArgs*(`-PjvmArgs=...`) gradle property, it will be used instead of the default [jvmArguments]
+ */
+val Project.jvmRunArgs
+  get() = run {
+    val jvmArgs: String? by this
+    jvmArgs?.split(",") ?: jvmArguments(appRun = true)
+  }
+
+/**
  * Returns the dependency string for the specified Kotlin wrapper.
  *
  * @param target The target wrapper to retrieve the dependency string for.
@@ -408,25 +412,24 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       "-Xcontext-receivers",
       "-Xexpect-actual-classes",
       "-Xskip-prerelease-check",
-      // "-Xsupress-warning=WARNING_NAME"
+      // "-Xsuppress-warning=CONTEXT_RECEIVERS_DEPRECATED"
       // "-P",
       // "plugin:...=..."
   )
-  optIn =
-      listOf(
-          "kotlin.ExperimentalStdlibApi",
-          "kotlin.contracts.ExperimentalContracts",
-          "kotlin.ExperimentalUnsignedTypes",
-          "kotlin.io.encoding.ExperimentalEncodingApi",
-          "kotlin.time.ExperimentalTime",
-          "kotlinx.coroutines.ExperimentalCoroutinesApi",
-          "kotlinx.serialization.ExperimentalSerializationApi",
-          "kotlin.ExperimentalMultiplatform",
-          "kotlin.js.ExperimentalJsExport",
-          "kotlin.experimental.ExperimentalNativeApi",
-          "kotlinx.cinterop.ExperimentalForeignApi",
-          // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
-      )
+  optIn.addAll(
+      "kotlin.ExperimentalStdlibApi",
+      "kotlin.contracts.ExperimentalContracts",
+      "kotlin.ExperimentalUnsignedTypes",
+      "kotlin.io.encoding.ExperimentalEncodingApi",
+      "kotlin.time.ExperimentalTime",
+      "kotlinx.coroutines.ExperimentalCoroutinesApi",
+      "kotlinx.serialization.ExperimentalSerializationApi",
+      "kotlin.ExperimentalMultiplatform",
+      "kotlin.js.ExperimentalJsExport",
+      "kotlin.experimental.ExperimentalNativeApi",
+      "kotlinx.cinterop.ExperimentalForeignApi",
+      // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
+  )
 }
 
 context(Project)
@@ -588,16 +591,17 @@ fun KotlinSourceSet.ksp(dependencyNotation: Any) {
 
 /** Returns the path of the dependency jar in runtime classpath. */
 context(Project)
-val ExternalDependency.dependencyPath
-  get() =
-      configurations
-          .named("runtimeClasspath")
-          .get()
-          .resolvedConfiguration
-          .resolvedArtifacts
-          .find { it.moduleVersion.id.module == module }
-          ?.file
-          ?.path ?: error("Could not find $name in runtime classpath")
+val ExternalDependency.dependencyPath: Provider<String>
+  get() = provider {
+    configurations
+        .named("runtimeClasspath")
+        .get()
+        .resolvedConfiguration
+        .resolvedArtifacts
+        .find { it.moduleVersion.id.module == module }
+        ?.file
+        ?.path
+  }
 
 /** Returns the application `run` command. */
 context(Project)

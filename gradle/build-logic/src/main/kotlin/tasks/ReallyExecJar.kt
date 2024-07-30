@@ -27,7 +27,7 @@ abstract class ReallyExecJar : DefaultTask() {
 
   init {
     description = "Build executable binary"
-    group = LifecycleBasePlugin.BUILD_TASK_NAME
+    group = LifecycleBasePlugin.BUILD_GROUP
     javaOpts.convention(emptyList())
     execJarFile.convention(project.layout.buildDirectory.file(project.name))
   }

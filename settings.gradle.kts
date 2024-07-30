@@ -35,7 +35,7 @@ if (nativeBuild.toBoolean()) {
 }
 
 if (composeBuild.toBoolean()) {
-  include(":compose:desktop")
+  include(":compose:cmp")
   // include(":compose:html")
 }
 

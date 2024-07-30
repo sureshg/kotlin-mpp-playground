@@ -141,7 +141,7 @@ graalvmNative {
  * [Configure-Custom-SourceSet](https://docs.gradle.org/current/userguide/java_testing.html#sec:configuring_java_integration_tests)
  */
 val graal by
-    sourceSets.creating {
+    sourceSets.registering {
       compileClasspath += sourceSets.main.get().output
       runtimeClasspath += sourceSets.main.get().output
     }
@@ -210,5 +210,5 @@ dependencies {
   // Dependencies required for native-image build. Use "graalCompileOnly" for compile only deps.
   // "graalCompileOnly"(libs.graalvm.sdk)
   // "graalImplementation"(libs.classgraph)
-  nativeImageCompileOnly(graal.output)
+  nativeImageCompileOnly(graal.map { it.output })
 }

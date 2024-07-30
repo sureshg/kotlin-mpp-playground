@@ -98,37 +98,34 @@ spotless {
 
 tasks {
   withType<DokkaTaskPartial>().configureEach {
-    dokkaSourceSets {
-      // register("customSourceSet") {}
-      configureEach {
-        moduleName = project.name
-        jdkVersion = kotlinJvmTarget.map { it.target.toInt() }
-        noStdlibLink = false
-        noJdkLink = false
-        reportUndocumented = false
-        skipDeprecated = true
-        // includes.from("README.md")
-        documentedVisibilities = setOf(Visibility.PUBLIC, Visibility.PROTECTED)
+    dokkaSourceSets.configureEach {
+      moduleName = project.name
+      jdkVersion = kotlinJvmTarget.map { it.target.toInt() }
+      noStdlibLink = false
+      noJdkLink = false
+      reportUndocumented = false
+      skipDeprecated = true
+      // includes.from("README.md")
+      documentedVisibilities = setOf(Visibility.PUBLIC, Visibility.PROTECTED)
 
-        sourceLink {
-          localDirectory = rootProject.projectDir
-          remoteUrl = URI("${githubRepo}/tree/main").toURL()
-          remoteLineSuffix = "#L"
-        }
-
-        samples.from("src/test/kotlin")
-
-        perPackageOption {
-          matchingRegex = ".*internal.*"
-          suppress = true
-        }
-        //  externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.coroutines/")
-        //  externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.serialization/")
-        //  externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx-datetime/",
-        // packageListUrl =
-        // "https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list")
-        //  externalDocumentationLink(url = "https://api.ktor.io/")
+      sourceLink {
+        localDirectory = rootProject.projectDir
+        remoteUrl = URI("${githubRepo}/tree/main").toURL()
+        remoteLineSuffix = "#L"
       }
+
+      samples.from("src/test/kotlin")
+
+      perPackageOption {
+        matchingRegex = ".*internal.*"
+        suppress = true
+      }
+      // externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.coroutines/")
+      // externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.serialization/")
+      // externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx-datetime/",
+      // packageListUrl =
+      // "https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list")
+      // externalDocumentationLink(url = "https://api.ktor.io/")
     }
 
     pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {

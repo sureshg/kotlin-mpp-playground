@@ -1,6 +1,6 @@
 [versions]
 java                           = "24"
-kotlin                         = "2.0.20-Beta2"
+kotlin                         = "2.0.20-RC"
 kotlin-ksp                     = "2.0.20-Beta2-1.0.23"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
@@ -35,15 +35,15 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.16.2"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.778"
+kotlin-wrappers                = "1.0.0-pre.783"
 kotlin-redacted                = "1.9.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
 karakum                        = "1.0.0-alpha.40-K2"
-seskar                         = "3.2.0"
+seskar                         = "3.6.0"
 spring-boot                    = "3.3.1"
-spring-depmgmt                 = "1.1.5"
+spring-depmgmt                 = "1.1.6"
 ktor                           = "3.0.0-beta-2"
 ktor-cohort                    = "2.5.1"
 otel                           = "1.40.0"
@@ -55,7 +55,7 @@ sslcontext-kickstart           = "8.3.6"
 ksp-auto-service               = "1.2.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
-ajalt-mordant                  = "2.7.1"
+ajalt-mordant                  = "2.7.2"
 ajalt-clikt                    = "4.4.0"
 ajalt-colormath                = "3.6.0"
 classgraph                     = "4.8.174"
@@ -83,7 +83,7 @@ google-javaformat              = "1.22.0"
 palantir-javaformat            = "2.47.0"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.14.0"
-graalvm                        = "24.0.1"
+graalvm                        = "24.0.2"
 jspecify                       = "1.0.0"
 rsocket                        = "0.16.0"
 jctools                        = "4.0.1"
@@ -137,7 +137,7 @@ async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.0.0"
 airlift-aircompressor          = "0.27"
-airlift-security               = "250"
+airlift-security               = "251"
 directory-keystore             = "1.1.0"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
@@ -148,7 +148,7 @@ batik                          = "1.17"
 twelvemonkeys                  = "3.10.1"
 okapibarcode                   = "0.4.1"
 chasm                          = "0.6.0"
-kfswatch                       = "1.2.0"
+kfswatch                       = "1.3.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.10.0"
@@ -160,14 +160,14 @@ npm-jsjoda-tz                  = "2.21.1"
 # Plugin versions
 benmanes                       = "0.51.0"
 foojay-resolver                = "0.8.0"
-gradle-develocity              = "3.17.5"
-nmcp                           = "0.0.8"
+gradle-develocity              = "3.17.6"
+nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
-shadow                         = "8.1.1"
+shadow                         = "8.1.8"
 spotless                       = "7.0.0.BETA1"
 semver-plugin                  = "0.5.1"
 taskinfo                       = "2.1.0"
-dependency-analysis            = "1.32.0"
+dependency-analysis            = "1.33.0"
 best-practices-plugin          = "0.10"
 graalvm-nativeimage            = "0.10.2"
 github-depgraph                = "0.1.0"
@@ -186,8 +186,9 @@ jib-plugin                     = "3.4.3"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
-jetbrains-compose              = "1.7.0-alpha01"
+jetbrains-compose              = "1.7.0-alpha02"
 jetbrains-compose-nav          = "2.8.0-alpha08"
+jetbrains-compose-viewmodel    = "2.8.0"
 kobweb                         = "0.18.2"
 detekt                         = "1.23.6"
 detekt-compose-rules           = "0.4.5"
@@ -218,7 +219,7 @@ build-jte-plugin                     = { module = "gg.jte:jte-gradle-plugin"    
 build-nmcp-plugin                    = { module = "com.gradleup.nmcp:nmcp"                                          , version.ref = "nmcp"}
 build-nexus-plugin                   = { module = "io.github.gradle-nexus:publish-plugin"                           , version.ref = "nexus-publish"}
 build-spotless-plugin                = { module = "com.diffplug.spotless:spotless-plugin-gradle"                    , version.ref = "spotless"}
-build-shadow-plugin                  = { module = "com.github.johnrengelman:shadow"                                 , version.ref = "shadow"}
+build-shadow-plugin                  = { module = "io.github.goooler.shadow:shadow-gradle-plugin"                   , version.ref = "shadow"}
 build-taskinfo                       = { module = "org.barfuin.gradle.taskinfo:gradle-taskinfo"                     , version.ref = "taskinfo" }
 build-dependencyanalysis             = { module = "com.autonomousapps:dependency-analysis-gradle-plugin"            , version.ref = "dependency-analysis" }
 build-bestpractices-plugin           = { module = "com.autonomousapps:plugin-best-practices-plugin"                 , version.ref = "best-practices-plugin" }
@@ -253,6 +254,7 @@ kotlin-stdlib                        = { module = "org.jetbrains.kotlin:kotlin-s
 kotlin-reflect                       = { module = "org.jetbrains.kotlin:kotlin-reflect"                             , version.ref = "kotlin"}
 kotlin-test                          = { module = "org.jetbrains.kotlin:kotlin-test"                                , version.ref = "kotlin"}
 kotlin-test-junit                    = { module = "org.jetbrains.kotlin:kotlin-test-junit"                          , version.ref = "kotlin"}
+kotlin-test-junit5                   = { module = "org.jetbrains.kotlin:kotlin-test-junit5"                         , version.ref = "kotlin"}
 kotlin-metadata-jvm                  = { module = "org.jetbrains.kotlin:kotlin-metadata-jvm"                        , version.ref = "kotlin"}
 kotlin-compiler-embeddable           = { module = "org.jetbrains.kotlin:kotlin-compiler-embeddable"                 , version.ref = "kotlin"}
 kotlinx-coroutines-bom               = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom"                    , version.ref = "kotlinx-coroutines" }
@@ -550,6 +552,7 @@ karakum                              = { id = "io.github.sgrishchenko.karakum"  
 seskar                               = { id = "io.github.turansky.seskar"                                      , version.ref = "seskar" }
 jte                                  = { id = "gg.jte.gradle"                                                  , version.ref = "jte" }
 benmanes                             = { id = "com.github.ben-manes.versions"                                  , version.ref = "benmanes" }
+spotless                             = { id = "com.diffplug.spotless"                                          , version.ref = "spotless" }
 bestpractices                        = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "best-practices-plugin" }
 graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"                                  , version.ref = "graalvm-nativeimage"}
 buildkonfig                          = { id = "com.codingfeline.buildkonfig"                                   , version.ref = "buildkonfig"}

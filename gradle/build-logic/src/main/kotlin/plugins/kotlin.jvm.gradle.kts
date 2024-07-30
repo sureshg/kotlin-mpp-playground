@@ -4,11 +4,16 @@ import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
+import java.util.spi.ToolProvider
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
+import tasks.Jdeprscan
+import tasks.JdeprscanExtension
 import tasks.ReallyExecJar
 
 plugins {
@@ -77,7 +82,7 @@ redacted {
 }
 
 // Java agent configuration for jib
-val javaAgent by configurations.creating
+val javaAgent by configurations.registering { isTransitive = false }
 
 tasks {
   // Configure "compileJava" and "compileTestJava" tasks.
@@ -95,6 +100,7 @@ tasks {
     manifest {
       attributes(
           "Automatic-Module-Name" to project.group,
+          "Enable-Native-Access" to "ALL-UNNAMED",
           "Built-By" to System.getProperty("user.name"),
           "Built-Jdk" to System.getProperty("java.runtime.version"),
           "Built-OS" to
@@ -132,18 +138,59 @@ tasks {
     exclude("**/Main.java")
   }
 
-  pluginManager.withPlugin("com.github.johnrengelman.shadow") {
+  pluginManager.withPlugin("io.github.goooler.shadow") {
     val buildExecutable by
         registering(ReallyExecJar::class) {
-          val shadowJar = named<Jar>("shadowJar")
+          val shadowJar by existing(Jar::class)
           jarFile = shadowJar.flatMap { it.archiveFile }
           // javaOpts = application.applicationDefaultJvmArgs
           javaOpts = named<JavaExec>("run").get().jvmArgs
           execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
           onlyIf { OperatingSystem.current().isUnix }
         }
-
     build { finalizedBy(buildExecutable) }
+
+    register("printModuleDeps") {
+      description = "Print Java Platform Module dependencies of the application."
+      group = LifecycleBasePlugin.BUILD_GROUP
+
+      val shadowJar by existing(Jar::class)
+      doLast {
+        val jarFile = shadowJar.get().archiveFile.get().asFile
+
+        val jdeps =
+            ToolProvider.findFirst("jdeps").orElseGet { error("jdeps tool is missing in the JDK!") }
+        val out = StringWriter()
+        val pw = PrintWriter(out)
+        jdeps.run(
+            pw,
+            pw,
+            "-q",
+            "-R",
+            "--print-module-deps",
+            "--ignore-missing-deps",
+            "--multi-release=${javaRelease.get()}",
+            jarFile.absolutePath,
+        )
+
+        val modules = out.toString()
+        logger.quiet(
+            """
+            |Application modules for OpenJDK-${javaRelease.get()} are,
+            |${modules.split(",")
+              .mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
+              .joinToString(System.lineSeparator())}
+            """
+                .trimMargin())
+      }
+      dependsOn(shadowJar)
+    }
+
+    val jdepExtn = extensions.create<JdeprscanExtension>("jdeprscan")
+    register<Jdeprscan>("jdeprscan", jdepExtn).configure {
+      val shadowJar by existing(Jar::class)
+      jarFile = shadowJar.flatMap { it.archiveFile }
+    }
   }
 
   // Copy OpenTelemetry Java agent for jib

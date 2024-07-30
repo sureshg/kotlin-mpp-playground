@@ -18,7 +18,7 @@ abstract class BuildConfig @Inject constructor(@Nested val extn: BuildConfigExte
 
   init {
     description = "Generate build config class"
-    group = LifecycleBasePlugin.BUILD_TASK_NAME
+    group = LifecycleBasePlugin.BUILD_GROUP
   }
 
   @TaskAction

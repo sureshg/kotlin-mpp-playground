@@ -92,9 +92,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
 
     mainRun {
       mainClass = libs.versions.app.mainclass
-      val jvmArgs: String? by project
-      val args = jvmArgs?.split(",") ?: jvmArguments(appRun = true)
-      setArgs(args)
+      setArgs(jvmRunArgs)
     }
 
     // val test by testRuns.existing
@@ -189,6 +187,8 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
   wasmJs {
     // moduleName = "wasm-app"
     browser {
+      val rootDirPath = project.rootDir.path
+      val projectDirPath = project.projectDir.path
       commonWebpackConfig {
         cssSupport { enabled = true }
         // outputFileName = "wasm-app.js"
@@ -198,8 +198,8 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
               static =
                   (static ?: mutableListOf()).apply {
                     // Serve sources to debug inside the browser
-                    add(project.rootDir.path)
-                    add(project.projectDir.path)
+                    add(rootDirPath)
+                    add(projectDirPath)
                   }
             }
       }
@@ -256,7 +256,11 @@ fun KotlinMultiplatformExtension.allNativeTargets(configure: KotlinNativeTarget.
     macosArm64 { configure() }
     linuxX64 { configure() }
     linuxArm64 { configure() }
-    mingwX64 { configure() }
+
+    val nativeWinTarget: String? by project
+    if (nativeWinTarget.toBoolean()) {
+      mingwX64 { configure() }
+    }
   }
 }
 

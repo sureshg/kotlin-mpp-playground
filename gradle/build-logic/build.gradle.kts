@@ -9,6 +9,7 @@ plugins {
   alias(libs.plugins.jte)
   alias(libs.plugins.bestpractices)
   alias(libs.plugins.benmanes)
+  alias(libs.plugins.spotless)
   // alias(libs.plugins.kotlin.dsl)
 }
 
@@ -31,19 +32,34 @@ kotlin {
         "-Xno-param-assertions",
         "-Xno-call-assertions",
         "-Xno-receiver-assertions")
-    optIn =
-        listOf(
-            "kotlin.ExperimentalStdlibApi",
-            "kotlin.time.ExperimentalTime",
-            "kotlin.io.encoding.ExperimentalEncodingApi",
-            "kotlinx.validation.ExperimentalBCVApi",
-            "kotlinx.coroutines.ExperimentalCoroutinesApi",
-            "kotlinx.serialization.ExperimentalSerializationApi",
-            "kotlinx.validation.ExperimentalBCVApi",
-            "org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi",
-            "org.jetbrains.kotlin.gradle.ExperimentalWasmDsl",
-            "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl",
-            "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
+    optIn.addAll(
+        "kotlin.ExperimentalStdlibApi",
+        "kotlin.time.ExperimentalTime",
+        "kotlin.io.encoding.ExperimentalEncodingApi",
+        "kotlinx.validation.ExperimentalBCVApi",
+        "kotlinx.coroutines.ExperimentalCoroutinesApi",
+        "kotlinx.serialization.ExperimentalSerializationApi",
+        "org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi",
+        "org.jetbrains.kotlin.gradle.ExperimentalWasmDsl",
+        "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl",
+        "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
+  }
+}
+
+spotless {
+  val ktfmtVersion = libs.versions.ktfmt.get()
+  kotlin {
+    target("src/**/*.kts", "src/**/*.kt")
+    ktfmt(ktfmtVersion)
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+
+  kotlinGradle {
+    target("*.kts")
+    ktfmt(ktfmtVersion)
+    trimTrailingWhitespace()
+    endWithNewline()
   }
 }
 
@@ -67,9 +83,8 @@ tasks {
   register("cleanAll") {
     description = "Cleans all projects"
     group = LifecycleBasePlugin.CLEAN_TASK_NAME
-
     allprojects.mapNotNull { it.tasks.findByName("clean") }.forEach { dependsOn(it) }
-    doLast { delete(layout.buildDirectory) }
+    // doLast { delete(layout.buildDirectory) }
   }
 }
 

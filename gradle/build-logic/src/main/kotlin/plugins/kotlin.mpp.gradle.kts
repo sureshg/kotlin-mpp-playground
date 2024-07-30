@@ -43,11 +43,15 @@ kotlin {
       allNativeTargets { compilerOptions { configureKotlinNative() } }
     }
     "native" -> allNativeTargets { compilerOptions { configureKotlinNative() } }
-    "html" -> jsTarget()
     "web" -> {
       jsTarget()
       wasmJsTarget()
     }
+    "cmp" -> {
+      jvmTarget()
+      wasmJsTarget()
+    }
+    "html" -> jsTarget()
     else -> jvmTarget()
   }
 
@@ -114,6 +118,7 @@ tasks {
     manifest {
       attributes(
           "Automatic-Module-Name" to project.group,
+          "Enable-Native-Access" to "ALL-UNNAMED",
           "Built-By" to System.getProperty("user.name"),
           "Built-Jdk" to System.getProperty("java.runtime.version"),
           "Built-OS" to
@@ -145,7 +150,7 @@ tasks {
     }
   }
 
-  pluginManager.withPlugin("com.github.johnrengelman.shadow") {
+  pluginManager.withPlugin("io.github.goooler.shadow") {
     val buildExecutable by
         registering(ReallyExecJar::class) {
           jarFile = named<Jar>("shadowJar").flatMap { it.archiveFile }

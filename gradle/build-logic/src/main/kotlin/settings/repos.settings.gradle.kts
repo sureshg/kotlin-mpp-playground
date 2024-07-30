@@ -24,6 +24,13 @@ pluginManagement {
     }
   }
 
+  // val kotlinVersion =
+  //     file("$rootDir/gradle/libs.versions.toml")
+  //         .readLines()
+  //         .first { it.contains("kotlin") }
+  //         .split("\"")[1]
+  //         .trim()
+
   plugins {
     // val kspVersion: String by settings
     // id("com.google.devtools.ksp") version kspVersion apply false
@@ -33,6 +40,7 @@ pluginManagement {
   repositories {
     mavenCentral()
     gradlePluginPortal()
+    googleAndroid()
     kobWeb()
   }
 }
@@ -52,13 +60,7 @@ plugins {
 dependencyResolutionManagement {
   repositories {
     mavenCentral()
-    google {
-      mavenContent {
-        includeGroupAndSubgroups("androidx")
-        includeGroupAndSubgroups("com.android")
-        includeGroupAndSubgroups("com.google")
-      }
-    }
+    googleAndroid()
     kobWeb()
   }
 
@@ -100,6 +102,16 @@ develocity {
     uploadInBackground = false
     tag("GITHUB_ACTION")
     buildScanPublished { addJobSummary() }
+  }
+}
+
+fun RepositoryHandler.googleAndroid() {
+  google {
+    mavenContent {
+      includeGroupAndSubgroups("androidx")
+      includeGroupAndSubgroups("com.android")
+      includeGroupAndSubgroups("com.google")
+    }
   }
 }
 

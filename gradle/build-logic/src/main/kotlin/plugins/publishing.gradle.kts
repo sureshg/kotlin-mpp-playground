@@ -16,6 +16,10 @@ plugins {
 if (isRootProject) {
   apply(plugin = "io.github.gradle-nexus.publish-plugin")
 
+  val nativeBuild: String? by project
+  val composeBuild: String? by project
+  val springBoot: String? by project
+
   nmcp {
     publishAggregation {
       project(":shared")
@@ -28,15 +32,14 @@ if (isRootProject) {
       project(":backend:profiling")
       project(":backend:security")
       project(":web")
-
-      val nativeBuild: String? by project
       if (nativeBuild.toBoolean()) {
         project(":backend:native")
       }
-
-      val composeBuild: String? by project
+      if (springBoot.toBoolean()) {
+        project(":backend:boot")
+      }
       if (composeBuild.toBoolean()) {
-        project(":compose:desktop")
+        project(":compose:cmp")
         // project(":compose:html")
       }
 
