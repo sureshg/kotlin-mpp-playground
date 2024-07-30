@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > TimerKt</title>
+  <title>: Coverage Report > SysConfig</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,15 +19,18 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.flow</a>
+    <a href="../index.html">dev.suresh.config</a>
 </div>
 
-<h1>Coverage Summary for Class: TimerKt (dev.suresh.flow)</h1>
+<h1>Coverage Summary for Class: SysConfig (dev.suresh.config)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,35 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">TimerKt</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/20)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">TimerKt$timerComposeFlow$1</td>
+  <td class="name">SysConfig</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -83,7 +58,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/1)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -97,27 +71,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/33)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/5)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,10 +79,19 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/53)
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/58)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -136,41 +99,56 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.flow
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.config
 &nbsp;
-&nbsp;import kotlinx.coroutines.delay
-&nbsp;import kotlinx.coroutines.flow.flow
-&nbsp;import kotlinx.datetime.Clock
-&nbsp;import kotlinx.datetime.TimeZone
-&nbsp;import kotlinx.datetime.toLocalDateTime
+&nbsp;import io.ktor.server.config.*
+&nbsp;import kotlin.io.path.Path
+&nbsp;import kotlin.io.path.exists
+&nbsp;import kotlin.reflect.full.withNullability
+&nbsp;import kotlin.reflect.typeOf
+&nbsp;import kotlin.time.Duration
 &nbsp;
-&nbsp;// import androidx.compose.runtime.*
-&nbsp;// import app.cash.molecule.RecompositionMode
-&nbsp;// import app.cash.molecule.moleculeFlow
-&nbsp;//
-&nbsp;// @Composable
-&nbsp;// fun timer(tz: TimeZone): LocalDateTime {
-&nbsp;//   var time by remember { mutableStateOf(currentTime(tz)) }
-&nbsp;//   LaunchedEffect(Unit) {
-&nbsp;//     while (true) {
-&nbsp;//       delay(1000)
-&nbsp;//       time = currentTime(tz)
-&nbsp;//     }
-&nbsp;//   }
-&nbsp;//   return time
-&nbsp;// }
-&nbsp;//
-&nbsp;// fun timerComposeFlow(tz: TimeZone = TimeZone.currentSystemDefault()) =
-&nbsp;//     moleculeFlow(RecompositionMode.Immediate) { timer(tz) }
+&nbsp;data object SysConfig {
 &nbsp;
-<b class="nc">&nbsp;private fun currentTime(tz: TimeZone) = Clock.System.now().toLocalDateTime(tz)</b>
+&nbsp;  // Logback log directory
+<b class="nc">&nbsp;  val LOG_DIR by lazy {</b>
+<b class="nc">&nbsp;    System.getenv(&quot;LOG_DIR&quot;).orEmpty().ifBlank {</b>
+<b class="nc">&nbsp;      when {</b>
+<b class="nc">&nbsp;        Path(&quot;/log&quot;).exists() -&gt; &quot;/log&quot;</b>
+<b class="nc">&nbsp;        else -&gt; System.getProperty(&quot;user.dir&quot;)</b>
+<b class="nc">&nbsp;      }</b>
+&nbsp;    }
+&nbsp;  }
 &nbsp;
-<b class="nc">&nbsp;fun timerComposeFlow(tz: TimeZone = TimeZone.currentSystemDefault()) = flow {</b>
-<b class="nc">&nbsp;  while (true) {</b>
-<b class="nc">&nbsp;    delay(1000)</b>
-<b class="nc">&nbsp;    emit(currentTime(tz))</b>
+&nbsp;  /**
+&nbsp;   * Initializes the system properties required for the application to run. This should be invoked
+&nbsp;   * before the Engine main() method is called.
+&nbsp;   */
+&nbsp;  fun initSysProperties() {
+<b class="nc">&nbsp;    System.setProperty(&quot;jdk.tls.maxCertificateChainLength&quot;, &quot;15&quot;)</b>
+<b class="nc">&nbsp;    System.setProperty(&quot;jdk.includeInExceptions&quot;, &quot;hostInfo&quot;)</b>
+<b class="nc">&nbsp;    System.setProperty(&quot;LOG_DIR&quot;, LOG_DIR)</b>
 &nbsp;  }
 &nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Extension function to get and convert config values to their respective type. Nullability is
+&nbsp; * disabled to support java types
+&nbsp; */
+&nbsp;context(ApplicationConfig)
+&nbsp;@Suppress(&quot;IMPLICIT_CAST_TO_ANY&quot;)
+&nbsp;inline fun &lt;reified T&gt; prop(prop: String) =
+&nbsp;    when (typeOf&lt;T&gt;().withNullability(false)) {
+&nbsp;      typeOf&lt;String&gt;() -&gt; property(prop).getString()
+&nbsp;      typeOf&lt;List&lt;String&gt;&gt;() -&gt; property(prop).getList()
+&nbsp;      typeOf&lt;Boolean&gt;() -&gt; property(prop).getString().toBoolean()
+&nbsp;      typeOf&lt;Int&gt;() -&gt; property(prop).getString().toInt()
+&nbsp;      typeOf&lt;Long&gt;() -&gt; property(prop).getString().toLong()
+&nbsp;      typeOf&lt;Double&gt;() -&gt; property(prop).getString().toDouble()
+&nbsp;      typeOf&lt;Duration&gt;() -&gt; Duration.parse(property(prop).getString().lowercase())
+&nbsp;      else -&gt; throw IllegalArgumentException(&quot;Unsupported type: ${typeOf&lt;T&gt;()}&quot;)
+&nbsp;    }
+&nbsp;        as T
 </code>
 </pre>
 </div>
@@ -194,7 +172,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-25 00:18</div>
+    <div style="float:right;">generated on 2024-07-30 17:43</div>
 </div>
 </body>
 </html>

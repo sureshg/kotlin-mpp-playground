@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > GenArt</title>
+  <title>: Coverage Report > TimerKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,18 +19,15 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.gen</a>
+    <a href="../index.html">dev.suresh.flow</a>
 </div>
 
-<h1>Coverage Summary for Class: GenArt (dev.suresh.gen)</h1>
+<h1>Coverage Summary for Class: TimerKt (dev.suresh.flow)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -49,13 +46,22 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">GenArt</td>
+  <td class="name">TimerKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/2)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -63,35 +69,66 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/10)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/17)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/112)
+    (0/20)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">TimerKt$timerComposeFlow$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/53)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -99,46 +136,41 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.gen
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.flow
 &nbsp;
-&nbsp;import java.awt.Color
-&nbsp;import java.awt.geom.Ellipse2D
-&nbsp;import java.awt.image.BufferedImage
-&nbsp;import java.awt.image.BufferedImage.TYPE_INT_ARGB
-&nbsp;import javax.imageio.ImageIO
-&nbsp;import kotlin.math.PI
+&nbsp;import kotlinx.coroutines.delay
+&nbsp;import kotlinx.coroutines.flow.flow
+&nbsp;import kotlinx.datetime.Clock
+&nbsp;import kotlinx.datetime.TimeZone
+&nbsp;import kotlinx.datetime.toLocalDateTime
 &nbsp;
-&nbsp;object GenArt {
+&nbsp;// import androidx.compose.runtime.*
+&nbsp;// import app.cash.molecule.RecompositionMode
+&nbsp;// import app.cash.molecule.moleculeFlow
+&nbsp;//
+&nbsp;// @Composable
+&nbsp;// fun timer(tz: TimeZone): LocalDateTime {
+&nbsp;//   var time by remember { mutableStateOf(currentTime(tz)) }
+&nbsp;//   LaunchedEffect(Unit) {
+&nbsp;//     while (true) {
+&nbsp;//       delay(1000)
+&nbsp;//       time = currentTime(tz)
+&nbsp;//     }
+&nbsp;//   }
+&nbsp;//   return time
+&nbsp;// }
+&nbsp;//
+&nbsp;// fun timerComposeFlow(tz: TimeZone = TimeZone.currentSystemDefault()) =
+&nbsp;//     moleculeFlow(RecompositionMode.Immediate) { timer(tz) }
 &nbsp;
-&nbsp;  const val S = 1024
+<b class="nc">&nbsp;private fun currentTime(tz: TimeZone) = Clock.System.now().toLocalDateTime(tz)</b>
 &nbsp;
-&nbsp;  fun flower() {
-<b class="nc">&nbsp;    BufferedImage(S, S, TYPE_INT_ARGB).apply {</b>
-<b class="nc">&nbsp;      createGraphics().apply {</b>
-<b class="nc">&nbsp;        color = Color(0, 0, 0, 25)</b>
-<b class="nc">&nbsp;        for (angle in 0..&lt;360 step 15) {</b>
-<b class="nc">&nbsp;          val old = transform</b>
-<b class="nc">&nbsp;          val centerX = S / 2.0</b>
-<b class="nc">&nbsp;          val centerY = S / 2.0</b>
-<b class="nc">&nbsp;          val eWidth = S / 8.0</b>
-<b class="nc">&nbsp;          val eHeight = S * 7.0 / 16</b>
-<b class="nc">&nbsp;          translate(centerX, centerY)</b>
-<b class="nc">&nbsp;          rotate(angle.toRadians())</b>
-<b class="nc">&nbsp;          fill(Ellipse2D.Double(eHeight - centerX, eWidth - centerY, eWidth, eHeight))</b>
-<b class="nc">&nbsp;          transform = old</b>
-&nbsp;        }
-<b class="nc">&nbsp;        dispose()</b>
-<b class="nc">&nbsp;      }</b>
-<b class="nc">&nbsp;      ImageIO.write(this, &quot;png&quot;, java.io.File(&quot;flower.png&quot;))</b>
-<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;fun timerComposeFlow(tz: TimeZone = TimeZone.currentSystemDefault()) = flow {</b>
+<b class="nc">&nbsp;  while (true) {</b>
+<b class="nc">&nbsp;    delay(1000)</b>
+<b class="nc">&nbsp;    emit(currentTime(tz))</b>
 &nbsp;  }
 &nbsp;}
-&nbsp;
-&nbsp;fun Double.toRadians() = this / 180 * PI
-&nbsp;
-&nbsp;fun Int.toRadians() = toDouble().toRadians()
-&nbsp;
-&nbsp;fun Double.toDegrees() = this * 180 / PI
 </code>
 </pre>
 </div>
@@ -162,7 +194,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-25 00:18</div>
+    <div style="float:right;">generated on 2024-07-30 17:43</div>
 </div>
 </body>
 </html>

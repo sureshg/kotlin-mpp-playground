@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/745)
+    (0/757)
   </span>
 </td>
 </tr>
@@ -235,7 +235,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/773)
+    (0/785)
   </span>
 </td>
 </tr>
@@ -354,8 +354,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;      DragDropBox { dragData -&gt;</b>
 <b class="nc">&nbsp;        if (dragData is DragData.FilesList) {</b>
 <b class="nc">&nbsp;          val newPaths =</b>
-<b class="nc">&nbsp;              dragData.readFiles().mapNotNull {</b>
-<b class="nc">&nbsp;                URI(it).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }</b>
+<b class="nc">&nbsp;              dragData.readFiles().mapNotNull { fPath -&gt;</b>
+<b class="nc">&nbsp;                URI(fPath).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }</b>
 &nbsp;              }
 <b class="nc">&nbsp;          droppedPaths = (newPaths + droppedPaths).distinct()</b>
 &nbsp;        }
@@ -387,7 +387,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-25 00:18</div>
+    <div style="float:right;">generated on 2024-07-30 17:43</div>
 </div>
 </body>
 </html>

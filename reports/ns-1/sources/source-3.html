@@ -200,8 +200,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      DragDropBox { dragData -&gt;
 &nbsp;        if (dragData is DragData.FilesList) {
 &nbsp;          val newPaths =
-&nbsp;              dragData.readFiles().mapNotNull {
-&nbsp;                URI(it).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
+&nbsp;              dragData.readFiles().mapNotNull { fPath -&gt;
+&nbsp;                URI(fPath).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
 &nbsp;              }
 &nbsp;          droppedPaths = (newPaths + droppedPaths).distinct()
 &nbsp;        }
@@ -233,7 +233,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-07-25 00:18</div>
+    <div style="float:right;">generated on 2024-07-30 17:43</div>
 </div>
 </body>
 </html>
