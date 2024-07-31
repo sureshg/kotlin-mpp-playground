@@ -325,7 +325,6 @@ ktor-client-logging                  = { module = "io.ktor:ktor-client-logging" 
 ktor-client-resources                = { module = "io.ktor:ktor-client-resources"                              , version.ref = "ktor"}
 ktor-client-encoding                 = { module = "io.ktor:ktor-client-encoding"                               , version.ref = "ktor"}
 ktor-client-mock                     = { module = "io.ktor:ktor-client-mock"                                   , version.ref = "ktor"}
-ktor-client-tests                    = { module = "io.ktor:ktor-client-tests"                                  , version.ref = "ktor"}
 
 # krpc
 kotlinx-rpc-runtime                     = { module = "org.jetbrains.kotlinx:kotlinx-rpc-runtime"                    , version.ref = "kotlinx-rpc"}

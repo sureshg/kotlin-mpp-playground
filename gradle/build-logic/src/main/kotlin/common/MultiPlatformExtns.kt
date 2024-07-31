@@ -63,7 +63,6 @@ fun KotlinMultiplatformExtension.commonTarget() {
       dependencies {
         api(kotlin("test"))
         api(libs.kotlinx.coroutines.test)
-        api(libs.ktor.client.tests)
         api(libs.ktor.client.mock)
         api(libs.cash.turbine)
       }
