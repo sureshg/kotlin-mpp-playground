@@ -121,6 +121,24 @@ class AppTests {
                 Transferable.of(
                     """
                     #!/bin/sh
+                    apk add openssl
+                    mkdir -p $certDir
+                    openssl req -x509 \
+                           -newkey rsa:4096 -sha256 -nodes \
+                           -days 365 \
+                           -subj "/CN=localhost" \
+                           -addext "subjectAltName=DNS:localhost.com,IP:127.0.0.1" \
+                           -keyout $key \
+                           -out $cert
+                    # -outform der -keyform der
+                    """
+                        .trimIndent(),
+                    365),
+                "$certDir/gen-certs.sh")
+            .withCopyToContainer(
+                Transferable.of(
+                    """
+                    #!/bin/sh
                     set -e
                     echo "Entrypoint args: "\${'$'}@""
                     apk add nginx
@@ -129,8 +147,8 @@ class AppTests {
                     server {
                             listen 80 default_server;
                             listen [::]:80 default_server;
-                            listen 443 ssl http2 default_server;
-                            listen [::]:443 ssl http2 default_server;
+                            listen $tlsPort ssl http2 default_server;
+                            listen [::]:$tlsPort ssl http2 default_server;
                             ssl_certificate $cert;
                             ssl_certificate_key $key;
                             location / {
@@ -147,24 +165,6 @@ class AppTests {
                         .trimIndent(),
                     365),
                 "/entrypoint.sh")
-            .withCopyToContainer(
-                Transferable.of(
-                    """
-                    #!/bin/sh
-                    apk add openssl
-                    mkdir -p $certDir
-                    openssl req -x509 \
-                           -newkey rsa:4096 -sha256 -nodes \
-                           -days 365 \
-                           -subj "/CN=localhost" \
-                           -addext "subjectAltName=DNS:localhost.com,IP:127.0.0.1" \
-                           -keyout $key \
-                           -out $cert
-                    # -outform der -keyform der
-                    """
-                        .trimIndent(),
-                    365),
-                "$certDir/gen-certs.sh")
             .withCommand("sh", "-c", "$certDir/gen-certs.sh && /entrypoint.sh")
             .withExposedPorts(tlsPort)
             .withLogConsumer(Slf4jLogConsumer(logger, false))
