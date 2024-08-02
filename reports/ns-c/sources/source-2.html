@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/28)
+    (0/31)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/200)
+    (0/215)
   </span>
 </td>
 </tr>
@@ -104,6 +104,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.plugins.cors.routing.*
 &nbsp;import io.ktor.server.plugins.defaultheaders.*
 &nbsp;import io.ktor.server.plugins.forwardedheaders.*
+&nbsp;import io.ktor.server.plugins.hsts.*
 &nbsp;import io.ktor.server.plugins.partialcontent.*
 &nbsp;import io.ktor.server.request.*
 &nbsp;import io.ktor.server.routing.*
@@ -136,8 +137,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  install(CORS) {</b>
 <b class="nc">&nbsp;    anyHost()</b>
 <b class="nc">&nbsp;    allowHeader(HttpHeaders.ContentType)</b>
+<b class="nc">&nbsp;    exposeHeader(&quot;Location&quot;)</b>
+<b class="nc">&nbsp;    exposeHeader(&quot;Server&quot;)</b>
 <b class="nc">&nbsp;    allowCredentials = true</b>
 &nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  install(HSTS)</b>
 &nbsp;
 <b class="nc">&nbsp;  install(CallLogging) {</b>
 <b class="nc">&nbsp;    level = Level.INFO</b>
@@ -183,7 +188,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-02 08:51</div>
+    <div style="float:right;">generated on 2024-08-02 11:39</div>
 </div>
 </body>
 </html>
