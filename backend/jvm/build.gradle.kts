@@ -164,6 +164,7 @@ dependencies {
   implementation(libs.ktor.server.http.redirect)
   implementation(libs.ktor.server.compression)
   implementation(libs.ktor.server.cors)
+  implementation(libs.ktor.server.hsts)
   implementation(libs.ktor.server.host.common)
   implementation(libs.ktor.server.auto.head)
   implementation(libs.ktor.server.partial.content)

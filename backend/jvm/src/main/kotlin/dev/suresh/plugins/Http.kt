@@ -10,6 +10,7 @@ import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
+import io.ktor.server.plugins.hsts.*
 import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.request.*
 import io.ktor.server.routing.*
@@ -42,8 +43,12 @@ fun Application.configureHTTP() {
   install(CORS) {
     anyHost()
     allowHeader(HttpHeaders.ContentType)
+    exposeHeader("Location")
+    exposeHeader("Server")
     allowCredentials = true
   }
+
+  install(HSTS)
 
   install(CallLogging) {
     level = Level.INFO
