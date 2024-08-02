@@ -1,3 +1,4 @@
+import dev.suresh.http.MediaApiClient
 import dev.suresh.readAsByteArray
 import dev.suresh.readAsText
 import dev.suresh.selectFileFromDisk
@@ -24,6 +25,16 @@ suspend fun main() {
   val sha512 = CryptographyProvider.Default.get(SHA512).hasher()
   val hashHex = sha512.hash("Kotlin WasmJS!".encodeToByteArray()).toHexString()
   log.info { "SHA512 Hash: $hashHex" }
+
+  mainScope.launch {
+    try {
+      log.info { "Calling Media API client..." }
+      val response = MediaApiClient().images()
+      log.info { "Response: $response" }
+    } catch (e: Throwable) {
+      log.error(e) { "Error calling Media API client" }
+    }
+  }
 
   coroutineScope {
     val coroutinesElm = document.getElementById("coroutines")

@@ -1,5 +1,6 @@
 import dev.suresh.Greeting
 import dev.suresh.flow.timerComposeFlow
+import dev.suresh.http.MediaApiClient
 import dev.suresh.log
 import interop.topLevelJsFun
 import kotlin.random.Random
@@ -47,6 +48,16 @@ suspend fun main() {
   // HighlightJs.highlightElement(root)
   // val promise = Promise.resolve("Promise")
   // root.appendText(promise.await())
+
+  mainScope.launch {
+    try {
+      log.info { "Calling Media API client..." }
+      val response = MediaApiClient().images()
+      log.info { "Response: $response" }
+    } catch (e: Throwable) {
+      log.error(e) { "Error calling Media API client" }
+    }
+  }
 
   mainScope.launch {
     log.info { "Starting the timer..." }
