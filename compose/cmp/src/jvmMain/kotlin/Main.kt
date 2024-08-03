@@ -27,6 +27,7 @@ import androidx.navigation.compose.rememberNavController
 import dev.suresh.compose.res.*
 import java.awt.Dimension
 import java.io.File
+import nav.Screen
 import org.jetbrains.compose.resources.painterResource
 
 val resourcesDir = File(System.getProperty("compose.application.resources.dir", "."))
@@ -90,7 +91,7 @@ fun Home(navController: NavController) {
           Image(painter = painterResource(Res.drawable.idea_logo), contentDescription = "Logo")
         }
 
-        ElevatedButton(onClick = { navController.navigate("FileBrowser") }) {
+        ElevatedButton(onClick = { navController.navigate(Screen.FileBrowser.route) }) {
           Icon(
               painter = painterResource(Res.drawable.ic_fluent_rocket_24_filled),
               contentDescription = "File Browser",
@@ -110,9 +111,9 @@ fun App() {
         // println("Saved the screenshot to ${file.absolutePath}")
       }) {
         val navController = rememberNavController()
-        NavHost(navController = navController, startDestination = "Home") {
-          composable("Home") { Home(navController) }
-          composable("FileBrowser") { FileBrowser(navController = navController) }
+        NavHost(navController = navController, startDestination = Screen.Home.route) {
+          composable(Screen.Home.route) { Home(navController) }
+          composable(Screen.FileBrowser.route) { FileBrowser(navController = navController) }
         }
       }
 }

@@ -521,6 +521,7 @@ elastic-otel-javaagent               = { module = "co.elastic.otel:elastic-otel-
 compose-html-core                    = { module = "org.jetbrains.compose.html:html-core"                                    , version.ref = "jetbrains-compose" }
 compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                                   , version.ref = "jetbrains-compose" }
 compose-navigation                   = { module = "org.jetbrains.androidx.navigation:navigation-compose"                    , version.ref = "jetbrains-compose-nav" }
+compose-lifecycle-viewmodel          = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose"            , version.ref = "jetbrains-compose-viewmodel" }
 compose-routing                      = { module = "app.softwork:routing-compose"                                            , version.ref = "compose-routing" }
 compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"                            , version.ref = "compose-icons" }
 detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                                          , version.ref = "detekt-compose-rules" }

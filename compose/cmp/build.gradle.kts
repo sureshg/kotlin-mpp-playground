@@ -27,6 +27,7 @@ kotlin {
       implementation(compose.components.resources)
       implementation(compose.components.uiToolingPreview)
       implementation(libs.compose.navigation)
+      implementation(libs.compose.lifecycle.viewmodel)
       // implementation(compose.materialIconsExtended)
       // project.dependencies.detektPlugins(libs.detekt.compose.rules)
     }
