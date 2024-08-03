@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/769)
+    (0/770)
   </span>
 </td>
 </tr>
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/834)
+    (0/835)
   </span>
 </td>
 </tr>
@@ -179,6 +179,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import dev.suresh.compose.res.*
 &nbsp;import java.awt.Dimension
 &nbsp;import java.io.File
+&nbsp;import nav.Screen
 &nbsp;import org.jetbrains.compose.resources.painterResource
 &nbsp;
 <b class="nc">&nbsp;val resourcesDir = File(System.getProperty(&quot;compose.application.resources.dir&quot;, &quot;.&quot;))</b>
@@ -242,7 +243,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;          Image(painter = painterResource(Res.drawable.idea_logo), contentDescription = &quot;Logo&quot;)
 &nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;        ElevatedButton(onClick = { navController.navigate(&quot;FileBrowser&quot;) }) {</b>
+<b class="nc">&nbsp;        ElevatedButton(onClick = { navController.navigate(Screen.FileBrowser.route) }) {</b>
 &nbsp;          Icon(
 &nbsp;              painter = painterResource(Res.drawable.ic_fluent_rocket_24_filled),
 &nbsp;              contentDescription = &quot;File Browser&quot;,
@@ -262,9 +263,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;        // println(&quot;Saved the screenshot to ${file.absolutePath}&quot;)
 <b class="nc">&nbsp;      }) {</b>
 &nbsp;        val navController = rememberNavController()
-&nbsp;        NavHost(navController = navController, startDestination = &quot;Home&quot;) {
-&nbsp;          composable(&quot;Home&quot;) { Home(navController) }
-&nbsp;          composable(&quot;FileBrowser&quot;) { FileBrowser(navController = navController) }
+&nbsp;        NavHost(navController = navController, startDestination = Screen.Home.route) {
+&nbsp;          composable(Screen.Home.route) { Home(navController) }
+&nbsp;          composable(Screen.FileBrowser.route) { FileBrowser(navController = navController) }
 &nbsp;        }
 &nbsp;      }
 <b class="nc">&nbsp;}</b>
@@ -314,7 +315,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-03 00:21</div>
+    <div style="float:right;">generated on 2024-08-03 17:48</div>
 </div>
 </body>
 </html>
