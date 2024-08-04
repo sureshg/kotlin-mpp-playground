@@ -20,7 +20,7 @@ import ui.debug
 import ui.home.HomeButton
 
 @Composable
-fun BirdsImages(modifier: Modifier = Modifier, navToHome: () -> Unit) {
+fun BirdImages(modifier: Modifier = Modifier, navToHome: () -> Unit) {
   val birdsViewModel = viewModel { BirdsViewModel() }
   val state by birdsViewModel.uiState.collectAsState()
   val scrollState = rememberScrollState()

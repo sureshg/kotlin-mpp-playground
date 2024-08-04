@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import ui.birds.BirdsImages
+import ui.birds.BirdImages
 import ui.file.FileBrowser
 import ui.home.Home
 
@@ -23,7 +23,7 @@ fun NavRoot() {
       FileBrowser(navToHome = { navController.popBackStack() })
     }
 
-    composable(Screen.Image.route) { BirdsImages(navToHome = { navController.popBackStack() }) }
+    composable(Screen.Image.route) { BirdImages(navToHome = { navController.popBackStack() }) }
 
     composable(
         route = Screen.Profile.route,
