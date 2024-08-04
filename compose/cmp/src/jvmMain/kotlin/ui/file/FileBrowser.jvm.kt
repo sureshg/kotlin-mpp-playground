@@ -1,5 +1,7 @@
 @file:OptIn(ExperimentalComposeUiApi::class)
 
+package ui.file
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,8 +15,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.net.URI
@@ -22,18 +24,32 @@ import java.nio.file.LinkOption
 import java.nio.file.Path
 import kotlin.io.path.exists
 import kotlin.io.path.toPath
+import ui.FileColors
+import ui.dashedBorder
 
-private object Colors {
-  val default = Color.Gray
-  val active = Color(29, 117, 223, 255)
-  val fileItemBg = Color(233, 30, 99, 255)
-  val fileItemFg = Color.White
+@Composable
+actual fun DragDropListView() {
+  Box(modifier = Modifier, contentAlignment = Alignment.Center) {
+    Column {
+      var droppedPaths by remember { mutableStateOf(emptyList<Path>()) }
+      DragDropBox { dragData ->
+        if (dragData is DragData.FilesList) {
+          val newPaths =
+              dragData.readFiles().mapNotNull { fPath ->
+                URI(fPath).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
+              }
+          droppedPaths = (newPaths + droppedPaths).distinct()
+        }
+      }
+      FileListView(files = droppedPaths)
+    }
+  }
 }
 
 @Composable
 fun DragDropBox(modifier: Modifier = Modifier, onDrop: (DragData) -> Unit) {
   var isDragging by remember { mutableStateOf(false) }
-  val dndColor = if (isDragging) Colors.active else Colors.default
+  val dndColor = if (isDragging) FileColors.active else FileColors.default
   var fdOpen by remember { mutableStateOf(false) }
 
   // val (textField, setTextField) = remember { mutableStateOf(TextFieldValue()) }
@@ -87,32 +103,13 @@ fun FileListView(modifier: Modifier = Modifier, files: List<Path>) {
     items(files) {
       Box(
           modifier =
-              Modifier.padding(5.dp).background(Colors.fileItemBg, RoundedCornerShape(10.dp))) {
+              Modifier.padding(5.dp).background(FileColors.fileItemBg, RoundedCornerShape(10.dp))) {
             Text(
                 modifier = Modifier.padding(4.dp),
                 text = it.fileName.toString(),
-                color = Colors.fileItemFg,
+                color = FileColors.fileItemFg,
                 fontSize = 14.sp)
           }
-    }
-  }
-}
-
-@Composable
-fun DragDropListView() {
-  Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-    Column {
-      var droppedPaths by remember { mutableStateOf(emptyList<Path>()) }
-      DragDropBox { dragData ->
-        if (dragData is DragData.FilesList) {
-          val newPaths =
-              dragData.readFiles().mapNotNull { fPath ->
-                URI(fPath).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
-              }
-          droppedPaths = (newPaths + droppedPaths).distinct()
-        }
-      }
-      FileListView(files = droppedPaths)
     }
   }
 }

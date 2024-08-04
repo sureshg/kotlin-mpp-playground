@@ -1,1 +1,1 @@
-Desktop App Resource for MacOS Arm64
+Desktop App for MacOS Arm64

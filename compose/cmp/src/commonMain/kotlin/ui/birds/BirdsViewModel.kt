@@ -1,4 +1,4 @@
-package model
+package ui.birds
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

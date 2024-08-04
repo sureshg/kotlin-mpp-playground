@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalComposeLibrary::class)
+
 import common.Platform
 import common.jvmArguments
 import java.time.Year
@@ -26,18 +28,19 @@ kotlin {
       implementation(compose.material3)
       implementation(compose.components.resources)
       implementation(compose.components.uiToolingPreview)
+
       implementation(libs.compose.navigation)
       implementation(libs.compose.lifecycle.viewmodel)
+
       // implementation(compose.materialIconsExtended)
       // project.dependencies.detektPlugins(libs.detekt.compose.rules)
     }
 
-    commonTest.dependencies {
-      @OptIn(ExperimentalComposeLibrary::class) implementation(compose.uiTest)
-    }
+    commonTest.dependencies { implementation(compose.uiTest) }
 
     jvmMain.dependencies {
       implementation(compose.desktop.currentOs)
+      implementation(compose.desktop.components.animatedImage)
       implementation(libs.kotlinx.coroutines.swing)
       implementation(libs.slf4j.simple)
     }

@@ -4,5 +4,5 @@ import kotlinx.browser.document
 
 @OptIn(ExperimentalComposeUiApi::class)
 fun main() {
-  ComposeViewport(document.body!!) { CommonApp() }
+  ComposeViewport(document.body!!) { App() }
 }

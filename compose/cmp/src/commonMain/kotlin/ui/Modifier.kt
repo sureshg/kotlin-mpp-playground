@@ -1,9 +1,12 @@
+package ui
+
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.DrawModifier
 import androidx.compose.ui.draw.drawWithCache
 import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.scale
@@ -37,11 +40,6 @@ fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modi
 }
 
 fun Modifier.flipped() = then(FlippedModifier())
-
-fun ByteArray.toImageBitmap(): ImageBitmap =
-    org.jetbrains.skia.Image.makeFromEncoded(this).toComposeImageBitmap()
-
-fun ImageBitmap.toByteArray(): ByteArray? = asSkiaBitmap().readPixels()
 
 class FlippedModifier : DrawModifier {
   override fun ContentDrawScope.draw() {
