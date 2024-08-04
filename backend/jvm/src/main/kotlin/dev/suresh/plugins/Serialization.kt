@@ -6,7 +6,7 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.resources.*
 
 fun Application.configureSerialization() {
-  install(ContentNegotiation) { json(dev.suresh.json) }
+  install(ContentNegotiation) { json(dev.suresh.http.json) }
 
   install(Resources)
 }

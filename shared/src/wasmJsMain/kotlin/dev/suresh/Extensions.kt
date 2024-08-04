@@ -1,3 +1,5 @@
+package dev.suresh
+
 import kotlin.wasm.unsafe.UnsafeWasmMemoryApi
 import kotlin.wasm.unsafe.withScopedMemoryAllocator
 import org.khronos.webgl.ArrayBuffer

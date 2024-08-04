@@ -11,8 +11,6 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import kotlinx.serialization.json.ClassDiscriminatorMode.POLYMORPHIC
-import kotlinx.serialization.json.Json
 
 expect val platform: Platform
 
@@ -82,30 +80,7 @@ interface Platform {
       "${Instant.fromEpochSeconds(epochSeconds).toLocalDateTime(TimeZone.currentSystemDefault())} $tzShortId"
 }
 
-// Expect classes are not stable
-// expect class Platform {
-//    val name: String
-// }
-
-/** Common JSON instance for serde of JSON data. */
-val json by lazy {
-  Json {
-    prettyPrint = true
-    isLenient = true
-    ignoreUnknownKeys = true
-    encodeDefaults = true
-    explicitNulls = false
-    decodeEnumsCaseInsensitive = true
-    allowTrailingComma = true
-    allowSpecialFloatingPointValues = true
-    allowStructuredMapKeys = true
-    allowComments = true
-    classDiscriminatorMode = POLYMORPHIC
-  }
-}
-
 val log = KotlinLogging.logger {}
-
 /** Gets the current date and time in UTC timezone. */
 val utcDateTimeNow
   get() = Clock.System.now().toLocalDateTime(TimeZone.UTC)
@@ -113,3 +88,8 @@ val utcDateTimeNow
 /** Gets the current date and time in the system's default time zone. */
 val localDateTimeNow
   get() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
+
+// Expect classes are not stable
+// expect class Platform {
+//    val name: String
+// }

@@ -9,7 +9,6 @@ import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.asList
 import org.w3c.files.File
 import org.w3c.files.FileReader
-import toByteArray
 
 /**
  * The code is adapted from

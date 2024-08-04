@@ -1,6 +1,6 @@
 import dev.suresh.flow.timerComposeFlow
 import dev.suresh.http.MediaApiClient
-import dev.suresh.json
+import dev.suresh.http.json
 import dev.suresh.platform
 import kotlin.reflect.typeOf
 import kotlin.time.Duration
