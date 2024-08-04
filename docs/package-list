@@ -3,8 +3,6 @@ $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/processor/[root]/index.html
 $dokka.location://App/#/PointingToDeclaration/cmp/[root]/-app.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
-$dokka.location://console/#/PointingToDeclaration/shared/[root]/console.html
-$dokka.location://currentTimeMillis/#/PointingToDeclaration/shared/[root]/current-time-millis.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
 $dokka.location://log/#/PointingToDeclaration/web/[root]/log.html
 $dokka.location://main/#/PointingToDeclaration/cmp/[root]/[wasm-js]main.html
@@ -14,15 +12,10 @@ $dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutin
 $dokka.location://runTerminal/#/PointingToDeclaration/web/[root]/run-terminal.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/shared/[root]/stdlib-features.html
-$dokka.location://toByteArray/org.khronos.webgl.ArrayBuffer?#/PointingToDeclaration/shared/[root]/to-byte-array.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
 $dokka.location:/ClassVisitor/defaultHandler/#com.google.devtools.ksp.symbol.KSNode#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/default-handler.html
 $dokka.location:/ClassVisitor/visitClassDeclaration/#com.google.devtools.ksp.symbol.KSClassDeclaration#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/visit-class-declaration.html
-$dokka.location:/Console///PointingToDeclaration/shared/[root]/-console/index.html
-$dokka.location:/Console/Console/#/PointingToDeclaration/shared/[root]/-console/-console.html
-$dokka.location:/Console/log/#kotlin.String?/PointingToDeclaration/shared/[root]/-console/log.html
-$dokka.location:/Console/log/#kotlin.js.JsAny?/PointingToDeclaration/shared/[root]/-console/log.html
 $dokka.location:/MyService///PointingToDeclaration/shared/[root]/-my-service/index.html
 $dokka.location:/Person///PointingToDeclaration/shared/[root]/-person/index.html
 $dokka.location:/Person/Person/#kotlin.String#kotlin.String/PointingToDeclaration/shared/[root]/-person/-person.html
