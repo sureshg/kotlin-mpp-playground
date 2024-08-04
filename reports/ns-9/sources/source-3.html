@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > ImgRes</title>
+  <title>: Coverage Report > HttpClient_jvmKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.http</a>
 </div>
 
-<h1>Coverage Summary for Class: ImgRes (dev.suresh.http)</h1>
+<h1>Coverage Summary for Class: HttpClient_jvmKt (dev.suresh.http)</h1>
 
 <table class="coverageStats">
 
@@ -46,7 +46,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">ImgRes</td>
+  <td class="name">HttpClient_jvmKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -55,6 +55,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/1)
   </span>
 </td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -68,28 +69,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/13)
+    (0/178)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">ImgRes$$serializer</td>
-    <td class="coverageStat"/>
-  </tr>
-  <tr>
-    <td class="name">ImgRes$$serializer$annotationImpl$io_ktor_resources_Resource$0</td>
-    <td class="coverageStat"/>
-  </tr>
-  <tr>
-    <td class="name">ImgRes$Companion</td>
+    <td class="name">HttpClient_jvmKt$httpClient$1$6</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -112,7 +97,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/3)
   </span>
 </td>
   </tr>
@@ -126,12 +111,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/2)
   </span>
 </td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,15 +125,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/15)
+    (0/181)
   </span>
 </td>
 </tr>
@@ -160,117 +138,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
 &nbsp;
-&nbsp;import io.github.oshai.kotlinlogging.KotlinLogging
 &nbsp;import io.ktor.client.*
-&nbsp;import io.ktor.client.call.*
-&nbsp;import io.ktor.client.plugins.*
-&nbsp;import io.ktor.client.plugins.compression.*
-&nbsp;import io.ktor.client.plugins.contentnegotiation.*
-&nbsp;import io.ktor.client.plugins.cookies.*
-&nbsp;import io.ktor.client.plugins.logging.*
-&nbsp;import io.ktor.client.plugins.resources.*
-&nbsp;import io.ktor.client.plugins.resources.Resources
-&nbsp;import io.ktor.http.*
-&nbsp;import io.ktor.resources.*
-&nbsp;import io.ktor.serialization.kotlinx.json.*
-&nbsp;import io.ktor.util.*
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import io.ktor.client.engine.java.*
 &nbsp;
-<b class="nc">&nbsp;@Resource(&quot;/media-api/images.json&quot;) class ImgRes()</b>
-&nbsp;
-&nbsp;@Resource(&quot;/media-api/videos.json&quot;) class VideoRes()
-&nbsp;
-&nbsp;@Serializable
-&nbsp;data class Image(
-&nbsp;    val category: String,
-&nbsp;    val path: String,
-&nbsp;    val author: String,
-&nbsp;)
-&nbsp;
-&nbsp;@Serializable
-&nbsp;data class Video(
-&nbsp;    val description: String,
-&nbsp;    val sources: List&lt;String&gt;,
-&nbsp;    val subtitle: String,
-&nbsp;    val thumb: String,
-&nbsp;    val title: String,
-&nbsp;    val poster: String? = null,
-&nbsp;)
-&nbsp;
-&nbsp;class MediaApiClient(val timeout: Timeout = Timeout.DEFAULT, val retry: Retry = Retry.DEFAULT) {
-&nbsp;
-&nbsp;  private val log = KotlinLogging.logger {}
-&nbsp;
-&nbsp;  private val client = HttpClient {
-&nbsp;    install(Resources)
-&nbsp;    install(ContentNegotiation) { json(dev.suresh.json) }
-&nbsp;
-&nbsp;    install(ContentEncoding) {
-&nbsp;      deflate(1.0F)
-&nbsp;      gzip(0.9F)
-&nbsp;    }
-&nbsp;
-&nbsp;    install(HttpRequestRetry) {
-&nbsp;      maxRetries = retry.attempts
-&nbsp;      retryOnException(retryOnTimeout = true)
-&nbsp;      retryOnServerErrors()
-&nbsp;      constantDelay(millis = retry.maxDelay.inWholeMilliseconds)
-&nbsp;    }
-&nbsp;
-&nbsp;    install(HttpTimeout) {
-&nbsp;      connectTimeoutMillis = timeout.connection.inWholeMilliseconds
-&nbsp;      requestTimeoutMillis = timeout.read.inWholeMilliseconds
-&nbsp;      socketTimeoutMillis = timeout.write.inWholeMilliseconds
-&nbsp;    }
-&nbsp;
-&nbsp;    install(HttpCookies)
-&nbsp;
-&nbsp;    install(Logging) {
-&nbsp;      logger = Logger.DEFAULT
-&nbsp;      level = LogLevel.INFO
-&nbsp;      sanitizeHeader { header -&gt; header == HttpHeaders.Authorization }
-&nbsp;    }
-&nbsp;
-&nbsp;    engine { pipelining = true }
-&nbsp;
-&nbsp;    followRedirects = true
-&nbsp;
-&nbsp;    install(UserAgent) { agent = &quot;Image API Client&quot; }
-&nbsp;
-&nbsp;    install(DefaultRequest) {
-&nbsp;      url(&quot;https://suresh.dev/&quot;)
-&nbsp;      headers.appendIfNameAndValueAbsent(
-&nbsp;          HttpHeaders.ContentType, ContentType.Application.Json.toString())
-&nbsp;    }
-&nbsp;
-&nbsp;    // install(Auth) {
-&nbsp;    //   basic {
-&nbsp;    //     credentials {
-&nbsp;    //       sendWithoutRequest { true }
-&nbsp;    //       BasicAuthCredentials(username = &quot;&quot;, password = &quot;&quot;)
-&nbsp;    //     }
-&nbsp;    //   }
-&nbsp;    // }
-&nbsp;    //
-&nbsp;    // expectSuccess = false
-&nbsp;    //
-&nbsp;    // HttpResponseValidator {
-&nbsp;    //   validateResponse {
-&nbsp;    //     when (it.status.value) {
-&nbsp;    //       in 300..399 -&gt; throw RedirectResponseException(it, &quot;Redirect error&quot;)
-&nbsp;    //       in 400..499 -&gt; throw ClientRequestException(it, &quot;Client error&quot;)
-&nbsp;    //       in 500..599 -&gt; throw ServerResponseException(it, &quot;Server error&quot;)
-&nbsp;    //     }
-&nbsp;    //   }
-&nbsp;    // }
-&nbsp;  }
-&nbsp;
-&nbsp;  suspend fun images() = client.get(ImgRes()).body&lt;List&lt;Image&gt;&gt;()
-&nbsp;
-&nbsp;  suspend fun videos() = client.get(VideoRes()).body&lt;List&lt;Video&gt;&gt;()
-&nbsp;
-&nbsp;  fun close() = client.close()
-&nbsp;}
+&nbsp;actual fun httpClient(
+&nbsp;    name: String,
+&nbsp;    timeout: Timeout,
+&nbsp;    retry: Retry,
+&nbsp;    config: HttpClientConfig&lt;*&gt;.() -&gt; Unit
+<b class="nc">&nbsp;) = HttpClient(Java) { config(this) }</b>
 </code>
 </pre>
 </div>
@@ -294,7 +170,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-04 14:11</div>
+    <div style="float:right;">generated on 2024-08-04 18:11</div>
 </div>
 </body>
 </html>

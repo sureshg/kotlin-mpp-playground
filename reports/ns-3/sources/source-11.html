@@ -113,29 +113,29 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import java.time.format.DateTimeFormatter
 &nbsp;import java.util.*
 &nbsp;import java.util.concurrent.ExecutorService
-&nbsp;import java.util.concurrent.Executors
+<b class="nc">&nbsp;import java.util.concurrent.Executors</b>
 &nbsp;import javax.net.ssl.TrustManagerFactory
-<b class="nc">&nbsp;import javax.net.ssl.X509TrustManager</b>
-&nbsp;import kotlinx.coroutines.*
+&nbsp;import javax.net.ssl.X509TrustManager
+<b class="nc">&nbsp;import kotlinx.coroutines.*</b>
 &nbsp;import org.slf4j.LoggerFactory
-<b class="nc">&nbsp;</b>
-&nbsp;actual val platform: Platform = JvmPlatform
 &nbsp;
-<b class="fc">&nbsp;object JvmPlatform : Platform {</b>
+<b class="fc">&nbsp;actual val platform: Platform = JvmPlatform</b>
 &nbsp;
-&nbsp;  private val log = LoggerFactory.getLogger(this::class.java)
+&nbsp;object JvmPlatform : Platform {
 &nbsp;
+<b class="fc">&nbsp;  private val log = LoggerFactory.getLogger(this::class.java)</b>
+<b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;  override val name: String = &quot;JVM&quot;</b>
 <b class="fc">&nbsp;</b>
-<b class="fc">&nbsp;  override fun env(key: String, def: String?): String? = System.getenv(key) ?: def</b>
-<b class="fc">&nbsp;</b>
-&nbsp;  override fun sysProp(key: String, def: String?): String? = System.getProperty(key, def)
+&nbsp;  override fun env(key: String, def: String?): String? = System.getenv(key) ?: def
 &nbsp;
+&nbsp;  override fun sysProp(key: String, def: String?): String? = System.getProperty(key, def)
+<b class="fc">&nbsp;</b>
 &nbsp;  override val tzShortId: String
-<b class="fc">&nbsp;    get() {</b>
+&nbsp;    get() {
 &nbsp;      // ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)
-&nbsp;      return DateTimeFormatter.ofPattern(&quot;zzz&quot;)
-&nbsp;          .withLocale(Locale.ENGLISH)
+<b class="fc">&nbsp;      return DateTimeFormatter.ofPattern(&quot;zzz&quot;)</b>
+<b class="fc">&nbsp;          .withLocale(Locale.ENGLISH)</b>
 <b class="fc">&nbsp;          .withZone(ZoneId.systemDefault())</b>
 <b class="fc">&nbsp;          .format(Instant.now())</b>
 <b class="fc">&nbsp;    }</b>
@@ -156,24 +156,24 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="fc">&nbsp;          val execService = mh.invokeExact() as ExecutorService</b>
 <b class="fc">&nbsp;          execService.asCoroutineDispatcher()</b>
 <b class="fc">&nbsp;          // Via Reflection</b>
-<b class="fc">&nbsp;          // (Executors::class.java.getMethod(&quot;newVirtualThreadPerTaskExecutor&quot;).invoke(null) as</b>
+&nbsp;          // (Executors::class.java.getMethod(&quot;newVirtualThreadPerTaskExecutor&quot;).invoke(null) as
 <b class="fc">&nbsp;          // ExecutorService).asCoroutineDispatcher()</b>
-&nbsp;        }
+<b class="fc">&nbsp;        }</b>
 <b class="fc">&nbsp;        .getOrNull()</b>
 <b class="fc">&nbsp;  }</b>
 <b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;  override val appInfo: Map&lt;String, String&gt;</b>
 <b class="fc">&nbsp;    get() =</b>
-<b class="fc">&nbsp;        super.appInfo +</b>
-<b class="fc">&nbsp;            mapOf(</b>
-&nbsp;                &quot;uptime&quot; to
+&nbsp;        super.appInfo +
+&nbsp;            mapOf(
+<b class="nc">&nbsp;                &quot;uptime&quot; to</b>
 &nbsp;                    run {
-<b class="nc">&nbsp;                      val processEpochSec =</b>
+<b class="fc">&nbsp;                      val processEpochSec =</b>
 &nbsp;                          ProcessHandle.current().info().startInstant().get().epochSecond
-<b class="fc">&nbsp;                      epochSecToString(processEpochSec)</b>
-&nbsp;                    })
+&nbsp;                      epochSecToString(processEpochSec)
+<b class="fc">&nbsp;                    })</b>
 &nbsp;
-<b class="fc">&nbsp;  override val osInfo: Map&lt;String, String?&gt;</b>
+&nbsp;  override val osInfo: Map&lt;String, String?&gt;
 &nbsp;    get() =
 &nbsp;        super.osInfo +
 &nbsp;            mapOf(
@@ -378,7 +378,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-04 14:11</div>
+    <div style="float:right;">generated on 2024-08-04 18:11</div>
 </div>
 </body>
 </html>
