@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > MainKt</title>
+  <title>: Coverage Report > HomeScreenKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">&lt;empty package name&gt;</a>
+    <a href="../index.html">ui.home</a>
 </div>
 
-<h1>Coverage Summary for Class: MainKt (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: HomeScreenKt (ui.home)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">MainKt</td>
+  <td class="name">HomeScreenKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/11)
+    (0/7)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/59)
+    (0/44)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,12 +76,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/770)
+    (0/590)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">MainKt$Home$1$1</td>
+    <td class="name">HomeScreenKt$Home$1$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -115,7 +115,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/12)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -131,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/62)
+    (0/47)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/835)
+    (0/655)
   </span>
 </td>
 </tr>
@@ -150,16 +150,17 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;import androidx.compose.animation.AnimatedVisibility
-&nbsp;import androidx.compose.desktop.ui.tooling.preview.Preview
+<code class="sourceCode" id="sourceCode">&nbsp;package ui.home
+&nbsp;
+&nbsp;import androidx.compose.animation.AnimatedVisibility
 &nbsp;import androidx.compose.foundation.Image
 &nbsp;import androidx.compose.foundation.basicMarquee
 &nbsp;import androidx.compose.foundation.layout.*
 &nbsp;import androidx.compose.foundation.text.selection.SelectionContainer
-&nbsp;import androidx.compose.material.Button
-&nbsp;import androidx.compose.material.Icon
-&nbsp;import androidx.compose.material.Text
-&nbsp;import androidx.compose.material3.ElevatedButton
+&nbsp;import androidx.compose.material.icons.Icons
+&nbsp;import androidx.compose.material.icons.filled.Home
+&nbsp;import androidx.compose.material.icons.filled.Star
+&nbsp;import androidx.compose.material3.*
 &nbsp;import androidx.compose.runtime.*
 &nbsp;import androidx.compose.runtime.saveable.rememberSaveable
 &nbsp;import androidx.compose.ui.Alignment
@@ -171,29 +172,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import androidx.compose.ui.text.font.FontWeight
 &nbsp;import androidx.compose.ui.text.withStyle
 &nbsp;import androidx.compose.ui.unit.dp
-&nbsp;import androidx.compose.ui.window.*
-&nbsp;import androidx.navigation.NavController
-&nbsp;import androidx.navigation.compose.NavHost
-&nbsp;import androidx.navigation.compose.composable
-&nbsp;import androidx.navigation.compose.rememberNavController
 &nbsp;import dev.suresh.compose.res.*
-&nbsp;import java.awt.Dimension
-&nbsp;import java.io.File
-&nbsp;import nav.Screen
+&nbsp;import dev.suresh.platform
 &nbsp;import org.jetbrains.compose.resources.painterResource
-&nbsp;
-<b class="nc">&nbsp;val resourcesDir = File(System.getProperty(&quot;compose.application.resources.dir&quot;, &quot;.&quot;))</b>
+&nbsp;import org.jetbrains.compose.resources.vectorResource
+&nbsp;import org.jetbrains.compose.ui.tooling.preview.Preview
+&nbsp;import ui.debug
 &nbsp;
 &nbsp;@Composable
 &nbsp;@Preview
-<b class="nc">&nbsp;fun Home(navController: NavController) {</b>
+<b class="nc">&nbsp;fun Home(navToFile: () -&gt; Unit, navToImage: () -&gt; Unit) {</b>
 <b class="nc">&nbsp;  val coroutineScope = rememberCoroutineScope()</b>
-<b class="nc">&nbsp;  var text by rememberSaveable { mutableStateOf(AnnotatedString(&quot;Hello, Compose!&quot;)) }</b>
+<b class="nc">&nbsp;  var text by rememberSaveable { mutableStateOf(AnnotatedString(&quot;Compose Multiplatform!&quot;)) }</b>
 <b class="nc">&nbsp;  var showImage by rememberSaveable { mutableStateOf(false) }</b>
-<b class="nc">&nbsp;  val resource = resourcesDir.resolve(&quot;resource.txt&quot;)</b>
 &nbsp;
 <b class="nc">&nbsp;  Column(</b>
-<b class="nc">&nbsp;      modifier = Modifier.fillMaxSize().padding(10.dp).debug(color = Color.Blue),</b>
+&nbsp;      modifier =
+<b class="nc">&nbsp;          Modifier.fillMaxSize().padding(10.dp).debug(color = MaterialTheme.colorScheme.primary),</b>
 <b class="nc">&nbsp;      horizontalAlignment = Alignment.CenterHorizontally,</b>
 <b class="nc">&nbsp;      verticalArrangement = Arrangement.SpaceEvenly) {</b>
 <b class="nc">&nbsp;        SelectionContainer {</b>
@@ -205,33 +200,27 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;        Button(</b>
 <b class="nc">&nbsp;            onClick = {</b>
 <b class="nc">&nbsp;              text = buildAnnotatedString {</b>
-<b class="nc">&nbsp;                append(&quot;Compose Desktop App: &quot;)</b>
+<b class="nc">&nbsp;                append(&quot;Compose ${platform.name} App: &quot;)</b>
 <b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
 <b class="nc">&nbsp;                  append(BuildConfig.version)</b>
 <b class="nc">&nbsp;                }</b>
 <b class="nc">&nbsp;                appendLine()</b>
 &nbsp;
-<b class="nc">&nbsp;                append(&quot;JavaVersion: &quot;)</b>
+<b class="nc">&nbsp;                append(&quot;Java : &quot;)</b>
 <b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
 <b class="nc">&nbsp;                  append(BuildConfig.java)</b>
 <b class="nc">&nbsp;                }</b>
 <b class="nc">&nbsp;                appendLine()</b>
 &nbsp;
-<b class="nc">&nbsp;                append(&quot;Kotlin Version: &quot;)</b>
+<b class="nc">&nbsp;                append(&quot;Kotlin : &quot;)</b>
 <b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
 <b class="nc">&nbsp;                  append(KotlinVersion.CURRENT.toString())</b>
 <b class="nc">&nbsp;                }</b>
 <b class="nc">&nbsp;                appendLine()</b>
 &nbsp;
-<b class="nc">&nbsp;                append(&quot;Compose Multiplatform Version: &quot;)</b>
+<b class="nc">&nbsp;                append(&quot;Compose Multiplatform : &quot;)</b>
 <b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
 <b class="nc">&nbsp;                  append(BuildConfig.jetbrainsCompose)</b>
-<b class="nc">&nbsp;                }</b>
-<b class="nc">&nbsp;                appendLine()</b>
-&nbsp;
-<b class="nc">&nbsp;                append(&quot;Resource: &quot;)</b>
-<b class="nc">&nbsp;                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {</b>
-<b class="nc">&nbsp;                  if (resource.exists()) append(resource.readText()) else append(&quot;Not found&quot;)</b>
 <b class="nc">&nbsp;                }</b>
 <b class="nc">&nbsp;              }</b>
 <b class="nc">&nbsp;              showImage = !showImage</b>
@@ -240,58 +229,47 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;            }
 &nbsp;
 <b class="nc">&nbsp;        AnimatedVisibility(visible = showImage) {</b>
-&nbsp;          Image(painter = painterResource(Res.drawable.idea_logo), contentDescription = &quot;Logo&quot;)
+&nbsp;          Image(
+&nbsp;              modifier = Modifier.size(100.dp),
+&nbsp;              imageVector = vectorResource(Res.drawable.compose_multiplatform),
+&nbsp;              contentDescription = &quot;Logo&quot;)
 &nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;        ElevatedButton(onClick = { navController.navigate(Screen.FileBrowser.route) }) {</b>
-&nbsp;          Icon(
-&nbsp;              painter = painterResource(Res.drawable.ic_fluent_rocket_24_filled),
-&nbsp;              contentDescription = &quot;File Browser&quot;,
-&nbsp;              modifier = Modifier.size(24.dp))
-&nbsp;          Spacer(modifier = Modifier.width(5.dp))
-&nbsp;          Text(&quot;File Browser!&quot;)
-&nbsp;        }
+<b class="nc">&nbsp;        Row {</b>
+<b class="nc">&nbsp;          ElevatedButton(onClick = navToFile) {</b>
+&nbsp;            Icon(
+&nbsp;                painter = painterResource(Res.drawable.ic_fluent_rocket),
+&nbsp;                contentDescription = &quot;File Browser&quot;,
+&nbsp;                modifier = Modifier.size(24.dp))
+&nbsp;            Spacer(modifier = Modifier.width(5.dp))
+&nbsp;            Text(&quot;File Browser!&quot;)
+&nbsp;          }
+&nbsp;
+<b class="nc">&nbsp;          Spacer(modifier = Modifier.width(5.dp))</b>
+&nbsp;
+<b class="nc">&nbsp;          ElevatedButton(onClick = navToImage) {</b>
+&nbsp;            Icon(
+&nbsp;                imageVector = Icons.Default.Star,
+&nbsp;                contentDescription = &quot;Bird Images&quot;,
+&nbsp;                modifier = Modifier.size(24.dp))
+&nbsp;            Spacer(modifier = Modifier.width(5.dp))
+&nbsp;            Text(&quot;Bird Images!&quot;)
+&nbsp;          }
+<b class="nc">&nbsp;        }</b>
 <b class="nc">&nbsp;      }</b>
 <b class="nc">&nbsp;}</b>
 &nbsp;
 &nbsp;@Composable
-<b class="nc">&nbsp;fun App() {</b>
-<b class="nc">&nbsp;  SaveToBitmap(</b>
-<b class="nc">&nbsp;      onSave = {</b>
-&nbsp;        // val file = File(&quot;screenshot.png&quot;)
-&nbsp;        // it.toPngImage(file.toPath())
-&nbsp;        // println(&quot;Saved the screenshot to ${file.absolutePath}&quot;)
-<b class="nc">&nbsp;      }) {</b>
-&nbsp;        val navController = rememberNavController()
-&nbsp;        NavHost(navController = navController, startDestination = Screen.Home.route) {
-&nbsp;          composable(Screen.Home.route) { Home(navController) }
-&nbsp;          composable(Screen.FileBrowser.route) { FileBrowser(navController = navController) }
-&nbsp;        }
-&nbsp;      }
+<b class="nc">&nbsp;fun HomeButton(navToHome: () -&gt; Unit) {</b>
+<b class="nc">&nbsp;  ElevatedButton(onClick = navToHome) {</b>
+&nbsp;    Icon(
+&nbsp;        imageVector = Icons.Default.Home,
+&nbsp;        contentDescription = &quot;Home&quot;,
+&nbsp;        modifier = Modifier.size(24.dp))
+&nbsp;    Spacer(modifier = Modifier.width(5.dp))
+&nbsp;    Text(&quot;Back to Home&quot;)
+&nbsp;  }
 <b class="nc">&nbsp;}</b>
-&nbsp;
-&nbsp;@Composable
-<b class="nc">&nbsp;fun FileBrowser(modifier: Modifier = Modifier, navController: NavController) {</b>
-<b class="nc">&nbsp;  Column(</b>
-<b class="nc">&nbsp;      modifier = modifier.fillMaxSize().padding(10.dp).debug(color = Color.Magenta),</b>
-<b class="nc">&nbsp;      horizontalAlignment = Alignment.CenterHorizontally,</b>
-<b class="nc">&nbsp;      verticalArrangement = Arrangement.SpaceEvenly) {</b>
-<b class="nc">&nbsp;        DragDropListView()</b>
-<b class="nc">&nbsp;        Button(onClick = { navController.popBackStack() }) { Text(&quot;Back&quot;) }</b>
-<b class="nc">&nbsp;      }</b>
-<b class="nc">&nbsp;}</b>
-&nbsp;
-<b class="nc">&nbsp;fun main() = application {</b>
-&nbsp;  Window(
-&nbsp;      title = &quot;App&quot;,
-&nbsp;      state =
-&nbsp;          rememberWindowState(
-&nbsp;              width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center)),
-&nbsp;      onCloseRequest = ::exitApplication) {
-&nbsp;        window.minimumSize = Dimension(350, 600)
-&nbsp;        AppTheme { App() }
-&nbsp;      }
-&nbsp;}
 </code>
 </pre>
 </div>
@@ -315,7 +293,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-04 00:20</div>
+    <div style="float:right;">generated on 2024-08-04 13:04</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > JMain</title>
+  <title>: Coverage Report > TestProcessorProvider</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: JMain (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: TestProcessorProvider (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">JMain</td>
+  <td class="name">TestProcessorProvider</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/9)
   </span>
 </td>
 </tr>
@@ -92,8 +92,62 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode"><b class="nc">&nbsp;void main(String[] args) {</b>
-<b class="nc">&nbsp;    System.out.println(&quot;Java Main!&quot;);</b>
+<code class="sourceCode" id="sourceCode">&nbsp;import com.google.auto.service.AutoService
+&nbsp;import com.google.devtools.ksp.processing.*
+&nbsp;import com.google.devtools.ksp.symbol.KSAnnotated
+&nbsp;import com.google.devtools.ksp.symbol.KSClassDeclaration
+&nbsp;import com.google.devtools.ksp.symbol.KSNode
+&nbsp;import com.google.devtools.ksp.visitor.KSTopDownVisitor
+&nbsp;import java.io.OutputStreamWriter
+&nbsp;
+<b class="nc">&nbsp;@AutoService(SymbolProcessorProvider::class)</b>
+&nbsp;class TestProcessorProvider : SymbolProcessorProvider {
+&nbsp;  override fun create(environment: SymbolProcessorEnvironment) =
+<b class="nc">&nbsp;      TestProcessor(environment.codeGenerator, environment.logger)</b>
+&nbsp;}
+&nbsp;
+&nbsp;class TestProcessor(val codeGenerator: CodeGenerator, val logger: KSPLogger) : SymbolProcessor {
+&nbsp;  private var invoked = false
+&nbsp;
+&nbsp;  override fun process(resolver: Resolver): List&lt;KSAnnotated&gt; {
+&nbsp;    val allFiles = resolver.getAllFiles().map { it.fileName }
+&nbsp;    logger.warn(allFiles.toList().toString())
+&nbsp;    if (invoked) {
+&nbsp;      return emptyList()
+&nbsp;    }
+&nbsp;    invoked = true
+&nbsp;
+&nbsp;    codeGenerator
+&nbsp;        .createNewFile(
+&nbsp;            dependencies = Dependencies.ALL_FILES,
+&nbsp;            packageName = &quot;&quot;,
+&nbsp;            fileName = &quot;Foo&quot;,
+&nbsp;            extensionName = &quot;kt&quot;)
+&nbsp;        .use { output -&gt;
+&nbsp;          OutputStreamWriter(output).use { writer -&gt;
+&nbsp;            writer.write(&quot;package com.example\n\n&quot;)
+&nbsp;            writer.write(&quot;class Foo {\n&quot;)
+&nbsp;
+&nbsp;            val visitor = ClassVisitor()
+&nbsp;            resolver.getAllFiles().forEach { it.accept(visitor, writer) }
+&nbsp;            writer.write(&quot;}\n&quot;)
+&nbsp;          }
+&nbsp;        }
+&nbsp;    return emptyList()
+&nbsp;  }
+&nbsp;}
+&nbsp;
+&nbsp;class ClassVisitor : KSTopDownVisitor&lt;OutputStreamWriter, Unit&gt;() {
+&nbsp;  override fun defaultHandler(node: KSNode, data: OutputStreamWriter) {}
+&nbsp;
+&nbsp;  override fun visitClassDeclaration(
+&nbsp;      classDeclaration: KSClassDeclaration,
+&nbsp;      data: OutputStreamWriter
+&nbsp;  ) {
+&nbsp;    super.visitClassDeclaration(classDeclaration, data)
+&nbsp;    val symbolName = classDeclaration.simpleName.asString().lowercase()
+&nbsp;    data.write(&quot;    val $symbolName = true\n&quot;)
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -118,7 +172,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-04 00:20</div>
+    <div style="float:right;">generated on 2024-08-04 13:04</div>
 </div>
 </body>
 </html>

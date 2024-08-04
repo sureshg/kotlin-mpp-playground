@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Colors</title>
+  <title>: Coverage Report > ClassVisitor</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: Colors (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: ClassVisitor (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Colors</td>
+  <td class="name">ClassVisitor</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/3)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/22)
+    (0/20)
   </span>
 </td>
 </tr>
@@ -92,122 +92,61 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;@file:OptIn(ExperimentalComposeUiApi::class)
+<code class="sourceCode" id="sourceCode">&nbsp;import com.google.auto.service.AutoService
+&nbsp;import com.google.devtools.ksp.processing.*
+&nbsp;import com.google.devtools.ksp.symbol.KSAnnotated
+&nbsp;import com.google.devtools.ksp.symbol.KSClassDeclaration
+&nbsp;import com.google.devtools.ksp.symbol.KSNode
+&nbsp;import com.google.devtools.ksp.visitor.KSTopDownVisitor
+&nbsp;import java.io.OutputStreamWriter
 &nbsp;
-&nbsp;import androidx.compose.foundation.background
-&nbsp;import androidx.compose.foundation.layout.Box
-&nbsp;import androidx.compose.foundation.layout.Column
-&nbsp;import androidx.compose.foundation.layout.padding
-&nbsp;import androidx.compose.foundation.lazy.LazyColumn
-&nbsp;import androidx.compose.foundation.lazy.items
-&nbsp;import androidx.compose.foundation.shape.RoundedCornerShape
-&nbsp;import androidx.compose.material.OutlinedButton
-&nbsp;import androidx.compose.material.Text
-&nbsp;import androidx.compose.material.icons.Icons
-&nbsp;import androidx.compose.material.icons.filled.KeyboardArrowUp
-&nbsp;import androidx.compose.material3.Icon
-&nbsp;import androidx.compose.runtime.*
-&nbsp;import androidx.compose.ui.*
-&nbsp;import androidx.compose.ui.graphics.Color
-&nbsp;import androidx.compose.ui.unit.dp
-&nbsp;import androidx.compose.ui.unit.sp
-&nbsp;import java.net.URI
-&nbsp;import java.nio.file.LinkOption
-&nbsp;import java.nio.file.Path
-&nbsp;import kotlin.io.path.exists
-&nbsp;import kotlin.io.path.toPath
-&nbsp;
-&nbsp;private object Colors {
-<b class="nc">&nbsp;  val default = Color.Gray</b>
-<b class="nc">&nbsp;  val active = Color(29, 117, 223, 255)</b>
-<b class="nc">&nbsp;  val fileItemBg = Color(233, 30, 99, 255)</b>
-<b class="nc">&nbsp;  val fileItemFg = Color.White</b>
+&nbsp;@AutoService(SymbolProcessorProvider::class)
+&nbsp;class TestProcessorProvider : SymbolProcessorProvider {
+&nbsp;  override fun create(environment: SymbolProcessorEnvironment) =
+&nbsp;      TestProcessor(environment.codeGenerator, environment.logger)
 &nbsp;}
 &nbsp;
-&nbsp;@Composable
-&nbsp;fun DragDropBox(modifier: Modifier = Modifier, onDrop: (DragData) -&gt; Unit) {
-&nbsp;  var isDragging by remember { mutableStateOf(false) }
-&nbsp;  val dndColor = if (isDragging) Colors.active else Colors.default
-&nbsp;  var fdOpen by remember { mutableStateOf(false) }
+&nbsp;class TestProcessor(val codeGenerator: CodeGenerator, val logger: KSPLogger) : SymbolProcessor {
+&nbsp;  private var invoked = false
 &nbsp;
-&nbsp;  // val (textField, setTextField) = remember { mutableStateOf(TextFieldValue()) }
+&nbsp;  override fun process(resolver: Resolver): List&lt;KSAnnotated&gt; {
+&nbsp;    val allFiles = resolver.getAllFiles().map { it.fileName }
+&nbsp;    logger.warn(allFiles.toList().toString())
+&nbsp;    if (invoked) {
+&nbsp;      return emptyList()
+&nbsp;    }
+&nbsp;    invoked = true
 &nbsp;
-&nbsp;  Box(
-&nbsp;      modifier =
-&nbsp;          modifier
-&nbsp;              .dashedBorder(strokeWidth = 2.dp, color = dndColor, cornerRadius = 8.dp)
-&nbsp;              .onExternalDrag(
-&nbsp;                  onDragStart = { isDragging = true },
-&nbsp;                  onDragExit = { isDragging = false },
-&nbsp;                  onDrop = {
-&nbsp;                    isDragging = false
-&nbsp;                    onDrop(it.dragData)
-&nbsp;                  })) {
-&nbsp;        Column(modifier = Modifier.align(Alignment.Center)) {
-&nbsp;          Text(
-&nbsp;              &quot;Drag &amp; drop files here&quot;,
-&nbsp;              modifier = Modifier.padding(20.dp),
-&nbsp;              color = dndColor,
-&nbsp;              fontSize = 14.sp)
+&nbsp;    codeGenerator
+&nbsp;        .createNewFile(
+&nbsp;            dependencies = Dependencies.ALL_FILES,
+&nbsp;            packageName = &quot;&quot;,
+&nbsp;            fileName = &quot;Foo&quot;,
+&nbsp;            extensionName = &quot;kt&quot;)
+&nbsp;        .use { output -&gt;
+&nbsp;          OutputStreamWriter(output).use { writer -&gt;
+&nbsp;            writer.write(&quot;package com.example\n\n&quot;)
+&nbsp;            writer.write(&quot;class Foo {\n&quot;)
 &nbsp;
-&nbsp;          OutlinedButton(
-&nbsp;              modifier = modifier.align(Alignment.CenterHorizontally).padding(10.dp),
-&nbsp;              enabled = isDragging.not(),
-&nbsp;              shape = RoundedCornerShape(10.dp),
-&nbsp;              onClick = { fdOpen = !fdOpen }) {
-&nbsp;                Icon(Icons.Default.KeyboardArrowUp, &quot;Upload&quot;)
-&nbsp;                Text(&quot;Select&quot;)
-&nbsp;              }
-&nbsp;
-&nbsp;          if (fdOpen) {
-&nbsp;            FileDialog { files -&gt;
-&nbsp;              val data =
-&nbsp;                  object : DragData.FilesList {
-&nbsp;                    override fun readFiles() = files.map { it.toURI().toString() }
-&nbsp;                  }
-&nbsp;
-&nbsp;              onDrop(data)
-&nbsp;              fdOpen = false
-&nbsp;            }
-&nbsp;            // DisposableEffect(isOpen) {// open FileChooser}
+&nbsp;            val visitor = ClassVisitor()
+&nbsp;            resolver.getAllFiles().forEach { it.accept(visitor, writer) }
+&nbsp;            writer.write(&quot;}\n&quot;)
 &nbsp;          }
 &nbsp;        }
-&nbsp;      }
-&nbsp;}
-&nbsp;
-&nbsp;@Composable
-&nbsp;fun FileListView(modifier: Modifier = Modifier, files: List&lt;Path&gt;) {
-&nbsp;  LazyColumn(modifier) {
-&nbsp;    items(files) {
-&nbsp;      Box(
-&nbsp;          modifier =
-&nbsp;              Modifier.padding(5.dp).background(Colors.fileItemBg, RoundedCornerShape(10.dp))) {
-&nbsp;            Text(
-&nbsp;                modifier = Modifier.padding(4.dp),
-&nbsp;                text = it.fileName.toString(),
-&nbsp;                color = Colors.fileItemFg,
-&nbsp;                fontSize = 14.sp)
-&nbsp;          }
-&nbsp;    }
+&nbsp;    return emptyList()
 &nbsp;  }
 &nbsp;}
 &nbsp;
-&nbsp;@Composable
-&nbsp;fun DragDropListView() {
-&nbsp;  Box(modifier = Modifier, contentAlignment = Alignment.Center) {
-&nbsp;    Column {
-&nbsp;      var droppedPaths by remember { mutableStateOf(emptyList&lt;Path&gt;()) }
-&nbsp;      DragDropBox { dragData -&gt;
-&nbsp;        if (dragData is DragData.FilesList) {
-&nbsp;          val newPaths =
-&nbsp;              dragData.readFiles().mapNotNull { fPath -&gt;
-&nbsp;                URI(fPath).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
-&nbsp;              }
-&nbsp;          droppedPaths = (newPaths + droppedPaths).distinct()
-&nbsp;        }
-&nbsp;      }
-&nbsp;      FileListView(files = droppedPaths)
-&nbsp;    }
+<b class="nc">&nbsp;class ClassVisitor : KSTopDownVisitor&lt;OutputStreamWriter, Unit&gt;() {</b>
+<b class="nc">&nbsp;  override fun defaultHandler(node: KSNode, data: OutputStreamWriter) {}</b>
+&nbsp;
+&nbsp;  override fun visitClassDeclaration(
+&nbsp;      classDeclaration: KSClassDeclaration,
+&nbsp;      data: OutputStreamWriter
+&nbsp;  ) {
+<b class="nc">&nbsp;    super.visitClassDeclaration(classDeclaration, data)</b>
+<b class="nc">&nbsp;    val symbolName = classDeclaration.simpleName.asString().lowercase()</b>
+<b class="nc">&nbsp;    data.write(&quot;    val $symbolName = true\n&quot;)</b>
 &nbsp;  }
 &nbsp;}
 </code>
@@ -233,7 +172,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-04 00:20</div>
+    <div style="float:right;">generated on 2024-08-04 13:04</div>
 </div>
 </body>
 </html>

@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/6)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/36)
+    (0/54)
   </span>
 </td>
 </tr>
@@ -103,11 +103,17 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import org.jetbrains.compose.resources.InternalResourceApi
 &nbsp;
 &nbsp;private object CommonMainDrawable0 {
+&nbsp;  public val animated_svg: DrawableResource by 
+<b class="nc">&nbsp;      lazy { init_animated_svg() }</b>
+&nbsp;
 &nbsp;  public val compose_logo: DrawableResource by 
 <b class="nc">&nbsp;      lazy { init_compose_logo() }</b>
 &nbsp;
-&nbsp;  public val ic_fluent_rocket_24_filled: DrawableResource by 
-<b class="nc">&nbsp;      lazy { init_ic_fluent_rocket_24_filled() }</b>
+&nbsp;  public val compose_multiplatform: DrawableResource by 
+<b class="nc">&nbsp;      lazy { init_compose_multiplatform() }</b>
+&nbsp;
+&nbsp;  public val ic_fluent_rocket: DrawableResource by 
+<b class="nc">&nbsp;      lazy { init_ic_fluent_rocket() }</b>
 &nbsp;
 &nbsp;  public val idea_logo: DrawableResource by 
 <b class="nc">&nbsp;      lazy { init_idea_logo() }</b>
@@ -118,11 +124,25 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;@InternalResourceApi
 &nbsp;internal fun _collectCommonMainDrawable0Resources(map: MutableMap&lt;String, DrawableResource&gt;) {
+&nbsp;  map.put(&quot;animated_svg&quot;, CommonMainDrawable0.animated_svg)
 &nbsp;  map.put(&quot;compose_logo&quot;, CommonMainDrawable0.compose_logo)
-&nbsp;  map.put(&quot;ic_fluent_rocket_24_filled&quot;, CommonMainDrawable0.ic_fluent_rocket_24_filled)
+&nbsp;  map.put(&quot;compose_multiplatform&quot;, CommonMainDrawable0.compose_multiplatform)
+&nbsp;  map.put(&quot;ic_fluent_rocket&quot;, CommonMainDrawable0.ic_fluent_rocket)
 &nbsp;  map.put(&quot;idea_logo&quot;, CommonMainDrawable0.idea_logo)
 &nbsp;  map.put(&quot;particles&quot;, CommonMainDrawable0.particles)
 &nbsp;}
+&nbsp;
+&nbsp;public val Res.drawable.animated_svg: DrawableResource
+&nbsp;  get() = CommonMainDrawable0.animated_svg
+&nbsp;
+&nbsp;private fun init_animated_svg(): DrawableResource =
+&nbsp;    org.jetbrains.compose.resources.DrawableResource(
+&nbsp;  &quot;drawable:animated_svg&quot;,
+&nbsp;    setOf(
+&nbsp;      org.jetbrains.compose.resources.ResourceItem(setOf(),
+&nbsp;    &quot;composeResources/dev.suresh.compose.res/drawable/animated_svg&quot;, -1, -1),
+&nbsp;    )
+&nbsp;)
 &nbsp;
 &nbsp;public val Res.drawable.compose_logo: DrawableResource
 &nbsp;  get() = CommonMainDrawable0.compose_logo
@@ -136,15 +156,27 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    )
 &nbsp;)
 &nbsp;
-&nbsp;public val Res.drawable.ic_fluent_rocket_24_filled: DrawableResource
-&nbsp;  get() = CommonMainDrawable0.ic_fluent_rocket_24_filled
+&nbsp;public val Res.drawable.compose_multiplatform: DrawableResource
+&nbsp;  get() = CommonMainDrawable0.compose_multiplatform
 &nbsp;
-&nbsp;private fun init_ic_fluent_rocket_24_filled(): DrawableResource =
+&nbsp;private fun init_compose_multiplatform(): DrawableResource =
 &nbsp;    org.jetbrains.compose.resources.DrawableResource(
-&nbsp;  &quot;drawable:ic_fluent_rocket_24_filled&quot;,
+&nbsp;  &quot;drawable:compose_multiplatform&quot;,
 &nbsp;    setOf(
 &nbsp;      org.jetbrains.compose.resources.ResourceItem(setOf(),
-&nbsp;    &quot;composeResources/dev.suresh.compose.res/drawable/ic_fluent_rocket_24_filled.svg&quot;, -1, -1),
+&nbsp;    &quot;composeResources/dev.suresh.compose.res/drawable/compose-multiplatform.xml&quot;, -1, -1),
+&nbsp;    )
+&nbsp;)
+&nbsp;
+&nbsp;public val Res.drawable.ic_fluent_rocket: DrawableResource
+&nbsp;  get() = CommonMainDrawable0.ic_fluent_rocket
+&nbsp;
+&nbsp;private fun init_ic_fluent_rocket(): DrawableResource =
+&nbsp;    org.jetbrains.compose.resources.DrawableResource(
+&nbsp;  &quot;drawable:ic_fluent_rocket&quot;,
+&nbsp;    setOf(
+&nbsp;      org.jetbrains.compose.resources.ResourceItem(setOf(),
+&nbsp;    &quot;composeResources/dev.suresh.compose.res/drawable/ic-fluent-rocket.svg&quot;, -1, -1),
 &nbsp;    )
 &nbsp;)
 &nbsp;
@@ -192,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-04 00:20</div>
+    <div style="float:right;">generated on 2024-08-04 13:04</div>
 </div>
 </body>
 </html>
