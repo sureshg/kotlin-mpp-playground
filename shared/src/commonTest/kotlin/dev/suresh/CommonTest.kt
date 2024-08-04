@@ -28,7 +28,7 @@ class CommonTest {
   }
 
   @Test
-  fun httpClient() = runTest {
+  fun testHttpClient() = runTest {
     val mockEngine = MockEngine { req ->
       respondError(HttpStatusCode.BadRequest, "Client Error Response")
     }
