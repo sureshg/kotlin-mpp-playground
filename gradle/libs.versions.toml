@@ -193,7 +193,7 @@ jetbrains-compose-viewmodel    = "2.8.0"
 kobweb                         = "0.18.2"
 detekt                         = "1.23.6"
 detekt-compose-rules           = "0.4.5"
-mappie                         = "0.5.0"
+mappie                         = "0.6.0"
 
 [libraries]
 # External plugins for precompiled script plugins (build-logic)
