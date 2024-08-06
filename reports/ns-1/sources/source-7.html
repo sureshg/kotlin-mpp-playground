@@ -99,14 +99,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;import androidx.compose.ui.Alignment
+<code class="sourceCode" id="sourceCode">&nbsp;@file:OptIn(ExperimentalComposeUiApi::class)
+&nbsp;
+&nbsp;import androidx.compose.runtime.CompositionLocalProvider
+&nbsp;import androidx.compose.ui.Alignment
+&nbsp;import androidx.compose.ui.ExperimentalComposeUiApi
 &nbsp;import androidx.compose.ui.unit.dp
-&nbsp;import androidx.compose.ui.window.Window
-&nbsp;import androidx.compose.ui.window.WindowPosition
-&nbsp;import androidx.compose.ui.window.application
-&nbsp;import androidx.compose.ui.window.rememberWindowState
+&nbsp;import androidx.compose.ui.window.*
 &nbsp;import java.awt.Dimension
 &nbsp;import java.io.File
+&nbsp;import ui.crash.windowExceptionHandlerFactory
 &nbsp;
 <b class="nc">&nbsp;val resource by lazy {</b>
 <b class="nc">&nbsp;  val file =</b>
@@ -115,15 +117,18 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;}
 &nbsp;
 <b class="nc">&nbsp;fun main() = application {</b>
-&nbsp;  Window(
-&nbsp;      title = resource,
-&nbsp;      state =
-&nbsp;          rememberWindowState(
-&nbsp;              width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center)),
-&nbsp;      onCloseRequest = ::exitApplication) {
-&nbsp;        window.minimumSize = Dimension(350, 600)
-&nbsp;        App()
-&nbsp;      }
+&nbsp;  CompositionLocalProvider(
+&nbsp;      LocalWindowExceptionHandlerFactory provides windowExceptionHandlerFactory,
+&nbsp;  ) {
+&nbsp;    val windowState =
+&nbsp;        rememberWindowState(
+&nbsp;            width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center))
+&nbsp;
+&nbsp;    Window(title = resource, state = windowState, onCloseRequest = ::exitApplication) {
+&nbsp;      window.minimumSize = Dimension(350, 600)
+&nbsp;      App()
+&nbsp;    }
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -148,7 +153,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-06 15:12</div>
+    <div style="float:right;">generated on 2024-08-06 15:59</div>
 </div>
 </body>
 </html>
