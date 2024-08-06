@@ -245,6 +245,11 @@ dependencies {
   implementation(libs.password4j)
   implementation(libs.bundles.keystore)
   implementation(libs.bundles.ajalt)
+
+  // OpenTelemetry
+  implementation(libs.otel.instr.annotations)
+  implementation(libs.otel.extension.kotlin)
+
   // Auto-service
   ksp(libs.ksp.auto.service)
   implementation(libs.google.auto.annotations)

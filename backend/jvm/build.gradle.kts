@@ -80,10 +80,10 @@ jib {
             "OTEL_TRACES_EXPORTER" to "logging",
             "OTEL_METRICS_EXPORTER" to "logging",
             "OTEL_LOGS_EXPORTER" to "logging",
+            "OTEL_RESOURCE_ATTRIBUTES" to
+                "service.name=${project.name},service.namespace=${project.group},service.instance.id=localhost:8080",
             // "OTEL_EXPORTER_OTLP_PROTOCOL" to "grpc",
             // "OTEL_EXPORTER_OTLP_ENDPOINT" to "http://host.docker.internal:4317",
-            // "OTEL_RESOURCE_ATTRIBUTES" to
-            // "service.name=${project.name},service.namespace=${project.group},service.instance.id=localhost:8080",
         )
 
     args = listOf(project.name, project.version.toString())

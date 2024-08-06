@@ -83,9 +83,21 @@ $ ./gradlew :backend:jvm:run
 * OpenTelemetry
 
   ```bash
+   # Install otel-desktop-viewer or Jaeger
    $ brew tap CtrlSpice/homebrew-otel-desktop-viewer
    $ brew install otel-desktop-viewer
    $ otel-desktop-viewer
+
+
+   # or run the Jaeger collector
+   $ docker run -it --rm \
+                -e COLLECTOR_OTLP_ENABLED=true \
+                -p 4317:4317 \
+                -p 16686:16686 \
+                jaegertracing/all-in-one
+   $ open http://localhost:16686
+
+   # Run the app
    $ docker run -it --rm \
                 --name jvm \
                 -p 8080:8080 \
