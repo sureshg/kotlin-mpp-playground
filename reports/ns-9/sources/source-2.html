@@ -94,6 +94,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
 &nbsp;
+&nbsp;import dev.suresh.log
+&nbsp;import io.github.oshai.kotlinlogging.KLogger
 &nbsp;import io.ktor.client.*
 &nbsp;import io.ktor.client.plugins.*
 &nbsp;import io.ktor.client.plugins.compression.*
@@ -129,6 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    name: String = &quot;Api Client&quot;,
 &nbsp;    timeout: Timeout = Timeout.DEFAULT,
 &nbsp;    retry: Retry = Retry.DEFAULT,
+&nbsp;    httpLogger: KLogger = log,
 &nbsp;    config: HttpClientConfig&lt;*&gt;.() -&gt; Unit = {
 &nbsp;      install(Resources)
 &nbsp;
@@ -155,14 +158,21 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      install(HttpCookies)
 &nbsp;
 &nbsp;      install(Logging) {
-&nbsp;        logger = Logger.DEFAULT
 &nbsp;        level = LogLevel.INFO
+&nbsp;        logger =
+&nbsp;            object : Logger {
+&nbsp;              override fun log(message: String) {
+&nbsp;                httpLogger.info { message }
+&nbsp;              }
+&nbsp;            }
 &nbsp;        sanitizeHeader { header -&gt; header == HttpHeaders.Authorization }
 &nbsp;      }
 &nbsp;
 &nbsp;      engine { pipelining = true }
 &nbsp;
 &nbsp;      followRedirects = true
+&nbsp;
+&nbsp;      expectSuccess = true
 &nbsp;
 &nbsp;      install(UserAgent) { agent = name }
 &nbsp;
@@ -179,8 +189,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      //     }
 &nbsp;      //   }
 &nbsp;      // }
-&nbsp;      //
-&nbsp;      // expectSuccess = false
 &nbsp;      //
 &nbsp;      // HttpResponseValidator {
 &nbsp;      //   validateResponse {
@@ -216,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-07 00:20</div>
+    <div style="float:right;">generated on 2024-08-07 15:18</div>
 </div>
 </body>
 </html>
