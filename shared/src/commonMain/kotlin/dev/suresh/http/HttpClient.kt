@@ -1,5 +1,7 @@
 package dev.suresh.http
 
+import dev.suresh.log
+import io.github.oshai.kotlinlogging.KLogger
 import io.ktor.client.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.compression.*
@@ -35,6 +37,7 @@ expect fun httpClient(
     name: String = "Api Client",
     timeout: Timeout = Timeout.DEFAULT,
     retry: Retry = Retry.DEFAULT,
+    httpLogger: KLogger = log,
     config: HttpClientConfig<*>.() -> Unit = {
       install(Resources)
 
@@ -61,14 +64,21 @@ expect fun httpClient(
       install(HttpCookies)
 
       install(Logging) {
-        logger = Logger.DEFAULT
         level = LogLevel.INFO
+        logger =
+            object : Logger {
+              override fun log(message: String) {
+                httpLogger.info { message }
+              }
+            }
         sanitizeHeader { header -> header == HttpHeaders.Authorization }
       }
 
       engine { pipelining = true }
 
       followRedirects = true
+
+      expectSuccess = true
 
       install(UserAgent) { agent = name }
 
@@ -85,8 +95,6 @@ expect fun httpClient(
       //     }
       //   }
       // }
-      //
-      // expectSuccess = false
       //
       // HttpResponseValidator {
       //   validateResponse {
