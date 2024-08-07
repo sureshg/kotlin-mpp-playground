@@ -37,6 +37,7 @@ class MediaApiClient(timeout: Timeout = Timeout.DEFAULT, retry: Retry = Retry.DE
               name = "Media API Client",
               timeout = timeout,
               retry = retry,
+              httpLogger = log,
           )
           .config { defaultRequest { url("https://suresh.dev/") } }
 
