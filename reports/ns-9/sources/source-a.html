@@ -180,7 +180,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val poster: String? = null,
 &nbsp;)
 &nbsp;
-&nbsp;class MediaApiClient(timeout: Timeout = Timeout.DEFAULT, retry: Retry = Retry.DEFAULT) {
+&nbsp;data class MediaApiClient(
+&nbsp;    val timeout: Timeout = Timeout.DEFAULT,
+&nbsp;    val retry: Retry = Retry.DEFAULT
+&nbsp;) : AutoCloseable {
 &nbsp;
 &nbsp;  private val log = KotlinLogging.logger {}
 &nbsp;
@@ -191,13 +194,22 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;              retry = retry,
 &nbsp;              httpLogger = log,
 &nbsp;          )
-&nbsp;          .config { defaultRequest { url(&quot;https://suresh.dev/&quot;) } }
+&nbsp;          .config {
+&nbsp;            defaultRequest { url(&quot;https://suresh.dev/&quot;) }
+&nbsp;
+&nbsp;            // install(Auth) {
+&nbsp;            //   basic {
+&nbsp;            //     sendWithoutRequest { true }
+&nbsp;            //     credentials { BasicAuthCredentials(username = &quot;&quot;, password = &quot;&quot;) }
+&nbsp;            //   }
+&nbsp;            // }
+&nbsp;          }
 &nbsp;
 &nbsp;  suspend fun images() = client.get(ImgRes()).body&lt;List&lt;Image&gt;&gt;()
 &nbsp;
 &nbsp;  suspend fun videos() = client.get(VideoRes()).body&lt;List&lt;Video&gt;&gt;()
 &nbsp;
-&nbsp;  fun close() = client.close()
+&nbsp;  override fun close() = client.close()
 &nbsp;}
 </code>
 </pre>
@@ -222,7 +234,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-08 00:20</div>
+    <div style="float:right;">generated on 2024-08-08 15:12</div>
 </div>
 </body>
 </html>

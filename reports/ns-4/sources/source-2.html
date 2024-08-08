@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > PemExtnsKt</title>
+  <title>: Coverage Report > CertScan</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.cert</a>
 </div>
 
-<h1>Coverage Summary for Class: PemExtnsKt (dev.suresh.cert)</h1>
+<h1>Coverage Summary for Class: CertScan (dev.suresh.cert)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">PemExtnsKt</td>
+  <td class="name">CertScan</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -71,7 +71,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/15)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -79,7 +79,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/50)
+    (0/20)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,7 +87,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/302)
+    (0/135)
   </span>
 </td>
 </tr>
@@ -101,141 +101,49 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.cert
 &nbsp;
-&nbsp;import java.security.PrivateKey
-&nbsp;import java.security.PublicKey
-&nbsp;import java.security.cert.*
-&nbsp;import javax.naming.ldap.LdapName
-&nbsp;import kotlin.io.encoding.Base64
-&nbsp;import kotlinx.datetime.TimeZone
-&nbsp;import kotlinx.datetime.toKotlinInstant
-&nbsp;import kotlinx.datetime.toLocalDateTime
+&nbsp;import dev.suresh.tls.SavingTrustManager
+&nbsp;import java.net.InetSocketAddress
+&nbsp;import java.security.cert.X509Certificate
+&nbsp;import javax.net.ssl.SNIHostName
+&nbsp;import javax.net.ssl.SSLContext
+&nbsp;import javax.net.ssl.SSLSocket
+&nbsp;import kotlin.time.Duration
+&nbsp;import kotlin.time.Duration.Companion.milliseconds
 &nbsp;
-&nbsp;const val ALT_RFC822_NAME = 1
-&nbsp;const val ALT_DNS_NAME = 2
-&nbsp;const val ALT_IPA_NAME = 7
+&nbsp;object CertScan {
 &nbsp;
-&nbsp;/** PEM certificate pattern */
-<b class="nc">&nbsp;val CERT_PATTERN =</b>
-<b class="nc">&nbsp;    &quot;&quot;&quot;-+BEGIN\s+.*CERTIFICATE[^-]*-+(?:\s|\r|\n)+([a-z0-9+/=\r\n]+)-+END\s+.*CERTIFICATE[^-]*-+&quot;&quot;&quot;</b>
-<b class="nc">&nbsp;        .toRegex(RegexOption.IGNORE_CASE)</b>
+&nbsp;  fun scan(
+&nbsp;      host: String,
+<b class="nc">&nbsp;      port: Int = 443,</b>
+<b class="nc">&nbsp;      sni: String? = null,</b>
+<b class="nc">&nbsp;      timeout: Duration = 2_000.milliseconds</b>
+&nbsp;  ): List&lt;X509Certificate&gt; {
+<b class="nc">&nbsp;    val trustManager = SavingTrustManager()</b>
+<b class="nc">&nbsp;    val socket =</b>
+<b class="nc">&nbsp;        SSLContext.getInstance(&quot;TLS&quot;).run {</b>
+<b class="nc">&nbsp;          init(null, arrayOf(trustManager), null)</b>
+<b class="nc">&nbsp;          socketFactory.createSocket() as SSLSocket</b>
+&nbsp;        }
 &nbsp;
-<b class="nc">&nbsp;val certFactory = CertificateFactory.getInstance(&quot;X.509&quot;)</b>
+<b class="nc">&nbsp;    return socket.use { sock -&gt;</b>
+<b class="nc">&nbsp;      val handshake = runCatching {</b>
+<b class="nc">&nbsp;        sni?.let {</b>
+&nbsp;          // sock.sslParameters will create a new object
+<b class="nc">&nbsp;          val sslParams = sock.sslParameters</b>
+<b class="nc">&nbsp;          sslParams.serverNames = listOf(SNIHostName(sni))</b>
+<b class="nc">&nbsp;          sock.sslParameters = sslParams</b>
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        sock.soTimeout = timeout.inWholeMilliseconds.toInt()</b>
+<b class="nc">&nbsp;        sock.connect(InetSocketAddress(host, port), timeout.inWholeMilliseconds.toInt())</b>
+<b class="nc">&nbsp;        sock.startHandshake()</b>
 &nbsp;
-&nbsp;/** Returns the certificate subject DN (common name) from the certificate */
-&nbsp;val X509Certificate.commonName
-&nbsp;  get() =
-<b class="nc">&nbsp;      LdapName(subjectX500Principal.name)</b>
-<b class="nc">&nbsp;          .rdns</b>
-<b class="nc">&nbsp;          .filter { it.type.equals(&quot;CN&quot;, true) }</b>
-<b class="nc">&nbsp;          .map { it.value.toString() }</b>
-<b class="nc">&nbsp;          .single()</b>
-&nbsp;
-&nbsp;/** Returns the subject alternative names from the certificate. */
-&nbsp;val X509Certificate.subjectAltNames
-&nbsp;  get() =
-<b class="nc">&nbsp;      subjectAlternativeNames</b>
-<b class="nc">&nbsp;          .orEmpty()</b>
-<b class="nc">&nbsp;          .filter { it.size == 2 }</b>
-<b class="nc">&nbsp;          .mapNotNull {</b>
-<b class="nc">&nbsp;            val oid = it[0].toString().toInt()</b>
-<b class="nc">&nbsp;            when (oid) {</b>
-&nbsp;              ALT_RFC822_NAME,
-&nbsp;              ALT_DNS_NAME,
-<b class="nc">&nbsp;              ALT_IPA_NAME -&gt; it[1].toString()</b>
-<b class="nc">&nbsp;              else -&gt; null</b>
-<b class="nc">&nbsp;            }</b>
-&nbsp;          }
-&nbsp;
-&nbsp;/**
-&nbsp; * Returns true if the certificate is signed by the given [ca] cert., false otherwise.
-&nbsp; *
-&nbsp; * @param ca [X509Certificate] CA cert.
-&nbsp; */
-&nbsp;fun X509Certificate.signedBy(ca: X509Certificate): Boolean =
-<b class="nc">&nbsp;    when {</b>
-<b class="nc">&nbsp;      issuerX500Principal != ca.subjectX500Principal -&gt; false</b>
-<b class="nc">&nbsp;      else -&gt; runCatching { verify(ca.publicKey) }.isSuccess</b>
+&nbsp;        // Peer has to be authenticated this to work
+&nbsp;        // sock.session.peerCertificates.filterIsInstance&lt;X509Certificate&gt;()
+<b class="nc">&nbsp;      }</b>
+<b class="nc">&nbsp;      trustManager.chain</b>
 &nbsp;    }
-&nbsp;
-&nbsp;/** Returns true if the certificate is self-signed, false otherwise. */
-&nbsp;val X509Certificate.selfSigned
-<b class="nc">&nbsp;  get() = signedBy(this)</b>
-&nbsp;
-&nbsp;/**
-&nbsp; * Returns `true` if the certificate is a CA certificate.
-&nbsp; *
-&nbsp; * @see [X509Certificate.getKeyUsage]
-&nbsp; */
-&nbsp;val X509Certificate.isCA
-<b class="nc">&nbsp;  get() = keyUsage?.get(5) ?: false</b>
-&nbsp;
-&nbsp;/** Returns `true` if the certificate is an intermediate CA certificate, `false` otherwise. */
-&nbsp;val X509Certificate.isIntermediateCA
-<b class="nc">&nbsp;  get() = isCA &amp;&amp; !selfSigned</b>
-&nbsp;
-&nbsp;/** Returns the certificate expiry date time in UTC. */
-&nbsp;val X509Certificate.expiryDateUTC
-<b class="nc">&nbsp;  get() = notAfter.toInstant().toKotlinInstant().toLocalDateTime(TimeZone.UTC)</b>
-&nbsp;
-&nbsp;val PublicKey.pem: String
-<b class="nc">&nbsp;  get() = encodePem(&quot;PUBLIC KEY&quot;, encoded)</b>
-&nbsp;
-&nbsp;val PrivateKey.pem: String
-<b class="nc">&nbsp;  get() = encodePem(&quot;PRIVATE KEY&quot;, encoded)</b>
-&nbsp;
-&nbsp;val X509Certificate.pem: String
-<b class="nc">&nbsp;  get() = encodePem(&quot;CERTIFICATE&quot;, encoded)</b>
-&nbsp;
-&nbsp;/** Returns true if the cert chain is signed by given Root CA */
-&nbsp;fun List&lt;X509Certificate&gt;.isSignedByRoot(root: List&lt;X509Certificate&gt;): Boolean {
-<b class="nc">&nbsp;  check(isNotEmpty()) { &quot;Cert chain is empty&quot; }</b>
-<b class="nc">&nbsp;  val trustAnchors =</b>
-<b class="nc">&nbsp;      root</b>
-<b class="nc">&nbsp;          .map {</b>
-&nbsp;            // it.checkValidity()
-<b class="nc">&nbsp;            TrustAnchor(it, null)</b>
-&nbsp;          }
-<b class="nc">&nbsp;          .toSet()</b>
-<b class="nc">&nbsp;  val params = PKIXParameters(trustAnchors).apply { isRevocationEnabled = false }</b>
-<b class="nc">&nbsp;  val certPath = certFactory.generateCertPath(this)</b>
-<b class="nc">&nbsp;  val certPathValidator = CertPathValidator.getInstance(&quot;PKIX&quot;)</b>
-<b class="nc">&nbsp;  return runCatching { certPathValidator.validate(certPath, params) }.isSuccess</b>
+&nbsp;  }
 &nbsp;}
-&nbsp;
-&nbsp;/**
-&nbsp; * Checks if the given string is a PEM encoded certificate.
-&nbsp; *
-&nbsp; * @param data cert data
-&nbsp; * @return `true` if it&#39;s a `PEM` certificate.
-&nbsp; */
-<b class="nc">&nbsp;fun isPem(data: String) = CERT_PATTERN.containsMatchIn(data)</b>
-&nbsp;
-&nbsp;/**
-&nbsp; * Read all X.509 certificates from the given PEM encoded certificate.
-&nbsp; *
-&nbsp; * @param certChain PEM encoded cert(s)
-&nbsp; * @return list of [X509Certificate]
-&nbsp; */
-&nbsp;fun readCertChain(certChain: String) =
-&nbsp;    try {
-<b class="nc">&nbsp;      CERT_PATTERN.findAll(certChain)</b>
-<b class="nc">&nbsp;          .map {</b>
-<b class="nc">&nbsp;            val base64Text = it.groupValues[1]</b>
-<b class="nc">&nbsp;            val buffer = Base64.Mime.decode(base64Text.toByteArray(Charsets.US_ASCII))</b>
-<b class="nc">&nbsp;            certFactory.generateCertificate(buffer.inputStream()) as X509Certificate</b>
-&nbsp;          }
-<b class="nc">&nbsp;          .toList()</b>
-&nbsp;    } catch (e: Exception) {
-<b class="nc">&nbsp;      throw IllegalStateException(&quot;Can&#39;t read the PEM certificate, cert data is invalid&quot;, e)</b>
-&nbsp;    }
-&nbsp;
-&nbsp;/** Encodes the given [encoded] bytes to PEM format. */
-&nbsp;fun encodePem(type: String, encoded: ByteArray) =
-<b class="nc">&nbsp;    &quot;&quot;&quot;-----BEGIN $type-----</b>
-<b class="nc">&nbsp;      |${Base64.encode(encoded).chunked(64).joinToString(&quot;\n&quot;)}</b>
-<b class="nc">&nbsp;      |-----END $type-----</b>
-&nbsp;      |&quot;&quot;&quot;
-<b class="nc">&nbsp;        .trimMargin()</b>
 </code>
 </pre>
 </div>
@@ -259,7 +167,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-08 00:20</div>
+    <div style="float:right;">generated on 2024-08-08 15:12</div>
 </div>
 </body>
 </html>

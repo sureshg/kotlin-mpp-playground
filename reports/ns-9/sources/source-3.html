@@ -52,16 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +60,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/188)
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/260)
   </span>
 </td>
 </tr>
@@ -129,17 +136,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   </span>
 </td>
   </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
+  <tr>
+    <td class="name">HttpClient_jvmKt$httpClient$1$9$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/1)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -153,7 +159,50 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/199)
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/306)
   </span>
 </td>
 </tr>
@@ -166,9 +215,20 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
 &nbsp;
+&nbsp;import dev.suresh.cert.RootCA
 &nbsp;import io.github.oshai.kotlinlogging.KLogger
+&nbsp;import io.github.oshai.kotlinlogging.KotlinLogging
 &nbsp;import io.ktor.client.*
 &nbsp;import io.ktor.client.engine.java.*
+&nbsp;import nl.altindag.ssl.SSLFactory
+&nbsp;
+<b class="nc">&nbsp;val log = KotlinLogging.logger {}</b>
+&nbsp;
+<b class="nc">&nbsp;val customTLSContext by lazy {</b>
+<b class="nc">&nbsp;  log.info { &quot;Initializing TLS context with custom RootCAs...&quot; }</b>
+<b class="nc">&nbsp;  log.info { &quot;Root CAs: ${RootCA.commonNames}&quot; }</b>
+<b class="nc">&nbsp;  SSLFactory.builder().withDefaultTrustMaterial().withTrustMaterial(RootCA.certs).build().sslContext</b>
+&nbsp;}
 &nbsp;
 &nbsp;actual fun httpClient(
 &nbsp;    name: String,
@@ -176,7 +236,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    retry: Retry,
 &nbsp;    httpLogger: KLogger,
 &nbsp;    config: HttpClientConfig&lt;*&gt;.() -&gt; Unit
-<b class="nc">&nbsp;) = HttpClient(Java) { config(this) }</b>
+&nbsp;) =
+<b class="nc">&nbsp;    HttpClient(Java) {</b>
+<b class="nc">&nbsp;      config(this)</b>
+<b class="nc">&nbsp;      engine { config { sslContext(customTLSContext) } }</b>
+&nbsp;    }
 </code>
 </pre>
 </div>
@@ -200,7 +264,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-08 00:20</div>
+    <div style="float:right;">generated on 2024-08-08 15:12</div>
 </div>
 </body>
 </html>

@@ -289,7 +289,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -297,7 +297,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/55)
+    (0/58)
   </span>
 </td>
   </tr>
@@ -317,7 +317,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/16)
+    (0/17)
   </span>
 </td>
 <td class="coverageStat">
@@ -325,7 +325,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/330)
+    (0/333)
   </span>
 </td>
 </tr>
@@ -362,7 +362,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  get(&quot;/jfr&quot;) { call.respondLogStream { JFR.recordingStream() } }</b>
 &nbsp;
 <b class="nc">&nbsp;  get(&quot;/trace&quot;) {</b>
-<b class="nc">&nbsp;    call.respond(mapOf(&quot;OpenTelemetry&quot; to BuildConfig.otelInstr, &quot;Image Size&quot; to mediaApiCall()))</b>
+<b class="nc">&nbsp;    call.respond(</b>
+<b class="nc">&nbsp;        mapOf(&quot;OpenTelemetry&quot; to BuildConfig.otelInstr, &quot;Image Size&quot; to mediaApiCall().toString()))</b>
 &nbsp;  }
 &nbsp;}
 &nbsp;
@@ -399,7 +400,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-08 00:20</div>
+    <div style="float:right;">generated on 2024-08-08 15:12</div>
 </div>
 </body>
 </html>

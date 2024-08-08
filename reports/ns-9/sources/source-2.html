@@ -158,7 +158,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      install(HttpCookies)
 &nbsp;
 &nbsp;      install(Logging) {
-&nbsp;        level = LogLevel.INFO
+&nbsp;        level =
+&nbsp;            when {
+&nbsp;              httpLogger.isDebugEnabled() -&gt; LogLevel.ALL
+&nbsp;              httpLogger.isLoggingOff() -&gt; LogLevel.NONE
+&nbsp;              else -&gt; LogLevel.INFO
+&nbsp;            }
+&nbsp;
 &nbsp;        logger =
 &nbsp;            object : Logger {
 &nbsp;              override fun log(message: String) {
@@ -172,33 +178,22 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;      followRedirects = true
 &nbsp;
-&nbsp;      expectSuccess = true
-&nbsp;
-&nbsp;      install(UserAgent) { agent = name }
+&nbsp;      install(UserAgent) { agent = &quot;$name-${BuildConfig.version}&quot; }
 &nbsp;
 &nbsp;      install(DefaultRequest) {
 &nbsp;        headers.appendIfNameAndValueAbsent(
 &nbsp;            HttpHeaders.ContentType, ContentType.Application.Json.toString())
 &nbsp;      }
 &nbsp;
-&nbsp;      // install(Auth) {
-&nbsp;      //   basic {
-&nbsp;      //     credentials {
-&nbsp;      //       sendWithoutRequest { true }
-&nbsp;      //       BasicAuthCredentials(username = &quot;&quot;, password = &quot;&quot;)
-&nbsp;      //     }
-&nbsp;      //   }
-&nbsp;      // }
-&nbsp;      //
-&nbsp;      // HttpResponseValidator {
-&nbsp;      //   validateResponse {
-&nbsp;      //     when (it.status.value) {
-&nbsp;      //       in 300..399 -&gt; throw RedirectResponseException(it, &quot;Redirect error&quot;)
-&nbsp;      //       in 400..499 -&gt; throw ClientRequestException(it, &quot;Client error&quot;)
-&nbsp;      //       in 500..599 -&gt; throw ServerResponseException(it, &quot;Server error&quot;)
-&nbsp;      //     }
-&nbsp;      //   }
-&nbsp;      // }
+&nbsp;      expectSuccess = true
+&nbsp;
+&nbsp;      HttpResponseValidator {
+&nbsp;        handleResponseExceptionWithRequest { ex, req -&gt;
+&nbsp;          val resException = ex as? ResponseException ?: return@handleResponseExceptionWithRequest
+&nbsp;          val res = resException.response
+&nbsp;          httpLogger.trace { &quot;Request failed: ${req.method.value} ${req.url} -&gt; ${res.status}&quot; }
+&nbsp;        }
+&nbsp;      }
 &nbsp;    }
 &nbsp;): HttpClient
 </code>
@@ -224,7 +219,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-08 00:20</div>
+    <div style="float:right;">generated on 2024-08-08 15:12</div>
 </div>
 </body>
 </html>
