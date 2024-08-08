@@ -3,6 +3,7 @@ package dev.suresh
 import BuildConfig
 import dev.suresh.config.SysConfig
 import dev.suresh.plugins.configureHTTP
+import dev.suresh.plugins.configureOTel
 import dev.suresh.plugins.configureSecurity
 import dev.suresh.plugins.configureSerialization
 import dev.suresh.plugins.custom.customPlugins
@@ -27,6 +28,7 @@ fun Application.module() {
   configureHTTP()
   configureSerialization()
   configureSecurity()
+  configureOTel()
   errorRoutes()
   customPlugins()
   routing {

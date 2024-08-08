@@ -99,7 +99,7 @@ tasks {
   withType<Jar>().configureEach {
     manifest {
       attributes(
-          "Automatic-Module-Name" to project.group,
+          // "Automatic-Module-Name" to project.group,
           "Enable-Native-Access" to "ALL-UNNAMED",
           "Built-By" to System.getProperty("user.name"),
           "Built-Jdk" to System.getProperty("java.runtime.version"),
