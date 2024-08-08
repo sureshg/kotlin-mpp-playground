@@ -150,7 +150,7 @@ tasks {
     }
   }
 
-  pluginManager.withPlugin("io.github.goooler.shadow") {
+  pluginManager.withPlugin("com.gradleup.shadow") {
     val buildExecutable by
         registering(ReallyExecJar::class) {
           jarFile = named<Jar>("shadowJar").flatMap { it.archiveFile }

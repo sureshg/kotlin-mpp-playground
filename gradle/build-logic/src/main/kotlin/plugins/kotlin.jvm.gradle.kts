@@ -138,7 +138,7 @@ tasks {
     exclude("**/Main.java")
   }
 
-  pluginManager.withPlugin("io.github.goooler.shadow") {
+  pluginManager.withPlugin("com.gradleup.shadow") {
     val buildExecutable by
         registering(ReallyExecJar::class) {
           val shadowJar by existing(Jar::class)

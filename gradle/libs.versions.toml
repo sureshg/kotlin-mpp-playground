@@ -166,7 +166,7 @@ foojay-resolver                = "0.8.0"
 gradle-develocity              = "3.17.6"
 nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
-shadow                         = "8.1.8"
+shadow                         = "8.3.0"
 spotless                       = "7.0.0.BETA1"
 semver-plugin                  = "0.5.1"
 taskinfo                       = "2.1.0"
@@ -222,7 +222,7 @@ build-jte-plugin                     = { module = "gg.jte:jte-gradle-plugin"    
 build-nmcp-plugin                    = { module = "com.gradleup.nmcp:nmcp"                                          , version.ref = "nmcp"}
 build-nexus-plugin                   = { module = "io.github.gradle-nexus:publish-plugin"                           , version.ref = "nexus-publish"}
 build-spotless-plugin                = { module = "com.diffplug.spotless:spotless-plugin-gradle"                    , version.ref = "spotless"}
-build-shadow-plugin                  = { module = "io.github.goooler.shadow:shadow-gradle-plugin"                   , version.ref = "shadow"}
+build-shadow-plugin                  = { module = "com.gradleup.shadow:shadow-gradle-plugin"                        , version.ref = "shadow"}
 build-taskinfo                       = { module = "org.barfuin.gradle.taskinfo:gradle-taskinfo"                     , version.ref = "taskinfo" }
 build-dependencyanalysis             = { module = "com.autonomousapps:dependency-analysis-gradle-plugin"            , version.ref = "dependency-analysis" }
 build-bestpractices-plugin           = { module = "com.autonomousapps:plugin-best-practices-plugin"                 , version.ref = "best-practices-plugin" }

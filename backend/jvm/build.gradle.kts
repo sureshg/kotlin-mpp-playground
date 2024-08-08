@@ -9,7 +9,7 @@ plugins {
   com.google.cloud.tools.jib
   gg.jte.gradle
   plugins.graalvm
-  io.github.goooler.shadow
+  com.gradleup.shadow
   alias(libs.plugins.ktor)
   alias(libs.plugins.exposed)
   plugins.publishing
