@@ -64,7 +64,13 @@ expect fun httpClient(
       install(HttpCookies)
 
       install(Logging) {
-        level = LogLevel.INFO
+        level =
+            when {
+              httpLogger.isDebugEnabled() -> LogLevel.ALL
+              httpLogger.isLoggingOff() -> LogLevel.NONE
+              else -> LogLevel.INFO
+            }
+
         logger =
             object : Logger {
               override fun log(message: String) {
@@ -78,32 +84,21 @@ expect fun httpClient(
 
       followRedirects = true
 
-      expectSuccess = true
-
-      install(UserAgent) { agent = name }
+      install(UserAgent) { agent = "$name-${BuildConfig.version}" }
 
       install(DefaultRequest) {
         headers.appendIfNameAndValueAbsent(
             HttpHeaders.ContentType, ContentType.Application.Json.toString())
       }
 
-      // install(Auth) {
-      //   basic {
-      //     credentials {
-      //       sendWithoutRequest { true }
-      //       BasicAuthCredentials(username = "", password = "")
-      //     }
-      //   }
-      // }
-      //
-      // HttpResponseValidator {
-      //   validateResponse {
-      //     when (it.status.value) {
-      //       in 300..399 -> throw RedirectResponseException(it, "Redirect error")
-      //       in 400..499 -> throw ClientRequestException(it, "Client error")
-      //       in 500..599 -> throw ServerResponseException(it, "Server error")
-      //     }
-      //   }
-      // }
+      expectSuccess = true
+
+      HttpResponseValidator {
+        handleResponseExceptionWithRequest { ex, req ->
+          val resException = ex as? ResponseException ?: return@handleResponseExceptionWithRequest
+          val res = resException.response
+          httpLogger.trace { "Request failed: ${req.method.value} ${req.url} -> ${res.status}" }
+        }
+      }
     }
 ): HttpClient

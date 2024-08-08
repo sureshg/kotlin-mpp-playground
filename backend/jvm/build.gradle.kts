@@ -29,6 +29,7 @@ jte {
   sourceDirectory =
       sourceSets.main.map { it.resources.srcDirs.first().resolve("templates").toPath() }
   generate()
+  jteExtension("gg.jte.models.generator.ModelExtension") { property("language", "Kotlin") }
 }
 
 exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
@@ -51,7 +52,7 @@ jib {
 
   to {
     image = "${project.githubUser}/${project.name}"
-    tags = setOf("latest")
+    tags = setOf(project.version.toString().substringBefore("+"), "latest")
   }
 
   container {
@@ -196,6 +197,7 @@ dependencies {
   implementation(libs.sherlock.sql)
 
   // Templating
+  jteGenerate(libs.jte.models)
   implementation(libs.jte.runtime)
   // compileOnly(libs.jte.kotlin)
   implementation(libs.kotlinx.html)
@@ -204,6 +206,9 @@ dependencies {
 
   // OpenTelemetry
   javaAgent(libs.otel.instr.javaagent)
+  implementation(libs.otel.instr.annotations)
+  implementation(libs.otel.instr.ktor)
+  implementation(libs.otel.extension.kotlin)
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
   implementation(libs.micrometer.prometheus)

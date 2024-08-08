@@ -76,4 +76,5 @@
 
     <logger name="io.netty" level="INFO"/>
     <logger name="Exposed" level="INFO"/>
+    <logger name="dev.suresh.http.MediaApiClient" level="INFO"/>
 </configuration>

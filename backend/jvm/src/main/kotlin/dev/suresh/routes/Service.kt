@@ -24,7 +24,8 @@ fun Routing.services() {
   get("/jfr") { call.respondLogStream { JFR.recordingStream() } }
 
   get("/trace") {
-    call.respond(mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall()))
+    call.respond(
+        mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall().toString()))
   }
 }
 

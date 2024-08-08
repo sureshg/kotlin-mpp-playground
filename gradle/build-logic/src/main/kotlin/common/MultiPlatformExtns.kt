@@ -113,9 +113,6 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.jspecify)
         api(libs.password4j)
         api(libs.bundles.keystore)
-        // OpenTelemetry
-        api(libs.otel.instr.annotations)
-        api(libs.otel.extension.kotlin)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         api(libs.google.auto.annotations)
         ksp(libs.ksp.auto.service)

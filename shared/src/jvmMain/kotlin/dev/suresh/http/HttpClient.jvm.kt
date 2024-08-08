@@ -1,8 +1,19 @@
 package dev.suresh.http
 
+import dev.suresh.cert.RootCA
 import io.github.oshai.kotlinlogging.KLogger
+import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.client.*
 import io.ktor.client.engine.java.*
+import nl.altindag.ssl.SSLFactory
+
+val log = KotlinLogging.logger {}
+
+val customTLSContext by lazy {
+  log.info { "Initializing TLS context with custom RootCAs..." }
+  log.info { "Root CAs: ${RootCA.commonNames}" }
+  SSLFactory.builder().withDefaultTrustMaterial().withTrustMaterial(RootCA.certs).build().sslContext
+}
 
 actual fun httpClient(
     name: String,
@@ -10,4 +21,8 @@ actual fun httpClient(
     retry: Retry,
     httpLogger: KLogger,
     config: HttpClientConfig<*>.() -> Unit
-) = HttpClient(Java) { config(this) }
+) =
+    HttpClient(Java) {
+      config(this)
+      engine { config { sslContext(customTLSContext) } }
+    }

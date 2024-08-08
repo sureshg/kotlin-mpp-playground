@@ -28,7 +28,10 @@ data class Video(
     val poster: String? = null,
 )
 
-class MediaApiClient(timeout: Timeout = Timeout.DEFAULT, retry: Retry = Retry.DEFAULT) {
+data class MediaApiClient(
+    val timeout: Timeout = Timeout.DEFAULT,
+    val retry: Retry = Retry.DEFAULT
+) : AutoCloseable {
 
   private val log = KotlinLogging.logger {}
 
@@ -39,11 +42,20 @@ class MediaApiClient(timeout: Timeout = Timeout.DEFAULT, retry: Retry = Retry.DE
               retry = retry,
               httpLogger = log,
           )
-          .config { defaultRequest { url("https://suresh.dev/") } }
+          .config {
+            defaultRequest { url("https://suresh.dev/") }
+
+            // install(Auth) {
+            //   basic {
+            //     sendWithoutRequest { true }
+            //     credentials { BasicAuthCredentials(username = "", password = "") }
+            //   }
+            // }
+          }
 
   suspend fun images() = client.get(ImgRes()).body<List<Image>>()
 
   suspend fun videos() = client.get(VideoRes()).body<List<Video>>()
 
-  fun close() = client.close()
+  override fun close() = client.close()
 }

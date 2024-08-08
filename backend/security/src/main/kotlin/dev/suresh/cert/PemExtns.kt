@@ -66,7 +66,7 @@ val X509Certificate.selfSigned
  * @see [X509Certificate.getKeyUsage]
  */
 val X509Certificate.isCA
-  get() = keyUsage?.get(5) ?: false
+  get() = keyUsage?.get(5) == true
 
 /** Returns `true` if the certificate is an intermediate CA certificate, `false` otherwise. */
 val X509Certificate.isIntermediateCA
