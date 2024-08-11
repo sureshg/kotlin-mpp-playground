@@ -197,8 +197,8 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
               static =
                   (static ?: mutableListOf()).apply {
                     // Serve sources to debug inside the browser
-                    add(rootDirPath)
                     add(projectDirPath)
+                    add(rootDirPath)
                   }
             }
       }

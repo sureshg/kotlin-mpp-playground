@@ -26,13 +26,12 @@ kotlin {
       implementation(compose.runtime)
       implementation(compose.foundation)
       implementation(compose.material3)
+      implementation(compose.ui)
       implementation(compose.components.resources)
       implementation(compose.components.uiToolingPreview)
-
+      // implementation(compose.materialIconsExtended)
       implementation(libs.compose.navigation)
       implementation(libs.compose.lifecycle.viewmodel)
-
-      // implementation(compose.materialIconsExtended)
       // project.dependencies.detektPlugins(libs.detekt.compose.rules)
     }
 
@@ -146,8 +145,6 @@ compose {
     //     sourceSetName = sourceSet.name,
     //     directoryProvider = layout.dir(sourceSet.map { it.resources.srcDirs.first() }))
   }
-
-  web {}
 }
 
 tasks {
