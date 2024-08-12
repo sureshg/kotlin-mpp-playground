@@ -94,13 +94,33 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.plugins
 &nbsp;
+&nbsp;import com.google.auto.service.AutoService
 &nbsp;import io.ktor.server.application.Application
+&nbsp;import io.opentelemetry.api.trace.Span
+&nbsp;import io.opentelemetry.context.Context
+&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseCustomizer
+&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseMutator
 &nbsp;
 &nbsp;fun Application.configureOTel() {
 &nbsp;  //  install(KtorServerTracing) {
 &nbsp;  //    setOpenTelemetry(GlobalOpenTelemetry.get())
 &nbsp;  //  }
 <b class="nc">&nbsp;}</b>
+&nbsp;
+&nbsp;@AutoService(HttpServerResponseCustomizer::class)
+&nbsp;class TraceIDResponseCustomizer : HttpServerResponseCustomizer {
+&nbsp;  override fun &lt;T&gt; customize(
+&nbsp;      serverContext: Context,
+&nbsp;      response: T,
+&nbsp;      responseMutator: HttpServerResponseMutator&lt;T&gt;
+&nbsp;  ) {
+&nbsp;    val spanContext = Span.fromContextOrNull(serverContext)?.spanContext
+&nbsp;    if (spanContext?.isValid != true) {
+&nbsp;      return
+&nbsp;    }
+&nbsp;    responseMutator.appendHeader(response, &quot;X-Trace-Id&quot;, spanContext.traceId)
+&nbsp;  }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -124,7 +144,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-12 15:27</div>
+    <div style="float:right;">generated on 2024-08-12 17:03</div>
 </div>
 </body>
 </html>
