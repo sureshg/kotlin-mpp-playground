@@ -7,7 +7,6 @@ import kotlin.io.path.listDirectoryEntries
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
-import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 
 plugins {
   plugins.kotlin.mpp
@@ -48,10 +47,7 @@ kotlin {
   }
 }
 
-composeCompiler {
-  reportsDestination = layout.buildDirectory.dir("compose_compiler")
-  targetKotlinPlatforms = setOf(KotlinPlatformType.jvm)
-}
+composeCompiler { reportsDestination = layout.buildDirectory.dir("compose_compiler") }
 
 compose {
   desktop {
