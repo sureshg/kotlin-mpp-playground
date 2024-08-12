@@ -39,6 +39,9 @@ fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modi
       })
 }
 
+inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -> Modifier) =
+    then(if (value) builder() else Modifier)
+
 fun Modifier.flipped() = then(FlippedModifier())
 
 class FlippedModifier : DrawModifier {
