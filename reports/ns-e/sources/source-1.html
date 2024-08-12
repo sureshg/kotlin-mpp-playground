@@ -52,7 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/3)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -61,7 +61,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +69,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/20)
+    (0/52)
   </span>
 </td>
 </tr>
@@ -101,14 +101,84 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   </span>
 </td>
   </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
+  <tr>
+    <td class="name">AdminKt$adminRoutes$3$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AdminKt$adminRoutes$3$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/145)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AdminKt$adminRoutes$3$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -117,7 +187,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,7 +195,42 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/47)
+    (0/31)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/320)
   </span>
 </td>
 </tr>
@@ -139,9 +244,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.routes
 &nbsp;
 &nbsp;import BuildConfig
+&nbsp;import ch.qos.logback.classic.Level
+&nbsp;import ch.qos.logback.classic.LoggerContext
+&nbsp;import ch.qos.logback.classic.util.ContextInitializer
+&nbsp;import io.ktor.http.HttpStatusCode
 &nbsp;import io.ktor.server.plugins.swagger.*
 &nbsp;import io.ktor.server.response.*
 &nbsp;import io.ktor.server.routing.*
+&nbsp;import org.slf4j.Logger
+&nbsp;import org.slf4j.LoggerFactory
 &nbsp;
 &nbsp;fun Routing.adminRoutes() {
 <b class="nc">&nbsp;  swaggerUI(path = &quot;swagger&quot;, swaggerFile = &quot;openapi/documentation.yaml&quot;) {</b>
@@ -150,6 +261,50 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  get(&quot;/&quot;) { call.respondRedirect(&quot;/swagger&quot;) }</b>
+&nbsp;
+<b class="nc">&nbsp;  route(&quot;/loglevel&quot;) {</b>
+<b class="nc">&nbsp;    get(&quot;/{logger}&quot;) {</b>
+<b class="nc">&nbsp;      val loggerName = call.parameters[&quot;logger&quot;] ?: Logger.ROOT_LOGGER_NAME</b>
+<b class="nc">&nbsp;      val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
+<b class="nc">&nbsp;      val logger = loggerCtx.getLogger(loggerName)</b>
+<b class="nc">&nbsp;      when (logger) {</b>
+<b class="nc">&nbsp;        null -&gt; call.respondText(&quot;Logger &#39;$loggerName&#39; not found&quot;, status = HttpStatusCode.NotFound)</b>
+<b class="nc">&nbsp;        else -&gt; call.respondText(&quot;Logger &#39;$loggerName&#39; has level: ${logger.level}&quot;)</b>
+&nbsp;      }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    post(&quot;/{logger}/{level}&quot;) {</b>
+<b class="nc">&nbsp;      val loggerName = call.parameters[&quot;logger&quot;] ?: Logger.ROOT_LOGGER_NAME</b>
+<b class="nc">&nbsp;      val levelName = call.parameters[&quot;level&quot;]?.uppercase() ?: Level.INFO.levelStr</b>
+&nbsp;      try {
+<b class="nc">&nbsp;        var loggerFound = false</b>
+<b class="nc">&nbsp;        val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
+<b class="nc">&nbsp;        for (logger in loggerCtx.loggerList) {</b>
+<b class="nc">&nbsp;          if (logger.name.startsWith(prefix = loggerName, ignoreCase = true)) {</b>
+<b class="nc">&nbsp;            logger.level = Level.valueOf(levelName)</b>
+<b class="nc">&nbsp;            loggerFound = true</b>
+&nbsp;          }
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        when (loggerFound) {</b>
+<b class="nc">&nbsp;          true -&gt;</b>
+<b class="nc">&nbsp;              call.respondText(</b>
+<b class="nc">&nbsp;                  &quot;Log level for &#39;$loggerName&#39; and it&#39;s sub packages set to $levelName&quot;)</b>
+&nbsp;          else -&gt;
+<b class="nc">&nbsp;              call.respondText(&quot;Logger &#39;$loggerName&#39; not found&quot;, status = HttpStatusCode.NotFound)</b>
+&nbsp;        }
+&nbsp;      } catch (_: Exception) {
+<b class="nc">&nbsp;        call.respondText(&quot;Invalid log level: $levelName&quot;, status = HttpStatusCode.BadRequest)</b>
+&nbsp;      }
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    post(&quot;/reset&quot;) {</b>
+<b class="nc">&nbsp;      val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
+<b class="nc">&nbsp;      loggerCtx.reset()</b>
+<b class="nc">&nbsp;      ContextInitializer(loggerCtx).autoConfig()</b>
+<b class="nc">&nbsp;      call.respondText(&quot;Logback configuration reset!&quot;)</b>
+&nbsp;    }
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -174,7 +329,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-12 00:20</div>
+    <div style="float:right;">generated on 2024-08-12 12:32</div>
 </div>
 </body>
 </html>
