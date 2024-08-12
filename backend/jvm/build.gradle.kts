@@ -206,9 +206,7 @@ dependencies {
 
   // OpenTelemetry
   javaAgent(libs.otel.instr.javaagent)
-  implementation(libs.otel.extension.kotlin)
-  implementation(libs.otel.instr.annotations)
-  // implementation(libs.otel.instr.ktor)
+  implementation(libs.bundles.opentelemetry)
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
 

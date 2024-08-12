@@ -505,14 +505,14 @@ otel-bom                             = { module = "io.opentelemetry:opentelemetr
 otel-api                             = { module = "io.opentelemetry:opentelemetry-api"                                            , version.ref = "otel"}
 otel-extension-kotlin                = { module = "io.opentelemetry:opentelemetry-extension-kotlin"                               , version.ref = "otel"}
 
-otel-instr-bom                       = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom"            , version.ref = "otel-instr"}
-otel-instr-javaagent                 = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent"                            , version.ref = "otel-instr"}
-otel-instr-annotations               = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations"    , version.ref = "otel-instr"}
-otel-instr-ktor                      = { module = "io.opentelemetry.instrumentation:opentelemetry-ktor-2.0"                       , version.ref = "otel-instr-alpha"}
-otel-instr-logback-appender          = { module = "io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0"           , version.ref = "otel-instr"}
-otel-instr-logback-mdc               = { module = "io.opentelemetry.instrumentation:opentelemetry-logback-mdc-1.0"                , version.ref = "otel-instr"}
-otel-instr-micrometer                = { module = "io.opentelemetry.instrumentation:opentelemetry-micrometer-1.5"                 , version.ref = "otel-instr"}
+otel-instr-bom                       = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom"                      , version.ref = "otel-instr"}
+otel-instr-javaagent                 = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent"                                      , version.ref = "otel-instr"}
+otel-instr-annotations               = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-annotations"              , version.ref = "otel-instr"}
+otel-instr-extension-api             = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent-extension-api"                        , version.ref = "otel-instr-alpha"}
+otel-instr-ktor                      = { module = "io.opentelemetry.instrumentation:opentelemetry-ktor-2.0"                                 , version.ref = "otel-instr-alpha"}
 otel-instr-coroutines                = { module = "io.opentelemetry.javaagent.instrumentation:opentelemetry-javaagent-kotlinx-coroutines"   , version.ref = "otel-instr-alpha"}
+otel-instr-logback-appender          = { module = "io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0"                     , version.ref = "otel-instr"}
+otel-instr-logback-mdc               = { module = "io.opentelemetry.instrumentation:opentelemetry-logback-mdc-1.0"                          , version.ref = "otel-instr"}
 
 # Compose
 compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                                   , version.ref = "jetbrains-compose" }
@@ -543,8 +543,9 @@ jlama-core                           = { module = "com.github.tjake:jlama-core" 
 jlama-native                         = { module = "com.github.tjake:jlama-native"                                           , version.ref = "jlama" }
 
 [bundles]
-ajalt = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-colormath", "ajalt-clikt"]
-keystore = ["sslcontext-kickstart", "directory-keystore"]
+keystore        = ["sslcontext-kickstart", "directory-keystore"]
+ajalt           = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-colormath", "ajalt-clikt"]
+opentelemetry   = ["otel-extension-kotlin","otel-instr-annotations","otel-instr-extension-api","otel-instr-ktor"]
 
 
 [plugins]
