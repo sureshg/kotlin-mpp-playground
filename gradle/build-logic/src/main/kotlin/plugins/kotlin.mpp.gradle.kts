@@ -141,6 +141,12 @@ tasks {
           "version" to project.version,
       )
     }
+    filesMatching("manifest.json") {
+      expand(
+          "name" to project.name,
+          "version" to project.version.toString().substringBeforeLast("."),
+      )
+    }
   }
 
   pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {

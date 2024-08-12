@@ -192,7 +192,7 @@ kmp-hierarchy                  = "1.1"
 jetbrains-compose              = "1.7.0-alpha02"
 jetbrains-compose-nav          = "2.8.0-alpha08"
 jetbrains-compose-viewmodel    = "2.8.0"
-kobweb                         = "0.18.2"
+kobweb                         = "0.19.0"
 detekt                         = "1.23.6"
 detekt-compose-rules           = "0.4.9"
 mappie                         = "0.6.0"
@@ -431,14 +431,6 @@ junit-jupiter-api                    = { module = "org.junit.jupiter:junit-jupit
 junit-jupiter-engine                 = { module = "org.junit.jupiter:junit-jupiter-engine"                     , version.ref = "junit"}
 junit-jupiter-params                 = { module = "org.junit.jupiter:junit-jupiter-params"                     , version.ref = "junit"}
 
-kobweb-api                           = { module = "com.varabyte.kobweb:kobweb-api"                             , version.ref = "kobweb" }
-kobweb-core                          = { module = "com.varabyte.kobweb:kobweb-core "                           , version.ref = "kobweb" }
-kobweb-silk                          = { module = "com.varabyte.kobweb:kobweb-silk"                            , version.ref = "kobweb" }
-kobwebx-markdown                     = { module = "com.varabyte.kobwebx:kobwebx-markdown"                      , version.ref = "kobweb" }
-silk-foundation                      = { module = "com.varabyte.kobweb:silk-foundation"                        , version.ref = "kobweb" }
-silk-icons-fa                        = { module = "com.varabyte.kobwebx:silk-icons-fa"                         , version.ref = "kobweb" }
-silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-icons-mdi"                        , version.ref = "kobweb" }
-
 graal-sdk                            = { module = "org.graalvm.sdk:graal-sdk"                                  , version.ref = "graalvm"}
 graal-polyglot                       = { module = "org.graalvm.polyglot:polyglot"                              , version.ref = "graalvm"}
 graal-wasm                           = { module = "org.graalvm.polyglot:wasm"                                  , version.ref = "graalvm"}
@@ -523,13 +515,21 @@ otel-instr-micrometer                = { module = "io.opentelemetry.instrumentat
 otel-instr-coroutines                = { module = "io.opentelemetry.javaagent.instrumentation:opentelemetry-javaagent-kotlinx-coroutines"   , version.ref = "otel-instr-alpha"}
 
 # Compose
-compose-html-core                    = { module = "org.jetbrains.compose.html:html-core"                                    , version.ref = "jetbrains-compose" }
 compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                                   , version.ref = "jetbrains-compose" }
+compose-html-core                    = { module = "org.jetbrains.compose.html:html-core"                                    , version.ref = "jetbrains-compose" }
 compose-navigation                   = { module = "org.jetbrains.androidx.navigation:navigation-compose"                    , version.ref = "jetbrains-compose-nav" }
 compose-lifecycle-viewmodel          = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose"            , version.ref = "jetbrains-compose-viewmodel" }
 compose-routing                      = { module = "app.softwork:routing-compose"                                            , version.ref = "compose-routing" }
 compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"                            , version.ref = "compose-icons" }
 detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                                          , version.ref = "detekt-compose-rules" }
+
+kobweb-api                           = { module = "com.varabyte.kobweb:kobweb-api"                                          , version.ref = "kobweb" }
+kobweb-core                          = { module = "com.varabyte.kobweb:kobweb-core "                                        , version.ref = "kobweb" }
+kobweb-silk                          = { module = "com.varabyte.kobweb:kobweb-silk"                                         , version.ref = "kobweb" }
+kobwebx-markdown                     = { module = "com.varabyte.kobwebx:kobwebx-markdown"                                   , version.ref = "kobweb" }
+silk-foundation                      = { module = "com.varabyte.kobweb:silk-foundation"                                     , version.ref = "kobweb" }
+silk-icons-fa                        = { module = "com.varabyte.kobwebx:silk-icons-fa"                                      , version.ref = "kobweb" }
+silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-icons-mdi"                                     , version.ref = "kobweb" }
 
 # Native
 kfswatch                             = { module = "io.github.irgaly.kfswatch:kfswatch"                                      , version.ref = "kfswatch" }
