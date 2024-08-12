@@ -133,6 +133,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      })
 &nbsp;}
 &nbsp;
+&nbsp;inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -&gt; Modifier) =
+&nbsp;    then(if (value) builder() else Modifier)
+&nbsp;
 &nbsp;fun Modifier.flipped() = then(FlippedModifier())
 &nbsp;
 <b class="nc">&nbsp;class FlippedModifier : DrawModifier {</b>
@@ -163,7 +166,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-12 12:32</div>
+    <div style="float:right;">generated on 2024-08-12 15:27</div>
 </div>
 </body>
 </html>
