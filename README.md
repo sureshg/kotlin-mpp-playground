@@ -90,11 +90,11 @@ $ ./gradlew :backend:jvm:run
 
 
    # or run the Jaeger collector
-   $ docker run -it --rm \
+   $ docker run -it --rm --pull=always \
                 -e COLLECTOR_OTLP_ENABLED=true \
                 -p 4317:4317 \
                 -p 16686:16686 \
-                jaegertracing/all-in-one
+                jaegertracing/all-in-one:latest
    $ open http://localhost:16686
 
    # Run the app
@@ -107,6 +107,11 @@ $ ./gradlew :backend:jvm:run
                 -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
                 -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
                 sureshg/jvm:latest
+   $ curl -v -X GET http://localhost:8080/trace
+
+   # Change/Reset log level
+   $ curl -v -X POST http://localhost:8080/loglevel/dev.suresh.http/debug
+   $ curl -v -X POST http://localhost:8080/loglevel/reset
   ```
 
 * AppCDS
