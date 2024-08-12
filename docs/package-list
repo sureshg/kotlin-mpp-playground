@@ -3,6 +3,7 @@ $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/processor/[root]/index.html
 $dokka.location://App/#/PointingToDeclaration/cmp/[root]/-app.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
+$dokka.location://hideSpinner/#/PointingToDeclaration/cmp/[root]/hide-spinner.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
 $dokka.location://log/#/PointingToDeclaration/web/[root]/log.html
 $dokka.location://main/#/PointingToDeclaration/cmp/[root]/[wasm-js]main.html
