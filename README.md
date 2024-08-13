@@ -167,6 +167,9 @@ $ ./gradlew :backend:jvm:run
   $ ./gradlew :backend:native:jibDockerBuild
   $ docker run -it --rm --name native-app sureshg/native
 
+  # Debug distroless image
+  # docker run -it --entrypoint=sh gcr.io/distroless/cc-debian12:debug
+
   # Test linux binary on ARM64 MacOS
   $ ./gradlew :backend:native:linuxArm64Binaries
   $ docker run  \

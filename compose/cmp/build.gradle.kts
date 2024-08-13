@@ -43,7 +43,7 @@ kotlin {
       implementation(libs.slf4j.simple)
     }
 
-    jsMain.dependencies { implementation(compose.html.core) }
+    // jsMain.dependencies { implementation(compose.html.core) }
   }
 }
 

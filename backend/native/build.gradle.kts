@@ -26,6 +26,13 @@ kotlin {
     binaries {
       executable(setOf(RELEASE)) {
         entryPoint = "main"
+
+        // Fix for libcrypt.so.1 not found error on distroless
+        if (target.targetName.startsWith("linux")) {
+          linkerOpts("--as-needed")
+          freeCompilerArgs += "-Xoverride-konan-properties=linkerGccFlags.linux=-lgcc -lgcc_eh -lc"
+        }
+
         if (buildType == NativeBuildType.RELEASE) {
           mavenPublication {
             artifact(outputFile) {
@@ -34,9 +41,6 @@ kotlin {
           }
         }
       }
-
-      // Creates test executable
-      test(setOf(RELEASE))
     }
   }
 
@@ -63,9 +67,8 @@ kotlin {
 
 jib {
   from {
-    // Distroless is not yet supported for Kotlin Native
-    // image = "gcr.io/distroless/base-debian12"
-    image = "debian:stable-slim"
+    // image = "debian:stable-slim"
+    image = "gcr.io/distroless/cc-debian12"
     platforms {
       platform {
         architecture = "arm64"
@@ -143,19 +146,18 @@ tasks {
   val prepareJib by
       registering(Copy::class) {
         // DefaultNativePlatform.getCurrentArchitecture()
-        val containerReleaseExecutable =
+        val releaseExecutable =
             when {
               Platform.isAmd64 -> named("linkReleaseExecutableLinuxX64")
               else -> named("linkReleaseExecutableLinuxArm64")
             }
 
-        from(containerReleaseExecutable)
+        from(releaseExecutable)
         // Jib native image extension expects the native image to be in "native/nativeCompile"
         into(layout.buildDirectory.dir("native/nativeCompile"))
         rename { appBinName }
       }
 
   jibDockerBuild { dependsOn(prepareJib) }
-
   // publish { finalizedBy(jibDockerBuild) }
 }
