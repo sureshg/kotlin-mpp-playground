@@ -97,6 +97,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import kotlin.jvm.JvmInline
 &nbsp;import kotlin.time.Duration.Companion.microseconds
 &nbsp;import kotlin.time.TimeSource
+&nbsp;import kotlin.uuid.Uuid
 &nbsp;
 <b class="nc">&nbsp;enum class Planet(val moon: Int) {</b>
 <b class="nc">&nbsp;  MERCURY(0),</b>
@@ -171,6 +172,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  log.info { hex.hexToByteArray(hexFormat).decodeToString() }
 &nbsp;
 &nbsp;  log.info { Base64.Mime.encode(&quot;Hello Kotlin!&quot;.encodeToByteArray()) }
+&nbsp;  log.info { &quot;UUID: ${ Uuid.random()}&quot; }
 &nbsp;}
 </code>
 </pre>
@@ -195,7 +197,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-14 00:25</div>
+    <div style="float:right;">generated on 2024-08-14 12:57</div>
 </div>
 </body>
 </html>
