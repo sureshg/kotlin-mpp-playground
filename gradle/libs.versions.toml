@@ -1,7 +1,7 @@
 [versions]
 java                           = "24"
 kotlin                         = "2.0.20-RC2"
-kotlin-ksp                     = "2.0.20-RC-1.0.24"
+kotlin-ksp                     = "2.0.20-RC2-1.0.24"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.0"
@@ -212,7 +212,7 @@ build-kotlinx-benchmark              = { module = "org.jetbrains.kotlinx:kotlinx
 build-kotlin-dsl                     = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins"                     , version.ref = "gradle-kotlin-dsl"}
 build-dokka-plugin                   = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "kotlin-dokka"}
 build-dokka-base                     = { module = "org.jetbrains.dokka:dokka-base"                                  , version.ref = "kotlin-dokka"}
-build-kotlin-ksp                     = { module = "com.google.devtools.ksp:symbol-processing-gradle-plugin"         , version.ref = "kotlin-ksp"}
+build-kotlin-ksp                     = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin"   , version.ref = "kotlin-ksp"}
 build-redacted-plugin                = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "kotlin-redacted"}
 build-kmp-hierarchy                  = { module = "io.github.terrakok:kmp-hierarchy"                                , version.ref = "kmp-hierarchy"}
 build-benmanesversions               = { module = "com.github.ben-manes:gradle-versions-plugin"                     , version.ref = "benmanes"}
