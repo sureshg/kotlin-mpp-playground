@@ -67,8 +67,8 @@ kotlin {
 
 jib {
   from {
-    // image = "debian:stable-slim"
-    image = "gcr.io/distroless/cc-debian12"
+    // image = "gcr.io/distroless/cc-debian12"
+    image = "debian:stable-slim"
     platforms {
       platform {
         architecture = "arm64"
