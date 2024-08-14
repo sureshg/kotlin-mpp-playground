@@ -3,6 +3,7 @@ import kotlin.io.encoding.Base64
 import kotlin.jvm.JvmInline
 import kotlin.time.Duration.Companion.microseconds
 import kotlin.time.TimeSource
+import kotlin.uuid.Uuid
 
 enum class Planet(val moon: Int) {
   MERCURY(0),
@@ -77,4 +78,5 @@ fun stdlibFeatures() {
   log.info { hex.hexToByteArray(hexFormat).decodeToString() }
 
   log.info { Base64.Mime.encode("Hello Kotlin!".encodeToByteArray()) }
+  log.info { "UUID: ${ Uuid.random()}" }
 }

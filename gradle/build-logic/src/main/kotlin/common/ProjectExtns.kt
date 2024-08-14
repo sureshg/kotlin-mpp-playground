@@ -422,6 +422,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       "kotlin.ExperimentalUnsignedTypes",
       "kotlin.io.encoding.ExperimentalEncodingApi",
       "kotlin.time.ExperimentalTime",
+      "kotlin.uuid.ExperimentalUuidApi",
       "kotlinx.coroutines.ExperimentalCoroutinesApi",
       "kotlinx.serialization.ExperimentalSerializationApi",
       "kotlin.ExperimentalMultiplatform",
