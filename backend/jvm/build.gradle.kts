@@ -61,9 +61,14 @@ jib {
     entrypoint = buildList {
       add("java")
       add("-javaagent:${appRoot}/otel/otel-javaagent.jar")
+      add("-Dnet.bytebuddy.experimental=true")
       add("-Dotel.service.name=${project.name}")
       add("-Dotel.javaagent.logging=application")
-      add("-Dnet.bytebuddy.experimental=true")
+      add("-Dotel.instrumentation.runtime-telemetry-java17.enable-all=true")
+      add("-Dotel.instrumentation.runtime-telemetry.emit-experimental-telemetry=true")
+      // add("-Dotel.resource.attributes.service.name=${project.name}")
+      // add("-Dotel.resource.attributes.service.namespace=${project.group}")
+      // add("-Dotel.resource.attributes.service.instance.id=localhost:8080")
       // add("-Dotel.javaagent.enabled=false")
       // add("-Dotel.traces.exporter=logging")
       // add("-Dotel.metrics.exporter=logging")
@@ -82,9 +87,11 @@ jib {
             "OTEL_METRICS_EXPORTER" to "logging",
             "OTEL_LOGS_EXPORTER" to "logging",
             "OTEL_RESOURCE_ATTRIBUTES" to
-                "service.name=${project.name},service.namespace=${project.group},service.instance.id=localhost:8080",
+                "service.name=${project.name},service.namespace=${project.group}",
             // "OTEL_EXPORTER_OTLP_PROTOCOL" to "grpc",
             // "OTEL_EXPORTER_OTLP_ENDPOINT" to "http://host.docker.internal:4317",
+            // "OTEL_INSTRUMENTATION_RUNTIME_TELEMETRY_EMIT_EXPERIMENTAL_TELEMETRY" to "true",
+            // "OTEL_INSTRUMENTATION_RUNTIME_TELEMETRY_JAVA17_ENABLE_ALL" to "true",
         )
 
     args = listOf(project.name, project.version.toString())

@@ -21,7 +21,7 @@ org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
 kotlinx-kover                  = "0.8.3"
-kotlinx-io                     = "0.5.1"
+kotlinx-io                     = "0.5.2"
 kotlinx-atomicfu               = "0.25.0"
 kotlinx-coroutines             = "1.9.0-RC.2"
 kotlinx-datetime               = "0.6.0"
@@ -48,8 +48,8 @@ spring-depmgmt                 = "1.1.6"
 ktor                           = "3.0.0-beta-2"
 ktor-cohort                    = "2.5.1"
 otel                           = "1.41.0"
-otel-instr                     = "2.6.0"
-otel-instr-alpha               = "2.6.0-alpha"
+otel-instr                     = "2.7.0"
+otel-instr-alpha               = "2.7.0-alpha"
 elastic-otel                   = "0.4.0"
 okio                           = "3.9.0"
 sslcontext-kickstart           = "8.3.6"
@@ -74,7 +74,7 @@ kotest                         = "5.9.0"
 mockk                          = "1.13.12"
 mokkery                        = "2.2.0"
 slf4j                          = "2.1.0-alpha1"
-logback                        = "1.5.6"
+logback                        = "1.5.7"
 logback-tyler                  = "0.7"
 log4j                          = "3.0.0-beta2"
 jmh                            = "1.37"
@@ -152,6 +152,7 @@ chasm                          = "0.7.1"
 kfswatch                       = "1.3.0"
 langchain4j                    = "0.33.0"
 jlama                          = "0.2.1"
+chicory                        = "0.0.12"
 
 # NPM Dependencies
 npm-highlightjs                = "11.10.0"
@@ -168,7 +169,7 @@ nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
 shadow                         = "8.3.0"
 spotless                       = "7.0.0.BETA1"
-semver-plugin                  = "0.6.1"
+semver-plugin                  = "0.6.2"
 taskinfo                       = "2.1.0"
 dependency-analysis            = "1.33.0"
 best-practices-plugin          = "0.10"
@@ -535,6 +536,7 @@ silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-ico
 kfswatch                             = { module = "io.github.irgaly.kfswatch:kfswatch"                                      , version.ref = "kfswatch" }
 
 # Wasm
+chicory                              = { module = "com.dylibso.chicory:runtime"                                             , version.ref = "chicory" }
 
 # AI/ML
 langchain4j                          = { module = "dev.langchain4j:langchain4j"                                             , version.ref = "langchain4j" }
