@@ -26,6 +26,7 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.vectorResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import ui.debug
+import ui.lottie.lottie
 
 @Composable
 @Preview
@@ -77,10 +78,14 @@ fun Home(navToFile: () -> Unit, navToImage: () -> Unit) {
             }
 
         AnimatedVisibility(visible = showImage) {
-          Image(
-              modifier = Modifier.size(100.dp),
-              imageVector = vectorResource(Res.drawable.compose_multiplatform),
-              contentDescription = "Logo")
+          Row {
+            Image(
+                modifier = Modifier.size(100.dp),
+                imageVector = vectorResource(Res.drawable.compose_multiplatform),
+                contentDescription = "Logo")
+
+            lottie()
+          }
         }
 
         Row {

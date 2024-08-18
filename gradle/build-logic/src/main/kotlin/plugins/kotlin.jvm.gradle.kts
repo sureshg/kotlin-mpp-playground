@@ -258,8 +258,6 @@ dependencies {
   testImplementation(libs.kotlinx.lincheck)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.mockk)
-  testImplementation(libs.testcontainers.junit5)
-  testImplementation(libs.testcontainers.postgresql)
   // testImplementation(libs.slf4j.simple)
 }
 

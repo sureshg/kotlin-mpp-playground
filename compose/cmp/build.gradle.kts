@@ -31,6 +31,7 @@ kotlin {
       // implementation(compose.materialIconsExtended)
       implementation(libs.compose.navigation)
       implementation(libs.compose.lifecycle.viewmodel)
+      implementation(libs.compose.kottie)
       // project.dependencies.detektPlugins(libs.detekt.compose.rules)
     }
 

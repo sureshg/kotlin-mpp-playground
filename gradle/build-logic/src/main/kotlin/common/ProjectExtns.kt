@@ -193,7 +193,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:+PrintCommandLineFlags",
             "--enable-native-access=ALL-UNNAMED",
             "-Xms64M",
-            "-Xmx96M",
+            "-Xmx128M",
             "-XX:+UseZGC",
             "-XX:+UseCompressedOops",
             "-XX:+UseStringDeduplication",
@@ -268,18 +268,12 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "--show-module-resolution",
             // "-XX:+UseCompactObjectHeaders",
             // "-XX:+ShowHiddenFrames",
-            // "-XX:+AutoCreateSharedArchive",
-            // "-XX:SharedArchiveFile=$tmp/$name.jsa"
             // "-verbose:module",
             // "-XX:ConcGCThreads=2",
-            // "-XX:ZUncommitDelay=60",
             // "-XX:VMOptionsFile=vm_options",
-            // "-Xlog:gc\*",
-            // "-Xlog:class+load=info,cds=debug,cds+dynamic=info",
             // "-XX:+IgnoreUnrecognizedVMOptions",
             // "-XX:+StartAttachListener", // For jcmd Dynamic Attach Mechanism
             // "-XX:+DisableAttachMechanism",
-            // "-XX:+DebugNonSafepoints",
             // "-XX:OnOutOfMemoryError="./restart.sh"",
             // "-XX:SelfDestructTimer=0.05",
             // "-XX:NativeMemoryTracking=[off|summary|detail]",
@@ -287,7 +281,10 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-XX:OnError=\"gdb - %p\"", // Attach gdb on segfault
             // "-Djava.security.properties=/path/to/custom/java.security", // == to override
             // "-Duser.timezone=\"PST8PDT\"",
+            // ----- Networking -----
+            // "-Djdk.net.hosts.file=/etc/host/style/file",
             // "-Djava.net.preferIPv4Stack=true",
+            // "-Djava.net.preferIPv6Addresses=true",
             // "-Djavax.net.debug=all",
             // "-Dhttps.protocols=TLSv1.3",
             // "-Dhttps.agent=$name",
@@ -298,7 +295,10 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-Djdk.httpclient.HttpClient.log=headers",
             // "-Djdk.internal.httpclient.debug=false",
             // "-Djdk.tls.client.protocols=\"TLSv1.2,TLSv1.3\"",
+            // "-Djdk.tls.maxCertificateChainLength=10",
+            // "-Djdk.tls.maxHandshakeMessageSize=32768",
             // "-Djsse.enableSNIExtension=false",
+            // "-Djdk.tls.client.enableCAExtension=true",
             // ----- Misc -----
             // "-Djava.security.manager=allow",
             // "-Dfile.encoding=COMPAT", // uses '-Dnative.encoding'
@@ -306,8 +306,6 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-Djava.io.tmpdir=/var/data/tmp",
             // "-Djava.locale.providers=COMPAT,CLDR",
             // "-Djdk.lang.Process.launchMechanism=vfork",
-            // "-Djdk.tls.maxCertificateChainLength=10",
-            // "-Djdk.tls.maxHandshakeMessageSize=32768",
             // "-Djdk.virtualThreadScheduler.parallelism=10",
             // "-Djdk.virtualThreadScheduler.maxPoolSize=256",
             // "--add-exports=java.management/sun.management=ALL-UNNAMED",
@@ -498,10 +496,17 @@ context(Project)
 fun Test.configureJavaTest() {
   useJUnitPlatform()
   jvmArgs(jvmArguments())
+
   // For JUnit5 @EnabledIfSystemProperty
   systemProperty("ktorTest", project.hasProperty("ktorTest"))
   systemProperty("k8sTest", project.hasProperty("k8sTest"))
   systemProperty("spring.classformat.ignore", true)
+  // Custom hosts file for tests
+  val customHostFile = layout.projectDirectory.file("src/test/resources/hosts").asFile
+  if (customHostFile.exists()) {
+    systemProperty("jdk.net.hosts.file", customHostFile.absolutePath)
+  }
+
   reports.html.required = true
   maxParallelForks = (Runtime.getRuntime().availableProcessors() / 2).takeIf { it > 0 } ?: 1
 

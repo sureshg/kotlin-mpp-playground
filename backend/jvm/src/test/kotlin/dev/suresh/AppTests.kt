@@ -5,8 +5,7 @@ import com.lemonappdev.konsist.api.ext.list.enumConstants
 import com.lemonappdev.konsist.api.ext.list.modifierprovider.withEnumModifier
 import com.lemonappdev.konsist.api.ext.list.withAnnotationOf
 import com.lemonappdev.konsist.api.verify.assertTrue
-import io.ktor.client.*
-import io.ktor.client.engine.java.*
+import dev.suresh.http.testHttpClient
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
@@ -27,7 +26,6 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import nl.altindag.ssl.SSLFactory
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty
 import org.slf4j.LoggerFactory
 import org.slf4j.MDC
@@ -173,16 +171,7 @@ class AppTests {
     nginx.use {
       it.start()
       val endPoint = "https://${it.host}:${it.getMappedPort(tlsPort)}/"
-      val client =
-          HttpClient(Java) {
-            engine {
-              config {
-                sslContext(SSLFactory.builder().withUnsafeTrustMaterial().build().sslContext)
-              }
-            }
-          }
-
-      val statusCode = client.get(endPoint).status
+      val statusCode = testHttpClient.get(endPoint).status
       assertTrue(statusCode.value == 200)
     }
   }

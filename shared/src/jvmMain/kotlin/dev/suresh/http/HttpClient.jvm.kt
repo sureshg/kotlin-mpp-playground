@@ -9,10 +9,14 @@ import nl.altindag.ssl.SSLFactory
 
 val log = KotlinLogging.logger {}
 
-val customTLSContext by lazy {
+val customSSLFactory by lazy {
   log.info { "Initializing TLS context with custom RootCAs..." }
   log.info { "Root CAs: ${RootCA.commonNames}" }
-  SSLFactory.builder().withDefaultTrustMaterial().withTrustMaterial(RootCA.certs).build().sslContext
+  SSLFactory.builder()
+      .withDefaultTrustMaterial()
+      .withTrustMaterial(RootCA.certs)
+      .withSwappableTrustMaterial()
+      .build()
 }
 
 actual fun httpClient(
@@ -24,5 +28,5 @@ actual fun httpClient(
 ) =
     HttpClient(Java) {
       config(this)
-      engine { config { sslContext(customTLSContext) } }
+      engine { config { sslContext(customSSLFactory.sslContext) } }
     }

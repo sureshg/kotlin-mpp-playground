@@ -10,10 +10,11 @@ plugins {
   id("plugins.common")
   idea
   wrapper
-  com.github.`ben-manes`.versions
-  dev.iurysouza.modulegraph
   id("plugins.kotlin.docs")
   id("plugins.publishing")
+  com.github.`ben-manes`.versions
+  dev.iurysouza.modulegraph
+  com.dorongold.`task-tree`
   // id("gg.jte.gradle")
 }
 

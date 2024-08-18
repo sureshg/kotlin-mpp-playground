@@ -14,12 +14,7 @@ import javax.swing.JScrollPane
 import javax.swing.JTextArea
 import kotlin.system.exitProcess
 
-private const val FONT_SIZE = 10
-private const val MSG_WIDTH = 640
-private const val MSG_HEIGHT = 480
-
 fun showCrashDialog(logDirectory: File, exception: Throwable) {
-  val title = "App failed unexpectedly"
   val text = buildString {
     appendLine("Log directory:")
     appendLine(logDirectory)
@@ -31,14 +26,14 @@ fun showCrashDialog(logDirectory: File, exception: Throwable) {
       null,
       JScrollPane(
               JTextArea(text).apply {
-                font = Font(Font.MONOSPACED, Font.PLAIN, FONT_SIZE)
+                font = Font(Font.MONOSPACED, Font.PLAIN, 10)
                 lineWrap = false
               },
               JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
               JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS,
           )
-          .apply { preferredSize = Dimension(MSG_WIDTH, MSG_HEIGHT) },
-      title,
+          .apply { preferredSize = Dimension(640, 480) },
+      "App failed unexpectedly",
       JOptionPane.ERROR_MESSAGE,
   )
 }

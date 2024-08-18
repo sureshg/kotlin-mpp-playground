@@ -32,26 +32,26 @@ tasks {
   val copySharedJsResources by
       registering(Sync::class) {
         from(sharedJsRes)
-        into(jsProcessResources.get().destinationDir)
+        into(jsProcessResources.map { it.destinationDir })
         includeEmptyDirs = false
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
       }
   val copySharedWasmResources by
       registering(Sync::class) {
         from(sharedWasmRes)
-        into(wasmJsProcessResources.get().destinationDir)
+        into(wasmJsProcessResources.map { it.destinationDir })
         includeEmptyDirs = false
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
       }
 
   jsProcessResources {
     logger.quiet(TextColors.gray("◈ Configuring shared JS resources"))
-    dependsOn(copySharedJsResources)
+    mustRunAfter(copySharedJsResources)
   }
 
   wasmJsProcessResources {
     logger.quiet(TextColors.gray("◈ Configuring shared Wasm resources"))
-    dependsOn(copySharedWasmResources)
+    mustRunAfter(copySharedWasmResources)
   }
 }
 

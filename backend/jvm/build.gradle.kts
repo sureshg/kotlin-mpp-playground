@@ -225,6 +225,9 @@ dependencies {
   testImplementation(libs.testcontainers.junit5)
   testImplementation(libs.testcontainers.postgresql)
   testImplementation(libs.testcontainers.k3s)
+  testImplementation(libs.okhttp.tls)
+  testImplementation(libs.wiremock.standalone)
+  testImplementation(libs.wiremock.kotlin)
   testImplementation(libs.kubernetes.client)
   testImplementation(libs.konsist)
 

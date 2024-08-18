@@ -19,11 +19,11 @@ buildConfig {
 
 dependencies {
   commonMainApi(libs.uri.kmp)
-  commonMainApi(libs.benasher44.uuid)
   commonMainApi(libs.intellij.markdown)
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
 
+  // commonMainApi(libs.bundles.json.extra)
   // commonMainApi(libs.urlencoder)
   // commonMainApi(libs.arrow.suspendapp)
   // commonMainApi(libs.parsus)
