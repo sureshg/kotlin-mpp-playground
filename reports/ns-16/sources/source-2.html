@@ -178,6 +178,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import org.jetbrains.compose.resources.vectorResource
 &nbsp;import org.jetbrains.compose.ui.tooling.preview.Preview
 &nbsp;import ui.debug
+&nbsp;import ui.lottie.lottie
 &nbsp;
 &nbsp;@Composable
 &nbsp;@Preview
@@ -229,10 +230,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;            }
 &nbsp;
 <b class="nc">&nbsp;        AnimatedVisibility(visible = showImage) {</b>
-&nbsp;          Image(
-&nbsp;              modifier = Modifier.size(100.dp),
-&nbsp;              imageVector = vectorResource(Res.drawable.compose_multiplatform),
-&nbsp;              contentDescription = &quot;Logo&quot;)
+&nbsp;          Row {
+&nbsp;            Image(
+&nbsp;                modifier = Modifier.size(100.dp),
+&nbsp;                imageVector = vectorResource(Res.drawable.compose_multiplatform),
+&nbsp;                contentDescription = &quot;Logo&quot;)
+&nbsp;
+&nbsp;            lottie()
+&nbsp;          }
 &nbsp;        }
 &nbsp;
 <b class="nc">&nbsp;        Row {</b>
@@ -293,7 +298,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-18 00:23</div>
+    <div style="float:right;">generated on 2024-08-18 18:51</div>
 </div>
 </body>
 </html>
