@@ -50,6 +50,7 @@ dev.suresh.cert
 dev.suresh.flow
 dev.suresh.http
 dev.suresh.lang
+dev.suresh.qos
 module:web
 hljs
 interop
