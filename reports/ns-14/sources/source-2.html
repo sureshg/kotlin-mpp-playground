@@ -1,0 +1,263 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>: Coverage Report > BirdsScreenKt</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ui.birds</a>
+</div>
+
+<h1>Coverage Summary for Class: BirdsScreenKt (ui.birds)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">BirdsScreenKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/316)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">BirdsScreenKt$BirdImages$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">BirdsScreenKt$BirdImages$2$1$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/45)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/370)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package ui.birds
+&nbsp;
+&nbsp;import androidx.compose.foundation.layout.*
+&nbsp;import androidx.compose.foundation.rememberScrollState
+&nbsp;import androidx.compose.foundation.text.selection.SelectionContainer
+&nbsp;import androidx.compose.foundation.verticalScroll
+&nbsp;import androidx.compose.material3.CircularProgressIndicator
+&nbsp;import androidx.compose.material3.MaterialTheme
+&nbsp;import androidx.compose.material3.Text
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.runtime.LaunchedEffect
+&nbsp;import androidx.compose.runtime.collectAsState
+&nbsp;import androidx.compose.runtime.getValue
+&nbsp;import androidx.compose.ui.Alignment
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.graphics.Color
+&nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import androidx.lifecycle.viewmodel.compose.viewModel
+&nbsp;import ui.debug
+&nbsp;import ui.home.HomeButton
+&nbsp;
+&nbsp;@Composable
+<b class="nc">&nbsp;fun BirdImages(modifier: Modifier = Modifier, navToHome: () -&gt; Unit) {</b>
+<b class="nc">&nbsp;  val birdsViewModel = viewModel { BirdsViewModel() }</b>
+<b class="nc">&nbsp;  val state by birdsViewModel.uiState.collectAsState()</b>
+<b class="nc">&nbsp;  val scrollState = rememberScrollState()</b>
+&nbsp;
+&nbsp;  // Load the BirdUiState
+<b class="nc">&nbsp;  LaunchedEffect(birdsViewModel) { birdsViewModel.update() }</b>
+&nbsp;
+<b class="nc">&nbsp;  Column(</b>
+&nbsp;      modifier =
+<b class="nc">&nbsp;          modifier</b>
+<b class="nc">&nbsp;              .fillMaxSize()</b>
+<b class="nc">&nbsp;              .padding(10.dp)</b>
+<b class="nc">&nbsp;              .debug(color = Color.Black)</b>
+<b class="nc">&nbsp;              .verticalScroll(scrollState),</b>
+<b class="nc">&nbsp;      horizontalAlignment = Alignment.CenterHorizontally,</b>
+<b class="nc">&nbsp;      verticalArrangement = Arrangement.SpaceEvenly) {</b>
+<b class="nc">&nbsp;        if (state.images.isEmpty()) {</b>
+<b class="nc">&nbsp;          CircularProgressIndicator(</b>
+<b class="nc">&nbsp;              modifier = Modifier.width(64.dp),</b>
+<b class="nc">&nbsp;              color = MaterialTheme.colorScheme.secondary,</b>
+<b class="nc">&nbsp;              trackColor = MaterialTheme.colorScheme.surfaceVariant,</b>
+&nbsp;          )
+<b class="nc">&nbsp;          Text(&quot;Loading images...&quot;)</b>
+<b class="nc">&nbsp;        } else {</b>
+<b class="nc">&nbsp;          state.images.forEach { image -&gt;</b>
+<b class="nc">&nbsp;            SelectionContainer { Text(image.path) }</b>
+<b class="nc">&nbsp;            Spacer(modifier = Modifier.width(5.dp))</b>
+<b class="nc">&nbsp;          }</b>
+&nbsp;        }
+<b class="nc">&nbsp;        Spacer(modifier = Modifier.height(5.dp))</b>
+<b class="nc">&nbsp;        HomeButton(navToHome)</b>
+<b class="nc">&nbsp;      }</b>
+<b class="nc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-08-18 20:02</div>
+</div>
+</body>
+</html>
