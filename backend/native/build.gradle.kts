@@ -27,7 +27,7 @@ kotlin {
       executable(setOf(RELEASE)) {
         entryPoint = "main"
 
-        // Fix for libcrypt.so.1 not found error on distroless
+        // Fix for libcrypt.so.1 not-found error on distroless
         if (target.targetName.startsWith("linux")) {
           linkerOpts("--as-needed")
           freeCompilerArgs += "-Xoverride-konan-properties=linkerGccFlags.linux=-lgcc -lgcc_eh -lc"
@@ -67,8 +67,7 @@ kotlin {
 
 jib {
   from {
-    // image = "gcr.io/distroless/cc-debian12"
-    image = "debian:stable-slim"
+    image = "gcr.io/distroless/cc-debian12"
     platforms {
       platform {
         architecture = "arm64"

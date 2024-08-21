@@ -28,10 +28,16 @@ kotlin {
       implementation(compose.ui)
       implementation(compose.components.resources)
       implementation(compose.components.uiToolingPreview)
-      // implementation(compose.materialIconsExtended)
+
       implementation(libs.compose.navigation)
       implementation(libs.compose.lifecycle.viewmodel)
+      implementation(libs.compose.material3.adaptive)
+      implementation(libs.compose.material3.adaptive.layout)
+      implementation(libs.compose.material3.adaptive.nav)
+      implementation(libs.compose.material3.windowsize)
       implementation(libs.compose.kottie)
+
+      // implementation(compose.materialIconsExtended)
       // project.dependencies.detektPlugins(libs.detekt.compose.rules)
     }
 

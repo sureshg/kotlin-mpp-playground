@@ -135,16 +135,11 @@ tasks {
 
   withType<ProcessResources>().configureEach {
     inputs.property("version", project.version.toString())
-    filesMatching("*-res.txt") {
+    filesMatching("**/*-res.txt") {
       expand(
-          "name" to project.name,
+          "name" to rootProject.name,
+          "module" to project.name,
           "version" to project.version,
-      )
-    }
-    filesMatching("manifest.json") {
-      expand(
-          "name" to project.name,
-          "version" to project.version.toString().substringBeforeLast("."),
       )
     }
   }

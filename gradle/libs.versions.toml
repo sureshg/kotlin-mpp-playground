@@ -21,10 +21,10 @@ org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
 kotlinx-kover                  = "0.8.3"
-kotlinx-io                     = "0.5.2"
+kotlinx-io                     = "0.5.3"
 kotlinx-atomicfu               = "0.25.0"
 kotlinx-coroutines             = "1.9.0-RC.2"
-kotlinx-datetime               = "0.6.0"
+kotlinx-datetime               = "0.6.1"
 kotlinx-serialization          = "1.7.1"
 kotlinx-rpc                    = "0.1.0"
 kotlinx-collections-immutable  = "0.3.7"
@@ -36,7 +36,7 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.16.3"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.793"
+kotlin-wrappers                = "1.0.0-pre.795"
 kotlin-redacted                = "1.9.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
@@ -114,12 +114,12 @@ arrow-suspendapp               = "0.4.1-alpha.5"
 exposed                        = "0.53.0"
 postgresql                     = "42.7.3"
 hikariCP                       = "5.1.0"
-h2                             = "2.2.220"
+h2                             = "2.3.232"
 micrometer                     = "1.13.2"
 swagger-ui                     = "5.17.14"
 hoplite                        = "2.8.0-RC1"
 config4k                       = "0.6.0"
-shedlock                       = "5.13.0"
+shedlock                       = "5.15.0"
 sherlock                       = "1.0.1"
 sqids                          = "0.1.0"
 tsid                           = "2.1.1"
@@ -134,9 +134,6 @@ konsist                        = "0.15.1"
 kubernetes-client              = "21.0.1"
 reflect-typeparamresolver      = "1.0.2"
 reflect-typetools              = "0.6.3"
-compose-icons                  = "1.1.0"
-compose-routing                = "0.2.14"
-kottie                         = "1.9.6"
 async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.0.0"
@@ -157,6 +154,18 @@ langchain4j                    = "0.33.0"
 jlama                          = "0.2.1"
 chicory                        = "0.0.12"
 
+# Compose
+jetbrains-compose              = "1.7.0-alpha03"
+jetbrains-compose-viewmodel    = "2.8.0"
+jetbrains-compose-nav          = "2.8.0-alpha09"
+jetbrains-compose-adaptive     = "1.0.0-alpha01"
+kobweb                         = "0.19.0"
+detekt                         = "1.23.6"
+detekt-compose-rules           = "0.4.10"
+compose-icons                  = "1.1.0"
+compose-routing                = "0.2.14"
+kottie                         = "1.9.6"
+
 # NPM Dependencies
 npm-highlightjs                = "11.10.0"
 npm-kotlin-playground          = "1.30.0"
@@ -167,7 +176,7 @@ npm-jsjoda-tz                  = "2.21.1"
 # Plugin versions
 benmanes                       = "0.51.0"
 foojay-resolver                = "0.8.0"
-gradle-develocity              = "3.17.6"
+gradle-develocity              = "3.18"
 nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
 shadow                         = "8.3.0"
@@ -179,7 +188,7 @@ best-practices-plugin          = "0.10"
 graalvm-nativeimage            = "0.10.2"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
-wire-plugin                    = "4.9.8"
+wire-plugin                    = "5.0.0"
 poko-plugin                    = "0.15.3"
 buildkonfig                    = "0.13.3"
 akkurate                       = "0.1.0"
@@ -193,12 +202,6 @@ jib-plugin                     = "3.4.3"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
-jetbrains-compose              = "1.7.0-alpha02"
-jetbrains-compose-nav          = "2.8.0-alpha08"
-jetbrains-compose-viewmodel    = "2.8.0"
-kobweb                         = "0.19.0"
-detekt                         = "1.23.6"
-detekt-compose-rules           = "0.4.9"
 mappie                         = "0.6.0"
 
 [libraries]
@@ -509,9 +512,9 @@ imageio-extns                        = { module = "com.twelvemonkeys.imageio:ima
 okapibarcode                         = { module = "uk.org.okapibarcode:okapibarcode"                           , version.ref = "okapibarcode"}
 
 # OpenTelemetry
-otel-bom                             = { module = "io.opentelemetry:opentelemetry-bom"                                            , version.ref = "otel"}
-otel-api                             = { module = "io.opentelemetry:opentelemetry-api"                                            , version.ref = "otel"}
-otel-extension-kotlin                = { module = "io.opentelemetry:opentelemetry-extension-kotlin"                               , version.ref = "otel"}
+otel-bom                             = { module = "io.opentelemetry:opentelemetry-bom"                                                      , version.ref = "otel"}
+otel-api                             = { module = "io.opentelemetry:opentelemetry-api"                                                      , version.ref = "otel"}
+otel-extension-kotlin                = { module = "io.opentelemetry:opentelemetry-extension-kotlin"                                         , version.ref = "otel"}
 
 otel-instr-bom                       = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom"                      , version.ref = "otel-instr"}
 otel-instr-javaagent                 = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent"                                      , version.ref = "otel-instr"}
@@ -527,6 +530,10 @@ compose-runtime                      = { module = "org.jetbrains.compose.runtime
 compose-html-core                    = { module = "org.jetbrains.compose.html:html-core"                                    , version.ref = "jetbrains-compose" }
 compose-navigation                   = { module = "org.jetbrains.androidx.navigation:navigation-compose"                    , version.ref = "jetbrains-compose-nav" }
 compose-lifecycle-viewmodel          = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose"            , version.ref = "jetbrains-compose-viewmodel" }
+compose-material3-windowsize         = { module = "org.jetbrains.compose.material3:material3-window-size-class"             , version.ref = "jetbrains-compose" }
+compose-material3-adaptive           = { module = "org.jetbrains.compose.material3.adaptive:adaptive"                       , version.ref = "jetbrains-compose-adaptive" }
+compose-material3-adaptive-layout    = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout"                , version.ref = "jetbrains-compose-adaptive" }
+compose-material3-adaptive-nav       = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation"            , version.ref = "jetbrains-compose-adaptive" }
 compose-routing                      = { module = "app.softwork:routing-compose"                                            , version.ref = "compose-routing" }
 compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"                            , version.ref = "compose-icons" }
 detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                                          , version.ref = "detekt-compose-rules" }

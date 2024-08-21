@@ -117,9 +117,10 @@ tasks {
 
   processResources {
     inputs.property("version", project.version.toString())
-    filesMatching("*-res.txt") {
+    filesMatching("**/*-res.txt") {
       expand(
-          "name" to project.name,
+          "name" to rootProject.name,
+          "module" to project.name,
           "version" to project.version,
       )
     }

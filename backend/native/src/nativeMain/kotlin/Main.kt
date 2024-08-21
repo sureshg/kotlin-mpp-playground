@@ -17,10 +17,14 @@ expect fun readPassword(prompt: String): String?
 fun main(args: Array<String>): Unit = runBlocking {
   println("Kotlin Native App: ${BuildConfig.version}")
   println(json.encodeToString(platform.info))
+
   val count = args.firstOrNull()?.toIntOrNull() ?: 5
   timerComposeFlow().take(count).collect(::println)
+
   println("Executing command...")
-  execute("ls", "-l").also(::println)
+  runCatching { execute("ls", "-l").also(::println) }
+      .onFailure { println("Failed to execute command: ${it.message}") }
+
   println("Reflection Simple name ${this::class.simpleName}")
   println("Reflection Simple name ${this::class.qualifiedName}")
   println(prop("Hello"))

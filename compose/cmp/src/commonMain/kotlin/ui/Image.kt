@@ -10,10 +10,15 @@ import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.layer.drawLayer
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.*
 
-fun ByteArray.toImageBitmap(): ImageBitmap =
-    org.jetbrains.skia.Image.makeFromEncoded(this).toComposeImageBitmap()
-
+/**
+ * Image decoders for [ByteArray]
+ *
+ * @see [JPEG, PNG, BMP, WEBP to ImageBitmap][ByteArray.decodeToImageBitmap]
+ * @see [Vector XML file to an ImageVector][ByteArray.decodeToImageVector]
+ * @see [SVG file to a compose Painter][ByteArray.decodeToSvgPainter]
+ */
 fun ImageBitmap.toByteArray(): ByteArray? = asSkiaBitmap().readPixels()
 
 @Composable
