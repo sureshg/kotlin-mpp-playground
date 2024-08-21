@@ -52,7 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/17)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/261)
+    (0/257)
   </span>
 </td>
 </tr>
@@ -115,7 +115,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -131,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/20)
+    (0/19)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/277)
+    (0/273)
   </span>
 </td>
 </tr>
@@ -162,10 +162,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import androidx.compose.ui.graphics.*
 &nbsp;import androidx.compose.ui.graphics.layer.drawLayer
 &nbsp;import kotlinx.coroutines.launch
+&nbsp;import org.jetbrains.compose.resources.*
 &nbsp;
-&nbsp;fun ByteArray.toImageBitmap(): ImageBitmap =
-<b class="nc">&nbsp;    org.jetbrains.skia.Image.makeFromEncoded(this).toComposeImageBitmap()</b>
-&nbsp;
+&nbsp;/**
+&nbsp; * Image decoders for [ByteArray]
+&nbsp; *
+&nbsp; * @see [JPEG, PNG, BMP, WEBP to ImageBitmap][ByteArray.decodeToImageBitmap]
+&nbsp; * @see [Vector XML file to an ImageVector][ByteArray.decodeToImageVector]
+&nbsp; * @see [SVG file to a compose Painter][ByteArray.decodeToSvgPainter]
+&nbsp; */
 <b class="nc">&nbsp;fun ImageBitmap.toByteArray(): ByteArray? = asSkiaBitmap().readPixels()</b>
 &nbsp;
 &nbsp;@Composable
@@ -219,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-20 00:21</div>
+    <div style="float:right;">generated on 2024-08-21 18:29</div>
 </div>
 </body>
 </html>
