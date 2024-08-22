@@ -128,6 +128,9 @@ tasks {
       // externalDocumentationLink(url = "https://api.ktor.io/")
     }
 
+    //  pluginsMapConfiguration = mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "templatesDir"
+    // : "${projectDir.toString().replace('\\','/')}/../dokka-templates" }""")
+
     pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
       footerMessage = "Copyright &copy; 2024 suresh.dev"
       homepageLink = githubRepo

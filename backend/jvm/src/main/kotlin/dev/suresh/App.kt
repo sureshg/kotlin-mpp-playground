@@ -5,7 +5,6 @@ import dev.suresh.config.SysConfig
 import dev.suresh.plugins.configureHTTP
 import dev.suresh.plugins.configureOTel
 import dev.suresh.plugins.configureSecurity
-import dev.suresh.plugins.configureSerialization
 import dev.suresh.plugins.custom.customPlugins
 import dev.suresh.plugins.errorRoutes
 import dev.suresh.routes.*
@@ -26,7 +25,6 @@ fun main(args: Array<String>) =
 
 fun Application.module() {
   configureHTTP()
-  configureSerialization()
   configureSecurity()
   configureOTel()
   errorRoutes()

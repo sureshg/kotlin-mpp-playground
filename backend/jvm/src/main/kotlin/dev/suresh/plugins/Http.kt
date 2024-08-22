@@ -2,17 +2,20 @@ package dev.suresh.plugins
 
 import BuildConfig
 import io.ktor.http.*
+import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.autohead.*
 import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.compression.*
+import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
 import io.ktor.server.plugins.hsts.*
 import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.request.*
+import io.ktor.server.resources.Resources
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import kotlin.time.Duration.Companion.seconds
@@ -20,6 +23,10 @@ import kotlin.time.toJavaDuration
 import org.slf4j.event.Level
 
 fun Application.configureHTTP() {
+  install(Resources)
+
+  install(ContentNegotiation) { json(dev.suresh.http.json) }
+
   install(IgnoreTrailingSlash)
 
   install(PartialContent)
