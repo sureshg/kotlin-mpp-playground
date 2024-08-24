@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > SecurityKt</title>
+  <title>: Coverage Report > OpenTelemetryKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,12 +22,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.plugins</a>
 </div>
 
-<h1>Coverage Summary for Class: SecurityKt (dev.suresh.plugins)</h1>
+<h1>Coverage Summary for Class: OpenTelemetryKt (dev.suresh.plugins)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,13 +49,21 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">SecurityKt</td>
+  <td class="name">OpenTelemetryKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -61,25 +72,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/7)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/31)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">SecurityKt$configureSecurity$1$1$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
     (0/1)
   </span>
 </td>
@@ -88,96 +80,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/12)
-  </span>
-</td>
-  </tr>
-  <tr>
-    <td class="name">SecurityKt$configureSecurity$1$2$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
     (0/1)
   </span>
 </td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/20)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/13)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/63)
-  </span>
-</td>
 </tr>
+
 </table>
 
 <br/>
@@ -187,30 +94,29 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.plugins
 &nbsp;
-&nbsp;import io.ktor.server.application.*
-&nbsp;import io.ktor.server.auth.*
+&nbsp;import com.google.auto.service.AutoService
+&nbsp;import io.ktor.server.application.Application
+&nbsp;import io.opentelemetry.api.trace.Span
+&nbsp;import io.opentelemetry.context.Context
+&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseCustomizer
+&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseMutator
 &nbsp;
-&nbsp;fun Application.configureSecurity() {
-<b class="nc">&nbsp;  authentication {</b>
-<b class="nc">&nbsp;    bearer(&quot;auth-bearer&quot;) {</b>
-<b class="nc">&nbsp;      realm = &quot;Ktor App&quot;</b>
-<b class="nc">&nbsp;      authenticate { tokenCredential -&gt;</b>
-<b class="nc">&nbsp;        when (tokenCredential.token) {</b>
-<b class="nc">&nbsp;          &quot;token&quot; -&gt; UserIdPrincipal(&quot;admin&quot;)</b>
-<b class="nc">&nbsp;          else -&gt; null</b>
-&nbsp;        }
-&nbsp;      }
-&nbsp;    }
+&nbsp;fun Application.configureOTel() {
+&nbsp;  //  install(KtorServerTracing) {
+&nbsp;  //    setOpenTelemetry(GlobalOpenTelemetry.get())
+&nbsp;  //  }
+<b class="nc">&nbsp;}</b>
 &nbsp;
-<b class="nc">&nbsp;    basic(&quot;admin&quot;) {</b>
-<b class="nc">&nbsp;      realm = &quot;App Admin&quot;</b>
-<b class="nc">&nbsp;      validate { credentials -&gt;</b>
-<b class="nc">&nbsp;        when (credentials.name == &quot;admin&quot; &amp;&amp; credentials.password == &quot;admin&quot;) {</b>
-<b class="nc">&nbsp;          true -&gt; UserIdPrincipal(credentials.name)</b>
-<b class="nc">&nbsp;          else -&gt; null</b>
-&nbsp;        }
-&nbsp;      }
-&nbsp;    }
+&nbsp;@AutoService(HttpServerResponseCustomizer::class)
+&nbsp;class TraceIDResponseCustomizer : HttpServerResponseCustomizer {
+&nbsp;  override fun &lt;T&gt; customize(
+&nbsp;      serverContext: Context,
+&nbsp;      response: T,
+&nbsp;      responseMutator: HttpServerResponseMutator&lt;T&gt;
+&nbsp;  ) {
+&nbsp;    val spanContext = Span.fromContextOrNull(serverContext)?.spanContext
+&nbsp;    if (spanContext?.isValid != true) return
+&nbsp;    responseMutator.appendHeader(response, &quot;X-Trace-Id&quot;, spanContext.traceId)
 &nbsp;  }
 &nbsp;}
 </code>
@@ -236,7 +142,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-24 00:21</div>
+    <div style="float:right;">generated on 2024-08-24 21:33</div>
 </div>
 </body>
 </html>

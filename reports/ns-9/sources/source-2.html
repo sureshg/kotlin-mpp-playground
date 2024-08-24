@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > HttpClientKt</title>
+  <title>: Coverage Report > ErrorStatus</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,15 +22,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.http</a>
 </div>
 
-<h1>Coverage Summary for Class: HttpClientKt (dev.suresh.http)</h1>
+<h1>Coverage Summary for Class: ErrorStatus (dev.suresh.http)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -49,42 +46,103 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">HttpClientKt</td>
+  <td class="name">ErrorStatus</td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (1/1)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (3/3)
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/91)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ErrorStatus$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (13/13)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    100%
+    0%
   </span>
   <span class="absValue">
-    (46/46)
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/93)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -94,108 +152,24 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
 &nbsp;
-&nbsp;import dev.suresh.log
-&nbsp;import io.github.oshai.kotlinlogging.KLogger
-&nbsp;import io.ktor.client.*
-&nbsp;import io.ktor.client.plugins.*
-&nbsp;import io.ktor.client.plugins.compression.*
-&nbsp;import io.ktor.client.plugins.contentnegotiation.*
-&nbsp;import io.ktor.client.plugins.cookies.*
-&nbsp;import io.ktor.client.plugins.logging.*
-&nbsp;import io.ktor.client.plugins.resources.*
-&nbsp;import io.ktor.http.*
-&nbsp;import io.ktor.serialization.kotlinx.json.*
-&nbsp;import io.ktor.util.*
-&nbsp;import kotlinx.serialization.json.ClassDiscriminatorMode.POLYMORPHIC
-&nbsp;import kotlinx.serialization.json.Json
+&nbsp;import kotlin.time.Duration
+&nbsp;import kotlin.time.Duration.Companion.seconds
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
-&nbsp;/** Common JSON instance for serde of JSON data. */
-<b class="fc">&nbsp;val json by lazy {</b>
-<b class="fc">&nbsp;  Json {</b>
-<b class="fc">&nbsp;    prettyPrint = true</b>
-<b class="fc">&nbsp;    isLenient = true</b>
-<b class="fc">&nbsp;    ignoreUnknownKeys = true</b>
-<b class="fc">&nbsp;    encodeDefaults = true</b>
-<b class="fc">&nbsp;    explicitNulls = false</b>
-<b class="fc">&nbsp;    decodeEnumsCaseInsensitive = true</b>
-<b class="fc">&nbsp;    allowTrailingComma = true</b>
-<b class="fc">&nbsp;    allowSpecialFloatingPointValues = true</b>
-<b class="fc">&nbsp;    allowStructuredMapKeys = true</b>
-<b class="fc">&nbsp;    allowComments = true</b>
-<b class="fc">&nbsp;    classDiscriminatorMode = POLYMORPHIC</b>
+&nbsp;data class Timeout(val connection: Duration, val read: Duration, val write: Duration) {
+&nbsp;  companion object {
+&nbsp;    val DEFAULT = Timeout(connection = 5.seconds, read = 5.seconds, write = 5.seconds)
 &nbsp;  }
 &nbsp;}
 &nbsp;
-&nbsp;/** Multiplatform HTTP client factory function. */
-&nbsp;expect fun httpClient(
-&nbsp;    name: String = &quot;Api Client&quot;,
-&nbsp;    timeout: Timeout = Timeout.DEFAULT,
-&nbsp;    retry: Retry = Retry.DEFAULT,
-&nbsp;    httpLogger: KLogger = log,
-&nbsp;    config: HttpClientConfig&lt;*&gt;.() -&gt; Unit = {
-&nbsp;      install(Resources)
+&nbsp;data class Retry(val attempts: Int, val maxDelay: Duration) {
+&nbsp;  companion object {
+&nbsp;    val DEFAULT = Retry(attempts = 2, maxDelay = 2.seconds)
+&nbsp;  }
+&nbsp;}
 &nbsp;
-&nbsp;      install(ContentNegotiation) { json(json) }
-&nbsp;
-&nbsp;      install(ContentEncoding) {
-&nbsp;        deflate(1.0F)
-&nbsp;        gzip(0.9F)
-&nbsp;      }
-&nbsp;
-&nbsp;      install(HttpRequestRetry) {
-&nbsp;        maxRetries = retry.attempts
-&nbsp;        retryOnException(retryOnTimeout = true)
-&nbsp;        retryOnServerErrors()
-&nbsp;        exponentialDelay(maxDelayMs = retry.maxDelay.inWholeMilliseconds)
-&nbsp;      }
-&nbsp;
-&nbsp;      install(HttpTimeout) {
-&nbsp;        connectTimeoutMillis = timeout.connection.inWholeMilliseconds
-&nbsp;        requestTimeoutMillis = timeout.read.inWholeMilliseconds
-&nbsp;        socketTimeoutMillis = timeout.write.inWholeMilliseconds
-&nbsp;      }
-&nbsp;
-&nbsp;      install(HttpCookies)
-&nbsp;
-&nbsp;      install(Logging) {
-&nbsp;        level =
-&nbsp;            when {
-&nbsp;              httpLogger.isDebugEnabled() -&gt; LogLevel.ALL
-&nbsp;              httpLogger.isLoggingOff() -&gt; LogLevel.NONE
-&nbsp;              else -&gt; LogLevel.INFO
-&nbsp;            }
-&nbsp;
-&nbsp;        logger =
-&nbsp;            object : Logger {
-&nbsp;              override fun log(message: String) {
-&nbsp;                httpLogger.info { message }
-&nbsp;              }
-&nbsp;            }
-&nbsp;        sanitizeHeader { header -&gt; header == HttpHeaders.Authorization }
-&nbsp;      }
-&nbsp;
-&nbsp;      engine { pipelining = true }
-&nbsp;
-&nbsp;      followRedirects = true
-&nbsp;
-&nbsp;      install(UserAgent) { agent = &quot;$name-${BuildConfig.version}&quot; }
-&nbsp;
-&nbsp;      install(DefaultRequest) {
-&nbsp;        headers.appendIfNameAndValueAbsent(
-&nbsp;            HttpHeaders.ContentType, ContentType.Application.Json.toString())
-&nbsp;      }
-&nbsp;
-&nbsp;      expectSuccess = true
-&nbsp;
-&nbsp;      HttpResponseValidator {
-&nbsp;        handleResponseExceptionWithRequest { ex, req -&gt;
-&nbsp;          val resException = ex as? ResponseException ?: return@handleResponseExceptionWithRequest
-&nbsp;          val res = resException.response
-&nbsp;          httpLogger.trace { &quot;Request failed: ${req.method.value} ${req.url} -&gt; ${res.status}&quot; }
-&nbsp;        }
-&nbsp;      }
-&nbsp;    }
-&nbsp;): HttpClient
+<b class="nc">&nbsp;@Serializable</b>
+<b class="nc">&nbsp;data class ErrorStatus(val code: Int, val message: String, val details: String? = null)</b>
 </code>
 </pre>
 </div>
@@ -219,7 +193,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-24 00:21</div>
+    <div style="float:right;">generated on 2024-08-24 21:33</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Image</title>
+  <title>: Coverage Report > HttpClient_jvmKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.http</a>
 </div>
 
-<h1>Coverage Summary for Class: Image (dev.suresh.http)</h1>
+<h1>Coverage Summary for Class: HttpClient_jvmKt (dev.suresh.http)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Image</td>
+  <td class="name">HttpClient_jvmKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,7 +60,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/13)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,12 +76,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/56)
+    (0/261)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">Image$Companion</td>
+    <td class="name">HttpClient_jvmKt$httpClient$1$5$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -104,7 +104,70 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">HttpClient_jvmKt$httpClient$1$6</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">HttpClient_jvmKt$httpClient$1$9$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/35)
   </span>
 </td>
   </tr>
@@ -115,7 +178,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/11)
   </span>
 </td>
 <td class="coverageStat">
@@ -123,7 +186,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -131,7 +194,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/16)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +202,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/58)
+    (0/307)
   </span>
 </td>
 </tr>
@@ -152,65 +215,36 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
 &nbsp;
+&nbsp;import dev.suresh.cert.RootCA
+&nbsp;import io.github.oshai.kotlinlogging.KLogger
 &nbsp;import io.github.oshai.kotlinlogging.KotlinLogging
-&nbsp;import io.ktor.client.call.*
-&nbsp;import io.ktor.client.plugins.*
-&nbsp;import io.ktor.client.plugins.resources.*
-&nbsp;import io.ktor.resources.*
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import io.ktor.client.*
+&nbsp;import io.ktor.client.engine.java.*
+&nbsp;import nl.altindag.ssl.SSLFactory
 &nbsp;
-&nbsp;@Resource(&quot;/media-api/images.json&quot;) class ImgRes
+<b class="nc">&nbsp;val log = KotlinLogging.logger {}</b>
 &nbsp;
-&nbsp;@Resource(&quot;/media-api/videos.json&quot;) class VideoRes
-&nbsp;
-<b class="nc">&nbsp;@Serializable</b>
-<b class="nc">&nbsp;data class Image(</b>
-<b class="nc">&nbsp;    val category: String,</b>
-<b class="nc">&nbsp;    val path: String,</b>
-<b class="nc">&nbsp;    val author: String,</b>
-&nbsp;)
-&nbsp;
-&nbsp;@Serializable
-&nbsp;data class Video(
-&nbsp;    val description: String,
-&nbsp;    val sources: List&lt;String&gt;,
-&nbsp;    val subtitle: String,
-&nbsp;    val thumb: String,
-&nbsp;    val title: String,
-&nbsp;    val poster: String? = null,
-&nbsp;)
-&nbsp;
-&nbsp;data class MediaApiClient(
-&nbsp;    val timeout: Timeout = Timeout.DEFAULT,
-&nbsp;    val retry: Retry = Retry.DEFAULT
-&nbsp;) : AutoCloseable {
-&nbsp;
-&nbsp;  private val log = KotlinLogging.logger {}
-&nbsp;
-&nbsp;  private val client =
-&nbsp;      httpClient(
-&nbsp;              name = &quot;Media API Client&quot;,
-&nbsp;              timeout = timeout,
-&nbsp;              retry = retry,
-&nbsp;              httpLogger = log,
-&nbsp;          )
-&nbsp;          .config {
-&nbsp;            defaultRequest { url(&quot;https://suresh.dev/&quot;) }
-&nbsp;
-&nbsp;            // install(Auth) {
-&nbsp;            //   basic {
-&nbsp;            //     sendWithoutRequest { true }
-&nbsp;            //     credentials { BasicAuthCredentials(username = &quot;&quot;, password = &quot;&quot;) }
-&nbsp;            //   }
-&nbsp;            // }
-&nbsp;          }
-&nbsp;
-&nbsp;  suspend fun images() = client.get(ImgRes()).body&lt;List&lt;Image&gt;&gt;()
-&nbsp;
-&nbsp;  suspend fun videos() = client.get(VideoRes()).body&lt;List&lt;Video&gt;&gt;()
-&nbsp;
-&nbsp;  override fun close() = client.close()
+<b class="nc">&nbsp;val customSSLFactory by lazy {</b>
+<b class="nc">&nbsp;  log.info { &quot;Initializing TLS context with custom RootCAs...&quot; }</b>
+<b class="nc">&nbsp;  log.info { &quot;Root CAs: ${RootCA.commonNames}&quot; }</b>
+<b class="nc">&nbsp;  SSLFactory.builder()</b>
+<b class="nc">&nbsp;      .withDefaultTrustMaterial()</b>
+<b class="nc">&nbsp;      .withTrustMaterial(RootCA.certs)</b>
+<b class="nc">&nbsp;      .withSwappableTrustMaterial()</b>
+<b class="nc">&nbsp;      .build()</b>
 &nbsp;}
+&nbsp;
+&nbsp;actual fun httpClient(
+&nbsp;    name: String,
+&nbsp;    timeout: Timeout,
+&nbsp;    retry: Retry,
+&nbsp;    httpLogger: KLogger,
+&nbsp;    config: HttpClientConfig&lt;*&gt;.() -&gt; Unit
+&nbsp;) =
+<b class="nc">&nbsp;    HttpClient(Java) {</b>
+<b class="nc">&nbsp;      config(this)</b>
+<b class="nc">&nbsp;      engine { config { sslContext(customSSLFactory.sslContext) } }</b>
+&nbsp;    }
 </code>
 </pre>
 </div>
@@ -234,7 +268,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-08-24 00:21</div>
+    <div style="float:right;">generated on 2024-08-24 21:33</div>
 </div>
 </body>
 </html>

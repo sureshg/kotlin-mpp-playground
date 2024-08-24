@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Timeout</title>
+  <title>: Coverage Report > TraceIDResponseCustomizer</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,15 +19,18 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.http</a>
+    <a href="../index.html">dev.suresh.plugins</a>
 </div>
 
-<h1>Coverage Summary for Class: Timeout (dev.suresh.http)</h1>
+<h1>Coverage Summary for Class: TraceIDResponseCustomizer (dev.suresh.plugins)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,7 +49,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Timeout</td>
+  <td class="name">TraceIDResponseCustomizer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -55,13 +66,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/2)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,27 +79,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/37)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">Timeout$Companion</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -97,38 +87,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/38)
+    (0/30)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -136,26 +99,33 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.plugins
 &nbsp;
-&nbsp;import kotlin.time.Duration
-&nbsp;import kotlin.time.Duration.Companion.seconds
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import com.google.auto.service.AutoService
+&nbsp;import io.ktor.server.application.Application
+&nbsp;import io.opentelemetry.api.trace.Span
+&nbsp;import io.opentelemetry.context.Context
+&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseCustomizer
+&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseMutator
 &nbsp;
-<b class="nc">&nbsp;data class Timeout(val connection: Duration, val read: Duration, val write: Duration) {</b>
-&nbsp;  companion object {
-<b class="nc">&nbsp;    val DEFAULT = Timeout(connection = 5.seconds, read = 5.seconds, write = 5.seconds)</b>
-&nbsp;  }
+&nbsp;fun Application.configureOTel() {
+&nbsp;  //  install(KtorServerTracing) {
+&nbsp;  //    setOpenTelemetry(GlobalOpenTelemetry.get())
+&nbsp;  //  }
 &nbsp;}
 &nbsp;
-&nbsp;data class Retry(val attempts: Int, val maxDelay: Duration) {
-&nbsp;  companion object {
-&nbsp;    val DEFAULT = Retry(attempts = 2, maxDelay = 2.seconds)
+<b class="nc">&nbsp;@AutoService(HttpServerResponseCustomizer::class)</b>
+&nbsp;class TraceIDResponseCustomizer : HttpServerResponseCustomizer {
+&nbsp;  override fun &lt;T&gt; customize(
+&nbsp;      serverContext: Context,
+&nbsp;      response: T,
+&nbsp;      responseMutator: HttpServerResponseMutator&lt;T&gt;
+&nbsp;  ) {
+<b class="nc">&nbsp;    val spanContext = Span.fromContextOrNull(serverContext)?.spanContext</b>
+<b class="nc">&nbsp;    if (spanContext?.isValid != true) return</b>
+<b class="nc">&nbsp;    responseMutator.appendHeader(response, &quot;X-Trace-Id&quot;, spanContext.traceId)</b>
 &nbsp;  }
 &nbsp;}
-&nbsp;
-&nbsp;@Serializable
-&nbsp;data class ErrorStatus(val code: Int, val message: String, val details: String? = null)
 </code>
 </pre>
 </div>
