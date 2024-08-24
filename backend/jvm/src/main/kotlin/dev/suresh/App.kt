@@ -3,6 +3,7 @@ package dev.suresh
 import BuildConfig
 import dev.suresh.config.SysConfig
 import dev.suresh.plugins.configureHTTP
+import dev.suresh.plugins.configureInterceptors
 import dev.suresh.plugins.configureOTel
 import dev.suresh.plugins.configureSecurity
 import dev.suresh.plugins.custom.customPlugins
@@ -24,6 +25,7 @@ fun main(args: Array<String>) =
     }
 
 fun Application.module() {
+  configureInterceptors()
   configureHTTP()
   configureSecurity()
   configureOTel()
@@ -35,5 +37,6 @@ fun Application.module() {
     services()
     mgmtRoutes()
   }
+
   // CoroutineScope(coroutineContext).launch {}
 }

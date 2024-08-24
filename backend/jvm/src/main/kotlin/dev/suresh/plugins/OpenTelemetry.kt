@@ -21,9 +21,7 @@ class TraceIDResponseCustomizer : HttpServerResponseCustomizer {
       responseMutator: HttpServerResponseMutator<T>
   ) {
     val spanContext = Span.fromContextOrNull(serverContext)?.spanContext
-    if (spanContext?.isValid != true) {
-      return
-    }
+    if (spanContext?.isValid != true) return
     responseMutator.appendHeader(response, "X-Trace-Id", spanContext.traceId)
   }
 }

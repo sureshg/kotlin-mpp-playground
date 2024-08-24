@@ -2,6 +2,7 @@ package dev.suresh.http
 
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.serialization.Serializable
 
 data class Timeout(val connection: Duration, val read: Duration, val write: Duration) {
   companion object {
@@ -14,3 +15,6 @@ data class Retry(val attempts: Int, val maxDelay: Duration) {
     val DEFAULT = Retry(attempts = 2, maxDelay = 2.seconds)
   }
 }
+
+@Serializable
+data class ErrorStatus(val code: Int, val message: String, val details: String? = null)

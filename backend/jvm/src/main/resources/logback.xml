@@ -12,7 +12,7 @@
 
     <!-- [%d{ISO8601}] -->
     <property name="pattern"
-              value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} %-5level %X{remoteHost} [%thread] %X{call-id} %logger{16} - %msg%n%rEx"/>
+              value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} %X{trace-id} %-5level %X{remoteHost} [%thread]  %logger{16} - %msg%n%rEx"/>
 
     <appender name="APP1" class="RollingFileAppender">
         <file>${LOG_DIR}/app1.log</file>

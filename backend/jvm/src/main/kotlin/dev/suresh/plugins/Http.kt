@@ -6,6 +6,8 @@ import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.autohead.*
+import io.ktor.server.plugins.callid.CallId
+import io.ktor.server.plugins.callid.callIdMdc
 import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -16,11 +18,17 @@ import io.ktor.server.plugins.hsts.*
 import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.request.*
 import io.ktor.server.resources.Resources
+import io.ktor.server.response.respond
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toJavaDuration
+import kotlinx.atomicfu.atomic
 import org.slf4j.event.Level
+
+const val CALL_ID_PREFIX = "trace-id"
+
+private val counter = atomic(1L)
 
 fun Application.configureHTTP() {
   install(Resources)
@@ -57,12 +65,28 @@ fun Application.configureHTTP() {
 
   install(HSTS)
 
+  install(CallId) {
+    header(HttpHeaders.XRequestId)
+    generate {
+      when (it.isApi) {
+        true -> "$CALL_ID_PREFIX-${counter.getAndIncrement()}"
+        else -> "$CALL_ID_PREFIX-00000"
+      }
+    }
+    verify { it.isNotEmpty() }
+  }
+
   install(CallLogging) {
     level = Level.INFO
     disableForStaticContent()
     disableDefaultColors()
-    filter { it.isApiRoute }
+
+    // Add MDC entries
     mdc("remoteHost") { call -> call.request.origin.remoteHost }
+    callIdMdc(CALL_ID_PREFIX)
+
+    // Enable logging for API routes only
+    filter { it.isApi }
   }
 
   install(WebSockets) {
@@ -73,8 +97,18 @@ fun Application.configureHTTP() {
   }
 }
 
+fun Application.configureInterceptors() {
+  intercept(ApplicationCallPipeline.Plugins) {
+    println("Request: ${call.request.uri}")
+    if (call.request.headers["Custom-Header"] == "Test") {
+      call.respond(HttpStatusCode.Forbidden)
+      finish()
+    }
+  }
+}
+
 val ApplicationCall.debug
   get() = request.queryParameters.contains("debug")
 
-val ApplicationCall.isApiRoute
-  get() = request.path().startsWith("/api")
+val ApplicationCall.isApi
+  get() = request.path().startsWith("/")
