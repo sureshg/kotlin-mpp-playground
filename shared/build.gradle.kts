@@ -5,6 +5,7 @@ import common.versionCatalogMapOf
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
+  alias(libs.plugins.mappie)
 }
 
 description = "Shared common module for all projects"
@@ -18,11 +19,13 @@ buildConfig {
 }
 
 dependencies {
+  commonMainApi(libs.evas)
   commonMainApi(libs.uri.kmp)
   commonMainApi(libs.intellij.markdown)
   commonMainApi(libs.kotlin.codepoints.deluxe)
   commonMainApi(libs.multiplatform.settings.core)
 
+  // commonMainApi(libs.mappie.api)
   // commonMainApi(libs.bundles.json.extra)
   // commonMainApi(libs.urlencoder)
   // commonMainApi(libs.arrow.suspendapp)

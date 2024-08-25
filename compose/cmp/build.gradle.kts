@@ -48,6 +48,7 @@ kotlin {
       implementation(compose.desktop.components.animatedImage)
       implementation(libs.kotlinx.coroutines.swing)
       implementation(libs.slf4j.simple)
+      implementation(libs.evas.compose)
     }
 
     // jsMain.dependencies { implementation(compose.html.core) }

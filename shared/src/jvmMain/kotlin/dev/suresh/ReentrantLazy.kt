@@ -29,7 +29,8 @@ internal class ReentrantLazy<T : Any?>(initializer: () -> T) : Lazy<T> {
           this.initializer = null
         }
       }
-      @Suppress("UNCHECKED_CAST") return _value as T
+      @Suppress("UNCHECKED_CAST")
+      return _value as T
     }
 
   override fun isInitialized() = _value !== UNINITIALIZED_VALUE
