@@ -42,6 +42,7 @@ kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
 evas                           = "1.0.0-RC"
+kopy                           = "0.6.0+2.0.20"
 karakum                        = "1.0.0-alpha.40-K2"
 seskar                         = "3.20.0"
 spring-boot                    = "3.3.2"
@@ -184,8 +185,9 @@ shadow                         = "8.3.0"
 spotless                       = "7.0.0.BETA2"
 semver-plugin                  = "0.7.0"
 tasktree                       = "4.0.0"
-dependency-analysis            = "1.33.0"
-best-practices-plugin          = "0.10"
+sigstore                       = "1.0.0"
+autonomousapps-depanalysis     = "2.0.0"
+autonomousapps-bestpractices   = "0.10"
 graalvm-nativeimage            = "0.10.2"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
@@ -232,8 +234,10 @@ build-nexus-plugin                   = { module = "io.github.gradle-nexus:publis
 build-spotless-plugin                = { module = "com.diffplug.spotless:spotless-plugin-gradle"                    , version.ref = "spotless"}
 build-shadow-plugin                  = { module = "com.gradleup.shadow:shadow-gradle-plugin"                        , version.ref = "shadow"}
 build-tasktree                       = { module = "com.dorongold.plugins:task-tree"                                 , version.ref = "tasktree" }
-build-dependencyanalysis             = { module = "com.autonomousapps:dependency-analysis-gradle-plugin"            , version.ref = "dependency-analysis" }
-build-bestpractices-plugin           = { module = "com.autonomousapps:plugin-best-practices-plugin"                 , version.ref = "best-practices-plugin" }
+build-sigstore                       = { module = "dev.sigstore:sigstore-gradle-sign-plugin"                        , version.ref = "sigstore" }
+build-sigstore-base                  = { module = "dev.sigstore:sigstore-gradle-sign-base-plugin"                   , version.ref = "sigstore" }
+build-dependencyanalysis             = { module = "com.autonomousapps:dependency-analysis-gradle-plugin"            , version.ref = "autonomousapps-depanalysis" }
+build-bestpractices-plugin           = { module = "com.autonomousapps:plugin-best-practices-plugin"                 , version.ref = "autonomousapps-bestpractices" }
 build-semver-plugin                  = { module = "com.javiersc.semver:semver-gradle-plugin"                        , version.ref = "semver-plugin" }
 build-zip-prefixer                   = { module = "net.e175.klaus:zip-prefixer"                                     , version.ref = "zip-prefixer" }
 build-foojay-resolver                = { module = "org.gradle.toolchains:foojay-resolver"                           , version.ref = "foojay-resolver" }
@@ -564,10 +568,10 @@ jlama-core                           = { module = "com.github.tjake:jlama-core" 
 jlama-native                         = { module = "com.github.tjake:jlama-native"                                           , version.ref = "jlama" }
 
 [bundles]
-ajalt           = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-colormath", "ajalt-clikt"]
-json-extra      = ["kotlinx-jsonpath", "kotlinx-json-schema"]
-keystore        = ["sslcontext-kickstart", "directory-keystore"]
-opentelemetry   = ["otel-extension-kotlin","otel-instr-annotations","otel-instr-extension-api","otel-instr-ktor"]
+ajalt                                = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-colormath", "ajalt-clikt"]
+json-extra                           = ["kotlinx-jsonpath", "kotlinx-json-schema"]
+keystore                             = ["sslcontext-kickstart", "directory-keystore"]
+opentelemetry                        = ["otel-extension-kotlin","otel-instr-annotations","otel-instr-extension-api","otel-instr-ktor"]
 
 
 [plugins]
@@ -588,7 +592,10 @@ seskar                               = { id = "io.github.turansky.seskar"       
 jte                                  = { id = "gg.jte.gradle"                                                  , version.ref = "jte" }
 benmanes                             = { id = "com.github.ben-manes.versions"                                  , version.ref = "benmanes" }
 spotless                             = { id = "com.diffplug.spotless"                                          , version.ref = "spotless" }
-bestpractices                        = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "best-practices-plugin" }
+autonomousapps-depanalysis           = { id = "com.autonomousapps.dependency-analysis"                         , version.ref = "autonomousapps-depanalysis" }
+autonomousapps-bestpractices         = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "autonomousapps-bestpractices" }
+sigstore                             = { id = "dev.sigstore.sign"                                              , version.ref = "sigstore" }
+sigstore-base                        = { id = "dev.sigstore.sign-base"                                         , version.ref = "sigstore" }
 graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"                                  , version.ref = "graalvm-nativeimage"}
 buildkonfig                          = { id = "com.codingfeline.buildkonfig"                                   , version.ref = "buildkonfig"}
 detekt                               = { id = "io.github.detekt.gradle.compiler-plugin"                        , version.ref = "detekt"}
@@ -598,3 +605,4 @@ kobwebx-markdown                     = { id = "com.varabyte.kobwebx.markdown"   
 spring-boot                          = { id = "org.springframework.boot"                                       , version.ref = "spring-boot" }
 spring-depmgmt                       = { id = "io.spring.dependency-management"                                , version.ref = "spring-depmgmt" }
 mappie                               = { id = "tech.mappie.plugin"                                             , version.ref = "mappie" }
+kopy                                 = { id = "com.javiersc.kotlin.kopy"                                       , version.ref = "kopy" }

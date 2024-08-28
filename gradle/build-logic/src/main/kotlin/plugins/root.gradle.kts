@@ -16,6 +16,7 @@ plugins {
   dev.iurysouza.modulegraph
   com.dorongold.`task-tree`
   // id("gg.jte.gradle")
+  // com.autonomousapps.`dependency-analysis`
 }
 
 if (hasCleanTask) {
@@ -36,8 +37,8 @@ gradle.projectsEvaluated { logger.lifecycle(magenta("=== Projects Configuration 
 
 idea {
   module {
-    isDownloadJavadoc = false
-    isDownloadSources = false
+    isDownloadJavadoc = true
+    isDownloadSources = true
   }
   project.vcs = "Git"
 }
@@ -187,6 +188,8 @@ tasks {
     distributionType = Wrapper.DistributionType.ALL
     // distributionUrl = "${Repo.GRADLE_DISTRO}/gradle-$gradleVersion-bin.zip"
   }
+
+  // dependencyAnalysis { issues { this.all { onAny { severity("warn") } } } }
 
   defaultTasks("clean", "tasks", "--all")
 }

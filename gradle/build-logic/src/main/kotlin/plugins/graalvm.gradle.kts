@@ -11,7 +11,6 @@ import org.jetbrains.kotlin.gradle.utils.extendsFrom
 plugins {
   application
   org.graalvm.buildtools.native
-  // com.autonomousapps.`dependency-analysis`
 }
 
 val quickBuildEnabled = project.hasProperty("quick")
@@ -184,7 +183,6 @@ tasks {
 
   nativeCompile { finalizedBy(archiveTgz) }
 
-  // dependencyAnalysis { issues { this.all { onAny { severity("warn") } } } }
   // shadowJar { mergeServiceFiles() }
 }
 

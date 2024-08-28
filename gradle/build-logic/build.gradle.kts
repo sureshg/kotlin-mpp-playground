@@ -7,9 +7,9 @@ plugins {
   `kotlin-dsl`
   embeddedKotlin("plugin.serialization")
   alias(libs.plugins.jte)
-  alias(libs.plugins.bestpractices)
   alias(libs.plugins.benmanes)
   alias(libs.plugins.spotless)
+  alias(libs.plugins.autonomousapps.bestpractices)
   // alias(libs.plugins.kotlin.dsl)
 }
 

@@ -50,6 +50,7 @@ plugins {
   id("com.gradle.develocity")
   id("org.gradle.toolchains.foojay-resolver")
   id("org.jetbrains.kotlinx.kover.aggregation")
+  id("com.autonomousapps.build-health")
   id("com.javiersc.semver")
   // Include other pre-compiled settings plugin
   id("settings.include")
