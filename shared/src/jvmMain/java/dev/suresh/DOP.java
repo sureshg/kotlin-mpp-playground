@@ -8,15 +8,11 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 import static dev.suresh.Expr.eval;
+import static java.io.IO.println;
 import static java.lang.System.out;
 import static java.util.Objects.requireNonNull;
 
 public class DOP {
-
-    void main() throws Exception {
-        DOP.run();
-    }
-
     public static void run() throws Exception {
         record Person(String name, int age) {
         }
@@ -35,7 +31,7 @@ public class DOP {
                 END
                 """.formatted(new Person("Foo", 40));
         future.complete(textBlock);
-        out.println(future.get());
+        println(future.get());
 
         stringTemplates();
         amberReflections();
@@ -66,7 +62,7 @@ public class DOP {
             case FullName(var first, var last) -> "%s, %s".formatted(first, last);
             default -> "Invalid name";
         };
-        out.println(result);
+        println(result);
 
         if (name instanceof FullName<?> f) {
             out.printf("%s, %s%n", f.firstName(), f.lastName());
@@ -94,7 +90,7 @@ public class DOP {
             if (permittedSubclass.isRecord()) {
                 out.printf("%s record components are,%n", permittedSubclass.getSimpleName());
                 for (RecordComponent rc : permittedSubclass.getRecordComponents()) {
-                    out.println(rc);
+                    out.print(rc);
                 }
             }
         }
@@ -136,7 +132,7 @@ public class DOP {
                 };
 
                 out.printf("Deserialized record: %s%n", rec);
-                out.println(result);
+                println(result);
             }
         }
 

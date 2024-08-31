@@ -11,10 +11,7 @@ void main() {
     var jrtFS = FileSystems.getFileSystem(URI.create("jrt:/"));
     // Paths.get(URI.create("jrt:/"))
     var modules = jrtFS.getPath("/modules");
-    var fileServer = SimpleFileServer.createFileServer(
-            new InetSocketAddress(8080),
-            modules,
-            OutputLevel.VERBOSE);
-    System.out.printf("Visit http://localhost:%d/ to see the file server!%n", fileServer.getAddress().getPort());
+    var fileServer = SimpleFileServer.createFileServer(new InetSocketAddress(8080), modules, OutputLevel.VERBOSE);
+    println("Visit http://localhost:" + fileServer.getAddress().getPort() + "/ to see the file server!%n");
     fileServer.start();
 }

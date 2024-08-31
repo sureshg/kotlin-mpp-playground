@@ -1,3 +1,6 @@
+// import module java.base;
+
 void main(String[] args) {
-    System.out.println("Java Main!");
+    var s = readln("Java > ");
+    println("Hello, " + s);
 }
