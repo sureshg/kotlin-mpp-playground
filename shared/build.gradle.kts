@@ -6,6 +6,7 @@ import common.versionCatalogMapOf
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
+  `binary-compatibility-validator`
   alias(libs.plugins.mappie)
   alias(libs.plugins.kopy)
 }

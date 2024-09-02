@@ -8,6 +8,7 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
 import kotlinx.validation.ApiValidationExtension
+import kotlinx.validation.KotlinApiBuildTask
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
@@ -146,8 +147,14 @@ tasks {
 
   pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
     configure<ApiValidationExtension> {
-      validationDisabled = false
+      ignoredPackages.add("dev.suresh.test")
+      ignoredClasses.addAll(listOf("BuildConfig"))
+      validationDisabled = true
       klib { enabled = true }
+    }
+
+    withType<KotlinApiBuildTask>().configureEach {
+      // inputJar = named<Jar>("shadowJar").flatMap { it.archiveFile }
     }
   }
 

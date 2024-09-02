@@ -1,7 +1,7 @@
 plugins {
   plugins.kotlin.mpp
-  `binary-compatibility-validator`
   plugins.publishing
+  `binary-compatibility-validator`
 }
 
 description = "Certificate and Security!"

@@ -10,6 +10,8 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
 import java.util.spi.ToolProvider
+import kotlinx.validation.ApiValidationExtension
+import kotlinx.validation.KotlinApiBuildTask
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
 import tasks.Jdeprscan
@@ -225,6 +227,19 @@ tasks {
                 """
                     .trimMargin()))
       }
+    }
+  }
+
+  pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
+    configure<ApiValidationExtension> {
+      ignoredPackages.add("dev.suresh.test")
+      ignoredClasses.addAll(listOf("BuildConfig"))
+      validationDisabled = false
+      klib { enabled = true }
+    }
+
+    withType<KotlinApiBuildTask>().configureEach {
+      // inputJar = named<Jar>("shadowJar").flatMap { it.archiveFile }
     }
   }
 }
