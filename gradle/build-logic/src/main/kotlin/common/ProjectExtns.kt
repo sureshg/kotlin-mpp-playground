@@ -410,6 +410,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       "-Xcontext-receivers",
       "-Xexpect-actual-classes",
       "-Xskip-prerelease-check",
+      // "-Xsuppress-version-warnings",
       // "-Xsuppress-warning=CONTEXT_RECEIVERS_DEPRECATED"
       // "-P",
       // "plugin:...=..."

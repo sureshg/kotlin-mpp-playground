@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.versionCatalogMapOf
 
 plugins {
@@ -19,12 +20,14 @@ buildConfig {
   catalogVersions = project.versionCatalogMapOf()
 }
 
+kopy { functions = KopyFunctions.Copy }
+
 dependencies {
   commonMainApi(libs.evas)
   commonMainApi(libs.uri.kmp)
   commonMainApi(libs.intellij.markdown)
   commonMainApi(libs.kotlin.codepoints.deluxe)
-  commonMainApi(libs.multiplatform.settings.core)
+  commonMainApi(libs.multiplatform.settings.coroutines)
 
   // commonMainApi(libs.mappie.api)
   // commonMainApi(libs.bundles.json.extra)

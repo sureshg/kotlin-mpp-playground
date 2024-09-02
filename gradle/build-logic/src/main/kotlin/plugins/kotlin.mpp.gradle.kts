@@ -19,12 +19,12 @@ import tasks.ReallyExecJar
 
 plugins {
   kotlin("multiplatform")
+  kotlin("plugin.atomicfu")
   kotlin("plugin.serialization")
   kotlin("plugin.power-assert")
   kotlin("plugin.js-plain-objects")
   id("plugins.kotlin.docs")
   com.google.devtools.ksp
-  org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
   // kotlin("plugin.compose")
   // io.github.terrakok.`kmp-hierarchy`
@@ -85,10 +85,10 @@ ksp {
   // excludedSources.from(generateCodeTask)
 }
 
-atomicfu {
-  transformJvm = true
-  transformJs = true
-  jvmVariant = "VH"
+atomicfuCompilerPlugin {
+  // isJvmIrTransformationEnabled = true
+  // isJsIrTransformationEnabled = true
+  // isNativeIrTransformationEnabled = true
 }
 
 powerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }

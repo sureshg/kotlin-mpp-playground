@@ -19,10 +19,10 @@ import tasks.ReallyExecJar
 plugins {
   `java-library`
   kotlin("jvm")
+  kotlin("plugin.atomicfu")
   kotlin("plugin.serialization")
   kotlin("plugin.power-assert")
   com.google.devtools.ksp
-  org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
   id("plugins.kotlin.docs")
   // `test-suite-base`
@@ -62,10 +62,10 @@ testing {
   }
 }
 
-atomicfu {
-  jvmVariant = "VH"
-  transformJvm = true
-  verbose = true
+atomicfuCompilerPlugin {
+  isJvmIrTransformationEnabled = true
+  isJsIrTransformationEnabled = true
+  isNativeIrTransformationEnabled = true
 }
 
 ksp {

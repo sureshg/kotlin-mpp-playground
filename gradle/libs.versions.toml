@@ -36,19 +36,20 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.16.3"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.799"
+kotlin-wrappers                = "1.0.0-pre.800"
 kotlin-redacted                = "1.10.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
 evas                           = "1.0.0-RC"
-kopy                           = "0.8.0+2.0.20"
+kopy                           = "0.9.0+2.0.20"
+poko                           = "0.17.0"
 mappie                         = "0.7.0"
 akkurate                       = "0.9.0"
 konsist                        = "0.16.0"
 karakum                        = "1.0.0-alpha.40-K2"
 seskar                         = "3.20.0"
-spring-boot                    = "3.3.2"
+spring-boot                    = "3.3.3"
 spring-depmgmt                 = "1.1.6"
 ktor                           = "3.0.0-beta-2"
 ktor-cohort                    = "2.5.1"
@@ -109,7 +110,7 @@ urlencoder                     = "1.5.0"
 cash-turbine                   = "1.1.0"
 cardiologist                   = "0.2.2"
 kmp-store5                     = "5.1.0-alpha04"
-kmp-settings                   = "1.1.1"
+kmp-settings                   = "1.2.0"
 kmp-appdirs                    = "1.2.0"
 parsus                         = "0.6.1"
 java-keyring                   = "1.0.3"
@@ -194,7 +195,6 @@ graalvm-nativeimage            = "0.10.2"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 wire-plugin                    = "5.0.0"
-poko-plugin                    = "0.15.3"
 buildkonfig                    = "0.13.3"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.8.0"
@@ -213,6 +213,7 @@ kmp-hierarchy                  = "1.1"
 # https://plugins.gradle.org/plugin/org.jetbrains.kotlin.multiplatform
 build-kotlin                         = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin"                       , version.ref = "kotlin"}
 build-kotlin-noarg                   = { module = "org.jetbrains.kotlin:kotlin-noarg"                               , version.ref = "kotlin"}
+build-kotlin-atomicfu                = { module = "org.jetbrains.kotlin:atomicfu"                                   , version.ref = "kotlin"}
 build-kotlin-allopen                 = { module = "org.jetbrains.kotlin:kotlin-allopen"                             , version.ref = "kotlin"}
 build-kotlin-powerassert             = { module = "org.jetbrains.kotlin:kotlin-power-assert"                        , version.ref = "kotlin"}
 build-kotlin-jsplainobjects          = { module = "org.jetbrains.kotlin:js-plain-objects"                           , version.ref = "kotlin"}
@@ -247,7 +248,7 @@ build-kotlinx-kover                  = { module = "org.jetbrains.kotlinx:kover-g
 build-nativeimage-plugin             = { module = "org.graalvm.buildtools:native-gradle-plugin"                     , version.ref = "graalvm-nativeimage"}
 build-github-depgraph                = { module = "org.gradle:github-dependency-graph-gradle-plugin"                , version.ref = "github-depgraph"}
 build-wire-plugin                    = { module = "com.squareup.wire:wire-gradle-plugin"                            , version.ref = "wire-plugin"}
-build-poko-plugin                    = { module = "dev.drewhamilton.poko:poko-gradle-plugin"                        , version.ref = "poko-plugin"}
+build-poko-plugin                    = { module = "dev.drewhamilton.poko:poko-gradle-plugin"                        , version.ref = "poko"}
 build-kotlinx-bcv                    = { module = "org.jetbrains.kotlinx:binary-compatibility-validator"            , version.ref = "kotlinx-bcv"}
 build-buildkonfig-plugin             = { module = "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin"          , version.ref = "buildkonfig"}
 build-gmazzo-buildconfig             = { module = "com.github.gmazzo.buildconfig:plugin"                            , version.ref = "gmazzo-buildconfig"}
@@ -605,5 +606,6 @@ kobweb-library                       = { id = "com.varabyte.kobweb.library"     
 kobwebx-markdown                     = { id = "com.varabyte.kobwebx.markdown"                                  , version.ref = "kobweb" }
 spring-boot                          = { id = "org.springframework.boot"                                       , version.ref = "spring-boot" }
 spring-depmgmt                       = { id = "io.spring.dependency-management"                                , version.ref = "spring-depmgmt" }
-mappie                               = { id = "tech.mappie.plugin"                                             , version.ref = "mappie" }
 kopy                                 = { id = "com.javiersc.kotlin.kopy"                                       , version.ref = "kopy" }
+mappie                               = { id = "tech.mappie.plugin"                                             , version.ref = "mappie" }
+poko                                 = { id = "dev.drewhamilton.poko"                                          , version.ref = "poko" }

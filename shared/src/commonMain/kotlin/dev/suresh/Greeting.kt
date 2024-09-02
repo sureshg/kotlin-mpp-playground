@@ -1,21 +1,18 @@
 package dev.suresh
 
 import dev.suresh.http.json
-import dev.zacsweers.redacted.annotations.Redacted
+import dev.suresh.lang.*
 import kotlinx.atomicfu.atomic
 import kotlinx.atomicfu.locks.reentrantLock
 import kotlinx.atomicfu.locks.withLock
 import kotlinx.io.bytestring.*
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
-
-@Serializable data class KData(val name: String, val age: Int, @Redacted val password: String)
 
 class Greeting {
 
   fun greeting() = buildString {
     appendLine(json.encodeToString(platform.info))
-    appendLine(KData("Foo", 20, "test"))
+    appendLine(data())
     appendLine(kotlinxTests())
     appendLine(atomicFUTests())
   }
@@ -31,6 +28,23 @@ class Greeting {
       append(bs2)
     }
     return bs.decodeToString()
+  }
+
+  private fun data() = buildString {
+    val person =
+        Person(
+            name = Name(first = "Foo", last = "Bar"),
+            address =
+                Address(
+                    street = "123 Main St", city = "San Francisco", state = "CA", zip = "95000"),
+            privateInfo = PrivateInfo(ssn = "123-45-6789", dob = "01/01/2000"))
+    val modPerson =
+        person.copy {
+          name.last = "Baz"
+          address.city = "San Jose"
+        }
+    appendLine("Person: $person")
+    appendLine("Modified Person: $modPerson")
   }
 
   private fun atomicFUTests() = buildString {

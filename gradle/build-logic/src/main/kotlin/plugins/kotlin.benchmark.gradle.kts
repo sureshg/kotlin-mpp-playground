@@ -28,6 +28,9 @@ benchmark {
   targets {
     register("jvm") { configureJmh() }
     // register("desktop") { configureJmh() }
+    // register("macosArm64")
+    // register("macosX64")
+    // register("linuxX64")
     // register("js")
     // register("wasmJs")
   }
