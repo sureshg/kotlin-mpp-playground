@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > VThreadKt</title>
+  <title>: Coverage Report > Person</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.lang</a>
 </div>
 
-<h1>Coverage Summary for Class: VThreadKt (dev.suresh.lang)</h1>
+<h1>Coverage Summary for Class: Person (dev.suresh.lang)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,38 +49,38 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">VThreadKt</td>
+  <td class="name">Person</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/2)
   </span>
 </td>
     <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (21/21)
   </span>
 </td>
 </tr>
@@ -94,105 +94,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
 &nbsp;
-&nbsp;import dev.suresh.*
-&nbsp;import io.github.oshai.kotlinlogging.KLogger
-&nbsp;import java.util.concurrent.StructuredTaskScope
-&nbsp;import java.util.stream.Gatherers
-&nbsp;import kotlin.metadata.jvm.KotlinClassMetadata
-&nbsp;import kotlin.time.Duration.Companion.seconds
-&nbsp;import kotlinx.datetime.Clock
-&nbsp;import kotlinx.datetime.LocalDateTime
-&nbsp;import kotlinx.datetime.toJavaInstant
-&nbsp;import langFeatures
-&nbsp;import stdlibFeatures
+&nbsp;import com.javiersc.kotlin.kopy.Kopy
+&nbsp;import dev.zacsweers.redacted.annotations.Redacted
 &nbsp;
-&nbsp;object VThread {
+<b class="fc">&nbsp;@Kopy data class Person(val name: Name, val address: Address, val privateInfo: PrivateInfo)</b>
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  suspend fun virtualThreads() = runOnVirtualThread {
-&nbsp;    info { (Greeting().greeting()) }
-&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;, &quot;wasm&quot;).forEach {
-&nbsp;      info { &quot;Common-$it  --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
-&nbsp;      info { &quot;Backend-$it --&gt; ${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }
-&nbsp;    }
+&nbsp;@Kopy data class Name(val first: String, val last: String)
 &nbsp;
-&nbsp;    structuredConcurrency()
-&nbsp;    langFeatures()
-&nbsp;    stdlibFeatures()
-&nbsp;    kotlinxMetaData()
-&nbsp;    classFileApi()
-&nbsp;    info { &quot;Concurrent Gatherers: ${gatherers().size}&quot; }
-&nbsp;  }
+&nbsp;@Kopy data class Address(val street: String, val city: String, val state: String, val zip: String)
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun structuredConcurrency() {
-&nbsp;    info { &quot;Structured concurrency...&quot; }
-&nbsp;    val taskList =
-&nbsp;        StructuredTaskScope&lt;String&gt;().use { sts -&gt;
-&nbsp;          val start = Clock.System.now()
-&nbsp;          val tasks =
-&nbsp;              (1..100).map {
-&nbsp;                sts.fork {
-&nbsp;                  when (it) {
-&nbsp;                    in 1..40 -&gt; &quot;Task $it&quot;
-&nbsp;                    in 41..60 -&gt; kotlin.error(&quot;Error in task $it&quot;)
-&nbsp;                    else -&gt; {
-&nbsp;                      while (!Thread.currentThread().isInterrupted) {
-&nbsp;                        debug { &quot;Task $it ...&quot; }
-&nbsp;                        Thread.sleep(100)
-&nbsp;                      }
-&nbsp;                      &quot;Task $it&quot;
-&nbsp;                    }
-&nbsp;                  }
-&nbsp;                }
-&nbsp;              }
-&nbsp;          runCatching { sts.joinUntil(start.plus(1.seconds).toJavaInstant()) }
-&nbsp;          tasks
-&nbsp;        }
-&nbsp;
-&nbsp;    info { &quot;Total Tasks: ${taskList.size}&quot; }
-&nbsp;    val states = taskList.groupBy { it.state() }
-&nbsp;    states.forEach { (t, u) -&gt; info { &quot;$t --&gt; ${u.size}&quot; } }
-&nbsp;    check(states[StructuredTaskScope.Subtask.State.SUCCESS]?.size == 40)
-&nbsp;    check(states[StructuredTaskScope.Subtask.State.FAILED]?.size == 20)
-&nbsp;    check(states[StructuredTaskScope.Subtask.State.UNAVAILABLE]?.size == 40)
-&nbsp;
-&nbsp;    StructuredTaskScope.ShutdownOnFailure().use {
-&nbsp;      val task = it.fork { &quot;Virtual thread on ${Lang(&quot;Kotlin&quot;)} ${platform.name}!&quot; }
-&nbsp;      it.join().throwIfFailed()
-&nbsp;      info { task.get() }
-&nbsp;    }
-&nbsp;  }
-&nbsp;
-&nbsp;  private fun gatherers(): List&lt;String&gt; {
-&nbsp;    val mapGatherer = Gatherers.mapConcurrent&lt;Int, String&gt;(10) { &quot;$it-concurrent&quot; }
-&nbsp;    return (1..100).toList().stream().gather(mapGatherer).toList()
-&nbsp;  }
-&nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun kotlinxMetaData() {
-&nbsp;    val metadataAnnotation = LocalDateTime::class.java.getAnnotation(Metadata::class.java)
-&nbsp;    when (val metadata = KotlinClassMetadata.readLenient(metadataAnnotation)) {
-&nbsp;      is KotlinClassMetadata.Class -&gt; {
-&nbsp;        val klass = metadata.kmClass
-&nbsp;        info { klass.functions.map { it.name } }
-&nbsp;        info { klass.properties.map { it.name } }
-&nbsp;      }
-&nbsp;      is KotlinClassMetadata.Unknown -&gt; log.info { &quot;Unknown&quot; }
-&nbsp;      else -&gt; info { &quot;Other&quot; }
-&nbsp;    }
-&nbsp;  }
-&nbsp;}
-&nbsp;
-&nbsp;fun classFileApi() {
-&nbsp;  //  val codeModel =
-&nbsp;  //      Classfile.of()
-&nbsp;  //          .parse(Class.forName(&quot;AppKt&quot;).toBytes())
-&nbsp;  //          .methods()
-&nbsp;  //          .filter { it.methodName().equalsString(&quot;main&quot;) }
-&nbsp;  //          .firstNotNullOfOrNull { it.code().getOrNull() }
-&nbsp;  //  codeModel?.elementList()?.forEach { log.info {it.toString()} }
-<b class="nc">&nbsp;}</b>
+&nbsp;data class PrivateInfo(@Redacted val ssn: String, @Redacted val dob: String)
 </code>
 </pre>
 </div>
@@ -216,7 +127,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-02 00:22</div>
+    <div style="float:right;">generated on 2024-09-02 04:11</div>
 </div>
 </body>
 </html>

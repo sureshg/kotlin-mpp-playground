@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > ReentrantLazy</title>
+  <title>: Coverage Report > ReentrantLazyKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: ReentrantLazy (dev.suresh)</h1>
+<h1>Coverage Summary for Class: ReentrantLazyKt (dev.suresh)</h1>
 
 <table class="coverageStats">
 
@@ -46,55 +46,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">ReentrantLazy</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/12)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/63)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">ReentrantLazy$Companion</td>
-    <td class="coverageStat"/>
-  </tr>
-  <tr>
-    <td class="name">ReentrantLazy$Companion$UNINITIALIZED_VALUE</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
+  <td class="name">ReentrantLazyKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -111,9 +63,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/2)
   </span>
 </td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -127,7 +76,22 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/18)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ReentrantLazyKt$WhenMappings</td>
+    <td class="coverageStat"/>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -135,7 +99,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/13)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -143,7 +107,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/65)
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/18)
   </span>
 </td>
 </tr>
@@ -165,41 +137,41 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp; * Java Virtual thread friendly Kotlin lazy initialization. The implementation is based on
 &nbsp; * [Javalin Lazy](https://github.com/javalin/javalin/pull/1974) implementation.
 &nbsp; */
-<b class="nc">&nbsp;internal class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {</b>
+&nbsp;internal class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {
 &nbsp;  private companion object {
-<b class="nc">&nbsp;    private object UNINITIALIZED_VALUE</b>
+&nbsp;    private object UNINITIALIZED_VALUE
 &nbsp;  }
 &nbsp;
-<b class="nc">&nbsp;  private var initializer: (() -&gt; T)? = initializer</b>
+&nbsp;  private var initializer: (() -&gt; T)? = initializer
 &nbsp;
-<b class="nc">&nbsp;  @Volatile private var lock: ReentrantLock? = ReentrantLock()</b>
+&nbsp;  @Volatile private var lock: ReentrantLock? = ReentrantLock()
 &nbsp;
-<b class="nc">&nbsp;  @Volatile private var _value: Any? = UNINITIALIZED_VALUE</b>
+&nbsp;  @Volatile private var _value: Any? = UNINITIALIZED_VALUE
 &nbsp;
 &nbsp;  override val value: T
 &nbsp;    get() {
-<b class="nc">&nbsp;      lock?.withLock {</b>
-<b class="nc">&nbsp;        if (_value === UNINITIALIZED_VALUE) {</b>
-<b class="nc">&nbsp;          this._value = initializer!!.invoke()</b>
-<b class="nc">&nbsp;          this.lock = null</b>
-<b class="nc">&nbsp;          this.initializer = null</b>
+&nbsp;      lock?.withLock {
+&nbsp;        if (_value === UNINITIALIZED_VALUE) {
+&nbsp;          this._value = initializer!!.invoke()
+&nbsp;          this.lock = null
+&nbsp;          this.initializer = null
 &nbsp;        }
-<b class="nc">&nbsp;      }</b>
+&nbsp;      }
 &nbsp;      @Suppress(&quot;UNCHECKED_CAST&quot;)
-<b class="nc">&nbsp;      return _value as T</b>
+&nbsp;      return _value as T
 &nbsp;    }
 &nbsp;
-<b class="nc">&nbsp;  override fun isInitialized() = _value !== UNINITIALIZED_VALUE</b>
+&nbsp;  override fun isInitialized() = _value !== UNINITIALIZED_VALUE
 &nbsp;}
 &nbsp;
 &nbsp;/** A virtual thread friendly [kotlin.lazy] implementation. */
 &nbsp;fun &lt;T : Any?&gt; vtLazy(
-&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,
+<b class="nc">&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,</b>
 &nbsp;    initializer: () -&gt; T
 &nbsp;): Lazy&lt;T&gt; =
-&nbsp;    when (threadSafetyMode) {
-&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)
-&nbsp;      else -&gt; lazy(threadSafetyMode, initializer)
+<b class="nc">&nbsp;    when (threadSafetyMode) {</b>
+<b class="nc">&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)</b>
+<b class="nc">&nbsp;      else -&gt; lazy(threadSafetyMode, initializer)</b>
 &nbsp;    }
 </code>
 </pre>
@@ -224,7 +196,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-02 00:22</div>
+    <div style="float:right;">generated on 2024-09-02 04:11</div>
 </div>
 </body>
 </html>

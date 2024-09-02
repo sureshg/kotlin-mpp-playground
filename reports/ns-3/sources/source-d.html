@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > KData</title>
+  <title>: Coverage Report > Lang</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,12 +22,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: KData (dev.suresh)</h1>
+<h1>Coverage Summary for Class: Lang (dev.suresh)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,42 +49,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">KData</td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
+  <td class="name">Lang</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/1)
   </span>
 </td>
-<td class="coverageStat">
-  <span class="percent">
-    100%
-  </span>
-  <span class="absValue">
-    (1/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    71.4%
-  </span>
-  <span class="absValue">
-    (40/56)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">KData$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -104,45 +80,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    50%
-  </span>
-  <span class="absValue">
-    (1/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    50%
-  </span>
-  <span class="absValue">
-    (1/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    69%
-  </span>
-  <span class="absValue">
-    (40/58)
+    (0/14)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -150,70 +92,49 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh;
 &nbsp;
-&nbsp;import dev.suresh.http.json
-&nbsp;import dev.zacsweers.redacted.annotations.Redacted
-&nbsp;import kotlinx.atomicfu.atomic
-&nbsp;import kotlinx.atomicfu.locks.reentrantLock
-&nbsp;import kotlinx.atomicfu.locks.withLock
-&nbsp;import kotlinx.io.bytestring.*
-&nbsp;import kotlinx.serialization.Serializable
-&nbsp;import kotlinx.serialization.encodeToString
-&nbsp;
-<b class="pc">&nbsp;@Serializable data class KData(val name: String, val age: Int, @Redacted val password: String)</b>
-&nbsp;
-&nbsp;class Greeting {
-&nbsp;
-&nbsp;  fun greeting() = buildString {
-&nbsp;    appendLine(json.encodeToString(platform.info))
-&nbsp;    appendLine(KData(&quot;Foo&quot;, 20, &quot;test&quot;))
-&nbsp;    appendLine(kotlinxTests())
-&nbsp;    appendLine(atomicFUTests())
-&nbsp;  }
-&nbsp;
-&nbsp;  private fun kotlinxTests(): String {
-&nbsp;    val ba = &quot;Kotlinx&quot;.encodeToByteArray()
-&nbsp;    val bs1 = ByteString(data = ba)
-&nbsp;    val bs2 = &quot;IO&quot;.encodeToByteString()
-&nbsp;
-&nbsp;    val bs = buildByteString {
-&nbsp;      append(bs1)
-&nbsp;      append(&quot; &quot;.encodeToByteArray())
-&nbsp;      append(bs2)
-&nbsp;    }
-&nbsp;    return bs.decodeToString()
-&nbsp;  }
-&nbsp;
-&nbsp;  private fun atomicFUTests() = buildString {
-&nbsp;    val a = AtomicSample()
-&nbsp;    appendLine(&quot;AtomicFU sample&quot;)
-&nbsp;    appendLine(&quot;Initial value: ${a.x}&quot;)
-&nbsp;    a.doWork(1234)
-&nbsp;    appendLine(&quot;Final value: ${a.x}&quot;)
-&nbsp;    check(a.x == 1234)
-&nbsp;    check(a.synchronizedFoo(42) == 42)
-&nbsp;    appendLine(&quot;Synchronized foo: ${a.synchronizedFoo(42)}&quot;)
-&nbsp;  }
+<b class="nc">&nbsp;public record Lang(String name) {</b>
 &nbsp;}
 &nbsp;
-&nbsp;class AtomicSample {
 &nbsp;
-&nbsp;  private val lock = reentrantLock()
+&nbsp;record Model(String name, float temp, int tokens) {
 &nbsp;
-&nbsp;  private val _x = atomic(0)
+&nbsp;    public static ModelBuilder builder() {
+&nbsp;        return new ModelBuilder();
+&nbsp;    }
 &nbsp;
-&nbsp;  val x
-&nbsp;    get() = _x.value
+&nbsp;    void main() {
 &nbsp;
-&nbsp;  fun doWork(finalValue: Int) {
-&nbsp;    check(x == 0)
-&nbsp;    check(_x.getAndSet(3) == 0)
-&nbsp;    check(x == 3)
-&nbsp;    check(_x.compareAndSet(3, finalValue))
-&nbsp;  }
+&nbsp;        var b = Model.builder().name(&quot;test&quot;).build();
 &nbsp;
-&nbsp;  fun synchronizedFoo(value: Int) = lock.withLock { value }
+&nbsp;    }
+&nbsp;}
+&nbsp;
+&nbsp;class ModelBuilder {
+&nbsp;    private String name;
+&nbsp;    private float temp = 0.1f;
+&nbsp;
+&nbsp;    private int tokens = 100;
+&nbsp;
+&nbsp;    public ModelBuilder name(String name) {
+&nbsp;        this.name = name;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ModelBuilder temp(float temp) {
+&nbsp;        this.temp = temp;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ModelBuilder tokens(int tokens) {
+&nbsp;        this.tokens = tokens;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Model build() {
+&nbsp;        return new Model(name, temp, tokens);
+&nbsp;    }
 &nbsp;}
 </code>
 </pre>
@@ -238,7 +159,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-02 00:22</div>
+    <div style="float:right;">generated on 2024-09-02 04:11</div>
 </div>
 </body>
 </html>

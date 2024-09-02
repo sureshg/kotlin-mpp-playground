@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > ReentrantLazyKt</title>
+  <title>: Coverage Report > Result</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: ReentrantLazyKt (dev.suresh)</h1>
+<h1>Coverage Summary for Class: Result (dev.suresh)</h1>
 
 <table class="coverageStats">
 
@@ -46,76 +46,128 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">ReentrantLazyKt</td>
+  <td class="name">Result</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    42.9%
   </span>
   <span class="absValue">
-    (0/1)
+    (3/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    25%
   </span>
   <span class="absValue">
-    (0/2)
+    (1/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    37.5%
   </span>
   <span class="absValue">
-    (0/4)
+    (3/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    28.4%
   </span>
   <span class="absValue">
-    (0/18)
+    (19/67)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">ReentrantLazyKt$WhenMappings</td>
+    <td class="name">Result$Failure</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
     <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Result$Success</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    55.6%
   </span>
   <span class="absValue">
-    (0/1)
+    (5/9)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    25%
   </span>
   <span class="absValue">
-    (0/2)
+    (1/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    50%
   </span>
   <span class="absValue">
-    (0/4)
+    (5/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    49.5%
   </span>
   <span class="absValue">
-    (0/18)
+    (47/95)
   </span>
 </td>
 </tr>
@@ -126,53 +178,58 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh;
 &nbsp;
-&nbsp;import java.util.concurrent.locks.ReentrantLock
-&nbsp;import kotlin.LazyThreadSafetyMode.NONE
-&nbsp;import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
-&nbsp;import kotlin.concurrent.withLock
+&nbsp;import java.io.Serializable;
 &nbsp;
 &nbsp;/**
-&nbsp; * Java Virtual thread friendly Kotlin lazy initialization. The implementation is based on
-&nbsp; * [Javalin Lazy](https://github.com/javalin/javalin/pull/1974) implementation.
+&nbsp; * A discriminated union that encapsulates a successful outcome with a value of type T or a failure
+&nbsp; * with an arbitrary Throwable exception.
+&nbsp; *
+&nbsp; * @param &lt;T&gt; Result value type.
 &nbsp; */
-&nbsp;internal class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {
-&nbsp;  private companion object {
-&nbsp;    private object UNINITIALIZED_VALUE
-&nbsp;  }
+&nbsp;sealed interface Result&lt;T&gt; extends Serializable {
 &nbsp;
-&nbsp;  private var initializer: (() -&gt; T)? = initializer
-&nbsp;
-&nbsp;  @Volatile private var lock: ReentrantLock? = ReentrantLock()
-&nbsp;
-&nbsp;  @Volatile private var _value: Any? = UNINITIALIZED_VALUE
-&nbsp;
-&nbsp;  override val value: T
-&nbsp;    get() {
-&nbsp;      lock?.withLock {
-&nbsp;        if (_value === UNINITIALIZED_VALUE) {
-&nbsp;          this._value = initializer!!.invoke()
-&nbsp;          this.lock = null
-&nbsp;          this.initializer = null
-&nbsp;        }
-&nbsp;      }
-&nbsp;      @Suppress(&quot;UNCHECKED_CAST&quot;)
-&nbsp;      return _value as T
+&nbsp;    static &lt;T&gt; Result&lt;T&gt; success(T value) {
+<b class="fc">&nbsp;        return new Success&lt;&gt;(value);</b>
 &nbsp;    }
 &nbsp;
-&nbsp;  override fun isInitialized() = _value !== UNINITIALIZED_VALUE
+&nbsp;    static &lt;T&gt; Result&lt;T&gt; failure(Throwable error) {
+<b class="fc">&nbsp;        return new Failure&lt;&gt;(error);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default boolean isSuccess() {
+<b class="nc">&nbsp;        return this instanceof Success&lt;T&gt;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default boolean isFailure() {
+<b class="nc">&nbsp;        return this instanceof Failure&lt;T&gt;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default T getOrNull() {
+<b class="pc">&nbsp;        return this instanceof Success&lt;T&gt; s ? s.value() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default Throwable exceptionOrNull() {
+<b class="nc">&nbsp;        return this instanceof Failure&lt;T&gt; t ? t.error() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default String fString() {
+<b class="nc">&nbsp;        return &quot;&quot;&quot;</b>
+&nbsp;                ToString  -&gt; %1$s
+&nbsp;                Result    -&gt; %2$s
+&nbsp;                Success   -&gt; %3$s
+&nbsp;                Failure   -&gt; %4$s
+&nbsp;                Exception -&gt; %5$s
+<b class="nc">&nbsp;                &quot;&quot;&quot;.formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    record Success&lt;T&gt;(T value) implements Result&lt;T&gt; {</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    record Failure&lt;T&gt;(Throwable error) implements Result&lt;T&gt; {</b>
+&nbsp;    }
 &nbsp;}
-&nbsp;
-&nbsp;/** A virtual thread friendly [kotlin.lazy] implementation. */
-&nbsp;fun &lt;T : Any?&gt; vtLazy(
-<b class="nc">&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,</b>
-&nbsp;    initializer: () -&gt; T
-&nbsp;): Lazy&lt;T&gt; =
-<b class="nc">&nbsp;    when (threadSafetyMode) {</b>
-<b class="nc">&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)</b>
-<b class="nc">&nbsp;      else -&gt; lazy(threadSafetyMode, initializer)</b>
-&nbsp;    }
 </code>
 </pre>
 </div>
@@ -196,7 +253,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-02 00:22</div>
+    <div style="float:right;">generated on 2024-09-02 04:11</div>
 </div>
 </body>
 </html>

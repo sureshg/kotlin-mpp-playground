@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Profiling</title>
+  <title>: Coverage Report > ReentrantLazy</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: Profiling (dev.suresh)</h1>
+<h1>Coverage Summary for Class: ReentrantLazy (dev.suresh)</h1>
 
 <table class="coverageStats">
 
@@ -46,16 +46,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Profiling</td>
+  <td class="name">ReentrantLazy</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/3)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -69,36 +68,24 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/48)
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">Profiling$flameGraph-VtjQ1oo$$inlined$runOnVirtualThread$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
+    <td class="name">ReentrantLazy$Companion</td>
     <td class="coverageStat"/>
   </tr>
   <tr>
-    <td class="name">Profiling$heapdump$$inlined$runOnVirtualThread$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-  </tr>
-  <tr>
-    <td class="name">Profiling$jfrSnapshot$2$3</td>
+    <td class="name">ReentrantLazy$Companion$UNINITIALIZED_VALUE</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -121,33 +108,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/2)
   </span>
 </td>
-  </tr>
-  <tr>
-    <td class="name">Profiling$jfrSnapshot-KLykuaI$$inlined$runOnVirtualThread$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-  </tr>
-  <tr>
-    <td class="name">Profiling$threaddump$$inlined$runOnVirtualThread$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -156,16 +119,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/12)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/7)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -173,7 +127,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/52)
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
   </span>
 </td>
 </tr>
@@ -186,101 +156,51 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;import Arguments
-&nbsp;import FlameGraph
-&nbsp;import com.sun.management.HotSpotDiagnosticMXBean
-&nbsp;import io.github.oshai.kotlinlogging.KotlinLogging
-&nbsp;import java.io.ByteArrayOutputStream
-&nbsp;import java.io.PrintStream
-&nbsp;import java.lang.management.ManagementFactory
-&nbsp;import java.nio.charset.StandardCharsets
-&nbsp;import java.nio.file.Path
-&nbsp;import jdk.jfr.Configuration
-&nbsp;import jdk.jfr.FlightRecorder
-&nbsp;import jdk.jfr.consumer.RecordingStream
-&nbsp;import jfr2flame
-&nbsp;import kotlin.io.path.createTempFile
-&nbsp;import kotlin.io.path.deleteIfExists
-&nbsp;import kotlin.io.path.pathString
-&nbsp;import kotlin.time.Duration
-&nbsp;import kotlin.time.Duration.Companion.milliseconds
-&nbsp;import kotlin.time.Duration.Companion.minutes
-&nbsp;import kotlin.time.Duration.Companion.seconds
-&nbsp;import kotlin.time.toJavaDuration
-&nbsp;import one.jfr.JfrReader
+&nbsp;import java.util.concurrent.locks.ReentrantLock
+&nbsp;import kotlin.LazyThreadSafetyMode.NONE
+&nbsp;import kotlin.LazyThreadSafetyMode.SYNCHRONIZED
+&nbsp;import kotlin.concurrent.withLock
 &nbsp;
-&nbsp;object Profiling {
-&nbsp;
-<b class="nc">&nbsp;  private val log = KotlinLogging.logger {}</b>
-&nbsp;
-&nbsp;  private const val diagnosticObjName = &quot;com.sun.management:type=HotSpotDiagnostic&quot;
-&nbsp;
-<b class="nc">&nbsp;  suspend fun threaddump(): Path = runOnVirtualThread {</b>
-&nbsp;    val server = ManagementFactory.getPlatformMBeanServer()
-&nbsp;    val hotspot =
-&nbsp;        ManagementFactory.newPlatformMXBeanProxy(
-&nbsp;            server, diagnosticObjName, HotSpotDiagnosticMXBean::class.java)
-&nbsp;
-&nbsp;    val heapDumpPath = createTempFile(&quot;heapdump&quot;, &quot;.hprof&quot;)
-&nbsp;    heapDumpPath.deleteIfExists()
-&nbsp;    // hotspot.dumpThreads(ThreadDumpFormat.valueOf())
-&nbsp;    hotspot.dumpHeap(heapDumpPath.pathString, true)
-&nbsp;    heapDumpPath
+&nbsp;/**
+&nbsp; * Java Virtual thread friendly Kotlin lazy initialization. The implementation is based on
+&nbsp; * [Javalin Lazy](https://github.com/javalin/javalin/pull/1974) implementation.
+&nbsp; */
+<b class="nc">&nbsp;internal class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {</b>
+&nbsp;  private companion object {
+<b class="nc">&nbsp;    private object UNINITIALIZED_VALUE</b>
 &nbsp;  }
 &nbsp;
-<b class="nc">&nbsp;  suspend fun heapdump(): Path = runOnVirtualThread {</b>
-&nbsp;    val server = ManagementFactory.getPlatformMBeanServer()
-&nbsp;    val hotspot =
-&nbsp;        ManagementFactory.newPlatformMXBeanProxy(
-&nbsp;            server, diagnosticObjName, HotSpotDiagnosticMXBean::class.java)
+<b class="nc">&nbsp;  private var initializer: (() -&gt; T)? = initializer</b>
 &nbsp;
-&nbsp;    val heapDumpPath = createTempFile(&quot;heapdump&quot;, &quot;.hprof&quot;)
-&nbsp;    heapDumpPath.deleteIfExists()
-&nbsp;    hotspot.dumpHeap(heapDumpPath.pathString, true)
-&nbsp;    heapDumpPath
-&nbsp;  }
+<b class="nc">&nbsp;  @Volatile private var lock: ReentrantLock? = ReentrantLock()</b>
 &nbsp;
-<b class="nc">&nbsp;  suspend fun jfrSnapshot(maxAge: Duration = 2.minutes, maxSizeBytes: Long = 100_000_000): Path =</b>
-<b class="nc">&nbsp;      runOnVirtualThread {</b>
-&nbsp;        val jfrPath = createTempFile(&quot;profile&quot;, &quot;.jfr&quot;)
-&nbsp;        val flightRecorder = FlightRecorder.getFlightRecorder()
-&nbsp;        when {
-&nbsp;          flightRecorder.recordings.isEmpty() -&gt;
-&nbsp;              RecordingStream(Configuration.getConfiguration(&quot;profile&quot;)).use {
-&nbsp;                it.setMaxSize(maxSizeBytes)
-&nbsp;                it.setMaxAge(maxAge.toJavaDuration())
-&nbsp;                it.enable(&quot;jdk.CPULoad&quot;).withPeriod(100.milliseconds.toJavaDuration())
-&nbsp;                it.enable(&quot;jdk.JavaMonitorEnter&quot;).withStackTrace()
-&nbsp;                it.startAsync()
-&nbsp;                Thread.sleep(5.seconds.toJavaDuration())
-&nbsp;                it.dump(jfrPath)
-&nbsp;              }
-&nbsp;          else -&gt;
-&nbsp;              flightRecorder.takeSnapshot().use {
-&nbsp;                if (it.size &gt; 0) {
-&nbsp;                  it.maxSize = maxSizeBytes
-&nbsp;                  it.maxAge = maxAge.toJavaDuration()
-&nbsp;                  it.dump(jfrPath)
-&nbsp;                }
-&nbsp;              }
+<b class="nc">&nbsp;  @Volatile private var _value: Any? = UNINITIALIZED_VALUE</b>
+&nbsp;
+&nbsp;  override val value: T
+&nbsp;    get() {
+<b class="nc">&nbsp;      lock?.withLock {</b>
+<b class="nc">&nbsp;        if (_value === UNINITIALIZED_VALUE) {</b>
+<b class="nc">&nbsp;          this._value = initializer!!.invoke()</b>
+<b class="nc">&nbsp;          this.lock = null</b>
+<b class="nc">&nbsp;          this.initializer = null</b>
 &nbsp;        }
-<b class="nc">&nbsp;        log.info { &quot;JFR file written to ${jfrPath.toAbsolutePath()}&quot; }</b>
-&nbsp;        jfrPath
-&nbsp;      }
-&nbsp;
-<b class="nc">&nbsp;  suspend fun flameGraph(maxAge: Duration = 2.minutes): String = runOnVirtualThread {</b>
-&nbsp;    val jfrPath = jfrSnapshot(maxAge = maxAge, maxSizeBytes = 100_000_000)
-&nbsp;    JfrReader(jfrPath.pathString).use {
-&nbsp;      val jfr2flame = jfr2flame(it, Arguments())
-&nbsp;      val flameGraph = FlameGraph()
-&nbsp;      jfr2flame.convert(flameGraph)
-&nbsp;      val bos = ByteArrayOutputStream()
-&nbsp;      flameGraph.dump(PrintStream(bos))
-&nbsp;      jfrPath.deleteIfExists()
-&nbsp;      bos.toString(StandardCharsets.UTF_8)
+<b class="nc">&nbsp;      }</b>
+&nbsp;      @Suppress(&quot;UNCHECKED_CAST&quot;)
+<b class="nc">&nbsp;      return _value as T</b>
 &nbsp;    }
-&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  override fun isInitialized() = _value !== UNINITIALIZED_VALUE</b>
 &nbsp;}
+&nbsp;
+&nbsp;/** A virtual thread friendly [kotlin.lazy] implementation. */
+&nbsp;fun &lt;T : Any?&gt; vtLazy(
+&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,
+&nbsp;    initializer: () -&gt; T
+&nbsp;): Lazy&lt;T&gt; =
+&nbsp;    when (threadSafetyMode) {
+&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)
+&nbsp;      else -&gt; lazy(threadSafetyMode, initializer)
+&nbsp;    }
 </code>
 </pre>
 </div>
@@ -304,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-02 00:22</div>
+    <div style="float:right;">generated on 2024-09-02 04:11</div>
 </div>
 </body>
 </html>

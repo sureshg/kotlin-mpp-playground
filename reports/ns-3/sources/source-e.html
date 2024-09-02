@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Lang</title>
+  <title>: Coverage Report > Model</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: Lang (dev.suresh)</h1>
+<h1>Coverage Summary for Class: Model (dev.suresh)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Lang</td>
+  <td class="name">Model</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/3)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/14)
+    (0/32)
   </span>
 </td>
 </tr>
@@ -94,19 +94,19 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh;
 &nbsp;
-<b class="nc">&nbsp;public record Lang(String name) {</b>
+&nbsp;public record Lang(String name) {
 &nbsp;}
 &nbsp;
 &nbsp;
-&nbsp;record Model(String name, float temp, int tokens) {
+<b class="nc">&nbsp;record Model(String name, float temp, int tokens) {</b>
 &nbsp;
 &nbsp;    public static ModelBuilder builder() {
-&nbsp;        return new ModelBuilder();
+<b class="nc">&nbsp;        return new ModelBuilder();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    void main() {
 &nbsp;
-&nbsp;        var b = Model.builder().name(&quot;test&quot;).build();
+<b class="nc">&nbsp;        var b = Model.builder().name(&quot;test&quot;).build();</b>
 &nbsp;
 &nbsp;    }
 &nbsp;}
@@ -159,7 +159,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-02 00:22</div>
+    <div style="float:right;">generated on 2024-09-02 04:11</div>
 </div>
 </body>
 </html>
