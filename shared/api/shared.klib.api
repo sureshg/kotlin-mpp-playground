@@ -1,0 +1,433 @@
+// Klib ABI Dump
+// Targets: [js, wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <dev.suresh.kmp:shared>
+final enum class /Planet : kotlin/Enum</Planet> { // /Planet|null[0]
+    enum entry EARTH // /Planet.EARTH|null[0]
+    enum entry JUPITER // /Planet.JUPITER|null[0]
+    enum entry MARS // /Planet.MARS|null[0]
+    enum entry MERCURY // /Planet.MERCURY|null[0]
+    enum entry NEPTUNE // /Planet.NEPTUNE|null[0]
+    enum entry SATURN // /Planet.SATURN|null[0]
+    enum entry URANUS // /Planet.URANUS|null[0]
+    enum entry VENUS // /Planet.VENUS|null[0]
+
+    final val entries // /Planet.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries</Planet> // /Planet.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val moon // /Planet.moon|{}moon[0]
+        final fun <get-moon>(): kotlin/Int // /Planet.moon.<get-moon>|<get-moon>(){}[0]
+
+    final fun valueOf(kotlin/String): /Planet // /Planet.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array</Planet> // /Planet.values|values#static(){}[0]
+}
+
+abstract interface dev.suresh/Platform { // dev.suresh/Platform|null[0]
+    abstract val name // dev.suresh/Platform.name|{}name[0]
+        abstract fun <get-name>(): kotlin/String // dev.suresh/Platform.name.<get-name>|<get-name>(){}[0]
+    open val appInfo // dev.suresh/Platform.appInfo|{}appInfo[0]
+        open fun <get-appInfo>(): kotlin.collections/Map<kotlin/String, kotlin/String> // dev.suresh/Platform.appInfo.<get-appInfo>|<get-appInfo>(){}[0]
+    open val buildConfig // dev.suresh/Platform.buildConfig|{}buildConfig[0]
+        open fun <get-buildConfig>(): /BuildConfig // dev.suresh/Platform.buildConfig.<get-buildConfig>|<get-buildConfig>(){}[0]
+    open val info // dev.suresh/Platform.info|{}info[0]
+        open fun <get-info>(): kotlin.collections/Map<kotlin/String, kotlin.collections/Map<kotlin/String, kotlin/String?>> // dev.suresh/Platform.info.<get-info>|<get-info>(){}[0]
+    open val osInfo // dev.suresh/Platform.osInfo|{}osInfo[0]
+        open fun <get-osInfo>(): kotlin.collections/Map<kotlin/String, kotlin/String?> // dev.suresh/Platform.osInfo.<get-osInfo>|<get-osInfo>(){}[0]
+    open val tzShortId // dev.suresh/Platform.tzShortId|{}tzShortId[0]
+        open fun <get-tzShortId>(): kotlin/String // dev.suresh/Platform.tzShortId.<get-tzShortId>|<get-tzShortId>(){}[0]
+    open val virtualDispatcher // dev.suresh/Platform.virtualDispatcher|{}virtualDispatcher[0]
+        open fun <get-virtualDispatcher>(): kotlinx.coroutines/CoroutineDispatcher? // dev.suresh/Platform.virtualDispatcher.<get-virtualDispatcher>|<get-virtualDispatcher>(){}[0]
+
+    open fun env(kotlin/String, kotlin/String? = ...): kotlin/String? // dev.suresh/Platform.env|env(kotlin.String;kotlin.String?){}[0]
+    open fun epochSecToString(kotlin/Long): kotlin/String // dev.suresh/Platform.epochSecToString|epochSecToString(kotlin.Long){}[0]
+    open fun sysProp(kotlin/String, kotlin/String? = ...): kotlin/String? // dev.suresh/Platform.sysProp|sysProp(kotlin.String;kotlin.String?){}[0]
+}
+
+final class dev.suresh.http/ErrorStatus { // dev.suresh.http/ErrorStatus|null[0]
+    constructor <init>(kotlin/Int, kotlin/String, kotlin/String? = ...) // dev.suresh.http/ErrorStatus.<init>|<init>(kotlin.Int;kotlin.String;kotlin.String?){}[0]
+
+    final val code // dev.suresh.http/ErrorStatus.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // dev.suresh.http/ErrorStatus.code.<get-code>|<get-code>(){}[0]
+    final val details // dev.suresh.http/ErrorStatus.details|{}details[0]
+        final fun <get-details>(): kotlin/String? // dev.suresh.http/ErrorStatus.details.<get-details>|<get-details>(){}[0]
+    final val message // dev.suresh.http/ErrorStatus.message|{}message[0]
+        final fun <get-message>(): kotlin/String // dev.suresh.http/ErrorStatus.message.<get-message>|<get-message>(){}[0]
+
+    final fun component1(): kotlin/Int // dev.suresh.http/ErrorStatus.component1|component1(){}[0]
+    final fun component2(): kotlin/String // dev.suresh.http/ErrorStatus.component2|component2(){}[0]
+    final fun component3(): kotlin/String? // dev.suresh.http/ErrorStatus.component3|component3(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin/String = ..., kotlin/String? = ...): dev.suresh.http/ErrorStatus // dev.suresh.http/ErrorStatus.copy|copy(kotlin.Int;kotlin.String;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.http/ErrorStatus.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.http/ErrorStatus.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.http/ErrorStatus.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<dev.suresh.http/ErrorStatus> { // dev.suresh.http/ErrorStatus.$serializer|null[0]
+        final val descriptor // dev.suresh.http/ErrorStatus.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.http/ErrorStatus.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // dev.suresh.http/ErrorStatus.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): dev.suresh.http/ErrorStatus // dev.suresh.http/ErrorStatus.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, dev.suresh.http/ErrorStatus) // dev.suresh.http/ErrorStatus.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;dev.suresh.http.ErrorStatus){}[0]
+    }
+
+    final object Companion { // dev.suresh.http/ErrorStatus.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<dev.suresh.http/ErrorStatus> // dev.suresh.http/ErrorStatus.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class dev.suresh.http/Image { // dev.suresh.http/Image|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String) // dev.suresh.http/Image.<init>|<init>(kotlin.String;kotlin.String;kotlin.String){}[0]
+
+    final val author // dev.suresh.http/Image.author|{}author[0]
+        final fun <get-author>(): kotlin/String // dev.suresh.http/Image.author.<get-author>|<get-author>(){}[0]
+    final val category // dev.suresh.http/Image.category|{}category[0]
+        final fun <get-category>(): kotlin/String // dev.suresh.http/Image.category.<get-category>|<get-category>(){}[0]
+    final val path // dev.suresh.http/Image.path|{}path[0]
+        final fun <get-path>(): kotlin/String // dev.suresh.http/Image.path.<get-path>|<get-path>(){}[0]
+
+    final fun component1(): kotlin/String // dev.suresh.http/Image.component1|component1(){}[0]
+    final fun component2(): kotlin/String // dev.suresh.http/Image.component2|component2(){}[0]
+    final fun component3(): kotlin/String // dev.suresh.http/Image.component3|component3(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ...): dev.suresh.http/Image // dev.suresh.http/Image.copy|copy(kotlin.String;kotlin.String;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.http/Image.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.http/Image.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.http/Image.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<dev.suresh.http/Image> { // dev.suresh.http/Image.$serializer|null[0]
+        final val descriptor // dev.suresh.http/Image.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.http/Image.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // dev.suresh.http/Image.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): dev.suresh.http/Image // dev.suresh.http/Image.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, dev.suresh.http/Image) // dev.suresh.http/Image.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;dev.suresh.http.Image){}[0]
+    }
+
+    final object Companion { // dev.suresh.http/Image.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<dev.suresh.http/Image> // dev.suresh.http/Image.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class dev.suresh.http/ImgRes { // dev.suresh.http/ImgRes|null[0]
+    constructor <init>() // dev.suresh.http/ImgRes.<init>|<init>(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<dev.suresh.http/ImgRes> { // dev.suresh.http/ImgRes.$serializer|null[0]
+        final val descriptor // dev.suresh.http/ImgRes.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.http/ImgRes.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // dev.suresh.http/ImgRes.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): dev.suresh.http/ImgRes // dev.suresh.http/ImgRes.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, dev.suresh.http/ImgRes) // dev.suresh.http/ImgRes.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;dev.suresh.http.ImgRes){}[0]
+    }
+
+    final object Companion { // dev.suresh.http/ImgRes.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<dev.suresh.http/ImgRes> // dev.suresh.http/ImgRes.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class dev.suresh.http/MediaApiClient : kotlin/AutoCloseable { // dev.suresh.http/MediaApiClient|null[0]
+    constructor <init>(dev.suresh.http/Timeout = ..., dev.suresh.http/Retry = ...) // dev.suresh.http/MediaApiClient.<init>|<init>(dev.suresh.http.Timeout;dev.suresh.http.Retry){}[0]
+
+    final val retry // dev.suresh.http/MediaApiClient.retry|{}retry[0]
+        final fun <get-retry>(): dev.suresh.http/Retry // dev.suresh.http/MediaApiClient.retry.<get-retry>|<get-retry>(){}[0]
+    final val timeout // dev.suresh.http/MediaApiClient.timeout|{}timeout[0]
+        final fun <get-timeout>(): dev.suresh.http/Timeout // dev.suresh.http/MediaApiClient.timeout.<get-timeout>|<get-timeout>(){}[0]
+
+    final fun close() // dev.suresh.http/MediaApiClient.close|close(){}[0]
+    final fun component1(): dev.suresh.http/Timeout // dev.suresh.http/MediaApiClient.component1|component1(){}[0]
+    final fun component2(): dev.suresh.http/Retry // dev.suresh.http/MediaApiClient.component2|component2(){}[0]
+    final fun copy(dev.suresh.http/Timeout = ..., dev.suresh.http/Retry = ...): dev.suresh.http/MediaApiClient // dev.suresh.http/MediaApiClient.copy|copy(dev.suresh.http.Timeout;dev.suresh.http.Retry){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.http/MediaApiClient.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.http/MediaApiClient.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.http/MediaApiClient.toString|toString(){}[0]
+    final suspend fun images(): kotlin.collections/List<dev.suresh.http/Image> // dev.suresh.http/MediaApiClient.images|images(){}[0]
+    final suspend fun videos(): kotlin.collections/List<dev.suresh.http/Video> // dev.suresh.http/MediaApiClient.videos|videos(){}[0]
+}
+
+final class dev.suresh.http/Retry { // dev.suresh.http/Retry|null[0]
+    constructor <init>(kotlin/Int, kotlin.time/Duration) // dev.suresh.http/Retry.<init>|<init>(kotlin.Int;kotlin.time.Duration){}[0]
+
+    final val attempts // dev.suresh.http/Retry.attempts|{}attempts[0]
+        final fun <get-attempts>(): kotlin/Int // dev.suresh.http/Retry.attempts.<get-attempts>|<get-attempts>(){}[0]
+    final val maxDelay // dev.suresh.http/Retry.maxDelay|{}maxDelay[0]
+        final fun <get-maxDelay>(): kotlin.time/Duration // dev.suresh.http/Retry.maxDelay.<get-maxDelay>|<get-maxDelay>(){}[0]
+
+    final fun component1(): kotlin/Int // dev.suresh.http/Retry.component1|component1(){}[0]
+    final fun component2(): kotlin.time/Duration // dev.suresh.http/Retry.component2|component2(){}[0]
+    final fun copy(kotlin/Int = ..., kotlin.time/Duration = ...): dev.suresh.http/Retry // dev.suresh.http/Retry.copy|copy(kotlin.Int;kotlin.time.Duration){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.http/Retry.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.http/Retry.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.http/Retry.toString|toString(){}[0]
+
+    final object Companion { // dev.suresh.http/Retry.Companion|null[0]
+        final val DEFAULT // dev.suresh.http/Retry.Companion.DEFAULT|{}DEFAULT[0]
+            final fun <get-DEFAULT>(): dev.suresh.http/Retry // dev.suresh.http/Retry.Companion.DEFAULT.<get-DEFAULT>|<get-DEFAULT>(){}[0]
+    }
+}
+
+final class dev.suresh.http/Timeout { // dev.suresh.http/Timeout|null[0]
+    constructor <init>(kotlin.time/Duration, kotlin.time/Duration, kotlin.time/Duration) // dev.suresh.http/Timeout.<init>|<init>(kotlin.time.Duration;kotlin.time.Duration;kotlin.time.Duration){}[0]
+
+    final val connection // dev.suresh.http/Timeout.connection|{}connection[0]
+        final fun <get-connection>(): kotlin.time/Duration // dev.suresh.http/Timeout.connection.<get-connection>|<get-connection>(){}[0]
+    final val read // dev.suresh.http/Timeout.read|{}read[0]
+        final fun <get-read>(): kotlin.time/Duration // dev.suresh.http/Timeout.read.<get-read>|<get-read>(){}[0]
+    final val write // dev.suresh.http/Timeout.write|{}write[0]
+        final fun <get-write>(): kotlin.time/Duration // dev.suresh.http/Timeout.write.<get-write>|<get-write>(){}[0]
+
+    final fun component1(): kotlin.time/Duration // dev.suresh.http/Timeout.component1|component1(){}[0]
+    final fun component2(): kotlin.time/Duration // dev.suresh.http/Timeout.component2|component2(){}[0]
+    final fun component3(): kotlin.time/Duration // dev.suresh.http/Timeout.component3|component3(){}[0]
+    final fun copy(kotlin.time/Duration = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ...): dev.suresh.http/Timeout // dev.suresh.http/Timeout.copy|copy(kotlin.time.Duration;kotlin.time.Duration;kotlin.time.Duration){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.http/Timeout.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.http/Timeout.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.http/Timeout.toString|toString(){}[0]
+
+    final object Companion { // dev.suresh.http/Timeout.Companion|null[0]
+        final val DEFAULT // dev.suresh.http/Timeout.Companion.DEFAULT|{}DEFAULT[0]
+            final fun <get-DEFAULT>(): dev.suresh.http/Timeout // dev.suresh.http/Timeout.Companion.DEFAULT.<get-DEFAULT>|<get-DEFAULT>(){}[0]
+    }
+}
+
+final class dev.suresh.http/Video { // dev.suresh.http/Video|null[0]
+    constructor <init>(kotlin/String, kotlin.collections/List<kotlin/String>, kotlin/String, kotlin/String, kotlin/String, kotlin/String? = ...) // dev.suresh.http/Video.<init>|<init>(kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.String;kotlin.String;kotlin.String;kotlin.String?){}[0]
+
+    final val description // dev.suresh.http/Video.description|{}description[0]
+        final fun <get-description>(): kotlin/String // dev.suresh.http/Video.description.<get-description>|<get-description>(){}[0]
+    final val poster // dev.suresh.http/Video.poster|{}poster[0]
+        final fun <get-poster>(): kotlin/String? // dev.suresh.http/Video.poster.<get-poster>|<get-poster>(){}[0]
+    final val sources // dev.suresh.http/Video.sources|{}sources[0]
+        final fun <get-sources>(): kotlin.collections/List<kotlin/String> // dev.suresh.http/Video.sources.<get-sources>|<get-sources>(){}[0]
+    final val subtitle // dev.suresh.http/Video.subtitle|{}subtitle[0]
+        final fun <get-subtitle>(): kotlin/String // dev.suresh.http/Video.subtitle.<get-subtitle>|<get-subtitle>(){}[0]
+    final val thumb // dev.suresh.http/Video.thumb|{}thumb[0]
+        final fun <get-thumb>(): kotlin/String // dev.suresh.http/Video.thumb.<get-thumb>|<get-thumb>(){}[0]
+    final val title // dev.suresh.http/Video.title|{}title[0]
+        final fun <get-title>(): kotlin/String // dev.suresh.http/Video.title.<get-title>|<get-title>(){}[0]
+
+    final fun component1(): kotlin/String // dev.suresh.http/Video.component1|component1(){}[0]
+    final fun component2(): kotlin.collections/List<kotlin/String> // dev.suresh.http/Video.component2|component2(){}[0]
+    final fun component3(): kotlin/String // dev.suresh.http/Video.component3|component3(){}[0]
+    final fun component4(): kotlin/String // dev.suresh.http/Video.component4|component4(){}[0]
+    final fun component5(): kotlin/String // dev.suresh.http/Video.component5|component5(){}[0]
+    final fun component6(): kotlin/String? // dev.suresh.http/Video.component6|component6(){}[0]
+    final fun copy(kotlin/String = ..., kotlin.collections/List<kotlin/String> = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String? = ...): dev.suresh.http/Video // dev.suresh.http/Video.copy|copy(kotlin.String;kotlin.collections.List<kotlin.String>;kotlin.String;kotlin.String;kotlin.String;kotlin.String?){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.http/Video.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.http/Video.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.http/Video.toString|toString(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<dev.suresh.http/Video> { // dev.suresh.http/Video.$serializer|null[0]
+        final val descriptor // dev.suresh.http/Video.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.http/Video.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // dev.suresh.http/Video.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): dev.suresh.http/Video // dev.suresh.http/Video.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, dev.suresh.http/Video) // dev.suresh.http/Video.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;dev.suresh.http.Video){}[0]
+    }
+
+    final object Companion { // dev.suresh.http/Video.Companion|null[0]
+        final val $childSerializers // dev.suresh.http/Video.Companion.$childSerializers|{}$childSerializers[0]
+
+        final fun serializer(): kotlinx.serialization/KSerializer<dev.suresh.http/Video> // dev.suresh.http/Video.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class dev.suresh.http/VideoRes { // dev.suresh.http/VideoRes|null[0]
+    constructor <init>() // dev.suresh.http/VideoRes.<init>|<init>(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<dev.suresh.http/VideoRes> { // dev.suresh.http/VideoRes.$serializer|null[0]
+        final val descriptor // dev.suresh.http/VideoRes.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.http/VideoRes.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // dev.suresh.http/VideoRes.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): dev.suresh.http/VideoRes // dev.suresh.http/VideoRes.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, dev.suresh.http/VideoRes) // dev.suresh.http/VideoRes.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;dev.suresh.http.VideoRes){}[0]
+    }
+
+    final object Companion { // dev.suresh.http/VideoRes.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<dev.suresh.http/VideoRes> // dev.suresh.http/VideoRes.Companion.serializer|serializer(){}[0]
+    }
+}
+
+final class dev.suresh.lang/Address { // dev.suresh.lang/Address|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String, kotlin/String) // dev.suresh.lang/Address.<init>|<init>(kotlin.String;kotlin.String;kotlin.String;kotlin.String){}[0]
+
+    final val city // dev.suresh.lang/Address.city|{}city[0]
+        final fun <get-city>(): kotlin/String // dev.suresh.lang/Address.city.<get-city>|<get-city>(){}[0]
+    final val state // dev.suresh.lang/Address.state|{}state[0]
+        final fun <get-state>(): kotlin/String // dev.suresh.lang/Address.state.<get-state>|<get-state>(){}[0]
+    final val street // dev.suresh.lang/Address.street|{}street[0]
+        final fun <get-street>(): kotlin/String // dev.suresh.lang/Address.street.<get-street>|<get-street>(){}[0]
+    final val zip // dev.suresh.lang/Address.zip|{}zip[0]
+        final fun <get-zip>(): kotlin/String // dev.suresh.lang/Address.zip.<get-zip>|<get-zip>(){}[0]
+
+    final fun component1(): kotlin/String // dev.suresh.lang/Address.component1|component1(){}[0]
+    final fun component2(): kotlin/String // dev.suresh.lang/Address.component2|component2(){}[0]
+    final fun component3(): kotlin/String // dev.suresh.lang/Address.component3|component3(){}[0]
+    final fun component4(): kotlin/String // dev.suresh.lang/Address.component4|component4(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ..., kotlin/String = ..., kotlin/String = ...): dev.suresh.lang/Address // dev.suresh.lang/Address.copy|copy(kotlin.String;kotlin.String;kotlin.String;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.lang/Address.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.lang/Address.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.lang/Address.toString|toString(){}[0]
+}
+
+final class dev.suresh.lang/Name { // dev.suresh.lang/Name|null[0]
+    constructor <init>(kotlin/String, kotlin/String) // dev.suresh.lang/Name.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final val first // dev.suresh.lang/Name.first|{}first[0]
+        final fun <get-first>(): kotlin/String // dev.suresh.lang/Name.first.<get-first>|<get-first>(){}[0]
+    final val last // dev.suresh.lang/Name.last|{}last[0]
+        final fun <get-last>(): kotlin/String // dev.suresh.lang/Name.last.<get-last>|<get-last>(){}[0]
+
+    final fun component1(): kotlin/String // dev.suresh.lang/Name.component1|component1(){}[0]
+    final fun component2(): kotlin/String // dev.suresh.lang/Name.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ...): dev.suresh.lang/Name // dev.suresh.lang/Name.copy|copy(kotlin.String;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.lang/Name.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.lang/Name.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.lang/Name.toString|toString(){}[0]
+}
+
+final class dev.suresh.lang/Person { // dev.suresh.lang/Person|null[0]
+    constructor <init>(dev.suresh.lang/Name, dev.suresh.lang/Address, dev.suresh.lang/PrivateInfo) // dev.suresh.lang/Person.<init>|<init>(dev.suresh.lang.Name;dev.suresh.lang.Address;dev.suresh.lang.PrivateInfo){}[0]
+
+    final val address // dev.suresh.lang/Person.address|{}address[0]
+        final fun <get-address>(): dev.suresh.lang/Address // dev.suresh.lang/Person.address.<get-address>|<get-address>(){}[0]
+    final val name // dev.suresh.lang/Person.name|{}name[0]
+        final fun <get-name>(): dev.suresh.lang/Name // dev.suresh.lang/Person.name.<get-name>|<get-name>(){}[0]
+    final val privateInfo // dev.suresh.lang/Person.privateInfo|{}privateInfo[0]
+        final fun <get-privateInfo>(): dev.suresh.lang/PrivateInfo // dev.suresh.lang/Person.privateInfo.<get-privateInfo>|<get-privateInfo>(){}[0]
+
+    final fun component1(): dev.suresh.lang/Name // dev.suresh.lang/Person.component1|component1(){}[0]
+    final fun component2(): dev.suresh.lang/Address // dev.suresh.lang/Person.component2|component2(){}[0]
+    final fun component3(): dev.suresh.lang/PrivateInfo // dev.suresh.lang/Person.component3|component3(){}[0]
+    final fun copy(dev.suresh.lang/Name = ..., dev.suresh.lang/Address = ..., dev.suresh.lang/PrivateInfo = ...): dev.suresh.lang/Person // dev.suresh.lang/Person.copy|copy(dev.suresh.lang.Name;dev.suresh.lang.Address;dev.suresh.lang.PrivateInfo){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.lang/Person.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.lang/Person.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.lang/Person.toString|toString(){}[0]
+}
+
+final class dev.suresh.lang/PrivateInfo { // dev.suresh.lang/PrivateInfo|null[0]
+    constructor <init>(kotlin/String, kotlin/String) // dev.suresh.lang/PrivateInfo.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final val dob // dev.suresh.lang/PrivateInfo.dob|{}dob[0]
+        final fun <get-dob>(): kotlin/String // dev.suresh.lang/PrivateInfo.dob.<get-dob>|<get-dob>(){}[0]
+    final val ssn // dev.suresh.lang/PrivateInfo.ssn|{}ssn[0]
+        final fun <get-ssn>(): kotlin/String // dev.suresh.lang/PrivateInfo.ssn.<get-ssn>|<get-ssn>(){}[0]
+
+    final fun component1(): kotlin/String // dev.suresh.lang/PrivateInfo.component1|component1(){}[0]
+    final fun component2(): kotlin/String // dev.suresh.lang/PrivateInfo.component2|component2(){}[0]
+    final fun copy(kotlin/String = ..., kotlin/String = ...): dev.suresh.lang/PrivateInfo // dev.suresh.lang/PrivateInfo.copy|copy(kotlin.String;kotlin.String){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.lang/PrivateInfo.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.lang/PrivateInfo.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.lang/PrivateInfo.toString|toString(){}[0]
+}
+
+final class dev.suresh/AtomicSample { // dev.suresh/AtomicSample|null[0]
+    constructor <init>() // dev.suresh/AtomicSample.<init>|<init>(){}[0]
+
+    final val x // dev.suresh/AtomicSample.x|{}x[0]
+        final fun <get-x>(): kotlin/Int // dev.suresh/AtomicSample.x.<get-x>|<get-x>(){}[0]
+
+    final fun doWork(kotlin/Int) // dev.suresh/AtomicSample.doWork|doWork(kotlin.Int){}[0]
+    final fun synchronizedFoo(kotlin/Int): kotlin/Int // dev.suresh/AtomicSample.synchronizedFoo|synchronizedFoo(kotlin.Int){}[0]
+}
+
+final class dev.suresh/Greeting { // dev.suresh/Greeting|null[0]
+    constructor <init>() // dev.suresh/Greeting.<init>|<init>(){}[0]
+
+    final fun greeting(): kotlin/String // dev.suresh/Greeting.greeting|greeting(){}[0]
+}
+
+final value class /Person { // /Person|null[0]
+    constructor <init>(kotlin/String) // /Person.<init>|<init>(kotlin.String){}[0]
+    constructor <init>(kotlin/String, kotlin/String) // /Person.<init>|<init>(kotlin.String;kotlin.String){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // /Person.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // /Person.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // /Person.toString|toString(){}[0]
+}
+
+final object /MyService { // /MyService|null[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // /MyService.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // /MyService.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // /MyService.toString|toString(){}[0]
+}
+
+final object dev.suresh.http/ByteArrayAsBase64Serializer : kotlinx.serialization/KSerializer<kotlin/ByteArray> { // dev.suresh.http/ByteArrayAsBase64Serializer|null[0]
+    final val descriptor // dev.suresh.http/ByteArrayAsBase64Serializer.descriptor|{}descriptor[0]
+        final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.http/ByteArrayAsBase64Serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+    final fun deserialize(kotlinx.serialization.encoding/Decoder): kotlin/ByteArray // dev.suresh.http/ByteArrayAsBase64Serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+    final fun serialize(kotlinx.serialization.encoding/Encoder, kotlin/ByteArray) // dev.suresh.http/ByteArrayAsBase64Serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;kotlin.ByteArray){}[0]
+}
+
+final const val dev.suresh.lang/HAS_SEMI // dev.suresh.lang/HAS_SEMI|{}HAS_SEMI[0]
+    final fun <get-HAS_SEMI>(): kotlin/Long // dev.suresh.lang/HAS_SEMI.<get-HAS_SEMI>|<get-HAS_SEMI>(){}[0]
+
+final val dev.suresh.http/json // dev.suresh.http/json|{}json[0]
+    final fun <get-json>(): kotlinx.serialization.json/Json // dev.suresh.http/json.<get-json>|<get-json>(){}[0]
+final val dev.suresh.lang/hasSemi // dev.suresh.lang/hasSemi|@kotlin.Long{}hasSemi[0]
+    final inline fun (kotlin/Long).<get-hasSemi>(): kotlin/Boolean // dev.suresh.lang/hasSemi.<get-hasSemi>|<get-hasSemi>@kotlin.Long(){}[0]
+final val dev.suresh.lang/hasZeroByte // dev.suresh.lang/hasZeroByte|@kotlin.Long{}hasZeroByte[0]
+    final inline fun (kotlin/Long).<get-hasZeroByte>(): kotlin/Boolean // dev.suresh.lang/hasZeroByte.<get-hasZeroByte>|<get-hasZeroByte>@kotlin.Long(){}[0]
+final val dev.suresh/localDateTimeNow // dev.suresh/localDateTimeNow|{}localDateTimeNow[0]
+    final fun <get-localDateTimeNow>(): kotlinx.datetime/LocalDateTime // dev.suresh/localDateTimeNow.<get-localDateTimeNow>|<get-localDateTimeNow>(){}[0]
+final val dev.suresh/log // dev.suresh/log|{}log[0]
+    final fun <get-log>(): io.github.oshai.kotlinlogging/KLogger // dev.suresh/log.<get-log>|<get-log>(){}[0]
+final val dev.suresh/platform // dev.suresh/platform|{}platform[0]
+    final fun <get-platform>(): dev.suresh/Platform // dev.suresh/platform.<get-platform>|<get-platform>(){}[0]
+final val dev.suresh/utcDateTimeNow // dev.suresh/utcDateTimeNow|{}utcDateTimeNow[0]
+    final fun <get-utcDateTimeNow>(): kotlinx.datetime/LocalDateTime // dev.suresh/utcDateTimeNow.<get-utcDateTimeNow>|<get-utcDateTimeNow>(){}[0]
+
+final fun /langFeatures() // /langFeatures|langFeatures(){}[0]
+final fun /stdlibFeatures() // /stdlibFeatures|stdlibFeatures(){}[0]
+final fun dev.suresh.flow/timerComposeFlow(kotlinx.datetime/TimeZone = ...): kotlinx.coroutines.flow/Flow<kotlinx.datetime/LocalDateTime> // dev.suresh.flow/timerComposeFlow|timerComposeFlow(kotlinx.datetime.TimeZone){}[0]
+final fun dev.suresh.http/httpClient(kotlin/String = ..., dev.suresh.http/Timeout = ..., dev.suresh.http/Retry = ..., io.github.oshai.kotlinlogging/KLogger = ..., kotlin/Function1<io.ktor.client/HttpClientConfig<*>, kotlin/Unit> = ...): io.ktor.client/HttpClient // dev.suresh.http/httpClient|httpClient(kotlin.String;dev.suresh.http.Timeout;dev.suresh.http.Retry;io.github.oshai.kotlinlogging.KLogger;kotlin.Function1<io.ktor.client.HttpClientConfig<*>,kotlin.Unit>){}[0]
+
+// Targets: [js]
+final object dev.suresh/JsPlatform : dev.suresh/Platform { // dev.suresh/JsPlatform|null[0]
+    final val name // dev.suresh/JsPlatform.name|{}name[0]
+        final fun <get-name>(): kotlin/String // dev.suresh/JsPlatform.name.<get-name>|<get-name>(){}[0]
+    final val osInfo // dev.suresh/JsPlatform.osInfo|{}osInfo[0]
+        final fun <get-osInfo>(): kotlin.collections/Map<kotlin/String, kotlin/String?> // dev.suresh/JsPlatform.osInfo.<get-osInfo>|<get-osInfo>(){}[0]
+}
+
+// Targets: [js]
+final fun (org.khronos.webgl/ArrayBuffer?).dev.suresh/asByteArray(): kotlin/ByteArray? // dev.suresh/asByteArray|asByteArray@org.khronos.webgl.ArrayBuffer?(){}[0]
+
+// Targets: [wasmJs]
+final class dev.suresh/Console : kotlin.js/JsAny { // dev.suresh/Console|null[0]
+    constructor <init>() // dev.suresh/Console.<init>|<init>(){}[0]
+
+    final fun log(kotlin.js/JsAny?) // dev.suresh/Console.log|log(kotlin.js.JsAny?){}[0]
+    final fun log(kotlin/String?) // dev.suresh/Console.log|log(kotlin.String?){}[0]
+}
+
+// Targets: [wasmJs]
+final object dev.suresh/WasmPlatform : dev.suresh/Platform { // dev.suresh/WasmPlatform|null[0]
+    final val name // dev.suresh/WasmPlatform.name|{}name[0]
+        final fun <get-name>(): kotlin/String // dev.suresh/WasmPlatform.name.<get-name>|<get-name>(){}[0]
+    final val osInfo // dev.suresh/WasmPlatform.osInfo|{}osInfo[0]
+        final fun <get-osInfo>(): kotlin.collections/Map<kotlin/String, kotlin/String?> // dev.suresh/WasmPlatform.osInfo.<get-osInfo>|<get-osInfo>(){}[0]
+}
+
+// Targets: [wasmJs]
+final val dev.suresh/console // dev.suresh/console|{}console[0]
+    final fun <get-console>(): dev.suresh/Console // dev.suresh/console.<get-console>|<get-console>(){}[0]
+
+// Targets: [wasmJs]
+final fun (org.khronos.webgl/ArrayBuffer?).dev.suresh/toByteArray(): kotlin/ByteArray? // dev.suresh/toByteArray|toByteArray@org.khronos.webgl.ArrayBuffer?(){}[0]
+
+// Targets: [wasmJs]
+final fun dev.suresh/currentTimeMillis(): kotlin/Long // dev.suresh/currentTimeMillis|currentTimeMillis(){}[0]
+
+// Targets: [wasmJs]
+final suspend fun (org.w3c.dom/Document).dev.suresh/selectFileFromDisk(kotlin/String? = ..., kotlin/Boolean = ...): kotlin.collections/List<org.w3c.files/File> // dev.suresh/selectFileFromDisk|selectFileFromDisk@org.w3c.dom.Document(kotlin.String?;kotlin.Boolean){}[0]
+
+// Targets: [wasmJs]
+final suspend fun (org.w3c.files/File).dev.suresh/readAsByteArray(): kotlin/ByteArray? // dev.suresh/readAsByteArray|readAsByteArray@org.w3c.files.File(){}[0]
+
+// Targets: [wasmJs]
+final suspend fun (org.w3c.files/File).dev.suresh/readAsText(): kotlin/String? // dev.suresh/readAsText|readAsText@org.w3c.files.File(){}[0]
