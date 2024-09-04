@@ -26,11 +26,12 @@ import kotlin.time.toJavaDuration
 import kotlinx.atomicfu.atomic
 import org.slf4j.event.Level
 
-const val CALL_ID_PREFIX = "trace-id"
+const val TRACE_ID = "trace-id"
 
 private val counter = atomic(1L)
 
 fun Application.configureHTTP() {
+
   install(Resources)
 
   install(ContentNegotiation) { json(dev.suresh.http.json) }
@@ -69,8 +70,8 @@ fun Application.configureHTTP() {
     header(HttpHeaders.XRequestId)
     generate {
       when (it.isApi) {
-        true -> "$CALL_ID_PREFIX-${counter.getAndIncrement()}"
-        else -> "$CALL_ID_PREFIX-00000"
+        true -> "$TRACE_ID-${counter.getAndIncrement()}"
+        else -> "$TRACE_ID-00000"
       }
     }
     verify { it.isNotEmpty() }
@@ -83,7 +84,7 @@ fun Application.configureHTTP() {
 
     // Add MDC entries
     mdc("remoteHost") { call -> call.request.origin.remoteHost }
-    callIdMdc(CALL_ID_PREFIX)
+    callIdMdc(TRACE_ID)
 
     // Enable logging for API routes only
     filter { it.isApi }
@@ -111,4 +112,11 @@ val ApplicationCall.debug
   get() = request.queryParameters.contains("debug")
 
 val ApplicationCall.isApi
-  get() = request.path().startsWith("/")
+  get() = run {
+    val path = request.path()
+    when {
+      path.contains("/swagger") -> false
+      path.startsWith("/api/") -> true
+      else -> false
+    }
+  }

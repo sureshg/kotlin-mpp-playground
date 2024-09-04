@@ -1,8 +1,8 @@
 openapi: "3.1.0"
 info:
-  title: "kotlin_mpp_playground API"
-  description: "kotlin_mpp_playground API"
-  version: "1.0.0"
+  title: "{project.name} api"
+  description: "{project.name} api"
+  version: "{project.version}"
 servers:
 - url: "https://kotlin_mpp_playground"
 paths:

@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory
 fun Routing.adminRoutes() {
   swaggerUI(path = "swagger", swaggerFile = "openapi/documentation.yaml") {
     version = BuildConfig.swaggerUi
-    customStyle("https://unpkg.com/swagger-ui-themes@3.0.1/themes/3.x/theme-flattop.css")
+    customStyle(BuildConfig.swaggerStyle)
   }
 
   get("/") { call.respondRedirect("/swagger") }

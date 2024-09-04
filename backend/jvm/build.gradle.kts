@@ -184,6 +184,7 @@ dependencies {
   implementation(libs.ktor.server.websockets)
   implementation(libs.ktor.server.sse)
   implementation(libs.ktor.serialization.json)
+  implementation(libs.kotlinx.serialization.hocon)
 
   // Client dependencies
   implementation(libs.ktor.client.java)
