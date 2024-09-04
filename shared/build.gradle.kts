@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.versionCatalogMapOf
 
 plugins {
@@ -8,7 +7,7 @@ plugins {
   plugins.publishing
   `binary-compatibility-validator`
   alias(libs.plugins.mappie)
-  alias(libs.plugins.kopy)
+  // alias(libs.plugins.kopy)
 }
 
 description = "Shared common module for all projects"
@@ -20,8 +19,6 @@ buildConfig {
   gitCommit = semver.commits.get().first()
   catalogVersions = project.versionCatalogMapOf()
 }
-
-kopy { functions = KopyFunctions.Copy }
 
 dependencies {
   commonMainApi(libs.evas)

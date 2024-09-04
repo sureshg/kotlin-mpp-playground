@@ -38,11 +38,7 @@ class Greeting {
                 Address(
                     street = "123 Main St", city = "San Francisco", state = "CA", zip = "95000"),
             privateInfo = PrivateInfo(ssn = "123-45-6789", dob = "01/01/2000"))
-    val modPerson =
-        person.copy {
-          name.last = "Baz"
-          address.city = "San Jose"
-        }
+    val modPerson = person.copy()
     appendLine("Person: $person")
     appendLine("Modified Person: $modPerson")
   }
