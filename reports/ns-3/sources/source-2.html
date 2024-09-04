@@ -79,15 +79,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     100%
   </span>
   <span class="absValue">
-    (9/9)
+    (8/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    62.1%
+    59.8%
   </span>
   <span class="absValue">
-    (54/87)
+    (49/82)
   </span>
 </td>
 </tr>
@@ -139,11 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;                Address(
 &nbsp;                    street = &quot;123 Main St&quot;, city = &quot;San Francisco&quot;, state = &quot;CA&quot;, zip = &quot;95000&quot;),
 &nbsp;            privateInfo = PrivateInfo(ssn = &quot;123-45-6789&quot;, dob = &quot;01/01/2000&quot;))
-&nbsp;    val modPerson =
-&nbsp;        person.copy {
-&nbsp;          name.last = &quot;Baz&quot;
-&nbsp;          address.city = &quot;San Jose&quot;
-&nbsp;        }
+&nbsp;    val modPerson = person.copy()
 &nbsp;    appendLine(&quot;Person: $person&quot;)
 &nbsp;    appendLine(&quot;Modified Person: $modPerson&quot;)
 &nbsp;  }
@@ -164,7 +160,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="fc">&nbsp;  private val lock = reentrantLock()</b>
 &nbsp;
-<b class="fc">&nbsp;  private val _x = atomic(0)</b>
+&nbsp;  private val _x = atomic(0)
 &nbsp;
 &nbsp;  val x
 <b class="fc">&nbsp;    get() = _x.value</b>
@@ -201,7 +197,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-04 00:23</div>
+    <div style="float:right;">generated on 2024-09-04 13:18</div>
 </div>
 </body>
 </html>

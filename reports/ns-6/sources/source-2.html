@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > SystemConfigKt</title>
+  <title>: Coverage Report > AppConfigKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.config</a>
 </div>
 
-<h1>Coverage Summary for Class: SystemConfigKt (dev.suresh.config)</h1>
+<h1>Coverage Summary for Class: AppConfigKt (dev.suresh.config)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">SystemConfigKt</td>
+  <td class="name">AppConfigKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -101,33 +101,40 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.config
 &nbsp;
-&nbsp;import io.ktor.server.config.*
-&nbsp;import kotlin.io.path.Path
-&nbsp;import kotlin.io.path.exists
+&nbsp;import com.typesafe.config.ConfigFactory
+&nbsp;import io.github.oshai.kotlinlogging.KotlinLogging
+&nbsp;import io.ktor.server.config.ApplicationConfig
 &nbsp;import kotlin.reflect.full.withNullability
 &nbsp;import kotlin.reflect.typeOf
 &nbsp;import kotlin.time.Duration
+&nbsp;import kotlinx.serialization.hocon.*
 &nbsp;
-&nbsp;data object SysConfig {
+&nbsp;/**
+&nbsp; * Initializes the config data classes from the application config. Since HOCON is used for
+&nbsp; * application configuration, `kotlinx.serialization.hocon` is used to deserialize the config. The
+&nbsp; * [AppConfig.init] method should be called before accessing the config values.
+&nbsp; */
+&nbsp;data object AppConfig {
 &nbsp;
-&nbsp;  // Logback log directory
-&nbsp;  val LOG_DIR by lazy {
-&nbsp;    System.getenv(&quot;LOG_DIR&quot;).orEmpty().ifBlank {
-&nbsp;      when {
-&nbsp;        Path(&quot;/log&quot;).exists() -&gt; &quot;/log&quot;
-&nbsp;        else -&gt; System.getProperty(&quot;user.dir&quot;)
-&nbsp;      }
-&nbsp;    }
+&nbsp;  val log = KotlinLogging.logger {}
+&nbsp;
+&nbsp;  private lateinit var appConfig: ApplicationConfig
+&nbsp;
+&nbsp;  private val hocon = Hocon {
+&nbsp;    serializersModule = Hocon.serializersModule
+&nbsp;    encodeDefaults = true
 &nbsp;  }
 &nbsp;
-&nbsp;  /**
-&nbsp;   * Initializes the system properties required for the application to run. This should be invoked
-&nbsp;   * before the Engine main() method is called.
-&nbsp;   */
-&nbsp;  fun initSysProperties() {
-&nbsp;    System.setProperty(&quot;jdk.tls.maxCertificateChainLength&quot;, &quot;15&quot;)
-&nbsp;    System.setProperty(&quot;jdk.includeInExceptions&quot;, &quot;hostInfo&quot;)
-&nbsp;    System.setProperty(&quot;LOG_DIR&quot;, LOG_DIR)
+&nbsp;  /** Initializes application config */
+&nbsp;  fun init(config: ApplicationConfig) {
+&nbsp;    log.info { &quot;Initializing App configurations...&quot; }
+&nbsp;    appConfig = config
+&nbsp;  }
+&nbsp;
+&nbsp;  /** Application authn/authz configuration. */
+&nbsp;  val auth by lazy {
+&nbsp;    val config = ConfigFactory.parseMap(appConfig.config(&quot;app.auth&quot;).toMap())
+&nbsp;    hocon.decodeFromConfig&lt;Map&lt;String, String&gt;&gt;(config)
 &nbsp;  }
 &nbsp;}
 &nbsp;
@@ -135,9 +142,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp; * Extension function to get and convert config values to their respective type. Nullability is
 &nbsp; * disabled to support java types
 &nbsp; */
-&nbsp;context(ApplicationConfig)
 &nbsp;@Suppress(&quot;IMPLICIT_CAST_TO_ANY&quot;)
-&nbsp;inline fun &lt;reified T&gt; prop(prop: String) =
+&nbsp;inline fun &lt;reified T&gt; ApplicationConfig.prop(prop: String) =
 <b class="nc">&nbsp;    when (typeOf&lt;T&gt;().withNullability(false)) {</b>
 <b class="nc">&nbsp;      typeOf&lt;String&gt;() -&gt; property(prop).getString()</b>
 <b class="nc">&nbsp;      typeOf&lt;List&lt;String&gt;&gt;() -&gt; property(prop).getList()</b>
@@ -172,7 +178,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-04 00:23</div>
+    <div style="float:right;">generated on 2024-09-04 13:18</div>
 </div>
 </body>
 </html>

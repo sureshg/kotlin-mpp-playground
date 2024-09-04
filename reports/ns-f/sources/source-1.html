@@ -257,7 +257,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;fun Routing.adminRoutes() {
 <b class="nc">&nbsp;  swaggerUI(path = &quot;swagger&quot;, swaggerFile = &quot;openapi/documentation.yaml&quot;) {</b>
 <b class="nc">&nbsp;    version = BuildConfig.swaggerUi</b>
-<b class="nc">&nbsp;    customStyle(&quot;https://unpkg.com/swagger-ui-themes@3.0.1/themes/3.x/theme-flattop.css&quot;)</b>
+<b class="nc">&nbsp;    customStyle(BuildConfig.swaggerStyle)</b>
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  get(&quot;/&quot;) { call.respondRedirect(&quot;/swagger&quot;) }</b>
@@ -329,7 +329,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-04 00:23</div>
+    <div style="float:right;">generated on 2024-09-04 13:18</div>
 </div>
 </body>
 </html>

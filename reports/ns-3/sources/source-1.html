@@ -63,16 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/3)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/16)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +71,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/46)
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/100)
   </span>
 </td>
 </tr>
@@ -95,7 +102,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
 &nbsp;import BuildConfig
-&nbsp;import dev.suresh.config.SysConfig
+&nbsp;import dev.suresh.config.AppConfig
 &nbsp;import dev.suresh.plugins.configureHTTP
 &nbsp;import dev.suresh.plugins.configureInterceptors
 &nbsp;import dev.suresh.plugins.configureOTel
@@ -107,11 +114,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.netty.*
 &nbsp;import io.ktor.server.routing.*
 &nbsp;import io.ktor.util.logging.*
+&nbsp;import kotlin.io.path.Path
+&nbsp;import kotlin.io.path.exists
 &nbsp;
 &nbsp;fun main(args: Array&lt;String&gt;) =
 &nbsp;    try {
-<b class="nc">&nbsp;      SysConfig.initSysProperties()</b>
-<b class="nc">&nbsp;      println(&quot;Starting App ${BuildConfig.version}...&quot;)</b>
+<b class="nc">&nbsp;      initProps()</b>
 <b class="nc">&nbsp;      EngineMain.main(args)</b>
 &nbsp;    } catch (e: Throwable) {
 <b class="nc">&nbsp;      val log = KtorSimpleLogger(&quot;main&quot;)</b>
@@ -119,20 +127,40 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    }
 &nbsp;
 &nbsp;fun Application.module() {
+<b class="nc">&nbsp;  log.info(&quot;Starting App: ${BuildConfig.version}...&quot;)</b>
+<b class="nc">&nbsp;  AppConfig.init(environment.config)</b>
 <b class="nc">&nbsp;  configureInterceptors()</b>
 <b class="nc">&nbsp;  configureHTTP()</b>
 <b class="nc">&nbsp;  configureSecurity()</b>
 <b class="nc">&nbsp;  configureOTel()</b>
 <b class="nc">&nbsp;  errorRoutes()</b>
 <b class="nc">&nbsp;  customPlugins()</b>
+&nbsp;
 <b class="nc">&nbsp;  routing {</b>
 <b class="nc">&nbsp;    adminRoutes()</b>
 <b class="nc">&nbsp;    webApp()</b>
 <b class="nc">&nbsp;    services()</b>
 <b class="nc">&nbsp;    mgmtRoutes()</b>
 &nbsp;  }
-&nbsp;
 &nbsp;  // CoroutineScope(coroutineContext).launch {}
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Initializes the system properties required for the application to run. This should be invoked
+&nbsp; * before the Engine main() method is called.
+&nbsp; */
+&nbsp;fun initProps() {
+<b class="nc">&nbsp;  val logDir =</b>
+<b class="nc">&nbsp;      System.getenv(&quot;LOG_DIR&quot;).orEmpty().ifBlank {</b>
+<b class="nc">&nbsp;        when {</b>
+<b class="nc">&nbsp;          Path(&quot;/log&quot;).exists() -&gt; &quot;/log&quot;</b>
+<b class="nc">&nbsp;          else -&gt; System.getProperty(&quot;user.dir&quot;)</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;  System.setProperty(&quot;jdk.tls.maxCertificateChainLength&quot;, &quot;15&quot;)</b>
+<b class="nc">&nbsp;  System.setProperty(&quot;jdk.includeInExceptions&quot;, &quot;hostInfo&quot;)</b>
+<b class="nc">&nbsp;  System.setProperty(&quot;LOG_DIR&quot;, logDir)</b>
 &nbsp;}
 </code>
 </pre>
@@ -157,7 +185,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-04 00:23</div>
+    <div style="float:right;">generated on 2024-09-04 13:18</div>
 </div>
 </body>
 </html>
