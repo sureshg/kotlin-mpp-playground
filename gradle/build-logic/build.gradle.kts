@@ -171,7 +171,7 @@ dependencies {
   implementation(libs.build.kotlin)
   // OR implementation(kotlin("gradle-plugin"))
   implementation(libs.build.kotlin.ksp)
-  implementation(libs.build.kotlin.atomicfu)
+  implementation(libs.build.kotlinx.atomicfu)
   implementation(libs.build.kotlin.allopen)
   implementation(libs.build.kotlin.powerassert)
   implementation(libs.build.kotlin.jsplainobjects)
@@ -200,6 +200,7 @@ dependencies {
   implementation(libs.build.jib.nativeimage.extn)
   implementation(libs.build.github.changelog)
   implementation(libs.build.modulegraph.plugin)
+  // implementation(libs.build.kopy.plugin)
 
   // implementation(libs.build.kotlin.compose.compiler)
   // implementation(libs.build.karakum.plugin)

@@ -20,13 +20,14 @@ import tasks.ReallyExecJar
 
 plugins {
   kotlin("multiplatform")
-  kotlin("plugin.atomicfu")
   kotlin("plugin.serialization")
   kotlin("plugin.power-assert")
   kotlin("plugin.js-plain-objects")
   id("plugins.kotlin.docs")
   com.google.devtools.ksp
+  org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
+  // kotlin("plugin.atomicfu")
   // kotlin("plugin.compose")
   // io.github.terrakok.`kmp-hierarchy`
   // org.gradle.kotlin.`kotlin-dsl`
@@ -79,17 +80,17 @@ kotlin {
   // explicitApiWarning()
 }
 
+atomicfu {
+  transformJvm = true
+  transformJs = true
+  jvmVariant = "VH"
+}
+
 ksp {
   arg("autoserviceKsp.verify", "true")
   arg("autoserviceKsp.verbose", "true")
   allWarningsAsErrors = false
   // excludedSources.from(generateCodeTask)
-}
-
-atomicfuCompilerPlugin {
-  // isJvmIrTransformationEnabled = true
-  // isJsIrTransformationEnabled = true
-  // isNativeIrTransformationEnabled = true
 }
 
 powerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
@@ -143,12 +144,19 @@ tasks {
           "version" to project.version,
       )
     }
+    filesMatching("**/*.yaml") {
+      filter { line ->
+        line
+            .replace("{project.name}", rootProject.name)
+            .replace("{project.version}", project.version.toString())
+      }
+    }
   }
 
   pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
     configure<ApiValidationExtension> {
       ignoredPackages.add("dev.suresh.test")
-      ignoredClasses.addAll(listOf("BuildConfig"))
+      ignoredClasses.addAll(listOf("BuildConfig", "BuildConfig\$Host"))
       validationDisabled = true
       klib { enabled = true }
     }

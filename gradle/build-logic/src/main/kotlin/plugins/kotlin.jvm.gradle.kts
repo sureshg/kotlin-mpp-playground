@@ -21,12 +21,13 @@ import tasks.ReallyExecJar
 plugins {
   `java-library`
   kotlin("jvm")
-  kotlin("plugin.atomicfu")
   kotlin("plugin.serialization")
   kotlin("plugin.power-assert")
   com.google.devtools.ksp
+  org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
   id("plugins.kotlin.docs")
+  // kotlin("plugin.atomicfu")
   // `test-suite-base`
 }
 
@@ -64,10 +65,10 @@ testing {
   }
 }
 
-atomicfuCompilerPlugin {
-  isJvmIrTransformationEnabled = true
-  isJsIrTransformationEnabled = true
-  isNativeIrTransformationEnabled = true
+atomicfu {
+  transformJvm = true
+  transformJs = true
+  jvmVariant = "VH"
 }
 
 ksp {
@@ -126,6 +127,13 @@ tasks {
           "version" to project.version,
       )
     }
+    filesMatching("**/*.yaml") {
+      filter { line ->
+        line
+            .replace("{project.name}", rootProject.name)
+            .replace("{project.version}", project.version.toString())
+      }
+    }
   }
 
   javadoc {
@@ -151,6 +159,7 @@ tasks {
           execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
           onlyIf { OperatingSystem.current().isUnix }
         }
+
     build { finalizedBy(buildExecutable) }
 
     register("printModuleDeps") {
@@ -233,7 +242,7 @@ tasks {
   pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
     configure<ApiValidationExtension> {
       ignoredPackages.add("dev.suresh.test")
-      ignoredClasses.addAll(listOf("BuildConfig"))
+      ignoredClasses.addAll(listOf("BuildConfig", "BuildConfig\$Host"))
       validationDisabled = false
       klib { enabled = true }
     }
