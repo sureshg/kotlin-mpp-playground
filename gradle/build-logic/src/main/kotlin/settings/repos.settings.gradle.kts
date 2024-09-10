@@ -10,6 +10,15 @@ import org.gradle.api.JavaVersion.VERSION_17
 import org.gradle.kotlin.dsl.*
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
 
+val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
+val mvnSnapshotRepo by lazy {
+  file("$rootDir/gradle/libs.versions.toml")
+      .readLines()
+      .first { it.contains("mvn-snapshot-repo") }
+      .split("\"")[1]
+      .trim()
+}
+
 pluginManagement {
   require(JavaVersion.current().isCompatibleWith(VERSION_17)) {
     "This build requires Gradle to be run with at least Java $VERSION_17"
@@ -24,13 +33,6 @@ pluginManagement {
     }
   }
 
-  // val kotlinVersion =
-  //     file("$rootDir/gradle/libs.versions.toml")
-  //         .readLines()
-  //         .first { it.contains("kotlin") }
-  //         .split("\"")[1]
-  //         .trim()
-
   plugins {
     // val kspVersion: String by settings
     // id("com.google.devtools.ksp") version kspVersion apply false
@@ -42,6 +44,7 @@ pluginManagement {
     gradlePluginPortal()
     googleAndroid()
     kobWeb()
+    mavenSnapshot(plugin = true)
   }
 }
 
@@ -63,6 +66,7 @@ dependencyResolutionManagement {
     mavenCentral()
     googleAndroid()
     kobWeb()
+    mavenSnapshot()
   }
 
   // Enable back after the KMP Node.js repo fix.
@@ -130,10 +134,6 @@ fun RepositoryHandler.nodeJS() {
   }
 }
 
-fun RepositoryHandler.mavenSnapshot() {
-  maven(url = Repo.SONATYPE_SNAPSHOT) { mavenContent { snapshotsOnly() } }
-}
-
 fun RepositoryHandler.kobWeb() {
   maven(url = Repo.KOBWEB) {
     name = "KobWeb Repo"
@@ -141,7 +141,15 @@ fun RepositoryHandler.kobWeb() {
   }
 }
 
-/** Add build scan details to GitHub Job summary report! */
+fun RepositoryHandler.mavenSnapshot(plugin: Boolean = false) {
+  if (mvnSnapshot) {
+    logger.lifecycle(
+        "❖ Maven Snapshot is enabled for ${if (plugin) "plugins" else "dependencies"}!")
+    maven(url = mvnSnapshotRepo) { mavenContent { snapshotsOnly() } }
+  }
+}
+
+/** Add build scan details to the GitHub Job summary report! */
 fun PublishedBuildScan.addJobSummary() =
     with(GithubAction) {
       setOutput("build_scan_uri", buildScanUri)

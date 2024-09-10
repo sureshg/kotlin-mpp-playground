@@ -1,4 +1,10 @@
-pluginManagement { includeBuild("gradle/build-logic") }
+pluginManagement {
+  repositories {
+    mavenCentral()
+    gradlePluginPortal()
+  }
+  includeBuild("gradle/build-logic")
+}
 
 plugins { id("settings.repos") }
 

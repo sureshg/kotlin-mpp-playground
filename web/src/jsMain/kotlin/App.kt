@@ -16,14 +16,9 @@ import kotlinx.html.div
 import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.progress
-import org.w3c.dom.HTMLButtonElement
-import org.w3c.dom.HTMLDivElement
-import org.w3c.dom.HTMLProgressElement
-import org.w3c.dom.Node
+import org.w3c.dom.*
 import web.navigator.navigator
-import xterm.ITerminalOptions
-import xterm.ITheme
-import xterm.Terminal
+import xterm.*
 
 val mainScope = MainScope()
 
@@ -71,41 +66,7 @@ suspend fun main() {
 }
 
 fun runTerminal() {
-  val term =
-      Terminal(
-          options =
-              object : ITerminalOptions {
-                init {
-                  fontFamily = "Cascadia Code, Menlo, monospace"
-                  theme =
-                      object : ITheme {
-                        init {
-                          foreground = "#F8F8F8"
-                          background = "#2D2E2C"
-                          selectionBackground = "#5DA5D533"
-                          black = "#1E1E1D"
-                          brightBlack = "#262625"
-                          red = "#CE5C5C"
-                          brightRed = "#FF7272"
-                          green = "#5BCC5B"
-                          brightGreen = "#72FF72"
-                          yellow = "#CCCC5B"
-                          brightYellow = "#FFFF72"
-                          blue = "#5D5DD3"
-                          brightBlue = "#7279FF"
-                          magenta = "#BC5ED1"
-                          brightMagenta = "#E572FF"
-                          cyan = "#5DA5D5"
-                          brightCyan = "#72F0FF"
-                          white = "#F8F8F8"
-                          brightWhite = "#FFFFFF"
-                        }
-                      }
-                  cursorBlink = true
-                  allowProposedApi = true
-                }
-              })
-
+  val term = Terminal(options = object : ITerminalOptions {})
   term.run {
     open(document.getElementById("terminal") as HTMLDivElement)
     write("Hello from \u001B[1;3;31mKotlin Multiplatform\u001B[0m \r\n\$ ")

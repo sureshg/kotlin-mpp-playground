@@ -207,6 +207,10 @@ $ ./gradlew :backend:jvm:run
 
   # Compose Web
   $ ./gradlew :compose:cmp:wasmJsBrowserProductionRun -t
+
+  # Compose multiplatform tests
+  $ ./gradlew :compose:cmp:allTests
+  $ ./gradlew :compose:cmp:jvmTest
   ```
 
 ### Publishing

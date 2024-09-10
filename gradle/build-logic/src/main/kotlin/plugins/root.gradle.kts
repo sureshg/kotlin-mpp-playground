@@ -56,11 +56,7 @@ moduleGraphConfig {
 
 // Skip test tasks on skip.test=true
 if (skipTest) {
-  allprojects {
-    tasks
-        .matching { it.name.endsWith("test", ignoreCase = true) }
-        .configureEach { onlyIf { false } }
-  }
+  allprojects { tasks.matching { it is AbstractTestTask }.configureEach { onlyIf { false } } }
 }
 
 tasks {

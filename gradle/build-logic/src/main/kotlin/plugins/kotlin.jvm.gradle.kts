@@ -3,6 +3,7 @@ package plugins
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
+import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -10,13 +11,10 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
 import java.util.spi.ToolProvider
-import kotlinx.validation.ApiValidationExtension
-import kotlinx.validation.KotlinApiBuildTask
+import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.kotlin.dsl.*
-import tasks.Jdeprscan
-import tasks.JdeprscanExtension
-import tasks.ReallyExecJar
+import tasks.*
 
 plugins {
   `java-library`
@@ -24,8 +22,9 @@ plugins {
   kotlin("plugin.serialization")
   kotlin("plugin.power-assert")
   com.google.devtools.ksp
-  org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
+  com.javiersc.kotlin.kopy
+  org.jetbrains.kotlinx.atomicfu
   id("plugins.kotlin.docs")
   // kotlin("plugin.atomicfu")
   // `test-suite-base`
@@ -83,6 +82,8 @@ redacted {
   enabled = true
   replacementString = "█"
 }
+
+kopy { functions = KopyFunctions.Copy }
 
 // Java agent configuration for jib
 val javaAgent by configurations.registering { isTransitive = false }
@@ -265,6 +266,7 @@ dependencies {
   implementation(libs.kotlinx.serialization.json)
   implementation(libs.kotlinx.serialization.json.io)
   implementation(libs.kotlinx.datetime)
+  implementation(libs.kotlinx.collections.immutable)
   implementation(libs.kotlin.redacted.annotations)
   implementation(libs.jspecify)
   implementation(libs.password4j)

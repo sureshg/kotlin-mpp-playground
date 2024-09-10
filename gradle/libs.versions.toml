@@ -1,12 +1,12 @@
 [versions]
 java                           = "24"
 kotlin                         = "2.0.20"
-kotlin-ksp                     = "2.0.20-1.0.24"
+kotlin-ksp                     = "2.0.20-1.0.25"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.0"
 kotlin-lang-version            = "2.0"
-gradle                         = "8.10"
+gradle                         = "8.10.1"
 java-vendor                    = "Oracle"
 java-jvmArguments              = "--enable-preview"
 java-addModules                = "jdk.incubator.vector"
@@ -27,8 +27,8 @@ kotlinx-coroutines             = "1.9.0-RC.2"
 kotlinx-datetime               = "0.6.1"
 kotlinx-serialization          = "1.7.2"
 kotlinx-rpc                    = "0.1.0"
-kotlinx-collections-immutable  = "0.3.7"
-kotlinx-lincheck               = "2.33"
+kotlinx-collections-immutable  = "0.3.8"
+kotlinx-lincheck               = "2.34"
 kotlinx-html                   = "0.11.0"
 kotlinx-browser                = "0.1"
 kotlinx-benchmark              = "0.4.11"
@@ -36,13 +36,13 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.16.3"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.800"
+kotlin-wrappers                = "1.0.0-pre.805"
 kotlin-redacted                = "1.10.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
-evas                           = "1.0.0-RC"
-kopy                           = "0.9.0+2.0.20"
+evas                           = "1.0.0-RC.2"
+kopy                           = "0.11.0+2.0.20"
 poko                           = "0.17.0"
 mappie                         = "0.7.0"
 akkurate                       = "0.9.0"
@@ -53,7 +53,7 @@ spring-boot                    = "3.3.3"
 spring-depmgmt                 = "1.1.6"
 ktor                           = "3.0.0-beta-2"
 ktor-cohort                    = "2.5.1"
-otel                           = "1.41.0"
+otel                           = "1.42.0"
 otel-instr                     = "2.7.0"
 otel-instr-alpha               = "2.7.0-alpha"
 elastic-otel                   = "0.4.0"
@@ -62,7 +62,7 @@ sslcontext-kickstart           = "8.3.6"
 ksp-auto-service               = "1.2.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
-ajalt-mordant                  = "2.7.2"
+ajalt-mordant                  = "3.0.0"
 ajalt-clikt                    = "4.4.0"
 ajalt-colormath                = "3.6.0"
 classgraph                     = "4.8.175"
@@ -73,6 +73,7 @@ jgit                           = "6.5.0.202303070854-r"
 jte                            = "3.1.12"
 jimfs                          = "1.3.0"
 sshj                           = "0.38.0"
+jsch                           = "0.2.19"
 pty4j                          = "0.12.35"
 junit                          = "5.11.0"
 koin                           = "3.5.6"
@@ -83,7 +84,7 @@ wiremock                       = "3.9.1"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.0.0-alpha.14"
 slf4j                          = "2.1.0-alpha1"
-logback                        = "1.5.7"
+logback                        = "1.5.8"
 logback-tyler                  = "0.7"
 log4j                          = "3.0.0-beta2"
 jmh                            = "1.37"
@@ -143,7 +144,7 @@ async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.0.0"
 airlift-aircompressor          = "0.27"
-airlift-security               = "262"
+airlift-security               = "265"
 directory-keystore             = "1.1.0"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
@@ -155,21 +156,21 @@ twelvemonkeys                  = "3.10.1"
 okapibarcode                   = "0.4.1"
 chasm                          = "0.7.1"
 kfswatch                       = "1.3.0"
-langchain4j                    = "0.33.0"
+langchain4j                    = "0.34.0"
 jlama                          = "0.3.1"
 ldaptive                       = "2.3.2"
 chicory                        = "0.0.12"
 
 # Compose
-jetbrains-compose              = "1.7.0-alpha03"
-jetbrains-compose-viewmodel    = "2.8.0"
+jetbrains-compose              = "1.7.0-beta01"
+jetbrains-compose-viewmodel    = "2.8.1"
 jetbrains-compose-nav          = "2.8.0-alpha09"
-jetbrains-compose-adaptive     = "1.0.0-alpha01"
+jetbrains-compose-adaptive     = "1.0.0-alpha02"
 kobweb                         = "0.19.0"
-detekt                         = "1.23.6"
+detekt                         = "1.23.7"
 detekt-compose-rules           = "0.4.10"
 compose-icons                  = "1.1.0"
-compose-routing                = "0.3.0"
+compose-routing                = "0.4.0"
 kottie                         = "1.9.6"
 
 # NPM Dependencies
@@ -209,6 +210,8 @@ jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
 
+# Repositories
+mvn-snapshot-repo              = "https://oss.sonatype.org/content/repositories/snapshots"
 
 [libraries]
 # External plugins for precompiled script plugins (build-logic)
@@ -379,6 +382,7 @@ airlift-security-jwks                = { module = "io.airlift:security-jwks"    
 directory-keystore                   = { module = "com.github.marschall:directory-keystore"                    , version.ref = "directory-keystore"}
 pty4j                                = { module = "org.jetbrains.pty4j:pty4j"                                  , version.ref = "pty4j"}
 sshj                                 = { module = "com.hierynomus:sshj"                                        , version.ref = "sshj"}
+jsch                                 = { module = "com.github.mwiede:jsch"                                     , version.ref = "jsch"}
 sslcontext-kickstart                 = { module = "io.github.hakky54:sslcontext-kickstart"                     , version.ref = "sslcontext-kickstart"}
 
 ktor-cohort-core                     = { module = "com.sksamuel.cohort:cohort-ktor"                            , version.ref = "ktor-cohort"}
@@ -436,6 +440,8 @@ cache4k                              = { module = "io.github.reactivecircus.cach
 
 ajalt-mordant                        = { module = "com.github.ajalt.mordant:mordant"                           , version.ref = "ajalt-mordant"}
 ajalt-mordant-coroutines             = { module = "com.github.ajalt.mordant:mordant-coroutines"                , version.ref = "ajalt-mordant"}
+ajalt-mordant-markdown               = { module = "com.github.ajalt.mordant:mordant-markdown"                  , version.ref = "ajalt-mordant"}
+ajalt-mordant-jvm-ffm                = { module = "com.github.ajalt.mordant:mordant-jvm-ffm"                   , version.ref = "ajalt-mordant"}
 ajalt-colormath                      = { module = "com.github.ajalt.colormath:colormath"                       , version.ref = "ajalt-colormath"}
 ajalt-clikt                          = { module = "com.github.ajalt.clikt:clikt"                               , version.ref = "ajalt-clikt"}
 jgit                                 = { module = "org.eclipse.jgit:org.eclipse.jgit"                          , version.ref = "jgit" }
@@ -576,7 +582,7 @@ jlama-native                         = { module = "com.github.tjake:jlama-native
 ldaptive                             = { module = "org.ldaptive:ldaptive"                                                   , version.ref = "ldaptive" }
 
 [bundles]
-ajalt                                = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-colormath", "ajalt-clikt"]
+ajalt                                = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-mordant-markdown", "ajalt-colormath", "ajalt-clikt"]
 json-extra                           = ["kotlinx-jsonpath", "kotlinx-json-schema"]
 keystore                             = ["sslcontext-kickstart", "directory-keystore"]
 opentelemetry                        = ["otel-extension-kotlin","otel-instr-annotations","otel-instr-extension-api","otel-instr-ktor"]

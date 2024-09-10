@@ -128,10 +128,11 @@ jib {
 // Configuration to copy JS/Wasm app to resources
 val jsApp by configurations.creating
 val wasmApp by configurations.creating
+val composeWebApp by configurations.creating
 
 tasks {
   val copyTasks =
-      listOf(jsApp, wasmApp).map { cnf ->
+      listOf(jsApp, wasmApp, composeWebApp).map { cnf ->
         val appResDir = Path(base = "app", cnf.name.removeSuffix("App"))
         register<Sync>("copy${cnf.name}") {
           from(cnf)
@@ -235,6 +236,8 @@ dependencies {
   // Copy js and wasm apps
   jsApp(project(path = projects.web.dependencyProject.path, configuration = "jsApp"))
   wasmApp(project(path = projects.web.dependencyProject.path, configuration = "wasmApp"))
+  composeWebApp(
+      project(path = projects.compose.cmp.dependencyProject.path, configuration = "composeWebApp"))
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })

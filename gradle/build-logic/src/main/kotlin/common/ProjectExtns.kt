@@ -61,10 +61,10 @@ val Project.isSharedProject
 
 // val debug: String? by project
 val Project.debugEnabled
-  get() = properties["debug"]?.toString().toBoolean()
+  get() = providers.gradleProperty("debug").map(String::toBoolean).getOrElse(false)
 
 val Project.skipTest
-  get() = hasProperty("skip.test")
+  get() = providers.gradleProperty("skip.test").map(String::toBoolean).getOrElse(false)
 
 val Project.hasCleanTask
   get() = gradle.startParameter.taskNames.any { it in listOf("clean", "cleanAll") }
@@ -72,7 +72,7 @@ val Project.hasCleanTask
 val Project.hasDokkaTasks
   get() = gradle.taskGraph.allTasks.filterIsInstance<AbstractDokkaTask>().any()
 
-val Project.isSnapshot
+val Project.isSnapshotVersion
   get() = version.toString().endsWith("SNAPSHOT", true)
 
 val Project.runsOnCI
@@ -195,7 +195,6 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-Xms64M",
             "-Xmx128M",
             "-XX:+UseZGC",
-            "-XX:+UseCompressedOops",
             "-XX:+UseStringDeduplication",
             "-XX:+UnlockExperimentalVMOptions",
             "-XX:MaxRAMPercentage=0.8",

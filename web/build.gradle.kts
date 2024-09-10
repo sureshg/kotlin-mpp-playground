@@ -1,7 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import com.github.ajalt.mordant.rendering.TextColors
-
 plugins {
   plugins.kotlin.mpp
   plugins.publishing
@@ -45,12 +43,12 @@ tasks {
       }
 
   jsProcessResources {
-    logger.quiet(TextColors.gray("◈ Configuring shared JS resources"))
+    // logger.quiet(TextColors.gray("◈ Configuring shared JS resources"))
     mustRunAfter(copySharedJsResources)
   }
 
   wasmJsProcessResources {
-    logger.quiet(TextColors.gray("◈ Configuring shared Wasm resources"))
+    // logger.quiet(TextColors.gray("◈ Configuring shared Wasm resources"))
     mustRunAfter(copySharedWasmResources)
   }
 }

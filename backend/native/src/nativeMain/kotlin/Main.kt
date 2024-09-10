@@ -1,12 +1,10 @@
+import dev.suresh.Greeting
 import dev.suresh.flow.timerComposeFlow
 import dev.suresh.http.MediaApiClient
-import dev.suresh.http.json
-import dev.suresh.platform
 import kotlin.reflect.typeOf
 import kotlin.time.Duration
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.encodeToString
 
 data class ProcessResult(val code: Int, val rawOutput: String?)
 
@@ -16,7 +14,7 @@ expect fun readPassword(prompt: String): String?
 
 fun main(args: Array<String>): Unit = runBlocking {
   println("Kotlin Native App: ${BuildConfig.version}")
-  println(json.encodeToString(platform.info))
+  println(Greeting().greeting())
 
   val count = args.firstOrNull()?.toIntOrNull() ?: 5
   timerComposeFlow().take(count).collect(::println)

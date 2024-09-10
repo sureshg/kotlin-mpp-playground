@@ -4,7 +4,10 @@ object Repo {
 
   const val MAVEN_CENTRAL = "https://repo.maven.apache.org/maven2/"
 
-  const val SONATYPE_SNAPSHOT = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+  const val SONATYPE_SNAPSHOT = "https://oss.sonatype.org/content/repositories/snapshots"
+
+  // https://central.sonatype.org/faq/snapshot-releases/#question
+  const val SONATYPE_SNAPSHOT_S01 = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 
   const val NODEJS = "https://nodejs.org/dist/"
 

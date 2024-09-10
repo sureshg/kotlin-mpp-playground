@@ -3,20 +3,18 @@
 package plugins
 
 import com.google.devtools.ksp.gradle.KspAATask
+import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
-import kotlinx.validation.ApiValidationExtension
-import kotlinx.validation.KotlinApiBuildTask
+import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
-import tasks.BuildConfig
-import tasks.BuildConfigExtension
-import tasks.ReallyExecJar
+import tasks.*
 
 plugins {
   kotlin("multiplatform")
@@ -25,8 +23,9 @@ plugins {
   kotlin("plugin.js-plain-objects")
   id("plugins.kotlin.docs")
   com.google.devtools.ksp
-  org.jetbrains.kotlinx.atomicfu
   dev.zacsweers.redacted
+  com.javiersc.kotlin.kopy
+  org.jetbrains.kotlinx.atomicfu
   // kotlin("plugin.atomicfu")
   // kotlin("plugin.compose")
   // io.github.terrakok.`kmp-hierarchy`
@@ -99,6 +98,8 @@ redacted {
   enabled = true
   replacementString = "█"
 }
+
+kopy { functions = KopyFunctions.Copy }
 
 tasks {
   // Register buildConfig task only for project's common module

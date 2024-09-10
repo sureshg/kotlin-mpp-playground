@@ -175,3 +175,8 @@ tasks {
         rename { "${project.name}-${Platform.currentArch}-$version.dmg" }
       }
 }
+
+artifacts {
+  val composeWebApp by configurations.consumable("composeWebApp")
+  add(composeWebApp.name, tasks.wasmJsBrowserDistribution)
+}
