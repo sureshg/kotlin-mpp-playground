@@ -162,7 +162,7 @@ ldaptive                       = "2.3.2"
 chicory                        = "0.0.12"
 
 # Compose
-jetbrains-compose              = "1.7.0-beta01"
+jetbrains-compose              = "1.7.0-beta02"
 jetbrains-compose-viewmodel    = "2.8.1"
 jetbrains-compose-nav          = "2.8.0-alpha09"
 jetbrains-compose-adaptive     = "1.0.0-alpha02"
