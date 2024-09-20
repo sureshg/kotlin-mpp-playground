@@ -2,12 +2,8 @@ package dev.suresh
 
 import BuildConfig
 import dev.suresh.config.AppConfig
-import dev.suresh.plugins.configureHTTP
-import dev.suresh.plugins.configureInterceptors
-import dev.suresh.plugins.configureOTel
-import dev.suresh.plugins.configureSecurity
-import dev.suresh.plugins.custom.customPlugins
-import dev.suresh.plugins.errorRoutes
+import dev.suresh.plugins.*
+import dev.suresh.plugins.custom.*
 import dev.suresh.routes.*
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
@@ -15,6 +11,7 @@ import io.ktor.server.routing.*
 import io.ktor.util.logging.*
 import kotlin.io.path.Path
 import kotlin.io.path.exists
+import org.slf4j.bridge.SLF4JBridgeHandler
 
 fun main(args: Array<String>) =
     try {
@@ -31,9 +28,9 @@ fun Application.module() {
   configureInterceptors()
   configureHTTP()
   configureSecurity()
-  configureOTel()
   errorRoutes()
   customPlugins()
+  configureOTel()
 
   routing {
     adminRoutes()
@@ -50,7 +47,7 @@ fun Application.module() {
  */
 fun initProps() {
   val logDir =
-      System.getenv("LOG_DIR").orEmpty().ifBlank {
+      System.getProperty("LOG_DIR", System.getenv("LOG_DIR")).orEmpty().ifBlank {
         when {
           Path("/log").exists() -> "/log"
           else -> System.getProperty("user.dir")
@@ -60,4 +57,8 @@ fun initProps() {
   System.setProperty("jdk.tls.maxCertificateChainLength", "15")
   System.setProperty("jdk.includeInExceptions", "hostInfo")
   System.setProperty("LOG_DIR", logDir)
+
+  // Redirect JUL to SLF4J
+  SLF4JBridgeHandler.removeHandlersForRootLogger()
+  SLF4JBridgeHandler.install()
 }
