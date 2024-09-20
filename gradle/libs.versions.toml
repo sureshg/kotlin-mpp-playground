@@ -1,7 +1,7 @@
 [versions]
 java                           = "24"
-kotlin                         = "2.0.20"
-kotlin-ksp                     = "2.0.20-1.0.25"
+kotlin                         = "2.1.0-Beta1"
+kotlin-ksp                     = "2.1.0-Beta1-1.0.25"
 kotlin-jvmtarget               = "22"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.0"
@@ -21,11 +21,11 @@ org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
 kotlinx-kover                  = "0.9.0-RC"
-kotlinx-io                     = "0.5.3"
+kotlinx-io                     = "0.5.4"
 kotlinx-atomicfu               = "0.25.0"
-kotlinx-coroutines             = "1.9.0-RC.2"
+kotlinx-coroutines             = "1.9.0"
 kotlinx-datetime               = "0.6.1"
-kotlinx-serialization          = "1.7.2"
+kotlinx-serialization          = "1.7.3"
 kotlinx-rpc                    = "0.1.0"
 kotlinx-collections-immutable  = "0.3.8"
 kotlinx-lincheck               = "2.34"
@@ -36,8 +36,8 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.16.3"
 kotlin-dokka                   = "1.9.20"
-kotlin-wrappers                = "1.0.0-pre.805"
-kotlin-redacted                = "1.10.0"
+kotlin-wrappers                = "1.0.0-pre.809"
+kotlin-redacted                = "1.11.0-alpha01"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
@@ -46,16 +46,17 @@ kopy                           = "0.11.0+2.0.20"
 poko                           = "0.17.0"
 mappie                         = "0.7.0"
 akkurate                       = "0.9.0"
-konsist                        = "0.16.0"
+konsist                        = "0.16.1"
 karakum                        = "1.0.0-alpha.40-K2"
 seskar                         = "3.20.0"
 spring-boot                    = "3.3.3"
 spring-depmgmt                 = "1.1.6"
-ktor                           = "3.0.0-beta-2"
+ktor                           = "3.0.0-rc-1"
 ktor-cohort                    = "2.5.1"
-otel                           = "1.42.0"
-otel-instr                     = "2.7.0"
-otel-instr-alpha               = "2.7.0-alpha"
+otel                           = "1.42.1"
+otel-instr                     = "2.8.0"
+otel-instr-alpha               = "2.8.0-alpha"
+otel-semconv                   = "1.27.0-alpha"
 elastic-otel                   = "0.4.0"
 okio                           = "3.9.0"
 sslcontext-kickstart           = "8.3.6"
@@ -63,7 +64,7 @@ ksp-auto-service               = "1.2.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "3.0.0"
-ajalt-clikt                    = "4.4.0"
+ajalt-clikt                    = "5.0.0"
 ajalt-colormath                = "3.6.0"
 classgraph                     = "4.8.175"
 cache4k                        = "0.11.0"
@@ -73,10 +74,10 @@ jgit                           = "6.5.0.202303070854-r"
 jte                            = "3.1.12"
 jimfs                          = "1.3.0"
 sshj                           = "0.38.0"
-jsch                           = "0.2.19"
+jsch                           = "0.2.20"
 pty4j                          = "0.12.35"
 junit                          = "5.11.0"
-koin                           = "3.5.6"
+koin                           = "4.0.0"
 kotest                         = "5.9.0"
 mockk                          = "1.13.12"
 mokkery                        = "2.3.0"
@@ -94,7 +95,7 @@ google-javaformat              = "1.23.0"
 palantir-javaformat            = "2.50.0"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.15.0"
-graalvm                        = "24.0.2"
+graalvm                        = "24.1.0"
 jspecify                       = "1.0.0"
 rsocket                        = "0.16.0"
 jctools                        = "4.0.1"
@@ -108,6 +109,7 @@ kotlinx-json-schema            = "0.2.3"
 kotlin-cryptography            = "0.3.1"
 uri-kmp                        = "0.0.18"
 urlencoder                     = "1.5.0"
+bytesize                       = "2.0.0-beta04"
 cash-turbine                   = "1.1.0"
 cardiologist                   = "0.2.2"
 kmp-store5                     = "5.1.0-alpha04"
@@ -144,7 +146,7 @@ async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.0.0"
 airlift-aircompressor          = "0.27"
-airlift-security               = "265"
+airlift-security               = "268"
 directory-keystore             = "1.1.0"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
@@ -162,16 +164,16 @@ ldaptive                       = "2.3.2"
 chicory                        = "0.0.12"
 
 # Compose
-jetbrains-compose              = "1.7.0-beta01"
-jetbrains-compose-viewmodel    = "2.8.1"
-jetbrains-compose-nav          = "2.8.0-alpha09"
-jetbrains-compose-adaptive     = "1.0.0-alpha02"
-kobweb                         = "0.19.0"
+jetbrains-compose              = "1.7.0-beta02"
+jetbrains-compose-viewmodel    = "2.8.2"
+jetbrains-compose-nav          = "2.8.0-alpha10"
+jetbrains-compose-adaptive     = "1.0.0-alpha03"
+kobweb                         = "0.19.2"
 detekt                         = "1.23.7"
-detekt-compose-rules           = "0.4.10"
+detekt-compose-rules           = "0.4.12"
 compose-icons                  = "1.1.0"
 compose-routing                = "0.4.0"
-kottie                         = "1.9.6"
+kottie                         = "2.0.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.10.0"
@@ -184,17 +186,18 @@ swagger-style                  = "https://unpkg.com/swagger-ui-themes@3.0.1/them
 # Plugin versions
 benmanes                       = "0.51.0"
 foojay-resolver                = "0.8.0"
-gradle-develocity              = "3.18"
+gradle-develocity              = "3.18.1"
 nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
-shadow                         = "8.3.0"
+shadow                         = "8.3.2"
 spotless                       = "7.0.0.BETA2"
 semver-plugin                  = "0.7.0"
 tasktree                       = "4.0.0"
 sigstore                       = "1.0.0"
-autonomousapps-depanalysis     = "2.0.1"
+reproducible-builds            = "1.0"
+autonomousapps-depanalysis     = "2.0.2"
 autonomousapps-bestpractices   = "0.10"
-graalvm-nativeimage            = "0.10.2"
+graalvm-nativeimage            = "0.10.3"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 wire-plugin                    = "5.0.0"
@@ -209,9 +212,13 @@ jib-plugin                     = "3.4.3"
 jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
+tomlj                          = "1.1.1"
 
 # Repositories
-mvn-snapshot-repo              = "https://oss.sonatype.org/content/repositories/snapshots"
+repo-mvn-snapshot              = "https://oss.sonatype.org/content/repositories/snapshots"
+repo-mvn-snapshots01           = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+repo-nodejs                    = "https://nodejs.org/dist/"
+repo-kobweb                    = "https://us-central1-maven.pkg.dev/varabyte-repos/public"
 
 [libraries]
 # External plugins for precompiled script plugins (build-logic)
@@ -271,6 +278,10 @@ build-jib-plugin                     = { module = "com.google.cloud.tools:jib-gr
 build-jib-nativeimage-extn           = { module = "com.google.cloud.tools:jib-native-image-extension-gradle"        , version.ref = "jib-nativeimage-extn" }
 build-includegit-plugin              = { module = "me.champeau.gradle.includegit:plugin"                            , version.ref = "includegit-plugin" }
 build-karakum-plugin                 = { module = "io.github.sgrishchenko:karakum-gradle-plugin"                    , version.ref = "karakum" }
+build-tomlj                          = { module = "org.tomlj:tomlj"                                                 , version.ref = "tomlj" }
+build-reproducible-builds            = { module = "org.gradlex:reproducible-builds"                                 , version.ref = "reproducible-builds" }
+build-bytesize                       = { module = "me.saket.bytesize:bytesize"                                      , version.ref = "bytesize" }
+
 
 # Gradle Dependencies
 kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                                 , version.ref = "kotlin"}
@@ -443,7 +454,9 @@ ajalt-mordant-coroutines             = { module = "com.github.ajalt.mordant:mord
 ajalt-mordant-markdown               = { module = "com.github.ajalt.mordant:mordant-markdown"                  , version.ref = "ajalt-mordant"}
 ajalt-mordant-jvm-ffm                = { module = "com.github.ajalt.mordant:mordant-jvm-ffm"                   , version.ref = "ajalt-mordant"}
 ajalt-colormath                      = { module = "com.github.ajalt.colormath:colormath"                       , version.ref = "ajalt-colormath"}
+ajalt-clikt-core                     = { module = "com.github.ajalt.clikt:clikt-core"                          , version.ref = "ajalt-clikt"}
 ajalt-clikt                          = { module = "com.github.ajalt.clikt:clikt"                               , version.ref = "ajalt-clikt"}
+ajalt-clikt-markdown                 = { module = "com.github.ajalt.clikt:clikt-markdown"                      , version.ref = "ajalt-clikt"}
 jgit                                 = { module = "org.eclipse.jgit:org.eclipse.jgit"                          , version.ref = "jgit" }
 jte                                  = { module = "gg.jte:jte"                                                 , version.ref = "jte" }
 jte-runtime                          = { module = "gg.jte:jte-runtime"                                         , version.ref = "jte" }
@@ -467,9 +480,13 @@ graal-wasm                           = { module = "org.graalvm.polyglot:wasm"   
 google-auto-annotations              = { module = "com.google.auto.service:auto-service-annotations"           , version.ref = "google-auto-service"}
 google-tink                          = { module = "com.google.crypto.tink:tink"                                , version.ref = "google-tink"}
 ksp-auto-service                     = { module = "dev.zacsweers.autoservice:auto-service-ksp"                 , version.ref = "ksp-auto-service"}
+koin-bom                             = { module = "io.insert-koin:koin-bom"                                    , version.ref = "koin"}
 koin-core                            = { module = "io.insert-koin:koin-core"                                   , version.ref = "koin"}
+koin-core-coroutines                 = { module = "io.insert-koin:koin-core-coroutines"                        , version.ref = "koin"}
 koin-ktor                            = { module = "io.insert-koin:koin-ktor"                                   , version.ref = "koin"}
 koin-slf4j                           = { module = "io.insert-koin:koin-logger-slf4j"                           , version.ref = "koin"}
+koin-annotations                     = { module = "io.insert-koin:koin-annotations"                            , version.ref = "koin"}
+koin-ksp-compiler                    = { module = "io.insert-koin:koin-ksp-compiler"                           , version.ref = "koin"}
 koin-test                            = { module = "io.insert-koin:koin-test"                                   , version.ref = "koin"}
 koin-test-junit5                     = { module = "io.insert-koin:koin-test-junit5"                            , version.ref = "koin"}
 mockk                                = { module = "io.mockk:mockk"                                             , version.ref = "mockk"}
@@ -478,6 +495,7 @@ jctools-core                         = { module = "org.jctools:jctools-core"    
 slf4j-api                            = { module = "org.slf4j:slf4j-api"                                        , version.ref = "slf4j"}
 slf4j-simple                         = { module = "org.slf4j:slf4j-simple"                                     , version.ref = "slf4j"}
 slf4j-nop                            = { module = "org.slf4j:slf4j-nop"                                        , version.ref = "slf4j"}
+slf4j-jul                            = { module = "org.slf4j:jul-to-slf4j"                                     , version.ref = "slf4j"}
 logback-core                         = { module = "ch.qos.logback:logback-core"                                , version.ref = "logback"}
 logback-tyler                        = { module = "ch.qos.logback.tyler:tyler-base"                            , version.ref = "logback-tyler"}
 slf4j-jpl                            = { module = "org.slf4j:slf4j-jdk-platform-logging"                       , version.ref = "slf4j"}
@@ -534,6 +552,8 @@ okapibarcode                         = { module = "uk.org.okapibarcode:okapibarc
 otel-bom                             = { module = "io.opentelemetry:opentelemetry-bom"                                                      , version.ref = "otel"}
 otel-api                             = { module = "io.opentelemetry:opentelemetry-api"                                                      , version.ref = "otel"}
 otel-extension-kotlin                = { module = "io.opentelemetry:opentelemetry-extension-kotlin"                                         , version.ref = "otel"}
+otel-autoconfigure                   = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure"                              , version.ref = "otel"}
+otel-semconv                         = { module = "io.opentelemetry.semconv:opentelemetry-semconv"                                          , version.ref = "otel-semconv"}
 
 otel-instr-bom                       = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom"                      , version.ref = "otel-instr"}
 otel-instr-javaagent                 = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent"                                      , version.ref = "otel-instr"}
@@ -582,10 +602,21 @@ jlama-native                         = { module = "com.github.tjake:jlama-native
 ldaptive                             = { module = "org.ldaptive:ldaptive"                                                   , version.ref = "ldaptive" }
 
 [bundles]
-ajalt                                = ["ajalt-mordant", "ajalt-mordant-coroutines", "ajalt-mordant-markdown", "ajalt-colormath", "ajalt-clikt"]
+ajalt                                = ["ajalt-colormath",
+                                        "ajalt-mordant",
+                                        "ajalt-mordant-coroutines",
+                                        "ajalt-mordant-markdown",
+                                        "ajalt-clikt-core",
+                                        "ajalt-clikt",
+                                        "ajalt-clikt-markdown"]
 json-extra                           = ["kotlinx-jsonpath", "kotlinx-json-schema"]
 keystore                             = ["sslcontext-kickstart", "directory-keystore"]
-opentelemetry                        = ["otel-extension-kotlin","otel-instr-annotations","otel-instr-extension-api","otel-instr-ktor"]
+opentelemetry                        = ["otel-instr-annotations",
+                                        "otel-instr-extension-api",
+                                        "otel-autoconfigure",
+                                        "otel-semconv",
+                                        "otel-extension-kotlin",
+                                        "otel-instr-ktor"]
 
 
 [plugins]
@@ -606,6 +637,7 @@ seskar                               = { id = "io.github.turansky.seskar"       
 jte                                  = { id = "gg.jte.gradle"                                                  , version.ref = "jte" }
 benmanes                             = { id = "com.github.ben-manes.versions"                                  , version.ref = "benmanes" }
 spotless                             = { id = "com.diffplug.spotless"                                          , version.ref = "spotless" }
+reproducible-builds                  = { id = "org.gradlex.reproducible-builds"                                , version.ref = "reproducible-builds" }
 autonomousapps-depanalysis           = { id = "com.autonomousapps.dependency-analysis"                         , version.ref = "autonomousapps-depanalysis" }
 autonomousapps-bestpractices         = { id = "com.autonomousapps.plugin-best-practices-plugin"                , version.ref = "autonomousapps-bestpractices" }
 sigstore                             = { id = "dev.sigstore.sign"                                              , version.ref = "sigstore" }
