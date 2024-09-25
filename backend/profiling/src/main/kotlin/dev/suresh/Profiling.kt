@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package dev.suresh
 
 import Arguments
@@ -12,6 +14,7 @@ import java.nio.file.Path
 import jdk.jfr.Configuration
 import jdk.jfr.FlightRecorder
 import jdk.jfr.consumer.RecordingStream
+import jdk.management.VirtualThreadSchedulerMXBean
 import jfr2flame
 import kotlin.io.path.createTempFile
 import kotlin.io.path.deleteIfExists
@@ -27,7 +30,12 @@ object Profiling {
 
   private val log = KotlinLogging.logger {}
 
-  private const val diagnosticObjName = "com.sun.management:type=HotSpotDiagnostic"
+  const val diagnosticObjName = "com.sun.management:type=HotSpotDiagnostic"
+
+  val virtualThreadMxBean by lazy {
+    // const val vtSchedulerObjName = "jdk.management:type=VirtualThreadScheduler"
+    ManagementFactory.getPlatformMXBean(VirtualThreadSchedulerMXBean::class.java)
+  }
 
   suspend fun threaddump(): Path = runOnVirtualThread {
     val server = ManagementFactory.getPlatformMBeanServer()

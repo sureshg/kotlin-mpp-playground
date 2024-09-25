@@ -2,12 +2,11 @@ package dev.suresh.plugins
 
 import BuildConfig
 import io.ktor.http.*
-import io.ktor.serialization.kotlinx.json.json
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.autohead.*
-import io.ktor.server.plugins.callid.CallId
-import io.ktor.server.plugins.callid.callIdMdc
+import io.ktor.server.plugins.callid.*
 import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -17,9 +16,10 @@ import io.ktor.server.plugins.forwardedheaders.*
 import io.ktor.server.plugins.hsts.*
 import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.request.*
-import io.ktor.server.resources.Resources
-import io.ktor.server.response.respond
+import io.ktor.server.resources.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.sse.*
 import io.ktor.server.websocket.*
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toJavaDuration
@@ -89,6 +89,8 @@ fun Application.configureHTTP() {
     // Enable logging for API routes only
     filter { it.isApi }
   }
+
+  install(SSE)
 
   install(WebSockets) {
     pingPeriod = 15.seconds.toJavaDuration()

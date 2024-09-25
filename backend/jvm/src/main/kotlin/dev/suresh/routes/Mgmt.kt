@@ -12,13 +12,17 @@ import io.ktor.server.http.content.*
 import io.ktor.server.plugins.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.sse.sse
 import io.ktor.server.websocket.*
+import io.ktor.sse.ServerSentEvent
 import io.ktor.websocket.*
 import io.ktor.websocket.Frame.*
 import java.io.File
 import java.lang.ScopedValue.CallableOp
 import java.util.concurrent.ConcurrentHashMap
 import kotlin.io.path.*
+import kotlin.time.Duration.Companion.milliseconds
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -28,7 +32,7 @@ val mutex = Mutex()
 
 val docRoot = Path(System.getProperty("java.io.tmpdir"))
 
-fun Routing.mgmtRoutes() {
+fun Route.mgmtRoutes() {
 
   staticFiles(remotePath = "/tmp", dir = docRoot.toFile())
 
@@ -174,13 +178,30 @@ fun Routing.mgmtRoutes() {
     heapDumpPath.deleteIfExists()
   }
 
+  sse("/virtualThreadStats") {
+    val vtMxBean = Profiling.virtualThreadMxBean
+    while (true) {
+      val stat =
+          """
+          |Scheduler PoolSize: ${vtMxBean.poolSize}
+          |Scheduler Target Parallelism: ${vtMxBean.parallelism}
+          |Queued Virtual Thread: ${vtMxBean.queuedVirtualThreadCount}
+          |Mounted Virtual Thread: ${vtMxBean.mountedVirtualThreadCount}
+          """
+              .trimIndent()
+      send(ServerSentEvent(stat))
+      delay(500.milliseconds)
+    }
+    close()
+  }
+
   webSocketRaw("/term") {
     val ip = call.request.origin.remoteHost
     application.log.info("Got WebSocket connection from $ip")
     send("Connected to server using WebSocket: $ip")
     send("Type 'hi' to proceed")
 
-    // create concurrent hashset
+    // create a concurrent hashset
     val conn = ConcurrentHashMap.newKeySet<Frame>()
     for (frame in incoming) {
       when (frame) {
