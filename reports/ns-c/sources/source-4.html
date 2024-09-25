@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > OpenTelemetryKt</title>
+  <title>: Coverage Report > OTelKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.plugins</a>
 </div>
 
-<h1>Coverage Summary for Class: OpenTelemetryKt (dev.suresh.plugins)</h1>
+<h1>Coverage Summary for Class: OTelKt (dev.suresh.plugins)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">OpenTelemetryKt</td>
+  <td class="name">OTelKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/3)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/23)
   </span>
 </td>
 </tr>
@@ -95,17 +95,36 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.plugins
 &nbsp;
 &nbsp;import com.google.auto.service.AutoService
-&nbsp;import io.ktor.server.application.Application
+&nbsp;import io.ktor.server.application.*
+&nbsp;import io.opentelemetry.api.OpenTelemetry
 &nbsp;import io.opentelemetry.api.trace.Span
 &nbsp;import io.opentelemetry.context.Context
-&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseCustomizer
-&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseMutator
+&nbsp;import io.opentelemetry.javaagent.bootstrap.http.*
+&nbsp;import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk
+&nbsp;import io.opentelemetry.semconv.ServiceAttributes
 &nbsp;
 &nbsp;fun Application.configureOTel() {
 &nbsp;  //  install(KtorServerTracing) {
 &nbsp;  //    setOpenTelemetry(GlobalOpenTelemetry.get())
+&nbsp;  //    attributeExtractor {
+&nbsp;  //      onStart { attributes.put(&quot;start-time&quot;, Clock.System.now().toEpochMilliseconds()) }
+&nbsp;  //      onEnd { attributes.put(&quot;end-time&quot;, Clock.System.now().toEpochMilliseconds()) }
+&nbsp;  //    }
 &nbsp;  //  }
 <b class="nc">&nbsp;}</b>
+&nbsp;
+&nbsp;fun getOpenTelemetry(serviceName: String): OpenTelemetry {
+<b class="nc">&nbsp;  return AutoConfiguredOpenTelemetrySdk.builder()</b>
+<b class="nc">&nbsp;      .addResourceCustomizer { oldResource, _ -&gt;</b>
+<b class="nc">&nbsp;        oldResource</b>
+<b class="nc">&nbsp;            .toBuilder()</b>
+<b class="nc">&nbsp;            .putAll(oldResource.attributes)</b>
+<b class="nc">&nbsp;            .put(ServiceAttributes.SERVICE_NAME, serviceName)</b>
+<b class="nc">&nbsp;            .build()</b>
+&nbsp;      }
+<b class="nc">&nbsp;      .build()</b>
+<b class="nc">&nbsp;      .openTelemetrySdk</b>
+&nbsp;}
 &nbsp;
 &nbsp;@AutoService(HttpServerResponseCustomizer::class)
 &nbsp;class TraceIDResponseCustomizer : HttpServerResponseCustomizer {
@@ -142,7 +161,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-25 00:24</div>
+    <div style="float:right;">generated on 2024-09-25 09:04</div>
 </div>
 </body>
 </html>

@@ -60,10 +60,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (1/2)
+    (1/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     100%
   </span>
   <span class="absValue">
-    (15/15)
+    (12/12)
   </span>
 </td>
 </tr>
@@ -94,14 +94,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
 &nbsp;
-&nbsp;import com.javiersc.kotlin.kopy.Kopy
 &nbsp;import dev.zacsweers.redacted.annotations.Redacted
 &nbsp;
-&nbsp;@Kopy data class Person(val name: Name, val address: Address, val privateInfo: PrivateInfo)
+&nbsp;// import com.javiersc.kotlin.kopy.Kopy
 &nbsp;
-<b class="fc">&nbsp;@Kopy data class Name(val first: String, val last: String)</b>
+&nbsp;data class Person(val name: Name, val address: Address, val privateInfo: PrivateInfo)
 &nbsp;
-&nbsp;@Kopy data class Address(val street: String, val city: String, val state: String, val zip: String)
+<b class="fc">&nbsp;data class Name(val first: String, val last: String)</b>
+&nbsp;
+&nbsp;data class Address(val street: String, val city: String, val state: String, val zip: String)
 &nbsp;
 &nbsp;data class PrivateInfo(@Redacted val ssn: String, @Redacted val dob: String)
 </code>
@@ -127,7 +128,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-25 00:24</div>
+    <div style="float:right;">generated on 2024-09-25 09:04</div>
 </div>
 </body>
 </html>

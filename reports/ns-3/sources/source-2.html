@@ -84,10 +84,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 <td class="coverageStat">
   <span class="percent">
-    59.8%
+    70%
   </span>
   <span class="absValue">
-    (49/82)
+    (49/70)
   </span>
 </td>
 </tr>
@@ -139,11 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;                Address(
 &nbsp;                    street = &quot;123 Main St&quot;, city = &quot;San Francisco&quot;, state = &quot;CA&quot;, zip = &quot;95000&quot;),
 &nbsp;            privateInfo = PrivateInfo(ssn = &quot;123-45-6789&quot;, dob = &quot;01/01/2000&quot;))
-&nbsp;    val modPerson =
-&nbsp;        person.copy {
-&nbsp;          name.last = &quot;Baz&quot;
-&nbsp;          address.city = &quot;San Jose&quot;
-&nbsp;        }
+&nbsp;    val modPerson = person.copy()
 &nbsp;    appendLine(&quot;Person: $person&quot;)
 &nbsp;    appendLine(&quot;Modified Person: $modPerson&quot;)
 &nbsp;  }
@@ -201,7 +197,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-25 00:24</div>
+    <div style="float:right;">generated on 2024-09-25 09:04</div>
 </div>
 </body>
 </html>

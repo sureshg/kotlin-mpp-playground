@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/16)
+    (0/19)
   </span>
 </td>
 </tr>
@@ -105,33 +105,38 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  override fun getSupportedCipherSuites(): Array&lt;String&gt; = delegate.supportedCipherSuites
 &nbsp;
 &nbsp;  override fun createSocket(s: Socket, host: String, port: Int, autoClose: Boolean): Socket =
-&nbsp;      delegate.createSocket(s, host, port, autoClose).apply { reConfigure() }
+&nbsp;      delegate.createSocket(s, host, port, autoClose).apply { reconfigureSSLSocket() }
 &nbsp;
 &nbsp;  override fun createSocket(host: String, port: Int): Socket =
-&nbsp;      delegate.createSocket(host, port).apply { reConfigure() }
+&nbsp;      delegate.createSocket(host, port).apply { reconfigureSSLSocket() }
 &nbsp;
 &nbsp;  override fun createSocket(
 &nbsp;      host: String,
 &nbsp;      port: Int,
 &nbsp;      localHost: InetAddress,
 &nbsp;      localPort: Int
-&nbsp;  ): Socket = delegate.createSocket(host, port, localHost, localPort).apply { reConfigure() }
+&nbsp;  ): Socket =
+&nbsp;      delegate.createSocket(host, port, localHost, localPort).apply { reconfigureSSLSocket() }
 &nbsp;
 &nbsp;  override fun createSocket(host: InetAddress, port: Int): Socket =
-&nbsp;      delegate.createSocket(host, port).apply { reConfigure() }
+&nbsp;      delegate.createSocket(host, port).apply { reconfigureSSLSocket() }
 &nbsp;
 &nbsp;  override fun createSocket(
 &nbsp;      address: InetAddress,
 &nbsp;      port: Int,
 &nbsp;      localAddress: InetAddress,
 &nbsp;      localPort: Int
-&nbsp;  ): Socket = delegate.createSocket(address, port, localAddress, localPort).apply { reConfigure() }
+&nbsp;  ): Socket =
+&nbsp;      delegate.createSocket(address, port, localAddress, localPort).apply { reconfigureSSLSocket() }
 &nbsp;}
 &nbsp;
-&nbsp;fun Socket.reConfigure() {
+&nbsp;fun Socket.reconfigureSSLSocket() {
 <b class="nc">&nbsp;  val sslSock = this as SSLSocket</b>
 <b class="nc">&nbsp;  val sslParams = sslSock.sslParameters</b>
+&nbsp;  // Disable SNI
 <b class="nc">&nbsp;  sslParams.serverNames = emptyList()</b>
+&nbsp;  // Disable Hostname verification (Same as -Djdk.internal.httpclient.disableHostnameVerification)
+<b class="nc">&nbsp;  sslParams.endpointIdentificationAlgorithm = null</b>
 <b class="nc">&nbsp;  sslParameters = sslParams</b>
 &nbsp;}
 </code>
@@ -157,7 +162,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-25 00:24</div>
+    <div style="float:right;">generated on 2024-09-25 09:04</div>
 </div>
 </body>
 </html>

@@ -102,16 +102,35 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.plugins
 &nbsp;
 &nbsp;import com.google.auto.service.AutoService
-&nbsp;import io.ktor.server.application.Application
+&nbsp;import io.ktor.server.application.*
+&nbsp;import io.opentelemetry.api.OpenTelemetry
 &nbsp;import io.opentelemetry.api.trace.Span
 &nbsp;import io.opentelemetry.context.Context
-&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseCustomizer
-&nbsp;import io.opentelemetry.javaagent.bootstrap.http.HttpServerResponseMutator
+&nbsp;import io.opentelemetry.javaagent.bootstrap.http.*
+&nbsp;import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk
+&nbsp;import io.opentelemetry.semconv.ServiceAttributes
 &nbsp;
 &nbsp;fun Application.configureOTel() {
 &nbsp;  //  install(KtorServerTracing) {
 &nbsp;  //    setOpenTelemetry(GlobalOpenTelemetry.get())
+&nbsp;  //    attributeExtractor {
+&nbsp;  //      onStart { attributes.put(&quot;start-time&quot;, Clock.System.now().toEpochMilliseconds()) }
+&nbsp;  //      onEnd { attributes.put(&quot;end-time&quot;, Clock.System.now().toEpochMilliseconds()) }
+&nbsp;  //    }
 &nbsp;  //  }
+&nbsp;}
+&nbsp;
+&nbsp;fun getOpenTelemetry(serviceName: String): OpenTelemetry {
+&nbsp;  return AutoConfiguredOpenTelemetrySdk.builder()
+&nbsp;      .addResourceCustomizer { oldResource, _ -&gt;
+&nbsp;        oldResource
+&nbsp;            .toBuilder()
+&nbsp;            .putAll(oldResource.attributes)
+&nbsp;            .put(ServiceAttributes.SERVICE_NAME, serviceName)
+&nbsp;            .build()
+&nbsp;      }
+&nbsp;      .build()
+&nbsp;      .openTelemetrySdk
 &nbsp;}
 &nbsp;
 <b class="nc">&nbsp;@AutoService(HttpServerResponseCustomizer::class)</b>
@@ -149,7 +168,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-25 00:24</div>
+    <div style="float:right;">generated on 2024-09-25 09:04</div>
 </div>
 </body>
 </html>
