@@ -3,7 +3,6 @@ package plugins
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
-import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -23,7 +22,7 @@ plugins {
   kotlin("plugin.power-assert")
   com.google.devtools.ksp
   dev.zacsweers.redacted
-  com.javiersc.kotlin.kopy
+  // com.javiersc.kotlin.kopy
   org.jetbrains.kotlinx.atomicfu
   id("plugins.kotlin.docs")
   // kotlin("plugin.atomicfu")
@@ -50,17 +49,10 @@ kotlin {
 
 @Suppress("UnstableApiUsage", "UNUSED_VARIABLE")
 testing {
-  suites {
-    val test by
-        getting(JvmTestSuite::class) {
-          // OR "test"(JvmTestSuite::class) {}
-          useJUnitJupiter(libs.versions.junit)
-        }
-
-    withType(JvmTestSuite::class) {
-      // Configure all test suites
-      targets.configureEach { testTask { configureJavaTest() } }
-    }
+  suites.withType<JvmTestSuite> {
+    useJUnitJupiter(libs.versions.junit)
+    // Configure all test suites
+    targets.configureEach { testTask { configureJavaTest() } }
   }
 }
 
@@ -83,7 +75,7 @@ redacted {
   replacementString = "█"
 }
 
-kopy { functions = KopyFunctions.Copy }
+// kopy { functions = KopyFunctions.Copy }
 
 // Java agent configuration for jib
 val javaAgent by configurations.registering { isTransitive = false }
@@ -272,6 +264,8 @@ dependencies {
   implementation(libs.password4j)
   implementation(libs.bundles.keystore)
   implementation(libs.bundles.ajalt)
+  implementation(libs.slf4j.api)
+  implementation(libs.slf4j.jul)
 
   // Auto-service
   ksp(libs.ksp.auto.service)
@@ -280,6 +274,7 @@ dependencies {
   // Test dependencies
   testImplementation(platform(libs.junit.bom))
   testImplementation(platform(libs.testcontainers.bom))
+  testImplementation(kotlin("reflect"))
   testImplementation(kotlin("test-junit5"))
   testImplementation(libs.junit.jupiter)
   testImplementation(libs.kotlinx.lincheck)

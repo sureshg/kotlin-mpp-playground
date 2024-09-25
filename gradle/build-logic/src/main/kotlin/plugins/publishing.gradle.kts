@@ -61,7 +61,7 @@ publishing {
 
     maven {
       name = "GitHubPackages"
-      url = uri(Repo.githubPackage(libs.versions.dev.name.get(), rootProject.name))
+      url = uri(githubPackage(libs.versions.dev.name.get(), rootProject.name))
       credentials {
         // findProperty("githubActor")
         username = githubActor.orNull ?: System.getenv("GITHUB_ACTOR")

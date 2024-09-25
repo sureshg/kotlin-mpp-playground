@@ -25,6 +25,7 @@ fun KotlinMultiplatformExtension.commonTarget() {
         api(project.dependencies.platform(libs.ktor.bom))
         api(project.dependencies.platform(libs.kotlin.wrappers.bom))
       }
+      // languageSettings.enableLanguageFeature(LanguageFeature.xx)
     }
 
     commonMain {
@@ -97,6 +98,14 @@ fun KotlinMultiplatformExtension.jvmTarget() {
     // val test by testRuns.existing
     testRuns.configureEach { executionTask.configure { configureJavaTest() } }
 
+    // Register a task to execute a class using jvm runtime dependencies.
+    // compilations.getByName("test") {
+    //   tasks.register<JavaExec>("ktExec") {
+    //     classpath(runtimeDependencyFiles, output)
+    //     mainClass = "dev.suresh.test.ExecMain"
+    //   }
+    // }
+
     // attributes.attribute(mppTargetAttr, platformType.name)
     // attributes.attribute(KotlinPlatformType.attribute, KotlinPlatformType.jvm)
   }
@@ -109,6 +118,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.kotlin.metadata.jvm)
         api(libs.ktor.client.java)
         api(libs.slf4j.api)
+        api(libs.slf4j.jul)
         api(libs.kotlinx.coroutines.slf4j)
         api(libs.jspecify)
         api(libs.password4j)
@@ -128,6 +138,7 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.slf4j.simple)
         api(libs.testcontainers.junit5)
         api(libs.testcontainers.postgresql)
+        // api(kotlin("reflect"))
         // api(libs.konsist)
       }
     }

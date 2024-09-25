@@ -18,8 +18,8 @@ val dslJavaVersion = libs.versions.kotlin.dsl.jvmtarget
 
 idea {
   module {
-    isDownloadJavadoc = false
-    isDownloadSources = false
+    isDownloadJavadoc = true
+    isDownloadSources = true
   }
 }
 
@@ -201,6 +201,7 @@ dependencies {
   implementation(libs.build.github.changelog)
   implementation(libs.build.modulegraph.plugin)
   implementation(libs.build.kopy.plugin)
+  implementation(libs.build.tomlj)
 
   // implementation(libs.build.kotlin.compose.compiler)
   // implementation(libs.build.karakum.plugin)

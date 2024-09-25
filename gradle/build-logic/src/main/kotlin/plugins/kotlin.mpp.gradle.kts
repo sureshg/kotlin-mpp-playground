@@ -3,7 +3,6 @@
 package plugins
 
 import com.google.devtools.ksp.gradle.KspAATask
-import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -24,7 +23,7 @@ plugins {
   id("plugins.kotlin.docs")
   com.google.devtools.ksp
   dev.zacsweers.redacted
-  com.javiersc.kotlin.kopy
+  // com.javiersc.kotlin.kopy
   org.jetbrains.kotlinx.atomicfu
   // kotlin("plugin.atomicfu")
   // kotlin("plugin.compose")
@@ -99,7 +98,7 @@ redacted {
   replacementString = "█"
 }
 
-kopy { functions = KopyFunctions.Copy }
+// kopy { functions = KopyFunctions.Copy }
 
 tasks {
   // Register buildConfig task only for project's common module

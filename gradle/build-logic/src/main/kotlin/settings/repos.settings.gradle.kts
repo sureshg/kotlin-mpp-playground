@@ -4,19 +4,16 @@ package settings
 
 import com.gradle.develocity.agent.gradle.scan.PublishedBuildScan
 import common.GithubAction
-import common.Repo
 import kotlinx.kover.gradle.aggregation.settings.dsl.KoverSettingsExtension
 import org.gradle.api.JavaVersion.VERSION_17
 import org.gradle.kotlin.dsl.*
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
+import org.tomlj.Toml
 
-val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
-val mvnSnapshotRepo by lazy {
-  file("$rootDir/gradle/libs.versions.toml")
-      .readLines()
-      .first { it.contains("mvn-snapshot-repo") }
-      .split("\"")[1]
-      .trim()
+val versionCatalog by lazy {
+  // A hack to read version catalog from settings
+  Toml.parse(file("$rootDir/gradle/libs.versions.toml").readText()).getTable("versions")
+      ?: error("Unable to parse the version catalog!")
 }
 
 pluginManagement {
@@ -44,7 +41,7 @@ pluginManagement {
     gradlePluginPortal()
     googleAndroid()
     kobWeb()
-    mavenSnapshot(plugin = true)
+    mavenSnapshot()
   }
 }
 
@@ -123,7 +120,7 @@ fun RepositoryHandler.googleAndroid() {
 fun RepositoryHandler.nodeJS() {
   exclusiveContent {
     forRepository {
-      ivy(Repo.NODEJS) {
+      ivy(versionCatalog.getString("repo-nodejs").orEmpty()) {
         name = "Node Distributions at $url"
         patternLayout { artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
         metadataSources { artifact() }
@@ -135,17 +132,19 @@ fun RepositoryHandler.nodeJS() {
 }
 
 fun RepositoryHandler.kobWeb() {
-  maven(url = Repo.KOBWEB) {
+  maven(url = versionCatalog.getString("repo-kobweb").orEmpty()) {
     name = "KobWeb Repo"
     content { includeGroupAndSubgroups("com.varabyte") }
   }
 }
 
-fun RepositoryHandler.mavenSnapshot(plugin: Boolean = false) {
+fun RepositoryHandler.mavenSnapshot() {
+  val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
   if (mvnSnapshot) {
-    logger.lifecycle(
-        "❖ Maven Snapshot is enabled for ${if (plugin) "plugins" else "dependencies"}!")
-    maven(url = mvnSnapshotRepo) { mavenContent { snapshotsOnly() } }
+    logger.lifecycle("❖ Maven Snapshot is enabled!")
+    maven(url = versionCatalog.getString("repo-mvn-snapshot").orEmpty()) {
+      mavenContent { snapshotsOnly() }
+    }
   }
 }
 

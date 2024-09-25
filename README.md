@@ -265,9 +265,6 @@ $ ./gradlew :backend:jvm:run
 
   # GitHub Actions lint
   $ actionlint
-
-  # ToDo
-  # Enable es2015 for configureKotlinJs
   ```
 
 </details>

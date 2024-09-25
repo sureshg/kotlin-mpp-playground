@@ -192,6 +192,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "--show-version",
             "-XX:+PrintCommandLineFlags",
             "--enable-native-access=ALL-UNNAMED",
+            "--illegal-native-access=warn",
             "-Xms64M",
             "-Xmx128M",
             "-XX:+UseZGC",
@@ -291,7 +292,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-Dhttp.maxConnections=5",
             // ----- Java HTTP Client -----
             // "-Djdk.internal.httpclient.disableHostnameVerification",
-            // "-Djdk.httpclient.HttpClient.log=headers",
+            // "-Djdk.httpclient.HttpClient.log=errors,requests,headers",
             // "-Djdk.internal.httpclient.debug=false",
             // "-Djdk.tls.client.protocols=\"TLSv1.2,TLSv1.3\"",
             // "-Djdk.tls.maxCertificateChainLength=10",
@@ -387,7 +388,7 @@ fun JavaCompile.configureJavac() {
           // add("-Xplugin:unchecked") // compiler plugin
         })
 
-    // Add the Kotlin classes to the module path
+    // Add the Kotlin classes to the module path (compileKotlinJvm)
     val compileKotlin = tasks.findByName("compileKotlin") as? KotlinCompile
     if (compileKotlin != null) {
       compilerArgumentProviders +=
@@ -409,6 +410,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       "-Xcontext-receivers",
       "-Xexpect-actual-classes",
       "-Xskip-prerelease-check",
+      // "-XXLanguage:+ExplicitBackingFields",
       // "-Xsuppress-version-warnings",
       // "-Xsuppress-warning=CONTEXT_RECEIVERS_DEPRECATED"
       // "-P",
@@ -743,3 +745,23 @@ inline fun <reified T : Task> TaskContainer.maybeRegister(
         it.configure(action)
       }
     }
+
+/**
+ * Generates the URL for the GitHub package repository based on the owner and repository name.
+ *
+ * @param owner The owner of the GitHub repository.
+ * @param repository The name of the GitHub repository.
+ * @return The URL of the GitHub package repository.
+ */
+fun githubPackage(owner: String, repository: String) =
+    "https://maven.pkg.github.com/${owner.lowercase()}/$repository"
+
+/**
+ * Returns the latest download URL for a given [groupId] and [artifactId] from Maven Central.
+ *
+ * @param groupId the group ID of the Maven artifact
+ * @param artifactId the artifact ID of the Maven artifact
+ * @return the latest download URL for the specified Maven artifact
+ */
+fun mavenDownloadUrl(groupId: String, artifactId: String) =
+    "https://search.maven.org/remote_content?g=${groupId}&a=${artifactId}&v=LATEST"

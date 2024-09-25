@@ -1,24 +1,10 @@
 @file:Suppress("UnstableApiUsage")
 
 dependencyResolutionManagement {
-  val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
-  val mvnSnapshotRepo by lazy {
-    file(rootDir)
-        .resolveSibling("libs.versions.toml")
-        .readLines()
-        .first { it.contains("mvn-snapshot-repo") }
-        .split("\"")[1]
-        .trim()
-  }
-
   repositories {
     mavenCentral()
     gradlePluginPortal()
-
-    if (mvnSnapshot) {
-      logger.lifecycle("❖ Maven Snapshot is enabled for build-logic!")
-      maven(url = mvnSnapshotRepo) { mavenContent { snapshotsOnly() } }
-    }
+    mavenSnapshot()
   }
 
   versionCatalogs { register("libs") { from(files("../libs.versions.toml")) } }
@@ -30,3 +16,19 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 
 rootProject.name = "build-logic"
+
+fun RepositoryHandler.mavenSnapshot() {
+  val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
+  if (mvnSnapshot) {
+    val mvnSnapshotRepo =
+        file(rootDir)
+            .resolveSibling("libs.versions.toml")
+            .readLines()
+            .first { it.contains("repo-mvn-snapshot") }
+            .split("\"")[1]
+            .trim()
+
+    logger.lifecycle("❖ Maven Snapshot is enabled for build-logic!")
+    maven(url = mvnSnapshotRepo) { mavenContent { snapshotsOnly() } }
+  }
+}
