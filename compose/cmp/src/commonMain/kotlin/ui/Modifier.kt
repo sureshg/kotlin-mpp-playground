@@ -36,7 +36,9 @@ fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modi
                   pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f))
           drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))
         }
-      })
+      }
+      // .border(border = BorderStroke(strokeWidth, color),shape = RoundedCornerShape(cornerRadius))
+      )
 }
 
 inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -> Modifier) =

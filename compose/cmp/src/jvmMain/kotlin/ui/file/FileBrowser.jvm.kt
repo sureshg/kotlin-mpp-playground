@@ -1,8 +1,10 @@
-@file:OptIn(ExperimentalComposeUiApi::class)
+@file:OptIn(ExperimentalComposeUiApi::class, ExperimentalFoundationApi::class)
 
 package ui.file
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.draganddrop.dragAndDropTarget
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -16,7 +18,13 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draganddrop.DragAndDropEvent
+import androidx.compose.ui.draganddrop.DragAndDropTarget
+import androidx.compose.ui.draganddrop.DragData
+import androidx.compose.ui.draganddrop.dragData
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import java.net.URI
@@ -30,18 +38,18 @@ import ui.dashedBorder
 @Composable
 actual fun DragDropListView() {
   Box(modifier = Modifier, contentAlignment = Alignment.Center) {
+    var fPaths by remember { mutableStateOf(emptyList<Path>()) }
     Column {
-      var droppedPaths by remember { mutableStateOf(emptyList<Path>()) }
       DragDropBox { dragData ->
         if (dragData is DragData.FilesList) {
           val newPaths =
-              dragData.readFiles().mapNotNull { fPath ->
-                URI(fPath).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
+              dragData.readFiles().mapNotNull {
+                URI(it).toPath().takeIf { it.exists(LinkOption.NOFOLLOW_LINKS) }
               }
-          droppedPaths = (newPaths + droppedPaths).distinct()
+          fPaths = (newPaths + fPaths).distinct()
         }
       }
-      FileListView(files = droppedPaths)
+      FileListView(files = fPaths)
     }
   }
 }
@@ -51,20 +59,40 @@ fun DragDropBox(modifier: Modifier = Modifier, onDrop: (DragData) -> Unit) {
   var isDragging by remember { mutableStateOf(false) }
   val dndColor = if (isDragging) FileColors.active else FileColors.default
   var fdOpen by remember { mutableStateOf(false) }
-
   // val (textField, setTextField) = remember { mutableStateOf(TextFieldValue()) }
+
+  val dndTarget = remember {
+    object : DragAndDropTarget {
+      override fun onEntered(event: DragAndDropEvent) {
+        isDragging = true
+      }
+
+      override fun onExited(event: DragAndDropEvent) {
+        isDragging = false
+      }
+
+      override fun onDrop(event: DragAndDropEvent): Boolean {
+        isDragging = false
+        val dragData = event.dragData()
+        return when (dragData) {
+          is DragData.FilesList -> {
+            onDrop(dragData)
+            true
+          }
+          else -> {
+            println("Unsupported drag data: $dragData")
+            false
+          }
+        }
+      }
+    }
+  }
 
   Box(
       modifier =
           modifier
               .dashedBorder(strokeWidth = 2.dp, color = dndColor, cornerRadius = 8.dp)
-              .onExternalDrag(
-                  onDragStart = { isDragging = true },
-                  onDragExit = { isDragging = false },
-                  onDrop = {
-                    isDragging = false
-                    onDrop(it.dragData)
-                  })) {
+              .dragAndDropTarget(shouldStartDragAndDrop = { true }, target = dndTarget)) {
         Column(modifier = Modifier.align(Alignment.Center)) {
           Text(
               "Drag & drop files here",

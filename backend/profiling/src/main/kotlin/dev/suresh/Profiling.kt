@@ -33,7 +33,6 @@ object Profiling {
   const val diagnosticObjName = "com.sun.management:type=HotSpotDiagnostic"
 
   val virtualThreadMxBean by lazy {
-    // const val vtSchedulerObjName = "jdk.management:type=VirtualThreadScheduler"
     ManagementFactory.getPlatformMXBean(VirtualThreadSchedulerMXBean::class.java)
   }
 
