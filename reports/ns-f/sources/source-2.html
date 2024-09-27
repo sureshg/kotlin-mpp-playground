@@ -237,13 +237,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/1)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/10)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -251,7 +250,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/64)
+    (0/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/86)
   </span>
 </td>
   </tr>
@@ -305,7 +312,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/24)
+    (0/26)
   </span>
 </td>
 <td class="coverageStat">
@@ -313,7 +320,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/84)
+    (0/85)
   </span>
 </td>
 <td class="coverageStat">
@@ -321,7 +328,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/776)
+    (0/798)
   </span>
 </td>
 </tr>
@@ -357,6 +364,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import kotlin.io.path.*
 &nbsp;import kotlin.time.Duration.Companion.milliseconds
 &nbsp;import kotlinx.coroutines.delay
+&nbsp;import kotlinx.coroutines.isActive
 &nbsp;import kotlinx.coroutines.sync.Mutex
 &nbsp;import kotlinx.coroutines.sync.withLock
 &nbsp;
@@ -514,7 +522,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="nc">&nbsp;  sse(&quot;/virtualThreadStats&quot;) {</b>
 <b class="nc">&nbsp;    val vtMxBean = Profiling.virtualThreadMxBean</b>
-<b class="nc">&nbsp;    while (true) {</b>
+<b class="nc">&nbsp;    while (isActive) {</b>
 <b class="nc">&nbsp;      val stat =</b>
 &nbsp;          &quot;&quot;&quot;
 <b class="nc">&nbsp;          |Scheduler PoolSize: ${vtMxBean.poolSize}</b>
@@ -522,11 +530,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;          |Queued Virtual Thread: ${vtMxBean.queuedVirtualThreadCount}</b>
 <b class="nc">&nbsp;          |Mounted Virtual Thread: ${vtMxBean.mountedVirtualThreadCount}</b>
 &nbsp;          &quot;&quot;&quot;
-<b class="nc">&nbsp;              .trimIndent()</b>
-<b class="nc">&nbsp;      send(ServerSentEvent(stat))</b>
-<b class="nc">&nbsp;      delay(500.milliseconds)</b>
+<b class="nc">&nbsp;              .trimMargin()</b>
+<b class="nc">&nbsp;      send(ServerSentEvent(data = stat))</b>
+<b class="nc">&nbsp;      delay(1000.milliseconds)</b>
 &nbsp;    }
-&nbsp;    close()
+<b class="nc">&nbsp;    close()</b>
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  webSocketRaw(&quot;/term&quot;) {</b>
@@ -587,7 +595,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-27 00:24</div>
+    <div style="float:right;">generated on 2024-09-27 09:37</div>
 </div>
 </body>
 </html>

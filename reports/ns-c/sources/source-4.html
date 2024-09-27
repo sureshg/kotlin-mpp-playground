@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/23)
+    (0/33)
   </span>
 </td>
 </tr>
@@ -94,16 +94,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.plugins
 &nbsp;
-&nbsp;import com.google.auto.service.AutoService
+&nbsp;import dev.suresh.plugins.custom.OTelExtnPlugin
 &nbsp;import io.ktor.server.application.*
 &nbsp;import io.opentelemetry.api.OpenTelemetry
-&nbsp;import io.opentelemetry.api.trace.Span
-&nbsp;import io.opentelemetry.context.Context
-&nbsp;import io.opentelemetry.javaagent.bootstrap.http.*
 &nbsp;import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk
 &nbsp;import io.opentelemetry.semconv.ServiceAttributes
 &nbsp;
 &nbsp;fun Application.configureOTel() {
+<b class="nc">&nbsp;  install(OTelExtnPlugin) { enabled = true }</b>
+&nbsp;
 &nbsp;  //  install(KtorServerTracing) {
 &nbsp;  //    setOpenTelemetry(GlobalOpenTelemetry.get())
 &nbsp;  //    attributeExtractor {
@@ -111,8 +110,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  //      onEnd { attributes.put(&quot;end-time&quot;, Clock.System.now().toEpochMilliseconds()) }
 &nbsp;  //    }
 &nbsp;  //  }
-<b class="nc">&nbsp;}</b>
+&nbsp;}
 &nbsp;
+&nbsp;/**
+&nbsp; * [Manual
+&nbsp; * instrumentation](https://opentelemetry.io/docs/languages/java/instrumentation/#acquiring-a-tracer-in-java-agent)
+&nbsp; */
 &nbsp;fun getOpenTelemetry(serviceName: String): OpenTelemetry {
 <b class="nc">&nbsp;  return AutoConfiguredOpenTelemetrySdk.builder()</b>
 <b class="nc">&nbsp;      .addResourceCustomizer { oldResource, _ -&gt;</b>
@@ -124,19 +127,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      }
 <b class="nc">&nbsp;      .build()</b>
 <b class="nc">&nbsp;      .openTelemetrySdk</b>
-&nbsp;}
-&nbsp;
-&nbsp;@AutoService(HttpServerResponseCustomizer::class)
-&nbsp;class TraceIDResponseCustomizer : HttpServerResponseCustomizer {
-&nbsp;  override fun &lt;T&gt; customize(
-&nbsp;      serverContext: Context,
-&nbsp;      response: T,
-&nbsp;      responseMutator: HttpServerResponseMutator&lt;T&gt;
-&nbsp;  ) {
-&nbsp;    val spanContext = Span.fromContextOrNull(serverContext)?.spanContext
-&nbsp;    if (spanContext?.isValid != true) return
-&nbsp;    responseMutator.appendHeader(response, &quot;X-Trace-Id&quot;, spanContext.traceId)
-&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -161,7 +151,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-27 00:24</div>
+    <div style="float:right;">generated on 2024-09-27 09:37</div>
 </div>
 </body>
 </html>

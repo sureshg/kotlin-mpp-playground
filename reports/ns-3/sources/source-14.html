@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > ReentrantLazyKt</title>
+  <title>: Coverage Report > ReentrantLazy</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: ReentrantLazyKt (dev.suresh)</h1>
+<h1>Coverage Summary for Class: ReentrantLazy (dev.suresh)</h1>
 
 <table class="coverageStats">
 
@@ -46,7 +46,55 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">ReentrantLazyKt</td>
+  <td class="name">ReentrantLazy</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/63)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ReentrantLazy$Companion</td>
+    <td class="coverageStat"/>
+  </tr>
+  <tr>
+    <td class="name">ReentrantLazy$Companion$UNINITIALIZED_VALUE</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,26 +111,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/2)
   </span>
 </td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/18)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">ReentrantLazyKt$WhenMappings</td>
-    <td class="coverageStat"/>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -91,22 +119,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
     (0/4)
   </span>
 </td>
@@ -115,7 +127,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/65)
   </span>
 </td>
 </tr>
@@ -137,41 +165,41 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp; * Java Virtual thread friendly Kotlin lazy initialization. The implementation is based on
 &nbsp; * [Javalin Lazy](https://github.com/javalin/javalin/pull/1974) implementation.
 &nbsp; */
-&nbsp;internal class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {
+<b class="nc">&nbsp;internal class ReentrantLazy&lt;T : Any?&gt;(initializer: () -&gt; T) : Lazy&lt;T&gt; {</b>
 &nbsp;  private companion object {
-&nbsp;    private object UNINITIALIZED_VALUE
+<b class="nc">&nbsp;    private object UNINITIALIZED_VALUE</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  private var initializer: (() -&gt; T)? = initializer
+<b class="nc">&nbsp;  private var initializer: (() -&gt; T)? = initializer</b>
 &nbsp;
-&nbsp;  @Volatile private var lock: ReentrantLock? = ReentrantLock()
+<b class="nc">&nbsp;  @Volatile private var lock: ReentrantLock? = ReentrantLock()</b>
 &nbsp;
-&nbsp;  @Volatile private var _value: Any? = UNINITIALIZED_VALUE
+<b class="nc">&nbsp;  @Volatile private var _value: Any? = UNINITIALIZED_VALUE</b>
 &nbsp;
 &nbsp;  override val value: T
 &nbsp;    get() {
-&nbsp;      lock?.withLock {
-&nbsp;        if (_value === UNINITIALIZED_VALUE) {
-&nbsp;          this._value = initializer!!.invoke()
-&nbsp;          this.lock = null
-&nbsp;          this.initializer = null
+<b class="nc">&nbsp;      lock?.withLock {</b>
+<b class="nc">&nbsp;        if (_value === UNINITIALIZED_VALUE) {</b>
+<b class="nc">&nbsp;          this._value = initializer!!.invoke()</b>
+<b class="nc">&nbsp;          this.lock = null</b>
+<b class="nc">&nbsp;          this.initializer = null</b>
 &nbsp;        }
-&nbsp;      }
+<b class="nc">&nbsp;      }</b>
 &nbsp;      @Suppress(&quot;UNCHECKED_CAST&quot;)
-&nbsp;      return _value as T
+<b class="nc">&nbsp;      return _value as T</b>
 &nbsp;    }
 &nbsp;
-&nbsp;  override fun isInitialized() = _value !== UNINITIALIZED_VALUE
+<b class="nc">&nbsp;  override fun isInitialized() = _value !== UNINITIALIZED_VALUE</b>
 &nbsp;}
 &nbsp;
 &nbsp;/** A virtual thread friendly [kotlin.lazy] implementation. */
 &nbsp;fun &lt;T : Any?&gt; vtLazy(
-<b class="nc">&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,</b>
+&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,
 &nbsp;    initializer: () -&gt; T
 &nbsp;): Lazy&lt;T&gt; =
-<b class="nc">&nbsp;    when (threadSafetyMode) {</b>
-<b class="nc">&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)</b>
-<b class="nc">&nbsp;      else -&gt; lazy(threadSafetyMode, initializer)</b>
+&nbsp;    when (threadSafetyMode) {
+&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)
+&nbsp;      else -&gt; lazy(threadSafetyMode, initializer)
 &nbsp;    }
 </code>
 </pre>
@@ -196,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-27 00:24</div>
+    <div style="float:right;">generated on 2024-09-27 09:37</div>
 </div>
 </body>
 </html>

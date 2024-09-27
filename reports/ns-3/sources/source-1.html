@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > AppKt</title>
+  <title>: Coverage Report > AgentType</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: AppKt (dev.suresh)</h1>
+<h1>Coverage Summary for Class: AgentType (dev.suresh)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">AppKt</td>
+  <td class="name">AgentType</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -71,23 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/28)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/101)
+    (0/16)
   </span>
 </td>
 </tr>
@@ -101,68 +94,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;import BuildConfig
-&nbsp;import dev.suresh.config.AppConfig
-&nbsp;import dev.suresh.plugins.*
-&nbsp;import dev.suresh.plugins.custom.*
-&nbsp;import dev.suresh.routes.*
-&nbsp;import io.ktor.server.application.*
-&nbsp;import io.ktor.server.netty.*
-&nbsp;import io.ktor.server.routing.*
-&nbsp;import io.ktor.util.logging.*
-&nbsp;import kotlin.io.path.Path
-&nbsp;import kotlin.io.path.exists
-&nbsp;import org.slf4j.bridge.SLF4JBridgeHandler
+&nbsp;import jdk.jfr.*
 &nbsp;
-&nbsp;fun main(args: Array&lt;String&gt;) =
-&nbsp;    try {
-<b class="nc">&nbsp;      initProps()</b>
-<b class="nc">&nbsp;      EngineMain.main(args)</b>
-&nbsp;    } catch (e: Throwable) {
-<b class="nc">&nbsp;      val log = KtorSimpleLogger(&quot;main&quot;)</b>
-<b class="nc">&nbsp;      log.error(&quot;Failed to start the application: ${e.message}&quot;, e)</b>
-&nbsp;    }
-&nbsp;
-&nbsp;fun Application.module() {
-<b class="nc">&nbsp;  log.info(&quot;Starting App: ${BuildConfig.version}...&quot;)</b>
-<b class="nc">&nbsp;  AppConfig.init(environment.config)</b>
-<b class="nc">&nbsp;  configureInterceptors()</b>
-<b class="nc">&nbsp;  configureHTTP()</b>
-<b class="nc">&nbsp;  configureSecurity()</b>
-<b class="nc">&nbsp;  errorRoutes()</b>
-<b class="nc">&nbsp;  customPlugins()</b>
-<b class="nc">&nbsp;  configureOTel()</b>
-&nbsp;
-<b class="nc">&nbsp;  routing {</b>
-<b class="nc">&nbsp;    adminRoutes()</b>
-<b class="nc">&nbsp;    webApp()</b>
-<b class="nc">&nbsp;    services()</b>
-<b class="nc">&nbsp;    mgmtRoutes()</b>
-&nbsp;  }
-&nbsp;  // CoroutineScope(coroutineContext).launch {}
-&nbsp;}
-&nbsp;
-&nbsp;/**
-&nbsp; * Initializes the system properties required for the application to run. This should be invoked
-&nbsp; * before the Engine main() method is called.
-&nbsp; */
-&nbsp;fun initProps() {
-<b class="nc">&nbsp;  val logDir =</b>
-<b class="nc">&nbsp;      System.getProperty(&quot;LOG_DIR&quot;, System.getenv(&quot;LOG_DIR&quot;)).orEmpty().ifBlank {</b>
-<b class="nc">&nbsp;        when {</b>
-<b class="nc">&nbsp;          Path(&quot;/log&quot;).exists() -&gt; &quot;/log&quot;</b>
-<b class="nc">&nbsp;          else -&gt; System.getProperty(&quot;user.dir&quot;)</b>
-<b class="nc">&nbsp;        }</b>
-&nbsp;      }
-&nbsp;
-<b class="nc">&nbsp;  System.setProperty(&quot;jdk.tls.maxCertificateChainLength&quot;, &quot;15&quot;)</b>
-<b class="nc">&nbsp;  System.setProperty(&quot;jdk.includeInExceptions&quot;, &quot;hostInfo&quot;)</b>
-<b class="nc">&nbsp;  System.setProperty(&quot;LOG_DIR&quot;, logDir)</b>
-&nbsp;
-&nbsp;  // Redirect JUL to SLF4J
-<b class="nc">&nbsp;  SLF4JBridgeHandler.removeHandlersForRootLogger()</b>
-<b class="nc">&nbsp;  SLF4JBridgeHandler.install()</b>
-&nbsp;}
+&nbsp;@Name(&quot;dev.suresh.agent.AgentType&quot;)
+&nbsp;@Label(&quot;JVM Agent Type&quot;)
+&nbsp;@Description(&quot;JVM agent attach type&quot;)
+&nbsp;@Category(&quot;JVM Agent&quot;, &quot;Agent&quot;)
+&nbsp;@Period(&quot;5 s&quot;)
+&nbsp;@StackTrace(false)
+<b class="nc">&nbsp;class AgentType(@Label(&quot;Agent Type&quot;) val type: String = &quot;static&quot;) : Event()</b>
 </code>
 </pre>
 </div>
@@ -186,7 +126,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-09-27 00:24</div>
+    <div style="float:right;">generated on 2024-09-27 09:37</div>
 </div>
 </body>
 </html>
