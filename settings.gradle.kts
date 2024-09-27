@@ -24,6 +24,10 @@ include(":backend:data")
 
 include(":backend:profiling")
 
+include(":backend:agent:jfr")
+
+include(":backend:agent:otel")
+
 include(":web")
 
 include(":benchmark")

@@ -283,20 +283,6 @@ dependencies {
   // testImplementation(libs.slf4j.simple)
 }
 
-// Replace the standard jar with the one built by 'shadowJar' in both api and runtime variants
-//
-// configurations {
-//   apiElements {
-//     outgoing.artifacts.clear()
-//     outgoing.artifact(shadowJar.flatMap {it.archiveFile})
-//   }
-//
-//   runtimeElements {
-//     outgoing.artifacts.clear()
-//     outgoing.artifact(shadowJar.flatMap {it.archiveFile})
-//   }
-// }
-
 allprojects {
   configurations.configureEach {
     resolutionStrategy {

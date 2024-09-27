@@ -114,6 +114,14 @@ $ ./gradlew :backend:jvm:run
    $ curl -v -X POST http://localhost:8080/loglevel/reset
   ```
 
+* JVM Agents
+
+  ```bash
+  # Normal agent with Launcher-Agent-Class
+  $ ./gradlew :backend:agent:jfr:build
+  $ backend/agent/jfr/build/libs/jfr-app
+  ```
+
 * AppCDS
 
   ```bash

@@ -1,44 +1,49 @@
 package dev.suresh.plugins.custom
 
+import dev.suresh.plugins.isApi
 import io.ktor.server.application.*
-import io.ktor.server.application.hooks.*
-import kotlinx.coroutines.isActive
+import io.opentelemetry.api.trace.Span
 
-val TestPlugin =
-    createApplicationPlugin(name = "TestPlugin", createConfiguration = ::TestPluginConfig) {
-      on(MonitoringEvent(ApplicationStarted)) {
-        it.log.info("[TestPlugin] Application started - ${it.isActive}")
-      }
-
-      on(CallFailed) { call, error ->
-        if (pluginConfig.enabled) {
-          call.application.log.error("[TestPlugin]Failed call: $call", error)
+/**
+ * A custom ktor plugin to automatically add OpenTelemetry trace id to response headers for API
+ * endpoints.
+ */
+val OTelExtnPlugin =
+    createApplicationPlugin(name = "OTelExtnPlugin", createConfiguration = ::OTelExtnPluginConfig) {
+      onCall { call ->
+        if (pluginConfig.enabled && call.isApi) {
+          Span.current()?.let { span ->
+            call.response.headers.append(pluginConfig.traceIdHeader, span.spanContext.traceId)
+            // span.setAttribute("custom-attribute", "TestPlugin")
+            // span.addEvent("TestPluginEvent")
+          }
         }
       }
 
-      onCall {
-        if (pluginConfig.enabled) {
-          it.response.headers.append("X-Custom-Header", "TestPlugin")
-        }
-      }
-
-      onCallReceive { call, body ->
-        if (pluginConfig.enabled) {
-          call.application.log.info("[TestPlugin] Received: $body")
-        }
-      }
-
-      onCallRespond { call, res ->
-        if (pluginConfig.enabled) {
-          call.application.log.info("[TestPlugin] Responded: $res")
-        }
-      }
+      //  on(MonitoringEvent(ApplicationStarted)) {
+      //    it.log.info("Application started - ${it.isActive}")
+      //  }
+      //
+      //  on(CallFailed) { call, error ->
+      //    if (pluginConfig.enabled) {
+      //      call.application.log.error("Failed call: $call", error)
+      //    }
+      //  }
+      //
+      //  onCallReceive { call, body ->
+      //    if (pluginConfig.enabled) {
+      //      call.application.log.info("Received: $body")
+      //    }
+      //  }
+      //
+      //  onCallRespond { call, res ->
+      //    if (pluginConfig.enabled) {
+      //      call.application.log.info("Responded: $res")
+      //    }
+      //  }
     }
 
-class TestPluginConfig {
+class OTelExtnPluginConfig {
   var enabled: Boolean = false
-}
-
-fun Application.customPlugins() {
-  install(TestPlugin) { enabled = false }
+  var traceIdHeader: String = "X-Trace-Id"
 }

@@ -3,7 +3,6 @@ package dev.suresh
 import BuildConfig
 import dev.suresh.config.AppConfig
 import dev.suresh.plugins.*
-import dev.suresh.plugins.custom.*
 import dev.suresh.routes.*
 import io.ktor.server.application.*
 import io.ktor.server.netty.*
@@ -29,7 +28,6 @@ fun Application.module() {
   configureHTTP()
   configureSecurity()
   errorRoutes()
-  customPlugins()
   configureOTel()
 
   routing {

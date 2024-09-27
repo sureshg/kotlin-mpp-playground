@@ -23,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap
 import kotlin.io.path.*
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -180,7 +181,7 @@ fun Route.mgmtRoutes() {
 
   sse("/virtualThreadStats") {
     val vtMxBean = Profiling.virtualThreadMxBean
-    while (true) {
+    while (isActive) {
       val stat =
           """
           |Scheduler PoolSize: ${vtMxBean.poolSize}
@@ -188,9 +189,9 @@ fun Route.mgmtRoutes() {
           |Queued Virtual Thread: ${vtMxBean.queuedVirtualThreadCount}
           |Mounted Virtual Thread: ${vtMxBean.mountedVirtualThreadCount}
           """
-              .trimIndent()
-      send(ServerSentEvent(stat))
-      delay(500.milliseconds)
+              .trimMargin()
+      send(ServerSentEvent(data = stat))
+      delay(1000.milliseconds)
     }
     close()
   }

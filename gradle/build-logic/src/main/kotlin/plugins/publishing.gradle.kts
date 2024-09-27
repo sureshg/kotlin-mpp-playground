@@ -88,8 +88,8 @@ publishing {
       }
     }
 
-    // Kotlin JVM
-    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
+    // Kotlin JVM ("org.jetbrains.kotlin.jvm")
+    pluginManager.withPlugin("java") {
       register<MavenPublication>("maven") {
         from(components["java"])
         configurePom()
@@ -104,7 +104,7 @@ publishing {
       }
     }
 
-    // Maven Bom
+    // Java Platform (BOM)
     pluginManager.withPlugin("java-platform") {
       register<MavenPublication>("maven") {
         from(components["javaPlatform"])

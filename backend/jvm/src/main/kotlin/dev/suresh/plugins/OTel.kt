@@ -1,15 +1,14 @@
 package dev.suresh.plugins
 
-import com.google.auto.service.AutoService
+import dev.suresh.plugins.custom.OTelExtnPlugin
 import io.ktor.server.application.*
 import io.opentelemetry.api.OpenTelemetry
-import io.opentelemetry.api.trace.Span
-import io.opentelemetry.context.Context
-import io.opentelemetry.javaagent.bootstrap.http.*
 import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk
 import io.opentelemetry.semconv.ServiceAttributes
 
 fun Application.configureOTel() {
+  install(OTelExtnPlugin) { enabled = true }
+
   //  install(KtorServerTracing) {
   //    setOpenTelemetry(GlobalOpenTelemetry.get())
   //    attributeExtractor {
@@ -19,6 +18,10 @@ fun Application.configureOTel() {
   //  }
 }
 
+/**
+ * [Manual
+ * instrumentation](https://opentelemetry.io/docs/languages/java/instrumentation/#acquiring-a-tracer-in-java-agent)
+ */
 fun getOpenTelemetry(serviceName: String): OpenTelemetry {
   return AutoConfiguredOpenTelemetrySdk.builder()
       .addResourceCustomizer { oldResource, _ ->
@@ -30,17 +33,4 @@ fun getOpenTelemetry(serviceName: String): OpenTelemetry {
       }
       .build()
       .openTelemetrySdk
-}
-
-@AutoService(HttpServerResponseCustomizer::class)
-class TraceIDResponseCustomizer : HttpServerResponseCustomizer {
-  override fun <T> customize(
-      serverContext: Context,
-      response: T,
-      responseMutator: HttpServerResponseMutator<T>
-  ) {
-    val spanContext = Span.fromContextOrNull(serverContext)?.spanContext
-    if (spanContext?.isValid != true) return
-    responseMutator.appendHeader(response, "X-Trace-Id", spanContext.traceId)
-  }
 }
