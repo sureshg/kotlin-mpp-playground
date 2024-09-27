@@ -83,3 +83,5 @@ ui.file
 ui.home
 ui.lottie
 ui.misc
+module:jfr
+dev.suresh
