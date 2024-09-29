@@ -1,14 +1,13 @@
 package dev.suresh.plugins
 
-import dev.suresh.plugins.custom.OTelExtnPlugin
 import io.ktor.server.application.*
 import io.opentelemetry.api.OpenTelemetry
 import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk
 import io.opentelemetry.semconv.ServiceAttributes
 
 fun Application.configureOTel() {
-  install(OTelExtnPlugin) { enabled = true }
-
+  // install(OTelExtnPlugin) { enabled = true }
+  //
   //  install(KtorServerTracing) {
   //    setOpenTelemetry(GlobalOpenTelemetry.get())
   //    attributeExtractor {

@@ -15,6 +15,9 @@
     <property name="pattern"
               value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} %X{trace-id} %-5level %X{remoteHost} [%thread]  %logger{16} - %msg%n%rEx"/>
 
+    <property name="otel-pattern"
+              value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags} %-5level %logger{16} - %msg%n"/>
+
     <appender name="APP1" class="RollingFileAppender">
         <file>${LOG_DIR}/app1.log</file>
         <rollingPolicy class="TimeBasedRollingPolicy">
@@ -62,17 +65,30 @@
     <appender name="STDOUT" class="ConsoleAppender">
         <encoder class="PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
+            <!--pattern>${otel-pattern}</pattern-->
             <outputPatternAsHeader>true</outputPatternAsHeader>
         </encoder>
     </appender>
 
+    <!-- Inject the Span and Trace ID to MDC -->
+    <appender name="OTEL-MDC" class="io.opentelemetry.instrumentation.logback.mdc.v1_0.OpenTelemetryAppender">
+        <appender-ref ref="STDOUT"/>
+    </appender>
+
+    <!-- Forwards Logback log events to the OpenTelemetry SDK -->
+    <appender name="OTEL" class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+        <captureExperimentalAttributes>true</captureExperimentalAttributes>
+        <captureMdcAttributes>*</captureMdcAttributes>
+    </appender>
+
+    <!-- Reset all previous level configurations of all j.u.l. loggers -->
     <contextListener class="LevelChangePropagator">
-        <!-- Reset all previous level configurations of all j.u.l. loggers -->
         <resetJUL>true</resetJUL>
     </contextListener>
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
+        <!--appender-ref ref="OTEL"/-->
         <!-- appender-ref ref="JSON"/-->
     </root>
 

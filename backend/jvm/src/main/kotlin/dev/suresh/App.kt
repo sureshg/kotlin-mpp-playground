@@ -10,7 +10,6 @@ import io.ktor.server.routing.*
 import io.ktor.util.logging.*
 import kotlin.io.path.Path
 import kotlin.io.path.exists
-import org.slf4j.bridge.SLF4JBridgeHandler
 
 fun main(args: Array<String>) =
     try {
@@ -57,6 +56,6 @@ fun initProps() {
   System.setProperty("LOG_DIR", logDir)
 
   // Redirect JUL to SLF4J
-  SLF4JBridgeHandler.removeHandlersForRootLogger()
-  SLF4JBridgeHandler.install()
+  // SLF4JBridgeHandler.removeHandlersForRootLogger()
+  // SLF4JBridgeHandler.install()
 }
