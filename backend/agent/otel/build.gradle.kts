@@ -26,7 +26,7 @@ val extendedAgent by
 
       from(otelAgentJar)
       from(extnJar) { into("extensions") }
-      archiveFileName = "otel-agent.jar"
+      archiveFileName = "otel-javaagent.jar"
 
       // Preserve MANIFEST.MF file from the upstream javaagent
       doFirst {
@@ -72,6 +72,7 @@ dependencies {
   implementation(platform(libs.otel.instr.bom))
   compileOnly(libs.bundles.otel.agent.extn)
   compileOnly(libs.google.auto.annotations)
+  implementation(libs.otel.samplers)
   annotationProcessor(libs.google.auto.service.apt)
 
   testImplementation(platform(libs.junit.bom))
