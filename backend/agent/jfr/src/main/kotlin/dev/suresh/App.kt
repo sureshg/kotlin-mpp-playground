@@ -1,5 +1,7 @@
 package dev.suresh
 
+import dev.suresh.system.SystemExitInvoker
+import dev.suresh.system.SystemExitTransformer
 import java.lang.System.Logger.Level.ERROR
 import java.lang.System.Logger.Level.INFO
 import java.lang.instrument.Instrumentation
@@ -12,13 +14,20 @@ import jdk.jfr.consumer.RecordingStream
 
 val logger: System.Logger = System.getLogger("JFRAgent")
 
-fun premain(agentArgs: String?, inst: Instrumentation?) = startJFREvent("Static")
+fun premain(agentArgs: String?, inst: Instrumentation?) {
+  inst?.addTransformer(SystemExitTransformer(), true)
+  startJFREvent("Static")
+}
 
-fun agentmain(agentArgs: String?, inst: Instrumentation?) = startJFREvent("Dynamic")
+fun agentmain(agentArgs: String?, inst: Instrumentation?) {
+  inst?.addTransformer(SystemExitTransformer(), true)
+  startJFREvent("Dynamic")
+}
 
 fun main() {
   logger.log(INFO) { "JFR Agent Sample..Enter to exit!" }
   readln()
+  SystemExitInvoker()
 }
 
 fun startJFREvent(type: String) {
