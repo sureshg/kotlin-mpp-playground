@@ -138,7 +138,7 @@ jobs:
 
       - name: 🕸 Deploy Wasm, Js & Compose webapp to Github Pages
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
-        uses: JamesIves/github-pages-deploy-action@v4.6.4
+        uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
           branch: gh-pages
           folder: backend/jvm/build/resources/main/app
@@ -148,7 +148,7 @@ jobs:
 
       - name: 🏖️ Publish documentation to Github Pages
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
-        uses: JamesIves/github-pages-deploy-action@v4.6.4
+        uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
           branch: gh-pages
           folder: build/dokka/htmlMultiModule
@@ -158,7 +158,7 @@ jobs:
 
       - name: 🏖️ Publish coverage report to Github Pages
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
-        uses: JamesIves/github-pages-deploy-action@v4.6.4
+        uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
           branch: gh-pages
           folder: build/reports/kover/html
@@ -168,7 +168,7 @@ jobs:
 
       - name: 🧪️ Publish test report to Github Pages
         if: steps.gradle-build.outcome == 'success' && runner.os == 'Linux'
-        uses: JamesIves/github-pages-deploy-action@v4.6.4
+        uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
           branch: gh-pages
           folder: build/reports/tests/test
