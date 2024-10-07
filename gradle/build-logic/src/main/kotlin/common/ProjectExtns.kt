@@ -245,7 +245,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-Djdk.attach.allowAttachSelf=true",
             "-Djdk.traceVirtualThreadLocals=false",
             "-Djdk.tracePinnedThreads=full",
-            "-Djava.security.debug=properties",
+            // "-Djava.security.debug=properties",
             "-Djava.security.egd=file:/dev/./urandom",
             "-Djdk.includeInExceptions=hostInfo,jar",
             "-Dkotlinx.coroutines.debug",

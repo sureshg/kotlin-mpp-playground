@@ -121,7 +121,6 @@ fun KotlinMultiplatformExtension.jvmTarget() {
         api(libs.slf4j.jul)
         api(libs.kotlinx.coroutines.slf4j)
         api(libs.jspecify)
-        api(libs.password4j)
         api(libs.bundles.keystore)
         // https://kotlinlang.org/docs/ksp-multiplatform.html
         api(libs.google.auto.annotations)

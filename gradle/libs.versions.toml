@@ -49,7 +49,7 @@ akkurate                       = "0.9.0"
 konsist                        = "0.16.1"
 karakum                        = "1.0.0-alpha.40-K2"
 seskar                         = "3.42.0"
-spring-boot                    = "3.3.3"
+spring-boot                    = "3.3.4"
 spring-depmgmt                 = "1.1.6"
 ktor                           = "3.0.0-rc-2"
 ktor-cohort                    = "2.5.1"
@@ -175,6 +175,7 @@ detekt-compose-rules           = "0.4.12"
 compose-icons                  = "1.1.0"
 compose-routing                = "0.4.0"
 kottie                         = "2.0.0"
+mosaic                         = "0.14.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.10.0"
@@ -461,6 +462,7 @@ ajalt-colormath                      = { module = "com.github.ajalt.colormath:co
 ajalt-clikt-core                     = { module = "com.github.ajalt.clikt:clikt-core"                          , version.ref = "ajalt-clikt"}
 ajalt-clikt                          = { module = "com.github.ajalt.clikt:clikt"                               , version.ref = "ajalt-clikt"}
 ajalt-clikt-markdown                 = { module = "com.github.ajalt.clikt:clikt-markdown"                      , version.ref = "ajalt-clikt"}
+mosaic-runtime                       = { module = "com.jakewharton.mosaic:mosaic-runtime"                      , version.ref = "mosaic"}
 jgit                                 = { module = "org.eclipse.jgit:org.eclipse.jgit"                          , version.ref = "jgit" }
 jte                                  = { module = "gg.jte:jte"                                                 , version.ref = "jte" }
 jte-runtime                          = { module = "gg.jte:jte-runtime"                                         , version.ref = "jte" }

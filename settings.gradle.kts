@@ -46,6 +46,7 @@ if (nativeBuild.toBoolean()) {
 
 if (composeBuild.toBoolean()) {
   include(":compose:cmp")
+  include(":compose:cli")
   // include(":compose:html")
 }
 

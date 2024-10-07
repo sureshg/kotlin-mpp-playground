@@ -264,7 +264,6 @@ dependencies {
   implementation(libs.kotlinx.collections.immutable)
   implementation(libs.kotlin.redacted.annotations)
   implementation(libs.jspecify)
-  implementation(libs.password4j)
   implementation(libs.bundles.keystore)
   implementation(libs.bundles.ajalt)
   implementation(libs.slf4j.api)
