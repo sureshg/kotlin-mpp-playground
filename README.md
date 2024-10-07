@@ -106,6 +106,7 @@ $ ./gradlew :backend:jvm:run
                 -e OTEL_TRACES_EXPORTER="otlp" \
                 -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
                 -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
+                -e OTEL_DROP_SPANS="/swagger" \
                 sureshg/jvm:latest
    $ curl -v -X GET http://localhost:8080/trace
 
@@ -120,6 +121,9 @@ $ ./gradlew :backend:jvm:run
   # Normal agent with Launcher-Agent-Class
   $ ./gradlew :backend:agent:jfr:build
   $ backend/agent/jfr/build/libs/jfr-app
+
+  # Custom OpenTelemetry agent
+  $ ./gradlew :backend:agent:otel:build
   ```
 
 * AppCDS

@@ -10,10 +10,7 @@ kotlin.sourceSets {
 
   jvmMain {
     dependencies {
-      implementation(libs.pty4j.get().toString()) {
-        exclude(group = "org.jetbrains.pty4j", module = "purejavacomm")
-      }
-      implementation(fileTree("lib") { include("*.jar") })
+      implementation(libs.pty4j)
       // implementation(libs.graal.polyglot)
       // implementation(libs.graal.wasm)
     }

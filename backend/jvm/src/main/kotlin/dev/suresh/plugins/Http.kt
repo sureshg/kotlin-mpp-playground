@@ -1,6 +1,8 @@
 package dev.suresh.plugins
 
 import BuildConfig
+import dev.suresh.plugins.custom.CookieSession
+import dev.suresh.plugins.custom.CookieSessionSerializer
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -19,11 +21,13 @@ import io.ktor.server.request.*
 import io.ktor.server.resources.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.sessions.*
 import io.ktor.server.sse.*
 import io.ktor.server.websocket.*
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
-import kotlin.time.toJavaDuration
 import kotlinx.atomicfu.atomic
+import kotlinx.serialization.*
 import org.slf4j.event.Level
 
 const val TRACE_ID = "trace-id"
@@ -64,6 +68,19 @@ fun Application.configureHTTP() {
     allowCredentials = true
   }
 
+  install(Sessions) {
+    cookie<CookieSession>("SESSION") {
+      serializer = CookieSessionSerializer
+      cookie.apply {
+        secure = true
+        path = "/"
+        maxAge = Duration.INFINITE
+        httpOnly = true
+        extensions["SameSite"] = "lax"
+      }
+    }
+  }
+
   install(HSTS)
 
   install(CallId) {
@@ -93,8 +110,8 @@ fun Application.configureHTTP() {
   install(SSE)
 
   install(WebSockets) {
-    pingPeriod = 15.seconds.toJavaDuration()
-    timeout = 15.seconds.toJavaDuration()
+    pingPeriod = 15.seconds
+    timeout = 15.seconds
     maxFrameSize = Long.MAX_VALUE
     masking = false
   }

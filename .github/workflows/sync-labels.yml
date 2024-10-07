@@ -6,14 +6,22 @@ on:
       - main
     paths:
       - .github/config/labels.yml
+  workflow_dispatch:
+
+permissions:
+  issues: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: micnncim/action-label-syncer@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          manifest: .github/config/labels.yml
+          sparse-checkout: .github/config/labels.yml
+
+      - uses: EndBug/label-sync@v2
+        with:
+          config-file: |
+            .github/config/labels.yml
+          delete-other-labels: false
+          token: ${{ secrets.GITHUB_TOKEN }}

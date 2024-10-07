@@ -5,12 +5,14 @@ import dev.suresh.http.MediaApiClient
 import dev.suresh.lang.FFM
 import dev.suresh.lang.VThread
 import dev.suresh.log.RespLogger
+import dev.suresh.plugins.custom.CookieSession
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.sessions.*
 import io.opentelemetry.instrumentation.annotations.WithSpan
 import java.io.Writer
 
@@ -26,6 +28,18 @@ fun Routing.services() {
   get("/trace") {
     call.respond(
         mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall().toString()))
+  }
+
+  route("/session") {
+    get("/set") {
+      call.sessions.set(CookieSession("${BuildConfig.name}: ${BuildConfig.version}"))
+      call.respondText("Session created")
+    }
+
+    get("/") {
+      val session = call.sessions.get<CookieSession>()
+      call.respondText("Current Session: $session")
+    }
   }
 }
 
