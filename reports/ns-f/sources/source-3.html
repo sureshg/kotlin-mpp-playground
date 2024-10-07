@@ -52,7 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/5)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -61,7 +61,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/11)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +69,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/93)
+    (0/117)
   </span>
 </td>
 </tr>
@@ -301,14 +301,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   </span>
 </td>
   </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
+  <tr>
+    <td class="name">ServiceKt$services$5$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/12)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -317,7 +317,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/17)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -325,7 +325,63 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/337)
+    (0/30)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ServiceKt$services$5$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/15)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/419)
   </span>
 </td>
 </tr>
@@ -343,12 +399,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import dev.suresh.lang.FFM
 &nbsp;import dev.suresh.lang.VThread
 &nbsp;import dev.suresh.log.RespLogger
+&nbsp;import dev.suresh.plugins.custom.CookieSession
 &nbsp;import io.github.oshai.kotlinlogging.KLogger
 &nbsp;import io.github.oshai.kotlinlogging.KotlinLogging
 &nbsp;import io.ktor.http.*
 &nbsp;import io.ktor.server.application.*
 &nbsp;import io.ktor.server.response.*
 &nbsp;import io.ktor.server.routing.*
+&nbsp;import io.ktor.server.sessions.*
 &nbsp;import io.opentelemetry.instrumentation.annotations.WithSpan
 &nbsp;import java.io.Writer
 &nbsp;
@@ -364,6 +422,18 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  get(&quot;/trace&quot;) {</b>
 <b class="nc">&nbsp;    call.respond(</b>
 <b class="nc">&nbsp;        mapOf(&quot;OpenTelemetry&quot; to BuildConfig.otelInstr, &quot;Image Size&quot; to mediaApiCall().toString()))</b>
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  route(&quot;/session&quot;) {</b>
+<b class="nc">&nbsp;    get(&quot;/set&quot;) {</b>
+<b class="nc">&nbsp;      call.sessions.set(CookieSession(&quot;${BuildConfig.name}: ${BuildConfig.version}&quot;))</b>
+<b class="nc">&nbsp;      call.respondText(&quot;Session created&quot;)</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    get(&quot;/&quot;) {</b>
+<b class="nc">&nbsp;      val session = call.sessions.get&lt;CookieSession&gt;()</b>
+<b class="nc">&nbsp;      call.respondText(&quot;Current Session: $session&quot;)</b>
+&nbsp;    }
 &nbsp;  }
 &nbsp;}
 &nbsp;
@@ -400,7 +470,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-07 00:25</div>
+    <div style="float:right;">generated on 2024-10-07 15:33</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > CustomSSLSocketFactoryKt</title>
+  <title>: Coverage Report > SystemExitTransformer</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.tls</a>
+    <a href="../index.html">dev.suresh.system</a>
 </div>
 
-<h1>Coverage Summary for Class: CustomSSLSocketFactoryKt (dev.suresh.tls)</h1>
+<h1>Coverage Summary for Class: SystemExitTransformer (dev.suresh.system)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">CustomSSLSocketFactoryKt</td>
+  <td class="name">SystemExitTransformer</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,16 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/5)
+    (0/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +71,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/19)
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
   </span>
 </td>
 </tr>
@@ -92,53 +99,85 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.tls
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.system
 &nbsp;
-&nbsp;import java.net.InetAddress
-&nbsp;import java.net.Socket
-&nbsp;import javax.net.ssl.SSLSocket
-&nbsp;import javax.net.ssl.SSLSocketFactory
+&nbsp;import java.lang.classfile.ClassFile
+&nbsp;import java.lang.classfile.ClassTransform
+&nbsp;import java.lang.classfile.CodeElement
+&nbsp;import java.lang.classfile.CodeTransform
+&nbsp;import java.lang.classfile.MethodModel
+&nbsp;import java.lang.classfile.Opcode
+&nbsp;import java.lang.classfile.instruction.InvokeInstruction
+&nbsp;import java.lang.constant.ClassDesc
+&nbsp;import java.lang.constant.MethodTypeDesc
+&nbsp;import java.lang.instrument.ClassFileTransformer
+&nbsp;import java.security.ProtectionDomain
+&nbsp;import java.util.concurrent.atomic.AtomicBoolean
+&nbsp;import kotlin.jvm.optionals.getOrNull
 &nbsp;
-&nbsp;class CustomSSLSocketFactory(private val delegate: SSLSocketFactory) : SSLSocketFactory() {
-&nbsp;  override fun getDefaultCipherSuites(): Array&lt;String&gt; = delegate.defaultCipherSuites
-&nbsp;
-&nbsp;  override fun getSupportedCipherSuites(): Array&lt;String&gt; = delegate.supportedCipherSuites
-&nbsp;
-&nbsp;  override fun createSocket(s: Socket, host: String, port: Int, autoClose: Boolean): Socket =
-&nbsp;      delegate.createSocket(s, host, port, autoClose).apply { reconfigureSSLSocket() }
-&nbsp;
-&nbsp;  override fun createSocket(host: String, port: Int): Socket =
-&nbsp;      delegate.createSocket(host, port).apply { reconfigureSSLSocket() }
-&nbsp;
-&nbsp;  override fun createSocket(
-&nbsp;      host: String,
-&nbsp;      port: Int,
-&nbsp;      localHost: InetAddress,
-&nbsp;      localPort: Int
-&nbsp;  ): Socket =
-&nbsp;      delegate.createSocket(host, port, localHost, localPort).apply { reconfigureSSLSocket() }
-&nbsp;
-&nbsp;  override fun createSocket(host: InetAddress, port: Int): Socket =
-&nbsp;      delegate.createSocket(host, port).apply { reconfigureSSLSocket() }
-&nbsp;
-&nbsp;  override fun createSocket(
-&nbsp;      address: InetAddress,
-&nbsp;      port: Int,
-&nbsp;      localAddress: InetAddress,
-&nbsp;      localPort: Int
-&nbsp;  ): Socket =
-&nbsp;      delegate.createSocket(address, port, localAddress, localPort).apply { reconfigureSSLSocket() }
+&nbsp;/**
+&nbsp; * An agent that blocks code from calling [System.exit]. The agent declares a premain method that is
+&nbsp; * run by the JVM before the main method of the application. This method registers a transformer
+&nbsp; * that transforms class files as they are loaded from the class path or module path. The
+&nbsp; * transformer rewrites every call to [System.exit] into throw new `RuntimeException(&quot;System.exit
+&nbsp; * not allowed&quot;)`.
+&nbsp; *
+&nbsp; * The transformer reads and writes bytecodes in class files using the Class-File API.
+&nbsp; *
+&nbsp; * This is directly ported from [JEP-486](https://openjdk.org/jeps/486#Appendix)
+&nbsp; */
+<b class="nc">&nbsp;class SystemExitTransformer : ClassFileTransformer {</b>
+&nbsp;  override fun transform(
+&nbsp;      loader: ClassLoader?,
+&nbsp;      className: String,
+&nbsp;      classBeingRedefined: Class&lt;*&gt;,
+&nbsp;      protectionDomain: ProtectionDomain,
+&nbsp;      classBytes: ByteArray
+&nbsp;  ): ByteArray? {
+<b class="nc">&nbsp;    return if (loader != ClassLoader.getPlatformClassLoader()) blockSystemExit(classBytes) else null</b>
+&nbsp;  }
 &nbsp;}
 &nbsp;
-&nbsp;fun Socket.reconfigureSSLSocket() {
-<b class="nc">&nbsp;  val sslSock = this as SSLSocket</b>
-<b class="nc">&nbsp;  val sslParams = sslSock.sslParameters</b>
-&nbsp;  // Disable SNI
-<b class="nc">&nbsp;  sslParams.serverNames = emptyList()</b>
-&nbsp;  // Disable Hostname verification (Same as -Djdk.internal.httpclient.disableHostnameVerification)
-<b class="nc">&nbsp;  sslParams.endpointIdentificationAlgorithm = null</b>
-<b class="nc">&nbsp;  sslParameters = sslParams</b>
+&nbsp;fun blockSystemExit(classBytes: ByteArray): ByteArray? {
+&nbsp;  val modified = AtomicBoolean(false)
+&nbsp;
+&nbsp;  val cf = ClassFile.of(ClassFile.DebugElementsOption.DROP_DEBUG)
+&nbsp;  val classModel = cf.parse(classBytes)
+&nbsp;
+&nbsp;  val rewriteSystemExit = CodeTransform { codeBuilder, codeElement -&gt;
+&nbsp;    when (codeElement.isSystemExit()) {
+&nbsp;      true -&gt; {
+&nbsp;        val rte = ClassDesc.of(&quot;java.lang.RuntimeException&quot;)
+&nbsp;        codeBuilder
+&nbsp;            .new_(rte)
+&nbsp;            .dup()
+&nbsp;            .ldc(java.lang.String(&quot;System.exit not allowed&quot;))
+&nbsp;            .invokespecial(
+&nbsp;                rte, &quot;&lt;init&gt;&quot;, MethodTypeDesc.ofDescriptor(&quot;(Ljava/lang/String;)V&quot;), false)
+&nbsp;            .athrow()
+&nbsp;        modified.set(true)
+&nbsp;      }
+&nbsp;      else -&gt; codeBuilder.with(codeElement)
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  val ct = ClassTransform.transformingMethodBodies({ it.hasSystemExit() }, rewriteSystemExit)
+&nbsp;  val mod = cf.transformClass(classModel, ct)
+&nbsp;  return if (modified.get()) mod else null
 &nbsp;}
+&nbsp;
+&nbsp;fun MethodModel.hasSystemExit() =
+&nbsp;    code().getOrNull()?.elementStream()?.anyMatch { it.isSystemExit() } == true
+&nbsp;
+&nbsp;fun CodeElement.isSystemExit() =
+&nbsp;    when (this) {
+&nbsp;      is InvokeInstruction -&gt;
+&nbsp;          opcode() == Opcode.INVOKESTATIC &amp;&amp;
+&nbsp;              owner().asInternalName() == &quot;java/lang/System&quot; &amp;&amp;
+&nbsp;              name().stringValue() == &quot;exit&quot; &amp;&amp;
+&nbsp;              type().stringValue() == &quot;(I)V&quot;
+&nbsp;      else -&gt; false
+&nbsp;    }
 </code>
 </pre>
 </div>
@@ -162,7 +201,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-07 00:25</div>
+    <div style="float:right;">generated on 2024-10-07 15:33</div>
 </div>
 </body>
 </html>

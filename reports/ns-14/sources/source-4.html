@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > FileBrowserKt</title>
+  <title>: Coverage Report > Image_jvmKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">ui.file</a>
+    <a href="../index.html">ui</a>
 </div>
 
-<h1>Coverage Summary for Class: FileBrowserKt (ui.file)</h1>
+<h1>Coverage Summary for Class: Image_jvmKt (ui)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">FileBrowserKt</td>
+  <td class="name">Image_jvmKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/3)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -71,23 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/9)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/129)
+    (0/54)
   </span>
 </td>
 </tr>
@@ -99,33 +92,29 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package ui.file
+<code class="sourceCode" id="sourceCode">&nbsp;package ui
 &nbsp;
-&nbsp;import androidx.compose.foundation.layout.Arrangement
-&nbsp;import androidx.compose.foundation.layout.Column
-&nbsp;import androidx.compose.foundation.layout.fillMaxSize
-&nbsp;import androidx.compose.foundation.layout.padding
-&nbsp;import androidx.compose.material3.MaterialTheme
-&nbsp;import androidx.compose.runtime.Composable
-&nbsp;import androidx.compose.ui.Alignment
-&nbsp;import androidx.compose.ui.Modifier
-&nbsp;import androidx.compose.ui.unit.dp
-&nbsp;import ui.debug
-&nbsp;import ui.home.HomeButton
+&nbsp;import androidx.compose.ui.graphics.*
+&nbsp;import androidx.compose.ui.graphics.painter.Painter
+&nbsp;import androidx.compose.ui.unit.Density
+&nbsp;import androidx.compose.ui.unit.LayoutDirection
+&nbsp;import java.awt.image.BufferedImage
+&nbsp;import java.net.URI
+&nbsp;import java.nio.file.Path
+&nbsp;import javax.imageio.ImageIO
 &nbsp;
-&nbsp;@Composable expect fun DragDropListView()
+<b class="nc">&nbsp;fun URI.toImageBitmap() = ImageIO.read(toURL()).toComposeImageBitmap()</b>
 &nbsp;
-&nbsp;@Composable
-<b class="nc">&nbsp;fun FileBrowser(modifier: Modifier = Modifier, navToHome: () -&gt; Unit) {</b>
-<b class="nc">&nbsp;  Column(</b>
-&nbsp;      modifier =
-<b class="nc">&nbsp;          modifier.fillMaxSize().padding(10.dp).debug(color = MaterialTheme.colorScheme.primary),</b>
-<b class="nc">&nbsp;      horizontalAlignment = Alignment.CenterHorizontally,</b>
-<b class="nc">&nbsp;      verticalArrangement = Arrangement.SpaceEvenly) {</b>
-<b class="nc">&nbsp;        DragDropListView()</b>
-<b class="nc">&nbsp;        HomeButton(navToHome)</b>
-<b class="nc">&nbsp;      }</b>
-<b class="nc">&nbsp;}</b>
+&nbsp;fun ImageBitmap.toPngImage(path: Path): Boolean =
+<b class="nc">&nbsp;    toAwtImage().let { ImageIO.write(it, &quot;png&quot;, path.toFile()) }</b>
+&nbsp;
+&nbsp;fun Painter.toPngImage(path: Path): Boolean {
+<b class="nc">&nbsp;  val img = toAwtImage(Density(1f), LayoutDirection.Ltr)</b>
+<b class="nc">&nbsp;  return BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_RGB).run {</b>
+<b class="nc">&nbsp;    graphics.drawImage(img, 0, 0, null)</b>
+<b class="nc">&nbsp;    ImageIO.write(this, &quot;png&quot;, path.toFile())</b>
+&nbsp;  }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -149,7 +138,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-07 00:25</div>
+    <div style="float:right;">generated on 2024-10-07 15:33</div>
 </div>
 </body>
 </html>
