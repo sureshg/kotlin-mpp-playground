@@ -17,9 +17,11 @@ abstract class SampleTask : DefaultTask() {
   abstract val versions: MapProperty<String, String>
 
   @get:[InputDirectory Optional]
+  @get:PathSensitive(PathSensitivity.RELATIVE)
   abstract val inputDirectory: DirectoryProperty
 
   @get:[InputFile Optional]
+  @get:PathSensitive(PathSensitivity.RELATIVE)
   abstract val inputFile: RegularFileProperty
 
   @get:Internal val type = "Sample Task"

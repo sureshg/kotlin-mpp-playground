@@ -32,6 +32,9 @@ plugins {
 // Apply the regular plugin
 apply(plugin = "plugins.dependency.reports")
 
+// Load the build script from a file
+// apply(from = rootDir.resolve("project.plugin.gradle.kts"))
+
 java {
   withSourcesJar()
   withJavadocJar()
@@ -265,7 +268,7 @@ dependencies {
   implementation(libs.bundles.keystore)
   implementation(libs.bundles.ajalt)
   implementation(libs.slf4j.api)
-  implementation(libs.slf4j.jul)
+  // implementation(libs.slf4j.jul)
 
   // Auto-service
   ksp(libs.ksp.auto.service)

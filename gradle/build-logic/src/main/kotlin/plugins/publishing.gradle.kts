@@ -2,6 +2,7 @@ package plugins
 
 import com.google.cloud.tools.jib.gradle.JibExtension
 import common.*
+import java.time.Year
 import nmcp.NmcpPublishTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
@@ -167,7 +168,7 @@ fun MavenPublication.configurePom() {
   pom {
     name = provider { "${project.group}:${project.name}" }
     description = provider { project.description }
-    inceptionYear = "2024"
+    inceptionYear = Year.now().toString()
     url = githubRepo
 
     developers {

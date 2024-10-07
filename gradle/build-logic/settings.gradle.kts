@@ -11,12 +11,6 @@ dependencyResolutionManagement {
   repositoriesMode = RepositoriesMode.FAIL_ON_PROJECT_REPOS
 }
 
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
-enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
-
-rootProject.name = "build-logic"
-
 fun RepositoryHandler.mavenSnapshot() {
   val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
   if (mvnSnapshot) {
@@ -32,3 +26,9 @@ fun RepositoryHandler.mavenSnapshot() {
     maven(url = mvnSnapshotRepo) { mavenContent { snapshotsOnly() } }
   }
 }
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
+
+rootProject.name = "build-logic"

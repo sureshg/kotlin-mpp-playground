@@ -90,15 +90,6 @@ tasks {
 
 gradlePlugin {
   plugins {
-
-    // Re-exposure of plugin from dependency. Gradle doesn't expose the plugin itself.
-    create("com.gradle.develocity") {
-      id = "com.gradle.develocity"
-      implementationClass = "com.gradle.develocity.agent.gradle.DevelocityPlugin"
-      displayName = "Develocity Gradle Plugin"
-      description = "Develocity gradle settings plugin re-exposed from dependency"
-    }
-
     // A generic plugin for both project and settings
     register("Generic Plugin") {
       id = "plugins.generic"
@@ -132,13 +123,13 @@ gradlePlugin {
 // Jte is used for generating build config.
 jte {
   contentType = gg.jte.ContentType.Plain
-  sourceDirectory = sourceSets.main.map { it.resources.srcDirs.first().toPath() }
   generate()
   jteExtension("gg.jte.models.generator.ModelExtension") {
     property("language", "Kotlin")
     // property("interfaceAnnotation", "@foo.bar.MyAnnotation")
     // property("implementationAnnotation", "@foo.bar.MyAnnotation")
   }
+  // sourceDirectory = sourceSets.main.map { it.resources.srcDirs.first().toPath() }
   // jteExtension("gg.jte.nativeimage.NativeResourcesExtension")
   // binaryStaticContent = true
   // kotlinCompileArgs = arrayOf("-jvm-target", dslJavaVersion.get())

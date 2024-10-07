@@ -16,9 +16,12 @@ import org.gradle.language.base.plugins.*
  * [Java Stack Trace Grouper](https://github.com/keith-turner/JSG/blob/master/src/main/scripts/stub.sh)
  * project.
  */
+@CacheableTask
 abstract class ReallyExecJar : DefaultTask() {
 
-  @get:InputFile abstract val jarFile: RegularFileProperty
+  @get:InputFile
+  @get:PathSensitive(PathSensitivity.RELATIVE)
+  abstract val jarFile: RegularFileProperty
 
   @get:Input abstract val javaOpts: ListProperty<String>
 
