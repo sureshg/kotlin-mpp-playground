@@ -4,8 +4,8 @@ plugins {
   plugins.kotlin.jvm
   alias(libs.plugins.spring.boot)
   alias(libs.plugins.spring.depmgmt)
-  org.graalvm.buildtools.native
   `kotlin-spring`
+  // org.graalvm.buildtools.native
   // plugins.publishing
 }
 
@@ -14,6 +14,7 @@ description = "Kotlin SpringBoot app"
 springBoot { buildInfo {} }
 
 dependencies {
+  implementation(projects.shared)
   implementation("org.springframework.boot:spring-boot-starter-web")
   implementation("org.jetbrains.kotlin:kotlin-reflect")
   runtimeOnly("org.postgresql:postgresql")
@@ -24,6 +25,9 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
   testImplementation("org.springframework.security:spring-security-test")
+  testImplementation("org.springframework.boot:spring-boot-testcontainers")
+  testImplementation("org.testcontainers:junit-jupiter")
+  testImplementation("org.testcontainers:postgresql")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 

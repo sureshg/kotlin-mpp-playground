@@ -3,6 +3,7 @@
 package settings
 
 import com.gradle.develocity.agent.gradle.scan.PublishedBuildScan
+import com.javiersc.semver.settings.gradle.plugin.SemverSettingsExtension
 import common.GithubAction
 import kotlinx.kover.gradle.aggregation.settings.dsl.KoverSettingsExtension
 import org.gradle.api.JavaVersion.VERSION_17
@@ -77,6 +78,11 @@ toolchainManagement {
       repository("foojay") { resolverClass = FoojayToolchainResolver::class.java }
     }
   }
+}
+
+configure<SemverSettingsExtension> {
+  // val ktVersion = versionCatalog.getString("kotlin").orEmpty()
+  // mapVersion { it.copy(metadata = ktVersion).toString() }
 }
 
 configure<KoverSettingsExtension> {
