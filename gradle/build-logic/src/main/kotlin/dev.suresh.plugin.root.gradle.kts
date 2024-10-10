@@ -1,5 +1,3 @@
-package plugins
-
 import com.github.ajalt.mordant.rendering.TextColors.*
 import common.*
 import common.Platform
@@ -7,11 +5,11 @@ import org.gradle.api.publish.plugins.PublishingPlugin.PUBLISH_LIFECYCLE_TASK_NA
 import org.gradle.kotlin.dsl.*
 
 plugins {
-  id("plugins.common")
+  id("dev.suresh.plugin.common")
   idea
   wrapper
-  id("plugins.kotlin.docs")
-  id("plugins.publishing")
+  id("dev.suresh.plugin.kotlin.docs")
+  id("dev.suresh.plugin.publishing")
   com.github.`ben-manes`.versions
   dev.iurysouza.modulegraph
   com.dorongold.`task-tree`

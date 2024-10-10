@@ -422,13 +422,13 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
       "kotlin.ExperimentalUnsignedTypes",
       "kotlin.io.encoding.ExperimentalEncodingApi",
       "kotlin.time.ExperimentalTime",
-      "kotlin.uuid.ExperimentalUuidApi",
       "kotlinx.coroutines.ExperimentalCoroutinesApi",
       "kotlinx.serialization.ExperimentalSerializationApi",
       "kotlin.ExperimentalMultiplatform",
       "kotlin.js.ExperimentalJsExport",
       "kotlin.experimental.ExperimentalNativeApi",
       "kotlinx.cinterop.ExperimentalForeignApi",
+      "kotlin.uuid.ExperimentalUuidApi",
       // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
   )
 }

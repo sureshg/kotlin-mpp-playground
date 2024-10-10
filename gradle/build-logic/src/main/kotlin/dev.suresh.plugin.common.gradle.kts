@@ -1,5 +1,3 @@
-package plugins
-
 import common.*
 import org.gradle.kotlin.dsl.*
 

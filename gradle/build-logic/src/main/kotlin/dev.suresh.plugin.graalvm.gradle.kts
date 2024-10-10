@@ -1,7 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-package plugins
-
 import com.javiersc.semver.project.gradle.plugin.SemverExtension
 import common.*
 import common.GithubAction

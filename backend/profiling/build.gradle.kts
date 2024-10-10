@@ -1,6 +1,6 @@
 plugins {
-  plugins.kotlin.mpp
-  plugins.publishing
+  dev.suresh.plugin.kotlin.mpp
+  dev.suresh.plugin.publishing
 }
 
 description = "JVM Profiling and Monitoring!"

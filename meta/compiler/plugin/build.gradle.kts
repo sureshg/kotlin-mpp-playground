@@ -1,6 +1,6 @@
 plugins {
-  plugins.kotlin.jvm
-  plugins.publishing
+  dev.suresh.plugin.kotlin.jvm
+  dev.suresh.plugin.publishing
 }
 
 description = "Kotlin Compiler Plugin"

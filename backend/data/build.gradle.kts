@@ -1,6 +1,6 @@
 plugins {
-  plugins.kotlin.mpp
-  plugins.publishing
+  dev.suresh.plugin.kotlin.mpp
+  dev.suresh.plugin.publishing
 }
 
 description = "Kotlin Data Science!"

@@ -1,7 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-package plugins
-
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 import java.time.ZonedDateTime
@@ -20,7 +18,7 @@ plugins {
   kotlin("plugin.serialization")
   kotlin("plugin.power-assert")
   kotlin("plugin.js-plain-objects")
-  id("plugins.kotlin.docs")
+  id("dev.suresh.plugin.kotlin.docs")
   com.google.devtools.ksp
   dev.zacsweers.redacted
   // com.javiersc.kotlin.kopy

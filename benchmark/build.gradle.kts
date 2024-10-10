@@ -1,3 +1,3 @@
-plugins { plugins.kotlin.benchmark }
+plugins { dev.suresh.plugin.kotlin.benchmark }
 
 dependencies { commonMainImplementation(projects.shared) }

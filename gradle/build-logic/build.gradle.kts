@@ -90,30 +90,30 @@ tasks {
 
 gradlePlugin {
   plugins {
-    // A generic plugin for both project and settings
-    register("Generic Plugin") {
-      id = "plugins.generic"
-      implementationClass = "plugins.GenericPlugin"
-      displayName = "Generic plugin"
-      description = "A plugin-aware pre-compiled generic plugin"
-      tags = listOf("Generic Plugin", "build-logic")
+    // Uncomment the id to change plugin id for this pre-compiled plugin
+    named("dev.suresh.plugin.common") {
+      // id = "${project.group}.${project.name}.common"
+      displayName = "Common build-logic plugin"
+      description = "Common pre-compiled script plugin"
+      tags = listOf("Common Plugin", "build-logic")
     }
 
     // Dependency Reports plugin
     register("Dependency Reports") {
-      id = "plugins.dependency.reports"
+      id = "dev.suresh.plugin.depreports"
       implementationClass = "plugins.DepReportsPlugin"
       displayName = "Dependency Reports plugin"
       description = "A plugin to list all the resolved artifacts"
       tags = listOf("Dependency Reports", "build-logic")
     }
 
-    // Uncomment the id to change plugin id for this pre-compiled plugin
-    named("plugins.common") {
-      // id = "build.plugins.common"
-      displayName = "Common build-logic plugin"
-      description = "Common pre-compiled script plugin"
-      tags = listOf("Common Plugin", "build-logic")
+    // A generic plugin for both project and settings
+    register("Generic Plugin") {
+      id = "dev.suresh.plugin.generic"
+      implementationClass = "plugins.GenericPlugin"
+      displayName = "Generic plugin"
+      description = "A plugin-aware pre-compiled generic plugin"
+      tags = listOf("Generic Plugin", "build-logic")
     }
 
     // val settingsPlugin by registering {}
@@ -201,7 +201,7 @@ dependencies {
   // implementation(libs.build.includegit.plugin)
   // implementation(libs.build.cyclonedx.plugin)
 
+  testImplementation(gradleTestKit())
   // For using kotlin-dsl in pre-compiled script plugins
   // implementation("${libs.build.kotlin.dsl.get().module}:${expectedKotlinDslPluginsVersion}")
-  // testImplementation(gradleTestKit())
 }

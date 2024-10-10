@@ -1,12 +1,12 @@
 import common.jvmRunArgs
 
 plugins {
-  plugins.kotlin.jvm
+  dev.suresh.plugin.kotlin.jvm
   alias(libs.plugins.spring.boot)
   alias(libs.plugins.spring.depmgmt)
   `kotlin-spring`
   // org.graalvm.buildtools.native
-  // plugins.publishing
+  // dev.suresh.plugin.publishing
 }
 
 description = "Kotlin SpringBoot app"

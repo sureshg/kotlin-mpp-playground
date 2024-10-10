@@ -1,5 +1,3 @@
-package plugins
-
 import common.*
 import java.net.URI
 import org.hildan.github.changelog.plugin.GitHubChangelogExtension

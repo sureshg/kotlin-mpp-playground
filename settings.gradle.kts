@@ -6,7 +6,7 @@ pluginManagement {
   includeBuild("gradle/build-logic")
 }
 
-plugins { id("settings.repos") }
+plugins { id("dev.suresh.plugin.repos") }
 
 rootProject.name = "kotlin-mpp-playground"
 

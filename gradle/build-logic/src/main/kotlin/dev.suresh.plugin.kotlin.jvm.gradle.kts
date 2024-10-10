@@ -1,5 +1,3 @@
-package plugins
-
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
@@ -24,13 +22,13 @@ plugins {
   dev.zacsweers.redacted
   // com.javiersc.kotlin.kopy
   org.jetbrains.kotlinx.atomicfu
-  id("plugins.kotlin.docs")
+  id("dev.suresh.plugin.kotlin.docs")
   // kotlin("plugin.atomicfu")
   // `test-suite-base`
 }
 
 // Apply the regular plugin
-apply(plugin = "plugins.dependency.reports")
+apply(plugin = "dev.suresh.plugin.depreports")
 
 // Load the build script from a file
 // apply(from = rootDir.resolve("project.plugin.gradle.kts"))

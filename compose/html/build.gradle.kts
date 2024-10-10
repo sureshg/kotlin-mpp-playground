@@ -1,6 +1,6 @@
 plugins {
-  plugins.kotlin.mpp
-  plugins.publishing
+  dev.suresh.plugin.kotlin.mpp
+  dev.suresh.plugin.publishing
   alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.kobweb.application)
   alias(libs.plugins.kobwebx.markdown)

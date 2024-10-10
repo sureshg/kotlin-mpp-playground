@@ -4,15 +4,15 @@ import common.*
 import kotlin.io.path.Path
 
 plugins {
-  plugins.kotlin.jvm
+  dev.suresh.plugin.kotlin.jvm
   application
   com.google.cloud.tools.jib
   gg.jte.gradle
-  plugins.graalvm
+  dev.suresh.plugin.graalvm
   com.gradleup.shadow
   alias(libs.plugins.ktor)
   alias(libs.plugins.exposed)
-  plugins.publishing
+  dev.suresh.plugin.publishing
 }
 
 description = "Ktor backend jvm application"

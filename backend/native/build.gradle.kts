@@ -12,9 +12,9 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
 plugins {
-  plugins.kotlin.mpp
+  dev.suresh.plugin.kotlin.mpp
   com.google.cloud.tools.jib
-  plugins.publishing
+  dev.suresh.plugin.publishing
 }
 
 val appBinName = "app"

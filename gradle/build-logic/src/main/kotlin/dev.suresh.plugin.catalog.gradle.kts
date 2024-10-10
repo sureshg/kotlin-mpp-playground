@@ -1,5 +1,3 @@
-package plugins
-
 import common.libs
 
 plugins { `version-catalog` }

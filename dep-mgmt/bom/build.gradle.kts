@@ -1,6 +1,6 @@
 plugins {
   `java-platform`
-  plugins.publishing
+  dev.suresh.plugin.publishing
 }
 
 description = "A platform (BOM) used to align all module versions"

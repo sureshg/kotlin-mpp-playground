@@ -2,7 +2,7 @@ import common.jvmRunArgs
 import kotlin.collections.plus
 
 plugins {
-  plugins.kotlin.jvm
+  dev.suresh.plugin.kotlin.jvm
   application
   com.gradleup.shadow
 }

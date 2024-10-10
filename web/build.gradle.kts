@@ -1,8 +1,8 @@
 @file:Suppress("UnstableApiUsage")
 
 plugins {
-  plugins.kotlin.mpp
-  plugins.publishing
+  dev.suresh.plugin.kotlin.mpp
+  dev.suresh.plugin.publishing
   // alias(libs.plugins.karakum)
   // alias(libs.plugins.seskar)
 }

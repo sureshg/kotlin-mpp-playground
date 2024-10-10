@@ -6,7 +6,7 @@ import common.byteDisplaySize
 plugins {
   java
   com.gradleup.shadow
-  plugins.publishing
+  dev.suresh.plugin.publishing
 }
 
 description = "OpenTelemetry agent with custom instrumentation!"

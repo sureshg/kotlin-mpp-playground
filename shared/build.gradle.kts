@@ -3,8 +3,8 @@
 import common.versionCatalogMapOf
 
 plugins {
-  plugins.kotlin.mpp
-  plugins.publishing
+  dev.suresh.plugin.kotlin.mpp
+  dev.suresh.plugin.publishing
   `binary-compatibility-validator`
   alias(libs.plugins.mappie)
 }

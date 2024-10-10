@@ -9,8 +9,8 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
 
 plugins {
-  plugins.kotlin.mpp
-  plugins.publishing
+  dev.suresh.plugin.kotlin.mpp
+  dev.suresh.plugin.publishing
   alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.jetbrains.compose)
   // alias(libs.plugins.detekt)
