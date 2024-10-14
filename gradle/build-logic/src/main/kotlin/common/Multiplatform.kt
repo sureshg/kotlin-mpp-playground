@@ -267,11 +267,7 @@ fun KotlinMultiplatformExtension.allNativeTargets(configure: KotlinNativeTarget.
     macosArm64 { configure() }
     linuxX64 { configure() }
     linuxArm64 { configure() }
-
-    val nativeWinTarget: String? by project
-    if (nativeWinTarget.toBoolean()) {
-      mingwX64 { configure() }
-    }
+    mingwX64 { configure() }
   }
 }
 

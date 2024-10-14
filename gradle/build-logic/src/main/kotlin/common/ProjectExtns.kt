@@ -135,11 +135,11 @@ val Project.mavenCentralUsername
 val Project.mavenCentralPassword
   get() = providers.gradleProperty("mavenCentralPassword")
 
-val Project.githubActor
-  get() = providers.gradleProperty("githubActor")
+val Project.githubPackagesUsername
+  get() = providers.gradleProperty("githubPackagesUsername")
 
-val Project.githubToken
-  get() = providers.gradleProperty("githubToken")
+val Project.githubPackagesPassword
+  get() = providers.gradleProperty("githubPackagesPassword")
 
 /** Kotlin Dependencies extension functions. */
 val Project.isKotlinMultiplatformProject
@@ -193,7 +193,6 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:+PrintCommandLineFlags",
             "--enable-native-access=ALL-UNNAMED",
             "--illegal-native-access=warn",
-            "-Xms64M",
             "-Xmx128M",
             "-XX:+UseZGC",
             "-XX:+UseStringDeduplication",
@@ -407,7 +406,6 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon() {
   suppressWarnings = false
   verbose = false
   freeCompilerArgs.addAll(
-      "-Xcontext-receivers",
       "-Xexpect-actual-classes",
       "-Xskip-prerelease-check",
       // "-XXLanguage:+ExplicitBackingFields",
@@ -466,7 +464,6 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
       "-Xjsr305=strict",
       "-Xjvm-default=all",
       "-Xassertions=jvm",
-      "-Xcontext-receivers",
       "-Xemit-jvm-type-annotations",
       "-Xjspecify-annotations=strict",
       "-Xextended-compiler-checks",
@@ -486,7 +483,6 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm() {
   )
 }
 
-context(Project)
 fun KotlinNativeCompilerOptions.configureKotlinNative() {
   freeCompilerArgs.addAll(
       // "-Xverbose-phases=Linker"
@@ -562,10 +558,8 @@ fun TestLoggingContainer.configureLogEvents() {
   }
 }
 
-context(Project)
 fun KotlinTestReport.configureTestReport() {}
 
-context(Project)
 fun KotlinJsCompilerOptions.configureKotlinJs() {
   // freeCompilerArgs.addAll("-Xir-per-file")
   // target = "es2015"
@@ -573,7 +567,6 @@ fun KotlinJsCompilerOptions.configureKotlinJs() {
   // sourceMapEmbedSources = "always"
 }
 
-context(Project)
 fun KotlinNpmInstallTask.configureKotlinNpm() {
   args.add("--ignore-engines")
 }
@@ -583,7 +576,6 @@ fun KotlinNpmInstallTask.configureKotlinNpm() {
  *
  * @param dependencyNotation The notation of the dependency to add.
  */
-context(Project)
 fun KotlinSourceSet.ksp(dependencyNotation: Any) {
   val kspConfiguration =
       when {
@@ -594,27 +586,24 @@ fun KotlinSourceSet.ksp(dependencyNotation: Any) {
         name.endsWith("Main") -> name.substringBeforeLast("Main")
         else -> name
       }.replaceFirstChar { it.uppercaseChar() }
-  dependencies.add("ksp$kspConfiguration", dependencyNotation)
+  project.dependencies.add("ksp$kspConfiguration", dependencyNotation)
 }
 
-/** Returns the path of the dependency jar in runtime classpath. */
-context(Project)
-val ExternalDependency.dependencyPath: Provider<String>
-  get() = provider {
-    configurations
-        .named("runtimeClasspath")
-        .get()
-        .resolvedConfiguration
-        .resolvedArtifacts
-        .find { it.moduleVersion.id.module == module }
-        ?.file
-        ?.path
-  }
+/** Returns the path of dependency jar in the runtime classpath. */
+fun Project.depPathOf(dep: ExternalDependency) = provider {
+  configurations
+      .named("runtimeClasspath")
+      .get()
+      .resolvedConfiguration
+      .resolvedArtifacts
+      .find { it.moduleVersion.id.module == dep.module }
+      ?.file
+      ?.path
+}
 
 /** Returns the application `run` command. */
-context(Project)
-fun Path.appRunCmd(args: List<String>): String {
-  val path = layout.projectDirectory.asFile.toPath().relativize(this)
+fun Project.appRunCmd(binary: Path, args: List<String>): String {
+  val path = layout.projectDirectory.asFile.toPath().relativize(binary)
   val newLine = System.lineSeparator()
   val lineCont = """\""" // Bash line continuation
   val indent = "\t"
@@ -655,14 +644,15 @@ val Project.incubatorModules
   get(): String {
     val javaCmd = project.javaToolchainPath.resolve("bin").resolve("java")
     val bos = ByteArrayOutputStream()
-    val execResult = exec {
-      workingDir = layout.buildDirectory.get().asFile
-      commandLine = listOf(javaCmd.toString())
-      args = listOf("--list-modules")
-      standardOutput = bos
-      errorOutput = bos
-    }
-    execResult.assertNormalExitValue()
+    val execResult =
+        providers.exec {
+          workingDir = layout.buildDirectory.get().asFile
+          commandLine = listOf(javaCmd.toString())
+          args = listOf("--list-modules")
+          standardOutput = bos
+          errorOutput = bos
+        }
+    execResult.result.get().assertNormalExitValue()
     return bos.toString(Charsets.UTF_8)
         .lines()
         .filter { it.startsWith("jdk.incubator") }
