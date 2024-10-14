@@ -170,6 +170,8 @@ $ ./gradlew :backend:jvm:run
 
   ```bash
   $ ./gradlew :backend:native:build
+  $ find backend/native/build/bin -type f -perm +111 -exec ls -lh {} \; | awk '{print $9 ": " $5}'
+
   # Arch specific binaries
   $ ./gradlew :backend:native:macosArm64Binaries
   $ ./gradlew :backend:native:macosX64Binaries
@@ -242,12 +244,13 @@ $ ./gradlew :backend:jvm:run
 
   $ export ORG_GRADLE_PROJECT_mavenCentralUsername=<Username from https://central.sonatype.com/account>
   $ export ORG_GRADLE_PROJECT_mavenCentralPassword=<Token from https://central.sonatype.com/account>
-  $ export ORG_GRADLE_PROJECT_signingKeyId=<GPG Key ID>
-  $ export ORG_GRADLE_PROJECT_signingPassword=<Password>
-  $ export ORG_GRADLE_PROJECT_signingKey=$(gpg --export-secret-keys --armor ${ORG_GRADLE_PROJECT_signingKeyId} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n')
+  $ export ORG_GRADLE_PROJECT_signingInMemoryKeyId=<GPG Key ID>
+  $ export ORG_GRADLE_PROJECT_signingInMemoryKeyPassword=<Password>
+  $ export ORG_GRADLE_PROJECT_signingInMemoryKey=$(gpg --export-secret-keys --armor ${ORG_GRADLE_PROJECT_signingInMemoryKeyId} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n')
 
+  # For aggregated publication (preferred)
   $ ./gradlew publishAggregatedPublicationToCentralPortal
-  # For all publications,
+  # For all publications
   $ ./gradlew publishAllPublicationsToCentralPortal
   ```
 
