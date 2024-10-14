@@ -8,20 +8,6 @@ plugins {
   `maven-publish`
   signing
   com.gradleup.nmcp
-  // org.cyclonedx.bom
-}
-
-// Nexus plugin needs to apply to the root project only
-if (isRootProject) {
-  apply(plugin = "io.github.gradle-nexus.publish-plugin")
-
-  nmcp {
-    publishAggregation {
-      username = mavenCentralUsername
-      password = mavenCentralPassword
-      publicationType = "AUTOMATIC"
-    }
-  }
 }
 
 group = libs.versions.group.get()
@@ -37,9 +23,8 @@ publishing {
       name = "GitHubPackages"
       url = uri(githubPackage(libs.versions.dev.name.get(), rootProject.name))
       credentials {
-        // findProperty("githubActor")
-        username = githubActor.orNull ?: System.getenv("GITHUB_ACTOR")
-        password = githubToken.orNull ?: System.getenv("GITHUB_TOKEN")
+        username = githubPackagesUsername.orNull
+        password = githubPackagesPassword.orNull
       }
     }
   }
@@ -113,8 +98,8 @@ pluginManager.withPlugin("com.google.cloud.tools.jib") {
     to {
       if (image.orEmpty().startsWith("ghcr.io", ignoreCase = true)) {
         auth {
-          username = githubActor.orNull ?: System.getenv("GITHUB_ACTOR")
-          password = githubToken.orNull ?: System.getenv("GITHUB_TOKEN")
+          username = githubPackagesUsername.orNull
+          password = githubPackagesPassword.orNull
         }
       }
     }
@@ -125,9 +110,8 @@ signing {
   setRequired { hasSigningKey }
   if (hasSigningKey) {
     useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
+    sign(publishing.publications)
   }
-  sign(publishing.publications)
-  // gradle.taskGraph.allTasks.any { it.name.startsWith("publish") }
 }
 
 nmcp {
@@ -179,12 +163,4 @@ tasks {
 
   // For publishing kotlin native binaries
   withType<AbstractPublishToMaven>().configureEach { mustRunAfter(withType<KotlinNativeLink>()) }
-
-  // cyclonedxBom {
-  //   includeConfigs = listOf("runtimeClasspath")
-  //   skipConfigs = listOf("compileClasspath", "testCompileClasspath")
-  //   destination = project.layout.buildDirectory.dir("sbom").map { it.asFile }
-  //   outputFormat = "json"
-  //   includeLicenseText = true
-  // }
 }

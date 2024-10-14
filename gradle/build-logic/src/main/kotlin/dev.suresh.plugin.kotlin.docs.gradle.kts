@@ -6,22 +6,16 @@ import org.jetbrains.dokka.base.DokkaBase
 import org.jetbrains.dokka.base.DokkaBaseConfiguration
 import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
 import org.jetbrains.dokka.gradle.DokkaTaskPartial
-import org.jetbrains.kotlin.gradle.tasks.KotlinTest
 
 plugins {
   org.jetbrains.dokka
   com.diffplug.spotless
-  `test-report-aggregation`
+  // `test-report-aggregation`
 }
 
 // The following plugins and config apply only to a root project.
 if (isRootProject) {
   apply(plugin = "org.hildan.github.changelog")
-
-  // Combined test report
-  dependencies {
-    allprojects.filter { !it.path.contains(":dep-mgmt") }.forEach { testReportAggregation(it) }
-  }
 
   // Dokka multi-module config.
   tasks.withType<DokkaMultiModuleTask>().configureEach {
@@ -43,10 +37,12 @@ if (isRootProject) {
   // Combined test reports
   val allTestReports by
       tasks.registering(TestReport::class) {
-        destinationDirectory = layout.buildDirectory.dir("reports/tests/test")
-        allprojects.forEach {
-          testResults.from(it.tasks.withType<Test>(), it.tasks.withType<KotlinTest>())
-        }
+        group = LifecycleBasePlugin.VERIFICATION_GROUP
+        description = "Generates aggregated test report for all tests."
+        destinationDirectory = layout.buildDirectory.dir("reports/allTests")
+
+        // Include the results from the `test` task in all subprojects
+        allprojects.forEach { testResults.from(it.tasks.withType<AbstractTestTask>()) }
 
         doLast {
           logger.lifecycle("All test reports are aggregated in ${destinationDirectory.get()}")

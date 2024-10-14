@@ -112,7 +112,7 @@ tasks {
 
   withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
 
-  // withType<KotlinJsCompile>().configureEach { }
+  // withType<Kotlin2JsCompile>().configureEach {}
 
   withType<Jar>().configureEach {
     manifest {

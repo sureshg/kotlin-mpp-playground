@@ -1,4 +1,5 @@
 @file:OptIn(ExperimentalComposeLibrary::class)
+@file:Suppress("UnstableApiUsage")
 
 import common.Platform
 import common.jvmArguments
