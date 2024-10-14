@@ -14,16 +14,15 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import io.opentelemetry.instrumentation.annotations.WithSpan
-import java.io.Writer
 
 private val logger = KotlinLogging.logger {}
 
 fun Routing.services() {
-  get("/ffm") { call.respondLogStream { FFM.memoryLayout() } }
+  get("/ffm") { call.respondLogStream { FFM.memoryLayout(this) } }
 
-  get("/vthreads") { call.respondLogStream { VThread.virtualThreads() } }
+  get("/vthreads") { call.respondLogStream { VThread.virtualThreads(this) } }
 
-  get("/jfr") { call.respondLogStream { JFR.recordingStream() } }
+  get("/jfr") { call.respondLogStream { JFR.recordingStream(this) } }
 
   get("/trace") {
     call.respond(
@@ -47,9 +46,7 @@ fun Routing.services() {
 
 suspend fun ApplicationCall.respondLogStream(
     contentType: ContentType = ContentType.Text.EventStream,
-    block:
-        suspend context(KLogger)
-        Writer.() -> Unit
+    block: suspend KLogger.() -> Unit
 ) {
-  respondTextWriter(contentType = contentType) { block(RespLogger(this, logger), this) }
+  respondTextWriter(contentType = contentType) { block(RespLogger(this, logger)) }
 }

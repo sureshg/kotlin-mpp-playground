@@ -234,10 +234,10 @@ dependencies {
   testImplementation(libs.konsist)
 
   // Copy js and wasm apps
-  jsApp(project(path = projects.web.dependencyProject.path, configuration = "jsApp"))
-  wasmApp(project(path = projects.web.dependencyProject.path, configuration = "wasmApp"))
+  jsApp(project(path = projects.web.identityPath.path, configuration = "jsApp"))
+  wasmApp(project(path = projects.web.identityPath.path, configuration = "wasmApp"))
   composeWebApp(
-      project(path = projects.compose.cmp.dependencyProject.path, configuration = "composeWebApp"))
+      project(path = projects.compose.cmp.identityPath.path, configuration = "composeWebApp"))
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })

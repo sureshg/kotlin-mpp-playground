@@ -14,24 +14,24 @@ import stdlibFeatures
 
 object VThread {
 
-  context(KLogger)
-  suspend fun virtualThreads() = runOnVirtualThread {
-    info { (Greeting().greeting()) }
-    listOf("main", "jvm", "js", "wasm").forEach {
-      info { "Common-$it  --> ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
-      info { "Backend-$it --> ${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}" }
-    }
+  suspend fun virtualThreads(logger: KLogger) = runOnVirtualThread {
+    with(logger) {
+      info { (Greeting().greeting()) }
+      listOf("main", "jvm", "js", "wasm").forEach {
+        info { "Common-$it : ${ClassLoader.getSystemResource("common-$it-res.txt")?.readText()}" }
+        info { "Backend-$it : ${ClassLoader.getSystemResource("backend-$it-res.txt")?.readText()}" }
+      }
 
-    structuredConcurrency()
-    langFeatures()
-    stdlibFeatures()
-    kotlinxMetaData()
-    classFileApi()
-    info { "Concurrent Gatherers: ${gatherers().size}" }
+      structuredConcurrency()
+      langFeatures()
+      stdlibFeatures()
+      kotlinxMetaData()
+      classFileApi()
+      info { "Concurrent Gatherers: ${gatherers().size}" }
+    }
   }
 
-  context(KLogger)
-  private fun structuredConcurrency() {
+  private fun KLogger.structuredConcurrency() {
     info { "Structured concurrency..." }
     val taskList =
         StructuredTaskScope<String>().use { sts ->
@@ -75,8 +75,7 @@ object VThread {
     return (1..100).toList().stream().gather(mapGatherer).toList()
   }
 
-  context(KLogger)
-  private fun kotlinxMetaData() {
+  private fun KLogger.kotlinxMetaData() {
     val metadataAnnotation = LocalDateTime::class.java.getAnnotation(Metadata::class.java)
     when (val metadata = KotlinClassMetadata.readLenient(metadataAnnotation)) {
       is KotlinClassMetadata.Class -> {

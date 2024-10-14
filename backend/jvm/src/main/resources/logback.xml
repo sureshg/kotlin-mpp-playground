@@ -56,9 +56,16 @@
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
         <encoder class="JsonEncoder">
+            <withLoggerName>true</withLoggerName>
             <withFormattedMessage>true</withFormattedMessage>
             <withMessage>false</withMessage>
             <withArguments>false</withArguments>
+            <withSequenceNumber>false</withSequenceNumber>
+            <withContext>false</withContext>
+            <withNanoseconds>false</withNanoseconds>
+            <withMDC>false</withMDC>
+            <withTimestamp>true</withTimestamp>
+            <withThrowable>false</withThrowable>
         </encoder>
     </appender>
 

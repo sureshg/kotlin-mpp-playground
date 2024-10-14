@@ -10,19 +10,19 @@ import java.time.Instant
 
 object FFM {
 
-  context(KLogger)
-  suspend fun memoryLayout() = runOnVirtualThread {
-    memoryAPIs()
-    currTime()
-    strlen("Hello Panama!")
-    getPid()
-    gmtime()
-    terminal()
-    dhReflection()
+  suspend fun memoryLayout(logger: KLogger) = runOnVirtualThread {
+    with(logger) {
+      memoryAPIs()
+      currTime()
+      strlen("Hello Panama!")
+      getPid()
+      gmtime()
+      terminal()
+      dhReflection()
+    }
   }
 
-  context(KLogger)
-  private fun strlen(str: String) {
+  private fun KLogger.strlen(str: String) {
     val strlenAddr = SYMBOL_LOOKUP.findOrNull("strlen")
     val strlenDescriptor = FunctionDescriptor.of(ValueLayout.JAVA_INT, AddressLayout.ADDRESS)
     val strlen = LINKER.downcallHandle(strlenAddr, strlenDescriptor)
@@ -33,8 +33,7 @@ object FFM {
     }
   }
 
-  context(KLogger)
-  private fun currTime() {
+  private fun KLogger.currTime() {
     // Print the current time.
     val timeAddr = SYMBOL_LOOKUP.findOrNull("time")
     val timeDesc = FunctionDescriptor.of(ValueLayout.JAVA_LONG)
@@ -43,8 +42,7 @@ object FFM {
     info { "time() = $timeResult epochSecond" }
   }
 
-  context(KLogger)
-  private fun gmtime() {
+  private fun KLogger.gmtime() {
     val gmtAddr = SYMBOL_LOOKUP.findOrNull("gmtime")
     val gmtDesc =
         FunctionDescriptor.of(
@@ -59,8 +57,7 @@ object FFM {
     }
   }
 
-  context(KLogger)
-  private fun getPid() {
+  private fun KLogger.getPid() {
     val getpidAddr = SYMBOL_LOOKUP.findOrNull("getpid")
     val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)
     val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)
@@ -79,8 +76,7 @@ object FFM {
    *  } point = { 1.0, 2.0 };
    * ```
    */
-  context(KLogger)
-  private fun memoryAPIs() {
+  private fun KLogger.memoryAPIs() {
     Arena.ofConfined().use { arena ->
       val point = arena.allocate(ValueLayout.JAVA_DOUBLE.byteSize() * 2)
       point.set(ValueLayout.JAVA_DOUBLE, 0, 1.0)
@@ -133,8 +129,7 @@ object FFM {
     }
   }
 
-  context(KLogger)
-  private fun terminal() {
+  private fun KLogger.terminal() {
     val winsize =
         MemoryLayout.structLayout(
                 ValueLayout.JAVA_SHORT.withName("ws_row"),
@@ -204,8 +199,7 @@ object FFM {
   }
 
   /** Reflectively invoke the downcallHandle method on the Linker class. */
-  context(KLogger)
-  private fun dhReflection() {
+  private fun KLogger.dhReflection() {
     val mh =
         MethodHandles.lookup()
             .findVirtual(
