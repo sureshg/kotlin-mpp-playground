@@ -5,6 +5,7 @@ plugins {
   dev.suresh.plugin.kotlin.jvm
   application
   com.gradleup.shadow
+  dev.suresh.plugin.publishing
 }
 
 description = "JVM JFR Agent!"

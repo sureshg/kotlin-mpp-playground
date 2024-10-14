@@ -13,6 +13,7 @@ kotlin.sourceSets {
       implementation(libs.pty4j)
       // implementation(libs.graal.polyglot)
       // implementation(libs.graal.wasm)
+      // implementation(fileTree("lib") { include("*.jar") })
     }
 
     kotlin.srcDir("src/main/kotlin")
