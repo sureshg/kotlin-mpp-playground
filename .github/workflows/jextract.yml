@@ -1,0 +1,93 @@
+name: jextract
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  jextract:
+    name: OpenJDK (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ macos-latest, windows-latest, ubuntu-latest, macos-13 ]
+        include:
+          - os: ubuntu-latest
+            script: linux.sh
+          - os: macos-latest
+            script: macos.sh
+          - os: macos-13
+            script: macos.sh
+          - os: windows-latest
+            script: windows.sh
+
+    steps:
+      - name: 🛎️ Check out the source code
+        uses: actions/checkout@v4
+
+      - name: ⚙ Set OS, Arch and Package
+        run: jextract/gen/script/set-package.sh
+
+      - name: ☕  Install jextract latest build
+        id: setup-jextract
+        uses: oracle-actions/setup-java@main
+        with:
+          website: jdk.java.net
+          release: 'jextract'
+          version: latest
+          install: true
+
+      - name: ☕ Install OpenJDK EA latest build
+        id: setup-java
+        uses: oracle-actions/setup-java@main
+        with:
+          website: jdk.java.net
+          release: 'ea'
+          version: latest
+          install: true
+
+
+      - name: 🏃Run jextract on ${{ matrix.os }}
+        run: |
+          java -version
+          jextract --version
+          jextract/gen/script/${{ matrix.script }}
+
+      - name: 📤 Uploading generated sources
+        uses: actions/upload-artifact@v4
+        with:
+          name: jextract-${{ matrix.os }}
+          path: jextract/src
+
+  merge:
+    name: 🔀 Merge branches
+    runs-on: ubuntu-latest
+    needs: jextract
+    steps:
+      - name: 🛎️ Check out the source code
+        uses: actions/checkout@v4
+
+      - name: 🧹 Clean up jextract src
+        run: rm -rf jextract/src || true
+
+      - name: 📥 Download source artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: jextract/src
+
+      - name: 📋 Copy the generated source
+        run: |
+          find jextract/src -mindepth 1 -maxdepth 1 -type d -exec sh -c 'cp -R "$0"/* jextract/src && rm -rf "$0"' {} \;
+          find jextract -type f
+
+      - name: 📌 Checkin the generated source
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Generated source using jextract"
