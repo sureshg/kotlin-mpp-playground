@@ -77,8 +77,6 @@ jobs:
         with:
           website: jdk.java.net
           release: ${{ matrix.jdk }}
-          version: latest
-          install: true
 
       - name: 🐘 Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -86,6 +84,7 @@ jobs:
       - name: 🏗️ Gradle Build & Run
         id: gradle-build
         run: |
+          java --version
           MKTEMP_PATH="$(dirname "$(mktemp -u)")/"
           echo "MKTEMP_PATH=$MKTEMP_PATH" >> $GITHUB_ENV
           ./gradlew buildAndPublish --no-daemon
