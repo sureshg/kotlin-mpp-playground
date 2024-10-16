@@ -108,24 +108,24 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;object VThread {
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  suspend fun virtualThreads() = runOnVirtualThread {
-&nbsp;    info { (Greeting().greeting()) }
-&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;, &quot;wasm&quot;).forEach {
-&nbsp;      info { &quot;Common-$it  --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
-&nbsp;      info { &quot;Backend-$it --&gt; ${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }
-&nbsp;    }
+&nbsp;  suspend fun virtualThreads(logger: KLogger) = runOnVirtualThread {
+&nbsp;    with(logger) {
+&nbsp;      info { (Greeting().greeting()) }
+&nbsp;      listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;, &quot;wasm&quot;).forEach {
+&nbsp;        info { &quot;Common-$it : ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }
+&nbsp;        info { &quot;Backend-$it : ${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }
+&nbsp;      }
 &nbsp;
-&nbsp;    structuredConcurrency()
-&nbsp;    langFeatures()
-&nbsp;    stdlibFeatures()
-&nbsp;    kotlinxMetaData()
-&nbsp;    classFileApi()
-&nbsp;    info { &quot;Concurrent Gatherers: ${gatherers().size}&quot; }
+&nbsp;      structuredConcurrency()
+&nbsp;      langFeatures()
+&nbsp;      stdlibFeatures()
+&nbsp;      kotlinxMetaData()
+&nbsp;      classFileApi()
+&nbsp;      info { &quot;Concurrent Gatherers: ${gatherers().size}&quot; }
+&nbsp;    }
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun structuredConcurrency() {
+&nbsp;  private fun KLogger.structuredConcurrency() {
 &nbsp;    info { &quot;Structured concurrency...&quot; }
 &nbsp;    val taskList =
 &nbsp;        StructuredTaskScope&lt;String&gt;().use { sts -&gt;
@@ -169,8 +169,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    return (1..100).toList().stream().gather(mapGatherer).toList()
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun kotlinxMetaData() {
+&nbsp;  private fun KLogger.kotlinxMetaData() {
 &nbsp;    val metadataAnnotation = LocalDateTime::class.java.getAnnotation(Metadata::class.java)
 &nbsp;    when (val metadata = KotlinClassMetadata.readLenient(metadataAnnotation)) {
 &nbsp;      is KotlinClassMetadata.Class -&gt; {
@@ -216,7 +215,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-16 00:24</div>
+    <div style="float:right;">generated on 2024-10-16 17:31</div>
 </div>
 </body>
 </html>

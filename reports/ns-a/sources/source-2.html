@@ -146,19 +146,19 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;object FFM {
 &nbsp;
-&nbsp;  context(KLogger)
-<b class="nc">&nbsp;  suspend fun memoryLayout() = runOnVirtualThread {</b>
-&nbsp;    memoryAPIs()
-&nbsp;    currTime()
-&nbsp;    strlen(&quot;Hello Panama!&quot;)
-&nbsp;    getPid()
-&nbsp;    gmtime()
-&nbsp;    terminal()
-&nbsp;    dhReflection()
+<b class="nc">&nbsp;  suspend fun memoryLayout(logger: KLogger) = runOnVirtualThread {</b>
+&nbsp;    with(logger) {
+&nbsp;      memoryAPIs()
+&nbsp;      currTime()
+&nbsp;      strlen(&quot;Hello Panama!&quot;)
+&nbsp;      getPid()
+&nbsp;      gmtime()
+&nbsp;      terminal()
+&nbsp;      dhReflection()
+&nbsp;    }
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun strlen(str: String) {
+&nbsp;  private fun KLogger.strlen(str: String) {
 <b class="nc">&nbsp;    val strlenAddr = SYMBOL_LOOKUP.findOrNull(&quot;strlen&quot;)</b>
 <b class="nc">&nbsp;    val strlenDescriptor = FunctionDescriptor.of(ValueLayout.JAVA_INT, AddressLayout.ADDRESS)</b>
 <b class="nc">&nbsp;    val strlen = LINKER.downcallHandle(strlenAddr, strlenDescriptor)</b>
@@ -169,8 +169,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    }</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun currTime() {
+&nbsp;  private fun KLogger.currTime() {
 &nbsp;    // Print the current time.
 <b class="nc">&nbsp;    val timeAddr = SYMBOL_LOOKUP.findOrNull(&quot;time&quot;)</b>
 <b class="nc">&nbsp;    val timeDesc = FunctionDescriptor.of(ValueLayout.JAVA_LONG)</b>
@@ -179,8 +178,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    info { &quot;time() = $timeResult epochSecond&quot; }</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun gmtime() {
+&nbsp;  private fun KLogger.gmtime() {
 <b class="nc">&nbsp;    val gmtAddr = SYMBOL_LOOKUP.findOrNull(&quot;gmtime&quot;)</b>
 <b class="nc">&nbsp;    val gmtDesc =</b>
 <b class="nc">&nbsp;        FunctionDescriptor.of(</b>
@@ -195,8 +193,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    }</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun getPid() {
+&nbsp;  private fun KLogger.getPid() {
 <b class="nc">&nbsp;    val getpidAddr = SYMBOL_LOOKUP.findOrNull(&quot;getpid&quot;)</b>
 <b class="nc">&nbsp;    val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)</b>
 <b class="nc">&nbsp;    val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)</b>
@@ -215,8 +212,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   *  } point = { 1.0, 2.0 };
 &nbsp;   * ```
 &nbsp;   */
-&nbsp;  context(KLogger)
-&nbsp;  private fun memoryAPIs() {
+&nbsp;  private fun KLogger.memoryAPIs() {
 <b class="nc">&nbsp;    Arena.ofConfined().use { arena -&gt;</b>
 <b class="nc">&nbsp;      val point = arena.allocate(ValueLayout.JAVA_DOUBLE.byteSize() * 2)</b>
 <b class="nc">&nbsp;      point.set(ValueLayout.JAVA_DOUBLE, 0, 1.0)</b>
@@ -269,8 +265,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    }</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun terminal() {
+&nbsp;  private fun KLogger.terminal() {
 <b class="nc">&nbsp;    val winsize =</b>
 <b class="nc">&nbsp;        MemoryLayout.structLayout(</b>
 <b class="nc">&nbsp;                ValueLayout.JAVA_SHORT.withName(&quot;ws_row&quot;),</b>
@@ -340,8 +335,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;
 &nbsp;  /** Reflectively invoke the downcallHandle method on the Linker class. */
-&nbsp;  context(KLogger)
-&nbsp;  private fun dhReflection() {
+&nbsp;  private fun KLogger.dhReflection() {
 <b class="nc">&nbsp;    val mh =</b>
 <b class="nc">&nbsp;        MethodHandles.lookup()</b>
 <b class="nc">&nbsp;            .findVirtual(</b>
@@ -382,7 +376,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-16 00:24</div>
+    <div style="float:right;">generated on 2024-10-16 17:31</div>
 </div>
 </body>
 </html>

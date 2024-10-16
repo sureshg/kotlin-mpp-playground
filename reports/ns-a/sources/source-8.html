@@ -93,7 +93,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <td class="coverageStat"/>
   </tr>
   <tr>
-    <td class="name">VThread$virtualThreads$2$1</td>
+    <td class="name">VThread$virtualThreads$2$1$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -121,7 +121,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">VThread$virtualThreads$2$2$1</td>
+    <td class="name">VThread$virtualThreads$2$1$2$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -156,7 +156,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">VThread$virtualThreads$2$2$2</td>
+    <td class="name">VThread$virtualThreads$2$1$2$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -191,7 +191,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">VThread$virtualThreads$2$3</td>
+    <td class="name">VThread$virtualThreads$2$1$3</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -276,24 +276,24 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;object VThread {
 &nbsp;
-&nbsp;  context(KLogger)
-<b class="nc">&nbsp;  suspend fun virtualThreads() = runOnVirtualThread {</b>
-<b class="nc">&nbsp;    info { (Greeting().greeting()) }</b>
-&nbsp;    listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;, &quot;wasm&quot;).forEach {
-<b class="nc">&nbsp;      info { &quot;Common-$it  --&gt; ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }</b>
-<b class="nc">&nbsp;      info { &quot;Backend-$it --&gt; ${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }</b>
-&nbsp;    }
+<b class="nc">&nbsp;  suspend fun virtualThreads(logger: KLogger) = runOnVirtualThread {</b>
+&nbsp;    with(logger) {
+<b class="nc">&nbsp;      info { (Greeting().greeting()) }</b>
+&nbsp;      listOf(&quot;main&quot;, &quot;jvm&quot;, &quot;js&quot;, &quot;wasm&quot;).forEach {
+<b class="nc">&nbsp;        info { &quot;Common-$it : ${ClassLoader.getSystemResource(&quot;common-$it-res.txt&quot;)?.readText()}&quot; }</b>
+<b class="nc">&nbsp;        info { &quot;Backend-$it : ${ClassLoader.getSystemResource(&quot;backend-$it-res.txt&quot;)?.readText()}&quot; }</b>
+&nbsp;      }
 &nbsp;
-&nbsp;    structuredConcurrency()
-&nbsp;    langFeatures()
-&nbsp;    stdlibFeatures()
-&nbsp;    kotlinxMetaData()
-&nbsp;    classFileApi()
-<b class="nc">&nbsp;    info { &quot;Concurrent Gatherers: ${gatherers().size}&quot; }</b>
+&nbsp;      structuredConcurrency()
+&nbsp;      langFeatures()
+&nbsp;      stdlibFeatures()
+&nbsp;      kotlinxMetaData()
+&nbsp;      classFileApi()
+<b class="nc">&nbsp;      info { &quot;Concurrent Gatherers: ${gatherers().size}&quot; }</b>
+&nbsp;    }
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun structuredConcurrency() {
+&nbsp;  private fun KLogger.structuredConcurrency() {
 <b class="nc">&nbsp;    info { &quot;Structured concurrency...&quot; }</b>
 <b class="nc">&nbsp;    val taskList =</b>
 <b class="nc">&nbsp;        StructuredTaskScope&lt;String&gt;().use { sts -&gt;</b>
@@ -337,8 +337,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    return (1..100).toList().stream().gather(mapGatherer).toList()</b>
 &nbsp;  }
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  private fun kotlinxMetaData() {
+&nbsp;  private fun KLogger.kotlinxMetaData() {
 <b class="nc">&nbsp;    val metadataAnnotation = LocalDateTime::class.java.getAnnotation(Metadata::class.java)</b>
 <b class="nc">&nbsp;    when (val metadata = KotlinClassMetadata.readLenient(metadataAnnotation)) {</b>
 <b class="nc">&nbsp;      is KotlinClassMetadata.Class -&gt; {</b>
@@ -384,7 +383,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-16 00:24</div>
+    <div style="float:right;">generated on 2024-10-16 17:31</div>
 </div>
 </body>
 </html>

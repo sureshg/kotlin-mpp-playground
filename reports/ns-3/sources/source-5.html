@@ -119,68 +119,69 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;  private val started = AtomicBoolean(false)
 &nbsp;
-&nbsp;  context(KLogger)
-&nbsp;  suspend fun recordingStream() = runOnVirtualThread {
-&nbsp;    if (!started.getAndSet(true)) {
-&nbsp;      info { &quot;Adding periodic JFR event...&quot; }
-&nbsp;      addPeriodicJFREvent(Counter()) { inc() }
-&nbsp;    }
+&nbsp;  suspend fun recordingStream(logger: KLogger) = runOnVirtualThread {
+&nbsp;    with(logger) {
+&nbsp;      if (!started.getAndSet(true)) {
+&nbsp;        info { &quot;Adding periodic JFR event...&quot; }
+&nbsp;        addPeriodicJFREvent(Counter()) { inc() }
+&nbsp;      }
 &nbsp;
-&nbsp;    val config = Configuration.getConfiguration(&quot;profile&quot;)
-&nbsp;    RecordingStream(config).use {
-&nbsp;      info { &quot;RecordingStream started!&quot; }
-&nbsp;      it.setMaxSize(5_000_000)
-&nbsp;      it.enable(&quot;jdk.CPULoad&quot;).withPeriod(Duration.ofSeconds(1))
-&nbsp;      it.onEvent(&quot;jdk.CPULoad&quot;) { event -&gt;
-&nbsp;        val jvmUser = event.getFloat(&quot;jvmUser&quot;)
-&nbsp;        val jvmSystem = event.getFloat(&quot;jvmSystem&quot;)
-&nbsp;        val machineTotal = event.getFloat(&quot;machineTotal&quot;)
-&nbsp;        info {
-&nbsp;          &quot;JVM User: %1$.2f, JVM System: %2$.2f, Machine Total: %3$.2f&quot;
-&nbsp;              .format(jvmUser, jvmSystem, machineTotal)
+&nbsp;      val config = Configuration.getConfiguration(&quot;profile&quot;)
+&nbsp;      RecordingStream(config).use {
+&nbsp;        info { &quot;RecordingStream started!&quot; }
+&nbsp;        it.setMaxSize(5_000_000)
+&nbsp;        it.enable(&quot;jdk.CPULoad&quot;).withPeriod(Duration.ofSeconds(1))
+&nbsp;        it.onEvent(&quot;jdk.CPULoad&quot;) { event -&gt;
+&nbsp;          val jvmUser = event.getFloat(&quot;jvmUser&quot;)
+&nbsp;          val jvmSystem = event.getFloat(&quot;jvmSystem&quot;)
+&nbsp;          val machineTotal = event.getFloat(&quot;machineTotal&quot;)
+&nbsp;          info {
+&nbsp;            &quot;JVM User: %1$.2f, JVM System: %2$.2f, Machine Total: %3$.2f&quot;
+&nbsp;                .format(jvmUser, jvmSystem, machineTotal)
+&nbsp;          }
+&nbsp;
+&nbsp;          // if (jvmUser &gt; 0.8) {
+&nbsp;          //  it.dump(Path(&quot;cpu-load.jfr&quot;))
+&nbsp;          // }
 &nbsp;        }
 &nbsp;
-&nbsp;        // if (jvmUser &gt; 0.8) {
-&nbsp;        //  it.dump(Path(&quot;cpu-load.jfr&quot;))
-&nbsp;        // }
-&nbsp;      }
+&nbsp;        // Contended classes for more than 10ms
+&nbsp;        it.enable(&quot;jdk.JavaMonitorEnter&quot;).withThreshold(Duration.ofMillis(10))
+&nbsp;        it.onEvent(&quot;jdk.JavaMonitorEnter&quot;) { event -&gt;
+&nbsp;          info { &quot;Long held Monitor: ${event.getClass(&quot;monitorClass&quot;)}&quot; }
+&nbsp;        }
 &nbsp;
-&nbsp;      // Contended classes for more than 10ms
-&nbsp;      it.enable(&quot;jdk.JavaMonitorEnter&quot;).withThreshold(Duration.ofMillis(10))
-&nbsp;      it.onEvent(&quot;jdk.JavaMonitorEnter&quot;) { event -&gt;
-&nbsp;        info { &quot;Long held Monitor: ${event.getClass(&quot;monitorClass&quot;)}&quot; }
-&nbsp;      }
+&nbsp;        it.enable(&quot;jdk.GarbageCollection&quot;)
+&nbsp;        it.enable(&quot;jdk.JVMInformation&quot;)
+&nbsp;        it.onEvent(&quot;jdk.JVMInformation&quot;) { event -&gt;
+&nbsp;          val jvmName = event.getString(&quot;jvmName&quot;)
+&nbsp;          val jvmVersion = event.getString(&quot;jvmVersion&quot;)
+&nbsp;          info { &quot;JVM: $jvmName, Version: $jvmVersion&quot; }
+&nbsp;        }
 &nbsp;
-&nbsp;      it.enable(&quot;jdk.GarbageCollection&quot;)
-&nbsp;      it.enable(&quot;jdk.JVMInformation&quot;)
-&nbsp;      it.onEvent(&quot;jdk.JVMInformation&quot;) { event -&gt;
-&nbsp;        val jvmName = event.getString(&quot;jvmName&quot;)
-&nbsp;        val jvmVersion = event.getString(&quot;jvmVersion&quot;)
-&nbsp;        info { &quot;JVM: $jvmName, Version: $jvmVersion&quot; }
-&nbsp;      }
+&nbsp;        it.enable(&quot;dev.suresh.Counter&quot;)
+&nbsp;        it.onEvent(&quot;dev.suresh.Counter&quot;) { event -&gt;
+&nbsp;          val duration = event.duration.toMillis()
+&nbsp;          info { &quot;Count: ${event.getLong(&quot;count&quot;)}, duration: $duration&quot; }
 &nbsp;
-&nbsp;      it.enable(&quot;dev.suresh.Counter&quot;)
-&nbsp;      it.onEvent(&quot;dev.suresh.Counter&quot;) { event -&gt;
-&nbsp;        val duration = event.duration.toMillis()
-&nbsp;        info { &quot;Count: ${event.getLong(&quot;count&quot;)}, duration: $duration&quot; }
-&nbsp;
-&nbsp;        // Find correlation events by getting an event window 1 sec before and after the event.
-&nbsp;        if (duration &gt; 500) {
-&nbsp;          EventStream.openRepository().use { es -&gt;
-&nbsp;            es.setStartTime(event.startTime.minus(Duration.ofSeconds(1)))
-&nbsp;            es.setEndTime(event.endTime.plus(Duration.ofSeconds(1)))
-&nbsp;            es.onEvent(&quot;jdk.GCPhasePause&quot;) { gcEvent -&gt;
-&nbsp;              val gcDuration = gcEvent.duration.toMillis()
-&nbsp;              info { &quot;GC pause of $gcDuration millis during the Counter event!&quot; }
+&nbsp;          // Find correlation events by getting an event window 1 sec before and after the event.
+&nbsp;          if (duration &gt; 500) {
+&nbsp;            EventStream.openRepository().use { es -&gt;
+&nbsp;              es.setStartTime(event.startTime.minus(Duration.ofSeconds(1)))
+&nbsp;              es.setEndTime(event.endTime.plus(Duration.ofSeconds(1)))
+&nbsp;              es.onEvent(&quot;jdk.GCPhasePause&quot;) { gcEvent -&gt;
+&nbsp;                val gcDuration = gcEvent.duration.toMillis()
+&nbsp;                info { &quot;GC pause of $gcDuration millis during the Counter event!&quot; }
+&nbsp;              }
 &nbsp;            }
 &nbsp;          }
 &nbsp;        }
-&nbsp;      }
 &nbsp;
-&nbsp;      it.startAsync()
-&nbsp;      Thread.sleep(3.seconds.toJavaDuration())
+&nbsp;        it.startAsync()
+&nbsp;        Thread.sleep(3.seconds.toJavaDuration())
+&nbsp;      }
+&nbsp;      info { &quot;RecordingStream done!&quot; }
 &nbsp;    }
-&nbsp;    info { &quot;RecordingStream done!&quot; }
 &nbsp;  }
 &nbsp;}
 </code>
@@ -206,7 +207,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-16 00:24</div>
+    <div style="float:right;">generated on 2024-10-16 17:31</div>
 </div>
 </body>
 </html>

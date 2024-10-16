@@ -101,7 +101,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/27)
+    (0/26)
   </span>
 </td>
   </tr>
@@ -381,7 +381,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/419)
+    (0/418)
   </span>
 </td>
 </tr>
@@ -408,16 +408,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.routing.*
 &nbsp;import io.ktor.server.sessions.*
 &nbsp;import io.opentelemetry.instrumentation.annotations.WithSpan
-&nbsp;import java.io.Writer
 &nbsp;
 <b class="nc">&nbsp;private val logger = KotlinLogging.logger {}</b>
 &nbsp;
 &nbsp;fun Routing.services() {
-<b class="nc">&nbsp;  get(&quot;/ffm&quot;) { call.respondLogStream { FFM.memoryLayout() } }</b>
+<b class="nc">&nbsp;  get(&quot;/ffm&quot;) { call.respondLogStream { FFM.memoryLayout(this) } }</b>
 &nbsp;
-<b class="nc">&nbsp;  get(&quot;/vthreads&quot;) { call.respondLogStream { VThread.virtualThreads() } }</b>
+<b class="nc">&nbsp;  get(&quot;/vthreads&quot;) { call.respondLogStream { VThread.virtualThreads(this) } }</b>
 &nbsp;
-<b class="nc">&nbsp;  get(&quot;/jfr&quot;) { call.respondLogStream { JFR.recordingStream() } }</b>
+<b class="nc">&nbsp;  get(&quot;/jfr&quot;) { call.respondLogStream { JFR.recordingStream(this) } }</b>
 &nbsp;
 <b class="nc">&nbsp;  get(&quot;/trace&quot;) {</b>
 <b class="nc">&nbsp;    call.respond(</b>
@@ -441,11 +440,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;suspend fun ApplicationCall.respondLogStream(
 <b class="nc">&nbsp;    contentType: ContentType = ContentType.Text.EventStream,</b>
-&nbsp;    block:
-&nbsp;        suspend context(KLogger)
-&nbsp;        Writer.() -&gt; Unit
+&nbsp;    block: suspend KLogger.() -&gt; Unit
 &nbsp;) {
-<b class="nc">&nbsp;  respondTextWriter(contentType = contentType) { block(RespLogger(this, logger), this) }</b>
+<b class="nc">&nbsp;  respondTextWriter(contentType = contentType) { block(RespLogger(this, logger)) }</b>
 &nbsp;}
 </code>
 </pre>
@@ -470,7 +467,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-16 00:24</div>
+    <div style="float:right;">generated on 2024-10-16 17:31</div>
 </div>
 </body>
 </html>

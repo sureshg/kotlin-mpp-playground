@@ -86,7 +86,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <td class="coverageStat"/>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$1</td>
+    <td class="name">JFR$recordingStream$2$1$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -114,7 +114,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$1</td>
+    <td class="name">JFR$recordingStream$2$1$3$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -142,7 +142,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$2</td>
+    <td class="name">JFR$recordingStream$2$1$3$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -170,7 +170,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$2$1</td>
+    <td class="name">JFR$recordingStream$2$1$3$2$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -198,7 +198,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$3</td>
+    <td class="name">JFR$recordingStream$2$1$3$3</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -226,7 +226,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$3$1</td>
+    <td class="name">JFR$recordingStream$2$1$3$3$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -254,7 +254,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$4</td>
+    <td class="name">JFR$recordingStream$2$1$3$4</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -282,7 +282,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$4$1</td>
+    <td class="name">JFR$recordingStream$2$1$3$4$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -310,7 +310,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$5</td>
+    <td class="name">JFR$recordingStream$2$1$3$5</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -345,7 +345,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$5$1</td>
+    <td class="name">JFR$recordingStream$2$1$3$5$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -373,7 +373,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$5$2$1</td>
+    <td class="name">JFR$recordingStream$2$1$3$5$2$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -401,7 +401,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$3$5$2$1$1</td>
+    <td class="name">JFR$recordingStream$2$1$3$5$2$1$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -429,7 +429,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$2$4</td>
+    <td class="name">JFR$recordingStream$2$1$4</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -457,7 +457,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">JFR$recordingStream$lambda$2$$inlined$addPeriodicJFREvent$1</td>
+    <td class="name">JFR$recordingStream$lambda$3$lambda$2$$inlined$addPeriodicJFREvent$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -537,68 +537,69 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="nc">&nbsp;  private val started = AtomicBoolean(false)</b>
 &nbsp;
-&nbsp;  context(KLogger)
-<b class="nc">&nbsp;  suspend fun recordingStream() = runOnVirtualThread {</b>
-&nbsp;    if (!started.getAndSet(true)) {
-<b class="nc">&nbsp;      info { &quot;Adding periodic JFR event...&quot; }</b>
-&nbsp;      addPeriodicJFREvent(Counter()) { inc() }
-&nbsp;    }
+<b class="nc">&nbsp;  suspend fun recordingStream(logger: KLogger) = runOnVirtualThread {</b>
+&nbsp;    with(logger) {
+&nbsp;      if (!started.getAndSet(true)) {
+<b class="nc">&nbsp;        info { &quot;Adding periodic JFR event...&quot; }</b>
+&nbsp;        addPeriodicJFREvent(Counter()) { inc() }
+&nbsp;      }
 &nbsp;
-&nbsp;    val config = Configuration.getConfiguration(&quot;profile&quot;)
-&nbsp;    RecordingStream(config).use {
-<b class="nc">&nbsp;      info { &quot;RecordingStream started!&quot; }</b>
-&nbsp;      it.setMaxSize(5_000_000)
-&nbsp;      it.enable(&quot;jdk.CPULoad&quot;).withPeriod(Duration.ofSeconds(1))
-&nbsp;      it.onEvent(&quot;jdk.CPULoad&quot;) { event -&gt;
-<b class="nc">&nbsp;        val jvmUser = event.getFloat(&quot;jvmUser&quot;)</b>
-<b class="nc">&nbsp;        val jvmSystem = event.getFloat(&quot;jvmSystem&quot;)</b>
-<b class="nc">&nbsp;        val machineTotal = event.getFloat(&quot;machineTotal&quot;)</b>
-<b class="nc">&nbsp;        info {</b>
-<b class="nc">&nbsp;          &quot;JVM User: %1$.2f, JVM System: %2$.2f, Machine Total: %3$.2f&quot;</b>
-<b class="nc">&nbsp;              .format(jvmUser, jvmSystem, machineTotal)</b>
+&nbsp;      val config = Configuration.getConfiguration(&quot;profile&quot;)
+&nbsp;      RecordingStream(config).use {
+<b class="nc">&nbsp;        info { &quot;RecordingStream started!&quot; }</b>
+&nbsp;        it.setMaxSize(5_000_000)
+&nbsp;        it.enable(&quot;jdk.CPULoad&quot;).withPeriod(Duration.ofSeconds(1))
+&nbsp;        it.onEvent(&quot;jdk.CPULoad&quot;) { event -&gt;
+<b class="nc">&nbsp;          val jvmUser = event.getFloat(&quot;jvmUser&quot;)</b>
+<b class="nc">&nbsp;          val jvmSystem = event.getFloat(&quot;jvmSystem&quot;)</b>
+<b class="nc">&nbsp;          val machineTotal = event.getFloat(&quot;machineTotal&quot;)</b>
+<b class="nc">&nbsp;          info {</b>
+<b class="nc">&nbsp;            &quot;JVM User: %1$.2f, JVM System: %2$.2f, Machine Total: %3$.2f&quot;</b>
+<b class="nc">&nbsp;                .format(jvmUser, jvmSystem, machineTotal)</b>
+&nbsp;          }
+&nbsp;
+&nbsp;          // if (jvmUser &gt; 0.8) {
+&nbsp;          //  it.dump(Path(&quot;cpu-load.jfr&quot;))
+&nbsp;          // }
 &nbsp;        }
 &nbsp;
-&nbsp;        // if (jvmUser &gt; 0.8) {
-&nbsp;        //  it.dump(Path(&quot;cpu-load.jfr&quot;))
-&nbsp;        // }
-&nbsp;      }
-&nbsp;
-&nbsp;      // Contended classes for more than 10ms
-&nbsp;      it.enable(&quot;jdk.JavaMonitorEnter&quot;).withThreshold(Duration.ofMillis(10))
-&nbsp;      it.onEvent(&quot;jdk.JavaMonitorEnter&quot;) { event -&gt;
-<b class="nc">&nbsp;        info { &quot;Long held Monitor: ${event.getClass(&quot;monitorClass&quot;)}&quot; }</b>
-&nbsp;      }
-&nbsp;
-&nbsp;      it.enable(&quot;jdk.GarbageCollection&quot;)
-&nbsp;      it.enable(&quot;jdk.JVMInformation&quot;)
-&nbsp;      it.onEvent(&quot;jdk.JVMInformation&quot;) { event -&gt;
-<b class="nc">&nbsp;        val jvmName = event.getString(&quot;jvmName&quot;)</b>
-<b class="nc">&nbsp;        val jvmVersion = event.getString(&quot;jvmVersion&quot;)</b>
-<b class="nc">&nbsp;        info { &quot;JVM: $jvmName, Version: $jvmVersion&quot; }</b>
-&nbsp;      }
-&nbsp;
-&nbsp;      it.enable(&quot;dev.suresh.Counter&quot;)
-&nbsp;      it.onEvent(&quot;dev.suresh.Counter&quot;) { event -&gt;
-<b class="nc">&nbsp;        val duration = event.duration.toMillis()</b>
-<b class="nc">&nbsp;        info { &quot;Count: ${event.getLong(&quot;count&quot;)}, duration: $duration&quot; }</b>
-&nbsp;
-&nbsp;        // Find correlation events by getting an event window 1 sec before and after the event.
-<b class="nc">&nbsp;        if (duration &gt; 500) {</b>
-<b class="nc">&nbsp;          EventStream.openRepository().use { es -&gt;</b>
-<b class="nc">&nbsp;            es.setStartTime(event.startTime.minus(Duration.ofSeconds(1)))</b>
-<b class="nc">&nbsp;            es.setEndTime(event.endTime.plus(Duration.ofSeconds(1)))</b>
-<b class="nc">&nbsp;            es.onEvent(&quot;jdk.GCPhasePause&quot;) { gcEvent -&gt;</b>
-<b class="nc">&nbsp;              val gcDuration = gcEvent.duration.toMillis()</b>
-<b class="nc">&nbsp;              info { &quot;GC pause of $gcDuration millis during the Counter event!&quot; }</b>
-&nbsp;            }
-<b class="nc">&nbsp;          }</b>
+&nbsp;        // Contended classes for more than 10ms
+&nbsp;        it.enable(&quot;jdk.JavaMonitorEnter&quot;).withThreshold(Duration.ofMillis(10))
+&nbsp;        it.onEvent(&quot;jdk.JavaMonitorEnter&quot;) { event -&gt;
+<b class="nc">&nbsp;          info { &quot;Long held Monitor: ${event.getClass(&quot;monitorClass&quot;)}&quot; }</b>
 &nbsp;        }
-&nbsp;      }
 &nbsp;
-&nbsp;      it.startAsync()
-&nbsp;      Thread.sleep(3.seconds.toJavaDuration())
+&nbsp;        it.enable(&quot;jdk.GarbageCollection&quot;)
+&nbsp;        it.enable(&quot;jdk.JVMInformation&quot;)
+&nbsp;        it.onEvent(&quot;jdk.JVMInformation&quot;) { event -&gt;
+<b class="nc">&nbsp;          val jvmName = event.getString(&quot;jvmName&quot;)</b>
+<b class="nc">&nbsp;          val jvmVersion = event.getString(&quot;jvmVersion&quot;)</b>
+<b class="nc">&nbsp;          info { &quot;JVM: $jvmName, Version: $jvmVersion&quot; }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        it.enable(&quot;dev.suresh.Counter&quot;)
+&nbsp;        it.onEvent(&quot;dev.suresh.Counter&quot;) { event -&gt;
+<b class="nc">&nbsp;          val duration = event.duration.toMillis()</b>
+<b class="nc">&nbsp;          info { &quot;Count: ${event.getLong(&quot;count&quot;)}, duration: $duration&quot; }</b>
+&nbsp;
+&nbsp;          // Find correlation events by getting an event window 1 sec before and after the event.
+<b class="nc">&nbsp;          if (duration &gt; 500) {</b>
+<b class="nc">&nbsp;            EventStream.openRepository().use { es -&gt;</b>
+<b class="nc">&nbsp;              es.setStartTime(event.startTime.minus(Duration.ofSeconds(1)))</b>
+<b class="nc">&nbsp;              es.setEndTime(event.endTime.plus(Duration.ofSeconds(1)))</b>
+<b class="nc">&nbsp;              es.onEvent(&quot;jdk.GCPhasePause&quot;) { gcEvent -&gt;</b>
+<b class="nc">&nbsp;                val gcDuration = gcEvent.duration.toMillis()</b>
+<b class="nc">&nbsp;                info { &quot;GC pause of $gcDuration millis during the Counter event!&quot; }</b>
+&nbsp;              }
+<b class="nc">&nbsp;            }</b>
+&nbsp;          }
+&nbsp;        }
+&nbsp;
+&nbsp;        it.startAsync()
+&nbsp;        Thread.sleep(3.seconds.toJavaDuration())
+&nbsp;      }
+<b class="nc">&nbsp;      info { &quot;RecordingStream done!&quot; }</b>
 &nbsp;    }
-<b class="nc">&nbsp;    info { &quot;RecordingStream done!&quot; }</b>
 &nbsp;  }
 &nbsp;}
 </code>
@@ -624,7 +625,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-16 00:24</div>
+    <div style="float:right;">generated on 2024-10-16 17:31</div>
 </div>
 </body>
 </html>
