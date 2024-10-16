@@ -117,17 +117,19 @@ val Project.githubRepo
   get() = "https://github.com/${githubUser}/${rootProject.name}"
 
 /** For publishing to maven central and GitHub */
-val Project.signingKey
-  get() = providers.gradleProperty("signingKey")
+val Project.signingInMemoryKey
+  get() = providers.gradleProperty("signingInMemoryKey")
 
-val Project.signingKeyId
-  get() = providers.gradleProperty("signingKeyId")
+val Project.signingInMemoryKeyId
+  get() = providers.gradleProperty("signingInMemoryKeyId")
 
-val Project.signingPassword
-  get() = providers.gradleProperty("signingPassword")
+val Project.signingInMemoryKeyPassword
+  get() = providers.gradleProperty("signingInMemoryKeyPassword")
 
 val Project.hasSigningKey
-  get() = signingKey.orNull.isNullOrBlank().not() && signingPassword.orNull.isNullOrBlank().not()
+  get() =
+      signingInMemoryKey.orNull.isNullOrBlank().not() &&
+          signingInMemoryKeyPassword.orNull.isNullOrBlank().not()
 
 val Project.mavenCentralUsername
   get() = providers.gradleProperty("mavenCentralUsername")
@@ -140,7 +142,6 @@ val Project.githubPackagesUsername
 
 val Project.githubPackagesPassword
   get() = providers.gradleProperty("githubPackagesPassword")
-
 /** Kotlin Dependencies extension functions. */
 val Project.isKotlinMultiplatformProject
   get() = plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")

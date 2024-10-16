@@ -109,7 +109,8 @@ pluginManager.withPlugin("com.google.cloud.tools.jib") {
 signing {
   setRequired { hasSigningKey }
   if (hasSigningKey) {
-    useInMemoryPgpKeys(signingKeyId.orNull, signingKey.orNull, signingPassword.orNull)
+    useInMemoryPgpKeys(
+        signingInMemoryKeyId.orNull, signingInMemoryKey.orNull, signingInMemoryKeyPassword.orNull)
     sign(publishing.publications)
   }
 }
