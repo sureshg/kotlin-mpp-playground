@@ -71,24 +71,35 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: ☕ Install OpenJDK ${{ matrix.jdk }} latest build from ☁️jdk.java.net
-        id: setup-java
+      - name: ⬇️ Download OpenJDK ${{ matrix.jdk }} latest build from ☁️jdk.java.net
+        id: download-jdk
         uses: oracle-actions/setup-java@main
         with:
           website: jdk.java.net
           release: ${{ matrix.jdk }}
+          version: latest
+          install: false
+
+      - name: ☕ Set up OpenJDK ${{ matrix.jdk }}
+        id: setup-java
+        uses: actions/setup-java@v4
+        if: always() && steps.download-jdk.outcome == 'success'
+        with:
+          distribution: jdkfile
+          java-version: ${{ steps.download-jdk.outputs.version }}
+          jdkFile: ${{ steps.download-jdk.outputs.archive }}
+          cache: 'gradle'
 
       - name: 🐘 Setup Gradle
+        if: ${{ false }}
         uses: gradle/actions/setup-gradle@v4
 
       - name: 🏗️ Gradle Build & Run
         id: gradle-build
         run: |
-          java --version
-          MKTEMP_PATH="$(dirname "$(mktemp -u)")/"
-          echo "MKTEMP_PATH=$MKTEMP_PATH" >> $GITHUB_ENV
           ./gradlew buildAndPublish --no-daemon
-          # echo "dist_path=backend/jvm/build/libs/jvm-all.jar" >> "$GITHUB_OUTPUT"
+          # echo "dist_path=../jvm-all.jar" >> "$GITHUB_OUTPUT"
+          # echo "NAME=VAL" >> $GITHUB_ENV
         env:
           GITHUB_USER: ${{ github.repository_owner }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -157,7 +168,6 @@ jobs:
           path: |
             hs_err*
             ${{ github.workspace }}/hs_err*
-            ${{ env.MKTEMP_PATH }}/*hs-err*
           if-no-files-found: warn
           retention-days: 30
 

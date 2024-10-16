@@ -1,10 +1,10 @@
-name: jextract
+name: Build-Jextract
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  #  push:
+  #    branches: [ main ]
+  #  pull_request:
+  #    branches: [ main ]
   workflow_dispatch:
 
 defaults:
@@ -52,7 +52,6 @@ jobs:
           release: 'ea'
           version: latest
           install: true
-
 
       - name: 🏃Run jextract on ${{ matrix.os }}
         run: |
