@@ -33,6 +33,12 @@ apply(plugin = "dev.suresh.plugin.depreports")
 // Load the build script from a file
 // apply(from = rootDir.resolve("project.plugin.gradle.kts"))
 
+val rootProjectName = rootProject.name
+val projectName = project.name
+val projectVersion = project.version.toString()
+val projectGroup = project.group.toString()
+val gradleVersion = gradle.gradleVersion
+
 java {
   withSourcesJar()
   withJavadocJar()
@@ -78,7 +84,6 @@ redacted {
 
 // kopy { functions = KopyFunctions.Copy }
 
-// Java agent configuration for jib
 val javaAgent by configurations.registering { isTransitive = false }
 
 tasks {
@@ -96,36 +101,34 @@ tasks {
   withType<Jar>().configureEach {
     manifest {
       attributes(
-          // "Automatic-Module-Name" to project.group,
+          // "Automatic-Module-Name" to projectGroup,
           "Enable-Native-Access" to "ALL-UNNAMED",
           "Built-By" to System.getProperty("user.name"),
           "Built-Jdk" to System.getProperty("java.runtime.version"),
           "Built-OS" to
               "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}",
           "Build-Timestamp" to DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()),
-          "Created-By" to "Gradle ${gradle.gradleVersion}",
-          Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
-          Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
-          Attributes.Name.IMPLEMENTATION_VENDOR.toString() to project.group,
+          "Created-By" to "Gradle $gradleVersion",
+          Attributes.Name.IMPLEMENTATION_TITLE.toString() to projectName,
+          Attributes.Name.IMPLEMENTATION_VERSION.toString() to projectVersion,
+          Attributes.Name.IMPLEMENTATION_VENDOR.toString() to projectGroup,
       )
     }
     duplicatesStrategy = DuplicatesStrategy.WARN
   }
 
   processResources {
-    inputs.property("version", project.version.toString())
+    inputs.property("version", projectVersion)
     filesMatching("**/*-res.txt") {
       expand(
-          "name" to rootProject.name,
-          "module" to project.name,
-          "version" to project.version,
+          "name" to rootProjectName,
+          "module" to projectName,
+          "version" to projectVersion,
       )
     }
     filesMatching("**/*.yaml") {
       filter { line ->
-        line
-            .replace("{project.name}", rootProject.name)
-            .replace("{project.version}", project.version.toString())
+        line.replace("{project.name}", rootProjectName).replace("{project.version}", projectVersion)
       }
     }
   }
@@ -150,7 +153,7 @@ tasks {
           jarFile = shadowJar.flatMap { it.archiveFile }
           // javaOpts = application.applicationDefaultJvmArgs
           javaOpts = named<JavaExec>("run").get().jvmArgs
-          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
+          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${projectName}-app") }
           onlyIf { OperatingSystem.current().isUnix }
         }
 
@@ -215,7 +218,7 @@ tasks {
     withType<BuildDockerTask>().configureEach {
       doLast {
         val portMapping = jib?.container?.ports.orEmpty().joinToString(" ") { "-p $it:$it" }
-        val image = jib?.to?.image ?: project.name
+        val image = jib?.to?.image ?: projectName
         val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
         val env =
             jib?.container
@@ -226,7 +229,7 @@ tasks {
         logger.lifecycle(
             TextColors.cyan(
                 """
-                |Run: docker run -it --rm --name ${project.name} $portMapping $env $image:$tag
+                |Run: docker run -it --rm --name $projectName $portMapping $env $image:$tag
                 """
                     .trimMargin()))
       }
