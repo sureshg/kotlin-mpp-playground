@@ -113,12 +113,7 @@ tasks {
     group = BasePlugin.BUILD_GROUP
 
     dependsOn(allprojects.map { it.tasks.build })
-    dependsOn(
-        ":allTestReports",
-        ":dokkaHtmlMultiModule",
-        ":koverHtmlReport",
-        /*":testAggregateTestReport"*/
-    )
+    dependsOn(":allTestReports", ":dokkaGenerate", ":koverHtmlReport")
 
     when {
       // Publishing to all repos on GitHub Action tag build

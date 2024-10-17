@@ -81,13 +81,13 @@ publishing {
 
     // Add Dokka html doc to all publications
     pluginManager.withPlugin("org.jetbrains.dokka") {
-      val dokkaHtmlJar by
+      val dokkaGenerateJar by
           tasks.registering(Jar::class) {
-            from(tasks.named("dokkaHtml"))
+            from(tasks.named("dokkaGenerate"))
             archiveClassifier = "html-docs"
           }
 
-      withType<MavenPublication>().configureEach { artifact(dokkaHtmlJar) }
+      withType<MavenPublication>().configureEach { artifact(dokkaGenerateJar) }
     }
   }
 }

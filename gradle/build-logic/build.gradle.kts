@@ -168,7 +168,6 @@ dependencies {
   implementation(libs.build.kotlinx.benchmark)
   implementation(libs.build.kotlinx.bcv)
   implementation(libs.build.dokka.plugin)
-  implementation(libs.build.dokka.base)
   implementation(libs.build.redacted.plugin)
   implementation(libs.build.gradle.develocity)
   implementation(libs.build.nmcp.plugin)

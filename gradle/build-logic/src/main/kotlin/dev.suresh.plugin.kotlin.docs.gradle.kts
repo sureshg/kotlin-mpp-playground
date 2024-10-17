@@ -1,38 +1,18 @@
 import common.*
-import java.net.URI
+import java.time.Year
 import org.hildan.github.changelog.plugin.GitHubChangelogExtension
-import org.jetbrains.dokka.DokkaConfiguration.Visibility
-import org.jetbrains.dokka.base.DokkaBase
-import org.jetbrains.dokka.base.DokkaBaseConfiguration
-import org.jetbrains.dokka.gradle.DokkaMultiModuleTask
-import org.jetbrains.dokka.gradle.DokkaTaskPartial
+import org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier
 
 plugins {
   org.jetbrains.dokka
   com.diffplug.spotless
+  // org.jetbrains.`dokka-javadoc`
   // `test-report-aggregation`
 }
 
 // The following plugins and config apply only to a root project.
 if (isRootProject) {
   apply(plugin = "org.hildan.github.changelog")
-
-  // Dokka multi-module config.
-  tasks.withType<DokkaMultiModuleTask>().configureEach {
-    description = project.description.orEmpty()
-    moduleName = project.name
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-      // Override the default dokka logo and styles
-      // val rootPath = rootProject.rootDir.toPath()
-      // customAssets = listOf(rootPath.resolve("app-logo.svg"))
-      // customStyleSheets = listOf(rootPath.resolve("logo-styles.css"))
-      // templatesDir = rootPath.resolve("templates")
-      footerMessage = "Copyright &copy; 2024 suresh.dev"
-      homepageLink = githubRepo
-      separateInheritedMembers = false
-      mergeImplicitExpectActualDeclarations = false
-    }
-  }
 
   // Combined test reports
   val allTestReports by
@@ -50,8 +30,55 @@ if (isRootProject) {
       }
 }
 
-pluginManager.withPlugin("org.hildan.github.changelog") {
-  configure<GitHubChangelogExtension> { githubUser = project.githubUser }
+dokka {
+  moduleName = project.name
+  dokkaSourceSets.configureEach {
+    // includes.from("README.md")
+    jdkVersion = kotlinJvmTarget.map { it.target.toInt() }
+    enableKotlinStdLibDocumentationLink = true
+    enableJdkDocumentationLink = true
+    reportUndocumented = false
+    skipDeprecated = true
+
+    sourceLink {
+      localDirectory = rootDir
+      remoteUrl = uri("${githubRepo}/tree/main")
+      remoteLineSuffix = "#L"
+    }
+
+    perPackageOption {
+      matchingRegex = ".*internal.*"
+      suppress = true
+    }
+
+    documentedVisibilities = setOf(VisibilityModifier.Public)
+
+    samples.from("src/test/kotlin")
+
+    externalDocumentationLinks {
+      register("kotlinx.coroutines") { url("https://kotlinlang.org/api/kotlinx.coroutines/") }
+      register("kotlinx.serialization") { url("https://kotlinlang.org/api/kotlinx.serialization/") }
+      register("kotlinx-datetime") {
+        url("https://kotlinlang.org/api/kotlinx-datetime/")
+        packageListUrl("https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list")
+      }
+      register("ktor") { url("https://api.ktor.io/") }
+    }
+
+    // dokkaPublicationDirectory = rootProject.layout.buildDirectory.dir("dokkaDir")
+  }
+
+  pluginsConfiguration.html {
+    footerMessage = "Copyright &copy; ${Year.now()} suresh.dev"
+    homepageLink = githubRepo
+    separateInheritedMembers = false
+    mergeImplicitExpectActualDeclarations = false
+
+    // val rootPath = rootProject.rootDir
+    // customAssets.from(rootPath.resolve("app-logo.svg"))
+    // customStyleSheets.from(rootPath.resolve("logo-styles.css"))
+    // templatesDir = rootProject.file("dokka-templates")
+  }
 }
 
 spotless {
@@ -67,7 +94,7 @@ spotless {
   kotlin {
     ktfmt(ktfmtVersion)
     target("**/*.kt")
-    targetExclude("**/build/**", "**/Service.kt")
+    targetExclude("**/build/**")
     trimTrailingWhitespace()
     endWithNewline()
     // licenseHeader(rootProject.file("gradle/license-header.txt"))
@@ -82,7 +109,7 @@ spotless {
   }
 
   format("misc") {
-    target("**/*.md", "**/.gitignore", "**/.kte")
+    target("**/*.md", ".gitignore", "**/.kte")
     targetExclude("**/build/**")
     trimTrailingWhitespace()
     indentWithSpaces(2)
@@ -90,44 +117,6 @@ spotless {
   }
 }
 
-tasks {
-  withType<DokkaTaskPartial>().configureEach {
-    dokkaSourceSets.configureEach {
-      moduleName = project.name
-      jdkVersion = kotlinJvmTarget.map { it.target.toInt() }
-      noStdlibLink = false
-      noJdkLink = false
-      reportUndocumented = false
-      skipDeprecated = true
-      // includes.from("README.md")
-      documentedVisibilities = setOf(Visibility.PUBLIC, Visibility.PROTECTED)
-
-      sourceLink {
-        localDirectory = rootProject.projectDir
-        remoteUrl = URI("${githubRepo}/tree/main").toURL()
-        remoteLineSuffix = "#L"
-      }
-
-      samples.from("src/test/kotlin")
-
-      perPackageOption {
-        matchingRegex = ".*internal.*"
-        suppress = true
-      }
-      // externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.coroutines/")
-      // externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx.serialization/")
-      // externalDocumentationLink(url = "https://kotlinlang.org/api/kotlinx-datetime/",
-      // packageListUrl =
-      // "https://kotlinlang.org/api/kotlinx-datetime/kotlinx-datetime/package-list")
-      // externalDocumentationLink(url = "https://api.ktor.io/")
-    }
-
-    //  pluginsMapConfiguration = mapOf("org.jetbrains.dokka.base.DokkaBase" to """{ "templatesDir"
-    // : "${projectDir.toString().replace('\\','/')}/../dokka-templates" }""")
-
-    pluginConfiguration<DokkaBase, DokkaBaseConfiguration> {
-      footerMessage = "Copyright &copy; 2024 suresh.dev"
-      homepageLink = githubRepo
-    }
-  }
+pluginManager.withPlugin("org.hildan.github.changelog") {
+  configure<GitHubChangelogExtension> { githubUser = project.githubUser }
 }

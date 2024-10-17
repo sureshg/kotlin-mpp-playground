@@ -35,7 +35,7 @@ kotlinx-benchmark              = "0.4.11"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.16.3"
-kotlin-dokka                   = "1.9.20"
+kotlin-dokka                   = "2.0.0-Beta"
 kotlin-wrappers                = "1.0.0-pre.818"
 kotlin-redacted                = "1.11.0-alpha01"
 kotlinx-multik                 = "0.2.3"
@@ -238,7 +238,6 @@ build-kotlinx-atomicfu               = { module = "org.jetbrains.kotlinx:atomicf
 build-kotlinx-benchmark              = { module = "org.jetbrains.kotlinx:kotlinx-benchmark-plugin"                  , version.ref = "kotlinx-benchmark"}
 build-kotlin-dsl                     = { module = "org.gradle.kotlin:gradle-kotlin-dsl-plugins"                     , version.ref = "gradle-kotlin-dsl"}
 build-dokka-plugin                   = { module = "org.jetbrains.dokka:dokka-gradle-plugin"                         , version.ref = "kotlin-dokka"}
-build-dokka-base                     = { module = "org.jetbrains.dokka:dokka-base"                                  , version.ref = "kotlin-dokka"}
 build-kotlin-ksp                     = { module = "com.google.devtools.ksp:com.google.devtools.ksp.gradle.plugin"   , version.ref = "kotlin-ksp"}
 build-kopy-plugin                    = { module = "com.javiersc.kotlin:kopy-gradle-plugin"                          , version.ref = "kopy"}
 build-redacted-plugin                = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-gradle"          , version.ref = "kotlin-redacted"}
