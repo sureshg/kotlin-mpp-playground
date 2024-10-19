@@ -1,18 +1,246 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
-$dokka.location:////PointingToDeclaration/processor/[root]/index.html
-$dokka.location://App/#/PointingToDeclaration/cmp/[root]/-app.html
+$dokka.location:////PointingToDeclaration/web/[root]/index.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
-$dokka.location://hideSpinner/#/PointingToDeclaration/cmp/[root]/hide-spinner.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
 $dokka.location://log/#/PointingToDeclaration/web/[root]/log.html
-$dokka.location://main/#/PointingToDeclaration/cmp/[root]/[wasm-js]main.html
+$dokka.location://main/#/PointingToDeclaration/web/[root]/[wasm-js]main.html
 $dokka.location://mainScope/#/PointingToDeclaration/web/[root]/main-scope.html
-$dokka.location://resource/#/PointingToDeclaration/cmp/[root]/resource.html
 $dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutines.html
 $dokka.location://runTerminal/#/PointingToDeclaration/web/[root]/run-terminal.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/shared/[root]/stdlib-features.html
+$dokka.location:/BuildConfig.Host///PointingToDeclaration/shared/[root]/-build-config/-host/index.html
+$dokka.location:/BuildConfig.Host/cpuCores/#/PointingToDeclaration/shared/[root]/-build-config/-host/cpu-cores.html
+$dokka.location:/BuildConfig.Host/jdkVendor/#/PointingToDeclaration/shared/[root]/-build-config/-host/jdk-vendor.html
+$dokka.location:/BuildConfig.Host/jdkVersion/#/PointingToDeclaration/shared/[root]/-build-config/-host/jdk-version.html
+$dokka.location:/BuildConfig.Host/memory/#/PointingToDeclaration/shared/[root]/-build-config/-host/memory.html
+$dokka.location:/BuildConfig.Host/name/#/PointingToDeclaration/shared/[root]/-build-config/-host/name.html
+$dokka.location:/BuildConfig.Host/os/#/PointingToDeclaration/shared/[root]/-build-config/-host/os.html
+$dokka.location:/BuildConfig.Host/user/#/PointingToDeclaration/shared/[root]/-build-config/-host/user.html
+$dokka.location:/BuildConfig///PointingToDeclaration/shared/[root]/-build-config/index.html
+$dokka.location:/BuildConfig/airliftAircompressor/#/PointingToDeclaration/shared/[root]/-build-config/airlift-aircompressor.html
+$dokka.location:/BuildConfig/airliftSecurity/#/PointingToDeclaration/shared/[root]/-build-config/airlift-security.html
+$dokka.location:/BuildConfig/ajaltClikt/#/PointingToDeclaration/shared/[root]/-build-config/ajalt-clikt.html
+$dokka.location:/BuildConfig/ajaltColormath/#/PointingToDeclaration/shared/[root]/-build-config/ajalt-colormath.html
+$dokka.location:/BuildConfig/ajaltMordant/#/PointingToDeclaration/shared/[root]/-build-config/ajalt-mordant.html
+$dokka.location:/BuildConfig/akkurate/#/PointingToDeclaration/shared/[root]/-build-config/akkurate.html
+$dokka.location:/BuildConfig/apLoaderAll/#/PointingToDeclaration/shared/[root]/-build-config/ap-loader-all.html
+$dokka.location:/BuildConfig/apacheCommonsImaging/#/PointingToDeclaration/shared/[root]/-build-config/apache-commons-imaging.html
+$dokka.location:/BuildConfig/appMainclass/#/PointingToDeclaration/shared/[root]/-build-config/app-mainclass.html
+$dokka.location:/BuildConfig/arrowSuspendapp/#/PointingToDeclaration/shared/[root]/-build-config/arrow-suspendapp.html
+$dokka.location:/BuildConfig/asyncProfiler/#/PointingToDeclaration/shared/[root]/-build-config/async-profiler.html
+$dokka.location:/BuildConfig/autonomousappsBestpractices/#/PointingToDeclaration/shared/[root]/-build-config/autonomousapps-bestpractices.html
+$dokka.location:/BuildConfig/autonomousappsDepanalysis/#/PointingToDeclaration/shared/[root]/-build-config/autonomousapps-depanalysis.html
+$dokka.location:/BuildConfig/batik/#/PointingToDeclaration/shared/[root]/-build-config/batik.html
+$dokka.location:/BuildConfig/benmanes/#/PointingToDeclaration/shared/[root]/-build-config/benmanes.html
+$dokka.location:/BuildConfig/buildTimeEpochMillis/#/PointingToDeclaration/shared/[root]/-build-config/build-time-epoch-millis.html
+$dokka.location:/BuildConfig/buildTimeLocal/#/PointingToDeclaration/shared/[root]/-build-config/build-time-local.html
+$dokka.location:/BuildConfig/buildTimeUTC/#/PointingToDeclaration/shared/[root]/-build-config/build-time-u-t-c.html
+$dokka.location:/BuildConfig/buildkonfig/#/PointingToDeclaration/shared/[root]/-build-config/buildkonfig.html
+$dokka.location:/BuildConfig/bytesize/#/PointingToDeclaration/shared/[root]/-build-config/bytesize.html
+$dokka.location:/BuildConfig/cache4k/#/PointingToDeclaration/shared/[root]/-build-config/cache4k.html
+$dokka.location:/BuildConfig/cardiologist/#/PointingToDeclaration/shared/[root]/-build-config/cardiologist.html
+$dokka.location:/BuildConfig/cashMolecule/#/PointingToDeclaration/shared/[root]/-build-config/cash-molecule.html
+$dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/-build-config/cash-turbine.html
+$dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
+$dokka.location:/BuildConfig/chicory/#/PointingToDeclaration/shared/[root]/-build-config/chicory.html
+$dokka.location:/BuildConfig/classgraph/#/PointingToDeclaration/shared/[root]/-build-config/classgraph.html
+$dokka.location:/BuildConfig/composeIcons/#/PointingToDeclaration/shared/[root]/-build-config/compose-icons.html
+$dokka.location:/BuildConfig/composeRouting/#/PointingToDeclaration/shared/[root]/-build-config/compose-routing.html
+$dokka.location:/BuildConfig/config4k/#/PointingToDeclaration/shared/[root]/-build-config/config4k.html
+$dokka.location:/BuildConfig/cyclonedxPlugin/#/PointingToDeclaration/shared/[root]/-build-config/cyclonedx-plugin.html
+$dokka.location:/BuildConfig/description/#/PointingToDeclaration/shared/[root]/-build-config/description.html
+$dokka.location:/BuildConfig/detekt/#/PointingToDeclaration/shared/[root]/-build-config/detekt.html
+$dokka.location:/BuildConfig/detektComposeRules/#/PointingToDeclaration/shared/[root]/-build-config/detekt-compose-rules.html
+$dokka.location:/BuildConfig/devEmail/#/PointingToDeclaration/shared/[root]/-build-config/dev-email.html
+$dokka.location:/BuildConfig/devName/#/PointingToDeclaration/shared/[root]/-build-config/dev-name.html
+$dokka.location:/BuildConfig/directoryKeystore/#/PointingToDeclaration/shared/[root]/-build-config/directory-keystore.html
+$dokka.location:/BuildConfig/elasticOtel/#/PointingToDeclaration/shared/[root]/-build-config/elastic-otel.html
+$dokka.location:/BuildConfig/evas/#/PointingToDeclaration/shared/[root]/-build-config/evas.html
+$dokka.location:/BuildConfig/expiringmap/#/PointingToDeclaration/shared/[root]/-build-config/expiringmap.html
+$dokka.location:/BuildConfig/exposed/#/PointingToDeclaration/shared/[root]/-build-config/exposed.html
+$dokka.location:/BuildConfig/exposedPlugin/#/PointingToDeclaration/shared/[root]/-build-config/exposed-plugin.html
+$dokka.location:/BuildConfig/foojayResolver/#/PointingToDeclaration/shared/[root]/-build-config/foojay-resolver.html
+$dokka.location:/BuildConfig/gitFullMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-full-message.html
+$dokka.location:/BuildConfig/gitHash/#/PointingToDeclaration/shared/[root]/-build-config/git-hash.html
+$dokka.location:/BuildConfig/gitMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-message.html
+$dokka.location:/BuildConfig/gitTags/#/PointingToDeclaration/shared/[root]/-build-config/git-tags.html
+$dokka.location:/BuildConfig/gitTimestampEpochSecond/#/PointingToDeclaration/shared/[root]/-build-config/git-timestamp-epoch-second.html
+$dokka.location:/BuildConfig/githubChangelog/#/PointingToDeclaration/shared/[root]/-build-config/github-changelog.html
+$dokka.location:/BuildConfig/githubDepgraph/#/PointingToDeclaration/shared/[root]/-build-config/github-depgraph.html
+$dokka.location:/BuildConfig/gmazzoBuildconfig/#/PointingToDeclaration/shared/[root]/-build-config/gmazzo-buildconfig.html
+$dokka.location:/BuildConfig/googleAutoService/#/PointingToDeclaration/shared/[root]/-build-config/google-auto-service.html
+$dokka.location:/BuildConfig/googleJavaformat/#/PointingToDeclaration/shared/[root]/-build-config/google-javaformat.html
+$dokka.location:/BuildConfig/googleTink/#/PointingToDeclaration/shared/[root]/-build-config/google-tink.html
+$dokka.location:/BuildConfig/graalvm/#/PointingToDeclaration/shared/[root]/-build-config/graalvm.html
+$dokka.location:/BuildConfig/graalvmNativeimage/#/PointingToDeclaration/shared/[root]/-build-config/graalvm-nativeimage.html
+$dokka.location:/BuildConfig/gradle/#/PointingToDeclaration/shared/[root]/-build-config/gradle.html
+$dokka.location:/BuildConfig/gradleDevelocity/#/PointingToDeclaration/shared/[root]/-build-config/gradle-develocity.html
+$dokka.location:/BuildConfig/gradleKotlinDsl/#/PointingToDeclaration/shared/[root]/-build-config/gradle-kotlin-dsl.html
+$dokka.location:/BuildConfig/group/#/PointingToDeclaration/shared/[root]/-build-config/group.html
+$dokka.location:/BuildConfig/h2/#/PointingToDeclaration/shared/[root]/-build-config/h2.html
+$dokka.location:/BuildConfig/hikariCP/#/PointingToDeclaration/shared/[root]/-build-config/hikari-c-p.html
+$dokka.location:/BuildConfig/hoplite/#/PointingToDeclaration/shared/[root]/-build-config/hoplite.html
+$dokka.location:/BuildConfig/includegitPlugin/#/PointingToDeclaration/shared/[root]/-build-config/includegit-plugin.html
+$dokka.location:/BuildConfig/intellijCoverage/#/PointingToDeclaration/shared/[root]/-build-config/intellij-coverage.html
+$dokka.location:/BuildConfig/intellijMarkdown/#/PointingToDeclaration/shared/[root]/-build-config/intellij-markdown.html
+$dokka.location:/BuildConfig/java/#/PointingToDeclaration/shared/[root]/-build-config/java.html
+$dokka.location:/BuildConfig/javaAddModules/#/PointingToDeclaration/shared/[root]/-build-config/java-add-modules.html
+$dokka.location:/BuildConfig/javaJvmArguments/#/PointingToDeclaration/shared/[root]/-build-config/java-jvm-arguments.html
+$dokka.location:/BuildConfig/javaKeychain/#/PointingToDeclaration/shared/[root]/-build-config/java-keychain.html
+$dokka.location:/BuildConfig/javaKeyring/#/PointingToDeclaration/shared/[root]/-build-config/java-keyring.html
+$dokka.location:/BuildConfig/javaVendor/#/PointingToDeclaration/shared/[root]/-build-config/java-vendor.html
+$dokka.location:/BuildConfig/jctools/#/PointingToDeclaration/shared/[root]/-build-config/jctools.html
+$dokka.location:/BuildConfig/jetbrainsCompose/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose.html
+$dokka.location:/BuildConfig/jetbrainsComposeAdaptive/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-adaptive.html
+$dokka.location:/BuildConfig/jetbrainsComposeNav/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-nav.html
+$dokka.location:/BuildConfig/jetbrainsComposeViewmodel/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-viewmodel.html
+$dokka.location:/BuildConfig/jfreeChart/#/PointingToDeclaration/shared/[root]/-build-config/jfree-chart.html
+$dokka.location:/BuildConfig/jfreeSvg/#/PointingToDeclaration/shared/[root]/-build-config/jfree-svg.html
+$dokka.location:/BuildConfig/jgit/#/PointingToDeclaration/shared/[root]/-build-config/jgit.html
+$dokka.location:/BuildConfig/jibNativeimageExtn/#/PointingToDeclaration/shared/[root]/-build-config/jib-nativeimage-extn.html
+$dokka.location:/BuildConfig/jibPlugin/#/PointingToDeclaration/shared/[root]/-build-config/jib-plugin.html
+$dokka.location:/BuildConfig/jimfs/#/PointingToDeclaration/shared/[root]/-build-config/jimfs.html
+$dokka.location:/BuildConfig/jlama/#/PointingToDeclaration/shared/[root]/-build-config/jlama.html
+$dokka.location:/BuildConfig/jmh/#/PointingToDeclaration/shared/[root]/-build-config/jmh.html
+$dokka.location:/BuildConfig/jsch/#/PointingToDeclaration/shared/[root]/-build-config/jsch.html
+$dokka.location:/BuildConfig/jspecify/#/PointingToDeclaration/shared/[root]/-build-config/jspecify.html
+$dokka.location:/BuildConfig/jte/#/PointingToDeclaration/shared/[root]/-build-config/jte.html
+$dokka.location:/BuildConfig/junit/#/PointingToDeclaration/shared/[root]/-build-config/junit.html
+$dokka.location:/BuildConfig/karakum/#/PointingToDeclaration/shared/[root]/-build-config/karakum.html
+$dokka.location:/BuildConfig/kfswatch/#/PointingToDeclaration/shared/[root]/-build-config/kfswatch.html
+$dokka.location:/BuildConfig/kmpAppdirs/#/PointingToDeclaration/shared/[root]/-build-config/kmp-appdirs.html
+$dokka.location:/BuildConfig/kmpHierarchy/#/PointingToDeclaration/shared/[root]/-build-config/kmp-hierarchy.html
+$dokka.location:/BuildConfig/kmpSettings/#/PointingToDeclaration/shared/[root]/-build-config/kmp-settings.html
+$dokka.location:/BuildConfig/kmpStore5/#/PointingToDeclaration/shared/[root]/-build-config/kmp-store5.html
+$dokka.location:/BuildConfig/kobweb/#/PointingToDeclaration/shared/[root]/-build-config/kobweb.html
+$dokka.location:/BuildConfig/koin/#/PointingToDeclaration/shared/[root]/-build-config/koin.html
+$dokka.location:/BuildConfig/konsist/#/PointingToDeclaration/shared/[root]/-build-config/konsist.html
+$dokka.location:/BuildConfig/kopy/#/PointingToDeclaration/shared/[root]/-build-config/kopy.html
+$dokka.location:/BuildConfig/kotest/#/PointingToDeclaration/shared/[root]/-build-config/kotest.html
+$dokka.location:/BuildConfig/kotlin/#/PointingToDeclaration/shared/[root]/-build-config/kotlin.html
+$dokka.location:/BuildConfig/kotlinApiVersion/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-api-version.html
+$dokka.location:/BuildConfig/kotlinBignum/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-bignum.html
+$dokka.location:/BuildConfig/kotlinCodepoints/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-codepoints.html
+$dokka.location:/BuildConfig/kotlinCryptography/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-cryptography.html
+$dokka.location:/BuildConfig/kotlinDiff/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-diff.html
+$dokka.location:/BuildConfig/kotlinDokka/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-dokka.html
+$dokka.location:/BuildConfig/kotlinDslJvmtarget/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-dsl-jvmtarget.html
+$dokka.location:/BuildConfig/kotlinJvmtarget/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-jvmtarget.html
+$dokka.location:/BuildConfig/kotlinKsp/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-ksp.html
+$dokka.location:/BuildConfig/kotlinLangVersion/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-lang-version.html
+$dokka.location:/BuildConfig/kotlinLogging/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-logging.html
+$dokka.location:/BuildConfig/kotlinRedacted/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-redacted.html
+$dokka.location:/BuildConfig/kotlinRetry/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-retry.html
+$dokka.location:/BuildConfig/kotlinWrappers/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-wrappers.html
+$dokka.location:/BuildConfig/kotlinxAtomicfu/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-atomicfu.html
+$dokka.location:/BuildConfig/kotlinxBcv/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-bcv.html
+$dokka.location:/BuildConfig/kotlinxBenchmark/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-benchmark.html
+$dokka.location:/BuildConfig/kotlinxBrowser/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-browser.html
+$dokka.location:/BuildConfig/kotlinxCollectionsImmutable/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-collections-immutable.html
+$dokka.location:/BuildConfig/kotlinxCoroutines/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-coroutines.html
+$dokka.location:/BuildConfig/kotlinxDataframe/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-dataframe.html
+$dokka.location:/BuildConfig/kotlinxDatetime/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-datetime.html
+$dokka.location:/BuildConfig/kotlinxHtml/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-html.html
+$dokka.location:/BuildConfig/kotlinxIo/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-io.html
+$dokka.location:/BuildConfig/kotlinxJsonSchema/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-json-schema.html
+$dokka.location:/BuildConfig/kotlinxJsonpath/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-jsonpath.html
+$dokka.location:/BuildConfig/kotlinxKandy/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-kandy.html
+$dokka.location:/BuildConfig/kotlinxKover/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-kover.html
+$dokka.location:/BuildConfig/kotlinxLincheck/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-lincheck.html
+$dokka.location:/BuildConfig/kotlinxMetadata/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-metadata.html
+$dokka.location:/BuildConfig/kotlinxMultik/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-multik.html
+$dokka.location:/BuildConfig/kotlinxReflectLite/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-reflect-lite.html
+$dokka.location:/BuildConfig/kotlinxRpc/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-rpc.html
+$dokka.location:/BuildConfig/kotlinxSerialization/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-serialization.html
+$dokka.location:/BuildConfig/kottie/#/PointingToDeclaration/shared/[root]/-build-config/kottie.html
+$dokka.location:/BuildConfig/kspAutoService/#/PointingToDeclaration/shared/[root]/-build-config/ksp-auto-service.html
+$dokka.location:/BuildConfig/ktfmt/#/PointingToDeclaration/shared/[root]/-build-config/ktfmt.html
+$dokka.location:/BuildConfig/ktor/#/PointingToDeclaration/shared/[root]/-build-config/ktor.html
+$dokka.location:/BuildConfig/ktorCohort/#/PointingToDeclaration/shared/[root]/-build-config/ktor-cohort.html
+$dokka.location:/BuildConfig/kubernetesClient/#/PointingToDeclaration/shared/[root]/-build-config/kubernetes-client.html
+$dokka.location:/BuildConfig/langchain4j/#/PointingToDeclaration/shared/[root]/-build-config/langchain4j.html
+$dokka.location:/BuildConfig/ldaptive/#/PointingToDeclaration/shared/[root]/-build-config/ldaptive.html
+$dokka.location:/BuildConfig/log4j/#/PointingToDeclaration/shared/[root]/-build-config/log4j.html
+$dokka.location:/BuildConfig/logback/#/PointingToDeclaration/shared/[root]/-build-config/logback.html
+$dokka.location:/BuildConfig/logbackTyler/#/PointingToDeclaration/shared/[root]/-build-config/logback-tyler.html
+$dokka.location:/BuildConfig/mappie/#/PointingToDeclaration/shared/[root]/-build-config/mappie.html
+$dokka.location:/BuildConfig/mavenArcheologist/#/PointingToDeclaration/shared/[root]/-build-config/maven-archeologist.html
+$dokka.location:/BuildConfig/mavenMima/#/PointingToDeclaration/shared/[root]/-build-config/maven-mima.html
+$dokka.location:/BuildConfig/micrometer/#/PointingToDeclaration/shared/[root]/-build-config/micrometer.html
+$dokka.location:/BuildConfig/mockk/#/PointingToDeclaration/shared/[root]/-build-config/mockk.html
+$dokka.location:/BuildConfig/modulegraph/#/PointingToDeclaration/shared/[root]/-build-config/modulegraph.html
+$dokka.location:/BuildConfig/mokkery/#/PointingToDeclaration/shared/[root]/-build-config/mokkery.html
+$dokka.location:/BuildConfig/mosaic/#/PointingToDeclaration/shared/[root]/-build-config/mosaic.html
+$dokka.location:/BuildConfig/mrjar/#/PointingToDeclaration/shared/[root]/-build-config/mrjar.html
+$dokka.location:/BuildConfig/name/#/PointingToDeclaration/shared/[root]/-build-config/name.html
+$dokka.location:/BuildConfig/nexusPublish/#/PointingToDeclaration/shared/[root]/-build-config/nexus-publish.html
+$dokka.location:/BuildConfig/nmcp/#/PointingToDeclaration/shared/[root]/-build-config/nmcp.html
+$dokka.location:/BuildConfig/npmHighlightjs/#/PointingToDeclaration/shared/[root]/-build-config/npm-highlightjs.html
+$dokka.location:/BuildConfig/npmJsjodaTz/#/PointingToDeclaration/shared/[root]/-build-config/npm-jsjoda-tz.html
+$dokka.location:/BuildConfig/npmKotlinPlayground/#/PointingToDeclaration/shared/[root]/-build-config/npm-kotlin-playground.html
+$dokka.location:/BuildConfig/npmPublishPlugin/#/PointingToDeclaration/shared/[root]/-build-config/npm-publish-plugin.html
+$dokka.location:/BuildConfig/npmVegaLite/#/PointingToDeclaration/shared/[root]/-build-config/npm-vega-lite.html
+$dokka.location:/BuildConfig/npmXtermjs/#/PointingToDeclaration/shared/[root]/-build-config/npm-xtermjs.html
+$dokka.location:/BuildConfig/okapibarcode/#/PointingToDeclaration/shared/[root]/-build-config/okapibarcode.html
+$dokka.location:/BuildConfig/okhttp/#/PointingToDeclaration/shared/[root]/-build-config/okhttp.html
+$dokka.location:/BuildConfig/okio/#/PointingToDeclaration/shared/[root]/-build-config/okio.html
+$dokka.location:/BuildConfig/openjdkJmc/#/PointingToDeclaration/shared/[root]/-build-config/openjdk-jmc.html
+$dokka.location:/BuildConfig/orgName/#/PointingToDeclaration/shared/[root]/-build-config/org-name.html
+$dokka.location:/BuildConfig/orgUrl/#/PointingToDeclaration/shared/[root]/-build-config/org-url.html
+$dokka.location:/BuildConfig/otel/#/PointingToDeclaration/shared/[root]/-build-config/otel.html
+$dokka.location:/BuildConfig/otelInstr/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr.html
+$dokka.location:/BuildConfig/otelInstrAlpha/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr-alpha.html
+$dokka.location:/BuildConfig/otelSamplers/#/PointingToDeclaration/shared/[root]/-build-config/otel-samplers.html
+$dokka.location:/BuildConfig/otelSemconv/#/PointingToDeclaration/shared/[root]/-build-config/otel-semconv.html
+$dokka.location:/BuildConfig/otp/#/PointingToDeclaration/shared/[root]/-build-config/otp.html
+$dokka.location:/BuildConfig/palantirJavaformat/#/PointingToDeclaration/shared/[root]/-build-config/palantir-javaformat.html
+$dokka.location:/BuildConfig/parsus/#/PointingToDeclaration/shared/[root]/-build-config/parsus.html
+$dokka.location:/BuildConfig/password4j/#/PointingToDeclaration/shared/[root]/-build-config/password4j.html
+$dokka.location:/BuildConfig/poko/#/PointingToDeclaration/shared/[root]/-build-config/poko.html
+$dokka.location:/BuildConfig/postgresql/#/PointingToDeclaration/shared/[root]/-build-config/postgresql.html
+$dokka.location:/BuildConfig/pty4j/#/PointingToDeclaration/shared/[root]/-build-config/pty4j.html
+$dokka.location:/BuildConfig/reflectTypeparamresolver/#/PointingToDeclaration/shared/[root]/-build-config/reflect-typeparamresolver.html
+$dokka.location:/BuildConfig/reflectTypetools/#/PointingToDeclaration/shared/[root]/-build-config/reflect-typetools.html
+$dokka.location:/BuildConfig/repoKobweb/#/PointingToDeclaration/shared/[root]/-build-config/repo-kobweb.html
+$dokka.location:/BuildConfig/repoMvnSnapshot/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-snapshot.html
+$dokka.location:/BuildConfig/repoMvnSnapshots01/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-snapshots01.html
+$dokka.location:/BuildConfig/repoNodejs/#/PointingToDeclaration/shared/[root]/-build-config/repo-nodejs.html
+$dokka.location:/BuildConfig/reproducibleBuilds/#/PointingToDeclaration/shared/[root]/-build-config/reproducible-builds.html
+$dokka.location:/BuildConfig/rsocket/#/PointingToDeclaration/shared/[root]/-build-config/rsocket.html
+$dokka.location:/BuildConfig/semverPlugin/#/PointingToDeclaration/shared/[root]/-build-config/semver-plugin.html
+$dokka.location:/BuildConfig/seskar/#/PointingToDeclaration/shared/[root]/-build-config/seskar.html
+$dokka.location:/BuildConfig/shadow/#/PointingToDeclaration/shared/[root]/-build-config/shadow.html
+$dokka.location:/BuildConfig/shedlock/#/PointingToDeclaration/shared/[root]/-build-config/shedlock.html
+$dokka.location:/BuildConfig/sherlock/#/PointingToDeclaration/shared/[root]/-build-config/sherlock.html
+$dokka.location:/BuildConfig/sigstore/#/PointingToDeclaration/shared/[root]/-build-config/sigstore.html
+$dokka.location:/BuildConfig/slf4j/#/PointingToDeclaration/shared/[root]/-build-config/slf4j.html
+$dokka.location:/BuildConfig/sourceBuddy/#/PointingToDeclaration/shared/[root]/-build-config/source-buddy.html
+$dokka.location:/BuildConfig/spotless/#/PointingToDeclaration/shared/[root]/-build-config/spotless.html
+$dokka.location:/BuildConfig/springBoot/#/PointingToDeclaration/shared/[root]/-build-config/spring-boot.html
+$dokka.location:/BuildConfig/springDepmgmt/#/PointingToDeclaration/shared/[root]/-build-config/spring-depmgmt.html
+$dokka.location:/BuildConfig/sqids/#/PointingToDeclaration/shared/[root]/-build-config/sqids.html
+$dokka.location:/BuildConfig/sshj/#/PointingToDeclaration/shared/[root]/-build-config/sshj.html
+$dokka.location:/BuildConfig/sslcontextKickstart/#/PointingToDeclaration/shared/[root]/-build-config/sslcontext-kickstart.html
+$dokka.location:/BuildConfig/swaggerStyle/#/PointingToDeclaration/shared/[root]/-build-config/swagger-style.html
+$dokka.location:/BuildConfig/swaggerUi/#/PointingToDeclaration/shared/[root]/-build-config/swagger-ui.html
+$dokka.location:/BuildConfig/tasktree/#/PointingToDeclaration/shared/[root]/-build-config/tasktree.html
+$dokka.location:/BuildConfig/tcpJavanioproxy/#/PointingToDeclaration/shared/[root]/-build-config/tcp-javanioproxy.html
+$dokka.location:/BuildConfig/testcontainers/#/PointingToDeclaration/shared/[root]/-build-config/testcontainers.html
+$dokka.location:/BuildConfig/tomlj/#/PointingToDeclaration/shared/[root]/-build-config/tomlj.html
+$dokka.location:/BuildConfig/tsid/#/PointingToDeclaration/shared/[root]/-build-config/tsid.html
+$dokka.location:/BuildConfig/twelvemonkeys/#/PointingToDeclaration/shared/[root]/-build-config/twelvemonkeys.html
+$dokka.location:/BuildConfig/uriKmp/#/PointingToDeclaration/shared/[root]/-build-config/uri-kmp.html
+$dokka.location:/BuildConfig/urlencoder/#/PointingToDeclaration/shared/[root]/-build-config/urlencoder.html
+$dokka.location:/BuildConfig/vanniktechPublish/#/PointingToDeclaration/shared/[root]/-build-config/vanniktech-publish.html
+$dokka.location:/BuildConfig/version/#/PointingToDeclaration/shared/[root]/-build-config/version.html
+$dokka.location:/BuildConfig/webjarsXterm/#/PointingToDeclaration/shared/[root]/-build-config/webjars-xterm.html
+$dokka.location:/BuildConfig/wirePlugin/#/PointingToDeclaration/shared/[root]/-build-config/wire-plugin.html
+$dokka.location:/BuildConfig/wiremock/#/PointingToDeclaration/shared/[root]/-build-config/wiremock.html
+$dokka.location:/BuildConfig/wiremockKotlin/#/PointingToDeclaration/shared/[root]/-build-config/wiremock-kotlin.html
+$dokka.location:/BuildConfig/xchart/#/PointingToDeclaration/shared/[root]/-build-config/xchart.html
+$dokka.location:/BuildConfig/zipPrefixer/#/PointingToDeclaration/shared/[root]/-build-config/zip-prefixer.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
 $dokka.location:/ClassVisitor/defaultHandler/#com.google.devtools.ksp.symbol.KSNode#java.io.OutputStreamWriter/PointingToDeclaration/processor/[root]/-class-visitor/default-handler.html
@@ -42,19 +270,6 @@ $dokka.location:/TestProcessor/process/#com.google.devtools.ksp.processing.Resol
 $dokka.location:/TestProcessorProvider///PointingToDeclaration/processor/[root]/-test-processor-provider/index.html
 $dokka.location:/TestProcessorProvider/TestProcessorProvider/#/PointingToDeclaration/processor/[root]/-test-processor-provider/-test-processor-provider.html
 $dokka.location:/TestProcessorProvider/create/#com.google.devtools.ksp.processing.SymbolProcessorEnvironment/PointingToDeclaration/processor/[root]/-test-processor-provider/create.html
-module:benchmark
-bench
-module:shared
-dev.suresh
-dev.suresh.cert
-dev.suresh.flow
-dev.suresh.http
-dev.suresh.lang
-dev.suresh.qos
-module:web
-hljs
-interop
-xterm
 module:data
 dev.suresh
 dev.suresh.gen
@@ -74,15 +289,14 @@ dev.suresh
 dev.suresh.cert
 dev.suresh.security
 dev.suresh.tls
-module:cmp
-nav
-ui
-ui.birds
-ui.crash
-ui.file
-ui.home
-ui.lottie
-ui.misc
-module:jfr
+module:shared
 dev.suresh
-dev.suresh.system
+dev.suresh.cert
+dev.suresh.flow
+dev.suresh.http
+dev.suresh.lang
+dev.suresh.qos
+module:web
+hljs
+interop
+xterm
