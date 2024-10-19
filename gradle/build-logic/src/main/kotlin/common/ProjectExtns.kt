@@ -32,7 +32,6 @@ import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.testing.internal.KotlinTestReport
 
 // val logger = LoggerFactory.getLogger("build-logic")
 
@@ -558,8 +557,6 @@ fun TestLoggingContainer.configureLogEvents() {
     exceptionFormat = TestExceptionFormat.FULL
   }
 }
-
-fun KotlinTestReport.configureTestReport() {}
 
 fun KotlinJsCompilerOptions.configureKotlinJs() {
   // freeCompilerArgs.addAll("-Xir-per-file")

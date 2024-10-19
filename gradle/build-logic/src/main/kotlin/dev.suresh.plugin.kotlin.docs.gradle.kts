@@ -93,10 +93,8 @@ spotless {
   val ktfmtVersion = libs.versions.ktfmt.get()
   kotlin {
     ktfmt(ktfmtVersion)
-    target("**/*.kt")
-    targetExclude("**/build/**")
+    target("src/**/*.kts", "src/**/*.kt")
     trimTrailingWhitespace()
-    endWithNewline()
     // licenseHeader(rootProject.file("gradle/license-header.txt"))
   }
 
@@ -105,15 +103,13 @@ spotless {
     target("**/*.gradle.kts")
     targetExclude("**/build/**")
     trimTrailingWhitespace()
-    endWithNewline()
   }
 
   format("misc") {
-    target("**/*.md", ".gitignore", "**/.kte")
+    target("**/*.md", "**/.kte")
     targetExclude("**/build/**")
     trimTrailingWhitespace()
     indentWithSpaces(2)
-    endWithNewline()
   }
 }
 

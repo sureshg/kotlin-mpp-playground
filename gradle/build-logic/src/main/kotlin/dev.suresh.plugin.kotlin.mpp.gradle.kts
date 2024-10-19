@@ -31,15 +31,9 @@ plugins {
   // dev.mokkery
 }
 
-val rootProjectName = rootProject.name
-val projectName = project.name
-val projectVersion = project.version.toString()
-val projectGroup = project.group.toString()
-val gradleVersion = gradle.gradleVersion
-
 kotlin {
   commonTarget()
-  when (projectName) {
+  when (project.name) {
     sharedProjectName -> {
       jvmTarget()
       jsTarget()
@@ -130,27 +124,29 @@ tasks {
           "Built-OS" to
               "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}",
           "Build-Timestamp" to DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()),
-          "Created-By" to "Gradle $gradleVersion",
-          Attributes.Name.IMPLEMENTATION_TITLE.toString() to projectName,
-          Attributes.Name.IMPLEMENTATION_VERSION.toString() to projectVersion,
-          Attributes.Name.IMPLEMENTATION_VENDOR.toString() to projectGroup,
+          "Created-By" to "Gradle ${gradle.gradleVersion}",
+          Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
+          Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
+          Attributes.Name.IMPLEMENTATION_VENDOR.toString() to project.group,
       )
     }
     duplicatesStrategy = DuplicatesStrategy.WARN
   }
 
   withType<ProcessResources>().configureEach {
-    inputs.property("version", projectVersion)
+    inputs.property("version", project.version.toString())
     filesMatching("**/*-res.txt") {
       expand(
-          "name" to rootProjectName,
-          "module" to projectName,
-          "version" to projectVersion,
+          "name" to rootProject.name,
+          "module" to project.name,
+          "version" to project.version,
       )
     }
     filesMatching("**/*.yaml") {
       filter { line ->
-        line.replace("{project.name}", rootProjectName).replace("{project.version}", projectVersion)
+        line
+            .replace("{project.name}", rootProject.name)
+            .replace("{project.version}", project.version.toString())
       }
     }
   }
@@ -174,7 +170,7 @@ tasks {
           jarFile = named<Jar>("shadowJar").flatMap { it.archiveFile }
           // javaOpts = application.applicationDefaultJvmArgs
           javaOpts = named<JavaExec>("run").get().jvmArgs
-          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${projectName}-app") }
+          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
           onlyIf { OperatingSystem.current().isUnix }
         }
 

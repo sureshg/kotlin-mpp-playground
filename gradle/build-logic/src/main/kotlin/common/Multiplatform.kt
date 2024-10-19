@@ -170,7 +170,7 @@ fun KotlinMultiplatformExtension.jsTarget() {
     }
     generateTypeScriptDefinitions()
     compilerOptions { configureKotlinJs() }
-    testRuns.configureEach { executionTask.configure { configureTestReport() } }
+    testRuns.configureEach { executionTask.configure {} }
   }
 
   sourceSets {
@@ -226,7 +226,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget() {
     }
     generateTypeScriptDefinitions()
     compilerOptions { configureKotlinJs() }
-    testRuns.configureEach { executionTask.configure { configureTestReport() } }
+    testRuns.configureEach { executionTask.configure {} }
   }
 
   sourceSets {
