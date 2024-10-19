@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Person</title>
+  <title>: Coverage Report > Planet</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: Person (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: Planet (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Person</td>
+  <td class="name">Planet</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/2)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -71,23 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/6)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/5)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/53)
+    (0/71)
   </span>
 </td>
 </tr>
@@ -106,28 +99,28 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import kotlin.time.TimeSource
 &nbsp;import kotlin.uuid.Uuid
 &nbsp;
-&nbsp;enum class Planet(val moon: Int) {
-&nbsp;  MERCURY(0),
-&nbsp;  VENUS(0),
-&nbsp;  EARTH(1),
-&nbsp;  MARS(2),
-&nbsp;  JUPITER(5),
-&nbsp;  SATURN(66),
-&nbsp;  URANUS(62),
-&nbsp;  NEPTUNE(13)
+<b class="nc">&nbsp;enum class Planet(val moon: Int) {</b>
+<b class="nc">&nbsp;  MERCURY(0),</b>
+<b class="nc">&nbsp;  VENUS(0),</b>
+<b class="nc">&nbsp;  EARTH(1),</b>
+<b class="nc">&nbsp;  MARS(2),</b>
+<b class="nc">&nbsp;  JUPITER(5),</b>
+<b class="nc">&nbsp;  SATURN(66),</b>
+<b class="nc">&nbsp;  URANUS(62),</b>
+<b class="nc">&nbsp;  NEPTUNE(13)</b>
 &nbsp;}
 &nbsp;
 &nbsp;data object MyService
 &nbsp;
 &nbsp;@JvmInline
-<b class="nc">&nbsp;value class Person(private val name: String) {</b>
+&nbsp;value class Person(private val name: String) {
 &nbsp;  init {
-<b class="nc">&nbsp;    check(name.isNotBlank()) { &quot;Name should not be empty&quot; }</b>
+&nbsp;    check(name.isNotBlank()) { &quot;Name should not be empty&quot; }
 &nbsp;  }
 &nbsp;
-<b class="nc">&nbsp;  constructor(firstName: String, lastName: String) : this(&quot;$firstName $lastName&quot;) {</b>
-<b class="nc">&nbsp;    check(firstName.isNotBlank()) { &quot;First name should not be empty&quot; }</b>
-<b class="nc">&nbsp;    check(lastName.isNotBlank()) { &quot;Last name should not be empty&quot; }</b>
+&nbsp;  constructor(firstName: String, lastName: String) : this(&quot;$firstName $lastName&quot;) {
+&nbsp;    check(firstName.isNotBlank()) { &quot;First name should not be empty&quot; }
+&nbsp;    check(lastName.isNotBlank()) { &quot;Last name should not be empty&quot; }
 &nbsp;  }
 &nbsp;}
 &nbsp;
@@ -204,7 +197,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-19 00:23</div>
+    <div style="float:right;">generated on 2024-10-19 08:08</div>
 </div>
 </body>
 </html>

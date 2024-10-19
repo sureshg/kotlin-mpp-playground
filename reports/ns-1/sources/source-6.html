@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > JMain</title>
+  <title>: Coverage Report > MainKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">&lt;empty package name&gt;</a>
 </div>
 
-<h1>Coverage Summary for Class: JMain (&lt;empty package name&gt;)</h1>
+<h1>Coverage Summary for Class: MainKt (&lt;empty package name&gt;)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">JMain</td>
+  <td class="name">MainKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,15 +63,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
     (0/3)
   </span>
 </td>
@@ -80,7 +71,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/33)
   </span>
 </td>
 </tr>
@@ -92,13 +99,36 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;// import module java.base;
+<code class="sourceCode" id="sourceCode">&nbsp;@file:OptIn(ExperimentalComposeUiApi::class)
 &nbsp;
-&nbsp;/// This is a **main** function.
-&nbsp;/// It uses new [java.io.IO#readln(String)]
-<b class="nc">&nbsp;void main(String[] args) {</b>
-<b class="nc">&nbsp;    var s = readln(&quot;Java &gt; &quot;);</b>
-<b class="nc">&nbsp;    println(&quot;Hello, &quot; + s);</b>
+&nbsp;import androidx.compose.runtime.CompositionLocalProvider
+&nbsp;import androidx.compose.ui.Alignment
+&nbsp;import androidx.compose.ui.ExperimentalComposeUiApi
+&nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import androidx.compose.ui.window.*
+&nbsp;import java.awt.Dimension
+&nbsp;import java.io.File
+&nbsp;import ui.crash.windowExceptionHandlerFactory
+&nbsp;
+<b class="nc">&nbsp;val resource by lazy {</b>
+<b class="nc">&nbsp;  val file =</b>
+<b class="nc">&nbsp;      File(System.getProperty(&quot;compose.application.resources.dir&quot;, &quot;.&quot;)).resolve(&quot;resource.txt&quot;)</b>
+<b class="nc">&nbsp;  if (file.exists()) file.readText() else &quot;App&quot;</b>
+&nbsp;}
+&nbsp;
+<b class="nc">&nbsp;fun main() = application {</b>
+&nbsp;  CompositionLocalProvider(
+&nbsp;      LocalWindowExceptionHandlerFactory provides windowExceptionHandlerFactory,
+&nbsp;  ) {
+&nbsp;    val windowState =
+&nbsp;        rememberWindowState(
+&nbsp;            width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center))
+&nbsp;
+&nbsp;    Window(title = resource, state = windowState, onCloseRequest = ::exitApplication) {
+&nbsp;      window.minimumSize = Dimension(350, 600)
+&nbsp;      App()
+&nbsp;    }
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -123,7 +153,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-10-19 00:23</div>
+    <div style="float:right;">generated on 2024-10-19 08:08</div>
 </div>
 </body>
 </html>
