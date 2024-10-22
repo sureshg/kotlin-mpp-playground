@@ -1,3 +1,5 @@
+import common.jvmTarget
+
 plugins {
   dev.suresh.plugin.kotlin.mpp
   dev.suresh.plugin.publishing
@@ -6,16 +8,20 @@ plugins {
 
 description = "Certificate and Security!"
 
-kotlin.sourceSets {
-  commonMain { dependencies { implementation(projects.shared) } }
+kotlin {
+  jvmTarget(project)
 
-  jvmMain {
-    kotlin.srcDir("src/main/kotlin")
-    resources.srcDir("src/main/resources")
-  }
+  sourceSets {
+    commonMain { dependencies { implementation(projects.shared) } }
 
-  jvmTest {
-    kotlin.srcDir("src/test/kotlin")
-    resources.srcDir("src/test/resources")
+    jvmMain {
+      kotlin.srcDir("src/main/kotlin")
+      resources.srcDir("src/main/resources")
+    }
+
+    jvmTest {
+      kotlin.srcDir("src/test/kotlin")
+      resources.srcDir("src/test/resources")
+    }
   }
 }

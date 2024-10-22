@@ -36,14 +36,14 @@ apply(plugin = "dev.suresh.plugin.depreports")
 java {
   withSourcesJar()
   withJavadocJar()
-  toolchain { configureJvmToolchain() }
+  toolchain { configureJvmToolchain(project) }
 }
 
 kotlin {
-  jvmToolchain { configureJvmToolchain() }
+  jvmToolchain { configureJvmToolchain(project) }
   compilerOptions {
-    configureKotlinCommon()
-    configureKotlinJvm()
+    configureKotlinCommon(project)
+    configureKotlinJvm(project)
   }
   // sourceSets.all { kotlin.setSrcDirs(listOf("src/kotlin")) }
 }
@@ -59,7 +59,6 @@ testing {
 
 atomicfu {
   transformJvm = true
-  transformJs = true
   jvmVariant = "VH"
 }
 
@@ -83,7 +82,7 @@ val javaAgent by configurations.registering { isTransitive = false }
 
 tasks {
   // Configure "compileJava" and "compileTestJava" tasks.
-  withType<JavaCompile>().configureEach { configureJavac() }
+  withType<JavaCompile>().configureEach { configureJavac(project) }
 
   // withType<KotlinJvmCompile>().configureEach { finalizedBy("spotlessApply") }
 

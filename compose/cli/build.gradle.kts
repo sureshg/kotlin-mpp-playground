@@ -12,6 +12,8 @@ plugins {
 description = "Compose mosaic CLI app!"
 
 kotlin {
+  jvmTarget(project)
+
   sourceSets {
     commonMain.dependencies {
       implementation(projects.shared)

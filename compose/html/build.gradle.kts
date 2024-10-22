@@ -11,6 +11,8 @@ description = "Compose HTML App"
 kobweb { app { index { description = "Powered by Kobweb (${libs.versions.kobweb})" } } }
 
 kotlin {
+  jsTarget(project)
+
   // configAsKobwebApplication(moduleName = project.name)
 
   sourceSets {

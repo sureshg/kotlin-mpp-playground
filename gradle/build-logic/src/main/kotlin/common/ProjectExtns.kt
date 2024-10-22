@@ -18,7 +18,6 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.attributes.*
 import org.gradle.api.component.AdhocComponentWithVariants
 import org.gradle.api.plugins.JavaPluginExtension
-import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.*
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.*
@@ -26,8 +25,6 @@ import org.gradle.api.tasks.testing.logging.*
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.*
-import org.gradle.plugin.use.PluginDependency
-import org.jetbrains.dokka.gradle.AbstractDokkaTask
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
@@ -67,9 +64,6 @@ val Project.skipTest
 
 val Project.hasCleanTask
   get() = gradle.startParameter.taskNames.any { it in listOf("clean", "cleanAll") }
-
-val Project.hasDokkaTasks
-  get() = gradle.taskGraph.allTasks.filterIsInstance<AbstractDokkaTask>().any()
 
 val Project.isSnapshotVersion
   get() = version.toString().endsWith("SNAPSHOT", true)
@@ -342,104 +336,97 @@ val Project.jvmRunArgs
  */
 fun kotlinw(target: String) = "org.jetbrains.kotlin-wrappers:kotlin-$target"
 
-/** Returns the dependency artifact for the given Gradle plugin. */
-fun Provider<PluginDependency>.toDep() = map {
-  "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version.requiredVersion}"
-}
-
 // https://kotlinlang.org/docs/multiplatform-set-up-targets.html#distinguish-several-targets-for-one-platform
 val mppTargetAttr = Attribute.of("mpp.target.name", String::class.java)
 
-context(Project)
 fun KotlinTarget.setTargetAttribute() {
   attributes.attribute(mppTargetAttr, targetName)
 }
 
-context(Project)
-fun JavaToolchainSpec.configureJvmToolchain() {
-  languageVersion = toolchainVersion
-  // vendor = toolchainVendor
-}
-
-context(Project)
-fun JavaCompile.configureJavac() {
-  options.apply {
-    encoding = Charsets.UTF_8.name()
-    release = javaRelease
-    isIncremental = true
-    isFork = true
-    debugOptions.debugLevel = "source,lines,vars"
-    // For Gradle worker daemon.
-    forkOptions.jvmArgs?.addAll(jvmArguments())
-    // Javac options
-    compilerArgs.addAll(
-        buildList {
-          addAll(jvmArguments())
-          add("-Xlint:all")
-          add("-parameters")
-          // add("-Xlint:-deprecation")
-          // add("-Xlint:lossy-conversions")
-          // add("-XX:+IgnoreUnrecognizedVMOptions")
-          // add("--add-exports")
-          // add("java.base/sun.nio.ch=ALL-UNNAMED")
-          // add("--patch-module")
-          // add("$moduleName=${sourceSets.main.get().output.asPath}")
-          // add("-Xplugin:unchecked") // compiler plugin
-        })
-
-    // Add the Kotlin classes to the module path (compileKotlinJvm)
-    val compileKotlin = tasks.findByName("compileKotlin") as? KotlinCompile
-    if (compileKotlin != null) {
-      compilerArgumentProviders +=
-          PatchModuleArgProvider(
-              provider { project.group.toString() }, compileKotlin.destinationDirectory)
+fun JavaToolchainSpec.configureJvmToolchain(project: Project) =
+    with(project) {
+      languageVersion = toolchainVersion
+      // vendor = toolchainVendor
     }
-  }
-}
 
-context(Project)
-fun KotlinCommonCompilerOptions.configureKotlinCommon() {
-  apiVersion = kotlinApiVersion
-  languageVersion = kotlinLangVersion
-  progressiveMode = true
-  allWarningsAsErrors = false
-  suppressWarnings = false
-  verbose = false
-  freeCompilerArgs.addAll(
-      "-Xexpect-actual-classes",
-      "-Xskip-prerelease-check",
-      // "-XXLanguage:+ExplicitBackingFields",
-      // "-Xsuppress-version-warnings",
-      // "-Xsuppress-warning=CONTEXT_RECEIVERS_DEPRECATED"
-      // "-P",
-      // "plugin:...=..."
-  )
-  optIn.addAll(
-      "kotlin.ExperimentalStdlibApi",
-      "kotlin.contracts.ExperimentalContracts",
-      "kotlin.ExperimentalUnsignedTypes",
-      "kotlin.io.encoding.ExperimentalEncodingApi",
-      "kotlin.time.ExperimentalTime",
-      "kotlinx.coroutines.ExperimentalCoroutinesApi",
-      "kotlinx.serialization.ExperimentalSerializationApi",
-      "kotlin.ExperimentalMultiplatform",
-      "kotlin.js.ExperimentalJsExport",
-      "kotlin.experimental.ExperimentalNativeApi",
-      "kotlinx.cinterop.ExperimentalForeignApi",
-      "kotlin.uuid.ExperimentalUuidApi",
-      // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
-  )
-}
+fun JavaCompile.configureJavac(project: Project) =
+    with(project) {
+      options.apply {
+        encoding = Charsets.UTF_8.name()
+        release = javaRelease
+        isIncremental = true
+        isFork = true
+        debugOptions.debugLevel = "source,lines,vars"
+        // For Gradle worker daemon.
+        forkOptions.jvmArgs?.addAll(jvmArguments())
+        // Javac options
+        compilerArgs.addAll(
+            buildList {
+              addAll(jvmArguments())
+              add("-Xlint:all")
+              add("-parameters")
+              // add("-Xlint:-deprecation")
+              // add("-Xlint:lossy-conversions")
+              // add("-XX:+IgnoreUnrecognizedVMOptions")
+              // add("--add-exports")
+              // add("java.base/sun.nio.ch=ALL-UNNAMED")
+              // add("--patch-module")
+              // add("$moduleName=${sourceSets.main.get().output.asPath}")
+              // add("-Xplugin:unchecked") // compiler plugin
+            })
 
-context(Project)
-fun KspAATask.configureKspConfig() {
-  kspConfig.apply {
-    apiVersion = kotlinApiVersion.map { it.version }
-    jvmTarget = kotlinJvmTarget.map { it.target }
-    languageVersion = kotlinLangVersion.map { it.version }
-    allWarningsAsErrors = false
-  }
-}
+        // Add the Kotlin classes to the module path (compileKotlinJvm)
+        val compileKotlin = tasks.findByName("compileKotlin") as? KotlinCompile
+        if (compileKotlin != null) {
+          compilerArgumentProviders +=
+              PatchModuleArgProvider(
+                  provider { project.group.toString() }, compileKotlin.destinationDirectory)
+        }
+      }
+    }
+
+fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
+    with(project) {
+      apiVersion = kotlinApiVersion
+      languageVersion = kotlinLangVersion
+      progressiveMode = true
+      allWarningsAsErrors = false
+      suppressWarnings = false
+      verbose = false
+      freeCompilerArgs.addAll(
+          "-Xexpect-actual-classes",
+          "-Xskip-prerelease-check",
+          // "-XXLanguage:+ExplicitBackingFields",
+          // "-Xsuppress-version-warnings",
+          // "-P",
+          // "plugin:...=..."
+      )
+      optIn.addAll(
+          "kotlin.ExperimentalStdlibApi",
+          "kotlin.contracts.ExperimentalContracts",
+          "kotlin.ExperimentalUnsignedTypes",
+          "kotlin.io.encoding.ExperimentalEncodingApi",
+          "kotlin.time.ExperimentalTime",
+          "kotlinx.coroutines.ExperimentalCoroutinesApi",
+          "kotlinx.serialization.ExperimentalSerializationApi",
+          "kotlin.ExperimentalMultiplatform",
+          "kotlin.js.ExperimentalJsExport",
+          "kotlin.experimental.ExperimentalNativeApi",
+          "kotlinx.cinterop.ExperimentalForeignApi",
+          "kotlin.uuid.ExperimentalUuidApi",
+          // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
+      )
+    }
+
+fun KspAATask.configureKspConfig() =
+    with(project) {
+      kspConfig.apply {
+        apiVersion = kotlinApiVersion.map { it.version }
+        jvmTarget = kotlinJvmTarget.map { it.target }
+        languageVersion = kotlinLangVersion.map { it.version }
+        allWarningsAsErrors = false
+      }
+    }
 
 /**
  * JVM backend compiler options can be found in,
@@ -450,57 +437,49 @@ fun KspAATask.configureKspConfig() {
  *   Gradle Kotlin DSL Api/Lang versions,
  * - [KotlinDslCompilerPlugins.kt](https://github.com/gradle/gradle/blob/master/platforms/core-configuration/kotlin-dsl-plugins/src/main/kotlin/org/gradle/kotlin/dsl/plugins/dsl/KotlinDslCompilerPlugins.kt#L63-L64)
  */
-context(Project)
-fun KotlinJvmCompilerOptions.configureKotlinJvm() {
-  jvmTarget = kotlinJvmTarget
-  apiVersion = kotlinApiVersion
-  languageVersion = kotlinLangVersion
-  javaParameters = true
-  verbose = true
-  allWarningsAsErrors = false
-  suppressWarnings = false
-  freeCompilerArgs.addAll(
-      "-Xadd-modules=$addModules",
-      "-Xjsr305=strict",
-      "-Xjvm-default=all",
-      "-Xassertions=jvm",
-      "-Xemit-jvm-type-annotations",
-      "-Xjspecify-annotations=strict",
-      "-Xextended-compiler-checks",
-      "-Xskip-prerelease-check",
-      // Remove null check intrinsics from bytecode
-      "-Xno-param-assertions",
-      "-Xno-call-assertions",
-      "-Xno-receiver-assertions",
-      // "-Xjdk-release=${kotlinJvmTarget.get().target}",
-      // "-Xadd-modules=ALL-MODULE-PATH",
-      // "-Xmodule-path=",
-      // "-Xjvm-enable-preview",
-      // "-Xjavac-arguments=\"--add-exports java.base/sun.nio.ch=ALL-UNNAMED\"",
-      // "-Xexplicit-api={strict|warning|disable}",
-      // "-Xgenerate-strict-metadata-version",
-      // "-Xuse-kapt4",
-  )
-}
-
-fun KotlinNativeCompilerOptions.configureKotlinNative() {
-  freeCompilerArgs.addAll(
-      // "-Xverbose-phases=Linker"
-      // "-Xruntime-logs=gc=info"
+fun KotlinJvmCompilerOptions.configureKotlinJvm(project: Project) =
+    with(project) {
+      jvmTarget = kotlinJvmTarget
+      apiVersion = kotlinApiVersion
+      languageVersion = kotlinLangVersion
+      javaParameters = true
+      verbose = true
+      allWarningsAsErrors = false
+      suppressWarnings = false
+      freeCompilerArgs.addAll(
+          "-Xadd-modules=$addModules",
+          "-Xjsr305=strict",
+          "-Xjvm-default=all",
+          "-Xassertions=jvm",
+          "-Xemit-jvm-type-annotations",
+          "-Xjspecify-annotations=strict",
+          "-Xextended-compiler-checks",
+          "-Xskip-prerelease-check",
+          // Remove null check intrinsics from bytecode
+          "-Xno-param-assertions",
+          "-Xno-call-assertions",
+          "-Xno-receiver-assertions",
+          // "-Xjdk-release=${kotlinJvmTarget.get().target}",
+          // "-Xadd-modules=ALL-MODULE-PATH",
+          // "-Xmodule-path=",
+          // "-Xjvm-enable-preview",
+          // "-Xjavac-arguments=\"--add-exports java.base/sun.nio.ch=ALL-UNNAMED\"",
+          // "-Xexplicit-api={strict|warning|disable}",
+          // "-Xgenerate-strict-metadata-version",
+          // "-Xuse-kapt4",
       )
-}
+    }
 
-context(Project)
 fun Test.configureJavaTest() {
   useJUnitPlatform()
-  jvmArgs(jvmArguments())
+  jvmArgs(project.jvmArguments())
 
   // For JUnit5 @EnabledIfSystemProperty
   systemProperty("ktorTest", project.hasProperty("ktorTest"))
   systemProperty("k8sTest", project.hasProperty("k8sTest"))
   systemProperty("spring.classformat.ignore", true)
   // Custom hosts file for tests
-  val customHostFile = layout.projectDirectory.file("src/test/resources/hosts").asFile
+  val customHostFile = project.layout.projectDirectory.file("src/test/resources/hosts").asFile
   if (customHostFile.exists()) {
     systemProperty("jdk.net.hosts.file", customHostFile.absolutePath)
   }
@@ -630,7 +609,7 @@ val Project.javaToolchainPath
     val jLauncher =
         when (defToolchain != null) {
           true -> javaToolchainSvc?.launcherFor(defToolchain)
-          else -> javaToolchainSvc?.launcherFor { configureJvmToolchain() }
+          else -> javaToolchainSvc?.launcherFor { configureJvmToolchain(project) }
         }?.orNull
 
     return jLauncher?.metadata?.installationPath?.asFile?.toPath()

@@ -3,9 +3,8 @@
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
+import common.*
 import common.Platform
-import common.githubRepo
-import common.githubUser
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
@@ -22,6 +21,8 @@ val appBinName = "app"
 description = "Ktor native application"
 
 kotlin {
+  allNativeTargets()
+
   targets.withType<KotlinNativeTarget>().configureEach {
     binaries {
       executable(setOf(RELEASE)) {

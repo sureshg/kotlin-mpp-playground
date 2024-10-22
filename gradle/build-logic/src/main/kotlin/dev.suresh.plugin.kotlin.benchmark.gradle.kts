@@ -1,4 +1,4 @@
-import common.libs
+import common.*
 import kotlinx.benchmark.gradle.BenchmarkTarget
 import kotlinx.benchmark.gradle.KotlinJvmBenchmarkTarget
 
@@ -18,6 +18,8 @@ plugins {
 group = libs.versions.group.get()
 
 description = "Kotlin benchmarking tests"
+
+kotlin { jvmTarget(project) }
 
 allOpen { annotation("org.openjdk.jmh.annotations.State") }
 

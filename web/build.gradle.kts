@@ -42,15 +42,8 @@ tasks {
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
       }
 
-  jsProcessResources {
-    // logger.quiet(TextColors.gray("◈ Configuring shared JS resources"))
-    mustRunAfter(copySharedJsResources)
-  }
-
-  wasmJsProcessResources {
-    // logger.quiet(TextColors.gray("◈ Configuring shared Wasm resources"))
-    mustRunAfter(copySharedWasmResources)
-  }
+  jsProcessResources { mustRunAfter(copySharedJsResources) }
+  wasmJsProcessResources { mustRunAfter(copySharedWasmResources) }
 }
 
 artifacts {

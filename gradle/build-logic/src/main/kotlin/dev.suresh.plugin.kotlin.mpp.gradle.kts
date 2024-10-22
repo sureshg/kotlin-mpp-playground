@@ -1,4 +1,5 @@
 @file:Suppress("UnstableApiUsage")
+@file:OptIn(ExperimentalKotlinGradlePluginApi::class, ExperimentalBCVApi::class)
 
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
@@ -7,6 +8,7 @@ import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
@@ -31,26 +33,25 @@ plugins {
   // dev.mokkery
 }
 
+val nativeBuild: String? by project
+
 kotlin {
-  commonTarget()
+  commonTarget(project)
   when (project.name) {
     sharedProjectName -> {
-      jvmTarget()
-      jsTarget()
-      wasmJsTarget()
-      allNativeTargets { compilerOptions { configureKotlinNative() } }
+      jvmTarget(project)
+      jsTarget(project)
+      wasmJsTarget(project)
+      if (nativeBuild.toBoolean()) {
+        allNativeTargets {}
+      }
     }
-    "native" -> allNativeTargets { compilerOptions { configureKotlinNative() } }
-    "web" -> {
-      jsTarget()
-      wasmJsTarget()
+
+    "web",
+    "frontend" -> {
+      jsTarget(project)
+      wasmJsTarget(project)
     }
-    "cmp" -> {
-      jvmTarget()
-      wasmJsTarget()
-    }
-    "html" -> jsTarget()
-    else -> jvmTarget()
   }
 
   applyDefaultHierarchyTemplate {
@@ -78,7 +79,6 @@ kotlin {
 
 atomicfu {
   transformJvm = true
-  transformJs = true
   jvmVariant = "VH"
 }
 
@@ -99,8 +99,7 @@ redacted {
 // kopy { functions = KopyFunctions.Copy }
 
 tasks {
-  // Register buildConfig task only for project's common module
-  if (project.isSharedProject) {
+  if (isSharedProject) {
     val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
     val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
     kotlin.sourceSets.commonMain { kotlin.srcDirs(buildConfig) }

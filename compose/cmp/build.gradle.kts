@@ -1,8 +1,8 @@
 @file:OptIn(ExperimentalComposeLibrary::class)
 @file:Suppress("UnstableApiUsage")
 
+import common.*
 import common.Platform
-import common.jvmArguments
 import java.time.Year
 import kotlin.io.path.listDirectoryEntries
 import org.jetbrains.compose.ExperimentalComposeLibrary
@@ -20,6 +20,9 @@ plugins {
 description = "Compose Desktop App!"
 
 kotlin {
+  jvmTarget(project)
+  wasmJsTarget(project)
+
   sourceSets {
     commonMain.dependencies {
       implementation(projects.shared)
@@ -179,5 +182,5 @@ tasks {
 
 artifacts {
   val composeWebApp by configurations.consumable("composeWebApp")
-  add(composeWebApp.name, tasks.wasmJsBrowserDistribution)
+  add(composeWebApp.name, tasks.named("wasmJsBrowserDistribution"))
 }
