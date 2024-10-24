@@ -87,10 +87,9 @@ graalvmNative {
         if (reportsEnabled) {
           add("-H:+BuildReport")
         }
-        add("--enable-sbom=classpath,embed")
+        // add("--enable-sbom=classpath,embed")
       }
-      // https://www.graalvm.org/dev/reference-manual/native-image/overview/BuildOptions/
-      // https://www.graalvm.org/dashboard/?ojr=help%3Btopic%3Dgetting-started.md
+      // https://www.graalvm.org/latest/reference-manual/native-image/overview/Options/
     }
 
     // resources {
