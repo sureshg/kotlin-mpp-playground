@@ -9,7 +9,7 @@ import nl.altindag.ssl.SSLFactory
 
 val log = KotlinLogging.logger {}
 
-val customSSLFactory by lazy {
+val customSSLFactory: SSLFactory by lazy {
   log.info { "Initializing TLS context with custom RootCAs..." }
   log.info { "Root CAs: ${RootCA.commonNames}" }
   SSLFactory.builder()
