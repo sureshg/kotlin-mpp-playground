@@ -11,8 +11,10 @@ import org.tomlj.Toml
 
 val versionCatalog by lazy {
   // A hack to read version catalog from settings
-  Toml.parse(file("$rootDir/gradle/libs.versions.toml").readText()).getTable("versions")
-      ?: error("Unable to parse the version catalog!")
+  runCatching {
+        Toml.parse(file("$rootDir/gradle/libs.versions.toml").readText()).getTable("versions")
+      }
+      .getOrNull()
 }
 
 pluginManagement {
@@ -123,7 +125,7 @@ fun RepositoryHandler.googleAndroid() {
 fun RepositoryHandler.nodeJS() {
   exclusiveContent {
     forRepository {
-      ivy(versionCatalog.getString("repo-nodejs").orEmpty()) {
+      ivy(versionCatalog?.getString("repo-nodejs").orEmpty()) {
         name = "Node Distributions at $url"
         patternLayout { artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
         metadataSources { artifact() }
@@ -135,7 +137,7 @@ fun RepositoryHandler.nodeJS() {
 }
 
 fun RepositoryHandler.kobWeb() {
-  maven(url = versionCatalog.getString("repo-kobweb").orEmpty()) {
+  maven(url = versionCatalog?.getString("repo-kobweb").orEmpty()) {
     name = "KobWeb Repo"
     content { includeGroupAndSubgroups("com.varabyte") }
   }
@@ -145,7 +147,7 @@ fun RepositoryHandler.mavenSnapshot() {
   val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
   if (mvnSnapshot) {
     logger.lifecycle("❖ Maven Snapshot is enabled!")
-    maven(url = versionCatalog.getString("repo-mvn-snapshot").orEmpty()) {
+    maven(url = versionCatalog?.getString("repo-mvn-snapshot").orEmpty()) {
       mavenContent { snapshotsOnly() }
     }
   }
