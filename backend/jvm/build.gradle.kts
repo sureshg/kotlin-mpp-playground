@@ -233,11 +233,13 @@ dependencies {
   testImplementation(libs.kubernetes.client)
   testImplementation(libs.konsist)
 
-  // Copy js and wasm apps
-  jsApp(project(path = projects.web.identityPath.path, configuration = "jsApp"))
-  wasmApp(project(path = projects.web.identityPath.path, configuration = "wasmApp"))
-  composeWebApp(
-      project(path = projects.compose.cmp.identityPath.path, configuration = "composeWebApp"))
+  // Copy js, wasm, compose apps
+  findProject(":web")?.let {
+    jsApp(project(path = it.path, configuration = "jsApp"))
+    wasmApp(project(path = it.path, configuration = "wasmApp"))
+  }
+
+  findProject(":compose:cmp")?.let { project(path = it.path, configuration = "composeWebApp") }
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })
