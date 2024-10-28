@@ -239,7 +239,9 @@ dependencies {
     wasmApp(project(path = it.path, configuration = "wasmApp"))
   }
 
-  findProject(":compose:cmp")?.let { project(path = it.path, configuration = "composeWebApp") }
+  findProject(":compose:cmp")?.let {
+    composeWebApp(project(path = it.path, configuration = "composeWebApp"))
+  }
 
   // Specify the classifier using variantOf
   // implementation(variantOf(libs.lwjgl.opengl) { classifier("natives-linux") })
