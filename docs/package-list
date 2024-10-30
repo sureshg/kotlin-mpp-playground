@@ -108,6 +108,7 @@ $dokka.location:/BuildConfig/jsch/#/PointingToDeclaration/shared/[root]/-build-
 $dokka.location:/BuildConfig/jspecify/#/PointingToDeclaration/shared/[root]/-build-config/jspecify.html
 $dokka.location:/BuildConfig/jte/#/PointingToDeclaration/shared/[root]/-build-config/jte.html
 $dokka.location:/BuildConfig/junit/#/PointingToDeclaration/shared/[root]/-build-config/junit.html
+$dokka.location:/BuildConfig/kaml/#/PointingToDeclaration/shared/[root]/-build-config/kaml.html
 $dokka.location:/BuildConfig/karakum/#/PointingToDeclaration/shared/[root]/-build-config/karakum.html
 $dokka.location:/BuildConfig/kfswatch/#/PointingToDeclaration/shared/[root]/-build-config/kfswatch.html
 $dokka.location:/BuildConfig/kmpAppdirs/#/PointingToDeclaration/shared/[root]/-build-config/kmp-appdirs.html
@@ -216,6 +217,7 @@ $dokka.location:/BuildConfig/shedlock/#/PointingToDeclaration/shared/[root]/-bu
 $dokka.location:/BuildConfig/sherlock/#/PointingToDeclaration/shared/[root]/-build-config/sherlock.html
 $dokka.location:/BuildConfig/sigstore/#/PointingToDeclaration/shared/[root]/-build-config/sigstore.html
 $dokka.location:/BuildConfig/slf4j/#/PointingToDeclaration/shared/[root]/-build-config/slf4j.html
+$dokka.location:/BuildConfig/snakeyamlEngineKmp/#/PointingToDeclaration/shared/[root]/-build-config/snakeyaml-engine-kmp.html
 $dokka.location:/BuildConfig/sourceBuddy/#/PointingToDeclaration/shared/[root]/-build-config/source-buddy.html
 $dokka.location:/BuildConfig/spotless/#/PointingToDeclaration/shared/[root]/-build-config/spotless.html
 $dokka.location:/BuildConfig/springBoot/#/PointingToDeclaration/shared/[root]/-build-config/spring-boot.html
