@@ -74,10 +74,9 @@ dokka {
     separateInheritedMembers = false
     mergeImplicitExpectActualDeclarations = false
 
-    // val rootPath = rootProject.rootDir
-    // customAssets.from(rootPath.resolve("app-logo.svg"))
-    // customStyleSheets.from(rootPath.resolve("logo-styles.css"))
-    // templatesDir = rootProject.file("dokka-templates")
+    // customAssets.from(rootDir.resolve("app-logo.svg"))
+    // customStyleSheets.from(rootDir.resolve("logo-styles.css"))
+    // templatesDir = rootDir.resolve("dokka-templates")
   }
 }
 

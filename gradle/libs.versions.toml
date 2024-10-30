@@ -46,6 +46,8 @@ kopy                           = "0.12.0+2.0.21"
 poko                           = "0.17.2"
 mappie                         = "0.8.0"
 akkurate                       = "0.10.0"
+kaml                           = "0.62.0"
+snakeyaml-engine-kmp           = "3.0.3"
 konsist                        = "0.16.1"
 karakum                        = "1.0.0-alpha.40-K2"
 seskar                         = "3.43.0"
@@ -91,7 +93,7 @@ logback-tyler                  = "1.0.0"
 log4j                          = "3.0.0-beta2"
 jmh                            = "1.37"
 mrjar                          = "0.1.1"
-ktfmt                          = "0.52"
+ktfmt                          = "0.53"
 google-javaformat              = "1.24.0"
 palantir-javaformat            = "2.50.0"
 google-auto-service            = "1.1.1"
@@ -431,6 +433,10 @@ hoplite-hocon                        = { module = "com.sksamuel.hoplite:hoplite-
 expiringmap                          = { module = "net.jodah:expiringmap"                                      , version.ref = "expiringmap"}
 password4j                           = { module = "com.password4j:password4j"                                  , version.ref = "password4j"}
 otp-java                             = { module = "com.github.bastiaanjansen:otp-java"                         , version.ref = "otp"}
+
+# Yaml
+kaml                                 = { module = "com.charleskorn.kaml:kaml"                                  , version.ref = "kaml"}
+snakeyaml-engine-kmp                 = { module = "it.krzeminski:snakeyaml-engine-kmp"                         , version.ref = "snakeyaml-engine-kmp"}
 
 # Database IDs
 sqids                                = { module = "org.sqids:sqids"                                            , version.ref = "sqids"}

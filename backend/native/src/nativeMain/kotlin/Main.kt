@@ -1,3 +1,4 @@
+import com.charleskorn.kaml.Yaml
 import dev.suresh.Greeting
 import dev.suresh.flow.timerComposeFlow
 import dev.suresh.http.MediaApiClient
@@ -5,6 +6,7 @@ import kotlin.reflect.typeOf
 import kotlin.time.Duration
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.Serializable
 
 data class ProcessResult(val code: Int, val rawOutput: String?)
 
@@ -40,8 +42,26 @@ fun main(args: Array<String>): Unit = runBlocking {
   // MultiplatformSystem.readEnvironmentVariable()
 
   val client = MediaApiClient()
-  val images = client.images()
-  println("Found ${images.size} images")
+  try {
+    val images = client.images()
+    println("Found ${images.size} images")
+  } catch (e: Exception) {
+    e.printStackTrace()
+  }
+
+  @Serializable data class Team(val leader: String, val members: List<String>)
+
+  val yaml =
+      Yaml.default.decodeFromString<Team>(
+          """
+          leader: Amy
+          members:
+                 - Bob
+                 - Cindy
+                 - Dan
+          """
+              .trimIndent())
+  println(yaml)
 }
 
 inline fun <reified T> prop(prop: T): String {

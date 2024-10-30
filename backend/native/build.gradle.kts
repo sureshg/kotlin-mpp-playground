@@ -50,6 +50,7 @@ kotlin {
     nativeMain {
       dependencies {
         api(libs.ktor.client.cio)
+        api(libs.kaml)
         api(libs.kmp.appdirs)
         api(libs.kfswatch)
         // api(libs.arrow.suspendapp.ktor)
