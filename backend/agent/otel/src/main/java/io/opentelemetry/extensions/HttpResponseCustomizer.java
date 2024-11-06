@@ -14,6 +14,7 @@ public class HttpResponseCustomizer implements HttpServerResponseCustomizer {
 
     private static final String TRACE_ID_HEADER = "X-Trace-Id";
 
+
     @Override
     public <T> void customize(Context serverContext, T response, HttpServerResponseMutator<T> responseMutator) {
         var span = Span.fromContextOrNull(serverContext);

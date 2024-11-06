@@ -1,8 +1,8 @@
 version: "3.8"
 
-# docker compose -f clickhouse-compose.yml up
+# docker compose -f otel-compose.yml up
 services:
-  clickhouse-server:
+  clickhouse:
     image: clickhouse/clickhouse-server:latest-alpine
     restart: always
     volumes:
@@ -27,6 +27,27 @@ services:
     networks:
       - otel-clickhouse
 
+  node_exporter:
+    image: prom/node-exporter:latest
+    container_name: node_exporter
+    command:
+      - '--path.rootfs=/host'
+    network_mode: host
+    pid: host
+    restart: unless-stopped
+    volumes:
+      - '/:/host:ro,rslave'
+    ports:
+      - '9100:9100'
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:latest
+    network_mode: host
+    volumes:
+      - ./otel-collector-config.yml:/config.yaml
+    command:
+      - --config=file:/config.yaml
+
   grafana:
     image: grafana/grafana:latest
     volumes:
@@ -45,21 +66,7 @@ services:
         limits:
           memory: 2g
     depends_on:
-      - clickhouse-server
-
-  db-data:
-    image: openjdk:24-slim
-    restart: always
-    volumes:
-      - clickhouse-data:/data/clickhouse/data
-      - clickhouse-log:/data/clickhouse/log
-    ports:
-      - "8000:8000"
-    networks:
-      - app-network
-    command: [ "jwebserver", "-b", "0.0.0.0", "-d", "/data" ]
-    depends_on:
-      - clickhouse-server
+      - clickhouse
 
 volumes:
   clickhouse-data:

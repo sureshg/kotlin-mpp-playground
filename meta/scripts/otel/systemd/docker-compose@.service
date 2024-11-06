@@ -1,0 +1,23 @@
+# /etc/systemd/system/compose-app.service
+# systemctl enable compose-app
+# Also, https://github.com/moby/moby/blob/master/contrib/init/systemd/docker.service
+
+[Unit]
+Description=%i docker compose service
+Requires=docker.service
+PartOf=docker.service
+After=docker.service
+StartLimitIntervalSec=60
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+WorkingDirectory=/app/%i
+ExecStart=/usr/local/bin/docker-compose up -d --remove-orphans
+ExecStop=/usr/local/bin/docker-compose down
+TimeoutStartSec=0
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

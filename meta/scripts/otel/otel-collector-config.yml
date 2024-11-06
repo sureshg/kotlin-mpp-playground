@@ -3,6 +3,16 @@ receivers:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: 'node_exporter'
+          static_configs:
+            - targets: [ 'node_exporter:9100' ]  # Default node_exporter port
+          scrape_interval: 10s
 
 processors:
   batch:
@@ -26,23 +36,10 @@ exporters:
   clickhouse:
     endpoint: tcp://clickhouse:9000
     database: otel
-    async_insert: true
     ttl: 12h
-    compress: lz4
     create_schema: true
     logs_table_name: otel_logs
     traces_table_name: otel_traces
-    metrics_tables:
-      gauge:
-        name: "otel_metrics_gauge"
-      sum:
-        name: "otel_metrics_sum"
-      summary:
-        name: "otel_metrics_summary"
-      histogram:
-        name: "otel_metrics_histogram"
-      exponential_histogram:
-        name: "otel_metrics_exp_histogram"
     timeout: 10s
     sending_queue:
       queue_size: 100
@@ -51,6 +48,13 @@ exporters:
       initial_interval: 5s
       max_interval: 30s
       max_elapsed_time: 300s
+
+    # otlphttp/traces:
+    #   endpoint: http://localhost:4418
+    #   tls:
+    #     insecure: true
+    # debug/logs:
+    #   verbosity: detailed
 
 extensions:
   health_check:
@@ -68,3 +72,8 @@ service:
       receivers: [ otlp ]
       processors: [ memory_limiter, resourcedetection/system, resource, batch ]
       exporters: [ clickhouse ]
+    metrics:
+      receivers: [ otlp ]
+      processors: [ memory_limiter, resourcedetection/system, resource, batch ]
+      exporters: [ clickhouse ]
+      # exporters: [otlphttp/metrics,debug/metrics]

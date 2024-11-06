@@ -260,7 +260,10 @@ $ ./gradlew :backend:jvm:run
   # Dependency Insight
   $ ./gradlew dependencies
   $ ./gradlew :shared:dependencies --configuration testRuntimeClasspath
+
+  $ ./gradlew -q :build-logic:dependencyInsight --dependency kotlin-compiler-embeddable --configuration RuntimeClasspath
   $ ./gradlew -q :shared:dependencyInsight --dependency slf4j-api --configuration RuntimeClasspath
+
   $ ./gradlew :backend:jvm:listResolvedArtifacts
 
   # KMP hierarchy and module graphs
