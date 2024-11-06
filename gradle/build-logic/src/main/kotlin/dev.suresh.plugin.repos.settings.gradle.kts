@@ -51,7 +51,6 @@ plugins {
   id("com.gradle.develocity")
   id("org.gradle.toolchains.foojay-resolver")
   id("org.jetbrains.kotlinx.kover.aggregation")
-  id("com.autonomousapps.build-health")
   id("com.javiersc.semver")
   // id("dev.suresh.plugin.include")
 }

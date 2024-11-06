@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import com.diffplug.spotless.kotlin.KtfmtStep
 import org.jetbrains.kotlin.gradle.dsl.*
 
 plugins {
@@ -9,7 +10,7 @@ plugins {
   alias(libs.plugins.jte)
   alias(libs.plugins.benmanes)
   alias(libs.plugins.spotless)
-  alias(libs.plugins.autonomousapps.bestpractices)
+  // alias(libs.plugins.autonomousapps.bestpractices)
   // alias(libs.plugins.kotlin.dsl)
 }
 
@@ -46,7 +47,7 @@ kotlin {
 }
 
 spotless {
-  val ktfmtVersion = libs.versions.ktfmt.get()
+  val ktfmtVersion = maxOf(KtfmtStep.defaultVersion(), libs.versions.ktfmt.get())
   kotlin {
     target("src/**/*.kts", "src/**/*.kt")
     ktfmt(ktfmtVersion)
@@ -176,7 +177,6 @@ dependencies {
   implementation(libs.build.mrjar.plugin)
   implementation(libs.build.semver.plugin)
   implementation(libs.build.benmanesversions)
-  implementation(libs.build.dependencyanalysis)
   implementation(libs.build.tasktree)
   implementation(libs.build.foojay.resolver)
   implementation(libs.build.nativeimage.plugin)
@@ -197,7 +197,7 @@ dependencies {
   // implementation(libs.jte.native)
   // implementation(libs.build.kmp.hierarchy)
   // implementation(libs.build.includegit.plugin)
-  // implementation(libs.build.cyclonedx.plugin)
+  // implementation(libs.build.dependencyanalysis)
 
   testImplementation(gradleTestKit())
   // For using kotlin-dsl in pre-compiled script plugins

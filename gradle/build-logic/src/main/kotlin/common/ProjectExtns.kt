@@ -412,7 +412,6 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
           "kotlin.ExperimentalMultiplatform",
           "kotlin.js.ExperimentalJsExport",
           "kotlin.experimental.ExperimentalNativeApi",
-          "kotlinx.cinterop.ExperimentalForeignApi",
           "kotlin.uuid.ExperimentalUuidApi",
           // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
       )

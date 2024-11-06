@@ -1,3 +1,4 @@
+import com.diffplug.spotless.kotlin.KtfmtStep
 import common.*
 import java.time.Year
 import org.hildan.github.changelog.plugin.GitHubChangelogExtension
@@ -89,7 +90,7 @@ spotless {
   }
   // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
 
-  val ktfmtVersion = libs.versions.ktfmt.get()
+  val ktfmtVersion = maxOf(KtfmtStep.defaultVersion(), libs.versions.ktfmt.get())
   kotlin {
     ktfmt(ktfmtVersion)
     target("src/**/*.kts", "src/**/*.kt")
