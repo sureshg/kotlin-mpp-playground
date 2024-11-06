@@ -193,19 +193,20 @@ artifacts {
   }
 }
 
-// Initialize Node.js and NPM extensions only once in a multi-module project
+// Ideally, NodeJsPlugin should be applied to the root project,
+// but this is a hack to apply from the kotlin.mpp convention plugin.
 var nodeJsEnabled: String? by rootProject.extra
 
 if (nodeJsEnabled.toBoolean().not()) {
-  rootProject.plugins.withType<NodeJsRootPlugin> {
-    rootProject.extensions.configure<NodeJsRootExtension> {
+  rootProject.plugins.withType<NodeJsPlugin> {
+    rootProject.the<NodeJsEnvSpec>().apply {
       download = true
       nodeJsEnabled = "true"
       // version = libs.versions.nodejs.version.get()
-      // nodeDownloadBaseUrl = "https://nodejs.org/download/nightly"
+      // downloadBaseUrl = "https://nodejs.org/download/nightly"
     }
 
-    rootProject.extensions.configure<NpmExtension> {
+    rootProject.the<NpmExtension>().apply {
       lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
       packageLockMismatchReport = LockFileMismatchReport.WARNING
       packageLockAutoReplace = false
