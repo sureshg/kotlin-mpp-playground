@@ -78,6 +78,7 @@ $dokka.location:/BuildConfig/graalvmNativeimage/#/PointingToDeclaration/shared/
 $dokka.location:/BuildConfig/gradle/#/PointingToDeclaration/shared/[root]/-build-config/gradle.html
 $dokka.location:/BuildConfig/gradleDevelocity/#/PointingToDeclaration/shared/[root]/-build-config/gradle-develocity.html
 $dokka.location:/BuildConfig/gradleKotlinDsl/#/PointingToDeclaration/shared/[root]/-build-config/gradle-kotlin-dsl.html
+$dokka.location:/BuildConfig/gradlePublish/#/PointingToDeclaration/shared/[root]/-build-config/gradle-publish.html
 $dokka.location:/BuildConfig/group/#/PointingToDeclaration/shared/[root]/-build-config/group.html
 $dokka.location:/BuildConfig/h2/#/PointingToDeclaration/shared/[root]/-build-config/h2.html
 $dokka.location:/BuildConfig/hikariCP/#/PointingToDeclaration/shared/[root]/-build-config/hikari-c-p.html
@@ -283,6 +284,7 @@ dev.suresh.log
 dev.suresh.plugins
 dev.suresh.plugins.custom
 dev.suresh.routes
+dev.suresh.wasm
 gg.jte.generated.precompiled
 module:profiling
 dev.suresh
