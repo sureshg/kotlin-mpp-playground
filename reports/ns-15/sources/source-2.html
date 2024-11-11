@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > BirdsScreenKt</title>
+  <title>: Coverage Report > FlippedModifier</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,15 +19,18 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">ui.birds</a>
+    <a href="../index.html">ui</a>
 </div>
 
-<h1>Coverage Summary for Class: BirdsScreenKt (ui.birds)</h1>
+<h1>Coverage Summary for Class: FlippedModifier (ui)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,7 +49,24 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">BirdsScreenKt</td>
+  <td class="name">FlippedModifier</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -60,117 +80,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/28)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/316)
+    (0/11)
   </span>
 </td>
 </tr>
-  <tr>
-    <td class="name">BirdsScreenKt$BirdImages$1$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/9)
-  </span>
-</td>
-  </tr>
-  <tr>
-    <td class="name">BirdsScreenKt$BirdImages$2$1$1</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/1)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/45)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/30)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/370)
-  </span>
-</td>
-</tr>
+
 </table>
 
 <br/>
@@ -178,62 +92,59 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package ui.birds
+<code class="sourceCode" id="sourceCode">&nbsp;package ui
 &nbsp;
-&nbsp;import androidx.compose.foundation.layout.*
-&nbsp;import androidx.compose.foundation.rememberScrollState
-&nbsp;import androidx.compose.foundation.text.selection.SelectionContainer
-&nbsp;import androidx.compose.foundation.verticalScroll
-&nbsp;import androidx.compose.material3.CircularProgressIndicator
-&nbsp;import androidx.compose.material3.MaterialTheme
-&nbsp;import androidx.compose.material3.Text
-&nbsp;import androidx.compose.runtime.Composable
-&nbsp;import androidx.compose.runtime.LaunchedEffect
-&nbsp;import androidx.compose.runtime.collectAsState
-&nbsp;import androidx.compose.runtime.getValue
-&nbsp;import androidx.compose.ui.Alignment
 &nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.composed
+&nbsp;import androidx.compose.ui.draw.DrawModifier
+&nbsp;import androidx.compose.ui.draw.drawWithCache
+&nbsp;import androidx.compose.ui.geometry.CornerRadius
 &nbsp;import androidx.compose.ui.graphics.Color
+&nbsp;import androidx.compose.ui.graphics.PathEffect
+&nbsp;import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+&nbsp;import androidx.compose.ui.graphics.drawscope.Stroke
+&nbsp;import androidx.compose.ui.graphics.drawscope.scale
+&nbsp;import androidx.compose.ui.platform.LocalDensity
+&nbsp;import androidx.compose.ui.unit.Dp
 &nbsp;import androidx.compose.ui.unit.dp
-&nbsp;import androidx.lifecycle.viewmodel.compose.viewModel
-&nbsp;import ui.debug
-&nbsp;import ui.home.HomeButton
+&nbsp;import kotlinx.coroutines.MainScope
 &nbsp;
-&nbsp;@Composable
-<b class="nc">&nbsp;fun BirdImages(modifier: Modifier = Modifier, navToHome: () -&gt; Unit) {</b>
-<b class="nc">&nbsp;  val birdsViewModel = viewModel { BirdsViewModel() }</b>
-<b class="nc">&nbsp;  val state by birdsViewModel.uiState.collectAsState()</b>
-<b class="nc">&nbsp;  val scrollState = rememberScrollState()</b>
+&nbsp;val debug = true
 &nbsp;
-&nbsp;  // Load the BirdUiState
-<b class="nc">&nbsp;  LaunchedEffect(birdsViewModel) { birdsViewModel.update() }</b>
+&nbsp;val mainScope = MainScope()
 &nbsp;
-<b class="nc">&nbsp;  Column(</b>
-&nbsp;      modifier =
-<b class="nc">&nbsp;          modifier</b>
-<b class="nc">&nbsp;              .fillMaxSize()</b>
-<b class="nc">&nbsp;              .padding(10.dp)</b>
-<b class="nc">&nbsp;              .debug(color = Color.Black)</b>
-<b class="nc">&nbsp;              .verticalScroll(scrollState),</b>
-<b class="nc">&nbsp;      horizontalAlignment = Alignment.CenterHorizontally,</b>
-<b class="nc">&nbsp;      verticalArrangement = Arrangement.SpaceEvenly) {</b>
-<b class="nc">&nbsp;        if (state.images.isEmpty()) {</b>
-<b class="nc">&nbsp;          CircularProgressIndicator(</b>
-<b class="nc">&nbsp;              modifier = Modifier.width(64.dp),</b>
-<b class="nc">&nbsp;              color = MaterialTheme.colorScheme.secondary,</b>
-<b class="nc">&nbsp;              trackColor = MaterialTheme.colorScheme.surfaceVariant,</b>
-&nbsp;          )
-<b class="nc">&nbsp;          Text(&quot;Loading images...&quot;)</b>
-<b class="nc">&nbsp;        } else {</b>
-<b class="nc">&nbsp;          state.images.forEach { image -&gt;</b>
-<b class="nc">&nbsp;            SelectionContainer { Text(image.path) }</b>
-<b class="nc">&nbsp;            Spacer(modifier = Modifier.width(5.dp))</b>
-<b class="nc">&nbsp;          }</b>
+&nbsp;fun Modifier.debug(color: Color = Color.Red) =
+&nbsp;    then(if (debug) dashedBorder(1.dp, color, 8.dp) else this)
+&nbsp;
+&nbsp;fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modifier = composed {
+&nbsp;  val density = LocalDensity.current
+&nbsp;  val strokeWidthPx = density.run { strokeWidth.toPx() }
+&nbsp;  val cornerRadiusPx = density.run { cornerRadius.toPx() }
+&nbsp;
+&nbsp;  then(
+&nbsp;      Modifier.drawWithCache {
+&nbsp;        onDrawBehind {
+&nbsp;          val stroke =
+&nbsp;              Stroke(
+&nbsp;                  width = strokeWidthPx,
+&nbsp;                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f))
+&nbsp;          drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))
 &nbsp;        }
-<b class="nc">&nbsp;        Spacer(modifier = Modifier.height(5.dp))</b>
-<b class="nc">&nbsp;        HomeButton(navToHome)</b>
-<b class="nc">&nbsp;      }</b>
-<b class="nc">&nbsp;}</b>
+&nbsp;      }
+&nbsp;      // .border(border = BorderStroke(strokeWidth, color),shape = RoundedCornerShape(cornerRadius))
+&nbsp;      )
+&nbsp;}
+&nbsp;
+&nbsp;inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -&gt; Modifier) =
+&nbsp;    then(if (value) builder() else Modifier)
+&nbsp;
+&nbsp;fun Modifier.flipped() = then(FlippedModifier())
+&nbsp;
+<b class="nc">&nbsp;class FlippedModifier : DrawModifier {</b>
+&nbsp;  override fun ContentDrawScope.draw() {
+<b class="nc">&nbsp;    scale(1f, -1f) { this@draw.drawContent() }</b>
+&nbsp;  }
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -257,7 +168,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-11-11 22:57</div>
+    <div style="float:right;">generated on 2024-11-11 23:34</div>
 </div>
 </body>
 </html>

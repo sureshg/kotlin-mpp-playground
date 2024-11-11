@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > ComposableSingletons</title>
+  <title>: Coverage Report > WasmKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">nav</a>
+    <a href="../index.html">dev.suresh.wasm</a>
 </div>
 
-<h1>Coverage Summary for Class: ComposableSingletons (nav)</h1>
+<h1>Coverage Summary for Class: WasmKt (dev.suresh.wasm)</h1>
 
 <table class="coverageStats">
 
@@ -45,8 +45,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   Instruction, %
 </th>
 </tr>
-  <tr>
-    <td class="name">ComposableSingletons$NavRootKt</td>
+<tr>
+  <td class="name">WasmKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -69,12 +69,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/10)
   </span>
 </td>
-  </tr>
+</tr>
   <tr>
-    <td class="name">ComposableSingletons$NavRootKt$lambda-1$1</td>
+    <td class="name">WasmKt$wasm$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -97,7 +97,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/29)
   </span>
 </td>
   </tr>
@@ -125,7 +125,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/9)
+    (0/39)
   </span>
 </td>
 </tr>
@@ -134,7 +134,21 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <br/>
 <br/>
 
-  <code class="sourceCode">Source code is not available<br /></code>
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.wasm
+&nbsp;
+&nbsp;import io.ktor.server.response.respondText
+&nbsp;import io.ktor.server.routing.Routing
+&nbsp;import io.ktor.server.routing.get
+&nbsp;
+&nbsp;fun Routing.wasm() {
+<b class="nc">&nbsp;  get(&quot;/wasm&quot;) { call.respondText(&quot;WASM: WebAssembly&quot;) }</b>
+&nbsp;}
+&nbsp;
+&nbsp;// https://github.com/extism/plugins/releases
+</code>
+</pre>
 </div>
 
 <script type="text/javascript">
@@ -156,7 +170,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-11-11 22:57</div>
+    <div style="float:right;">generated on 2024-11-11 23:34</div>
 </div>
 </body>
 </html>
