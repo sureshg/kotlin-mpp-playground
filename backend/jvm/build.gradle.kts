@@ -205,6 +205,10 @@ dependencies {
   implementation(libs.hikariCP)
   implementation(libs.sherlock.sql)
 
+  // Wasm
+  implementation(libs.chicory)
+  implementation(libs.chicory.aot)
+
   // Templating
   jteGenerate(libs.jte.models)
   implementation(libs.jte.runtime)

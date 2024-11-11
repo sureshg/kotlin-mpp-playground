@@ -6,6 +6,7 @@ import dev.suresh.lang.FFM
 import dev.suresh.lang.VThread
 import dev.suresh.log.RespLogger
 import dev.suresh.plugins.custom.CookieSession
+import dev.suresh.wasm.wasm
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.*
@@ -40,6 +41,8 @@ fun Routing.services() {
       call.respondText("Current Session: $session")
     }
   }
+
+  wasm()
 }
 
 @WithSpan suspend fun mediaApiCall() = MediaApiClient().images().size
