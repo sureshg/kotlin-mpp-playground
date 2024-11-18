@@ -168,7 +168,7 @@ chicory                        = "1.0.0-M1"
 
 # Compose
 jetbrains-compose              = "1.7.0"
-jetbrains-compose-viewmodel    = "2.8.3"
+jetbrains-compose-viewmodel    = "2.8.4"
 jetbrains-compose-nav          = "2.8.0-alpha10"
 jetbrains-compose-adaptive     = "1.0.0"
 kobweb                         = "0.19.2"
