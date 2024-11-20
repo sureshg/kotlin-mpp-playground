@@ -139,8 +139,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.wasm
 &nbsp;
 &nbsp;import io.ktor.server.response.respondText
-&nbsp;import io.ktor.server.routing.Routing
-&nbsp;import io.ktor.server.routing.get
+&nbsp;import io.ktor.server.routing.*
+&nbsp;
+&nbsp;// val factModule by lazy { Parser.parse(::class.java.getResourceAsStream(&quot;/fact.wasm&quot;)!!) }
 &nbsp;
 &nbsp;fun Routing.wasm() {
 <b class="nc">&nbsp;  get(&quot;/wasm&quot;) { call.respondText(&quot;WASM: WebAssembly&quot;) }</b>
@@ -170,7 +171,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-11-18 23:35</div>
+    <div style="float:right;">generated on 2024-11-20 08:12</div>
 </div>
 </body>
 </html>
