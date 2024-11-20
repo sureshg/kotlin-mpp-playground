@@ -136,19 +136,19 @@ class AppTests {
                     $$"""
                     #!/bin/sh
                     set -e
-                    echo "Entrypoint args: "$@""
+                    echo "Entrypoint args: $@"
                     apk add nginx
-                    echo "<h1>Hello world!</h1>" > $docRoot/index.html;
+                    echo "<h1>Hello world!</h1>" > $$docRoot/index.html;
                     cat <<EOF > /etc/nginx/http.d/default.conf
                     server {
                             listen 80 default_server;
                             listen [::]:80 default_server;
-                            listen $tlsPort ssl http2 default_server;
-                            listen [::]:$tlsPort ssl http2 default_server;
-                            ssl_certificate $cert;
-                            ssl_certificate_key $key;
+                            listen $$tlsPort ssl http2 default_server;
+                            listen [::]:$$tlsPort ssl http2 default_server;
+                            ssl_certificate $$cert;
+                            ssl_certificate_key $$key;
                             location / {
-                                    root $docRoot;
+                                    root $$docRoot;
                             }
 
                             location = /404.html {
