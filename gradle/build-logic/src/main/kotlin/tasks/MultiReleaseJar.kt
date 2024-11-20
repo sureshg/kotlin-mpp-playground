@@ -26,7 +26,7 @@ private val Project.javaToolchains: JavaToolchainService
  *
  * For more details, check this [kotlinx-io](https://github.com/Kotlin/kotlinx-io/pull/406/files) PR
  */
-public fun Project.configureJava9ModuleInfoCompilation(
+fun Project.configureJava9ModuleInfoCompilation(
     sourceSetName: String,
     toolchainVersion: JavaLanguageVersion,
     parentCompilation: KotlinJvmCompilation,

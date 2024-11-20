@@ -95,6 +95,7 @@ spotless {
     ktfmt(ktfmtVersion)
     target("src/**/*.kts", "src/**/*.kt")
     trimTrailingWhitespace()
+    suppressLintsFor { step = "ktfmt" }
     // licenseHeader(rootProject.file("gradle/license-header.txt"))
   }
 

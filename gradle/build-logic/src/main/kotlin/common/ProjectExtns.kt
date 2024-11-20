@@ -191,6 +191,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:+UseZGC",
             "-XX:+UseStringDeduplication",
             "-XX:+UnlockExperimentalVMOptions",
+            "-XX:+UseCompactObjectHeaders",
             "-XX:MaxRAMPercentage=0.8",
             // "-XX:+UseEpsilonGC",
             // "-XX:+AlwaysPreTouch",
@@ -259,7 +260,6 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-XshowSettings:system",
             // "-XshowSettings:properties",
             // "--show-module-resolution",
-            // "-XX:+UseCompactObjectHeaders",
             // "-XX:+ShowHiddenFrames",
             // "-verbose:module",
             // "-XX:ConcGCThreads=2",
@@ -396,6 +396,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
       freeCompilerArgs.addAll(
           "-Xexpect-actual-classes",
           "-Xskip-prerelease-check",
+          "-Xmulti-dollar-interpolation",
           // "-XXLanguage:+ExplicitBackingFields",
           // "-Xsuppress-version-warnings",
           // "-P",
@@ -429,6 +430,7 @@ fun KspAATask.configureKspConfig() =
 
 /**
  * JVM backend compiler options can be found in,
+ * - [CommonCompilerArgs](https://github.com/JetBrains/kotlin/blob/master/compiler/cli/cli-common/src/org/jetbrains/kotlin/cli/common/arguments/CommonCompilerArguments.kt)
  * - [K2JVMCompilerArguments.kt](https://github.com/JetBrains/kotlin/blob/master/compiler/cli/cli-common/src/org/jetbrains/kotlin/cli/common/arguments/K2JVMCompilerArguments.kt)
  * - [JvmTarget.kt](https://github.com/JetBrains/kotlin/blob/master/compiler/config.jvm/src/org/jetbrains/kotlin/config/JvmTarget.kt)
  * - [ApiVersion.kt](https://github.com/JetBrains/kotlin/blob/master/compiler/util/src/org/jetbrains/kotlin/config/ApiVersion.kt#L35)
