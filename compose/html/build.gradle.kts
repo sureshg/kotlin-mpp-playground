@@ -29,6 +29,7 @@ kotlin {
         implementation(libs.kobweb.core)
         implementation(libs.kobweb.silk)
         implementation(libs.kobwebx.markdown)
+        implementation(libs.kobwebx.serialization)
         // implementation(libs.silk.icons.fa)
       }
     }

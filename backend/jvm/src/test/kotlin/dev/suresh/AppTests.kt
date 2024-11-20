@@ -18,9 +18,6 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.testing.*
-import kotlin.test.Test
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlinx.coroutines.slf4j.MDCContext
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
@@ -37,6 +34,7 @@ import org.testcontainers.images.builder.Transferable
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.DockerImageName
+import kotlin.test.*
 
 @Testcontainers
 @EnabledIfSystemProperty(named = "ktorTest", matches = "true")
@@ -135,10 +133,10 @@ class AppTests {
                 "$certDir/gen-certs.sh")
             .withCopyToContainer(
                 Transferable.of(
-                    """
+                    $$"""
                     #!/bin/sh
                     set -e
-                    echo "Entrypoint args: "\${'$'}@""
+                    echo "Entrypoint args: "$@""
                     apk add nginx
                     echo "<h1>Hello world!</h1>" > $docRoot/index.html;
                     cat <<EOF > /etc/nginx/http.d/default.conf
