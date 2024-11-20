@@ -118,6 +118,7 @@ $dokka.location:/BuildConfig/kmpSettings/#/PointingToDeclaration/shared/[root]/
 $dokka.location:/BuildConfig/kmpStore5/#/PointingToDeclaration/shared/[root]/-build-config/kmp-store5.html
 $dokka.location:/BuildConfig/kobweb/#/PointingToDeclaration/shared/[root]/-build-config/kobweb.html
 $dokka.location:/BuildConfig/koin/#/PointingToDeclaration/shared/[root]/-build-config/koin.html
+$dokka.location:/BuildConfig/koinAnnotations/#/PointingToDeclaration/shared/[root]/-build-config/koin-annotations.html
 $dokka.location:/BuildConfig/konsist/#/PointingToDeclaration/shared/[root]/-build-config/konsist.html
 $dokka.location:/BuildConfig/kopy/#/PointingToDeclaration/shared/[root]/-build-config/kopy.html
 $dokka.location:/BuildConfig/kotest/#/PointingToDeclaration/shared/[root]/-build-config/kotest.html
