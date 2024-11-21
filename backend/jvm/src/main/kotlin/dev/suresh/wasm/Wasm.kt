@@ -1,12 +1,44 @@
 package dev.suresh.wasm
 
+import com.dylibso.chicory.experimental.aot.AotMachine
+import com.dylibso.chicory.runtime.HostFunction
+import com.dylibso.chicory.runtime.Instance
+import com.dylibso.chicory.wasm.Module
+import com.dylibso.chicory.wasm.Parser
+import com.dylibso.chicory.wasm.types.ValueType
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.*
 
-// val factModule by lazy { Parser.parse(::class.java.getResourceAsStream("/fact.wasm")!!) }
-
-fun Routing.wasm() {
-  get("/wasm") { call.respondText("WASM: WebAssembly") }
+/**
+ * More wasm modules can be found in
+ * - [wasm-corpus](https://github.com/dylibso/chicory/tree/main/wasm-corpus/src/main/resources/compiled)
+ * - [extism](https://github.com/extism/plugins/releases)
+ */
+val factWasmMod: Module by lazy {
+  val wasmRes = Thread.currentThread().contextClassLoader.getResourceAsStream("wasm/factorial.wasm")
+  // val wasmRes = object {}.javaClass.getResourceAsStream("wasm/factorial.wasm")
+  Parser.parse(wasmRes)
 }
 
-// https://github.com/extism/plugins/releases
+fun Routing.wasm() {
+  route("/wasm") {
+    get("fact") {
+      val num = call.parameters["num"]?.toLongOrNull() ?: 5
+      val inst = Instance.builder(factWasmMod).withMachineFactory(::AotMachine).build()
+      val iterFact = inst.export("iterFact")
+      val fact = iterFact.apply(num)[0]
+
+      call.respondText("WASM: Factorial($num): $fact")
+    }
+  }
+}
+
+fun logFunction() =
+    HostFunction("console", "log", listOf(ValueType.I32, ValueType.I32), emptyList()) {
+        instance,
+        args ->
+      val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())
+      println("WASM: $msg")
+      // Value.i32(0)
+      longArrayOf()
+    }
