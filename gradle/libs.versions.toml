@@ -165,7 +165,7 @@ kfswatch                       = "1.3.0"
 langchain4j                    = "0.36.1"
 jlama                          = "0.8.2"
 ldaptive                       = "2.3.2"
-chicory                        = "1.0.0-M1"
+chicory                        = "1.0.0-M2"
 
 # Compose
 jetbrains-compose              = "1.7.1"
