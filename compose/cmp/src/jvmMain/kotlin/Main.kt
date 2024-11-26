@@ -7,6 +7,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
 import java.awt.Dimension
 import java.io.File
+import kotlin.jvm.optionals.getOrElse
+import kotlinx.datetime.Clock
+import kotlinx.datetime.toJavaInstant
 import ui.crash.windowExceptionHandlerFactory
 
 val resource by lazy {
@@ -26,6 +29,18 @@ fun main() = application {
     Window(title = resource, state = windowState, onCloseRequest = ::exitApplication) {
       window.minimumSize = Dimension(350, 600)
       App()
+      showStartupTime()
     }
   }
+}
+
+fun showStartupTime() {
+  var currTime = System.currentTimeMillis()
+  var vmTime =
+      ProcessHandle.current()
+          .info()
+          .startInstant()
+          .getOrElse { Clock.System.now().toJavaInstant() }
+          .toEpochMilli()
+  println("Application started in ${currTime - vmTime} ms")
 }

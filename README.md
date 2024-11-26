@@ -217,6 +217,7 @@ $ ./gradlew :backend:jvm:run
   # Compose Desktop
   $ ./gradlew :compose:cmp:runDistributable
   $ ./gradlew :compose:cmp:packageDistributionForCurrentOS
+  $ ./gradlew :compose:cmp:packageReleaseUberJarForCurrentOS
   $ ./gradlew :compose:cmp:suggestModules
 
   # Compose Web
@@ -293,6 +294,23 @@ $ ./gradlew :backend:jvm:run
 - [Docs](https://suresh.dev/kotlin-mpp-playground/docs)
 - [Coverage](https://suresh.dev/kotlin-mpp-playground/reports)
 - [Tests](https://suresh.dev/kotlin-mpp-playground/tests)
+
+### Verifying Artifacts
+
+The published artifacts are signed using this [key][signing_key]:
+
+```
+pub (4)rsa4096/c124db3a8ad1c13f7153decdf209c085c8b53ca1 2017-06-11T09:45:47Z
+
+uid Suresh G (Suresh Gopalakrishnan's Public Signing Key.) <sureshg.g@gmail.com>
+sig cert  f209c085c8b53ca1 2017-06-11T09:45:47Z 2022-06-10T09:45:47Z ____________________ [selfsig]
+```
+
+The best way to verify artifacts is [automatically with Gradle][gradle_verification].
+
+[gradle_verification]: https://docs.gradle.org/current/userguide/dependency_verification.html#sec:signature-verification
+
+[signing_key]: https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xc124db3a8ad1c13f7153decdf209c085c8b53ca1
 
 ### Resources
 
