@@ -126,16 +126,26 @@ $ ./gradlew :backend:jvm:run
   $ ./gradlew :backend:agent:otel:build
   ```
 
-* AppCDS
+* AOT Linking
 
   ```bash
-  # Run with AppCDS
-  $ java -Xlog:class+load:file=/tmp/cds.log:uptime,level,tags,pid \
-         -XX:+AutoCreateSharedArchive \
-         -XX:SharedArchiveFile=/tmp/app.jsa \
+  # Training Run
+  $ java --enable-preview \
+         -XX:+UnlockExperimentalVMOptions \
+         -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf \
          -jar backend/jvm/build/libs/jvm-all.jar
 
-  # cds-log-parser.jar --logFile=/tmp/cds.log
+  # Create AOT archive
+  $ java --enable-preview \
+     -XX:+UnlockExperimentalVMOptions \
+     -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot \
+     -jar backend/jvm/build/libs/jvm-all.jar
+
+  # Run with AOT
+  $ java --enable-preview \
+     -XX:+UnlockExperimentalVMOptions \
+     -XX:AOTCache=app.aot \
+     -jar backend/jvm/build/libs/jvm-all.jar
   ```
 
 * Tests
