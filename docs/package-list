@@ -166,6 +166,7 @@ $dokka.location:/BuildConfig/kubernetesClient/#/PointingToDeclaration/shared/[r
 $dokka.location:/BuildConfig/langchain4j/#/PointingToDeclaration/shared/[root]/-build-config/langchain4j.html
 $dokka.location:/BuildConfig/ldaptive/#/PointingToDeclaration/shared/[root]/-build-config/ldaptive.html
 $dokka.location:/BuildConfig/log4j/#/PointingToDeclaration/shared/[root]/-build-config/log4j.html
+$dokka.location:/BuildConfig/log4k/#/PointingToDeclaration/shared/[root]/-build-config/log4k.html
 $dokka.location:/BuildConfig/logback/#/PointingToDeclaration/shared/[root]/-build-config/logback.html
 $dokka.location:/BuildConfig/logbackTyler/#/PointingToDeclaration/shared/[root]/-build-config/logback-tyler.html
 $dokka.location:/BuildConfig/mappie/#/PointingToDeclaration/shared/[root]/-build-config/mappie.html
