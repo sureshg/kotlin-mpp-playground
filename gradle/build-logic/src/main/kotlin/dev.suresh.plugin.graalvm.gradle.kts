@@ -12,7 +12,6 @@ plugins {
 }
 
 val quickBuildEnabled = project.hasProperty("quick")
-val nativeBundleEnabled = project.hasProperty("bundle")
 val muslEnabled = project.hasProperty("musl")
 val reportsEnabled = project.hasProperty("reports")
 val agentEnabled = project.hasProperty("agent")
@@ -32,14 +31,19 @@ graalvmNative {
       add("--enable-preview")
       add("--enable-native-access=ALL-UNNAMED")
       add("--native-image-info")
-      add("--color=auto")
-      add("--enable-monitoring=heapdump,jfr,jvmstat,threaddump,nmt")
       add("--enable-https")
       add("--install-exit-handlers")
       add("-R:MaxHeapSize=64m")
-      add("-H:+ReportExceptionStackTraces")
       add("-EBUILD_NUMBER=${project.version}")
       add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
+
+      add("-H:+UnlockExperimentalVMOptions")
+      add("-H:+VectorAPISupport")
+      add("-H:+CompactingOldGen")
+      add("-H:+ReportExceptionStackTraces")
+      add("-O3")
+      // add("-Os")
+      // add("-H:+ForeignAPISupport")
       // add("--features=graal.aot.RuntimeFeature")
       // add("-H:+AddAllCharsets")
       // add("-H:+IncludeAllLocales")
@@ -48,10 +52,14 @@ graalvmNative {
       // add("--enable-url-protocols=http,https,jar,unix")
       // add("--initialize-at-build-time=kotlinx,kotlin,org.slf4j")
 
-      // Experimental options
-      add("-H:+UnlockExperimentalVMOptions")
-      add("-H:+CompactingOldGen")
-      add("-Os")
+      val monOpts = buildString {
+        append("heapdump,jfr,jvmstat,threaddump,nmt")
+        if (Platform.isUnix) {
+          append(",")
+          append("jcmd")
+        }
+      }
+      add("--enable-monitoring=$monOpts")
 
       if (Platform.isLinux) {
         when {
@@ -78,11 +86,6 @@ graalvmNative {
         // add("--debug-attach")
       }
 
-      if (nativeBundleEnabled) {
-        add("--bundle-create")
-        add("--dry-run")
-      }
-
       if (java.toolchain.vendor.get().matches("Oracle.*")) {
         if (reportsEnabled) {
           add("-H:+BuildReport")
@@ -100,7 +103,8 @@ graalvmNative {
     // }
 
     jvmArgs = jvmArguments()
-    systemProperties = mapOf("java.awt.headless" to "false")
+    systemProperties =
+        mapOf("java.awt.headless" to "false", "jdk.incubator.vector.VECTOR_ACCESS_OOB_CHECK" to "0")
     javaLauncher = javaToolchains.launcherFor { configureJvmToolchain(project) }
   }
 
@@ -192,9 +196,6 @@ val niArchiveName
     append("-")
     if (muslEnabled) {
       append("static-")
-    }
-    if (nativeBundleEnabled) {
-      append("bundle-")
     }
     append(Platform.currentOS.id)
     append("-")

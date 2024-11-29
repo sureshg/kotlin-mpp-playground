@@ -244,6 +244,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-Djava.security.egd=file:/dev/./urandom",
             "-Djdk.includeInExceptions=hostInfo,jar",
             "-Dkotlinx.coroutines.debug",
+            "-Djdk.incubator.vector.VECTOR_ACCESS_OOB_CHECK=0",
             "-Dcom.sun.management.jmxremote",
             "-Dcom.sun.management.jmxremote.local.only=false",
             "-Dcom.sun.management.jmxremote.port=9898",
