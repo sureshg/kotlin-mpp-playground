@@ -391,13 +391,16 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
       apiVersion = kotlinApiVersion
       languageVersion = kotlinLangVersion
       progressiveMode = true
+      extraWarnings = false
       allWarningsAsErrors = false
       suppressWarnings = false
       verbose = false
       freeCompilerArgs.addAll(
           "-Xexpect-actual-classes",
           "-Xskip-prerelease-check",
+          "-Xwhen-guards",
           "-Xmulti-dollar-interpolation",
+          "-Xnon-local-break-continue",
           // "-XXLanguage:+ExplicitBackingFields",
           // "-Xsuppress-version-warnings",
           // "-P",
@@ -405,15 +408,14 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
       )
       optIn.addAll(
           "kotlin.ExperimentalStdlibApi",
-          "kotlin.contracts.ExperimentalContracts",
           "kotlin.ExperimentalUnsignedTypes",
+          "kotlin.contracts.ExperimentalContracts",
           "kotlin.io.encoding.ExperimentalEncodingApi",
           "kotlin.time.ExperimentalTime",
           "kotlinx.coroutines.ExperimentalCoroutinesApi",
           "kotlinx.serialization.ExperimentalSerializationApi",
           "kotlin.ExperimentalMultiplatform",
           "kotlin.js.ExperimentalJsExport",
-          "kotlin.experimental.ExperimentalNativeApi",
           "kotlin.uuid.ExperimentalUuidApi",
           // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
       )

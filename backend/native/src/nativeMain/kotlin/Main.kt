@@ -6,7 +6,7 @@ import kotlin.reflect.typeOf
 import kotlin.time.Duration
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 
 data class ProcessResult(val code: Int, val rawOutput: String?)
 

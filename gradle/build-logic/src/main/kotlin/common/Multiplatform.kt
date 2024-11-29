@@ -261,10 +261,7 @@ fun KotlinMultiplatformExtension.hostNativeTarget(configure: KotlinNativeTarget.
     }
 
 fun KotlinNativeCompilerOptions.configureKotlinNative() {
-  freeCompilerArgs.addAll(
-      // "-Xverbose-phases=Linker"
-      // "-Xruntime-logs=gc=info"
-      )
+  // freeCompilerArgs.addAll("-Xverbose-phases=Linker", "-Xruntime-logs=gc=info")
 }
 
 fun KotlinMultiplatformExtension.allNativeTargets(configure: KotlinNativeTarget.() -> Unit = {}) {
@@ -272,6 +269,13 @@ fun KotlinMultiplatformExtension.allNativeTargets(configure: KotlinNativeTarget.
     // KotlinNativeTargetWithHostTests
     compilerOptions { configureKotlinNative() }
     configure()
+  }
+
+  compilerOptions {
+    optIn.addAll(
+        "kotlinx.cinterop.ExperimentalForeignApi",
+        "kotlin.experimental.ExperimentalNativeApi",
+    )
   }
 
   macosX64 { configureAll() }

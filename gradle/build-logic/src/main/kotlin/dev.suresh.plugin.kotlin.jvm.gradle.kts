@@ -1,6 +1,7 @@
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
+import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -20,7 +21,7 @@ plugins {
   kotlin("plugin.power-assert")
   com.google.devtools.ksp
   dev.zacsweers.redacted
-  // com.javiersc.kotlin.kopy
+  com.javiersc.kotlin.kopy
   org.jetbrains.kotlinx.atomicfu
   id("dev.suresh.plugin.kotlin.docs")
   // kotlin("plugin.atomicfu")
@@ -75,7 +76,7 @@ redacted {
   replacementString = "█"
 }
 
-// kopy { functions = KopyFunctions.Copy }
+kopy { functions = KopyFunctions.Copy }
 
 // Java agent configuration for jib
 val javaAgent by configurations.registering { isTransitive = false }

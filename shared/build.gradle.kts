@@ -6,7 +6,7 @@ plugins {
   dev.suresh.plugin.kotlin.mpp
   dev.suresh.plugin.publishing
   `binary-compatibility-validator`
-  alias(libs.plugins.mappie)
+  // alias(libs.plugins.mappie)
 }
 
 description = "Shared common module for all projects"
