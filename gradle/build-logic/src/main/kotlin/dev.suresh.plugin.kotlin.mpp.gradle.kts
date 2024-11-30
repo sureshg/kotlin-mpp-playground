@@ -178,6 +178,25 @@ tasks {
   }
 }
 
+var npmEnabled: String? by rootProject.extra
+
+plugins.withType<NodeJsPlugin> {
+  the<NodeJsEnvSpec>().apply {
+    download = true
+    // version = libs.versions.nodejs.version.get()
+    // downloadBaseUrl = "https://nodejs.org/download/nightly"
+  }
+
+  if (!npmEnabled.toBoolean()) {
+    rootProject.the<NpmExtension>().apply {
+      lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
+      packageLockMismatchReport = LockFileMismatchReport.WARNING
+      packageLockAutoReplace = false
+    }
+    npmEnabled = "true"
+  }
+}
+
 // Expose shared js/wasm resource as configuration to be consumed by other projects.
 // https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
 artifacts {
@@ -190,28 +209,6 @@ artifacts {
     tasks.findByName("wasmJsProcessResources")?.let {
       val sharedWasmResources by configurations.consumable("sharedWasmResources")
       add(sharedWasmResources.name, provider { it })
-    }
-  }
-}
-
-// Ideally, NodeJsPlugin should be applied to the root project,
-// but this is a hack to apply from the kotlin.mpp convention plugin.
-var nodeJsEnabled: String? by rootProject.extra
-
-if (nodeJsEnabled.toBoolean().not()) {
-  rootProject.plugins.withType<NodeJsPlugin> {
-    rootProject.the<NodeJsEnvSpec>().apply {
-      download = true
-      nodeJsEnabled = "true"
-      // version = libs.versions.nodejs.version.get()
-      // downloadBaseUrl = "https://nodejs.org/download/nightly"
-    }
-
-    rootProject.the<NpmExtension>().apply {
-      lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
-      packageLockMismatchReport = LockFileMismatchReport.WARNING
-      packageLockAutoReplace = false
-      nodeJsEnabled = "true"
     }
   }
 }
