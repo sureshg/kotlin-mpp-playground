@@ -46,6 +46,7 @@ $dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/
 $dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
 $dokka.location:/BuildConfig/chicory/#/PointingToDeclaration/shared/[root]/-build-config/chicory.html
 $dokka.location:/BuildConfig/classgraph/#/PointingToDeclaration/shared/[root]/-build-config/classgraph.html
+$dokka.location:/BuildConfig/composeHotreload/#/PointingToDeclaration/shared/[root]/-build-config/compose-hotreload.html
 $dokka.location:/BuildConfig/composeIcons/#/PointingToDeclaration/shared/[root]/-build-config/compose-icons.html
 $dokka.location:/BuildConfig/composeRouting/#/PointingToDeclaration/shared/[root]/-build-config/compose-routing.html
 $dokka.location:/BuildConfig/config4k/#/PointingToDeclaration/shared/[root]/-build-config/config4k.html
