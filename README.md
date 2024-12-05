@@ -26,9 +26,28 @@ $ sdk u java 24.ea-open
 
 ```bash
 $ ./gradlew build [-Pskip.test]
+
 # Run the app
 $ ./gradlew :backend:jvm:run
+
+# Publish to local repo
+$ ./gradlew buildAndPublish
 ```
+
+### Publishing
+
+Push a new tag to trigger the release workflow and publish the artifacts. That's it 🎉.
+The next version will be based on the semantic version scope (`major`, `minor`, `patch`)
+
+   ```bash
+   $ ./gradlew pushSemverTag "-Psemver.scope=patch"
+
+   # To see the current version
+   # ./gradlew v
+
+   # Print the new version
+   # ./gradlew printSemver "-Psemver.scope=patch"
+   ```
 
 <details>
 <summary> <b>Multiplatform Targets</b></summary>
@@ -246,7 +265,7 @@ $ ./gradlew :backend:jvm:run
   ```bash
   $ ./gradlew publishAllPublicationsToLocalRepository
 
-  # Publishing to all repo except Central
+  # Publishing to all repo except Maven Central
   $ ./gradlew buildAndPublish
 
   # Maven Central Publishing
@@ -262,9 +281,10 @@ $ ./gradlew :backend:jvm:run
   $ export ORG_GRADLE_PROJECT_signingInMemoryKeyPassword=<Password>
   $ export ORG_GRADLE_PROJECT_signingInMemoryKey=$(gpg --export-secret-keys --armor ${ORG_GRADLE_PROJECT_signingInMemoryKeyId} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n')
 
-  # For aggregated publication (preferred)
+  # For aggregated publication (preferred) to Central
   $ ./gradlew publishAggregatedPublicationToCentralPortal
-  # For all publications
+
+  # For all publications (separate publications)
   $ ./gradlew publishAllPublicationsToCentralPortal
   ```
 
