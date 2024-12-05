@@ -132,18 +132,21 @@ $ ./gradlew :backend:jvm:run
   # Training Run
   $ java --enable-preview \
          -XX:+UnlockExperimentalVMOptions \
+         -XX:+UseCompactObjectHeaders \
          -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf \
          -jar backend/jvm/build/libs/jvm-all.jar
 
   # Create AOT archive
   $ java --enable-preview \
      -XX:+UnlockExperimentalVMOptions \
+     -XX:+UseCompactObjectHeaders \
      -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot \
      -jar backend/jvm/build/libs/jvm-all.jar
 
   # Run with AOT
   $ java --enable-preview \
      -XX:+UnlockExperimentalVMOptions \
+     -XX:+UseCompactObjectHeaders \
      -XX:AOTCache=app.aot \
      -jar backend/jvm/build/libs/jvm-all.jar
   ```

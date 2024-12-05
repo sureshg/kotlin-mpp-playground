@@ -6,7 +6,9 @@ import kotlin.reflect.typeOf
 import kotlin.time.Duration
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.runBlocking
+import kotlinx.io.files.Path
 import kotlinx.serialization.*
+import wasm.execWasm
 
 data class ProcessResult(val code: Int, val rawOutput: String?)
 
@@ -18,7 +20,8 @@ fun main(args: Array<String>): Unit = runBlocking {
   println("Kotlin Native App: ${BuildConfig.version}")
   println(Greeting().greeting())
 
-  val count = args.firstOrNull()?.toIntOrNull() ?: 5
+  val count = args.firstOrNull()?.toIntOrNull() ?: 2
+  execWasm(Path("./factorial.wasm"), arg = count)
   timerComposeFlow().take(count).collect(::println)
 
   println("Executing command...")

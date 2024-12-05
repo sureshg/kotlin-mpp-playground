@@ -53,6 +53,7 @@ kotlin {
         api(libs.kaml)
         api(libs.kmp.appdirs)
         api(libs.kfswatch)
+        api(libs.chasm)
         // api(libs.arrow.suspendapp.ktor)
       }
     }

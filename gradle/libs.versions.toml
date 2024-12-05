@@ -36,19 +36,19 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.16.3"
 kotlin-dokka                   = "2.0.0-Beta"
-kotlin-wrappers                = "1.0.0-pre.841"
+kotlin-wrappers                = "1.0.0-pre.843"
 kotlin-redacted                = "1.11.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
 kotlinx-kandy                  = "0.5.0"
 evas                           = "1.1.0"
 kopy                           = "0.13.1+2.1.0"
-poko                           = "0.17.2"
+poko                           = "0.18.0"
 mappie                         = "0.9.2"
 akkurate                       = "0.10.0"
 kaml                           = "0.65.0"
 snakeyaml-engine-kmp           = "3.0.3"
-konsist                        = "0.17.0"
+konsist                        = "0.17.2"
 karakum                        = "1.0.0-alpha.40-K2"
 seskar                         = "3.60.0"
 spring-boot                    = "3.4.0"
@@ -67,7 +67,7 @@ ksp-auto-service               = "1.2.0"
 gradle-kotlin-dsl              = "4.3.1"
 zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "3.0.1"
-ajalt-clikt                    = "5.0.1"
+ajalt-clikt                    = "5.0.2"
 ajalt-colormath                = "3.6.0"
 classgraph                     = "4.8.177"
 cache4k                        = "0.13.0"
@@ -104,7 +104,7 @@ jspecify                       = "1.0.0"
 rsocket                        = "0.16.0"
 jctools                        = "4.0.5"
 kotlin-codepoints              = "0.9.0"
-kotlin-logging                 = "7.0.0"
+kotlin-logging                 = "7.0.3"
 kotlin-bignum                  = "0.3.10"
 kotlin-diff                    = "0.7.0"
 kotlin-retry                   = "2.0.1"
@@ -166,7 +166,7 @@ langchain4j                    = "0.36.2"
 jlama                          = "0.8.3"
 ldaptive                       = "2.3.2"
 chicory                        = "1.0.0-M2"
-log4k                          = "0.26.0"
+log4k                          = "0.30.0"
 
 # Compose
 jetbrains-compose              = "1.7.1"
@@ -176,7 +176,8 @@ jetbrains-compose-adaptive     = "1.0.1"
 kobweb                         = "0.20.0"
 detekt                         = "1.23.7"
 detekt-compose-rules           = "0.4.19"
-compose-icons                  = "1.1.0"
+compose-hotreload              = "1.0.0"
+compose-icons                  = "1.1.1"
 compose-routing                = "0.4.0"
 kottie                         = "2.0.1"
 mosaic                         = "0.14.0"
@@ -191,7 +192,7 @@ swagger-style                  = "https://unpkg.com/swagger-ui-themes@3.0.1/them
 
 # Plugin versions
 benmanes                       = "0.51.0"
-foojay-resolver                = "0.8.0"
+foojay-resolver                = "0.9.0"
 gradle-develocity              = "3.18.2"
 nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
@@ -205,7 +206,7 @@ sigstore                       = "1.1.0"
 reproducible-builds            = "1.0"
 autonomousapps-depanalysis     = "2.5.0"
 autonomousapps-bestpractices   = "0.10"
-graalvm-nativeimage            = "0.10.3"
+graalvm-nativeimage            = "0.10.4"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 wire-plugin                    = "5.1.0"
@@ -378,6 +379,10 @@ ktor-client-encoding                 = { module = "io.ktor:ktor-client-encoding"
 ktor-client-mock                     = { module = "io.ktor:ktor-client-mock"                                   , version.ref = "ktor"}
 
 # krpc
+kotlinx-rpc-bom                         = { module = "org.jetbrains.kotlinx:kotlinx-rpc-bom"                        , version.ref = "kotlinx-rpc"}
+kotlinx-rpc-krpc-server                 = { module = "org.jetbrains.kotlinx:kotlinx-rpc-krpc-server"                , version.ref = "kotlinx-rpc"}
+kotlinx-rpc-krpc-client                 = { module = "org.jetbrains.kotlinx:kotlinx-rpc-krpc-client"                , version.ref = "kotlinx-rpc"}
+
 kotlinx-rpc-runtime                     = { module = "org.jetbrains.kotlinx:kotlinx-rpc-runtime"                    , version.ref = "kotlinx-rpc"}
 kotlinx-rpc-runtime-client              = { module = "org.jetbrains.kotlinx:kotlinx-rpc-runtime-client"             , version.ref = "kotlinx-rpc"}
 kotlinx-rpc-runtime-server              = { module = "org.jetbrains.kotlinx:kotlinx-rpc-runtime-server"             , version.ref = "kotlinx-rpc"}
@@ -659,7 +664,6 @@ kotlin-compose-compiler              = { id = "org.jetbrains.kotlin.plugin.compo
 kotlinx-atomicfu                     = { id = "org.jetbrains.kotlinx.atomicfu"                                 , version.ref = "kotlinx-atomicfu"}
 kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark"                                , version.ref = "kotlinx-benchmark" }
 kotlinx-rpc                          = { id = "org.jetbrains.kotlinx.rpc.plugin"                               , version.ref = "kotlinx-rpc" }
-kotlinx-rpc-platform                 = { id = "org.jetbrains.kotlinx.rpc.platform"                             , version.ref = "kotlinx-rpc" }
 jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
 ktor                                 = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }
 exposed                              = { id = "com.jetbrains.exposed.gradle.plugin"                            , version.ref = "exposed-plugin" }
