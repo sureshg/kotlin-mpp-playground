@@ -36,7 +36,7 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlinx-bcv                    = "0.16.3"
 kotlin-dokka                   = "2.0.0-Beta"
-kotlin-wrappers                = "1.0.0-pre.844"
+kotlin-wrappers                = "1.0.0-pre.845"
 kotlin-redacted                = "1.11.0"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.13.1"
@@ -124,7 +124,7 @@ java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.1.0"
 arrow-suspendapp               = "0.4.1-alpha.5"
-exposed                        = "0.56.0"
+exposed                        = "0.57.0"
 postgresql                     = "42.7.4"
 hikariCP                       = "6.2.1"
 h2                             = "2.3.232"
@@ -167,12 +167,13 @@ jlama                          = "0.8.3"
 ldaptive                       = "2.3.2"
 chicory                        = "1.0.0-M2"
 log4k                          = "0.30.0"
+rwmutex                        = "1.0.0"
 
 # Compose
-jetbrains-compose              = "1.7.1"
-jetbrains-compose-viewmodel    = "2.8.4"
-jetbrains-compose-nav          = "2.8.0-alpha10"
-jetbrains-compose-adaptive     = "1.0.1"
+jetbrains-compose              = "1.8.0-alpha01"
+jetbrains-compose-viewmodel    = "2.9.0-alpha01"
+jetbrains-compose-nav          = "2.8.0-alpha11"
+jetbrains-compose-adaptive     = "1.1.0-alpha01"
 kobweb                         = "0.20.0"
 detekt                         = "1.23.7"
 detekt-compose-rules           = "0.4.19"
@@ -198,7 +199,7 @@ nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.30.0"
 gradle-publish                 = "1.3.0"
-shadow                         = "9.0.0-beta2"
+shadow                         = "9.0.0-beta4"
 spotless                       = "7.0.0.BETA4"
 semver-plugin                  = "0.8.0"
 tasktree                       = "4.0.0"
@@ -616,6 +617,7 @@ silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-ico
 kfswatch                             = { module = "io.github.irgaly.kfswatch:kfswatch"                                      , version.ref = "kfswatch" }
 log4k-coroutines                     = { module = "io.github.smyrgeorge:log4k-coroutines"                                   , version.ref = "log4k" }
 log4k-slf4j                          = { module = "io.github.smyrgeorge:log4k-slf4j"                                        , version.ref = "log4k" }
+rwmutex                              = { module = "com.mayakapps.rwmutex:rwmutex"                                           , version.ref = "rwmutex" }
 
 
 # Wasm
