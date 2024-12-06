@@ -214,6 +214,7 @@ $dokka.location:/BuildConfig/repoMvnSnapshots01/#/PointingToDeclaration/shared/
 $dokka.location:/BuildConfig/repoNodejs/#/PointingToDeclaration/shared/[root]/-build-config/repo-nodejs.html
 $dokka.location:/BuildConfig/reproducibleBuilds/#/PointingToDeclaration/shared/[root]/-build-config/reproducible-builds.html
 $dokka.location:/BuildConfig/rsocket/#/PointingToDeclaration/shared/[root]/-build-config/rsocket.html
+$dokka.location:/BuildConfig/rwmutex/#/PointingToDeclaration/shared/[root]/-build-config/rwmutex.html
 $dokka.location:/BuildConfig/semverPlugin/#/PointingToDeclaration/shared/[root]/-build-config/semver-plugin.html
 $dokka.location:/BuildConfig/seskar/#/PointingToDeclaration/shared/[root]/-build-config/seskar.html
 $dokka.location:/BuildConfig/shadow/#/PointingToDeclaration/shared/[root]/-build-config/shadow.html
