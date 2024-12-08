@@ -1,4 +1,4 @@
-#!/usr/bin/env java --enable-preview --source 24
+#!/usr/bin/env java --enable-preview --source 25
 
 void main() {
     println("Hello Java " + System.getProperty("java.version"));
