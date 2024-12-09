@@ -52,16 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/5)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/12)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +60,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/119)
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/21)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/176)
   </span>
 </td>
 </tr>
@@ -357,14 +364,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   </span>
 </td>
   </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
+  <tr>
+    <td class="name">ServiceKt$services$6$1$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/15)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -373,7 +380,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/25)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -381,7 +388,70 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/420)
+    (0/28)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ServiceKt$services$6$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/36)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/534)
   </span>
 </td>
 </tr>
@@ -405,6 +475,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.github.oshai.kotlinlogging.KotlinLogging
 &nbsp;import io.ktor.http.*
 &nbsp;import io.ktor.server.application.*
+&nbsp;import io.ktor.server.plugins.csrf.CSRF
 &nbsp;import io.ktor.server.response.*
 &nbsp;import io.ktor.server.routing.*
 &nbsp;import io.ktor.server.sessions.*
@@ -430,10 +501,25 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;      call.respondText(&quot;Session created&quot;)</b>
 &nbsp;    }
 &nbsp;
-<b class="nc">&nbsp;    get(&quot;/&quot;) {</b>
+<b class="nc">&nbsp;    get {</b>
 <b class="nc">&nbsp;      val session = call.sessions.get&lt;CookieSession&gt;()</b>
 <b class="nc">&nbsp;      call.respondText(&quot;Current Session: $session&quot;)</b>
 &nbsp;    }
+&nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  route(&quot;/csrf&quot;) {</b>
+<b class="nc">&nbsp;    install(CSRF) {</b>
+<b class="nc">&nbsp;      allowOrigin(&quot;https://localhost:8080&quot;)</b>
+<b class="nc">&nbsp;      originMatchesHost()</b>
+<b class="nc">&nbsp;      checkHeader(&quot;X-CSRF&quot;) { csrfHeader -&gt;</b>
+<b class="nc">&nbsp;        val originHeader = request.headers[HttpHeaders.Origin]</b>
+<b class="nc">&nbsp;        csrfHeader == originHeader?.hashCode()?.toString(32)</b>
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      onFailure { respondText(&quot;Access denied!&quot;, status = HttpStatusCode.Forbidden) }</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    post { call.respondText(&quot;CSRF check passed!&quot;) }</b>
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  wasm()</b>
@@ -470,7 +556,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-12-09 02:14</div>
+    <div style="float:right;">generated on 2024-12-09 05:24</div>
 </div>
 </body>
 </html>
