@@ -342,6 +342,7 @@ ktor-server-call-logging             = { module = "io.ktor:ktor-server-call-logg
 ktor-server-call-id                  = { module = "io.ktor:ktor-server-call-id"                                     , version.ref = "ktor"}
 ktor-server-cors                     = { module = "io.ktor:ktor-server-cors"                                        , version.ref = "ktor"}
 ktor-server-hsts                     = { module = "io.ktor:ktor-server-hsts"                                        , version.ref = "ktor"}
+ktor-server-csrf                     = { module = "io.ktor:ktor-server-csrf"                                        , version.ref = "ktor"}
 ktor-server-swagger                  = { module = "io.ktor:ktor-server-swagger"                                     , version.ref = "ktor"}
 ktor-server-openapi                  = { module = "io.ktor:ktor-server-openapi"                                     , version.ref = "ktor"}
 ktor-server-http-redirect            = { module = "io.ktor:ktor-server-http-redirect"                               , version.ref = "ktor"}

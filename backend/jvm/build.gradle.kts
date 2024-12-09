@@ -174,6 +174,7 @@ dependencies {
   implementation(libs.ktor.server.compression)
   implementation(libs.ktor.server.cors)
   implementation(libs.ktor.server.hsts)
+  implementation(libs.ktor.server.csrf)
   implementation(libs.ktor.server.rate.limit)
   implementation(libs.ktor.server.double.receive)
   implementation(libs.ktor.server.host.common)

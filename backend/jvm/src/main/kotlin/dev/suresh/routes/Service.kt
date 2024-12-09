@@ -11,6 +11,7 @@ import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.plugins.csrf.CSRF
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
@@ -36,10 +37,25 @@ fun Routing.services() {
       call.respondText("Session created")
     }
 
-    get("/") {
+    get {
       val session = call.sessions.get<CookieSession>()
       call.respondText("Current Session: $session")
     }
+  }
+
+  route("/csrf") {
+    install(CSRF) {
+      allowOrigin("https://localhost:8080")
+      originMatchesHost()
+      checkHeader("X-CSRF") { csrfHeader ->
+        val originHeader = request.headers[HttpHeaders.Origin]
+        csrfHeader == originHeader?.hashCode()?.toString(32)
+      }
+
+      onFailure { respondText("Access denied!", status = HttpStatusCode.Forbidden) }
+    }
+
+    post { call.respondText("CSRF check passed!") }
   }
 
   wasm()
