@@ -187,7 +187,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:+PrintCommandLineFlags",
             "--enable-native-access=ALL-UNNAMED",
             "--illegal-native-access=warn",
-            // "--sun-misc-unsafe-memory-access=warn",
+            "--sun-misc-unsafe-memory-access=warn",
             "-Xmx128M",
             "-XX:+UseZGC",
             "-XX:+UseStringDeduplication",
