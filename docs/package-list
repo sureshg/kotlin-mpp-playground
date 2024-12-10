@@ -137,6 +137,7 @@ $dokka.location:/BuildConfig/kotlinLangVersion/#/PointingToDeclaration/shared/[
 $dokka.location:/BuildConfig/kotlinLogging/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-logging.html
 $dokka.location:/BuildConfig/kotlinRedacted/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-redacted.html
 $dokka.location:/BuildConfig/kotlinRetry/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-retry.html
+$dokka.location:/BuildConfig/kotlinServiceloader/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-serviceloader.html
 $dokka.location:/BuildConfig/kotlinWrappers/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-wrappers.html
 $dokka.location:/BuildConfig/kotlinxAtomicfu/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-atomicfu.html
 $dokka.location:/BuildConfig/kotlinxBcv/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-bcv.html
