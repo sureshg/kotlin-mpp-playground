@@ -31,88 +31,37 @@
 <script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" async></script>
 <script type="text/javascript" src="../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
+<nav class="navigation" id="navigation-wrapper">
+    <div class="navigation--inner">
+        <div class="navigation-title">
+            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
+            <div class="library-name">
 <a class="library-name--link" href="../../index.html">
-                    kotlin-mpp-playground
-            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
-        </button>
-        <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.2.0.9+7190037
+                            kotlin-mpp-playground
+                    </a>            </div>
+            <div class="library-version">0.2.0.9+e0e1024
+            </div>
         </div>
-        <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
+        <div class="filter-section" id="filter-section">
                 <button class="platform-tag platform-selector common-like" data-active="" data-filter=":shared/commonMain">common</button>
                 <button class="platform-tag platform-selector js-like" data-active="" data-filter=":shared/jsMain">js</button>
                 <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":shared/jvmMain">jvm</button>
                 <button class="platform-tag platform-selector wasm-like" data-active="" data-filter=":shared/wasmJsMain">wasmJs</button>
-            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
-                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
-                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                        </button>
-                    </div>
-                        <li role="option" class="dropdown--option platform-selector-option common-like" tabindex="0">
-                            <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":shared/commonMain" data-filter=":shared/commonMain">
-                                <span class="checkbox--icon"></span>
-                                common
-                            </label>
-                        </li>
-                        <li role="option" class="dropdown--option platform-selector-option js-like" tabindex="0">
-                            <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":shared/jsMain" data-filter=":shared/jsMain">
-                                <span class="checkbox--icon"></span>
-                                js
-                            </label>
-                        </li>
-                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
-                            <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":shared/jvmMain" data-filter=":shared/jvmMain">
-                                <span class="checkbox--icon"></span>
-                                jvm
-                            </label>
-                        </li>
-                        <li role="option" class="dropdown--option platform-selector-option wasm-like" tabindex="0">
-                            <label class="checkbox">
-                                <input type="checkbox" class="checkbox--input" id=":shared/wasmJsMain" data-filter=":shared/wasmJsMain">
-                                <span class="checkbox--icon"></span>
-                                wasmJs
-                            </label>
-                        </li>
-                </ul>
-                <div class="dropdown--overlay"></div>
-            </div>
         </div>
-                <a class="navigation-controls--btn navigation-controls--btn_homepage" id="homepage-link" href="https://github.com/sureshg/kotlin-mpp-playground"></a>
-            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
-            </button>
-            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
-                API
-            </div>
-        </div>
-    </nav>
+    </div>
+    <div class="navigation-controls">
+            <a class="navigation-controls--btn navigation-controls--homepage" id="homepage-link" href="https://github.com/sureshg/kotlin-mpp-playground"></a>
+        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
+        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
+    </div>
+</nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
-                            <span>
-                                    kotlin-mpp-playground
-                            </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                <div class="sidebar--inner" id="sideMenu"></div>
             </div>
             <div id="main">
 <div class="main-content" data-page-type="package" id="content" pageids="shared::dev.suresh////PointingToDeclaration//-978386457">
@@ -152,7 +101,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/wasmJsMain" data-filterable-set=":shared/wasmJsMain" data-active="" data-toggle=":shared/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">external </span><span class="token keyword">class </span><a href="-console/index.html">Console</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.js/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">JavaScript console class</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">external </span><span class="token keyword">class </span><a href="-console/index.html">Console</a> : <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.js/-js-any/index.html">JsAny</a></div><div class="brief "><p class="paragraph">JavaScript console class</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -235,7 +184,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jsMain" data-filterable-set=":shared/jsMain" data-active="" data-toggle=":shared/jsMain">js</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jsMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-js-platform/index.html">JsPlatform</a> : <a href="../../shared/dev.suresh/-platform/index.html">Platform</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jsMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-js-platform/index.html">JsPlatform</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -301,7 +250,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/wasmJsMain" data-filterable-set=":shared/wasmJsMain" data-active="" data-toggle=":shared/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-wasm-platform/index.html">WasmPlatform</a> : <a href="../../shared/dev.suresh/-platform/index.html">Platform</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">object </span><a href="-wasm-platform/index.html">WasmPlatform</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -322,7 +271,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="camel-case.html">camelCase</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Converts a string to camelcase by splitting it by space, dash, underscore, or dot.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">.</span><a href="camel-case.html">camelCase</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Converts a string to camelcase by splitting it by space, dash, underscore, or dot.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -339,7 +288,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="compact-fmt.html">compactFmt</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="compact-fmt.html">compactFmt</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -390,7 +339,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html">File</a><span class="token punctuation">.</span><a href="display-size.html">displaySize</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the file size in a human-readable format.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/File.html">File</a><span class="token punctuation">.</span><a href="display-size.html">displaySize</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the file size in a human-readable format.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -407,7 +356,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><span class="token operator">&lt;</span><a href="jar-path.html">T</a><span class="token operator"> : </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="jar-path.html">T</a><span class="token punctuation">.</span><a href="jar-path.html">jarPath</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the jar file path of the class</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><span class="token operator">&lt;</span><a href="jar-path.html">T</a><span class="token operator"> : </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="jar-path.html">T</a><span class="token punctuation">.</span><a href="jar-path.html">jarPath</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the jar file path of the class</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -471,7 +420,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="method-name.html">methodName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the method name contains this call-site</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">val </span><a href="method-name.html">methodName</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Returns the method name contains this call-site</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -626,7 +575,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="add-periodic-j-f-r-event.html">T</a><span class="token operator"> : </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/jdk.jfr/jdk/jfr/Event.html">Event</a><span class="token operator">&gt; </span><a href="add-periodic-j-f-r-event.html"><span class="token function">addPeriodicJFREvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">event<span class="token operator">: </span><a href="add-periodic-j-f-r-event.html">T</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">crossinline </span>block<span class="token operator">: </span><a href="add-periodic-j-f-r-event.html">T</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds a periodic event to the JFR stream.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">inline </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="add-periodic-j-f-r-event.html">T</a><span class="token operator"> : </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/jdk.jfr/jdk/jfr/Event.html">Event</a><span class="token operator">&gt; </span><a href="add-periodic-j-f-r-event.html"><span class="token function">addPeriodicJFREvent</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">event<span class="token operator">: </span><a href="add-periodic-j-f-r-event.html">T</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">crossinline </span>block<span class="token operator">: </span><a href="add-periodic-j-f-r-event.html">T</a><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Adds a periodic event to the JFR stream.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -643,7 +592,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jsMain" data-filterable-set=":shared/jsMain" data-active="" data-toggle=":shared/jsMain">js</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jsMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/org.khronos.webgl/-array-buffer/index.html">ArrayBuffer</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="as-byte-array.html"><span class="token function">asByteArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Convert JS <a href="https://kotlinlang.org/api/core/kotlin-stdlib/org.khronos.webgl/-array-buffer/index.html">ArrayBuffer</a> to Kotlin <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jsMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.khronos.webgl/-array-buffer/index.html">ArrayBuffer</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="as-byte-array.html"><span class="token function">asByteArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Convert JS <a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.khronos.webgl/-array-buffer/index.html">ArrayBuffer</a> to Kotlin <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a></p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -660,7 +609,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="byte-display-size.html"><span class="token function">byteDisplaySize</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">si<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns a human-readable version of the Byte size, where the input represents a specific number of bytes.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a><span class="token punctuation">.</span><a href="byte-display-size.html"><span class="token function">byteDisplaySize</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">si<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns a human-readable version of the Byte size, where the input represents a specific number of bytes.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -677,7 +626,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a><span class="token punctuation">.</span><a href="code-points-to-string.html"><span class="token function">codePointsToString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int-array/index.html">IntArray</a><span class="token punctuation">.</span><a href="code-points-to-string.html"><span class="token function">codePointsToString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">separator<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">""</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html">IntArray</a><span class="token punctuation">.</span><a href="code-points-to-string.html"><span class="token function">codePointsToString</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html">IntArray</a><span class="token punctuation">.</span><a href="code-points-to-string.html"><span class="token function">codePointsToString</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">separator<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator"> = </span><span class="token string">""</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -694,7 +643,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/wasmJsMain" data-filterable-set=":shared/wasmJsMain" data-active="" data-toggle=":shared/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-time-millis.html"><span class="token function">currentTimeMillis</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-long/index.html">Long</a></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="current-time-millis.html"><span class="token function">currentTimeMillis</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-long/index.html">Long</a></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -711,7 +660,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="downcall-handle.html"><span class="token function">downcallHandle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">symbol<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">fdesc<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/FunctionDescriptor.html">FunctionDescriptor</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>options<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/Linker.Option.html">Linker.Option</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/invoke/MethodHandle.html">MethodHandle</a><span class="token operator">?</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="downcall-handle.html"><span class="token function">downcallHandle</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">symbol<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token punctuation">, </span></span><span class="parameter ">fdesc<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/FunctionDescriptor.html">FunctionDescriptor</a><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">vararg </span>options<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/Linker.Option.html">Linker.Option</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/invoke/MethodHandle.html">MethodHandle</a><span class="token operator">?</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -728,7 +677,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/SymbolLookup.html">SymbolLookup</a><span class="token punctuation">.</span><a href="find-or-null.html"><span class="token function">findOrNull</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/MemorySegment.html">MemorySegment</a><span class="token operator">?</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/SymbolLookup.html">SymbolLookup</a><span class="token punctuation">.</span><a href="find-or-null.html"><span class="token function">findOrNull</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">name<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/foreign/MemorySegment.html">MemorySegment</a><span class="token operator">?</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -745,7 +694,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="jvm-runtime-info.html"><span class="token function">jvmRuntimeInfo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">debug<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the runtime information of the JVM and OS.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="jvm-runtime-info.html"><span class="token function">jvmRuntimeInfo</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">debug<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a></div><div class="brief "><p class="paragraph">Returns the runtime information of the JVM and OS.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -762,7 +711,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/wasmJsMain" data-filterable-set=":shared/wasmJsMain" data-active="" data-toggle=":shared/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/org.w3c.files/-file/index.html">File</a><span class="token punctuation">.</span><a href="read-as-byte-array.html"><span class="token function">readAsByteArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.w3c.files/-file/index.html">File</a><span class="token punctuation">.</span><a href="read-as-byte-array.html"><span class="token function">readAsByteArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -779,7 +728,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/wasmJsMain" data-filterable-set=":shared/wasmJsMain" data-active="" data-toggle=":shared/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/org.w3c.files/-file/index.html">File</a><span class="token punctuation">.</span><a href="read-as-text.html"><span class="token function">readAsText</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.w3c.files/-file/index.html">File</a><span class="token punctuation">.</span><a href="read-as-text.html"><span class="token function">readAsText</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -813,7 +762,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/wasmJsMain" data-filterable-set=":shared/wasmJsMain" data-active="" data-toggle=":shared/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/org.w3c.dom/-document/index.html">Document</a><span class="token punctuation">.</span><a href="select-file-from-disk.html"><span class="token function">selectFileFromDisk</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accept<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">multiple<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/org.w3c.files/-file/index.html">File</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The code is adapted from <a href="https://github.com/Wavesonics/compose-multiplatform-file-picker">compose-multiplatform-file-picker</a></p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.w3c.dom/-document/index.html">Document</a><span class="token punctuation">.</span><a href="select-file-from-disk.html"><span class="token function">selectFileFromDisk</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accept<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html">String</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter ">multiple<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html">List</a><span class="token operator">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.w3c.files/-file/index.html">File</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">The code is adapted from <a href="https://github.com/Wavesonics/compose-multiplatform-file-picker">compose-multiplatform-file-picker</a></p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -847,7 +796,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/wasmJsMain" data-filterable-set=":shared/wasmJsMain" data-active="" data-toggle=":shared/wasmJsMain">wasmJs</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/org.khronos.webgl/-array-buffer/index.html">ArrayBuffer</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="to-byte-array.html"><span class="token function">toByteArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/wasmJsMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/org.khronos.webgl/-array-buffer/index.html">ArrayBuffer</a><span class="token operator">?</span><span class="token punctuation">.</span><a href="to-byte-array.html"><span class="token function">toByteArray</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -864,7 +813,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-bytes.html">T</a><span class="token operator"> : </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="to-bytes.html">T</a><span class="token punctuation">.</span><a href="to-bytes.html"><span class="token function">toBytes</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Read the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html">Class</a> as <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-byte-array/index.html">ByteArray</a></p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="to-bytes.html">T</a><span class="token operator"> : </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html">Class</a><span class="token operator">&lt;</span><span class="token operator">*</span><span class="token operator">&gt;</span><span class="token operator">&gt; </span><a href="to-bytes.html">T</a><span class="token punctuation">.</span><a href="to-bytes.html"><span class="token function">toBytes</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a><span class="token operator">?</span></div><div class="brief "><p class="paragraph">Read the <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Class.html">Class</a> as <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-byte-array/index.html">ByteArray</a></p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -881,7 +830,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ClassLoader.html">ClassLoader</a><span class="token punctuation">.</span><a href="using.html"><span class="token function">using</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">run<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Run the lambda in the context of the receiver classloader.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/ClassLoader.html">ClassLoader</a><span class="token punctuation">.</span><a href="using.html"><span class="token function">using</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">run<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span></div><div class="brief "><p class="paragraph">Run the lambda in the context of the receiver classloader.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
@@ -898,7 +847,7 @@
                 <div class="title">
                   <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
                     <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":shared/jvmMain" data-filterable-set=":shared/jvmMain" data-active="" data-toggle=":shared/jvmMain">jvm</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="vt-lazy.html">T</a><span class="token operator">&gt; </span><a href="vt-lazy.html"><span class="token function">vtLazy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">threadSafetyMode<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-lazy-thread-safety-mode/index.html">LazyThreadSafetyMode</a><span class="token operator"> = </span>NONE<span class="token punctuation">, </span></span><span class="parameter ">initializer<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="vt-lazy.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-lazy/index.html">Lazy</a><span class="token operator">&lt;</span><a href="vt-lazy.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A virtual thread friendly <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/index.html">kotlin.lazy</a> implementation.</p></div></div>                  </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":shared/jvmMain"><div class="symbol monospace"><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="vt-lazy.html">T</a><span class="token operator">&gt; </span><a href="vt-lazy.html"><span class="token function">vtLazy</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">threadSafetyMode<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-lazy-thread-safety-mode/index.html">LazyThreadSafetyMode</a><span class="token operator"> = </span>NONE<span class="token punctuation">, </span></span><span class="parameter ">initializer<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="vt-lazy.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-lazy/index.html">Lazy</a><span class="token operator">&lt;</span><a href="vt-lazy.html">T</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">A virtual thread friendly <a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/index.html">kotlin.lazy</a> implementation.</p></div></div>                  </div>
                 </div>
               </div>
             </div>
