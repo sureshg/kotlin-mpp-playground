@@ -1,0 +1,81 @@
+file_format: "1.1.0"
+disabled: false
+resource:
+  schema_url: https://opentelemetry.io/schemas/1.40.0
+  attributes:
+    - name: service.name
+      value: "${OTEL_SERVICE_NAME:}"
+    - name: service.version
+      value: "${OTEL_SERVICE_VERSION}"
+    - name: other
+      value: "one-more"
+propagator:
+  composite: [ tracecontext, baggage ]
+tracer_provider:
+  processors:
+    - simple:
+        exporter:
+          console: { }
+    - batch:
+        exporter:
+          otlp:
+            protocol: http/protobuf
+            endpoint: http://localhost:4318
+
+meter_provider:
+  readers:
+    - periodic:
+        exporter:
+          console: { }
+    - periodic:
+        interval: 1000
+        exporter:
+          otlp:
+            protocol: http/protobuf
+            endpoint: http://localhost:4318
+
+logger_provider:
+  processors:
+    - simple:
+        exporter:
+          console: { }
+    - batch:
+        exporter:
+          otlp:
+            protocol: http/protobuf
+            endpoint: http://localhost:4318
+
+    # jaeger
+    # - batch:
+    #     exporter:
+    #       otlp:
+    #         protocol: http/protobuf
+    #         endpoint: http://localhost:14318
+    # prometheus
+    # - periodic:
+    #     interval: 1000
+    #     exporter:
+    #       otlp:
+    #         protocol: http/protobuf
+    #         endpoint: http://localhost:9090/api/v1/otlp/v1/metrics
+    # honeycomb
+    # - batch:
+    #     exporter:
+    #       otlp:
+    #         protocol: http/protobuf
+    #         endpoint: https://api.honeycomb.io:443
+    #         headers:
+    #         - name: "x-honeycomb-team"
+    #         - value: "${HONEYCOMB_API_KEY}"
+  # view configuration
+  # views:
+  #   - selector:
+  #       meter_name: go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp
+  #     stream:
+  #       aggregation:
+  #         drop: {}
+  #   - selector:
+  #       instrument_name: demo_client/*
+  #     stream:
+  #       aggregation:
+  #         drop: {}

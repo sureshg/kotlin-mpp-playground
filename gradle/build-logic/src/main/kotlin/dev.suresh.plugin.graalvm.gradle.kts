@@ -162,7 +162,7 @@ configurations {
 
 tasks {
   val archiveTgz by
-      creating(Tar::class) {
+      registering(Tar::class) {
         archiveFileName = niArchiveName
         compression = Compression.GZIP
         destinationDirectory = project.layout.buildDirectory

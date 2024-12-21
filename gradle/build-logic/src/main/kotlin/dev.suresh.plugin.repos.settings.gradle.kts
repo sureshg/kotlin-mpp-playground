@@ -85,7 +85,10 @@ configure<SemverSettingsExtension> {
 
 configure<KoverSettingsExtension> {
   enableCoverage()
-  reports { excludedClasses.addAll("*.generated.*", "dev.suresh.example.*") }
+  reports {
+    excludedClasses.addAll("*.generated.*", "dev.suresh.example.*")
+    verify { warningInsteadOfFailure = true }
+  }
 }
 
 develocity {

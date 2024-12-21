@@ -73,6 +73,7 @@ dependencies {
   compileOnly(libs.bundles.otel.agent.extn)
   compileOnly(libs.google.auto.annotations)
   annotationProcessor(libs.google.auto.service.apt)
+  implementation(libs.otel.samplers)
 
   testImplementation(platform(libs.junit.bom))
   testImplementation(libs.junit.jupiter)

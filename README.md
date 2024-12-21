@@ -116,6 +116,10 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
                 jaegertracing/all-in-one:latest
    $ open http://localhost:16686
 
+   # Run otel tui
+   $ brew install ymtdzzz/tap/otel-tui
+   $ otel-tui
+
    # Run the app
    $ docker run -it --rm \
                 --name jvm \

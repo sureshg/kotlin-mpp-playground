@@ -33,6 +33,7 @@ processors:
         action: upsert
 
 exporters:
+  debug:
   clickhouse:
     endpoint: tcp://clickhouse:9000
     database: otel
@@ -63,6 +64,10 @@ extensions:
 
 service:
   extensions: [ pprof, zpages, health_check ]
+  telemetry:
+    traces:
+    metrics:
+    logs:
   pipelines:
     logs:
       receivers: [ otlp ]

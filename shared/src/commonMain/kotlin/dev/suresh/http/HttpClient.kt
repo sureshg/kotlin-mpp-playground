@@ -23,6 +23,7 @@ val json by lazy {
     ignoreUnknownKeys = true
     encodeDefaults = true
     explicitNulls = false
+    coerceInputValues = true
     decodeEnumsCaseInsensitive = true
     allowTrailingComma = true
     allowSpecialFloatingPointValues = true

@@ -13,7 +13,6 @@ import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
-import org.jetbrains.kotlin.gradle.targets.jvm.KotlinJvmTarget
 import tasks.*
 
 plugins {
@@ -35,6 +34,7 @@ plugins {
 }
 
 val nativeBuild: String? by project
+val nativeWinTarget: String? by project
 
 kotlin {
   commonTarget(project)
@@ -44,7 +44,7 @@ kotlin {
       jsTarget(project)
       wasmJsTarget(project)
       if (nativeBuild.toBoolean()) {
-        allNativeTargets {}
+        allNativeTargets(winTarget = nativeWinTarget.toBoolean()) {}
       }
     }
 
@@ -55,23 +55,23 @@ kotlin {
     }
   }
 
-  applyDefaultHierarchyTemplate {
-    common {
-      group("posix") {
-        // Using group will add the intermediate source sets
-        group("linux")
-        group("apple")
-      }
+  // applyDefaultHierarchyTemplate {
+  //    common {
+  //      group("posix") {
+  //        // Using group will add the intermediate source sets
+  //        group("linux")
+  //        group("apple")
+  //      }
+  //
+  //      group("jsCommon") {
+  //        withJs()
+  //        withWasmJs()
+  //      }
+  //    }
+  //  }
 
-      group("jsCommon") {
-        withJs()
-        withWasmJs()
-      }
-    }
-  }
-
-  // To configure specific targets
-  targets.withType<KotlinJvmTarget>().configureEach { compilerOptions {} }
+  // ==== To configure specific targets ====
+  // targets.withType<KotlinJvmTarget>().configureEach { compilerOptions {} }
   // targets.matching { it.platformType == js }.configureEach { apply(plugin = ...) }
 
   // kotlinDaemonJvmArgs = jvmArguments
@@ -134,19 +134,21 @@ tasks {
   }
 
   withType<ProcessResources>().configureEach {
-    inputs.property("version", project.version.toString())
+    val version = project.version.toString()
+    val rootProjectName = rootProject.name
+    val moduleName = project.name
+
+    inputs.property("version", version)
     filesMatching("**/*-res.txt") {
       expand(
-          "name" to rootProject.name,
-          "module" to project.name,
-          "version" to project.version,
+          "name" to rootProjectName,
+          "module" to moduleName,
+          "version" to version,
       )
     }
     filesMatching("**/*.yaml") {
       filter { line ->
-        line
-            .replace("{project.name}", rootProject.name)
-            .replace("{project.version}", project.version.toString())
+        line.replace("{project.name}", rootProjectName).replace("{project.version}", version)
       }
     }
   }

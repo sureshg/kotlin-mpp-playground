@@ -2,6 +2,7 @@
 <configuration scan="true" scanPeriod="15 seconds" packagingData="true" debug="false">
     <import class="ch.qos.logback.classic.encoder.JsonEncoder"/>
     <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
+    <import class="ch.qos.logback.classic.AsyncAppender"/>
     <import class="ch.qos.logback.core.rolling.RollingFileAppender"/>
     <import class="ch.qos.logback.core.FileAppender"/>
     <import class="ch.qos.logback.core.ConsoleAppender"/>
@@ -47,6 +48,11 @@
             <outputPatternAsHeader>true</outputPatternAsHeader>
         </encoder>
     </appender>
+
+    <!--appender name="ASYNC-APP1" class="AsyncAppender">
+        <appender-ref ref="APP1"/>
+        <neverBlock>true</neverBlock>
+    </appender-->
 
     <appender name="JSON" class="RollingFileAppender">
         <file>${LOG_DIR}/app.json</file>
@@ -95,8 +101,9 @@
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
-        <!--appender-ref ref="OTEL"/-->
+        <!-- appender-ref ref="OTEL"/-->
         <!-- appender-ref ref="JSON"/-->
+        <!-- appender-ref ref="ASYNC-APP1" /-->
     </root>
 
     <logger name="dev.suresh" level="INFO" additivity="false">

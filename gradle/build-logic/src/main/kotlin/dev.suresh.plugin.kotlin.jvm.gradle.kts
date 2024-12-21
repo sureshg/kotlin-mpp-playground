@@ -113,19 +113,21 @@ tasks {
   }
 
   processResources {
-    inputs.property("version", project.version.toString())
+    val version = project.version.toString()
+    val rootProjectName = rootProject.name
+    val moduleName = project.name
+
+    inputs.property("version", version)
     filesMatching("**/*-res.txt") {
       expand(
-          "name" to rootProject.name,
-          "module" to project.name,
-          "version" to project.version,
+          "name" to rootProjectName,
+          "module" to moduleName,
+          "version" to version,
       )
     }
     filesMatching("**/*.yaml") {
       filter { line ->
-        line
-            .replace("{project.name}", rootProject.name)
-            .replace("{project.version}", project.version.toString())
+        line.replace("{project.name}", rootProjectName).replace("{project.version}", version)
       }
     }
   }

@@ -6,12 +6,14 @@ import io.ktor.client.plugins.*
 import io.ktor.client.plugins.resources.*
 import io.ktor.resources.*
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 
 @Resource("/media-api/images.json") class ImgRes
 
 @Resource("/media-api/videos.json") class VideoRes
 
 @Serializable
+@JsonIgnoreUnknownKeys
 data class Image(
     val category: String,
     val path: String,

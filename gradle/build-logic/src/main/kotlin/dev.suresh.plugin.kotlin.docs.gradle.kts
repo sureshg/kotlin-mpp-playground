@@ -54,8 +54,6 @@ dokka {
 
     documentedVisibilities = setOf(VisibilityModifier.Public)
 
-    samples.from("src/test/kotlin")
-
     externalDocumentationLinks {
       register("kotlinx.coroutines") { url("https://kotlinlang.org/api/kotlinx.coroutines/") }
       register("kotlinx.serialization") { url("https://kotlinlang.org/api/kotlinx.serialization/") }
@@ -65,6 +63,9 @@ dokka {
       }
       register("ktor") { url("https://api.ktor.io/") }
     }
+
+    // https://github.com/Kotlin/dokka/issues/3373
+    // samples.from("src/test/kotlin")
 
     // dokkaPublicationDirectory = rootProject.layout.buildDirectory.dir("dokkaDir")
   }
@@ -86,7 +87,6 @@ spotless {
     // googleJavaFormat(libs.versions.google.javaformat.get())
     palantirJavaFormat(libs.versions.palantir.javaformat.get()).formatJavadoc(true)
     target("**/*.java_disabled")
-    targetExclude("**/build/**")
   }
   // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
 

@@ -89,12 +89,17 @@ tasks {
   val githubActionOutput by registering {
     description = "Set Github workflow action output for this build"
     group = BasePlugin.BUILD_GROUP
+
+    val projectName = project.name
+    val projectGroup = project.group
+    val projectVersion = project.version
+
     doLast {
       with(GithubAction) {
-        setOutput("name", project.name)
-        setOutput("group", project.group)
-        setOutput("version", project.version)
-        setOutput("artifact_name", "${project.name}-${project.version}")
+        setOutput("name", projectName)
+        setOutput("group", projectGroup)
+        setOutput("version", projectVersion)
+        setOutput("artifact_name", "$projectName-$projectVersion")
       }
     }
   }

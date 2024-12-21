@@ -122,7 +122,7 @@ tasks {
   val linkReleaseExecutableMacosArm64 by getting(KotlinNativeLink::class)
 
   val macOsUniversalBinary by
-      creating(Exec::class) {
+      registering(Exec::class) {
         val binName = "${project.name}-macos"
         dependsOn(linkReleaseExecutableMacosX64, linkReleaseExecutableMacosArm64)
         commandLine(

@@ -264,7 +264,7 @@ fun KotlinNativeCompilerOptions.configureKotlinNative() {
   // freeCompilerArgs.addAll("-Xverbose-phases=Linker", "-Xruntime-logs=gc=info")
 }
 
-fun KotlinMultiplatformExtension.allNativeTargets(configure: KotlinNativeTarget.() -> Unit = {}) {
+fun KotlinMultiplatformExtension.allNativeTargets(winTarget: Boolean = false, configure: KotlinNativeTarget.() -> Unit = {}) {
   fun KotlinNativeTarget.configureAll() {
     // KotlinNativeTargetWithHostTests
     compilerOptions { configureKotlinNative() }
@@ -282,7 +282,9 @@ fun KotlinMultiplatformExtension.allNativeTargets(configure: KotlinNativeTarget.
   macosArm64 { configureAll() }
   linuxX64 { configureAll() }
   linuxArm64 { configureAll() }
-  mingwX64 { configureAll() }
+  if(winTarget) {
+    mingwX64 { configureAll() }
+  }
 }
 
 fun KotlinMultiplatformExtension.addKspDependencyForAllTargets(
