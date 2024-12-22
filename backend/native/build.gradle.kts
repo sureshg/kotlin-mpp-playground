@@ -21,7 +21,7 @@ val appBinName = "app"
 description = "Ktor native application"
 
 kotlin {
-  allNativeTargets()
+  nativeTargets(project)
 
   targets.withType<KotlinNativeTarget>().configureEach {
     binaries {
@@ -49,12 +49,11 @@ kotlin {
     commonMain { dependencies { api(projects.shared) } }
     nativeMain {
       dependencies {
-        api(libs.ktor.client.cio)
         api(libs.kaml)
         api(libs.kmp.appdirs)
         api(libs.kfswatch)
         api(libs.chasm)
-        // api(libs.arrow.suspendapp.ktor)
+        api(libs.kmp.process)
       }
     }
 

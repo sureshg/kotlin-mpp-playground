@@ -37,7 +37,7 @@ kotlinx-benchmark              = "0.4.13"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
 kotlin-wrappers                = "1.0.0-pre.854"
-kotlin-redacted                = "1.11.0"
+kotlin-redacted                = "1.12.0"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.16.0-dev-5267"
@@ -90,7 +90,7 @@ wiremock                       = "3.10.0"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.0.0-alpha.14"
 slf4j                          = "2.1.0-alpha1"
-logback                        = "1.5.14"
+logback                        = "1.5.15"
 logback-tyler                  = "1.0.0"
 log4j                          = "3.0.0-beta2"
 jmh                            = "1.37"
@@ -110,8 +110,10 @@ kotlin-bignum                  = "0.3.10"
 kotlin-diff                    = "0.7.0"
 kotlin-retry                   = "2.0.1"
 kotlinx-jsonpath               = "3.0.2"
-kotlinx-json-schema            = "0.2.3"
 kotlin-cryptography            = "0.4.0"
+kotlin-json-schema             = "0.1.1"
+json-schema-validator          = "0.3.0"
+pwall-json-schema              = "0.52"
 uri-kmp                        = "0.0.18"
 urlencoder                     = "1.5.0"
 bytesize                       = "2.0.0-beta04"
@@ -167,6 +169,7 @@ kmp-process                    = "0.1.1"
 langchain4j                    = "0.36.2"
 jlama                          = "0.8.3"
 mcp-kotlin                     = "0.1.0"
+kmcp                           = "0.1.0"
 dflib                          = "1.0.0"
 ldaptive                       = "2.4.0"
 chicory                        = "1.0.0-M2"
@@ -189,7 +192,7 @@ kottie                         = "2.0.1"
 mosaic                         = "0.14.0"
 
 # NPM Dependencies
-npm-highlightjs                = "11.10.0"
+npm-highlightjs                = "11.11.0"
 npm-kotlin-playground          = "1.30.0"
 npm-xtermjs                    = "5.5.0"
 npm-vega-lite                  = "5.19.0"
@@ -233,7 +236,6 @@ tomlj                          = "1.1.1"
 repo-mvn-snapshot              = "https://oss.sonatype.org/content/repositories/snapshots"
 repo-mvn-snapshots01           = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
 repo-nodejs                    = "https://nodejs.org/dist/"
-repo-kobweb                    = "https://us-central1-maven.pkg.dev/varabyte-repos/public"
 
 [libraries]
 # External plugins for precompiled script plugins (build-logic)
@@ -431,7 +433,9 @@ rsocket-ktor-client                  = { module = "io.rsocket.kotlin:rsocket-kto
 rsocket-ktor-server                  = { module = "io.rsocket.kotlin:rsocket-ktor-server"                      , version.ref = "rsocket"}
 uri-kmp                              = { module = "com.eygraber:uri-kmp"                                       , version.ref = "uri-kmp"}
 kotlinx-jsonpath                     = { module = "com.eygraber:jsonpathkt-kotlinx"                            , version.ref = "kotlinx-jsonpath"}
-kotlinx-json-schema                  = { module = "io.github.optimumcode:json-schema-validator"                , version.ref = "kotlinx-json-schema"}
+json-schema-validator                = { module = "io.github.optimumcode:json-schema-validator"                , version.ref = "json-schema-validator"}
+json-schema-gen                      = { module = "sh.ondr:kotlin-json-schema"                                 , version.ref = "kotlin-json-schema"}
+pwall-json-schema                    = { module = "net.pwall.json:json-kotlin-schema"                          , version.ref = "pwall-json-schema"}
 urlencoder                           = { module = "net.thauvin.erik.urlencoder:urlencoder-lib"                 , version.ref = "urlencoder"}
 
 logback-classic                      = { module = "ch.qos.logback:logback-classic"                             , version.ref = "logback"}
@@ -645,6 +649,7 @@ jlama-core                           = { module = "com.github.tjake:jlama-core" 
 jlama-native                         = { module = "com.github.tjake:jlama-native"                                           , version.ref = "jlama" }
 dflib                                = { module = "org.dflib:dflib"                                                         , version.ref = "dflib" }
 mcp-kotlin                           = { module = "io.modelcontextprotocol:kotlin-sdk"                                      , version.ref = "mcp-kotlin"}
+kmcp                                 = { module = "sh.ondr.kmcp:kmcp-gradle"                                                , version.ref = "kmcp"}
 ozone-bluesky                        = { module = "sh.christian.ozone:bluesky"                                              , version.ref = "bluesky-ozone"}
 ozone-jetstream                      = { module = "sh.christian.ozone:jetstream"                                            , version.ref = "bluesky-ozone"}
 
@@ -660,7 +665,7 @@ ajalt                                = ["ajalt-colormath",
                                         "ajalt-clikt",
                                         "ajalt-clikt-markdown"]
 
-json-extra                           = ["kotlinx-jsonpath", "kotlinx-json-schema"]
+json-extra                           = ["kotlinx-jsonpath", "json-schema-validator"]
 keystore                             = ["sslcontext-kickstart", "directory-keystore"]
 otel                                 = ["otel-instr-annotations",
                                         "otel-autoconfigure",

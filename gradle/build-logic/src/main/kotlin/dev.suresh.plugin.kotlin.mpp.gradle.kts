@@ -33,9 +33,6 @@ plugins {
   // dev.mokkery
 }
 
-val nativeBuild: String? by project
-val nativeWinTarget: String? by project
-
 kotlin {
   commonTarget(project)
   when (project.name) {
@@ -43,9 +40,7 @@ kotlin {
       jvmTarget(project)
       jsTarget(project)
       wasmJsTarget(project)
-      if (nativeBuild.toBoolean()) {
-        allNativeTargets(winTarget = nativeWinTarget.toBoolean()) {}
-      }
+      nativeTargets(project) {}
     }
 
     "web",

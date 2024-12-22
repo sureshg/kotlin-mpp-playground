@@ -4,7 +4,6 @@ import org.gradle.api.GradleException
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.dsl.KotlinNativeCompilerOptions
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
@@ -260,32 +259,47 @@ fun KotlinMultiplatformExtension.hostNativeTarget(configure: KotlinNativeTarget.
           throw GradleException("Host OS '${Platform.currentOS}' is not supported in Kotlin/Native")
     }
 
-fun KotlinNativeCompilerOptions.configureKotlinNative() {
-  // freeCompilerArgs.addAll("-Xverbose-phases=Linker", "-Xruntime-logs=gc=info")
-}
+fun KotlinMultiplatformExtension.nativeTargets(
+    project: Project,
+    configure: KotlinNativeTarget.() -> Unit = {}
+) =
+    with(project) {
+      val nativeBuild: String? by project
+      val nativeWinTarget: String? by project
 
-fun KotlinMultiplatformExtension.allNativeTargets(winTarget: Boolean = false, configure: KotlinNativeTarget.() -> Unit = {}) {
-  fun KotlinNativeTarget.configureAll() {
-    // KotlinNativeTargetWithHostTests
-    compilerOptions { configureKotlinNative() }
-    configure()
-  }
+      if (nativeBuild.toBoolean()) {
+        fun KotlinNativeTarget.configureAll() {
+          compilerOptions {
+            // freeCompilerArgs.addAll("-Xverbose-phases=Linker", "-Xruntime-logs=gc=info")
+          }
+          configure()
+        }
 
-  compilerOptions {
-    optIn.addAll(
-        "kotlinx.cinterop.ExperimentalForeignApi",
-        "kotlin.experimental.ExperimentalNativeApi",
-    )
-  }
+        compilerOptions {
+          optIn.addAll(
+              "kotlinx.cinterop.ExperimentalForeignApi",
+              "kotlin.experimental.ExperimentalNativeApi",
+          )
+        }
 
-  macosX64 { configureAll() }
-  macosArm64 { configureAll() }
-  linuxX64 { configureAll() }
-  linuxArm64 { configureAll() }
-  if(winTarget) {
-    mingwX64 { configureAll() }
-  }
-}
+        macosX64 { configureAll() }
+        macosArm64 { configureAll() }
+        linuxX64 { configureAll() }
+        linuxArm64 { configureAll() }
+        if (nativeWinTarget.toBoolean()) {
+          mingwX64 { configureAll() }
+        }
+
+        sourceSets {
+          nativeMain {
+            dependencies {
+              api(libs.ktor.client.cio)
+              // api(libs.arrow.suspendapp.ktor)
+            }
+          }
+        }
+      }
+    }
 
 fun KotlinMultiplatformExtension.addKspDependencyForAllTargets(
     project: Project,
