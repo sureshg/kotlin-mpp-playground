@@ -158,12 +158,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.client.plugins.resources.*
 &nbsp;import io.ktor.resources.*
 &nbsp;import kotlinx.serialization.Serializable
+&nbsp;import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 &nbsp;
 &nbsp;@Resource(&quot;/media-api/images.json&quot;) class ImgRes
 &nbsp;
 <b class="nc">&nbsp;@Resource(&quot;/media-api/videos.json&quot;) class VideoRes</b>
 &nbsp;
 &nbsp;@Serializable
+&nbsp;@JsonIgnoreUnknownKeys
 &nbsp;data class Image(
 &nbsp;    val category: String,
 &nbsp;    val path: String,
@@ -234,7 +236,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-12-16 22:46</div>
+    <div style="float:right;">generated on 2024-12-23 05:12</div>
 </div>
 </body>
 </html>

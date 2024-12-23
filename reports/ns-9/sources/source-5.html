@@ -81,6 +81,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 </tr>
   <tr>
+    <td class="name">Image$$serializer</td>
+    <td class="coverageStat"/>
+  </tr>
+  <tr>
+    <td class="name">Image$$serializer$annotationImpl$kotlinx_serialization_json_JsonIgnoreUnknownKeys$0</td>
+    <td class="coverageStat"/>
+  </tr>
+  <tr>
     <td class="name">Image$Companion</td>
 <td class="coverageStat">
   <span class="percent">
@@ -158,12 +166,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.client.plugins.resources.*
 &nbsp;import io.ktor.resources.*
 &nbsp;import kotlinx.serialization.Serializable
+&nbsp;import kotlinx.serialization.json.JsonIgnoreUnknownKeys
 &nbsp;
 &nbsp;@Resource(&quot;/media-api/images.json&quot;) class ImgRes
 &nbsp;
 &nbsp;@Resource(&quot;/media-api/videos.json&quot;) class VideoRes
 &nbsp;
 <b class="nc">&nbsp;@Serializable</b>
+&nbsp;@JsonIgnoreUnknownKeys
 <b class="nc">&nbsp;data class Image(</b>
 <b class="nc">&nbsp;    val category: String,</b>
 <b class="nc">&nbsp;    val path: String,</b>
@@ -234,7 +244,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2024-12-16 22:46</div>
+    <div style="float:right;">generated on 2024-12-23 05:12</div>
 </div>
 </body>
 </html>
