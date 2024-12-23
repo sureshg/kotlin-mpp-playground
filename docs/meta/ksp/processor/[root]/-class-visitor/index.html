@@ -31,41 +31,71 @@
 <script type="text/javascript" src="../../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../../../ui-kit/ui-kit.min.js" async></script>
+<script type="text/javascript" src="../../../../../ui-kit/ui-kit.min.js" defer></script>
 <script type="text/javascript" src="../../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
 <body>
     <div class="root">
-<nav class="navigation" id="navigation-wrapper">
-    <div class="navigation--inner">
-        <div class="navigation-title">
-            <button class="menu-toggle" id="menu-toggle" type="button">toggle menu</button>
-            <div class="library-name">
+    <nav class="navigation theme-dark" id="navigation-wrapper">
 <a class="library-name--link" href="../../../../../index.html">
-                            kotlin-mpp-playground
-                    </a>            </div>
-            <div class="library-version">0.2.0.9+3870477
+                    kotlin-mpp-playground
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.2.0.10+8f409b8
+        </div>
+        <div class="navigation-controls">
+        <div class="filter-section filter-section_loading" id="filter-section">
+                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":meta:ksp:processor/jvmMain">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
+                    <div class="dropdown--header"><span>Platform filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":meta:ksp:processor/jvmMain" data-filter=":meta:ksp:processor/jvmMain">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
         </div>
-        <div class="filter-section" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":meta:ksp:processor/jvmMain">jvm</button>
+                <a class="navigation-controls--btn navigation-controls--btn_homepage" id="homepage-link" href="https://github.com/sureshg/kotlin-mpp-playground"></a>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
         </div>
-    </div>
-    <div class="navigation-controls">
-            <a class="navigation-controls--btn navigation-controls--homepage" id="homepage-link" href="https://github.com/sureshg/kotlin-mpp-playground"></a>
-        <button class="navigation-controls--btn navigation-controls--theme" id="theme-toggle-button" type="button">switch theme</button>
-        <div class="navigation-controls--btn navigation-controls--search" id="searchBar" role="button">search in API</div>
-    </div>
-</nav>
+    </nav>
         <div id="container">
             <div class="sidebar" id="leftColumn">
-                <div class="sidebar--inner" id="sideMenu"></div>
+                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
+                        <div class="dropdown--header">
+                            <span>
+                                    kotlin-mpp-playground
+                            </span>
+                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                            </button>
+                        </div>
+                        <div class="sidebar--inner" id="sideMenu"></div>
+                    </ul>
+                    <div class="dropdown--overlay"></div>
+                </div>
             </div>
             <div id="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="processor::/ClassVisitor///PointingToDeclaration//1616505536">
   <div class="breadcrumbs"><a href="../../index.html">processor</a><span class="delimiter">/</span><a href="../index.html">[root]</a><span class="delimiter">/</span><span class="current">ClassVisitor</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Class</span><wbr><span><span>Visitor</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">ClassVisitor</a> : <span data-unresolved-link="com.google.devtools.ksp.visitor/KSTopDownVisitor///PointingToDeclaration/">KSTopDownVisitor</span><span class="token operator">&lt;</span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/sureshg/kotlin-mpp-playground/tree/main/meta/ksp/processor/src/main/kotlin/TestProcessor.kt#L46">source</a>)</span></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">ClassVisitor</a> : <span data-unresolved-link="com.google.devtools.ksp.visitor/KSTopDownVisitor///PointingToDeclaration/">KSTopDownVisitor</span><span class="token operator">&lt;</span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a><span class="token punctuation">, </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">&gt; </span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/sureshg/kotlin-mpp-playground/tree/main/meta/ksp/processor/src/main/kotlin/TestProcessor.kt#L46">source</a>)</span></span></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
@@ -106,47 +136,47 @@
               </div>
             </div>
           </div>
-<a data-name="-985996056%2FFunctions%2F1616505536" anchor-label="visitAnnotated" id="-985996056%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-1475540346%2FFunctions%2F1616505536" anchor-label="visitAnnotated" id="-1475540346%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-985996056%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>Annotated</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-985996056%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-1475540346%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>Annotated</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1475540346%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-985996056%2FFunctions%2F1616505536"><span class="token function">visitAnnotated</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">annotated<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSAnnotated///PointingToDeclaration/">KSAnnotated</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1475540346%2FFunctions%2F1616505536"><span class="token function">visitAnnotated</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">annotated<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSAnnotated///PointingToDeclaration/">KSAnnotated</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1907392992%2FFunctions%2F1616505536" anchor-label="visitAnnotation" id="-1907392992%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-528518066%2FFunctions%2F1616505536" anchor-label="visitAnnotation" id="-528518066%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1907392992%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>Annotation</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1907392992%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-528518066%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>Annotation</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-528518066%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1907392992%2FFunctions%2F1616505536"><span class="token function">visitAnnotation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">annotation<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSAnnotation///PointingToDeclaration/">KSAnnotation</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-528518066%2FFunctions%2F1616505536"><span class="token function">visitAnnotation</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">annotation<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSAnnotation///PointingToDeclaration/">KSAnnotation</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1455227490%2FFunctions%2F1616505536" anchor-label="visitCallableReference" id="-1455227490%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="870708112%2FFunctions%2F1616505536" anchor-label="visitCallableReference" id="870708112%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1455227490%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Callable</span><wbr><span><span>Reference</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1455227490%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#870708112%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Callable</span><wbr><span><span>Reference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="870708112%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1455227490%2FFunctions%2F1616505536"><span class="token function">visitCallableReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSCallableReference///PointingToDeclaration/">KSCallableReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#870708112%2FFunctions%2F1616505536"><span class="token function">visitCallableReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSCallableReference///PointingToDeclaration/">KSCallableReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -166,317 +196,317 @@
               </div>
             </div>
           </div>
-<a data-name="-534290036%2FFunctions%2F1616505536" anchor-label="visitClassifierReference" id="-534290036%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="828953698%2FFunctions%2F1616505536" anchor-label="visitClassifierReference" id="828953698%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-534290036%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Classifier</span><wbr><span><span>Reference</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-534290036%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#828953698%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Classifier</span><wbr><span><span>Reference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="828953698%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-534290036%2FFunctions%2F1616505536"><span class="token function">visitClassifierReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSClassifierReference///PointingToDeclaration/">KSClassifierReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#828953698%2FFunctions%2F1616505536"><span class="token function">visitClassifierReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSClassifierReference///PointingToDeclaration/">KSClassifierReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="266249772%2FFunctions%2F1616505536" anchor-label="visitDeclaration" id="266249772%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="1453552578%2FFunctions%2F1616505536" anchor-label="visitDeclaration" id="1453552578%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#266249772%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>Declaration</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="266249772%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#1453552578%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1453552578%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#266249772%2FFunctions%2F1616505536"><span class="token function">visitDeclaration</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">declaration<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSDeclaration///PointingToDeclaration/">KSDeclaration</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1453552578%2FFunctions%2F1616505536"><span class="token function">visitDeclaration</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">declaration<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSDeclaration///PointingToDeclaration/">KSDeclaration</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="393326048%2FFunctions%2F1616505536" anchor-label="visitDeclarationContainer" id="393326048%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="939859086%2FFunctions%2F1616505536" anchor-label="visitDeclarationContainer" id="939859086%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#393326048%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Declaration</span><wbr><span><span>Container</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="393326048%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#939859086%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Declaration</span><wbr><span><span>Container</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="939859086%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#393326048%2FFunctions%2F1616505536"><span class="token function">visitDeclarationContainer</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">declarationContainer<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSDeclarationContainer///PointingToDeclaration/">KSDeclarationContainer</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#939859086%2FFunctions%2F1616505536"><span class="token function">visitDeclarationContainer</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">declarationContainer<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSDeclarationContainer///PointingToDeclaration/">KSDeclarationContainer</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="508618352%2FFunctions%2F1616505536" anchor-label="visitDefNonNullReference" id="508618352%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="698531326%2FFunctions%2F1616505536" anchor-label="visitDefNonNullReference" id="698531326%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#508618352%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Def</span><wbr><span>Non</span><wbr><span>Null</span><wbr><span><span>Reference</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="508618352%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#698531326%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Def</span><wbr><span>Non</span><wbr><span>Null</span><wbr><span><span>Reference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="698531326%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#508618352%2FFunctions%2F1616505536"><span class="token function">visitDefNonNullReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSDefNonNullReference///PointingToDeclaration/">KSDefNonNullReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#698531326%2FFunctions%2F1616505536"><span class="token function">visitDefNonNullReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSDefNonNullReference///PointingToDeclaration/">KSDefNonNullReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1162041750%2FFunctions%2F1616505536" anchor-label="visitDynamicReference" id="-1162041750%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="810674756%2FFunctions%2F1616505536" anchor-label="visitDynamicReference" id="810674756%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1162041750%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Dynamic</span><wbr><span><span>Reference</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1162041750%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#810674756%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Dynamic</span><wbr><span><span>Reference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="810674756%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1162041750%2FFunctions%2F1616505536"><span class="token function">visitDynamicReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSDynamicReference///PointingToDeclaration/">KSDynamicReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#810674756%2FFunctions%2F1616505536"><span class="token function">visitDynamicReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSDynamicReference///PointingToDeclaration/">KSDynamicReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="4467818%2FFunctions%2F1616505536" anchor-label="visitFile" id="4467818%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-259120060%2FFunctions%2F1616505536" anchor-label="visitFile" id="-259120060%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#4467818%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>File</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="4467818%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-259120060%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>File</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-259120060%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#4467818%2FFunctions%2F1616505536"><span class="token function">visitFile</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSFile///PointingToDeclaration/">KSFile</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-259120060%2FFunctions%2F1616505536"><span class="token function">visitFile</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">file<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSFile///PointingToDeclaration/">KSFile</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2028999740%2FFunctions%2F1616505536" anchor-label="visitFunctionDeclaration" id="2028999740%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-1064022094%2FFunctions%2F1616505536" anchor-label="visitFunctionDeclaration" id="-1064022094%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#2028999740%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Function</span><wbr><span><span>Declaration</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2028999740%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-1064022094%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Function</span><wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1064022094%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#2028999740%2FFunctions%2F1616505536"><span class="token function">visitFunctionDeclaration</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">function<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSFunctionDeclaration///PointingToDeclaration/">KSFunctionDeclaration</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1064022094%2FFunctions%2F1616505536"><span class="token function">visitFunctionDeclaration</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">function<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSFunctionDeclaration///PointingToDeclaration/">KSFunctionDeclaration</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1989583518%2FFunctions%2F1616505536" anchor-label="visitModifierListOwner" id="1989583518%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="1376874128%2FFunctions%2F1616505536" anchor-label="visitModifierListOwner" id="1376874128%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#1989583518%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Modifier</span><wbr><span>List</span><wbr><span><span>Owner</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1989583518%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#1376874128%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Modifier</span><wbr><span>List</span><wbr><span><span>Owner</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1376874128%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1989583518%2FFunctions%2F1616505536"><span class="token function">visitModifierListOwner</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">modifierListOwner<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSModifierListOwner///PointingToDeclaration/">KSModifierListOwner</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1376874128%2FFunctions%2F1616505536"><span class="token function">visitModifierListOwner</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">modifierListOwner<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSModifierListOwner///PointingToDeclaration/">KSModifierListOwner</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1295614454%2FFunctions%2F1616505536" anchor-label="visitNode" id="1295614454%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="1871472184%2FFunctions%2F1616505536" anchor-label="visitNode" id="1871472184%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#1295614454%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>Node</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1295614454%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#1871472184%2FFunctions%2F1616505536"><span>visit</span><wbr><span><span>Node</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1871472184%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1295614454%2FFunctions%2F1616505536"><span class="token function">visitNode</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSNode///PointingToDeclaration/">KSNode</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1871472184%2FFunctions%2F1616505536"><span class="token function">visitNode</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">node<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSNode///PointingToDeclaration/">KSNode</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1452370784%2FFunctions%2F1616505536" anchor-label="visitParenthesizedReference" id="-1452370784%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="1170894286%2FFunctions%2F1616505536" anchor-label="visitParenthesizedReference" id="1170894286%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1452370784%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Parenthesized</span><wbr><span><span>Reference</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1452370784%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#1170894286%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Parenthesized</span><wbr><span><span>Reference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1170894286%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1452370784%2FFunctions%2F1616505536"><span class="token function">visitParenthesizedReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSParenthesizedReference///PointingToDeclaration/">KSParenthesizedReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1170894286%2FFunctions%2F1616505536"><span class="token function">visitParenthesizedReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">reference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSParenthesizedReference///PointingToDeclaration/">KSParenthesizedReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="2001997930%2FFunctions%2F1616505536" anchor-label="visitPropertyAccessor" id="2001997930%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-1681080252%2FFunctions%2F1616505536" anchor-label="visitPropertyAccessor" id="-1681080252%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#2001997930%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Property</span><wbr><span><span>Accessor</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2001997930%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-1681080252%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Property</span><wbr><span><span>Accessor</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1681080252%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#2001997930%2FFunctions%2F1616505536"><span class="token function">visitPropertyAccessor</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accessor<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSPropertyAccessor///PointingToDeclaration/">KSPropertyAccessor</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1681080252%2FFunctions%2F1616505536"><span class="token function">visitPropertyAccessor</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">accessor<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSPropertyAccessor///PointingToDeclaration/">KSPropertyAccessor</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1432980034%2FFunctions%2F1616505536" anchor-label="visitPropertyDeclaration" id="1432980034%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="768716140%2FFunctions%2F1616505536" anchor-label="visitPropertyDeclaration" id="768716140%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#1432980034%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Property</span><wbr><span><span>Declaration</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1432980034%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#768716140%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Property</span><wbr><span><span>Declaration</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="768716140%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1432980034%2FFunctions%2F1616505536"><span class="token function">visitPropertyDeclaration</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">property<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSPropertyDeclaration///PointingToDeclaration/">KSPropertyDeclaration</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#768716140%2FFunctions%2F1616505536"><span class="token function">visitPropertyDeclaration</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">property<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSPropertyDeclaration///PointingToDeclaration/">KSPropertyDeclaration</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1406771776%2FFunctions%2F1616505536" anchor-label="visitPropertyGetter" id="-1406771776%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-1843177298%2FFunctions%2F1616505536" anchor-label="visitPropertyGetter" id="-1843177298%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1406771776%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Property</span><wbr><span><span>Getter</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1406771776%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-1843177298%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Property</span><wbr><span><span>Getter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1843177298%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1406771776%2FFunctions%2F1616505536"><span class="token function">visitPropertyGetter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">getter<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSPropertyGetter///PointingToDeclaration/">KSPropertyGetter</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1843177298%2FFunctions%2F1616505536"><span class="token function">visitPropertyGetter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">getter<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSPropertyGetter///PointingToDeclaration/">KSPropertyGetter</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-452074432%2FFunctions%2F1616505536" anchor-label="visitPropertySetter" id="-452074432%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="1433133614%2FFunctions%2F1616505536" anchor-label="visitPropertySetter" id="1433133614%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-452074432%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Property</span><wbr><span><span>Setter</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-452074432%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#1433133614%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Property</span><wbr><span><span>Setter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1433133614%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-452074432%2FFunctions%2F1616505536"><span class="token function">visitPropertySetter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">setter<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSPropertySetter///PointingToDeclaration/">KSPropertySetter</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1433133614%2FFunctions%2F1616505536"><span class="token function">visitPropertySetter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">setter<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSPropertySetter///PointingToDeclaration/">KSPropertySetter</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-556144096%2FFunctions%2F1616505536" anchor-label="visitReferenceElement" id="-556144096%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-1583839154%2FFunctions%2F1616505536" anchor-label="visitReferenceElement" id="-1583839154%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-556144096%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Reference</span><wbr><span><span>Element</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-556144096%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-1583839154%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Reference</span><wbr><span><span>Element</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1583839154%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-556144096%2FFunctions%2F1616505536"><span class="token function">visitReferenceElement</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">element<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSReferenceElement///PointingToDeclaration/">KSReferenceElement</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1583839154%2FFunctions%2F1616505536"><span class="token function">visitReferenceElement</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">element<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSReferenceElement///PointingToDeclaration/">KSReferenceElement</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1242198492%2FFunctions%2F1616505536" anchor-label="visitTypeAlias" id="-1242198492%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-453589302%2FFunctions%2F1616505536" anchor-label="visitTypeAlias" id="-453589302%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1242198492%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Type</span><wbr><span><span>Alias</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1242198492%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-453589302%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Type</span><wbr><span><span>Alias</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-453589302%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1242198492%2FFunctions%2F1616505536"><span class="token function">visitTypeAlias</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeAlias<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSTypeAlias///PointingToDeclaration/">KSTypeAlias</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-453589302%2FFunctions%2F1616505536"><span class="token function">visitTypeAlias</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeAlias<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSTypeAlias///PointingToDeclaration/">KSTypeAlias</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-483993376%2FFunctions%2F1616505536" anchor-label="visitTypeArgument" id="-483993376%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-707604082%2FFunctions%2F1616505536" anchor-label="visitTypeArgument" id="-707604082%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-483993376%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Type</span><wbr><span><span>Argument</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-483993376%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-707604082%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Type</span><wbr><span><span>Argument</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-707604082%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-483993376%2FFunctions%2F1616505536"><span class="token function">visitTypeArgument</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeArgument<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSTypeArgument///PointingToDeclaration/">KSTypeArgument</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-707604082%2FFunctions%2F1616505536"><span class="token function">visitTypeArgument</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeArgument<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSTypeArgument///PointingToDeclaration/">KSTypeArgument</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1608414550%2FFunctions%2F1616505536" anchor-label="visitTypeParameter" id="1608414550%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-1327984936%2FFunctions%2F1616505536" anchor-label="visitTypeParameter" id="-1327984936%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#1608414550%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Type</span><wbr><span><span>Parameter</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1608414550%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-1327984936%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Type</span><wbr><span><span>Parameter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1327984936%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1608414550%2FFunctions%2F1616505536"><span class="token function">visitTypeParameter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeParameter<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSTypeParameter///PointingToDeclaration/">KSTypeParameter</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-1327984936%2FFunctions%2F1616505536"><span class="token function">visitTypeParameter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeParameter<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSTypeParameter///PointingToDeclaration/">KSTypeParameter</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-1746655334%2FFunctions%2F1616505536" anchor-label="visitTypeReference" id="-1746655334%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-426006764%2FFunctions%2F1616505536" anchor-label="visitTypeReference" id="-426006764%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-1746655334%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Type</span><wbr><span><span>Reference</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1746655334%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-426006764%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Type</span><wbr><span><span>Reference</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-426006764%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-1746655334%2FFunctions%2F1616505536"><span class="token function">visitTypeReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeReference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSTypeReference///PointingToDeclaration/">KSTypeReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-426006764%2FFunctions%2F1616505536"><span class="token function">visitTypeReference</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">typeReference<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSTypeReference///PointingToDeclaration/">KSTypeReference</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="-2049618178%2FFunctions%2F1616505536" anchor-label="visitValueArgument" id="-2049618178%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="1055882800%2FFunctions%2F1616505536" anchor-label="visitValueArgument" id="1055882800%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#-2049618178%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Value</span><wbr><span><span>Argument</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2049618178%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#1055882800%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Value</span><wbr><span><span>Argument</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1055882800%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#-2049618178%2FFunctions%2F1616505536"><span class="token function">visitValueArgument</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">valueArgument<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSValueArgument///PointingToDeclaration/">KSValueArgument</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#1055882800%2FFunctions%2F1616505536"><span class="token function">visitValueArgument</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">valueArgument<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSValueArgument///PointingToDeclaration/">KSValueArgument</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
           </div>
-<a data-name="1764076736%2FFunctions%2F1616505536" anchor-label="visitValueParameter" id="1764076736%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
+<a data-name="-346199634%2FFunctions%2F1616505536" anchor-label="visitValueParameter" id="-346199634%2FFunctions%2F1616505536" data-filterable-set=":meta:ksp:processor/jvmMain"></a>
           <div class="table-row" data-filterable-current=":meta:ksp:processor/jvmMain" data-filterable-set=":meta:ksp:processor/jvmMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
-                  <div><a href="index.html#1764076736%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Value</span><wbr><span><span>Parameter</span></span></a></div>
-<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1764076736%2FFunctions%2F1616505536"></span>
+                  <div><a href="index.html#-346199634%2FFunctions%2F1616505536"><span>visit</span><wbr><span>Value</span><wbr><span><span>Parameter</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-346199634%2FFunctions%2F1616505536"></span>
                     <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
                   </span></span></div>
               <div>
                 <div class="title">
-                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">fun </span><a href="index.html#1764076736%2FFunctions%2F1616505536"><span class="token function">visitValueParameter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">valueParameter<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSValueParameter///PointingToDeclaration/">KSValueParameter</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":meta:ksp:processor/jvmMain"><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">fun </span><a href="index.html#-346199634%2FFunctions%2F1616505536"><span class="token function">visitValueParameter</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">valueParameter<span class="token operator">: </span><span data-unresolved-link="com.google.devtools.ksp.symbol/KSValueParameter///PointingToDeclaration/">KSValueParameter</span><span class="token punctuation">, </span></span><span class="parameter ">data<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/OutputStreamWriter.html">OutputStreamWriter</a></span></span><span class="token punctuation">)</span></div></div></div>
                 </div>
               </div>
             </div>
