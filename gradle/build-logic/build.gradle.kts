@@ -167,6 +167,7 @@ dependencies {
   implementation(libs.build.kotlinx.kover)
   implementation(libs.build.kotlinx.benchmark)
   implementation(libs.build.kotlinx.bcv)
+  implementation(libs.build.kmpmt)
   implementation(libs.build.dokka.plugin)
   implementation(libs.build.redacted.plugin)
   implementation(libs.build.gradle.develocity)
