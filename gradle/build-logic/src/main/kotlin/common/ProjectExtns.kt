@@ -476,6 +476,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm(project: Project) =
     }
 
 fun Test.configureJavaTest() {
+  enabled = true
   useJUnitPlatform()
   jvmArgs(project.jvmArguments())
 
@@ -483,6 +484,7 @@ fun Test.configureJavaTest() {
   systemProperty("ktorTest", project.hasProperty("ktorTest"))
   systemProperty("k8sTest", project.hasProperty("k8sTest"))
   systemProperty("spring.classformat.ignore", true)
+
   // Custom hosts file for tests
   val customHostFile = project.layout.projectDirectory.file("src/test/resources/hosts").asFile
   if (customHostFile.exists()) {

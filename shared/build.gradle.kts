@@ -7,6 +7,7 @@ plugins {
   dev.suresh.plugin.publishing
   `binary-compatibility-validator`
   // alias(libs.plugins.mappie)
+  com.jakewharton.`kmp-missing-targets`
 }
 
 description = "Shared common module for all projects"
@@ -18,6 +19,8 @@ buildConfig {
   gitCommit = semver.commits.get().first()
   catalogVersions = project.versionCatalogMapOf()
 }
+
+kotlinMissingTargets {}
 
 dependencies {
   commonMainApi(libs.evas)

@@ -182,11 +182,15 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
   ```
 
-* Binary Compatibility
+* BinCompat & Missing Targets
 
   ```bash
   $ ./gradlew :backend:security:apiDump
   $ ./gradlew :backend:security:apiCheck
+
+  # KMP missing targets report
+  $ ./gradlew :shared:kmpMissingTargets
+  $ open shared/build/reports/kmp-missing-targets.md
   ```
 
 ### Wasm/JS
@@ -378,10 +382,6 @@ is [automatically with Gradle][gradle_verification].
 [cmp_url]: https://github.com/JetBrains/compose-multiplatform/releases
 
 [cmp_img]: https://img.shields.io/github/v/release/JetBrains/compose-multiplatform?color=3cdc84&label=Compose%20MP&logo=JetpackCompose&logoColor=3cdc84
-
-[kobweb_url]: https://github.com/varabyte/kobweb/releases
-
-[kobweb_img]: https://img.shields.io/github/v/release/varabyte/kobweb?color=1985f2&include_prereleases&label=Kobweb&logo=Github&logoColor=1985f2
 
 [ktor_url]: https://search.maven.org/artifact/io.ktor/ktor-bom
 

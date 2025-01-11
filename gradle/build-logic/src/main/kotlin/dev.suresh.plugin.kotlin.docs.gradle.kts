@@ -110,7 +110,7 @@ spotless {
     target("**/*.md", "**/.kte")
     targetExclude("**/build/**")
     trimTrailingWhitespace()
-    indentWithSpaces(2)
+    leadingTabsToSpaces(2)
   }
 }
 

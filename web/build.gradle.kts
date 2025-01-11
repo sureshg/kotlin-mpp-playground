@@ -3,8 +3,6 @@
 plugins {
   dev.suresh.plugin.kotlin.mpp
   dev.suresh.plugin.publishing
-  // alias(libs.plugins.karakum)
-  // alias(libs.plugins.seskar)
 }
 
 description = "Kotlin JS/Wasm Web application"
@@ -17,7 +15,6 @@ dependencies {
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
   jsMainImplementation(npm("@xterm/xterm", libs.versions.npm.xtermjs.get()))
   jsMainImplementation(libs.kotlin.cryptography.webcrypto)
-  // jsMainImplementation(libs.seskar.core)
   wasmJsMainImplementation(libs.kotlin.cryptography.webcrypto)
 
   sharedJsRes(
