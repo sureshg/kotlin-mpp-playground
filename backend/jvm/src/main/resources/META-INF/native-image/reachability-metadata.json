@@ -22,7 +22,20 @@
       "type": "[Ljava.lang.Comparable;"
     },
     {
-      "type": "[Ljava.lang.String;"
+      "type": "[Ljava.lang.Integer;",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
+    },
+    {
+      "type": "[Ljava.lang.String;",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
     },
     {
       "type": "[Ljavax.management.openmbean.CompositeData;"
@@ -324,6 +337,17 @@
       "type": "dev.suresh.plugins.custom.CookieSession"
     },
     {
+      "type": "io.ktor.callid.CallIdKt"
+    },
+    {
+      "type": "io.ktor.callid.CallIdKt$withCallId$2",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
       "type": "io.ktor.http.HttpStatusCode"
     },
     {
@@ -465,6 +489,9 @@
       "type": "io.ktor.server.engine.ShutDownUrl"
     },
     {
+      "type": "io.ktor.server.html.RespondHtmlKt"
+    },
+    {
       "type": "io.ktor.server.http.content.CompressedFileType"
     },
     {
@@ -543,13 +570,55 @@
       "type": "io.ktor.server.plugins.callid.CallIdConfig"
     },
     {
-      "type": "io.ktor.server.plugins.callid.CallIdKt$CallId$2$1"
+      "type": "io.ktor.server.plugins.callid.CallIdKt$CallId$2$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
     },
     {
-      "type": "io.ktor.server.plugins.callid.CallIdSetup$install$1"
+      "type": "io.ktor.server.plugins.callid.CallIdKt$CallId$2$1$2",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.plugins.callid.CallIdSetup$install$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
     },
     {
       "type": "io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$1$invokeSuspend$$inlined$withMDC$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$2",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$2$invokeSuspend$$inlined$withMDC$1",
       "fields": [
         {
           "name": "label"
@@ -572,6 +641,17 @@
       ]
     },
     {
+      "type": "io.ktor.server.plugins.calllogging.MDCHookKt$MDCHook$1$install$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.plugins.calllogging.MDCHookKt$MDCHook$1$install$1$1"
+    },
+    {
       "type": "io.ktor.server.plugins.forwardedheaders.ForwardedHeaderValue"
     },
     {
@@ -587,10 +667,16 @@
       ]
     },
     {
+      "type": "io.ktor.server.plugins.swagger.SwaggerKt$swaggerUI$5$2"
+    },
+    {
       "type": "io.ktor.server.response.ApplicationResponsePropertiesKt"
     },
     {
       "type": "io.ktor.server.response.ResponseHeaders"
+    },
+    {
+      "type": "io.ktor.server.routing.RoutingNode$buildPipeline$1$1"
     },
     {
       "type": "io.ktor.server.routing.RoutingRoot"
@@ -604,6 +690,38 @@
             "io.ktor.server.application.Application",
             "kotlin.jvm.functions.Function1"
           ]
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.routing.RoutingRoot$Plugin$install$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.routing.RoutingRoot$executeResult$$inlined$execute$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.routing.RoutingRoot$executeResult$1",
+      "fields": [
+        {
+          "name": "label"
+        }
+      ]
+    },
+    {
+      "type": "io.ktor.server.routing.RoutingRoot$interceptor$1",
+      "fields": [
+        {
+          "name": "label"
         }
       ]
     },
@@ -641,6 +759,9 @@
         },
         {
           "name": "_removedRef"
+        },
+        {
+          "name": "removedRef"
         }
       ]
     },
@@ -923,6 +1044,54 @@
       ]
     },
     {
+      "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.BaseMpscLinkedAtomicArrayQueueColdProducerFields",
+      "fields": [
+        {
+          "name": "producerLimit"
+        }
+      ]
+    },
+    {
+      "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.BaseMpscLinkedAtomicArrayQueueConsumerFields",
+      "fields": [
+        {
+          "name": "consumerIndex"
+        }
+      ]
+    },
+    {
+      "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.BaseMpscLinkedAtomicArrayQueueProducerFields",
+      "fields": [
+        {
+          "name": "producerIndex"
+        }
+      ]
+    },
+    {
+      "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.unpadded.MpscAtomicUnpaddedArrayQueueConsumerIndexField",
+      "fields": [
+        {
+          "name": "consumerIndex"
+        }
+      ]
+    },
+    {
+      "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.unpadded.MpscAtomicUnpaddedArrayQueueProducerIndexField",
+      "fields": [
+        {
+          "name": "producerIndex"
+        }
+      ]
+    },
+    {
+      "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.unpadded.MpscAtomicUnpaddedArrayQueueProducerLimitField",
+      "fields": [
+        {
+          "name": "producerLimit"
+        }
+      ]
+    },
+    {
       "type": "java.io.File"
     },
     {
@@ -983,6 +1152,10 @@
       ]
     },
     {
+      "type": "java.lang.Error",
+      "allDeclaredFields": true
+    },
+    {
       "type": "java.lang.Exception",
       "allDeclaredFields": true
     },
@@ -995,12 +1168,20 @@
       ]
     },
     {
+      "type": "java.lang.IncompatibleClassChangeError",
+      "allDeclaredFields": true
+    },
+    {
       "type": "java.lang.Integer",
       "fields": [
         {
           "name": "TYPE"
         }
       ]
+    },
+    {
+      "type": "java.lang.LinkageError",
+      "allDeclaredFields": true
     },
     {
       "type": "java.lang.Long",
@@ -1016,6 +1197,18 @@
         {
           "name": "getDescriptor",
           "parameterTypes": []
+        }
+      ]
+    },
+    {
+      "type": "java.lang.NoSuchMethodError",
+      "allDeclaredFields": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
         }
       ]
     },
@@ -1226,6 +1419,14 @@
       "type": "java.rmi.registry.Registry"
     },
     {
+      "type": "java.rmi.server.RemoteObject",
+      "serializable": true
+    },
+    {
+      "type": "java.rmi.server.RemoteStub",
+      "serializable": true
+    },
+    {
       "type": "java.security.AlgorithmParametersSpi"
     },
     {
@@ -1238,7 +1439,31 @@
       "type": "java.security.SecurityPermission"
     },
     {
+      "type": "java.util.Arrays$ArrayList",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
+    },
+    {
       "type": "java.util.Date"
+    },
+    {
+      "type": "java.util.LinkedHashMap",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
+    },
+    {
+      "type": "java.util.LinkedHashSet",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
     },
     {
       "type": "java.util.List"
@@ -1355,6 +1580,7 @@
     },
     {
       "type": "javax.management.remote.rmi.RMIServerImpl_Stub",
+      "serializable": true,
       "methods": [
         {
           "name": "<init>",
@@ -1447,6 +1673,14 @@
       ]
     },
     {
+      "type": "kotlin.Pair",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
+    },
+    {
       "type": "kotlin.SafePublicationLazyImpl",
       "fields": [
         {
@@ -1459,6 +1693,14 @@
     },
     {
       "type": "kotlin.Throwable"
+    },
+    {
+      "type": "kotlin.Triple",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
     },
     {
       "type": "kotlin.Unit"
@@ -2212,6 +2454,9 @@
       "glob": "app"
     },
     {
+      "glob": "app/composeWeb/76cf560c9a7f20030646.wasm"
+    },
+    {
       "glob": "app/composeWeb/91c2c955c032773a8c68.wasm"
     },
     {
@@ -2261,6 +2506,9 @@
     },
     {
       "glob": "app/wasm/css/app.css"
+    },
+    {
+      "glob": "app/wasm/d53ec6dceb5265b17282.wasm"
     },
     {
       "glob": "app/wasm/index.html"
@@ -2594,6 +2842,16 @@
             "java.lang.String",
             "java.lang.String",
             "java.lang.String",
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String",
+            "boolean",
+            "java.util.List"
+          ]
+        },
+        {
+          "name": "<init>",
+          "parameterTypes": [
             "java.lang.String",
             "java.lang.String",
             "java.lang.String",

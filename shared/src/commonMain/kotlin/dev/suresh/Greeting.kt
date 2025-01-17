@@ -2,11 +2,12 @@ package dev.suresh
 
 import dev.suresh.http.json
 import dev.suresh.lang.*
+import dev.suresh.serde.toJsonElement
+import kotlin.time.Duration.Companion.seconds
+import kotlin.uuid.Uuid
 import kotlinx.atomicfu.atomic
-import kotlinx.atomicfu.locks.reentrantLock
-import kotlinx.atomicfu.locks.withLock
-import kotlinx.io.bytestring.*
-import kotlinx.serialization.encodeToString
+import kotlinx.atomicfu.locks.*
+import kotlinx.serialization.json.Json
 
 class Greeting {
 
@@ -15,19 +16,6 @@ class Greeting {
     appendLine(data())
     appendLine(kotlinxTests())
     appendLine(atomicFUTests())
-  }
-
-  private fun kotlinxTests(): String {
-    val ba = "Kotlinx".encodeToByteArray()
-    val bs1 = ByteString(data = ba)
-    val bs2 = "IO".encodeToByteString()
-
-    val bs = buildByteString {
-      append(bs1)
-      append(" ".encodeToByteArray())
-      append(bs2)
-    }
-    return bs.decodeToString()
   }
 
   private fun data() = buildString {
@@ -53,6 +41,51 @@ class Greeting {
     check(a.synchronizedFoo(42) == 42)
     appendLine("Synchronized foo: ${a.synchronizedFoo(42)}")
   }
+
+  private fun kotlinxTests(): String {
+    val obj =
+        mapOf(
+                "bool" to true,
+                "byte" to 1.toByte(),
+                "uByte" to 1.toUByte(),
+                "char" to '2',
+                "short" to 3.toShort(),
+                "uShort" to 3.toUShort(),
+                "int" to 4,
+                "uInt" to 4u,
+                "long" to 5L,
+                "uLong" to 5uL,
+                "float" to 6.0f,
+                "double" to 7.0,
+                "string" to "Kotlin",
+                "enum" to YesNo.YES,
+                "pair" to ("foo" to "Bar"),
+                "triple" to Triple("foo", "bar", "baz"),
+                "unit" to Unit,
+                "duration" to 2.seconds,
+                "uuid" to Uuid.random(),
+                "boolArray" to booleanArrayOf(true, false, true),
+                "byteArray" to byteArrayOf(1, 2, 3),
+                "charArray" to charArrayOf('1', '2', '3'),
+                "shortArray" to shortArrayOf(1, 2, 3),
+                "intArray" to intArrayOf(1, 2, 3),
+                "longArray" to longArrayOf(1, 2, 3),
+                "floatArray" to floatArrayOf(1.0f, 1.1f, 1.2f, 1.3f),
+                "doubleArray" to doubleArrayOf(1.0, 1.1, 1.2, 1.3),
+                "ubyteArray" to ubyteArrayOf(1u, 2u, 3u),
+                "ushortArray" to ushortArrayOf(1u, 2u, 3u),
+                "uintArray" to uintArrayOf(1u, 2u, 3u),
+                "ulongArray" to ulongArrayOf(1u, 2u, 3u),
+                "arrayOfInt" to arrayOf(1, 2, 3),
+                "arrayOfString" to arrayOf("foo", "bar"),
+                "listOfDouble" to listOf(1.1, 2.2, 3.3),
+                "listOfString" to listOf("foo", "bar"),
+                "setOfString" to setOf("foo", "bar", "baz"),
+                "mapOfStringInt" to mapOf("1" to 1, "2" to 2),
+            )
+            .toJsonElement()
+    return Json.encodeToString(obj)
+  }
 }
 
 class AtomicSample {
@@ -72,4 +105,9 @@ class AtomicSample {
   }
 
   fun synchronizedFoo(value: Int) = lock.withLock { value }
+}
+
+enum class YesNo {
+  YES,
+  NO
 }

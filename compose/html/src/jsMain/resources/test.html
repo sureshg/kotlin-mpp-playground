@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Layout</title>
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0">
+    <style>
+        :root {
+            --primary: #10B981;
+            --text: #1F2937;
+            --background: rgba(255, 255, 255, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem;
+            background: var(--background);
+            backdrop-filter: blur(2px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu-icon {
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.25rem;
+            text-decoration: none;
+        }
+
+        .brand-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Drawer */
+        .drawer {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: white;
+            padding: 2rem 1rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+
+        .drawer.open {
+            left: 0;
+        }
+
+        .drawer a {
+            display: block;
+            padding: 0.75rem 0;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 999;
+        }
+
+        .overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Content */
+        .main {
+            flex: 1;
+            padding: 5rem 2rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 1rem;
+            text-align: center;
+            background: #f9fafb;
+            margin-top: auto;
+        }
+
+        .blog-section {
+            margin-top: 2rem;
+        }
+
+        .blog-post {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .blog-post:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .post-title {
+            color: var(--text);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .post-title:hover {
+            color: var(--primary);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .post-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .post-content {
+            color: var(--text);
+            line-height: 1.7;
+            opacity: 0.9;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--primary);
+            border-radius: 16px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .blog-header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+<!-- Fixed Header -->
+<header class="header">
+    <nav class="nav">
+        <div class="nav-left">
+            <button class="menu-icon" onclick="toggleDrawer()">
+                <span class="material-symbols-rounded">menu</span>
+            </button>
+            <a href="#" class="brand">
+                <span class="material-symbols-rounded brand-icon">eco</span>
+                Brand
+            </a>
+        </div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#blog">Blog</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+</header>
+
+<!-- Drawer -->
+<div class="drawer" id="drawer">
+    <a href="#" class="brand">
+        <span class="material-symbols-rounded brand-icon">eco</span>
+        Brand
+    </a>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+</div>
+
+<!-- Overlay -->
+<div class="overlay" id="overlay" onclick="toggleDrawer()"></div>
+
+<main class="main">
+    <div style="max-width: 700px; margin: 0 auto; padding: 2rem 0;">
+        <!-- Profile -->
+        <div style="display: flex; align-items: center; gap: 2rem; margin-bottom: 3rem;">
+            <img src="https://suresh.dev/Writerside/images/suresh.jpg"
+                 alt="Suresh"
+                 style="width: 150px; height: 150px; border-radius: 50%; object-fit: cover;">
+
+            <div>
+                <!--                <h1 style="font-size: 2rem; margin-bottom: 0.5rem;">Suresh</h1>-->
+                <h1 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;
+                           background: linear-gradient(120deg, var(--primary), #3b82f6);
+                           -webkit-background-clip: text;
+                           -webkit-text-fill-color: transparent;">
+                    Suresh
+                </h1>
+                <p style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem;">Software Engineer</p>
+
+                <!-- Simple links -->
+                <div style="display: flex; gap: 1rem;">
+                    <a href="https://github.com/sureshg" target="_blank"
+                       style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none;">
+                        <span class="material-symbols-rounded">code</span>
+                        GitHub
+                    </a>
+                    <a href="https://twitter.com/sureshgdev" target="_blank"
+                       style="display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none;">
+                        <span class="material-symbols-rounded">chat</span>
+                        Twitter
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bio -->
+        <div style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+            Hey there! 👋 I'm a software engineer passionate about Kotlin, JVM technologies, and modern web development.
+            Currently working on open-source projects and exploring multiplatform development with Kotlin.
+        </div>
+
+        <!-- Tech stack -->
+        <div style="margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 1rem;">Tech Stack</h3>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                <span style="background: rgba(16, 185, 129, 0.1); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px;">Kotlin</span>
+                <span style="background: rgba(16, 185, 129, 0.1); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px;">Java</span>
+                <span style="background: rgba(16, 185, 129, 0.1); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px;">Spring Boot</span>
+                <span style="background: rgba(16, 185, 129, 0.1); color: var(--primary); padding: 0.5rem 1rem; border-radius: 20px;">Kotlin MPP</span>
+            </div>
+        </div>
+
+        <!-- Current Focus -->
+        <div>
+            <h3 style="margin-bottom: 1rem;">Current Focus</h3>
+            <ul style="list-style: none; padding: 0;">
+                <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--primary);">→</span>
+                    Building modern web applications with Kobweb
+                </li>
+                <li style="margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--primary);">→</span>
+                    Contributing to Kotlin Multiplatform projects
+                </li>
+                <li style="padding-left: 1.5rem; position: relative;">
+                    <span style="position: absolute; left: 0; color: var(--primary);">→</span>
+                    Exploring server-side Kotlin
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+
+<!-- Main Content -->
+<main class="main">
+    <div class="blog-header">
+        <h1 style="color: var(--primary); margin-bottom: 0.5rem">Welcome, sureshg!</h1>
+        <p style="color: var(--text); opacity: 0.8">Current UTC: 2025-01-05 22:56:42</p>
+    </div>
+
+    <!-- Blog Posts -->
+    <div class="blog-posts">
+        <div class="blog-post">
+            <a href="#" style="text-decoration: none;">
+                <h2 class="post-title">Getting Started with Kotlin Multiplatform</h2>
+            </a>
+            <div class="post-meta">
+                    <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">calendar_month</span>
+                        January 5, 2025
+                    </span>
+                <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">schedule</span>
+                        10 min read
+                    </span>
+            </div>
+            <div class="post-content">
+                <p>Kotlin Multiplatform is revolutionizing how we think about cross-platform development. In this
+                    comprehensive guide, we'll explore the fundamentals and best practices for building shared codebases
+                    across different platforms.</p>
+            </div>
+            <div>
+                <span class="tag">Kotlin</span>
+                <span class="tag">Multiplatform</span>
+                <span class="tag">Mobile</span>
+            </div>
+        </div>
+
+        <div class="blog-post">
+            <a href="#" style="text-decoration: none;">
+                <h2 class="post-title">Getting Started with Kotlin Multiplatform</h2>
+            </a>
+            <div class="post-meta">
+                    <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">calendar_month</span>
+                        January 5, 2025
+                    </span>
+                <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">schedule</span>
+                        10 min read
+                    </span>
+            </div>
+            <div class="post-content">
+                <p>Kotlin Multiplatform is revolutionizing how we think about cross-platform development. In this
+                    comprehensive guide, we'll explore the fundamentals and best practices for building shared codebases
+                    across different platforms.</p>
+            </div>
+            <div>
+                <span class="tag">Kotlin</span>
+                <span class="tag">Multiplatform</span>
+                <span class="tag">Mobile</span>
+            </div>
+        </div>
+
+        <div class="blog-post">
+            <a href="#" style="text-decoration: none;">
+                <h2 class="post-title">Getting Started with Kotlin Multiplatform</h2>
+            </a>
+            <div class="post-meta">
+                    <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">calendar_month</span>
+                        January 5, 2025
+                    </span>
+                <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">schedule</span>
+                        10 min read
+                    </span>
+            </div>
+            <div class="post-content">
+                <p>Kotlin Multiplatform is revolutionizing how we think about cross-platform development. In this
+                    comprehensive guide, we'll explore the fundamentals and best practices for building shared codebases
+                    across different platforms.</p>
+            </div>
+            <div>
+                <span class="tag">Kotlin</span>
+                <span class="tag">Multiplatform</span>
+                <span class="tag">Mobile</span>
+            </div>
+        </div>
+
+        <div class="blog-post">
+            <a href="#" style="text-decoration: none;">
+                <h2 class="post-title">Getting Started with Kotlin Multiplatform</h2>
+            </a>
+            <div class="post-meta">
+                    <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">calendar_month</span>
+                        January 5, 2025
+                    </span>
+                <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">schedule</span>
+                        10 min read
+                    </span>
+            </div>
+            <div class="post-content">
+                <p>Kotlin Multiplatform is revolutionizing how we think about cross-platform development. In this
+                    comprehensive guide, we'll explore the fundamentals and best practices for building shared codebases
+                    across different platforms.</p>
+            </div>
+            <div>
+                <span class="tag">Kotlin</span>
+                <span class="tag">Multiplatform</span>
+                <span class="tag">Mobile</span>
+            </div>
+        </div>
+
+        <div class="blog-post">
+            <a href="#" style="text-decoration: none;">
+                <h2 class="post-title">Getting Started with Kotlin Multiplatform</h2>
+            </a>
+            <div class="post-meta">
+                    <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">calendar_month</span>
+                        January 5, 2025
+                    </span>
+                <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">schedule</span>
+                        10 min read
+                    </span>
+            </div>
+            <div class="post-content">
+                <p>Kotlin Multiplatform is revolutionizing how we think about cross-platform development. In this
+                    comprehensive guide, we'll explore the fundamentals and best practices for building shared codebases
+                    across different platforms.</p>
+            </div>
+            <div>
+                <span class="tag">Kotlin</span>
+                <span class="tag">Multiplatform</span>
+                <span class="tag">Mobile</span>
+            </div>
+        </div>
+
+        <div class="blog-post">
+            <a href="#" style="text-decoration: none;">
+                <h2 class="post-title">Building Modern Web Apps with Kobweb</h2>
+            </a>
+            <div class="post-meta">
+                    <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">calendar_month</span>
+                        January 4, 2025
+                    </span>
+                <span>
+                        <span class="material-symbols-rounded" style="font-size: 18px;">schedule</span>
+                        8 min read
+                    </span>
+            </div>
+            <div class="post-content">
+                <p>Discover how Kobweb is changing the landscape of web development with Kotlin. Learn about its
+                    powerful features, component-based architecture, and how it enables you to write type-safe web
+                    applications.</p>
+            </div>
+            <div>
+                <span class="tag">Kobweb</span>
+                <span class="tag">Web</span>
+                <span class="tag">Kotlin</span>
+            </div>
+        </div>
+
+        <!-- Continue with similar structure for other posts -->
+        <!-- I'll show just two for brevity, but you can replicate for all 10 -->
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2025 Brand</p>
+</footer>
+
+<script>
+    function toggleDrawer() {
+        document.getElementById('drawer').classList.toggle('open');
+        document.getElementById('overlay').classList.toggle('open');
+    }
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+            document.getElementById('drawer').classList.remove('open');
+            document.getElementById('overlay').classList.remove('open');
+        }
+    });
+</script>
+</body>
+</html>
