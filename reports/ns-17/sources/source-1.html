@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > CrashDialogKt</title>
+  <title>: Coverage Report > FileColors</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">ui.crash</a>
+    <a href="../index.html">ui</a>
 </div>
 
-<h1>Coverage Summary for Class: CrashDialogKt (ui.crash)</h1>
+<h1>Coverage Summary for Class: FileColors (ui)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">CrashDialogKt</td>
+  <td class="name">FileColors</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/4)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/25)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/118)
+    (0/22)
   </span>
 </td>
 </tr>
@@ -92,53 +92,32 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;@file:OptIn(ExperimentalComposeUiApi::class)
+<code class="sourceCode" id="sourceCode">&nbsp;package ui
 &nbsp;
-&nbsp;package ui.crash
+&nbsp;import androidx.compose.foundation.shape.RoundedCornerShape
+&nbsp;import androidx.compose.material3.MaterialTheme
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.graphics.Color
+&nbsp;import androidx.compose.ui.unit.dp
 &nbsp;
-&nbsp;import androidx.compose.ui.ExperimentalComposeUiApi
-&nbsp;import androidx.compose.ui.window.WindowExceptionHandler
-&nbsp;import androidx.compose.ui.window.WindowExceptionHandlerFactory
-&nbsp;import dev.suresh.log
-&nbsp;import java.awt.Dimension
-&nbsp;import java.awt.Font
-&nbsp;import java.io.File
-&nbsp;import javax.swing.JOptionPane
-&nbsp;import javax.swing.JScrollPane
-&nbsp;import javax.swing.JTextArea
-&nbsp;import kotlin.system.exitProcess
-&nbsp;
-&nbsp;fun showCrashDialog(logDirectory: File, exception: Throwable) {
-<b class="nc">&nbsp;  val text = buildString {</b>
-<b class="nc">&nbsp;    appendLine(&quot;Log directory:&quot;)</b>
-<b class="nc">&nbsp;    appendLine(logDirectory)</b>
-<b class="nc">&nbsp;    appendLine()</b>
-<b class="nc">&nbsp;    appendLine(&quot;Stack trace:&quot;)</b>
-<b class="nc">&nbsp;    appendLine(exception.stackTraceToString())</b>
-<b class="nc">&nbsp;  }</b>
-<b class="nc">&nbsp;  JOptionPane.showMessageDialog(</b>
-<b class="nc">&nbsp;      null,</b>
-<b class="nc">&nbsp;      JScrollPane(</b>
-<b class="nc">&nbsp;              JTextArea(text).apply {</b>
-<b class="nc">&nbsp;                font = Font(Font.MONOSPACED, Font.PLAIN, 10)</b>
-<b class="nc">&nbsp;                lineWrap = false</b>
-<b class="nc">&nbsp;              },</b>
-<b class="nc">&nbsp;              JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,</b>
-<b class="nc">&nbsp;              JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS,</b>
-&nbsp;          )
-<b class="nc">&nbsp;          .apply { preferredSize = Dimension(640, 480) },</b>
-<b class="nc">&nbsp;      &quot;App failed unexpectedly&quot;,</b>
-<b class="nc">&nbsp;      JOptionPane.ERROR_MESSAGE,</b>
-&nbsp;  )
+&nbsp;@Composable
+&nbsp;fun AppTheme(content: @Composable () -&gt; Unit) {
+&nbsp;  MaterialTheme(
+&nbsp;      colorScheme = MaterialTheme.colorScheme.copy(primary = Color.Black),
+&nbsp;      shapes =
+&nbsp;          MaterialTheme.shapes.copy(
+&nbsp;              small = RoundedCornerShape(0.dp),
+&nbsp;              medium = RoundedCornerShape(0.dp),
+&nbsp;              large = RoundedCornerShape(0.dp))) {
+&nbsp;        content()
+&nbsp;      }
 &nbsp;}
 &nbsp;
-<b class="nc">&nbsp;val windowExceptionHandlerFactory = WindowExceptionHandlerFactory { window -&gt;</b>
-<b class="nc">&nbsp;  WindowExceptionHandler { ex -&gt;</b>
-<b class="nc">&nbsp;    window.dispose()</b>
-<b class="nc">&nbsp;    log.error(ex) { &quot;Application UI crash&quot; }</b>
-<b class="nc">&nbsp;    showCrashDialog(File(&quot;.&quot;), ex)</b>
-<b class="nc">&nbsp;    exitProcess(1)</b>
-&nbsp;  }
+&nbsp;object FileColors {
+<b class="nc">&nbsp;  val default = Color.Gray</b>
+<b class="nc">&nbsp;  val active = Color(29, 117, 223, 255)</b>
+<b class="nc">&nbsp;  val fileItemBg = Color(233, 30, 99, 255)</b>
+<b class="nc">&nbsp;  val fileItemFg = Color.White</b>
 &nbsp;}
 </code>
 </pre>
@@ -163,7 +142,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-13 22:41</div>
+    <div style="float:right;">generated on 2025-01-17 01:29</div>
 </div>
 </body>
 </html>

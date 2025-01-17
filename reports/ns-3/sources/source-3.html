@@ -103,11 +103,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;import dev.suresh.http.json
 &nbsp;import dev.suresh.lang.*
+&nbsp;import dev.suresh.serde.toJsonElement
+&nbsp;import kotlin.time.Duration.Companion.seconds
+&nbsp;import kotlin.uuid.Uuid
 &nbsp;import kotlinx.atomicfu.atomic
-&nbsp;import kotlinx.atomicfu.locks.reentrantLock
-&nbsp;import kotlinx.atomicfu.locks.withLock
-&nbsp;import kotlinx.io.bytestring.*
-&nbsp;import kotlinx.serialization.encodeToString
+&nbsp;import kotlinx.atomicfu.locks.*
+&nbsp;import kotlinx.serialization.json.Json
 &nbsp;
 &nbsp;class Greeting {
 &nbsp;
@@ -116,19 +117,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    appendLine(data())
 &nbsp;    appendLine(kotlinxTests())
 &nbsp;    appendLine(atomicFUTests())
-&nbsp;  }
-&nbsp;
-&nbsp;  private fun kotlinxTests(): String {
-&nbsp;    val ba = &quot;Kotlinx&quot;.encodeToByteArray()
-&nbsp;    val bs1 = ByteString(data = ba)
-&nbsp;    val bs2 = &quot;IO&quot;.encodeToByteString()
-&nbsp;
-&nbsp;    val bs = buildByteString {
-&nbsp;      append(bs1)
-&nbsp;      append(&quot; &quot;.encodeToByteArray())
-&nbsp;      append(bs2)
-&nbsp;    }
-&nbsp;    return bs.decodeToString()
 &nbsp;  }
 &nbsp;
 &nbsp;  private fun data() = buildString {
@@ -154,6 +142,51 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    check(a.synchronizedFoo(42) == 42)
 &nbsp;    appendLine(&quot;Synchronized foo: ${a.synchronizedFoo(42)}&quot;)
 &nbsp;  }
+&nbsp;
+&nbsp;  private fun kotlinxTests(): String {
+&nbsp;    val obj =
+&nbsp;        mapOf(
+&nbsp;                &quot;bool&quot; to true,
+&nbsp;                &quot;byte&quot; to 1.toByte(),
+&nbsp;                &quot;uByte&quot; to 1.toUByte(),
+&nbsp;                &quot;char&quot; to &#39;2&#39;,
+&nbsp;                &quot;short&quot; to 3.toShort(),
+&nbsp;                &quot;uShort&quot; to 3.toUShort(),
+&nbsp;                &quot;int&quot; to 4,
+&nbsp;                &quot;uInt&quot; to 4u,
+&nbsp;                &quot;long&quot; to 5L,
+&nbsp;                &quot;uLong&quot; to 5uL,
+&nbsp;                &quot;float&quot; to 6.0f,
+&nbsp;                &quot;double&quot; to 7.0,
+&nbsp;                &quot;string&quot; to &quot;Kotlin&quot;,
+&nbsp;                &quot;enum&quot; to YesNo.YES,
+&nbsp;                &quot;pair&quot; to (&quot;foo&quot; to &quot;Bar&quot;),
+&nbsp;                &quot;triple&quot; to Triple(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;),
+&nbsp;                &quot;unit&quot; to Unit,
+&nbsp;                &quot;duration&quot; to 2.seconds,
+&nbsp;                &quot;uuid&quot; to Uuid.random(),
+&nbsp;                &quot;boolArray&quot; to booleanArrayOf(true, false, true),
+&nbsp;                &quot;byteArray&quot; to byteArrayOf(1, 2, 3),
+&nbsp;                &quot;charArray&quot; to charArrayOf(&#39;1&#39;, &#39;2&#39;, &#39;3&#39;),
+&nbsp;                &quot;shortArray&quot; to shortArrayOf(1, 2, 3),
+&nbsp;                &quot;intArray&quot; to intArrayOf(1, 2, 3),
+&nbsp;                &quot;longArray&quot; to longArrayOf(1, 2, 3),
+&nbsp;                &quot;floatArray&quot; to floatArrayOf(1.0f, 1.1f, 1.2f, 1.3f),
+&nbsp;                &quot;doubleArray&quot; to doubleArrayOf(1.0, 1.1, 1.2, 1.3),
+&nbsp;                &quot;ubyteArray&quot; to ubyteArrayOf(1u, 2u, 3u),
+&nbsp;                &quot;ushortArray&quot; to ushortArrayOf(1u, 2u, 3u),
+&nbsp;                &quot;uintArray&quot; to uintArrayOf(1u, 2u, 3u),
+&nbsp;                &quot;ulongArray&quot; to ulongArrayOf(1u, 2u, 3u),
+&nbsp;                &quot;arrayOfInt&quot; to arrayOf(1, 2, 3),
+&nbsp;                &quot;arrayOfString&quot; to arrayOf(&quot;foo&quot;, &quot;bar&quot;),
+&nbsp;                &quot;listOfDouble&quot; to listOf(1.1, 2.2, 3.3),
+&nbsp;                &quot;listOfString&quot; to listOf(&quot;foo&quot;, &quot;bar&quot;),
+&nbsp;                &quot;setOfString&quot; to setOf(&quot;foo&quot;, &quot;bar&quot;, &quot;baz&quot;),
+&nbsp;                &quot;mapOfStringInt&quot; to mapOf(&quot;1&quot; to 1, &quot;2&quot; to 2),
+&nbsp;            )
+&nbsp;            .toJsonElement()
+&nbsp;    return Json.encodeToString(obj)
+&nbsp;  }
 &nbsp;}
 &nbsp;
 <b class="fc">&nbsp;class AtomicSample {</b>
@@ -173,6 +206,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;
 <b class="fc">&nbsp;  fun synchronizedFoo(value: Int) = lock.withLock { value }</b>
+&nbsp;}
+&nbsp;
+&nbsp;enum class YesNo {
+&nbsp;  YES,
+&nbsp;  NO
 &nbsp;}
 </code>
 </pre>
@@ -197,7 +235,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-13 22:41</div>
+    <div style="float:right;">generated on 2025-01-17 01:29</div>
 </div>
 </body>
 </html>

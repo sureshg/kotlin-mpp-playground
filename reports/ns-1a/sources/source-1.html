@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > AnimationKt</title>
+  <title>: Coverage Report > ComposableSingletons</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">ui.lottie</a>
+    <a href="../index.html">ui.file</a>
 </div>
 
-<h1>Coverage Summary for Class: AnimationKt (ui.lottie)</h1>
+<h1>Coverage Summary for Class: ComposableSingletons (ui.file)</h1>
 
 <table class="coverageStats">
 
@@ -45,36 +45,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   Instruction, %
 </th>
 </tr>
-<tr>
-  <td class="name">AnimationKt</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/12)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/235)
-  </span>
-</td>
-</tr>
   <tr>
-    <td class="name">AnimationKt$lottie$1$1</td>
+    <td class="name">ComposableSingletons$FileBrowser_jvmKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -97,7 +69,35 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/37)
+    (0/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ComposableSingletons$FileBrowser_jvmKt$lambda$974758889$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/38)
   </span>
 </td>
   </tr>
@@ -108,7 +108,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/2)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -117,7 +117,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/13)
+    (0/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,7 +125,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/272)
+    (0/44)
   </span>
 </td>
 </tr>
@@ -134,43 +134,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <br/>
 <br/>
 
-
-<pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package ui.lottie
-&nbsp;
-&nbsp;import KottieAnimation
-&nbsp;import androidx.compose.runtime.*
-&nbsp;import androidx.compose.runtime.Composable
-&nbsp;import androidx.compose.runtime.mutableStateOf
-&nbsp;import androidx.compose.ui.Modifier
-&nbsp;import dev.suresh.compose.res.Res
-&nbsp;import kottieComposition.KottieCompositionSpec
-&nbsp;import kottieComposition.animateKottieCompositionAsState
-&nbsp;import kottieComposition.rememberKottieComposition
-&nbsp;import org.jetbrains.compose.resources.ExperimentalResourceApi
-&nbsp;
-&nbsp;@OptIn(ExperimentalResourceApi::class)
-&nbsp;@Composable
-<b class="nc">&nbsp;fun lottie(modifier: Modifier = Modifier, res: String = &quot;files/lottie/anim.json&quot;) {</b>
-<b class="nc">&nbsp;  var afterEffectAnim by remember { mutableStateOf(&quot;&quot;) }</b>
-&nbsp;
-<b class="nc">&nbsp;  LaunchedEffect(Unit) { afterEffectAnim = Res.readBytes(res).decodeToString() }</b>
-&nbsp;
-<b class="nc">&nbsp;  val composition = rememberKottieComposition(spec = KottieCompositionSpec.File(afterEffectAnim))</b>
-<b class="nc">&nbsp;  val animationState by</b>
-<b class="nc">&nbsp;      animateKottieCompositionAsState(</b>
-<b class="nc">&nbsp;          composition = composition,</b>
-<b class="nc">&nbsp;          isPlaying = true,</b>
-&nbsp;      )
-&nbsp;
-<b class="nc">&nbsp;  KottieAnimation(</b>
-<b class="nc">&nbsp;      modifier = modifier,</b>
-<b class="nc">&nbsp;      composition = composition,</b>
-<b class="nc">&nbsp;      progress = { animationState.progress },</b>
-&nbsp;  )
-&nbsp;}
-</code>
-</pre>
+  <code class="sourceCode">Source code is not available<br /></code>
 </div>
 
 <script type="text/javascript">
@@ -192,7 +156,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-13 22:41</div>
+    <div style="float:right;">generated on 2025-01-17 01:29</div>
 </div>
 </body>
 </html>

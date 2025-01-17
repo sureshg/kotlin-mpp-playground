@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Retry</title>
+  <title>: Coverage Report > Timeout</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.http</a>
 </div>
 
-<h1>Coverage Summary for Class: Retry (dev.suresh.http)</h1>
+<h1>Coverage Summary for Class: Timeout (dev.suresh.http)</h1>
 
 <table class="coverageStats">
 
@@ -46,7 +46,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Retry</td>
+  <td class="name">Timeout</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -69,12 +69,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/23)
+    (0/37)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">Retry$Companion</td>
+    <td class="name">Timeout$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -125,7 +125,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/24)
+    (0/38)
   </span>
 </td>
 </tr>
@@ -142,15 +142,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import kotlin.time.Duration.Companion.seconds
 &nbsp;import kotlinx.serialization.Serializable
 &nbsp;
-&nbsp;data class Timeout(val connection: Duration, val read: Duration, val write: Duration) {
+<b class="nc">&nbsp;data class Timeout(val connection: Duration, val read: Duration, val write: Duration) {</b>
 &nbsp;  companion object {
-&nbsp;    val DEFAULT = Timeout(connection = 5.seconds, read = 5.seconds, write = 5.seconds)
+<b class="nc">&nbsp;    val DEFAULT = Timeout(connection = 5.seconds, read = 5.seconds, write = 5.seconds)</b>
 &nbsp;  }
 &nbsp;}
 &nbsp;
-<b class="nc">&nbsp;data class Retry(val attempts: Int, val maxDelay: Duration) {</b>
+&nbsp;data class Retry(val attempts: Int, val maxDelay: Duration) {
 &nbsp;  companion object {
-<b class="nc">&nbsp;    val DEFAULT = Retry(attempts = 2, maxDelay = 2.seconds)</b>
+&nbsp;    val DEFAULT = Retry(attempts = 2, maxDelay = 2.seconds)
 &nbsp;  }
 &nbsp;}
 &nbsp;
@@ -179,7 +179,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-13 22:41</div>
+    <div style="float:right;">generated on 2025-01-17 01:29</div>
 </div>
 </body>
 </html>

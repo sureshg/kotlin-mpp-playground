@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > FileColors</title>
+  <title>: Coverage Report > WasmKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,18 +19,15 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">ui</a>
+    <a href="../index.html">dev.suresh.wasm</a>
 </div>
 
-<h1>Coverage Summary for Class: FileColors (ui)</h1>
+<h1>Coverage Summary for Class: WasmKt (dev.suresh.wasm)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -49,7 +46,35 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">FileColors</td>
+  <td class="name">WasmKt</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/75)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">WasmKt$wasm$1$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -66,7 +91,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/4)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -80,11 +104,45 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/22)
+    (0/52)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/127)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -92,33 +150,50 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package ui
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.wasm
 &nbsp;
-&nbsp;import androidx.compose.foundation.shape.RoundedCornerShape
-&nbsp;import androidx.compose.material3.MaterialTheme
-&nbsp;import androidx.compose.runtime.Composable
-&nbsp;import androidx.compose.ui.graphics.Color
-&nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import com.dylibso.chicory.experimental.aot.AotMachine
+&nbsp;import com.dylibso.chicory.runtime.HostFunction
+&nbsp;import com.dylibso.chicory.runtime.Instance
+&nbsp;import com.dylibso.chicory.wasm.Parser
+&nbsp;import com.dylibso.chicory.wasm.types.ValueType
+&nbsp;import io.ktor.server.response.respondText
+&nbsp;import io.ktor.server.routing.*
 &nbsp;
-&nbsp;@Composable
-&nbsp;fun AppTheme(content: @Composable () -&gt; Unit) {
-&nbsp;  MaterialTheme(
-&nbsp;      colorScheme = MaterialTheme.colorScheme.copy(primary = Color.Black),
-&nbsp;      shapes =
-&nbsp;          MaterialTheme.shapes.copy(
-&nbsp;              small = RoundedCornerShape(0.dp),
-&nbsp;              medium = RoundedCornerShape(0.dp),
-&nbsp;              large = RoundedCornerShape(0.dp))) {
-&nbsp;        content()
-&nbsp;      }
+&nbsp;/**
+&nbsp; * More wasm modules can be found in
+&nbsp; * - [wasm-corpus](https://github.com/dylibso/chicory/tree/main/wasm-corpus/src/main/resources/compiled)
+&nbsp; * - [extism](https://github.com/extism/plugins/releases)
+&nbsp; */
+<b class="nc">&nbsp;val factWasmInst: Instance by lazy {</b>
+<b class="nc">&nbsp;  val wasmRes = Thread.currentThread().contextClassLoader.getResourceAsStream(&quot;wasm/factorial.wasm&quot;)</b>
+&nbsp;  // val wasmRes = object {}.javaClass.getResourceAsStream(&quot;wasm/factorial.wasm&quot;)
+<b class="nc">&nbsp;  val wasmMod = Parser.parse(wasmRes)</b>
+<b class="nc">&nbsp;  Instance.builder(wasmMod).withMachineFactory(::AotMachine).build()</b>
 &nbsp;}
 &nbsp;
-&nbsp;object FileColors {
-<b class="nc">&nbsp;  val default = Color.Gray</b>
-<b class="nc">&nbsp;  val active = Color(29, 117, 223, 255)</b>
-<b class="nc">&nbsp;  val fileItemBg = Color(233, 30, 99, 255)</b>
-<b class="nc">&nbsp;  val fileItemFg = Color.White</b>
+&nbsp;fun Routing.wasm() {
+<b class="nc">&nbsp;  route(&quot;/wasm&quot;) {</b>
+<b class="nc">&nbsp;    get(&quot;fact&quot;) {</b>
+<b class="nc">&nbsp;      val num = call.parameters[&quot;num&quot;]?.toLongOrNull() ?: 5</b>
+&nbsp;
+<b class="nc">&nbsp;      val iterFact = factWasmInst.export(&quot;iterFact&quot;)</b>
+<b class="nc">&nbsp;      val fact = iterFact.apply(num)[0]</b>
+&nbsp;
+<b class="nc">&nbsp;      call.respondText(&quot;WASM: Factorial($num): $fact&quot;)</b>
+&nbsp;    }
+&nbsp;  }
 &nbsp;}
+&nbsp;
+&nbsp;fun logFunction() =
+<b class="nc">&nbsp;    HostFunction(&quot;console&quot;, &quot;log&quot;, listOf(ValueType.I32, ValueType.I32), emptyList()) {</b>
+&nbsp;        instance,
+&nbsp;        args -&gt;
+<b class="nc">&nbsp;      val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())</b>
+<b class="nc">&nbsp;      println(&quot;WASM: $msg&quot;)</b>
+&nbsp;      // Value.i32(0)
+&nbsp;      longArrayOf()
+&nbsp;    }
 </code>
 </pre>
 </div>
@@ -142,7 +217,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-13 22:41</div>
+    <div style="float:right;">generated on 2025-01-17 01:29</div>
 </div>
 </body>
 </html>

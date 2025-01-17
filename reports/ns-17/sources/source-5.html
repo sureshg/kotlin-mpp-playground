@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > ThemeKt</title>
+  <title>: Coverage Report > ModifierKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">ui</a>
 </div>
 
-<h1>Coverage Summary for Class: ThemeKt (ui)</h1>
+<h1>Coverage Summary for Class: ModifierKt (ui)</h1>
 
 <table class="coverageStats">
 
@@ -46,13 +46,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">ThemeKt</td>
+  <td class="name">ModifierKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,7 +60,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,18 +76,18 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/138)
+    (0/62)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">ThemeKt$AppTheme$1</td>
+    <td class="name">ModifierKt$dashedBorder$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/3)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -96,7 +96,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/11)
   </span>
 </td>
 <td class="coverageStat">
@@ -104,7 +104,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/13)
+    (0/130)
   </span>
 </td>
   </tr>
@@ -115,7 +115,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -123,7 +123,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -131,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/18)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/151)
+    (0/192)
   </span>
 </td>
 </tr>
@@ -152,30 +152,56 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package ui
 &nbsp;
-&nbsp;import androidx.compose.foundation.shape.RoundedCornerShape
-&nbsp;import androidx.compose.material3.MaterialTheme
-&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.Modifier
+&nbsp;import androidx.compose.ui.composed
+&nbsp;import androidx.compose.ui.draw.DrawModifier
+&nbsp;import androidx.compose.ui.draw.drawWithCache
+&nbsp;import androidx.compose.ui.geometry.CornerRadius
 &nbsp;import androidx.compose.ui.graphics.Color
+&nbsp;import androidx.compose.ui.graphics.PathEffect
+&nbsp;import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+&nbsp;import androidx.compose.ui.graphics.drawscope.Stroke
+&nbsp;import androidx.compose.ui.graphics.drawscope.scale
+&nbsp;import androidx.compose.ui.platform.LocalDensity
+&nbsp;import androidx.compose.ui.unit.Dp
 &nbsp;import androidx.compose.ui.unit.dp
+&nbsp;import kotlinx.coroutines.MainScope
 &nbsp;
-&nbsp;@Composable
-<b class="nc">&nbsp;fun AppTheme(content: @Composable () -&gt; Unit) {</b>
-<b class="nc">&nbsp;  MaterialTheme(</b>
-<b class="nc">&nbsp;      colorScheme = MaterialTheme.colorScheme.copy(primary = Color.Black),</b>
-&nbsp;      shapes =
-<b class="nc">&nbsp;          MaterialTheme.shapes.copy(</b>
-<b class="nc">&nbsp;              small = RoundedCornerShape(0.dp),</b>
-<b class="nc">&nbsp;              medium = RoundedCornerShape(0.dp),</b>
-<b class="nc">&nbsp;              large = RoundedCornerShape(0.dp))) {</b>
-<b class="nc">&nbsp;        content()</b>
+<b class="nc">&nbsp;val debug = true</b>
+&nbsp;
+<b class="nc">&nbsp;val mainScope = MainScope()</b>
+&nbsp;
+<b class="nc">&nbsp;fun Modifier.debug(color: Color = Color.Red) =</b>
+<b class="nc">&nbsp;    then(if (debug) dashedBorder(1.dp, color, 8.dp) else this)</b>
+&nbsp;
+<b class="nc">&nbsp;fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modifier = composed {</b>
+<b class="nc">&nbsp;  val density = LocalDensity.current</b>
+<b class="nc">&nbsp;  val strokeWidthPx = density.run { strokeWidth.toPx() }</b>
+<b class="nc">&nbsp;  val cornerRadiusPx = density.run { cornerRadius.toPx() }</b>
+&nbsp;
+<b class="nc">&nbsp;  then(</b>
+<b class="nc">&nbsp;      Modifier.drawWithCache {</b>
+<b class="nc">&nbsp;        onDrawBehind {</b>
+<b class="nc">&nbsp;          val stroke =</b>
+<b class="nc">&nbsp;              Stroke(</b>
+<b class="nc">&nbsp;                  width = strokeWidthPx,</b>
+<b class="nc">&nbsp;                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f))</b>
+<b class="nc">&nbsp;          drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))</b>
+&nbsp;        }
 &nbsp;      }
+&nbsp;      // .border(border = BorderStroke(strokeWidth, color),shape = RoundedCornerShape(cornerRadius))
+&nbsp;      )
 &nbsp;}
 &nbsp;
-&nbsp;object FileColors {
-&nbsp;  val default = Color.Gray
-&nbsp;  val active = Color(29, 117, 223, 255)
-&nbsp;  val fileItemBg = Color(233, 30, 99, 255)
-&nbsp;  val fileItemFg = Color.White
+&nbsp;inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -&gt; Modifier) =
+<b class="nc">&nbsp;    then(if (value) builder() else Modifier)</b>
+&nbsp;
+<b class="nc">&nbsp;fun Modifier.flipped() = then(FlippedModifier())</b>
+&nbsp;
+&nbsp;class FlippedModifier : DrawModifier {
+&nbsp;  override fun ContentDrawScope.draw() {
+&nbsp;    scale(1f, -1f) { this@draw.drawContent() }
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -200,7 +226,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-13 22:41</div>
+    <div style="float:right;">generated on 2025-01-17 01:29</div>
 </div>
 </body>
 </html>
