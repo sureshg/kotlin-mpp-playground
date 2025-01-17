@@ -44,6 +44,7 @@ $dokka.location:/BuildConfig/cache4k/#/PointingToDeclaration/shared/[root]/-bui
 $dokka.location:/BuildConfig/cardiologist/#/PointingToDeclaration/shared/[root]/-build-config/cardiologist.html
 $dokka.location:/BuildConfig/cashMolecule/#/PointingToDeclaration/shared/[root]/-build-config/cash-molecule.html
 $dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/-build-config/cash-turbine.html
+$dokka.location:/BuildConfig/cel/#/PointingToDeclaration/shared/[root]/-build-config/cel.html
 $dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
 $dokka.location:/BuildConfig/chicory/#/PointingToDeclaration/shared/[root]/-build-config/chicory.html
 $dokka.location:/BuildConfig/classgraph/#/PointingToDeclaration/shared/[root]/-build-config/classgraph.html
@@ -110,11 +111,11 @@ $dokka.location:/BuildConfig/jlama/#/PointingToDeclaration/shared/[root]/-build
 $dokka.location:/BuildConfig/jmh/#/PointingToDeclaration/shared/[root]/-build-config/jmh.html
 $dokka.location:/BuildConfig/jsch/#/PointingToDeclaration/shared/[root]/-build-config/jsch.html
 $dokka.location:/BuildConfig/jsonSchemaValidator/#/PointingToDeclaration/shared/[root]/-build-config/json-schema-validator.html
+$dokka.location:/BuildConfig/jsonSugar/#/PointingToDeclaration/shared/[root]/-build-config/json-sugar.html
 $dokka.location:/BuildConfig/jspecify/#/PointingToDeclaration/shared/[root]/-build-config/jspecify.html
 $dokka.location:/BuildConfig/jte/#/PointingToDeclaration/shared/[root]/-build-config/jte.html
 $dokka.location:/BuildConfig/junit/#/PointingToDeclaration/shared/[root]/-build-config/junit.html
 $dokka.location:/BuildConfig/kaml/#/PointingToDeclaration/shared/[root]/-build-config/kaml.html
-$dokka.location:/BuildConfig/karakum/#/PointingToDeclaration/shared/[root]/-build-config/karakum.html
 $dokka.location:/BuildConfig/kfswatch/#/PointingToDeclaration/shared/[root]/-build-config/kfswatch.html
 $dokka.location:/BuildConfig/kmcp/#/PointingToDeclaration/shared/[root]/-build-config/kmcp.html
 $dokka.location:/BuildConfig/kmpAppdirs/#/PointingToDeclaration/shared/[root]/-build-config/kmp-appdirs.html
@@ -122,6 +123,7 @@ $dokka.location:/BuildConfig/kmpHierarchy/#/PointingToDeclaration/shared/[root]
 $dokka.location:/BuildConfig/kmpProcess/#/PointingToDeclaration/shared/[root]/-build-config/kmp-process.html
 $dokka.location:/BuildConfig/kmpSettings/#/PointingToDeclaration/shared/[root]/-build-config/kmp-settings.html
 $dokka.location:/BuildConfig/kmpStore5/#/PointingToDeclaration/shared/[root]/-build-config/kmp-store5.html
+$dokka.location:/BuildConfig/kmpmt/#/PointingToDeclaration/shared/[root]/-build-config/kmpmt.html
 $dokka.location:/BuildConfig/kobweb/#/PointingToDeclaration/shared/[root]/-build-config/kobweb.html
 $dokka.location:/BuildConfig/koin/#/PointingToDeclaration/shared/[root]/-build-config/koin.html
 $dokka.location:/BuildConfig/koinAnnotations/#/PointingToDeclaration/shared/[root]/-build-config/koin-annotations.html
@@ -144,6 +146,7 @@ $dokka.location:/BuildConfig/kotlinLogging/#/PointingToDeclaration/shared/[root
 $dokka.location:/BuildConfig/kotlinRedacted/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-redacted.html
 $dokka.location:/BuildConfig/kotlinRetry/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-retry.html
 $dokka.location:/BuildConfig/kotlinServiceloader/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-serviceloader.html
+$dokka.location:/BuildConfig/kotlinStatistics/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-statistics.html
 $dokka.location:/BuildConfig/kotlinWrappers/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-wrappers.html
 $dokka.location:/BuildConfig/kotlinxAtomicfu/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-atomicfu.html
 $dokka.location:/BuildConfig/kotlinxBcv/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-bcv.html
@@ -223,7 +226,6 @@ $dokka.location:/BuildConfig/reproducibleBuilds/#/PointingToDeclaration/shared/
 $dokka.location:/BuildConfig/rsocket/#/PointingToDeclaration/shared/[root]/-build-config/rsocket.html
 $dokka.location:/BuildConfig/rwmutex/#/PointingToDeclaration/shared/[root]/-build-config/rwmutex.html
 $dokka.location:/BuildConfig/semverPlugin/#/PointingToDeclaration/shared/[root]/-build-config/semver-plugin.html
-$dokka.location:/BuildConfig/seskar/#/PointingToDeclaration/shared/[root]/-build-config/seskar.html
 $dokka.location:/BuildConfig/shadow/#/PointingToDeclaration/shared/[root]/-build-config/shadow.html
 $dokka.location:/BuildConfig/shedlock/#/PointingToDeclaration/shared/[root]/-build-config/shedlock.html
 $dokka.location:/BuildConfig/sherlock/#/PointingToDeclaration/shared/[root]/-build-config/sherlock.html
@@ -310,7 +312,9 @@ dev.suresh.cert
 dev.suresh.flow
 dev.suresh.http
 dev.suresh.lang
+dev.suresh.lc
 dev.suresh.qos
+dev.suresh.serde
 module:web
 hljs
 interop
