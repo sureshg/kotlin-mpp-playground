@@ -172,6 +172,9 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
      -XX:+UseCompactObjectHeaders \
      -XX:AOTCache=app.aot \
      -jar backend/jvm/build/libs/jvm-all.jar
+
+  # Show native memory details
+  $ jcmd jvm-app System.map
   ```
 
 * Tests
