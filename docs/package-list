@@ -33,6 +33,7 @@ $dokka.location:/BuildConfig/asyncProfiler/#/PointingToDeclaration/shared/[root
 $dokka.location:/BuildConfig/autonomousappsBestpractices/#/PointingToDeclaration/shared/[root]/-build-config/autonomousapps-bestpractices.html
 $dokka.location:/BuildConfig/autonomousappsDepanalysis/#/PointingToDeclaration/shared/[root]/-build-config/autonomousapps-depanalysis.html
 $dokka.location:/BuildConfig/batik/#/PointingToDeclaration/shared/[root]/-build-config/batik.html
+$dokka.location:/BuildConfig/bcPlugins/#/PointingToDeclaration/shared/[root]/-build-config/bc-plugins.html
 $dokka.location:/BuildConfig/benmanes/#/PointingToDeclaration/shared/[root]/-build-config/benmanes.html
 $dokka.location:/BuildConfig/blueskyOzone/#/PointingToDeclaration/shared/[root]/-build-config/bluesky-ozone.html
 $dokka.location:/BuildConfig/buildTimeEpochMillis/#/PointingToDeclaration/shared/[root]/-build-config/build-time-epoch-millis.html
@@ -117,7 +118,6 @@ $dokka.location:/BuildConfig/jte/#/PointingToDeclaration/shared/[root]/-build-c
 $dokka.location:/BuildConfig/junit/#/PointingToDeclaration/shared/[root]/-build-config/junit.html
 $dokka.location:/BuildConfig/kaml/#/PointingToDeclaration/shared/[root]/-build-config/kaml.html
 $dokka.location:/BuildConfig/kfswatch/#/PointingToDeclaration/shared/[root]/-build-config/kfswatch.html
-$dokka.location:/BuildConfig/kmcp/#/PointingToDeclaration/shared/[root]/-build-config/kmcp.html
 $dokka.location:/BuildConfig/kmpAppdirs/#/PointingToDeclaration/shared/[root]/-build-config/kmp-appdirs.html
 $dokka.location:/BuildConfig/kmpHierarchy/#/PointingToDeclaration/shared/[root]/-build-config/kmp-hierarchy.html
 $dokka.location:/BuildConfig/kmpProcess/#/PointingToDeclaration/shared/[root]/-build-config/kmp-process.html
@@ -182,6 +182,7 @@ $dokka.location:/BuildConfig/logbackTyler/#/PointingToDeclaration/shared/[root]
 $dokka.location:/BuildConfig/mappie/#/PointingToDeclaration/shared/[root]/-build-config/mappie.html
 $dokka.location:/BuildConfig/mavenArcheologist/#/PointingToDeclaration/shared/[root]/-build-config/maven-archeologist.html
 $dokka.location:/BuildConfig/mavenMima/#/PointingToDeclaration/shared/[root]/-build-config/maven-mima.html
+$dokka.location:/BuildConfig/mcp4k/#/PointingToDeclaration/shared/[root]/-build-config/mcp4k.html
 $dokka.location:/BuildConfig/mcpKotlin/#/PointingToDeclaration/shared/[root]/-build-config/mcp-kotlin.html
 $dokka.location:/BuildConfig/micrometer/#/PointingToDeclaration/shared/[root]/-build-config/micrometer.html
 $dokka.location:/BuildConfig/mockk/#/PointingToDeclaration/shared/[root]/-build-config/mockk.html
