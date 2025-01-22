@@ -20,6 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
+bc-plugins                     = "0.24.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
@@ -36,11 +37,11 @@ kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.13"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.1.3"
+kotlin-wrappers                = "2025.1.5"
 kotlin-redacted                = "1.12.0"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
-kotlinx-dataframe              = "0.16.0-dev-5342"
+kotlinx-dataframe              = "0.16.0-dev-5384"
 kotlinx-kandy                  = "0.8.0-dev-59"
 kotlin-statistics              = "0.4.0-RC1"
 evas                           = "1.2.0"
@@ -71,7 +72,7 @@ ajalt-clikt                    = "5.0.2"
 ajalt-colormath                = "3.6.1"
 classgraph                     = "4.8.179"
 cache4k                        = "0.13.0"
-intellij-coverage              = "1.0.754"
+intellij-coverage              = "1.0.766"
 intellij-markdown              = "0.7.3"
 jgit                           = "7.1.0.202411261347-r"
 jte                            = "3.1.16"
@@ -113,12 +114,12 @@ kotlin-cryptography            = "0.4.0"
 kotlin-json-schema             = "0.1.1"
 json-sugar                     = "0.7.0"
 json-schema-validator          = "0.3.1"
-pwall-json-schema              = "0.52"
+pwall-json-schema              = "0.53"
 uri-kmp                        = "0.0.19"
 urlencoder                     = "1.5.0"
 bytesize                       = "2.0.0-beta04"
 cash-turbine                   = "1.2.0"
-cardiologist                   = "0.2.2"
+cardiologist                   = "0.3.1"
 kmp-store5                     = "5.1.0-alpha04"
 kmp-settings                   = "1.3.0"
 kmp-appdirs                    = "1.2.0"
@@ -126,7 +127,7 @@ parsus                         = "0.6.1"
 java-keyring                   = "1.0.3"
 java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.1.0"
-arrow-suspendapp               = "0.4.1-alpha.5"
+arrow-suspendapp               = "0.5.0"
 exposed                        = "0.58.0"
 postgresql                     = "42.7.5"
 hikariCP                       = "6.2.1"
@@ -135,7 +136,7 @@ micrometer                     = "1.14.2"
 swagger-ui                     = "5.17.14"
 hoplite                        = "2.9.0"
 config4k                       = "0.7.0"
-shedlock                       = "6.1.0"
+shedlock                       = "6.2.0"
 sherlock                       = "1.0.3"
 sqids                          = "0.1.0"
 tsid                           = "2.1.3"
@@ -170,7 +171,7 @@ kmp-process                    = "0.1.2"
 langchain4j                    = "1.0.0-alpha1"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.3.0"
-kmcp                           = "0.2.1"
+mcp4k                          = "0.3.0"
 dflib                          = "1.1.0"
 ldaptive                       = "2.4.0"
 chicory                        = "1.0.0"
@@ -179,10 +180,10 @@ rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.1"
 
 # Compose
-jetbrains-compose              = "1.8.0-alpha01"
-jetbrains-compose-viewmodel    = "2.9.0-alpha01"
-jetbrains-compose-nav          = "2.8.0-alpha11"
-jetbrains-compose-adaptive     = "1.1.0-alpha01"
+jetbrains-compose              = "1.8.0-alpha02"
+jetbrains-compose-viewmodel    = "2.9.0-alpha02"
+jetbrains-compose-nav          = "2.8.0-alpha12"
+jetbrains-compose-adaptive     = "1.1.0-alpha02"
 kobweb                         = "0.20.2"
 detekt                         = "1.23.7"
 detekt-compose-rules           = "0.4.22"
@@ -208,7 +209,7 @@ nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.30.0"
 gradle-publish                 = "1.3.0"
-shadow                         = "9.0.0-beta4"
+shadow                         = "9.0.0-beta5"
 spotless                       = "7.0.2"
 semver-plugin                  = "0.8.0"
 kmpmt                          = "0.1.1"
@@ -653,7 +654,6 @@ jlama-core                           = { module = "com.github.tjake:jlama-core" 
 jlama-native                         = { module = "com.github.tjake:jlama-native"                                           , version.ref = "jlama" }
 dflib                                = { module = "org.dflib:dflib"                                                         , version.ref = "dflib" }
 mcp-kotlin                           = { module = "io.modelcontextprotocol:kotlin-sdk"                                      , version.ref = "mcp-kotlin"}
-kmcp                                 = { module = "sh.ondr.kmcp:kmcp-gradle"                                                , version.ref = "kmcp"}
 ozone-bluesky                        = { module = "sh.christian.ozone:bluesky"                                              , version.ref = "bluesky-ozone"}
 ozone-jetstream                      = { module = "sh.christian.ozone:jetstream"                                            , version.ref = "bluesky-ozone"}
 
@@ -699,6 +699,7 @@ serviceloader-compiler               = { id = "app.softwork.serviceloader-compil
 jte                                  = { id = "gg.jte.gradle"                                                  , version.ref = "jte" }
 benmanes                             = { id = "com.github.ben-manes.versions"                                  , version.ref = "benmanes" }
 spotless                             = { id = "com.diffplug.spotless"                                          , version.ref = "spotless" }
+shadow                               = { id = "com.gradleup.shadow"                                            , version.ref = "shadow" }
 semver                               = { id = "com.javiersc.semver"                                            , version.ref = "semver-plugin" }
 reproducible-builds                  = { id = "org.gradlex.reproducible-builds"                                , version.ref = "reproducible-builds" }
 autonomousapps-depanalysis           = { id = "com.autonomousapps.dependency-analysis"                         , version.ref = "autonomousapps-depanalysis" }
@@ -719,3 +720,17 @@ spring-depmgmt                       = { id = "io.spring.dependency-management" 
 kopy                                 = { id = "com.javiersc.kotlin.kopy"                                       , version.ref = "kopy" }
 mappie                               = { id = "tech.mappie.plugin"                                             , version.ref = "mappie" }
 poko                                 = { id = "dev.drewhamilton.poko"                                          , version.ref = "poko" }
+mcp4k                                = { id = "sh.ondr.mcp4k"                                                  , version.ref = "mcp4k"}
+
+
+# Common build and settings plugin
+project-root                         = { id = "dev.suresh.plugin.root"                                         , version.ref = "bc-plugins" }
+project-common                       = { id = "dev.suresh.plugin.common"                                       , version.ref = "bc-plugins" }
+project-graalvm                      = { id = "dev.suresh.plugin.graalvm"                                      , version.ref = "bc-plugins" }
+project-kotlin-jvm                   = { id = "dev.suresh.plugin.kotlin.jvm"                                   , version.ref = "bc-plugins" }
+project-kotlin-mpp                   = { id = "dev.suresh.plugin.kotlin.mpp"                                   , version.ref = "bc-plugins" }
+project-kotlin-docs                  = { id = "dev.suresh.plugin.kotlin.docs"                                  , version.ref = "bc-plugins" }
+project-kotlin-benchmark             = { id = "dev.suresh.plugin.kotlin.benchmark"                             , version.ref = "bc-plugins" }
+project-publishing                   = { id = "dev.suresh.plugin.publishing"                                   , version.ref = "bc-plugins" }
+settings-repos                       = { id = "dev.suresh.plugin.repos"                                        , version.ref = "bc-plugins" }
+settings-catalog                     = { id = "dev.suresh.plugin.catalog"                                      , version.ref = "bc-plugins" }
