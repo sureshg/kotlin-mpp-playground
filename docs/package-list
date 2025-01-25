@@ -49,6 +49,7 @@ $dokka.location:/BuildConfig/cel/#/PointingToDeclaration/shared/[root]/-build-c
 $dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
 $dokka.location:/BuildConfig/chicory/#/PointingToDeclaration/shared/[root]/-build-config/chicory.html
 $dokka.location:/BuildConfig/classgraph/#/PointingToDeclaration/shared/[root]/-build-config/classgraph.html
+$dokka.location:/BuildConfig/composeHotReload/#/PointingToDeclaration/shared/[root]/-build-config/compose-hot-reload.html
 $dokka.location:/BuildConfig/composeHotreload/#/PointingToDeclaration/shared/[root]/-build-config/compose-hotreload.html
 $dokka.location:/BuildConfig/composeIcons/#/PointingToDeclaration/shared/[root]/-build-config/compose-icons.html
 $dokka.location:/BuildConfig/composeRouting/#/PointingToDeclaration/shared/[root]/-build-config/compose-routing.html
