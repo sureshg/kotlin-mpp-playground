@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-bc-plugins                     = "0.26.0"
+bc-plugins                     = "0.27.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
@@ -37,7 +37,7 @@ kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.13"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.1.6"
+kotlin-wrappers                = "2025.1.7"
 kotlin-redacted                = "1.12.0"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
@@ -184,6 +184,7 @@ jetbrains-compose              = "1.8.0-alpha02"
 jetbrains-compose-viewmodel    = "2.9.0-alpha02"
 jetbrains-compose-nav          = "2.8.0-alpha12"
 jetbrains-compose-adaptive     = "1.1.0-alpha02"
+compose-hot-reload             = "1.0.0"
 kobweb                         = "0.20.2"
 detekt                         = "1.23.7"
 detekt-compose-rules           = "0.4.22"
@@ -693,6 +694,7 @@ kotlinx-atomicfu                     = { id = "org.jetbrains.kotlinx.atomicfu"  
 kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark"                                , version.ref = "kotlinx-benchmark" }
 kotlinx-rpc                          = { id = "org.jetbrains.kotlinx.rpc.plugin"                               , version.ref = "kotlinx-rpc" }
 jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
+jetbrains-compose-hotreload          = { id = "org.jetbrains.compose-hot-reload"                               , version.ref = "compose-hot-reload"}
 ktor                                 = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }
 exposed                              = { id = "com.jetbrains.exposed.gradle.plugin"                            , version.ref = "exposed-plugin" }
 serviceloader-compiler               = { id = "app.softwork.serviceloader-compiler"                            , version.ref = "kotlin-serviceloader" }

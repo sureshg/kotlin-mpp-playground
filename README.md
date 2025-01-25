@@ -319,8 +319,11 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   # Clean
   $ ./gradlew cleanAll
 
-  # Gradle Daemon Toolchain
+  # Gradle Toolchains
+  $ ./gradlew buildEnvironment
   $ ./gradlew updateDaemonJvm
+  $ ./gradlew javaToolchains
+  $ ./gradlew wrapper --gradle-version=x.x.x
 
   # Gradle Best Practices
   $ ./gradlew -p gradle/build-logic :bestPracticesBaseline
