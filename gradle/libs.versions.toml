@@ -235,6 +235,7 @@ jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
 tomlj                          = "1.1.1"
+animalsniffer                  = "2.0.0"
 
 # Repositories
 repo-mvn-snapshot              = "https://oss.sonatype.org/content/repositories/snapshots"
@@ -723,7 +724,7 @@ kopy                                 = { id = "com.javiersc.kotlin.kopy"        
 mappie                               = { id = "tech.mappie.plugin"                                             , version.ref = "mappie" }
 poko                                 = { id = "dev.drewhamilton.poko"                                          , version.ref = "poko" }
 mcp4k                                = { id = "sh.ondr.mcp4k"                                                  , version.ref = "mcp4k"}
-
+animalsniffer                        = { id = "ru.vyarus.animalsniffer'"                                       , version.ref = "animalsniffer"}
 
 # Common build and settings plugin
 project-root                         = { id = "dev.suresh.plugin.root"                                         , version.ref = "bc-plugins" }
