@@ -82,6 +82,11 @@ kopy { functions = KopyFunctions.Copy }
 val javaAgent by configurations.registering { isTransitive = false }
 
 tasks {
+  val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
+  val buildConfig = register<BuildConfig>("buildConfig", buildConfigExtn)
+  buildConfig.configure { enabled = buildConfigExtn.enabled.get() }
+  kotlin.sourceSets.main { kotlin.srcDirs(buildConfig) }
+
   // Configure "compileJava" and "compileTestJava" tasks.
   withType<JavaCompile>().configureEach { configureJavac(project) }
 

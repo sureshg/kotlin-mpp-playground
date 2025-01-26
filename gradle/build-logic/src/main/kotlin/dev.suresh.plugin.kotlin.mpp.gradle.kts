@@ -95,13 +95,11 @@ redacted {
 kopy { functions = KopyFunctions.Copy }
 
 tasks {
-  if (isSharedProject) {
-    val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
-    val buildConfig by register<BuildConfig>("buildConfig", buildConfigExtn)
-    kotlin.sourceSets.commonMain { kotlin.srcDirs(buildConfig) }
-    // compileKotlinMetadata { dependsOn(buildConfig) }
-    // maybeRegister<Task>("prepareKotlinIdeaImport") { dependsOn(buildConfig) }
-  }
+  val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
+  val buildConfig = register<BuildConfig>("buildConfig", buildConfigExtn)
+  buildConfig.configure { enabled = buildConfigExtn.enabled.get() }
+  kotlin.sourceSets.commonMain { kotlin.srcDirs(buildConfig) }
+  // compileKotlinMetadata { dependsOn(buildConfig) }
 
   withType<KspAATask>().configureEach { configureKspConfig() }
 

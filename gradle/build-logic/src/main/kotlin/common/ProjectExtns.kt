@@ -32,7 +32,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 // val logger = LoggerFactory.getLogger("build-logic")
 
-/** Returns version catalog of this project. */
+/** Returns the version catalog of this project. */
 internal val Project.libs
   get() = the<LibrariesForLibs>()
 

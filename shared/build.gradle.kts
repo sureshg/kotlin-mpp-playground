@@ -13,6 +13,7 @@ plugins {
 description = "Shared common module for all projects"
 
 buildConfig {
+  enabled = true
   projectName = rootProject.name
   projectVersion = project.version.toString()
   projectDesc = rootProject.description

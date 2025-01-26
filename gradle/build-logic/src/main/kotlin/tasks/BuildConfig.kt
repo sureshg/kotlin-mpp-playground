@@ -1,5 +1,6 @@
 package tasks
 
+import com.github.ajalt.mordant.rendering.TextColors
 import com.javiersc.semver.project.gradle.plugin.Commit
 import gg.jte.generated.precompiled.StaticTemplates
 import javax.inject.Inject
@@ -32,7 +33,7 @@ abstract class BuildConfig @Inject constructor(@Nested val extn: BuildConfigExte
     val pkg = fqName.substringBeforeLast(".", "")
 
     val file = dir.resolve("$className.kt")
-    logger.quiet("Generated build config file: ${file.name}")
+    logger.quiet(TextColors.magenta("Generated build config file: ${file.name}"))
 
     // Get git commit info
     val gitCommit = run {
@@ -76,10 +77,11 @@ abstract class BuildConfig @Inject constructor(@Nested val extn: BuildConfigExte
 }
 
 open class BuildConfigExtension @Inject constructor(layout: ProjectLayout, objects: ObjectFactory) {
+  @get:Input val enabled = objects.property<Boolean>().convention(false)
   @get:Input val classFqName = objects.property<String>().convention("BuildConfig")
-  @get:Input val projectVersion = objects.property<String>()
-  @get:Input val projectName = objects.property<String>()
-  @get:Input val projectDesc = objects.property<String>()
+  @get:Input val projectVersion = objects.property<String>().convention("")
+  @get:Input val projectName = objects.property<String>().convention("")
+  @get:Input val projectDesc = objects.property<String>().convention("")
   @get:Input val catalogVersions = objects.mapProperty<String, String>().convention(emptyMap())
   @get:Input val dependencies = objects.listProperty<String>().convention(emptyList())
   @Internal val gitCommit = objects.property<Commit>()
