@@ -104,9 +104,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import dev.suresh.http.json
 &nbsp;import dev.suresh.lang.*
 &nbsp;import dev.suresh.serde.toJsonElement
+&nbsp;import kotlin.concurrent.atomics.*
 &nbsp;import kotlin.time.Duration.Companion.seconds
 &nbsp;import kotlin.uuid.Uuid
-&nbsp;import kotlinx.atomicfu.atomic
 &nbsp;import kotlinx.atomicfu.locks.*
 &nbsp;import kotlinx.serialization.json.Json
 &nbsp;
@@ -193,14 +193,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;  private val lock = reentrantLock()
 &nbsp;
-&nbsp;  private val _x = atomic(0)
+&nbsp;  private val _x = AtomicInt(0)
 &nbsp;
 &nbsp;  val x
-&nbsp;    get() = _x.value
+&nbsp;    get() = _x.load()
 &nbsp;
 &nbsp;  fun doWork(finalValue: Int) {
 &nbsp;    check(x == 0)
-&nbsp;    check(_x.getAndSet(3) == 0)
+&nbsp;    check(_x.exchange(3) == 0)
 &nbsp;    check(x == 3)
 &nbsp;    check(_x.compareAndSet(3, finalValue))
 &nbsp;  }
@@ -235,7 +235,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-29 22:23</div>
+    <div style="float:right;">generated on 2025-01-30 05:53</div>
 </div>
 </body>
 </html>

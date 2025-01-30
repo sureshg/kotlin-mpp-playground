@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/340)
+    (0/342)
   </span>
 </td>
 </tr>
@@ -146,7 +146,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/373)
+    (0/375)
   </span>
 </td>
 </tr>
@@ -183,15 +183,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.sessions.*
 &nbsp;import io.ktor.server.sse.*
 &nbsp;import io.ktor.server.websocket.*
+&nbsp;import kotlin.concurrent.atomics.*
 &nbsp;import kotlin.time.Duration
 &nbsp;import kotlin.time.Duration.Companion.seconds
-&nbsp;import kotlinx.atomicfu.atomic
-&nbsp;import kotlinx.serialization.*
 &nbsp;import org.slf4j.event.Level
 &nbsp;
 &nbsp;const val TRACE_ID = &quot;trace-id&quot;
 &nbsp;
-<b class="nc">&nbsp;private val counter = atomic(1L)</b>
+<b class="nc">&nbsp;private val counter = AtomicLong(1L)</b>
 &nbsp;
 &nbsp;fun Application.configureHTTP() {
 &nbsp;
@@ -246,7 +245,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    header(HttpHeaders.XRequestId)</b>
 <b class="nc">&nbsp;    generate {</b>
 <b class="nc">&nbsp;      when (it.isApi) {</b>
-<b class="nc">&nbsp;        true -&gt; &quot;$TRACE_ID-${counter.getAndIncrement()}&quot;</b>
+<b class="nc">&nbsp;        true -&gt; &quot;$TRACE_ID-${counter.incrementAndFetch()}&quot;</b>
 <b class="nc">&nbsp;        else -&gt; &quot;$TRACE_ID-00000&quot;</b>
 &nbsp;      }
 &nbsp;    }
@@ -321,7 +320,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-01-29 22:23</div>
+    <div style="float:right;">generated on 2025-01-30 05:53</div>
 </div>
 </body>
 </html>
