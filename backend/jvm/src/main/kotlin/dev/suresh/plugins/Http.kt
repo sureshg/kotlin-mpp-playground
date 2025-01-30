@@ -24,15 +24,14 @@ import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import io.ktor.server.sse.*
 import io.ktor.server.websocket.*
+import kotlin.concurrent.atomics.*
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
-import kotlinx.atomicfu.atomic
-import kotlinx.serialization.*
 import org.slf4j.event.Level
 
 const val TRACE_ID = "trace-id"
 
-private val counter = atomic(1L)
+private val counter = AtomicLong(1L)
 
 fun Application.configureHTTP() {
 
@@ -87,7 +86,7 @@ fun Application.configureHTTP() {
     header(HttpHeaders.XRequestId)
     generate {
       when (it.isApi) {
-        true -> "$TRACE_ID-${counter.getAndIncrement()}"
+        true -> "$TRACE_ID-${counter.incrementAndFetch()}"
         else -> "$TRACE_ID-00000"
       }
     }

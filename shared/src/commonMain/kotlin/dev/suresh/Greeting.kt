@@ -3,9 +3,9 @@ package dev.suresh
 import dev.suresh.http.json
 import dev.suresh.lang.*
 import dev.suresh.serde.toJsonElement
+import kotlin.concurrent.atomics.*
 import kotlin.time.Duration.Companion.seconds
 import kotlin.uuid.Uuid
-import kotlinx.atomicfu.atomic
 import kotlinx.atomicfu.locks.*
 import kotlinx.serialization.json.Json
 
@@ -92,14 +92,14 @@ class AtomicSample {
 
   private val lock = reentrantLock()
 
-  private val _x = atomic(0)
+  private val _x = AtomicInt(0)
 
   val x
-    get() = _x.value
+    get() = _x.load()
 
   fun doWork(finalValue: Int) {
     check(x == 0)
-    check(_x.getAndSet(3) == 0)
+    check(_x.exchange(3) == 0)
     check(x == 3)
     check(_x.compareAndSet(3, finalValue))
   }

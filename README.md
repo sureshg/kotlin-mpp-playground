@@ -57,11 +57,18 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 * Build and Run
 
   ```bash
+  # Kotlin Multiplatform
+  $ ./gradlew :shared:runJvm
+  $ ./gradlew :shared:jvmDistZip
+  # Run task for target 'jvm' and compilation 'main' (it's confusing)
+  $ ./gradlew :shared:jvmRun
+
+  # Kotlin JVM
   $ ./gradlew :backend:jvm:run
   $ ./gradlew :backend:jvm:build
   $ ./gradlew :backend:jvm:jdeprscan
   $ ./gradlew :backend:jvm:printModuleDeps
-  $ ./gradlew :shared:jvmRun
+
 
   # Benchmark
   $ ./gradlew :benchmark:benchmark

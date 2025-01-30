@@ -100,6 +100,14 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
         // val test by testRuns.existing
         testRuns.configureEach { executionTask.configure { configureJavaTest() } }
 
+        // binaries {
+        //   executable {
+        //     mainClass = libs.versions.app.mainclass
+        //     applicationDefaultJvmArgs = jvmRunArgs
+        //     applicationDistribution.duplicatesStrategy = DuplicatesStrategy.WARN
+        //   }
+        // }
+
         // Register a task to execute a class using jvm runtime dependencies.
         // compilations.getByName("test") {
         //   tasks.register<JavaExec>("ktExec") {
@@ -108,7 +116,6 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
         //   }
         // }
 
-        // attributes.attribute(mppTargetAttr, platformType.name)
         // attributes.attribute(KotlinPlatformType.attribute, KotlinPlatformType.jvm)
       }
 

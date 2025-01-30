@@ -418,8 +418,9 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
           "kotlin.ExperimentalMultiplatform",
           "kotlin.js.ExperimentalJsExport",
           "kotlin.uuid.ExperimentalUuidApi",
+          "kotlin.concurrent.atomics.ExperimentalAtomicApi"
           // "org.jetbrains.kotlin.compiler.plugin.ExperimentalCompilerApi",
-      )
+          )
     }
 
 fun KspAATask.configureKspConfig() =
