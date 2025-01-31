@@ -2,6 +2,7 @@ package common
 
 import org.gradle.api.GradleException
 import org.gradle.api.Project
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
@@ -100,13 +101,16 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
         // val test by testRuns.existing
         testRuns.configureEach { executionTask.configure { configureJavaTest() } }
 
-        // binaries {
-        //   executable {
-        //     mainClass = libs.versions.app.mainclass
-        //     applicationDefaultJvmArgs = jvmRunArgs
-        //     applicationDistribution.duplicatesStrategy = DuplicatesStrategy.WARN
-        //   }
-        // }
+        // Configure application executable only it's enabled
+        if (isKmpExecEnabled) {
+          binaries {
+            executable {
+              mainClass = libs.versions.app.mainclass
+              applicationDefaultJvmArgs = jvmRunArgs
+              applicationDistribution.duplicatesStrategy = DuplicatesStrategy.WARN
+            }
+          }
+        }
 
         // Register a task to execute a class using jvm runtime dependencies.
         // compilations.getByName("test") {

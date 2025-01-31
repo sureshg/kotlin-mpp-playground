@@ -25,6 +25,7 @@ import org.gradle.api.tasks.testing.logging.*
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.*
+import org.gradle.kotlin.dsl.extra
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
@@ -52,6 +53,9 @@ val Project.isRootProject
 val Project.sharedProjectName
   get() = "shared"
 
+val Project.buildLogicProjectName
+  get() = "build-logic"
+
 val Project.isSharedProject
   get() = name == sharedProjectName
 
@@ -70,6 +74,9 @@ val Project.isSnapshotVersion
 
 val Project.runsOnCI
   get() = providers.environmentVariable("CI").isPresent
+
+val Project.isKmpExecEnabled
+  get() = extra.has("enableKmpExec") && extra["enableKmpExec"] as Boolean
 
 /** Java version properties. */
 val Project.javaVersion

@@ -1,13 +1,8 @@
 import common.*
 import org.gradle.kotlin.dsl.*
 
-plugins { application }
-
 @Suppress("UNUSED_VARIABLE")
 tasks {
-  run.invoke { args(true) }
-
-  // val versionCatalog = the<VersionCatalogsExtension>().named("libs")
   val copyTemplates by
       registering(Copy::class) {
         description = "Generate template classes"
@@ -36,6 +31,8 @@ tasks {
 
         // inputs.property("buildversions", props.hashCode())
       }
+
+  // val versionCatalog = the<VersionCatalogsExtension>().named("libs")
 
   // Add the generated templates to the source set to enable the task.
   // sourceSets { main { java.srcDirs(copyTemplates) } }
