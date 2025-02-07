@@ -170,6 +170,7 @@ $dokka.location:/BuildConfig/kotlinxReflectLite/#/PointingToDeclaration/shared/
 $dokka.location:/BuildConfig/kotlinxRpc/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-rpc.html
 $dokka.location:/BuildConfig/kotlinxSerialization/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-serialization.html
 $dokka.location:/BuildConfig/kottie/#/PointingToDeclaration/shared/[root]/-build-config/kottie.html
+$dokka.location:/BuildConfig/ksoup/#/PointingToDeclaration/shared/[root]/-build-config/ksoup.html
 $dokka.location:/BuildConfig/kspAutoService/#/PointingToDeclaration/shared/[root]/-build-config/ksp-auto-service.html
 $dokka.location:/BuildConfig/ktfmt/#/PointingToDeclaration/shared/[root]/-build-config/ktfmt.html
 $dokka.location:/BuildConfig/ktor/#/PointingToDeclaration/shared/[root]/-build-config/ktor.html
