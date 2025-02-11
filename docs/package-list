@@ -158,6 +158,7 @@ $dokka.location:/BuildConfig/kotlinxCollectionsImmutable/#/PointingToDeclaration
 $dokka.location:/BuildConfig/kotlinxCoroutines/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-coroutines.html
 $dokka.location:/BuildConfig/kotlinxDataframe/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-dataframe.html
 $dokka.location:/BuildConfig/kotlinxDatetime/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-datetime.html
+$dokka.location:/BuildConfig/kotlinxDatetimeZoneinfo/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-datetime-zoneinfo.html
 $dokka.location:/BuildConfig/kotlinxHtml/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-html.html
 $dokka.location:/BuildConfig/kotlinxIo/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-io.html
 $dokka.location:/BuildConfig/kotlinxJsonpath/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-jsonpath.html
@@ -255,6 +256,7 @@ $dokka.location:/BuildConfig/twelvemonkeys/#/PointingToDeclaration/shared/[root
 $dokka.location:/BuildConfig/uriKmp/#/PointingToDeclaration/shared/[root]/-build-config/uri-kmp.html
 $dokka.location:/BuildConfig/urlencoder/#/PointingToDeclaration/shared/[root]/-build-config/urlencoder.html
 $dokka.location:/BuildConfig/vanniktechPublish/#/PointingToDeclaration/shared/[root]/-build-config/vanniktech-publish.html
+$dokka.location:/BuildConfig/vercraft/#/PointingToDeclaration/shared/[root]/-build-config/vercraft.html
 $dokka.location:/BuildConfig/version/#/PointingToDeclaration/shared/[root]/-build-config/version.html
 $dokka.location:/BuildConfig/webjarsXterm/#/PointingToDeclaration/shared/[root]/-build-config/webjars-xterm.html
 $dokka.location:/BuildConfig/wirePlugin/#/PointingToDeclaration/shared/[root]/-build-config/wire-plugin.html
