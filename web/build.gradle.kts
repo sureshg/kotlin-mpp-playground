@@ -17,10 +17,8 @@ dependencies {
   jsMainImplementation(libs.kotlin.cryptography.webcrypto)
   wasmJsMainImplementation(libs.kotlin.cryptography.webcrypto)
 
-  sharedJsRes(
-      project(path = projects.shared.identityPath.path, configuration = "sharedJsResources"))
-  sharedWasmRes(
-      project(path = projects.shared.identityPath.path, configuration = "sharedWasmResources"))
+  sharedJsRes(project(path = projects.shared.path, configuration = "sharedJsResources"))
+  sharedWasmRes(project(path = projects.shared.path, configuration = "sharedWasmResources"))
 }
 
 tasks {
