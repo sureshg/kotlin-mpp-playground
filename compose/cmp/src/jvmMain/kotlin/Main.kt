@@ -35,8 +35,8 @@ fun main() = application {
 }
 
 fun showStartupTime() {
-  var currTime = System.currentTimeMillis()
-  var vmTime =
+  val currTime = System.currentTimeMillis()
+  val vmTime =
       ProcessHandle.current()
           .info()
           .startInstant()
