@@ -127,7 +127,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;}
 &nbsp;
-&nbsp;/** Multiplatform HTTP client factory function. */
+&nbsp;/**
+&nbsp; * Multiplatform HTTP client engine configuration
+&nbsp; *
+&nbsp; * See [doc](https://ktor.io/docs/client-engines.html#mpp-config) for more details.
+&nbsp; */
 &nbsp;expect fun httpClient(
 &nbsp;    name: String = &quot;Api Client&quot;,
 &nbsp;    timeout: Timeout = Timeout.DEFAULT,
@@ -175,7 +179,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;        sanitizeHeader { header -&gt; header == HttpHeaders.Authorization }
 &nbsp;      }
 &nbsp;
-&nbsp;      engine { pipelining = true }
+&nbsp;      engine {
+&nbsp;        pipelining = true
+&nbsp;        // proxy  = ProxyBuilder.http()
+&nbsp;      }
 &nbsp;
 &nbsp;      followRedirects = true
 &nbsp;
@@ -220,7 +227,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-02-12 18:09</div>
+    <div style="float:right;">generated on 2025-02-13 06:55</div>
 </div>
 </body>
 </html>
