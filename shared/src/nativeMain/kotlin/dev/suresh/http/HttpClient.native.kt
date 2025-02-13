@@ -2,7 +2,7 @@ package dev.suresh.http
 
 import io.github.oshai.kotlinlogging.KLogger
 import io.ktor.client.*
-import io.ktor.client.engine.cio.*
+import io.ktor.client.engine.curl.*
 
 actual fun httpClient(
     name: String,
@@ -10,4 +10,8 @@ actual fun httpClient(
     retry: Retry,
     httpLogger: KLogger,
     config: HttpClientConfig<*>.() -> Unit
-) = HttpClient(CIO) { config(this) }
+) =
+    HttpClient(Curl) {
+      config(this)
+      engine { sslVerify = true }
+    }

@@ -30,3 +30,25 @@ actual fun httpClient(
       config(this)
       engine { config { sslContext(customSSLFactory.sslContext) } }
     }
+
+// val cioHttpClient = HttpClient(CIO) {
+//     config(this)
+//
+//     engine {
+//         maxConnectionsCount = 1000
+//         endpoint {
+//             maxConnectionsPerRoute = 100
+//             pipelineMaxSize = 20
+//             keepAliveTime = 5000
+//             connectTimeout = 5000
+//             connectAttempts = 5
+//         }
+//         https {
+//             serverName = "suresh.dev"
+//             cipherSuites = CIOCipherSuites.SupportedSuites
+//             trustManager = myCustomTrustManager
+//             random = mySecureRandom
+//             addKeyStore(myKeyStore, myKeyStorePassword)
+//         }
+//     }
+// }

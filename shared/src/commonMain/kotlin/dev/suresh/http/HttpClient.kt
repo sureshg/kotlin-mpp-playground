@@ -33,7 +33,11 @@ val json by lazy {
   }
 }
 
-/** Multiplatform HTTP client factory function. */
+/**
+ * Multiplatform HTTP client engine configuration
+ *
+ * See [doc](https://ktor.io/docs/client-engines.html#mpp-config) for more details.
+ */
 expect fun httpClient(
     name: String = "Api Client",
     timeout: Timeout = Timeout.DEFAULT,
@@ -81,7 +85,10 @@ expect fun httpClient(
         sanitizeHeader { header -> header == HttpHeaders.Authorization }
       }
 
-      engine { pipelining = true }
+      engine {
+        pipelining = true
+        // proxy  = ProxyBuilder.http()
+      }
 
       followRedirects = true
 

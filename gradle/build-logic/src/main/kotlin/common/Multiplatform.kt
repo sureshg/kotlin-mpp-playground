@@ -48,6 +48,7 @@ fun KotlinMultiplatformExtension.commonTarget(project: Project) =
             api(libs.kotlin.bignum)
             api(libs.kotlin.bignum.serialization)
             api(libs.ktor.client.core)
+            api(libs.ktor.client.cio)
             api(libs.ktor.client.content.negotiation)
             api(libs.ktor.client.encoding)
             api(libs.ktor.client.logging)
@@ -189,9 +190,8 @@ fun KotlinMultiplatformExtension.jsTarget(project: Project) =
       sourceSets {
         jsMain {
           dependencies {
-            api(libs.ktor.client.js)
-            api(kotlinw("browser"))
-            api(kotlinw("css"))
+            api(libs.kotlin.wrappers.browser)
+            api(libs.kotlin.wrappers.css)
             // api(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
             // ksp(project(":meta:ksp:processor"))
           }
@@ -247,7 +247,6 @@ fun KotlinMultiplatformExtension.wasmJsTarget(project: Project) =
           dependencies {
             // kotlinx-browser is only supported for WasmJs.
             api(libs.kotlinx.browser)
-            api(libs.ktor.client.js)
             // api(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
           }
         }
@@ -301,14 +300,7 @@ fun KotlinMultiplatformExtension.nativeTargets(
           mingwX64 { configureAll() }
         }
 
-        sourceSets {
-          nativeMain {
-            dependencies {
-              api(libs.ktor.client.cio)
-              // api(libs.arrow.suspendapp.ktor)
-            }
-          }
-        }
+        sourceSets { nativeMain { dependencies { api(libs.ktor.client.curl) } } }
       }
     }
 

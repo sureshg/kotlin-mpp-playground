@@ -337,14 +337,6 @@ val Project.jvmRunArgs
     jvmArgs?.split(",") ?: jvmArguments(appRun = true)
   }
 
-/**
- * Returns the dependency string for the specified Kotlin wrapper.
- *
- * @param target The target wrapper to retrieve the dependency string for.
- * @return The dependency string for the specified Kotlin wrapper.
- */
-fun kotlinw(target: String) = "org.jetbrains.kotlin-wrappers:kotlin-$target"
-
 // https://kotlinlang.org/docs/multiplatform-set-up-targets.html#distinguish-several-targets-for-one-platform
 val mppTargetAttr = Attribute.of("mpp.target.name", String::class.java)
 

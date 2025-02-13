@@ -215,7 +215,7 @@ dependencies {
   implementation(libs.jte.runtime)
   // compileOnly(libs.jte.kotlin)
   implementation(libs.kotlinx.html)
-  implementation(kotlinw("css"))
+  implementation(libs.kotlin.wrappers.css)
   implementation(libs.ktor.server.html)
 
   // OpenTelemetry
