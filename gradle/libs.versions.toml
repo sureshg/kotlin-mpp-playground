@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-bc-plugins                     = "1.8.0"
+bc-plugins                     = "1.9.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
@@ -30,7 +30,7 @@ kotlinx-coroutines             = "1.10.1"
 kotlinx-datetime               = "0.6.2"
 kotlinx-datetime-zoneinfo      = "2025a-spi.0.6.2"
 kotlinx-serialization          = "1.8.0"
-kotlinx-rpc                    = "0.5.0"
+kotlinx-rpc                    = "0.5.1"
 kotlinx-collections-immutable  = "0.3.8"
 kotlinx-lincheck               = "2.35"
 kotlinx-html                   = "0.12.0"
@@ -38,12 +38,12 @@ kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.13"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.2.4"
+kotlin-wrappers                = "2025.2.5"
 kotlin-redacted                = "1.12.0"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
-kotlinx-dataframe              = "0.16.0-dev-5599"
-kotlinx-kandy                  = "0.8.0-dev-59"
+kotlinx-dataframe              = "0.16.0-dev-5705"
+kotlinx-kandy                  = "0.8.0"
 kotlin-statistics              = "0.4.0-RC1"
 evas                           = "1.2.0"
 kopy                           = "0.14.0+2.1.10"
@@ -174,7 +174,7 @@ langchain4j                    = "1.0.0-beta1"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.3.0"
 mcp4k                          = "0.3.4"
-dflib                          = "2.0.0-M1"
+dflib                          = "2.0.0-M2"
 ldaptive                       = "2.4.0"
 chicory                        = "1.0.0"
 log4k                          = "0.30.0"
@@ -182,10 +182,10 @@ rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.1"
 
 # Compose
-jetbrains-compose              = "1.8.0-alpha02"
-jetbrains-compose-viewmodel    = "2.9.0-alpha02"
-jetbrains-compose-nav          = "2.8.0-alpha12"
-jetbrains-compose-adaptive     = "1.1.0-alpha02"
+jetbrains-compose              = "1.8.0-alpha03"
+jetbrains-compose-viewmodel    = "2.9.0-alpha03"
+jetbrains-compose-nav          = "2.8.0-alpha13"
+jetbrains-compose-adaptive     = "1.1.0-alpha03"
 kobweb                         = "0.20.3"
 detekt                         = "1.23.7"
 detekt-compose-rules           = "0.4.22"
@@ -267,6 +267,7 @@ build-kmp-hierarchy                  = { module = "io.github.terrakok:kmp-hierar
 build-benmanesversions               = { module = "com.github.ben-manes:gradle-versions-plugin"                     , version.ref = "benmanes"}
 build-gradle-develocity              = { module = "com.gradle:develocity-gradle-plugin"                             , version.ref = "gradle-develocity" }
 build-mrjar-plugin                   = { module = "me.champeau.gradle.mrjar:plugin"                                 , version.ref = "mrjar"}
+build-ktor-plugin                    = { module = "io.ktor.plugin:io.ktor.plugin.gradle.plugin"                     , version.ref = "ktor"}
 build-jte-plugin                     = { module = "gg.jte:jte-gradle-plugin"                                        , version.ref = "jte"}
 build-nmcp-plugin                    = { module = "com.gradleup.nmcp:nmcp"                                          , version.ref = "nmcp"}
 build-nexus-plugin                   = { module = "io.github.gradle-nexus:publish-plugin"                           , version.ref = "nexus-publish"}
@@ -345,6 +346,8 @@ kotlinx-dataframe-csv                = { module = "org.jetbrains.kotlinx:datafra
 kotlinx-dataframe-geo                = { module = "org.jetbrains.kotlinx:dataframe-geo"                             , version.ref = "kotlinx-dataframe"}
 kotlinx-dataframe-jdbc               = { module = "org.jetbrains.kotlinx:dataframe-jdbc"                            , version.ref = "kotlinx-dataframe"}
 kotlinx-kandy                        = { module = "org.jetbrains.kotlinx:kandy-lets-plot"                           , version.ref = "kotlinx-kandy"}
+kotlinx-kandy-geo                    = { module = "org.jetbrains.kotlinx:kandy-geo"                                 , version.ref = "kotlinx-kandy"}
+kotlinx-kandy-echarts                = { module = "org.jetbrains.kotlinx:kandy-echarts"                             , version.ref = "kotlinx-kandy"}
 kotlin-statistics                    = { module = "org.jetbrains.kotlinx:kotlin-statistics"                         , version.ref = "kotlin-statistics"}
 kotlin-ksp-api                       = { module = "com.google.devtools.ksp:symbol-processing-api"                   , version.ref = "kotlin-ksp"}
 kotlin-redacted-annotations          = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-annotations"     , version.ref = "kotlin-redacted"}
@@ -679,14 +682,25 @@ ajalt                                = ["ajalt-colormath",
                                         "ajalt-clikt",
                                         "ajalt-clikt-markdown"]
 
-json-extra                           = ["kotlinx-jsonpath", "json-schema-validator"]
-keystore                             = ["sslcontext-kickstart", "directory-keystore"]
+dataviz                              = ["kotlinx-dataframe-csv",
+                                        "kotlinx-dataframe-jdbc",
+                                        "kotlinx-dataframe-geo",
+                                        "kotlinx-kandy",
+                                        "kotlinx-kandy-geo"]
+
+json-extra                           = ["kotlinx-jsonpath",
+                                        "json-schema-validator"]
+
+keystore                             = ["sslcontext-kickstart",
+                                        "directory-keystore"]
+
 otel                                 = ["otel-instr-annotations",
                                         "otel-autoconfigure",
                                         "otel-semconv",
                                         "otel-instr-ktor",
                                         "otel-instr-logback-mdc",
                                         "otel-instr-logback-appender"]
+
 otel-agent-extn                      = ["otel-autoconfigure-spi",
                                         "otel-instr-api",
                                         "otel-instr-extension-api",

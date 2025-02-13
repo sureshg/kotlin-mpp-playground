@@ -190,6 +190,7 @@ fun KotlinMultiplatformExtension.jsTarget(project: Project) =
       sourceSets {
         jsMain {
           dependencies {
+            api(libs.ktor.client.js)
             api(libs.kotlin.wrappers.browser)
             api(libs.kotlin.wrappers.css)
             // api(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
@@ -245,6 +246,7 @@ fun KotlinMultiplatformExtension.wasmJsTarget(project: Project) =
       sourceSets {
         wasmJsMain {
           dependencies {
+            api(libs.ktor.client.js)
             // kotlinx-browser is only supported for WasmJs.
             api(libs.kotlinx.browser)
             // api(npm("@js-joda/timezone", libs.versions.npm.jsjoda.tz.get()))
