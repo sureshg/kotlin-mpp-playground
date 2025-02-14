@@ -1,7 +1,7 @@
 [versions]
 java                           = "25"
 kotlin                         = "2.1.20-Beta2"
-kotlin-ksp                     = "2.1.20-Beta2-1.0.29"
+kotlin-ksp                     = "2.1.20-Beta2-1.0.30"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.1"
@@ -193,7 +193,7 @@ compose-hotreload              = "1.0.0"
 compose-icons                  = "1.1.1"
 compose-routing                = "0.4.0"
 kottie                         = "2.0.1"
-mosaic                         = "0.15.0"
+mosaic                         = "0.16.0"
 
 # NPM Dependencies
 npm-highlightjs                = "11.11.0"
