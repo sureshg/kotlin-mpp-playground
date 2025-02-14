@@ -55,6 +55,9 @@ fun initProps() {
   System.setProperty("jdk.includeInExceptions", "hostInfo")
   System.setProperty("LOG_DIR", logDir)
 
+  println("⚡ ${BuildConfig.description} v${BuildConfig.version} ⚡")
+  println("Log Dir: $logDir")
+
   // Redirect JUL to SLF4J
   // SLF4JBridgeHandler.removeHandlersForRootLogger()
   // SLF4JBridgeHandler.install()

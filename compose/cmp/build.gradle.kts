@@ -14,6 +14,7 @@ plugins {
   dev.suresh.plugin.publishing
   alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.jetbrains.compose)
+  // alias(libs.plugins.jetbrains.compose.hotreload)
   // alias(libs.plugins.detekt)
 }
 

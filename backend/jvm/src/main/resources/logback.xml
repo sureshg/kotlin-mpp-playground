@@ -49,6 +49,8 @@
         </encoder>
     </appender>
 
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
+
     <!--appender name="ASYNC-APP1" class="AsyncAppender">
         <appender-ref ref="APP1"/>
         <neverBlock>true</neverBlock>
@@ -79,7 +81,7 @@
         <encoder class="PatternLayoutEncoder">
             <pattern>${pattern}</pattern>
             <!--pattern>${otel-pattern}</pattern-->
-            <outputPatternAsHeader>true</outputPatternAsHeader>
+            <outputPatternAsHeader>false</outputPatternAsHeader>
         </encoder>
     </appender>
 
