@@ -20,6 +20,7 @@ plugins {
   kotlin("plugin.serialization")
   kotlin("plugin.power-assert")
   kotlin("plugin.js-plain-objects")
+  id("dev.suresh.plugin.common")
   id("dev.suresh.plugin.kotlin.docs")
   com.google.devtools.ksp
   dev.zacsweers.redacted

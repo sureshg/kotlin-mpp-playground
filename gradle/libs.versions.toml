@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-bc-plugins                     = "1.11.0"
+bc-plugins                     = "1.12.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
@@ -170,6 +170,7 @@ chasm                          = "0.9.53"
 cel                            = "0.9.1"
 kfswatch                       = "1.3.0"
 kmp-process                    = "0.1.2"
+kmbed                          = "1.8.4"
 langchain4j                    = "1.0.0-beta1"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.3.0"
@@ -652,6 +653,7 @@ kmp-process                          = { module = "io.matthewnelson.kmp-process:
 log4k-coroutines                     = { module = "io.github.smyrgeorge:log4k-coroutines"                                   , version.ref = "log4k" }
 log4k-slf4j                          = { module = "io.github.smyrgeorge:log4k-slf4j"                                        , version.ref = "log4k" }
 rwmutex                              = { module = "com.mayakapps.rwmutex:rwmutex"                                           , version.ref = "rwmutex" }
+kmbed-runtime                        = { module = "io.karma.kmbed:kmbed-runtime"                                            , version.ref = "kmbed" }
 
 # Wasm
 chicory                              = { module = "com.dylibso.chicory:runtime"                                             , version.ref = "chicory" }
@@ -754,6 +756,7 @@ poko                                 = { id = "dev.drewhamilton.poko"           
 mcp4k                                = { id = "sh.ondr.mcp4k"                                                  , version.ref = "mcp4k"}
 animalsniffer                        = { id = "ru.vyarus.animalsniffer"                                        , version.ref = "animalsniffer"}
 build-vercraft                       = { id = "com.akuleshov7.vercraft.plugin-gradle"                          , version.ref = "vercraft" }
+kmbed-plugin                         = { id = "io.karma.kmbed.kmbed-gradle-plugin"                             , version.ref = "kmbed" }
 
 # Common build and settings plugin
 project-root                         = { id = "dev.suresh.plugin.root"                                         , version.ref = "bc-plugins" }

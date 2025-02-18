@@ -23,6 +23,7 @@ plugins {
   dev.zacsweers.redacted
   com.javiersc.kotlin.kopy
   org.jetbrains.kotlinx.atomicfu
+  id("dev.suresh.plugin.common")
   id("dev.suresh.plugin.kotlin.docs")
   // kotlin("plugin.atomicfu")
   // `test-suite-base`

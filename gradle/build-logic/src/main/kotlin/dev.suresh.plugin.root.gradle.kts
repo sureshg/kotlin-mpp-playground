@@ -5,7 +5,6 @@ import org.gradle.api.publish.plugins.PublishingPlugin.PUBLISH_LIFECYCLE_TASK_NA
 import org.gradle.kotlin.dsl.*
 
 plugins {
-  id("dev.suresh.plugin.common")
   idea
   wrapper
   id("dev.suresh.plugin.kotlin.docs")
