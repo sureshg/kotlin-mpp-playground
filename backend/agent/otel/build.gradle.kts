@@ -21,6 +21,9 @@ val otel by configurations.registering { isTransitive = false }
 // Task to repackage the OpenTelemetry agent with custom extensions
 val extendedAgent by
     tasks.registering(Jar::class) {
+      description = "Creates extended OpenTelemetry agent with extensions"
+      group = "build"
+
       val otelAgentJar = zipTree(otel.map { it.singleFile })
       val extnJar = tasks.shadowJar.map { it.archiveFile }
 
@@ -41,8 +44,13 @@ val extendedAgent by
       }
     }
 
-// Replace the normal jar with the one built by 'shadowJar' in both api and runtime variants
+// Replace the 'shadowJar' jar with the 'extendedAgent`
 configurations {
+  default {
+    outgoing.artifacts.clear()
+    outgoing.artifact(extendedAgent)
+  }
+
   apiElements {
     outgoing.artifacts.clear()
     outgoing.artifact(extendedAgent)
@@ -52,6 +60,13 @@ configurations {
     outgoing.artifacts.clear()
     outgoing.artifact(extendedAgent)
   }
+
+  this.shadow {
+    outgoing.artifacts.clear()
+    outgoing.artifact(extendedAgent)
+  }
+
+  shadowRuntimeElements { outgoing.artifacts.clear() }
 }
 
 tasks {
