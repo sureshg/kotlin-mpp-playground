@@ -36,21 +36,17 @@ include(":meta:ksp:processor")
 
 include(":meta:compiler:plugin")
 
-val nativeBuild: String? by settings
-val composeBuild: String? by settings
-val springBoot: String? by settings
-
-if (nativeBuild.toBoolean()) {
+if (isNativeTargetEnabled) {
   include(":backend:native")
 }
 
-if (composeBuild.toBoolean()) {
+if (isComposeEnabled) {
   include(":compose:cmp")
   // include(":compose:cli")
   // include(":compose:html")
 }
 
-if (springBoot.toBoolean()) {
+if (isSpringBootEnabled) {
   include(":backend:boot")
 }
 
@@ -59,3 +55,18 @@ if (springBoot.toBoolean()) {
 //        substitute(module("dev.suresh:misc-build")).using(project(":"))
 //    }
 // }
+
+val Settings.isNativeTargetEnabled: Boolean
+  get() = gradleBooleanProperty("kotlin.target.native.enabled").get()
+
+val Settings.isComposeEnabled: Boolean
+  get() = gradleBooleanProperty("composeBuild").get()
+
+val Settings.isSpringBootEnabled: Boolean
+  get() = gradleBooleanProperty("springBoot").get()
+
+val Settings.isWinTargetEnabled: Boolean
+  get() = gradleBooleanProperty("kotlin.target.win.enabled").get()
+
+fun Settings.gradleBooleanProperty(name: String): Provider<Boolean> =
+    providers.gradleProperty(name).map(String::toBoolean).orElse(false)

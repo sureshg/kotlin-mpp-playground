@@ -18,6 +18,7 @@ import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.api.attributes.*
 import org.gradle.api.component.AdhocComponentWithVariants
 import org.gradle.api.plugins.JavaPluginExtension
+import org.gradle.api.provider.*
 import org.gradle.api.tasks.*
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.testing.*
@@ -59,24 +60,30 @@ val Project.buildLogicProjectName
 val Project.isSharedProject
   get() = name == sharedProjectName
 
-// val debug: String? by project
-val Project.debugEnabled
-  get() = providers.gradleProperty("debug").map(String::toBoolean).getOrElse(false)
-
 val Project.skipTest
-  get() = providers.gradleProperty("skip.test").map(String::toBoolean).getOrElse(false)
+  get() = gradleBooleanProperty("skip.test").get()
 
 val Project.hasCleanTask
   get() = gradle.startParameter.taskNames.any { it in listOf("clean", "cleanAll") }
 
-val Project.isSnapshotVersion
-  get() = version.toString().endsWith("SNAPSHOT", true)
-
 val Project.runsOnCI
   get() = providers.environmentVariable("CI").isPresent
 
+// val debug: String? by project
+val Project.debugEnabled
+  get() = gradleBooleanProperty("debug").get()
+
+val Project.isSnapshotVersion
+  get() = version.toString().endsWith("SNAPSHOT", true)
+
 val Project.isKmpExecEnabled
   get() = extra.has("enableKmpExec") && extra["enableKmpExec"] as Boolean
+
+val Project.isNativeTargetEnabled: Boolean
+  get() = gradleBooleanProperty("kotlin.target.native.enabled").get()
+
+val Project.isWinTargetEnabled: Boolean
+  get() = gradleBooleanProperty("kotlin.target.win.enabled").get()
 
 /** Java version properties. */
 val Project.javaVersion
@@ -109,6 +116,9 @@ val Project.kotlinLangVersion
 
 val Project.orgName
   get() = libs.versions.org.name.get()
+
+val Project.orgUrl
+  get() = libs.versions.org.url.get()
 
 val Project.githubUser
   get() = libs.versions.dev.name.get().lowercase()
@@ -704,6 +714,9 @@ fun Project.addFileToJavaComponent(file: File) {
     mapToOptional()
   }
 }
+
+fun Project.gradleBooleanProperty(name: String): Provider<Boolean> =
+    providers.gradleProperty(name).map(String::toBoolean).orElse(false)
 
 /** Lazy version of [TaskContainer.maybeCreate] */
 inline fun <reified T : Task> TaskContainer.maybeRegister(

@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 @file:OptIn(ExperimentalKotlinGradlePluginApi::class, ExperimentalBCVApi::class)
 
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.devtools.ksp.gradle.KspAATask
 import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
@@ -33,6 +34,8 @@ plugins {
   // app.cash.molecule
   // dev.mokkery
 }
+
+configurations.configureEach { resolutionStrategy { failOnNonReproducibleResolution() } }
 
 kotlin {
   commonTarget(project)
@@ -147,6 +150,34 @@ tasks {
     }
   }
 
+  pluginManager.withPlugin("com.gradleup.shadow") {
+    // Register a shadowJar task for the default jvm target
+    val mainCompilation = kotlin.jvm().compilations.getByName("main")
+    val shadowJvmJar by
+        registering(ShadowJar::class) {
+          from(tasks.named("jvmJar"))
+          // from(mainCompilation.output.allOutputs) -> allOutputs == classes + resources
+          val runtimeDepConfig =
+              project.configurations.getByName(mainCompilation.runtimeDependencyConfigurationName)
+          configurations = listOf(runtimeDepConfig)
+          archiveClassifier = "all"
+          mergeServiceFiles()
+          manifest {
+            attributes[Attributes.Name.MAIN_CLASS.toString()] = libs.versions.app.mainclass
+          }
+        }
+
+    val buildExecutable by
+        registering(ReallyExecJar::class) {
+          jarFile = shadowJvmJar.flatMap { it.archiveFile }
+          javaOpts = jvmRunArgs
+          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
+          onlyIf { OperatingSystem.current().isUnix }
+        }
+
+    build { finalizedBy(buildExecutable) }
+  }
+
   pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
     configure<ApiValidationExtension> {
       ignoredPackages.add("dev.suresh.test")
@@ -156,21 +187,8 @@ tasks {
     }
 
     withType<KotlinApiBuildTask>().configureEach {
-      // inputJar = named<Jar>("shadowJar").flatMap { it.archiveFile }
+      // inputJar = named<Jar>("shadowJvmJar").flatMap { it.archiveFile }
     }
-  }
-
-  pluginManager.withPlugin("com.gradleup.shadow") {
-    val buildExecutable by
-        registering(ReallyExecJar::class) {
-          jarFile = named<Jar>("shadowJar").flatMap { it.archiveFile }
-          // javaOpts = application.applicationDefaultJvmArgs
-          javaOpts = named<JavaExec>("run").get().jvmArgs
-          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
-          onlyIf { OperatingSystem.current().isUnix }
-        }
-
-    build { finalizedBy(buildExecutable) }
   }
 }
 

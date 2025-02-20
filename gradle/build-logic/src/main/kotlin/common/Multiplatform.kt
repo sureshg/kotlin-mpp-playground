@@ -7,6 +7,7 @@ import org.gradle.kotlin.dsl.*
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinPlatformType
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.targets.js.dsl.KotlinJsBinaryMode
 import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 fun KotlinMultiplatformExtension.commonTarget(project: Project) =
@@ -101,7 +102,7 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
         // val test by testRuns.existing
         testRuns.configureEach { executionTask.configure { configureJavaTest() } }
 
-        // Configure application executable only it's enabled
+        // Configures JavaExec task with name "runJvm" and Gradle distribution "jvmDistZip"
         if (isKmpExecEnabled) {
           binaries {
             executable {
@@ -111,14 +112,6 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
             }
           }
         }
-
-        // Register a task to execute a class using jvm runtime dependencies.
-        // compilations.getByName("test") {
-        //   tasks.register<JavaExec>("ktExec") {
-        //     classpath(runtimeDependencyFiles, output)
-        //     mainClass = "dev.suresh.test.ExecMain"
-        //   }
-        // }
 
         // attributes.attribute(KotlinPlatformType.attribute, KotlinPlatformType.jvm)
       }
@@ -255,6 +248,37 @@ fun KotlinMultiplatformExtension.wasmJsTarget(project: Project) =
       }
     }
 
+fun KotlinMultiplatformExtension.wasmWasiTarget(project: Project) =
+    with(project) {
+      wasmWasi {
+        nodejs()
+        if (isSharedProject.not()) {
+          binaries
+              .executable()
+              .filter { it.mode == KotlinJsBinaryMode.PRODUCTION }
+              .forEach { binary ->
+                val wasmFilename = binary.mainFileName.map { it.replaceAfterLast(".", "wasm") }
+                val wasmFile =
+                    binary.linkTask.flatMap { it.destinationDirectory.file(wasmFilename) }
+                // Add generated WASM binary as maven publication
+                mavenPublication { artifact(wasmFile) { classifier = targetName } }
+              }
+        }
+
+        compilations.all {
+          compileTaskProvider.configure {
+            compilerOptions.freeCompilerArgs.addAll(
+                listOf("-Xwasm-use-traps-instead-of-exceptions"))
+          }
+        }
+      }
+
+      sourceSets {
+        wasmWasiMain { dependencies {} }
+        wasmWasiTest { kotlin {} }
+      }
+    }
+
 fun KotlinMultiplatformExtension.hostNativeTarget(configure: KotlinNativeTarget.() -> Unit = {}) =
     when {
       Platform.isMac -> {
@@ -275,10 +299,7 @@ fun KotlinMultiplatformExtension.nativeTargets(
     configure: KotlinNativeTarget.() -> Unit = {}
 ) =
     with(project) {
-      val nativeBuild: String? by project
-      val nativeWinTarget: String? by project
-
-      if (nativeBuild.toBoolean()) {
+      if (isNativeTargetEnabled) {
         fun KotlinNativeTarget.configureAll() {
           compilerOptions {
             // freeCompilerArgs.addAll("-Xverbose-phases=Linker", "-Xruntime-logs=gc=info")
@@ -297,11 +318,18 @@ fun KotlinMultiplatformExtension.nativeTargets(
         macosArm64 { configureAll() }
         linuxX64 { configureAll() }
         linuxArm64 { configureAll() }
-        if (nativeWinTarget.toBoolean()) {
+        if (isWinTargetEnabled) {
           mingwX64 { configureAll() }
         }
 
-        sourceSets { nativeMain { dependencies { api(libs.ktor.client.curl) } } }
+        sourceSets {
+          nativeMain {
+            dependencies {
+              // On native targets, only curl currently supports TLS
+              api(libs.ktor.client.curl)
+            }
+          }
+        }
       }
     }
 
