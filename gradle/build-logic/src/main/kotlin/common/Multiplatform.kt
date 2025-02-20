@@ -88,7 +88,6 @@ fun KotlinMultiplatformExtension.commonTarget(project: Project) =
 fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
     with(project) {
       jvm {
-        withJava()
         compilations.configureEach {
           compileJavaTaskProvider?.configure { configureJavac(project) }
         }
