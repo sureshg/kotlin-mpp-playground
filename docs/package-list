@@ -33,6 +33,8 @@ $dokka.location:/BuildConfig/arrowSuspendapp/#/PointingToDeclaration/shared/[ro
 $dokka.location:/BuildConfig/asyncProfiler/#/PointingToDeclaration/shared/[root]/-build-config/async-profiler.html
 $dokka.location:/BuildConfig/autonomousappsBestpractices/#/PointingToDeclaration/shared/[root]/-build-config/autonomousapps-bestpractices.html
 $dokka.location:/BuildConfig/autonomousappsDepanalysis/#/PointingToDeclaration/shared/[root]/-build-config/autonomousapps-depanalysis.html
+$dokka.location:/BuildConfig/badassJlink/#/PointingToDeclaration/shared/[root]/-build-config/badass-jlink.html
+$dokka.location:/BuildConfig/badassRuntime/#/PointingToDeclaration/shared/[root]/-build-config/badass-runtime.html
 $dokka.location:/BuildConfig/batik/#/PointingToDeclaration/shared/[root]/-build-config/batik.html
 $dokka.location:/BuildConfig/bcPlugins/#/PointingToDeclaration/shared/[root]/-build-config/bc-plugins.html
 $dokka.location:/BuildConfig/benmanes/#/PointingToDeclaration/shared/[root]/-build-config/benmanes.html
