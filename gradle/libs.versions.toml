@@ -38,8 +38,8 @@ kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.13"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.2.6"
-kotlin-redacted                = "1.12.0"
+kotlin-wrappers                = "2025.2.8"
+kotlin-redacted                = "1.12.1"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "0.16.0-dev-5786"
@@ -61,7 +61,7 @@ otel                           = "1.47.0"
 otel-instr                     = "2.13.1"
 otel-instr-alpha               = "2.13.1-alpha"
 otel-semconv                   = "1.30.0"
-otel-samplers                  = "1.43.0-alpha"
+otel-samplers                  = "1.44.0-alpha"
 elastic-otel                   = "0.4.0"
 okio                           = "3.10.2"
 sslcontext-kickstart           = "9.0.0"
@@ -81,7 +81,7 @@ jimfs                          = "1.3.0"
 sshj                           = "0.39.0"
 jsch                           = "0.2.23"
 pty4j                          = "0.13.2"
-junit                          = "5.12.0-RC2"
+junit                          = "5.12.0"
 koin                           = "4.1.0-Beta5"
 koin-annotations               = "2.0.0-RC4"
 kotest                         = "6.0.0.M2"
@@ -98,7 +98,7 @@ jmh                            = "1.37"
 mrjar                          = "0.1.1"
 ktfmt                          = "0.54"
 google-javaformat              = "1.25.2"
-palantir-javaformat            = "2.52.0"
+palantir-javaformat            = "2.55.0"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.16.0"
 graalvm                        = "24.1.2"
@@ -177,8 +177,8 @@ mcp-kotlin                     = "0.3.0"
 mcp4k                          = "0.3.4"
 dflib                          = "2.0.0-M2"
 ldaptive                       = "2.4.0"
-chicory                        = "1.0.0"
-weh-bindings                   = "0.2"
+chicory                        = "1.1.0"
+weh-bindings                   = "0.3"
 log4k                          = "0.30.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.1"
@@ -189,7 +189,7 @@ jetbrains-compose-viewmodel    = "2.9.0-alpha03"
 jetbrains-compose-nav          = "2.8.0-alpha13"
 jetbrains-compose-adaptive     = "1.1.0-alpha03"
 kobweb                         = "0.20.3"
-detekt                         = "1.23.7"
+detekt                         = "1.23.8"
 detekt-compose-rules           = "0.4.22"
 compose-hotreload              = "1.0.0"
 compose-icons                  = "1.1.1"
@@ -230,7 +230,7 @@ wire-plugin                    = "5.3.0"
 buildkonfig                    = "0.16.0"
 gmazzo-buildconfig             = "3.1.0"
 cyclonedx-plugin               = "1.10.0"
-modulegraph                    = "0.10.1"
+modulegraph                    = "0.12.0"
 cash-molecule                  = "1.4.3"
 npm-publish-plugin             = "3.5.2"
 exposed-plugin                 = "0.2.1"
@@ -240,6 +240,8 @@ includegit-plugin              = "0.1.6"
 kmp-hierarchy                  = "1.1"
 tomlj                          = "1.1.1"
 animalsniffer                  = "2.0.0"
+badass-runtime                 = "1.13.1-patch-1"
+badass-jlink                   = "3.1.0"
 
 # Repositories
 repo-mvn-central               = "https://repo.maven.apache.org/maven2/"
@@ -310,7 +312,8 @@ build-includegit-plugin              = { module = "me.champeau.gradle.includegit
 build-tomlj                          = { module = "org.tomlj:tomlj"                                                 , version.ref = "tomlj" }
 build-reproducible-builds            = { module = "org.gradlex:reproducible-builds"                                 , version.ref = "reproducible-builds" }
 build-bytesize                       = { module = "me.saket.bytesize:bytesize"                                      , version.ref = "bytesize" }
-
+build-badass-jlink                   = { module = "com.dua3.gradle.jlink:com.dua3.gradle.jlink.gradle.plugin"       , version.ref = "badass-jlink" }
+build-badass-runtime                 = { module = "com.dua3.gradle.runtime:com.dua3.gradle.runtime.gradle.plugin"   , version.ref = "badass-runtime" }
 
 # Gradle Dependencies
 kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                                 , version.ref = "kotlin"}
@@ -757,6 +760,8 @@ mcp4k                                = { id = "sh.ondr.mcp4k"                   
 animalsniffer                        = { id = "ru.vyarus.animalsniffer"                                        , version.ref = "animalsniffer"}
 build-vercraft                       = { id = "com.akuleshov7.vercraft.plugin-gradle"                          , version.ref = "vercraft" }
 kmbed-plugin                         = { id = "io.karma.kmbed.kmbed-gradle-plugin"                             , version.ref = "kmbed" }
+badass-jlink                         = { id = "com.dua3.gradle.jlink"                                          , version.ref = "badass-jlink" }
+badass-runtime                       = { id = "com.dua3.gradle.runtime"                                        , version.ref = "badass-runtime" }
 
 # Common build and settings plugin
 project-root                         = { id = "dev.suresh.plugin.root"                                         , version.ref = "bc-plugins" }
