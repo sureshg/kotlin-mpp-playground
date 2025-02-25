@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > AtomicSample</title>
+  <title>: Coverage Report > YesNo</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: AtomicSample (dev.suresh)</h1>
+<h1>Coverage Summary for Class: YesNo (dev.suresh)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">AtomicSample</td>
+  <td class="name">YesNo</td>
 <td class="coverageStat">
   <span class="percent">
     100%
@@ -63,15 +63,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (1/1)
   </span>
 </td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    100%
   </span>
   <span class="absValue">
-    (5/10)
+    (2/2)
   </span>
 </td>
 <td class="coverageStat">
@@ -79,15 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     100%
   </span>
   <span class="absValue">
-    (9/9)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    72.7%
-  </span>
-  <span class="absValue">
-    (56/77)
+    (18/18)
   </span>
 </td>
 </tr>
@@ -189,28 +182,28 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;}
 &nbsp;
-<b class="fc">&nbsp;class AtomicSample {</b>
+&nbsp;class AtomicSample {
 &nbsp;
-<b class="fc">&nbsp;  private val lock = reentrantLock()</b>
+&nbsp;  private val lock = reentrantLock()
 &nbsp;
-<b class="fc">&nbsp;  private val _x = AtomicInt(0)</b>
+&nbsp;  private val _x = AtomicInt(0)
 &nbsp;
 &nbsp;  val x
-<b class="fc">&nbsp;    get() = _x.load()</b>
+&nbsp;    get() = _x.load()
 &nbsp;
 &nbsp;  fun doWork(finalValue: Int) {
-<b class="pc">&nbsp;    check(x == 0)</b>
-<b class="pc">&nbsp;    check(_x.exchange(3) == 0)</b>
-<b class="pc">&nbsp;    check(x == 3)</b>
-<b class="pc">&nbsp;    check(_x.compareAndSet(3, finalValue))</b>
+&nbsp;    check(x == 0)
+&nbsp;    check(_x.exchange(3) == 0)
+&nbsp;    check(x == 3)
+&nbsp;    check(_x.compareAndSet(3, finalValue))
 &nbsp;  }
 &nbsp;
-<b class="fc">&nbsp;  fun synchronizedFoo(value: Int) = lock.withLock { value }</b>
+&nbsp;  fun synchronizedFoo(value: Int) = lock.withLock { value }
 &nbsp;}
 &nbsp;
 &nbsp;enum class YesNo {
-&nbsp;  YES,
-&nbsp;  NO
+<b class="fc">&nbsp;  YES,</b>
+<b class="fc">&nbsp;  NO</b>
 &nbsp;}
 </code>
 </pre>
