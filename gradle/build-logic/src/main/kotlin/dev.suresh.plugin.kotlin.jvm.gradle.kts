@@ -35,6 +35,14 @@ apply(plugin = "dev.suresh.plugin.depreports")
 // Load the build script from a file
 // apply(from = rootDir.resolve("project.plugin.gradle.kts"))
 
+configurations.configureEach {
+  resolutionStrategy {
+    // failOnNonReproducibleResolution()
+    // eachDependency { if (requested.name.contains("intellij-coverage")) {
+    // useVersion(libs.versions.intellij.coverage.get()) }}
+  }
+}
+
 java {
   withSourcesJar()
   withJavadocJar()
@@ -115,7 +123,7 @@ tasks {
           Attributes.Name.IMPLEMENTATION_VENDOR.toString() to project.group,
       )
     }
-    duplicatesStrategy = DuplicatesStrategy.WARN
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
   }
 
   processResources {
@@ -289,17 +297,4 @@ dependencies {
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.mockk)
   // testImplementation(libs.slf4j.simple)
-}
-
-allprojects {
-  configurations.configureEach {
-    resolutionStrategy {
-      // force()
-      eachDependency {
-        if (requested.name.contains("intellij-coverage")) {
-          // useVersion(libs.versions.intellij.coverage.get())
-        }
-      }
-    }
-  }
 }

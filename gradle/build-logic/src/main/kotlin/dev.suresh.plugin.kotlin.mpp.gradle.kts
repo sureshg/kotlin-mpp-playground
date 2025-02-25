@@ -127,7 +127,7 @@ tasks {
           Attributes.Name.IMPLEMENTATION_VENDOR.toString() to project.group,
       )
     }
-    duplicatesStrategy = DuplicatesStrategy.WARN
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
   }
 
   withType<ProcessResources>().configureEach {
@@ -152,19 +152,20 @@ tasks {
 
   pluginManager.withPlugin("com.gradleup.shadow") {
     // Register a shadowJar task for the default jvm target
-    val mainCompilation = kotlin.jvm().compilations.getByName("main")
     val shadowJvmJar by
         registering(ShadowJar::class) {
-          from(tasks.named("jvmJar"))
-          // from(mainCompilation.output.allOutputs) -> allOutputs == classes + resources
+          val main by kotlin.jvm().compilations
+          // allOutputs == classes + resources
+          from(main.output.allOutputs)
           val runtimeDepConfig =
-              project.configurations.getByName(mainCompilation.runtimeDependencyConfigurationName)
+              project.configurations.getByName(main.runtimeDependencyConfigurationName)
           configurations = listOf(runtimeDepConfig)
           archiveClassifier = "all"
           mergeServiceFiles()
           manifest {
             attributes[Attributes.Name.MAIN_CLASS.toString()] = libs.versions.app.mainclass
           }
+          duplicatesStrategy = DuplicatesStrategy.INCLUDE
         }
 
     val buildExecutable by

@@ -108,7 +108,7 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
             executable {
               mainClass = libs.versions.app.mainclass
               applicationDefaultJvmArgs = jvmRunArgs
-              applicationDistribution.duplicatesStrategy = DuplicatesStrategy.WARN
+              applicationDistribution.duplicatesStrategy = DuplicatesStrategy.INCLUDE
             }
           }
         }
