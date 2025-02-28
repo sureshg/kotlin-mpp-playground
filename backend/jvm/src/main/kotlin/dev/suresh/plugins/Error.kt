@@ -30,6 +30,10 @@ fun Application.errorRoutes() {
       call.respondError(status, cause.message ?: "Unknown error", cause)
     }
 
+    status(HttpStatusCode.NotFound) { call, _ ->
+      call.respondRedirect("/app", permanent = true) // 301
+    }
+
     unhandled {
       it.respondError(
           HttpStatusCode.NotFound, "The requested URL ${it.request.path()} was not found")

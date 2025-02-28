@@ -9,6 +9,8 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.cookies.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.plugins.resources.*
+import io.ktor.client.plugins.websocket.WebSockets
+import io.ktor.client.plugins.websocket.pingInterval
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.util.*
@@ -83,6 +85,8 @@ expect fun httpClient(
               }
             }
         sanitizeHeader { header -> header == HttpHeaders.Authorization }
+
+        // filter { it.url.host.contains("localhost").not() }
       }
 
       engine {
@@ -98,6 +102,8 @@ expect fun httpClient(
         headers.appendIfNameAndValueAbsent(
             HttpHeaders.ContentType, ContentType.Application.Json.toString())
       }
+
+      install(WebSockets) { pingInterval = timeout.read }
 
       expectSuccess = true
 

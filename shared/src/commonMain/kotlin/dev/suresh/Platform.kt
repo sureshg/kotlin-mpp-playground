@@ -7,6 +7,7 @@ import BuildConfig.Host
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.jvm.JvmName
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
@@ -21,8 +22,8 @@ interface Platform {
   val tzShortId
     get() = TimeZone.currentSystemDefault().id
 
-  val virtualDispatcher: CoroutineDispatcher?
-    get() = null
+  val virtualDispatcher: CoroutineDispatcher
+    get() = Dispatchers.Default
 
   val buildConfig
     get() = BuildConfig

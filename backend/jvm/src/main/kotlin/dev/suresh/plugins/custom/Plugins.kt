@@ -2,6 +2,7 @@ package dev.suresh.plugins.custom
 
 import dev.suresh.plugins.isApi
 import io.ktor.server.application.*
+import io.ktor.util.AttributeKey
 import io.opentelemetry.api.trace.Span
 
 /**
@@ -10,7 +11,11 @@ import io.opentelemetry.api.trace.Span
  */
 val OTelExtnPlugin =
     createApplicationPlugin(name = "OTelExtnPlugin", createConfiguration = ::OTelExtnPluginConfig) {
+      val onCallTimeKey = AttributeKey<Long>("onCallTimeKey")
       onCall { call ->
+        val onCallTime = System.currentTimeMillis()
+        call.attributes.put(onCallTimeKey, onCallTime)
+
         if (pluginConfig.enabled && call.isApi) {
           Span.current()?.let { span ->
             call.response.headers.append(pluginConfig.traceIdHeader, span.spanContext.traceId)
@@ -31,6 +36,7 @@ val OTelExtnPlugin =
       //  }
       //
       //  onCallReceive { call, body ->
+      //    val onCallTime = call.attributes[onCallTimeKey]
       //    if (pluginConfig.enabled) {
       //      call.application.log.info("Received: $body")
       //    }

@@ -15,6 +15,10 @@ import io.ktor.server.plugins.csrf.CSRF
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import io.ktor.server.websocket.webSocket
+import io.ktor.websocket.Frame
+import io.ktor.websocket.readText
+import io.ktor.websocket.send
 import io.opentelemetry.instrumentation.annotations.WithSpan
 
 private val logger = KotlinLogging.logger {}
@@ -59,6 +63,15 @@ fun Routing.services() {
   }
 
   wasm()
+
+  webSocket("/chat") {
+    send("You are connected!")
+    for (frame in incoming) {
+      frame as? Frame.Text ?: continue
+      val receivedText = frame.readText()
+      send("You said: $receivedText")
+    }
+  }
 }
 
 @WithSpan suspend fun mediaApiCall() = MediaApiClient().images().size
