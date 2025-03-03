@@ -69,6 +69,7 @@ $dokka.location:/BuildConfig/evas/#/PointingToDeclaration/shared/[root]/-build-
 $dokka.location:/BuildConfig/expiringmap/#/PointingToDeclaration/shared/[root]/-build-config/expiringmap.html
 $dokka.location:/BuildConfig/exposed/#/PointingToDeclaration/shared/[root]/-build-config/exposed.html
 $dokka.location:/BuildConfig/exposedPlugin/#/PointingToDeclaration/shared/[root]/-build-config/exposed-plugin.html
+$dokka.location:/BuildConfig/filekitDialogs/#/PointingToDeclaration/shared/[root]/-build-config/filekit-dialogs.html
 $dokka.location:/BuildConfig/foojayResolver/#/PointingToDeclaration/shared/[root]/-build-config/foojay-resolver.html
 $dokka.location:/BuildConfig/gitFullMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-full-message.html
 $dokka.location:/BuildConfig/gitHash/#/PointingToDeclaration/shared/[root]/-build-config/git-hash.html
@@ -87,6 +88,7 @@ $dokka.location:/BuildConfig/gradle/#/PointingToDeclaration/shared/[root]/-buil
 $dokka.location:/BuildConfig/gradleDevelocity/#/PointingToDeclaration/shared/[root]/-build-config/gradle-develocity.html
 $dokka.location:/BuildConfig/gradleKotlinDsl/#/PointingToDeclaration/shared/[root]/-build-config/gradle-kotlin-dsl.html
 $dokka.location:/BuildConfig/gradlePublish/#/PointingToDeclaration/shared/[root]/-build-config/gradle-publish.html
+$dokka.location:/BuildConfig/gradlexMavenPlugin/#/PointingToDeclaration/shared/[root]/-build-config/gradlex-maven-plugin.html
 $dokka.location:/BuildConfig/group/#/PointingToDeclaration/shared/[root]/-build-config/group.html
 $dokka.location:/BuildConfig/h2/#/PointingToDeclaration/shared/[root]/-build-config/h2.html
 $dokka.location:/BuildConfig/hikariCP/#/PointingToDeclaration/shared/[root]/-build-config/hikari-c-p.html
@@ -188,6 +190,8 @@ $dokka.location:/BuildConfig/logbackTyler/#/PointingToDeclaration/shared/[root]
 $dokka.location:/BuildConfig/mappie/#/PointingToDeclaration/shared/[root]/-build-config/mappie.html
 $dokka.location:/BuildConfig/mavenArcheologist/#/PointingToDeclaration/shared/[root]/-build-config/maven-archeologist.html
 $dokka.location:/BuildConfig/mavenMima/#/PointingToDeclaration/shared/[root]/-build-config/maven-mima.html
+$dokka.location:/BuildConfig/mavenPluginAnnotations/#/PointingToDeclaration/shared/[root]/-build-config/maven-plugin-annotations.html
+$dokka.location:/BuildConfig/mavenPluginApi/#/PointingToDeclaration/shared/[root]/-build-config/maven-plugin-api.html
 $dokka.location:/BuildConfig/mcp4k/#/PointingToDeclaration/shared/[root]/-build-config/mcp4k.html
 $dokka.location:/BuildConfig/mcpKotlin/#/PointingToDeclaration/shared/[root]/-build-config/mcp-kotlin.html
 $dokka.location:/BuildConfig/micrometer/#/PointingToDeclaration/shared/[root]/-build-config/micrometer.html
