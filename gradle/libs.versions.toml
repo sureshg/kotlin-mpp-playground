@@ -38,17 +38,17 @@ kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.13"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.2.11"
+kotlin-wrappers                = "2025.3.3"
 kotlin-redacted                = "1.12.1"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
-kotlinx-dataframe              = "0.16.0-dev-5838"
+kotlinx-dataframe              = "0.16.0-dev-5981"
 kotlinx-kandy                  = "0.8.0"
 kotlin-statistics              = "0.4.0-RC1"
 evas                           = "1.2.0"
 kopy                           = "0.14.0+2.1.10"
 poko                           = "0.18.2"
-mappie                         = "1.0.0"
+mappie                         = "1.1.1"
 akkurate                       = "0.11.0"
 kaml                           = "0.72.0"
 snakeyaml-engine-kmp           = "3.1.1"
@@ -58,8 +58,8 @@ spring-depmgmt                 = "1.1.7"
 ktor                           = "3.1.1"
 ktor-cohort                    = "2.6.1"
 otel                           = "1.47.0"
-otel-instr                     = "2.13.2"
-otel-instr-alpha               = "2.13.2-alpha"
+otel-instr                     = "2.13.3"
+otel-instr-alpha               = "2.13.3-alpha"
 otel-semconv                   = "1.30.0"
 otel-samplers                  = "1.44.0-alpha"
 elastic-otel                   = "0.4.0"
@@ -72,7 +72,7 @@ ajalt-mordant                  = "3.0.2"
 ajalt-clikt                    = "5.0.3"
 ajalt-colormath                = "3.6.1"
 classgraph                     = "4.8.179"
-cache4k                        = "0.13.0"
+cache4k                        = "0.14.0"
 intellij-coverage              = "1.0.766"
 intellij-markdown              = "0.7.3"
 jgit                           = "7.1.0.202411261347-r"
@@ -87,7 +87,7 @@ koin-annotations               = "2.0.0"
 kotest                         = "6.0.0.M2"
 mockk                          = "1.13.17"
 mokkery                        = "2.7.0"
-wiremock                       = "3.12.0"
+wiremock                       = "3.12.1"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.0.0-alpha.14"
 slf4j                          = "2.1.0-alpha1"
@@ -130,7 +130,7 @@ java-keyring                   = "1.0.4"
 java-keychain                  = "1.1.0"
 webjars-xterm                  = "5.1.0"
 arrow-suspendapp               = "0.5.0"
-exposed                        = "0.59.0"
+exposed                        = "0.60.0"
 postgresql                     = "42.7.5"
 hikariCP                       = "6.2.1"
 h2                             = "2.3.232"
@@ -156,7 +156,7 @@ async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.0.0"
 airlift-aircompressor          = "2.0.2"
-airlift-security               = "309"
+airlift-security               = "312"
 directory-keystore             = "1.1.0"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
@@ -169,7 +169,7 @@ okapibarcode                   = "0.4.1"
 chasm                          = "0.9.53"
 cel                            = "0.9.1"
 kfswatch                       = "1.3.0"
-kmp-process                    = "0.1.2"
+kmp-process                    = "0.2.0"
 kmbed                          = "1.8.4"
 langchain4j                    = "1.0.0-beta1"
 jlama                          = "0.8.4"
@@ -242,6 +242,9 @@ tomlj                          = "1.1.1"
 animalsniffer                  = "2.0.0"
 badass-runtime                 = "1.13.1-patch-1"
 badass-jlink                   = "3.1.0"
+maven-plugin-api               = "3.9.9"
+maven-plugin-annotations       = "3.15.1"
+gradlex-maven-plugin           = "1.0.3"
 
 # Repositories
 repo-mvn-central               = "https://repo.maven.apache.org/maven2/"
@@ -314,6 +317,7 @@ build-reproducible-builds            = { module = "org.gradlex:reproducible-buil
 build-bytesize                       = { module = "me.saket.bytesize:bytesize"                                      , version.ref = "bytesize" }
 build-badass-jlink                   = { module = "com.dua3.gradle.jlink:com.dua3.gradle.jlink.gradle.plugin"       , version.ref = "badass-jlink" }
 build-badass-runtime                 = { module = "com.dua3.gradle.runtime:com.dua3.gradle.runtime.gradle.plugin"   , version.ref = "badass-runtime" }
+
 
 # Gradle Dependencies
 kotlin-bom                           = { module = "org.jetbrains.kotlin:kotlin-bom"                                 , version.ref = "kotlin"}
@@ -685,38 +689,42 @@ ozone-jetstream                      = { module = "sh.christian.ozone:jetstream"
 # Misc
 ldaptive                             = { module = "org.ldaptive:ldaptive"                                                   , version.ref = "ldaptive" }
 
+# Maven Plugin
+maven-plugin-api                     = { module = "org.apache.maven:maven-plugin-api"                                       , version.ref = "maven-plugin-api" }
+maven-plugin-annotations             = { module = "rg.apache.maven.plugin-tools:maven-plugin-annotations"           , version.ref = "maven-plugin-annotations" }
+
 [bundles]
 ajalt                                = ["ajalt-colormath",
-                                        "ajalt-mordant",
-                                        "ajalt-mordant-coroutines",
-                                        "ajalt-mordant-markdown",
-                                        "ajalt-clikt-core",
-                                        "ajalt-clikt",
-                                        "ajalt-clikt-markdown"]
+    "ajalt-mordant",
+    "ajalt-mordant-coroutines",
+    "ajalt-mordant-markdown",
+    "ajalt-clikt-core",
+    "ajalt-clikt",
+    "ajalt-clikt-markdown"]
 
 dataviz                              = ["kotlinx-dataframe-csv",
-                                        "kotlinx-dataframe-jdbc",
-                                        "kotlinx-dataframe-geo",
-                                        "kotlinx-kandy",
-                                        "kotlinx-kandy-geo"]
+    "kotlinx-dataframe-jdbc",
+    "kotlinx-dataframe-geo",
+    "kotlinx-kandy",
+    "kotlinx-kandy-geo"]
 
 json-extra                           = ["kotlinx-jsonpath",
-                                        "json-schema-validator"]
+    "json-schema-validator"]
 
 keystore                             = ["sslcontext-kickstart",
-                                        "directory-keystore"]
+    "directory-keystore"]
 
 otel                                 = ["otel-instr-annotations",
-                                        "otel-autoconfigure",
-                                        "otel-semconv",
-                                        "otel-instr-ktor",
-                                        "otel-instr-logback-mdc",
-                                        "otel-instr-logback-appender"]
+    "otel-autoconfigure",
+    "otel-semconv",
+    "otel-instr-ktor",
+    "otel-instr-logback-mdc",
+    "otel-instr-logback-appender"]
 
 otel-agent-extn                      = ["otel-autoconfigure-spi",
-                                        "otel-instr-api",
-                                        "otel-instr-extension-api",
-                                        "otel-semconv"]
+    "otel-instr-api",
+    "otel-instr-extension-api",
+    "otel-semconv"]
 
 
 [plugins]
@@ -763,6 +771,7 @@ build-vercraft                       = { id = "com.akuleshov7.vercraft.plugin-gr
 kmbed-plugin                         = { id = "io.karma.kmbed.kmbed-gradle-plugin"                             , version.ref = "kmbed" }
 badass-jlink                         = { id = "com.dua3.gradle.jlink"                                          , version.ref = "badass-jlink" }
 badass-runtime                       = { id = "com.dua3.gradle.runtime"                                        , version.ref = "badass-runtime" }
+gradlex-maven-plugin                 = { id = "org.gradlex.maven-plugin-development"                           , version.ref = "gradlex-maven-plugin" }
 
 # Common build and settings plugin
 project-root                         = { id = "dev.suresh.plugin.root"                                         , version.ref = "bc-plugins" }
