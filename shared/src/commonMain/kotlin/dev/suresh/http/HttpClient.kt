@@ -9,6 +9,7 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.cookies.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.plugins.resources.*
+import io.ktor.client.plugins.sse.SSE
 import io.ktor.client.plugins.websocket.WebSockets
 import io.ktor.client.plugins.websocket.pingInterval
 import io.ktor.http.*
@@ -101,6 +102,11 @@ expect fun httpClient(
       install(DefaultRequest) {
         headers.appendIfNameAndValueAbsent(
             HttpHeaders.ContentType, ContentType.Application.Json.toString())
+      }
+
+      install(SSE) {
+        maxReconnectionAttempts = retry.attempts
+        reconnectionTime = timeout.connection
       }
 
       install(WebSockets) { pingInterval = timeout.read }
