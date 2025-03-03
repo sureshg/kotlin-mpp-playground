@@ -27,9 +27,11 @@ fun main() = application {
             width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center))
 
     Window(title = resource, state = windowState, onCloseRequest = ::exitApplication) {
+      // DevelopmentEntryPoint {
       window.minimumSize = Dimension(350, 600)
       App()
       showStartupTime()
+      // }
     }
   }
 }

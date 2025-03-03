@@ -8,14 +8,15 @@ import kotlin.io.path.listDirectoryEntries
 import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
+import org.jetbrains.kotlin.compose.compiler.gradle.ComposeFeatureFlag
 
 plugins {
   dev.suresh.plugin.kotlin.mpp
-  dev.suresh.plugin.publishing
   alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.jetbrains.compose)
-  // alias(libs.plugins.jetbrains.compose.hotreload)
+  alias(libs.plugins.jetbrains.compose.hotreload)
   // alias(libs.plugins.detekt)
+  dev.suresh.plugin.publishing
 }
 
 description = "Compose Desktop App!"
@@ -60,7 +61,10 @@ kotlin {
   }
 }
 
-composeCompiler { reportsDestination = layout.buildDirectory.dir("compose_compiler") }
+composeCompiler {
+  reportsDestination = layout.buildDirectory.dir("compose_compiler")
+  featureFlags.add(ComposeFeatureFlag.OptimizeNonSkippingGroups)
+}
 
 compose {
   desktop {
