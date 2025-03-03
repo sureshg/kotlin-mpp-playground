@@ -52,7 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/19)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/60)
+    (0/62)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/342)
+    (0/350)
   </span>
 </td>
 </tr>
@@ -122,7 +122,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/19)
+    (0/20)
   </span>
 </td>
 <td class="coverageStat">
@@ -138,7 +138,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/64)
+    (0/66)
   </span>
 </td>
 <td class="coverageStat">
@@ -146,7 +146,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/375)
+    (0/383)
   </span>
 </td>
 </tr>
@@ -170,6 +170,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.plugins.callid.*
 &nbsp;import io.ktor.server.plugins.calllogging.*
 &nbsp;import io.ktor.server.plugins.compression.*
+&nbsp;import io.ktor.server.plugins.conditionalheaders.*
 &nbsp;import io.ktor.server.plugins.contentnegotiation.*
 &nbsp;import io.ktor.server.plugins.cors.routing.*
 &nbsp;import io.ktor.server.plugins.defaultheaders.*
@@ -225,6 +226,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    exposeHeader(&quot;Server&quot;)</b>
 <b class="nc">&nbsp;    allowCredentials = true</b>
 &nbsp;  }
+&nbsp;
+<b class="nc">&nbsp;  install(ConditionalHeaders) {</b>
+&nbsp;    //  version { call, outgoingContent -&gt;
+&nbsp;    //    when (outgoingContent.contentType?.withoutParameters()) {
+&nbsp;    //      ContentType.Text.CSS -&gt;
+&nbsp;    //          listOf(EntityTagVersion(&quot;abc123&quot;), LastModifiedVersion(GMTDate(123)))
+&nbsp;    //      else -&gt; emptyList()
+&nbsp;    //    }
+&nbsp;    //  }
+<b class="nc">&nbsp;  }</b>
 &nbsp;
 <b class="nc">&nbsp;  install(Sessions) {</b>
 <b class="nc">&nbsp;    cookie&lt;CookieSession&gt;(&quot;SESSION&quot;) {</b>
@@ -320,7 +331,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-03 22:23</div>
+    <div style="float:right;">generated on 2025-03-03 23:28</div>
 </div>
 </body>
 </html>

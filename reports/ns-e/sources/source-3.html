@@ -96,6 +96,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;import dev.suresh.plugins.isApi
 &nbsp;import io.ktor.server.application.*
+&nbsp;import io.ktor.util.AttributeKey
 &nbsp;import io.opentelemetry.api.trace.Span
 &nbsp;
 &nbsp;/**
@@ -104,7 +105,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp; */
 &nbsp;val OTelExtnPlugin =
 &nbsp;    createApplicationPlugin(name = &quot;OTelExtnPlugin&quot;, createConfiguration = ::OTelExtnPluginConfig) {
+&nbsp;      val onCallTimeKey = AttributeKey&lt;Long&gt;(&quot;onCallTimeKey&quot;)
 &nbsp;      onCall { call -&gt;
+&nbsp;        val onCallTime = System.currentTimeMillis()
+&nbsp;        call.attributes.put(onCallTimeKey, onCallTime)
+&nbsp;
 &nbsp;        if (pluginConfig.enabled &amp;&amp; call.isApi) {
 &nbsp;          Span.current()?.let { span -&gt;
 &nbsp;            call.response.headers.append(pluginConfig.traceIdHeader, span.spanContext.traceId)
@@ -125,6 +130,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      //  }
 &nbsp;      //
 &nbsp;      //  onCallReceive { call, body -&gt;
+&nbsp;      //    val onCallTime = call.attributes[onCallTimeKey]
 &nbsp;      //    if (pluginConfig.enabled) {
 &nbsp;      //      call.application.log.info(&quot;Received: $body&quot;)
 &nbsp;      //    }
@@ -164,7 +170,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-03 22:23</div>
+    <div style="float:right;">generated on 2025-03-03 23:28</div>
 </div>
 </body>
 </html>

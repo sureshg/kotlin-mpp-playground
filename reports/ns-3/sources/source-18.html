@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > SecAppKt</title>
+  <title>: Coverage Report > Result</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,15 +22,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh</a>
 </div>
 
-<h1>Coverage Summary for Class: SecAppKt (dev.suresh)</h1>
+<h1>Coverage Summary for Class: Result (dev.suresh)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -49,49 +46,131 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">SecAppKt</td>
+  <td class="name">Result</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    42.9%
   </span>
   <span class="absValue">
-    (0/1)
+    (3/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    25%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/4)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    37.5%
   </span>
   <span class="absValue">
-    (0/10)
+    (3/8)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    28.4%
   </span>
   <span class="absValue">
-    (0/62)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/283)
+    (19/67)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">Result$Failure</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Result$Success</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    55.6%
+  </span>
+  <span class="absValue">
+    (5/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    25%
+  </span>
+  <span class="absValue">
+    (1/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (5/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    49.5%
+  </span>
+  <span class="absValue">
+    (47/95)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -99,79 +178,57 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh;
 &nbsp;
-&nbsp;import java.time.*
-&nbsp;import java.util.*
+&nbsp;import java.io.Serializable;
 &nbsp;
-&nbsp;fun main() {
-<b class="nc">&nbsp;  println(&quot;JVM Certs &amp; Security!&quot;)</b>
-<b class="nc">&nbsp;  val trustStores = TrustStore.allTrustStores()</b>
-<b class="nc">&nbsp;  trustStores.forEach { println(it) }</b>
+&nbsp;/**
+&nbsp; * A discriminated union that encapsulates a successful outcome with a value of type T or a failure
+&nbsp; * with an arbitrary Throwable exception.
+&nbsp; *
+&nbsp; * @param &lt;T&gt; Result value type.
+&nbsp; */
+&nbsp;sealed interface Result&lt;T&gt; extends Serializable {
 &nbsp;
-<b class="nc">&nbsp;  val jj = Byte::class.javaObjectType</b>
-<b class="nc">&nbsp;  println(jj)</b>
-<b class="nc">&nbsp;  val valueClasses =</b>
-&nbsp;      arrayOf(
-<b class="nc">&nbsp;          Byte::class.java,</b>
-<b class="nc">&nbsp;          Short::class.java,</b>
-<b class="nc">&nbsp;          Int::class.java,</b>
-<b class="nc">&nbsp;          Long::class.java,</b>
-<b class="nc">&nbsp;          Float::class.java,</b>
-<b class="nc">&nbsp;          Double::class.java,</b>
-<b class="nc">&nbsp;          Boolean::class.java,</b>
-<b class="nc">&nbsp;          Char::class.java,</b>
-<b class="nc">&nbsp;          Number::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Byte::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Short::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Integer::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Long::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Float::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Double::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Boolean::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Character::class.java,</b>
-<b class="nc">&nbsp;          java.lang.Number::class.java,</b>
-<b class="nc">&nbsp;          Byte::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Short::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Int::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Long::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Float::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Double::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Boolean::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Char::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Number::class.javaPrimitiveType,</b>
-<b class="nc">&nbsp;          Byte::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Short::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Int::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Long::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Float::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Double::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Boolean::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Char::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Number::class.javaObjectType,</b>
-<b class="nc">&nbsp;          Record::class.java,</b>
-<b class="nc">&nbsp;          Duration::class.java,</b>
-<b class="nc">&nbsp;          Instant::class.java,</b>
-<b class="nc">&nbsp;          LocalDate::class.java,</b>
-<b class="nc">&nbsp;          LocalDateTime::class.java,</b>
-<b class="nc">&nbsp;          LocalTime::class.java,</b>
-<b class="nc">&nbsp;          MonthDay::class.java,</b>
-<b class="nc">&nbsp;          OffsetDateTime::class.java,</b>
-<b class="nc">&nbsp;          OffsetTime::class.java,</b>
-<b class="nc">&nbsp;          Optional::class.java,</b>
-<b class="nc">&nbsp;          OptionalDouble::class.java,</b>
-<b class="nc">&nbsp;          OptionalInt::class.java,</b>
-<b class="nc">&nbsp;          OptionalLong::class.java,</b>
-<b class="nc">&nbsp;          Period::class.java,</b>
-<b class="nc">&nbsp;          Year::class.java,</b>
-<b class="nc">&nbsp;          YearMonth::class.java,</b>
-<b class="nc">&nbsp;          ZonedDateTime::class.java,</b>
-&nbsp;      )
+&nbsp;    static &lt;T&gt; Result&lt;T&gt; success(T value) {
+<b class="fc">&nbsp;        return new Success&lt;&gt;(value);</b>
+&nbsp;    }
 &nbsp;
-&nbsp;  // This will all become primitive in Valhalla
-<b class="nc">&nbsp;  valueClasses.forEach {</b>
-<b class="nc">&nbsp;    println(&quot;${it?.simpleName?.padEnd(15)} -&gt;  ${it?.typeName?.padEnd(25)}  ${it?.isPrimitive}&quot;)</b>
-<b class="nc">&nbsp;  }</b>
+&nbsp;    static &lt;T&gt; Result&lt;T&gt; failure(Throwable error) {
+<b class="fc">&nbsp;        return new Failure&lt;&gt;(error);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default boolean isSuccess() {
+<b class="nc">&nbsp;        return this instanceof Success&lt;T&gt;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default boolean isFailure() {
+<b class="nc">&nbsp;        return this instanceof Failure&lt;T&gt;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default T getOrNull() {
+<b class="pc">&nbsp;        return this instanceof Success&lt;T&gt; s ? s.value() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default Throwable exceptionOrNull() {
+<b class="nc">&nbsp;        return this instanceof Failure&lt;T&gt; t ? t.error() : null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    default String fString() {
+<b class="nc">&nbsp;        return &quot;&quot;&quot;</b>
+&nbsp;                ToString  -&gt; %1$s
+&nbsp;                Result    -&gt; %2$s
+&nbsp;                Success   -&gt; %3$s
+&nbsp;                Failure   -&gt; %4$s
+&nbsp;                Exception -&gt; %5$s
+<b class="nc">&nbsp;                &quot;&quot;&quot;.formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    record Success&lt;T&gt;(T value) implements Result&lt;T&gt; {</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    record Failure&lt;T&gt;(Throwable error) implements Result&lt;T&gt; {</b>
+&nbsp;    }
 &nbsp;}
 </code>
 </pre>
@@ -196,7 +253,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-03 22:23</div>
+    <div style="float:right;">generated on 2025-03-03 23:28</div>
 </div>
 </body>
 </html>
