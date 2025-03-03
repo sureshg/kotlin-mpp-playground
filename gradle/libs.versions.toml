@@ -191,11 +191,12 @@ jetbrains-compose-adaptive     = "1.1.0-alpha03"
 kobweb                         = "0.20.3"
 detekt                         = "1.23.8"
 detekt-compose-rules           = "0.4.22"
-compose-hotreload              = "1.0.0"
+compose-hotreload              = "1.0.0-alpha01"
 compose-icons                  = "1.1.1"
 compose-routing                = "0.4.0"
 kottie                         = "2.0.1"
 mosaic                         = "0.16.0"
+filekit-dialogs                = "0.10.0-beta01"
 
 # NPM Dependencies
 npm-highlightjs                = "11.11.0"
@@ -645,6 +646,7 @@ compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.ico
 detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                                          , version.ref = "detekt-compose-rules" }
 compose-kottie                       = { module = "io.github.ismai117:kottie"                                               , version.ref = "kottie" }
 evas-compose                         = { module = "io.sellmair:evas-compose"                                                , version.ref = "evas" }
+filekit-dialogs-compose              = { module = "io.github.vinceglb:filekit-dialogs-compose"                              , version.ref = "filekit-dialogs" }
 
 kobweb-api                           = { module = "com.varabyte.kobweb:kobweb-api"                                          , version.ref = "kobweb" }
 kobweb-core                          = { module = "com.varabyte.kobweb:kobweb-core "                                        , version.ref = "kobweb" }
