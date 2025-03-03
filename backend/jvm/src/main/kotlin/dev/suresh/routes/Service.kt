@@ -1,9 +1,8 @@
 package dev.suresh.routes
 
 import dev.suresh.JFR
-import dev.suresh.http.MediaApiClient
-import dev.suresh.lang.FFM
-import dev.suresh.lang.VThread
+import dev.suresh.http.*
+import dev.suresh.lang.*
 import dev.suresh.log.RespLogger
 import dev.suresh.plugins.custom.CookieSession
 import dev.suresh.wasm.wasm
@@ -11,15 +10,23 @@ import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.plugins.csrf.CSRF
+import io.ktor.server.http.content.*
+import io.ktor.server.plugins.csrf.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import io.ktor.server.sse.heartbeat
+import io.ktor.server.sse.send
+import io.ktor.server.sse.sse
 import io.ktor.server.websocket.webSocket
+import io.ktor.sse.ServerSentEvent
 import io.ktor.websocket.Frame
 import io.ktor.websocket.readText
 import io.ktor.websocket.send
 import io.opentelemetry.instrumentation.annotations.WithSpan
+import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.isActive
+import kotlinx.serialization.serializer
 
 private val logger = KotlinLogging.logger {}
 
@@ -71,6 +78,34 @@ fun Routing.services() {
       val receivedText = frame.readText()
       send("You said: $receivedText")
     }
+  }
+
+  sse(
+      "/sse",
+      serialize = { typeInfo, data ->
+        val serializer = json.serializersModule.serializer(typeInfo.kotlinType!!)
+        json.encodeToString(serializer, data)
+      }) {
+        val name = call.parameters["name"] ?: "World"
+        var counter = 0
+        while (isActive) {
+          send(Name("Hello", "$name ${counter++}"))
+        }
+
+        heartbeat {
+          period = 10.seconds
+          event = ServerSentEvent("heartbeat")
+        }
+
+        close()
+      }
+
+  get("/no-compression") {
+    // Prevent response body compression
+    call.suppressCompression()
+    call.suppressDecompression()
+    println(call.isDecompressionSuppressed)
+    println(call.isCompressionSuppressed) // true
   }
 }
 

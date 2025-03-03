@@ -11,6 +11,7 @@ import io.ktor.server.plugins.autohead.*
 import io.ktor.server.plugins.callid.*
 import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.compression.*
+import io.ktor.server.plugins.conditionalheaders.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
@@ -65,6 +66,16 @@ fun Application.configureHTTP() {
     exposeHeader("Location")
     exposeHeader("Server")
     allowCredentials = true
+  }
+
+  install(ConditionalHeaders) {
+    //  version { call, outgoingContent ->
+    //    when (outgoingContent.contentType?.withoutParameters()) {
+    //      ContentType.Text.CSS ->
+    //          listOf(EntityTagVersion("abc123"), LastModifiedVersion(GMTDate(123)))
+    //      else -> emptyList()
+    //    }
+    //  }
   }
 
   install(Sessions) {
