@@ -11,3 +11,5 @@ actual fun httpClient(
     httpLogger: KLogger,
     config: HttpClientConfig<*>.() -> Unit
 ) = HttpClient(Js) { config(this) }
+
+fun getKtorEnvLogLevel(): String? = js("process.env.KTOR_LOG_LEVEL")
