@@ -155,6 +155,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;        retryOnException(retryOnTimeout = true)
 &nbsp;        retryOnServerErrors()
 &nbsp;        exponentialDelay(maxDelayMs = retry.maxDelay.inWholeMilliseconds)
+&nbsp;        // modifyRequest { it.headers.append(&quot;X_RETRY_COUNT&quot;, retryCount.toString()) }
 &nbsp;      }
 &nbsp;
 &nbsp;      install(HttpTimeout) {
@@ -179,6 +180,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;                httpLogger.info { message }
 &nbsp;              }
 &nbsp;            }
+&nbsp;        format = LoggingFormat.OkHttp
 &nbsp;        sanitizeHeader { header -&gt; header == HttpHeaders.Authorization }
 &nbsp;
 &nbsp;        // filter { it.url.host.contains(&quot;localhost&quot;).not() }
@@ -239,7 +241,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-03 23:28</div>
+    <div style="float:right;">generated on 2025-03-05 08:32</div>
 </div>
 </body>
 </html>
