@@ -12,7 +12,7 @@ data class Timeout(val connection: Duration, val read: Duration, val write: Dura
 
 data class Retry(val attempts: Int, val maxDelay: Duration) {
   companion object {
-    val DEFAULT = Retry(attempts = 2, maxDelay = 2.seconds)
+    val DEFAULT = Retry(attempts = 2, maxDelay = 5.seconds)
   }
 }
 

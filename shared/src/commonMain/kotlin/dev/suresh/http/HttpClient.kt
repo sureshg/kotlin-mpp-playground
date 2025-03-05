@@ -61,6 +61,7 @@ expect fun httpClient(
         retryOnException(retryOnTimeout = true)
         retryOnServerErrors()
         exponentialDelay(maxDelayMs = retry.maxDelay.inWholeMilliseconds)
+        // modifyRequest { it.headers.append("X_RETRY_COUNT", retryCount.toString()) }
       }
 
       install(HttpTimeout) {
@@ -85,6 +86,7 @@ expect fun httpClient(
                 httpLogger.info { message }
               }
             }
+        format = LoggingFormat.OkHttp
         sanitizeHeader { header -> header == HttpHeaders.Authorization }
 
         // filter { it.url.host.contains("localhost").not() }
