@@ -36,9 +36,10 @@ kotlinx-lincheck               = "2.36"
 kotlinx-html                   = "0.12.0"
 kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.13"
+kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.3.3"
+kotlin-wrappers                = "2025.3.5"
 kotlin-redacted                = "1.12.1"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
@@ -146,7 +147,7 @@ expiringmap                    = "0.5.10"
 otp                            = "2.1.0"
 password4j                     = "1.8.2"
 apache-commons-imaging         = "1.0-alpha5"
-testcontainers                 = "1.20.5"
+testcontainers                 = "1.20.6"
 sourceBuddy                    = "2.5.0"
 tcp-javanioproxy               = "1.6"
 kubernetes-client              = "23.0.0"
@@ -214,7 +215,7 @@ nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.30.0"
 gradle-publish                 = "1.3.0"
-shadow                         = "9.0.0-beta9"
+shadow                         = "9.0.0-beta10"
 spotless                       = "7.0.2"
 semver-plugin                  = "0.8.0"
 vercraft                       = "0.5.0"
@@ -346,6 +347,7 @@ kotlinx-io-core                      = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-io-filesystem                = { module = "org.jetbrains.kotlinx:kotlinx-io-filesystem"                     , version.ref = "kotlinx-io"}
 kotlinx-io-okio                      = { module = "org.jetbrains.kotlinx:kotlinx-io-okio"                           , version.ref = "kotlinx-io"}
 kotlinx-lincheck                     = { module = "org.jetbrains.kotlinx:lincheck"                                  , version.ref = "kotlinx-lincheck"}
+kotlinx-fuzz-jazzer                  = { module = "org.jetbrains:kotlinx.fuzz.jazzer"                               , version.ref = "kotlinx-fuzz"}
 kotlinx-reflect-lite                 = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"                      , version.ref = "kotlinx-reflect-lite"}
 kotlinx-collections-immutable        = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable"             , version.ref = "kotlinx-collections-immutable"}
 kotlinx-html                         = { module = "org.jetbrains.kotlinx:kotlinx-html"                              , version.ref = "kotlinx-html"}
@@ -737,6 +739,7 @@ kotlin-js-plainobjects               = { id = "org.jetbrains.kotlin.plugin.js-pl
 kotlin-compose-compiler              = { id = "org.jetbrains.kotlin.plugin.compose"                            , version.ref = "kotlin"}
 kotlinx-atomicfu                     = { id = "org.jetbrains.kotlinx.atomicfu"                                 , version.ref = "kotlinx-atomicfu"}
 kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark"                                , version.ref = "kotlinx-benchmark" }
+kotlinx-fuzz                         = { id = "kotlinx.fuzz.gradle"                                            , version.ref = "kotlinx-fuzz" }
 kotlinx-rpc                          = { id = "org.jetbrains.kotlinx.rpc.plugin"                               , version.ref = "kotlinx-rpc" }
 jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
 jetbrains-compose-hotreload          = { id = "org.jetbrains.compose.hot-reload"                               , version.ref = "compose-hotreload"}

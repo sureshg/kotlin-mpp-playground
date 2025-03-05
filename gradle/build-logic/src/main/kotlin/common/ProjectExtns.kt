@@ -6,6 +6,9 @@ import com.google.devtools.ksp.gradle.KspAATask
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.nio.file.Path
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.jar.Attributes
 import org.graalvm.buildtools.gradle.dsl.GraalVMExtension
 import org.gradle.accessors.dm.LibrariesForLibs
 import org.gradle.api.Action
@@ -100,6 +103,27 @@ val Project.toolchainVendor
 
 val Project.addModules
   get() = libs.versions.java.addModules.get()
+
+val Project.isAutomaticModuleEnabled
+  get() = gradleBooleanProperty("java.automatic.module.enabled").get()
+
+val Project.defaultJarManifest
+  get() = buildMap {
+    put("Enable-Native-Access", "ALL-UNNAMED")
+    put("Built-By", System.getProperty("user.name"))
+    put("Built-Jdk", System.getProperty("java.runtime.version"))
+    put(
+        "Built-OS",
+        "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}")
+    put("Build-Timestamp", DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()))
+    put("Created-By", "Gradle ${gradle.gradleVersion}")
+    put(Attributes.Name.IMPLEMENTATION_TITLE.toString(), project.name)
+    put(Attributes.Name.IMPLEMENTATION_VERSION.toString(), project.version)
+    put(Attributes.Name.IMPLEMENTATION_VENDOR.toString(), project.group)
+    if (isAutomaticModuleEnabled) {
+      put("Automatic-Module-Name", project.group)
+    }
+  }
 
 /** Kotlin version properties. */
 val Project.kotlinVersion
@@ -211,6 +235,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             "-XX:+UnlockExperimentalVMOptions",
             "-XX:+UseCompactObjectHeaders",
             "-XX:MaxRAMPercentage=0.8",
+            // "-XX:+UseLargePages",
             // "-XX:+UseEpsilonGC",
             // "-XX:+AlwaysPreTouch",
             """-Xlog:gc*,stringdedup*:
@@ -279,6 +304,7 @@ fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = bu
             // "-XshowSettings:system",
             // "-XshowSettings:properties",
             // "--show-module-resolution",
+            // "-XX:-StackTraceInThrowable",
             // "-XX:+ShowHiddenFrames",
             // "-verbose:module",
             // "-XX:ConcGCThreads=2",
@@ -692,7 +718,11 @@ fun Project.printTaskGraph() {
   }
 }
 
-/** Adds [file] as an outgoing variant to publication. */
+/**
+ * Adds [file] as an outgoing variant to publication. Refer
+ * [Customizing publishing](https://docs.gradle.org/current/userguide/publishing_customization.html)
+ * for more details.
+ */
 @Suppress("UnstableApiUsage")
 fun Project.addFileToJavaComponent(file: File) {
   // Here's a configuration to declare the outgoing variant

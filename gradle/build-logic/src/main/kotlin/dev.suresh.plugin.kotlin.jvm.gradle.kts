@@ -5,9 +5,6 @@ import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
 import java.io.PrintWriter
 import java.io.StringWriter
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-import java.util.jar.Attributes
 import java.util.spi.ToolProvider
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
@@ -108,21 +105,7 @@ tasks {
   withType<KspAATask>().configureEach { configureKspConfig() }
 
   withType<Jar>().configureEach {
-    manifest {
-      attributes(
-          // "Automatic-Module-Name" to project.group,
-          "Enable-Native-Access" to "ALL-UNNAMED",
-          "Built-By" to System.getProperty("user.name"),
-          "Built-Jdk" to System.getProperty("java.runtime.version"),
-          "Built-OS" to
-              "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}",
-          "Build-Timestamp" to DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()),
-          "Created-By" to "Gradle ${gradle.gradleVersion}",
-          Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
-          Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
-          Attributes.Name.IMPLEMENTATION_VENDOR.toString() to project.group,
-      )
-    }
+    manifest { attributes(defaultJarManifest) }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
   }
 

@@ -5,8 +5,6 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.devtools.ksp.gradle.KspAATask
 import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
 import java.util.jar.Attributes
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
@@ -112,21 +110,7 @@ tasks {
   // withType<Kotlin2JsCompile>().configureEach {}
 
   withType<Jar>().configureEach {
-    manifest {
-      attributes(
-          // "Automatic-Module-Name" to project.group,
-          "Enable-Native-Access" to "ALL-UNNAMED",
-          "Built-By" to System.getProperty("user.name"),
-          "Built-Jdk" to System.getProperty("java.runtime.version"),
-          "Built-OS" to
-              "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}",
-          "Build-Timestamp" to DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()),
-          "Created-By" to "Gradle ${gradle.gradleVersion}",
-          Attributes.Name.IMPLEMENTATION_TITLE.toString() to project.name,
-          Attributes.Name.IMPLEMENTATION_VERSION.toString() to project.version,
-          Attributes.Name.IMPLEMENTATION_VENDOR.toString() to project.group,
-      )
-    }
+    manifest { attributes(defaultJarManifest) }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
   }
 
@@ -151,32 +135,37 @@ tasks {
   }
 
   pluginManager.withPlugin("com.gradleup.shadow") {
-    // Register a shadowJar task for the default jvm target
-    val shadowJvmJar by
-        registering(ShadowJar::class) {
-          val main by kotlin.jvm().compilations
-          // allOutputs == classes + resources
-          from(main.output.allOutputs)
-          val runtimeDepConfig =
-              project.configurations.getByName(main.runtimeDependencyConfigurationName)
-          configurations = listOf(runtimeDepConfig)
-          archiveClassifier = "all"
-          mergeServiceFiles()
+    val shadowJar by
+        existing(ShadowJar::class) {
+          // https://gradleup.com/shadow/kmp-plugin/
           manifest {
             attributes[Attributes.Name.MAIN_CLASS.toString()] = libs.versions.app.mainclass
           }
-          duplicatesStrategy = DuplicatesStrategy.INCLUDE
         }
 
     val buildExecutable by
         registering(ReallyExecJar::class) {
-          jarFile = shadowJvmJar.flatMap { it.archiveFile }
+          jarFile = shadowJar.flatMap { it.archiveFile }
           javaOpts = jvmRunArgs
           execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
           onlyIf { OperatingSystem.current().isUnix }
         }
 
     build { finalizedBy(buildExecutable) }
+
+    // Shows how to register a shadowJar task for the default jvm target
+    register<ShadowJar>("shadowJvmJar") {
+      val main by kotlin.jvm().compilations
+      // allOutputs == classes + resources
+      from(main.output.allOutputs)
+      val runtimeDepConfig =
+          project.configurations.getByName(main.runtimeDependencyConfigurationName)
+      configurations = listOf(runtimeDepConfig)
+      archiveClassifier = "jvm-all"
+      mergeServiceFiles()
+      manifest { attributes[Attributes.Name.MAIN_CLASS.toString()] = libs.versions.app.mainclass }
+      duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
   }
 
   pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
@@ -188,7 +177,7 @@ tasks {
     }
 
     withType<KotlinApiBuildTask>().configureEach {
-      // inputJar = named<Jar>("shadowJvmJar").flatMap { it.archiveFile }
+      // inputJar = named<Jar>("shadowJar").flatMap { it.archiveFile }
     }
   }
 }
