@@ -163,6 +163,7 @@ $dokka.location:/BuildConfig/kotlinxCoroutines/#/PointingToDeclaration/shared/[
 $dokka.location:/BuildConfig/kotlinxDataframe/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-dataframe.html
 $dokka.location:/BuildConfig/kotlinxDatetime/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-datetime.html
 $dokka.location:/BuildConfig/kotlinxDatetimeZoneinfo/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-datetime-zoneinfo.html
+$dokka.location:/BuildConfig/kotlinxFuzz/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-fuzz.html
 $dokka.location:/BuildConfig/kotlinxHtml/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-html.html
 $dokka.location:/BuildConfig/kotlinxIo/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-io.html
 $dokka.location:/BuildConfig/kotlinxJsonpath/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-jsonpath.html

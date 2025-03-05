@@ -41,7 +41,7 @@
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.2.0.63+968fdb9
+        <div class="library-version" id="library-version">0.2.0.65+d82fefa
         </div>
         <div class="navigation-controls">
         <div class="filter-section filter-section_loading" id="filter-section">
@@ -391,6 +391,7 @@
         retryOnException(retryOnTimeout = true)
         retryOnServerErrors()
         exponentialDelay(maxDelayMs = retry.maxDelay.inWholeMilliseconds)
+        // modifyRequest { it.headers.append("X_RETRY_COUNT", retryCount.toString()) }
       }
 
       install(HttpTimeout) {
@@ -415,6 +416,7 @@
                 httpLogger.info { message }
               }
             }
+        format = LoggingFormat.OkHttp
         sanitizeHeader { header -&gt; header == HttpHeaders.Authorization }
 
         // filter { it.url.host.contains("localhost").not() }
