@@ -2,9 +2,9 @@
 
 import com.gradle.develocity.agent.gradle.scan.PublishedBuildScan
 import com.javiersc.semver.settings.gradle.plugin.SemverSettingsExtension
-import common.GithubAction
+import common.*
 import kotlinx.kover.gradle.aggregation.settings.dsl.KoverSettingsExtension
-import org.gradle.api.JavaVersion.VERSION_17
+import org.gradle.api.JavaVersion.VERSION_21
 import org.gradle.kotlin.dsl.*
 import org.gradle.toolchains.foojay.FoojayToolchainResolver
 import org.tomlj.Toml
@@ -12,14 +12,14 @@ import org.tomlj.Toml
 val versionCatalog by lazy {
   // A hack to read version catalog from settings
   runCatching {
-        Toml.parse(file("$rootDir/gradle/libs.versions.toml").readText()).getTable("versions")
+        Toml.parse(settingsDir.resolve("gradle/libs.versions.toml").readText()).getTable("versions")
       }
       .getOrNull()
 }
 
 pluginManagement {
-  require(JavaVersion.current().isCompatibleWith(VERSION_17)) {
-    "This build requires Gradle to be run with at least Java $VERSION_17"
+  require(JavaVersion.current().isCompatibleWith(VERSION_21)) {
+    "This build requires Gradle to be run with at least Java $VERSION_21"
   }
 
   resolutionStrategy {
@@ -77,7 +77,7 @@ toolchainManagement {
 }
 
 configure<SemverSettingsExtension> {
-  // val ktVersion = versionCatalog.getString("kotlin").orEmpty()
+  // val ktVersion = versionCatalog?.getString("kotlin").orEmpty()
   // mapVersion { it.copy(metadata = ktVersion).toString() }
 }
 
@@ -137,11 +137,13 @@ fun RepositoryHandler.nodeJS() {
 }
 
 fun RepositoryHandler.mavenSnapshot() {
-  val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
+  val mvnSnapshot = gradleBooleanProperty("maven.snapshot.repo.enabled").get()
   if (mvnSnapshot) {
     logger.lifecycle("❖ Maven Snapshot is enabled!")
     maven(url = versionCatalog?.getString("repo-mvn-snapshot").orEmpty()) {
+      name = "Central Portal Snapshots"
       mavenContent { snapshotsOnly() }
+      // content { includeModule("dev.suresh", "app") }
     }
   }
 }

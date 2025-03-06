@@ -77,7 +77,7 @@ val Project.debugEnabled
   get() = gradleBooleanProperty("debug").get()
 
 val Project.isSnapshotVersion
-  get() = version.toString().endsWith("SNAPSHOT", true)
+  get() = version.toString().endsWith("-SNAPSHOT", true)
 
 val Project.isKmpExecEnabled
   get() = extra.has("enableKmpExec") && extra["enableKmpExec"] as Boolean

@@ -12,7 +12,7 @@ dependencyResolutionManagement {
 }
 
 fun RepositoryHandler.mavenSnapshot() {
-  val mvnSnapshot = providers.gradleProperty("enableMavenSnapshot").orNull.toBoolean()
+  val mvnSnapshot = providers.gradleProperty("maven.snapshot.repo.enabled").orNull.toBoolean()
   if (mvnSnapshot) {
     val mvnSnapshotRepo =
         file(rootDir)
