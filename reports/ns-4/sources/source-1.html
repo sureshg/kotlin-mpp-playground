@@ -52,18 +52,18 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   <td class="name">CertExtnKt</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    100%
   </span>
   <span class="absValue">
-    (0/1)
+    (1/1)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    7.1%
   </span>
   <span class="absValue">
-    (0/14)
+    (1/14)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,18 +76,18 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    14.3%
   </span>
   <span class="absValue">
-    (0/35)
+    (5/35)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    10.5%
   </span>
   <span class="absValue">
-    (0/257)
+    (27/257)
   </span>
 </td>
 </tr>
@@ -116,11 +116,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;/** Returns the certificate subject DN (common name) from the certificate */
 &nbsp;val X509Certificate.commonName
 &nbsp;  get() =
-<b class="nc">&nbsp;      LdapName(subjectX500Principal.name)</b>
-<b class="nc">&nbsp;          .rdns</b>
-<b class="nc">&nbsp;          .filter { it.type.equals(&quot;CN&quot;, true) }</b>
-<b class="nc">&nbsp;          .map { it.value.toString() }</b>
-<b class="nc">&nbsp;          .single()</b>
+<b class="fc">&nbsp;      LdapName(subjectX500Principal.name)</b>
+<b class="fc">&nbsp;          .rdns</b>
+<b class="fc">&nbsp;          .filter { it.type.equals(&quot;CN&quot;, true) }</b>
+<b class="fc">&nbsp;          .map { it.value.toString() }</b>
+<b class="fc">&nbsp;          .single()</b>
 &nbsp;
 &nbsp;/** Returns the subject alternative names from the certificate. */
 &nbsp;val X509Certificate.subjectAltNames
@@ -224,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-05 08:32</div>
+    <div style="float:right;">generated on 2025-03-07 00:06</div>
 </div>
 </body>
 </html>
