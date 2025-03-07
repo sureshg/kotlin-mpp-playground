@@ -39,7 +39,7 @@ kotlinx-benchmark              = "0.4.13"
 kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.3.5"
+kotlin-wrappers                = "2025.3.6"
 kotlin-redacted                = "1.12.1"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
@@ -99,7 +99,7 @@ jmh                            = "1.37"
 mrjar                          = "0.1.1"
 ktfmt                          = "0.54"
 google-javaformat              = "1.25.2"
-palantir-javaformat            = "2.55.0"
+palantir-javaformat            = "2.56.0"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.16.0"
 graalvm                        = "24.1.2"
@@ -178,17 +178,17 @@ mcp-kotlin                     = "0.3.0"
 mcp4k                          = "0.3.4"
 dflib                          = "2.0.0-M2"
 ldaptive                       = "2.4.0"
-chicory                        = "1.1.0"
+chicory                        = "1.1.1"
 weh-bindings                   = "0.3"
 log4k                          = "0.30.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.2"
 
 # Compose
-jetbrains-compose              = "1.8.0-alpha03"
-jetbrains-compose-viewmodel    = "2.9.0-alpha03"
-jetbrains-compose-nav          = "2.8.0-alpha13"
-jetbrains-compose-adaptive     = "1.1.0-alpha03"
+jetbrains-compose              = "1.8.0-alpha04"
+jetbrains-compose-viewmodel    = "2.9.0-alpha04"
+jetbrains-compose-nav          = "2.9.0-alpha14"
+jetbrains-compose-adaptive     = "1.1.0-alpha04"
 kobweb                         = "0.20.4"
 detekt                         = "1.23.8"
 detekt-compose-rules           = "0.4.22"
@@ -672,7 +672,7 @@ chicory-bom                          = { module = "com.dylibso.chicory:bom"     
 chicory-aot                          = { module = "com.dylibso.chicory:aot-experimental"                                    , version.ref = "chicory" }
 chicory-hostmodule-annproc           = { module = "com.dylibso.chicory:host-module-annotations-experimental"                , version.ref = "chicory" }
 chicory-wasi                         = { module = "com.dylibso.chicory:wasi"                                                , version.ref = "chicory" }
-chicory-simd                         = { module = "com.dylibso.chicory:simd-experimental"                                   , version.ref = "chicory" }
+chicory-simd                         = { module = "com.dylibso.chicory:simd"                                                , version.ref = "chicory" }
 chasm                                = { module = "io.github.charlietap.chasm:chasm"                                        , version.ref = "chasm" }
 weh-chasm-wasip1                     = { module = "at.released.weh:bindings-chasm-wasip1"                                   , version.ref = "weh-bindings" }
 weh-chasm-emscripten                 = { module = "at.released.weh:bindings-chasm-emscripten"                               , version.ref = "weh-bindings" }
