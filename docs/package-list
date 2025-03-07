@@ -233,7 +233,6 @@ $dokka.location:/BuildConfig/reflectTypeparamresolver/#/PointingToDeclaration/s
 $dokka.location:/BuildConfig/reflectTypetools/#/PointingToDeclaration/shared/[root]/-build-config/reflect-typetools.html
 $dokka.location:/BuildConfig/repoMvnCentral/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-central.html
 $dokka.location:/BuildConfig/repoMvnSnapshot/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-snapshot.html
-$dokka.location:/BuildConfig/repoMvnSnapshots01/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-snapshots01.html
 $dokka.location:/BuildConfig/repoNodejs/#/PointingToDeclaration/shared/[root]/-build-config/repo-nodejs.html
 $dokka.location:/BuildConfig/reproducibleBuilds/#/PointingToDeclaration/shared/[root]/-build-config/reproducible-builds.html
 $dokka.location:/BuildConfig/rsocket/#/PointingToDeclaration/shared/[root]/-build-config/rsocket.html
