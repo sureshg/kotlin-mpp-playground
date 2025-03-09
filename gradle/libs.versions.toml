@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Gradle Dependencies Versions
-bc-plugins                     = "1.15.0"
+bc-plugins                     = "1.17.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
@@ -39,7 +39,7 @@ kotlinx-benchmark              = "0.4.13"
 kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.3.7"
+kotlin-wrappers                = "2025.3.8"
 kotlin-redacted                = "1.12.1"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
@@ -158,7 +158,7 @@ ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.0.0"
 airlift-aircompressor          = "2.0.2"
 airlift-security               = "312"
-directory-keystore             = "1.1.0"
+directory-keystore             = "1.1.1"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
 jfree-chart                    = "1.5.4"
@@ -167,7 +167,7 @@ xchart                         = "3.8.8"
 batik                          = "1.18"
 twelvemonkeys                  = "3.12.0"
 okapibarcode                   = "0.4.1"
-chasm                          = "0.9.53"
+chasm                          = "0.9.6"
 cel                            = "0.9.1"
 kfswatch                       = "1.3.0"
 kmp-process                    = "0.2.0"
@@ -247,6 +247,8 @@ badass-jlink                   = "3.1.0"
 maven-plugin-api               = "3.9.9"
 maven-plugin-annotations       = "3.15.1"
 gradlex-maven-plugin           = "1.0.3"
+typesafe-conventions           = "0.5.0"
+
 
 # Repositories
 repo-mvn-central               = "https://repo.maven.apache.org/maven2/"
@@ -776,6 +778,7 @@ kmbed-plugin                         = { id = "io.karma.kmbed.kmbed-gradle-plugi
 badass-jlink                         = { id = "com.dua3.gradle.jlink"                                          , version.ref = "badass-jlink" }
 badass-runtime                       = { id = "com.dua3.gradle.runtime"                                        , version.ref = "badass-runtime" }
 gradlex-maven-plugin                 = { id = "org.gradlex.maven-plugin-development"                           , version.ref = "gradlex-maven-plugin" }
+typesafe-conventions                 = { id = "dev.panuszewski.typesafe-conventions"                           , version.ref = "typesafe-conventions" }
 
 # Common build and settings plugin
 project-root                         = { id = "dev.suresh.plugin.root"                                         , version.ref = "bc-plugins" }

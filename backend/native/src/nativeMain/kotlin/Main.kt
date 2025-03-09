@@ -53,7 +53,7 @@ fun main(args: Array<String>): Unit = runBlocking {
   val client = MediaApiClient()
   try {
     val images = client.images()
-    println("Found ${images.size} images")
+    println("Found ${images.size} images!")
   } catch (e: Exception) {
     e.printStackTrace()
   }

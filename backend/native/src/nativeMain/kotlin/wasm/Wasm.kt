@@ -6,7 +6,7 @@ import io.github.charlietap.chasm.embedding.module
 import io.github.charlietap.chasm.embedding.shapes.getOrNull
 import io.github.charlietap.chasm.embedding.shapes.map
 import io.github.charlietap.chasm.embedding.store
-import io.github.charlietap.chasm.executor.runtime.value.NumberValue
+import io.github.charlietap.chasm.runtime.value.NumberValue
 import kotlinx.io.buffered
 import kotlinx.io.files.Path
 import kotlinx.io.files.SystemFileSystem
