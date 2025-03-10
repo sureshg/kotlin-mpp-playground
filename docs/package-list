@@ -259,6 +259,7 @@ $dokka.location:/BuildConfig/testcontainers/#/PointingToDeclaration/shared/[roo
 $dokka.location:/BuildConfig/tomlj/#/PointingToDeclaration/shared/[root]/-build-config/tomlj.html
 $dokka.location:/BuildConfig/tsid/#/PointingToDeclaration/shared/[root]/-build-config/tsid.html
 $dokka.location:/BuildConfig/twelvemonkeys/#/PointingToDeclaration/shared/[root]/-build-config/twelvemonkeys.html
+$dokka.location:/BuildConfig/typesafeConventions/#/PointingToDeclaration/shared/[root]/-build-config/typesafe-conventions.html
 $dokka.location:/BuildConfig/uriKmp/#/PointingToDeclaration/shared/[root]/-build-config/uri-kmp.html
 $dokka.location:/BuildConfig/urlencoder/#/PointingToDeclaration/shared/[root]/-build-config/urlencoder.html
 $dokka.location:/BuildConfig/vanniktechPublish/#/PointingToDeclaration/shared/[root]/-build-config/vanniktech-publish.html
