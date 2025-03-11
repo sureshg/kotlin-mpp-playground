@@ -17,11 +17,11 @@ fun main(args: Array<String>) =
       EngineMain.main(args)
     } catch (e: Throwable) {
       val log = KtorSimpleLogger("main")
-      log.error("Failed to start the application: ${e.message}", e)
+      log.error("Failed to start ${BuildConfig.description}: ${e.message}", e)
     }
 
 fun Application.module() {
-  log.info("Starting App: ${BuildConfig.version}...")
+  log.info("Starting ${BuildConfig.description} v${BuildConfig.version}...")
   AppConfig.init(environment.config)
   configureInterceptors()
   configureHTTP()
