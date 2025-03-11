@@ -169,11 +169,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;      EngineMain.main(args)</b>
 &nbsp;    } catch (e: Throwable) {
 <b class="nc">&nbsp;      val log = KtorSimpleLogger(&quot;main&quot;)</b>
-<b class="nc">&nbsp;      log.error(&quot;Failed to start the application: ${e.message}&quot;, e)</b>
+<b class="nc">&nbsp;      log.error(&quot;Failed to start ${BuildConfig.description}: ${e.message}&quot;, e)</b>
 &nbsp;    }
 &nbsp;
 &nbsp;fun Application.module() {
-<b class="nc">&nbsp;  log.info(&quot;Starting App: ${BuildConfig.version}...&quot;)</b>
+<b class="nc">&nbsp;  log.info(&quot;Starting ${BuildConfig.description} v${BuildConfig.version}...&quot;)</b>
 <b class="nc">&nbsp;  AppConfig.init(environment.config)</b>
 <b class="nc">&nbsp;  configureInterceptors()</b>
 <b class="nc">&nbsp;  configureHTTP()</b>
@@ -238,7 +238,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-10 22:46</div>
+    <div style="float:right;">generated on 2025-03-11 04:20</div>
 </div>
 </body>
 </html>
