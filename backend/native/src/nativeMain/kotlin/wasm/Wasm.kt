@@ -29,7 +29,7 @@ fun execWasm(path: Path, arg: Int = 5) {
           }
       println("Result: $result")
     } else {
-      println("Wasm file not found: $path")
+      println("Wasm file not found: $path!")
     }
   } catch (e: Exception) {
     println("Failed to execute wasm: ${e.message}")

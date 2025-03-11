@@ -5,7 +5,6 @@ import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
 import common.*
 import common.Platform
-import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
@@ -25,9 +24,8 @@ kotlin {
 
   targets.withType<KotlinNativeTarget>().configureEach {
     binaries {
-      executable(setOf(RELEASE)) {
+      executable(setOf(DEBUG)) {
         entryPoint = "main"
-
         // Fix for libcrypt.so.1 not-found error on distroless
         if (target.targetName.startsWith("linux")) {
           linkerOpts("--as-needed")
@@ -42,6 +40,10 @@ kotlin {
           }
         }
       }
+
+      test(setOf()) {}
+
+      // sharedLib {  }
     }
   }
 
@@ -117,20 +119,20 @@ jib {
 sourceSets.maybeCreate("main")
 
 tasks {
-  val linkReleaseExecutableMacosX64 by getting(KotlinNativeLink::class)
-  val linkReleaseExecutableMacosArm64 by getting(KotlinNativeLink::class)
-
+  val buildType = "Debug"
   val macOsUniversalBinary by
       registering(Exec::class) {
+        val macosX64 = named<KotlinNativeLink>("link${buildType}ExecutableMacosX64")
+        val macosArm64 = named<KotlinNativeLink>("link${buildType}ExecutableMacosArm64")
         val binName = "${project.name}-macos"
-        dependsOn(linkReleaseExecutableMacosX64, linkReleaseExecutableMacosArm64)
+        dependsOn(macosX64, macosArm64)
         commandLine(
             "lipo",
             "-create",
             "-output",
             binName,
-            linkReleaseExecutableMacosX64.outputFile.get(),
-            linkReleaseExecutableMacosArm64.outputFile.get())
+            macosArm64.get().outputFile.get(),
+            macosX64.get().outputFile.get())
         workingDir = layout.buildDirectory.dir("bin").get().asFile
         group = "Build"
         description = "Builds universal macOS binary"
@@ -141,7 +143,7 @@ tasks {
                   "Universal macOS binary created: ${workingDir.resolve(binName).absolutePath}"))
         }
 
-        onlyIf { OperatingSystem.current().isMacOsX }
+        onlyIf { Platform.isMac }
       }
 
   val prepareJib by
@@ -149,8 +151,8 @@ tasks {
         // DefaultNativePlatform.getCurrentArchitecture()
         val releaseExecutable =
             when {
-              Platform.isAmd64 -> named("linkReleaseExecutableLinuxX64")
-              else -> named("linkReleaseExecutableLinuxArm64")
+              Platform.isAmd64 -> named("link${buildType}ExecutableLinuxX64")
+              else -> named("link${buildType}ExecutableLinuxArm64")
             }
 
         from(releaseExecutable)
