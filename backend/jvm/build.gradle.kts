@@ -10,8 +10,8 @@ plugins {
   gg.jte.gradle
   dev.suresh.plugin.graalvm
   com.gradleup.shadow
-  alias(libs.plugins.ktor)
-  alias(libs.plugins.exposed)
+  alias(libs.plugins.jetbrains.ktor)
+  alias(libs.plugins.jetbrains.exposed)
   dev.suresh.plugin.publishing
 }
 
