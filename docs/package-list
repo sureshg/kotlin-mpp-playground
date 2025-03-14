@@ -46,7 +46,6 @@ $dokka.location:/BuildConfig/buildkonfig/#/PointingToDeclaration/shared/[root]/
 $dokka.location:/BuildConfig/bytesize/#/PointingToDeclaration/shared/[root]/-build-config/bytesize.html
 $dokka.location:/BuildConfig/cache4k/#/PointingToDeclaration/shared/[root]/-build-config/cache4k.html
 $dokka.location:/BuildConfig/cardiologist/#/PointingToDeclaration/shared/[root]/-build-config/cardiologist.html
-$dokka.location:/BuildConfig/cashMolecule/#/PointingToDeclaration/shared/[root]/-build-config/cash-molecule.html
 $dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/-build-config/cash-turbine.html
 $dokka.location:/BuildConfig/cel/#/PointingToDeclaration/shared/[root]/-build-config/cel.html
 $dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
@@ -125,7 +124,6 @@ $dokka.location:/BuildConfig/kaml/#/PointingToDeclaration/shared/[root]/-build-
 $dokka.location:/BuildConfig/kfswatch/#/PointingToDeclaration/shared/[root]/-build-config/kfswatch.html
 $dokka.location:/BuildConfig/kmbed/#/PointingToDeclaration/shared/[root]/-build-config/kmbed.html
 $dokka.location:/BuildConfig/kmpAppdirs/#/PointingToDeclaration/shared/[root]/-build-config/kmp-appdirs.html
-$dokka.location:/BuildConfig/kmpHierarchy/#/PointingToDeclaration/shared/[root]/-build-config/kmp-hierarchy.html
 $dokka.location:/BuildConfig/kmpProcess/#/PointingToDeclaration/shared/[root]/-build-config/kmp-process.html
 $dokka.location:/BuildConfig/kmpSettings/#/PointingToDeclaration/shared/[root]/-build-config/kmp-settings.html
 $dokka.location:/BuildConfig/kmpStore5/#/PointingToDeclaration/shared/[root]/-build-config/kmp-store5.html
@@ -216,6 +214,7 @@ $dokka.location:/BuildConfig/okio/#/PointingToDeclaration/shared/[root]/-build-
 $dokka.location:/BuildConfig/openjdkJmc/#/PointingToDeclaration/shared/[root]/-build-config/openjdk-jmc.html
 $dokka.location:/BuildConfig/orgName/#/PointingToDeclaration/shared/[root]/-build-config/org-name.html
 $dokka.location:/BuildConfig/orgUrl/#/PointingToDeclaration/shared/[root]/-build-config/org-url.html
+$dokka.location:/BuildConfig/oshi/#/PointingToDeclaration/shared/[root]/-build-config/oshi.html
 $dokka.location:/BuildConfig/otel/#/PointingToDeclaration/shared/[root]/-build-config/otel.html
 $dokka.location:/BuildConfig/otelInstr/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr.html
 $dokka.location:/BuildConfig/otelInstrAlpha/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr-alpha.html
@@ -265,6 +264,7 @@ $dokka.location:/BuildConfig/urlencoder/#/PointingToDeclaration/shared/[root]/-
 $dokka.location:/BuildConfig/vanniktechPublish/#/PointingToDeclaration/shared/[root]/-build-config/vanniktech-publish.html
 $dokka.location:/BuildConfig/vercraft/#/PointingToDeclaration/shared/[root]/-build-config/vercraft.html
 $dokka.location:/BuildConfig/version/#/PointingToDeclaration/shared/[root]/-build-config/version.html
+$dokka.location:/BuildConfig/wasm2class/#/PointingToDeclaration/shared/[root]/-build-config/wasm2class.html
 $dokka.location:/BuildConfig/webjarsXterm/#/PointingToDeclaration/shared/[root]/-build-config/webjars-xterm.html
 $dokka.location:/BuildConfig/wehBindings/#/PointingToDeclaration/shared/[root]/-build-config/weh-bindings.html
 $dokka.location:/BuildConfig/wirePlugin/#/PointingToDeclaration/shared/[root]/-build-config/wire-plugin.html
