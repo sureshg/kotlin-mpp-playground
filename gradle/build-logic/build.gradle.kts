@@ -145,7 +145,6 @@ dependencies {
   implementation(libs.jte.runtime)
   jteGenerate(libs.jte.models)
 
-
   // External plugins deps to use in precompiled script plugins
   implementation(libs.plugins.kotlin.multiplatform.dep)
   implementation(libs.plugins.kotlin.allopen.dep)
