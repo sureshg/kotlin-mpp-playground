@@ -95,7 +95,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.tls
 &nbsp;
 &nbsp;import java.security.cert.X509Certificate
-&nbsp;import javax.net.ssl.X509TrustManager
+&nbsp;import javax.net.ssl.*
 &nbsp;
 <b class="nc">&nbsp;class SavingTrustManager : X509TrustManager {</b>
 &nbsp;
@@ -113,6 +113,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  override fun getAcceptedIssuers(): Array&lt;X509Certificate&gt; = emptyArray()</b>
+&nbsp;}
+&nbsp;
+&nbsp;fun SavingTrustManager.newTLSSocket(): SSLSocket {
+&nbsp;  val tm = this
+&nbsp;  return SSLContext.getInstance(&quot;TLS&quot;).run {
+&nbsp;    init(null, arrayOf(tm), null)
+&nbsp;    socketFactory.createSocket() as SSLSocket
+&nbsp;  }
 &nbsp;}
 </code>
 </pre>
@@ -137,7 +145,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-11 22:28</div>
+    <div style="float:right;">generated on 2025-03-14 05:12</div>
 </div>
 </body>
 </html>

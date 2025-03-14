@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>: Coverage Report > TLSProp</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">dev.suresh.tls</a>
+</div>
+
+<h1>Coverage Summary for Class: TLSProp (dev.suresh.tls)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+<th class="coverageStat 
+">
+  Instruction, %
+</th>
+</tr>
+<tr>
+  <td class="name">TLSProp</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/224)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.tls
+&nbsp;
+&nbsp;import java.net.JarURLConnection
+&nbsp;import java.security.Security
+&nbsp;import java.util.jar.Manifest
+&nbsp;import kotlin.reflect.KClass
+&nbsp;
+&nbsp;/**
+&nbsp; * Enumeration of JSSE (Java Secure Socket Extension) system and security properties used for
+&nbsp; * configuring TLS/SSL connections.
+&nbsp; */
+<b class="nc">&nbsp;enum class TLSProp(val prop: String, val desc: String, val system: Boolean = true) {</b>
+<b class="nc">&nbsp;  Debug(&quot;javax.net.debug&quot;, &quot;Debugging SSL/TLS Connections.&quot;),</b>
+<b class="nc">&nbsp;  KeyStore(&quot;javax.net.ssl.keyStore&quot;, &quot;Default keystore&quot;),</b>
+<b class="nc">&nbsp;  KeyStoreType(&quot;javax.net.ssl.keyStoreType&quot;, &quot;Default keystore type&quot;),</b>
+<b class="nc">&nbsp;  KeyStorePassword(&quot;javax.net.ssl.keyStorePassword&quot;, &quot;Default keystore password&quot;),</b>
+<b class="nc">&nbsp;  KeyStoreProvider(&quot;javax.net.ssl.keyStoreProvider&quot;, &quot;Default keystore provider&quot;),</b>
+<b class="nc">&nbsp;  TrustStore(&quot;javax.net.ssl.trustStore&quot;, &quot;Default truststore&quot;),</b>
+<b class="nc">&nbsp;  TrustStoreType(&quot;javax.net.ssl.trustStoreType&quot;, &quot;Default truststore type&quot;),</b>
+<b class="nc">&nbsp;  TrustStorePassword(&quot;javax.net.ssl.trustStorePassword&quot;, &quot;Default truststore password&quot;),</b>
+<b class="nc">&nbsp;  TrustStoreProvider(&quot;javax.net.ssl.trustStoreProvider&quot;, &quot;Default truststore provider&quot;),</b>
+<b class="nc">&nbsp;  ProxyHost(&quot;https.proxyHost&quot;, &quot;Default HTTPS proxy host&quot;),</b>
+<b class="nc">&nbsp;  ProxyPort(&quot;https.proxyPort&quot;, &quot;Default HTTPS proxy port&quot;),</b>
+<b class="nc">&nbsp;  HttpsCipherSuites(&quot;https.cipherSuites&quot;, &quot;Default cipher suites&quot;),</b>
+<b class="nc">&nbsp;  HttpsProtocols(&quot;https.protocols&quot;, &quot;Default HTTPS handshaking protocols&quot;),</b>
+<b class="nc">&nbsp;  TLSProtocols(&quot;jdk.tls.client.protocols&quot;, &quot;Default Enabled TLS Protocols&quot;),</b>
+<b class="nc">&nbsp;  CertPathDisabledAlgos(</b>
+<b class="nc">&nbsp;      &quot;jdk.certpath.disabledAlgorithms&quot;,</b>
+<b class="nc">&nbsp;      &quot;Disabled certificate verification cryptographic algorithms&quot;,</b>
+<b class="nc">&nbsp;      false),</b>
+<b class="nc">&nbsp;  TLSDisabledAlgos(&quot;jdk.tls.disabledAlgorithms&quot;, &quot;Disabled/Restricted Algorithms&quot;, false);</b>
+&nbsp;
+&nbsp;  /** Sets the JSSE system/security property to the given value. */
+&nbsp;  fun set(value: String) {
+<b class="nc">&nbsp;    when (system) {</b>
+<b class="nc">&nbsp;      true -&gt; System.setProperty(prop, value)</b>
+<b class="nc">&nbsp;      else -&gt; Security.setProperty(prop, value)</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Returns the jar [Manifest] of the class. Returns `null` if the class is not bundled in a jar
+&nbsp; * (Classes in an unpacked class hierarchy).
+&nbsp; */
+&nbsp;val &lt;T : Any&gt; KClass&lt;T&gt;.jarManifest: Manifest?
+&nbsp;  get() {
+&nbsp;    val res = java.getResource(&quot;${java.simpleName}.class&quot;)
+&nbsp;    val conn = res?.openConnection()
+&nbsp;    return if (conn is JarURLConnection) conn.manifest else null
+&nbsp;  }
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-03-14 05:12</div>
+</div>
+</body>
+</html>
