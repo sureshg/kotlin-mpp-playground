@@ -86,78 +86,6 @@
       ]
     },
     {
-      "type": "ch.qos.logback.classic.pattern.DateConverter",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "ch.qos.logback.classic.pattern.LevelConverter",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "ch.qos.logback.classic.pattern.LineSeparatorConverter",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "ch.qos.logback.classic.pattern.LoggerConverter",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "ch.qos.logback.classic.pattern.MDCConverter",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "ch.qos.logback.classic.pattern.MessageConverter",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "ch.qos.logback.classic.pattern.RootCauseFirstThrowableProxyConverter",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "ch.qos.logback.classic.pattern.ThreadConverter",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
       "type": "ch.qos.logback.classic.spi.LogbackServiceProvider"
     },
     {
@@ -224,6 +152,15 @@
       "type": "ch.qos.logback.core.spi.ContextAware"
     },
     {
+      "type": "ch.qos.logback.core.status.NopStatusListener",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": []
+        }
+      ]
+    },
+    {
       "type": "com.sun.management.GarbageCollectorMXBean"
     },
     {
@@ -277,14 +214,6 @@
       ]
     },
     {
-      "type": "dev.suresh.AtomicSample",
-      "fields": [
-        {
-          "name": "_x$volatile"
-        }
-      ]
-    },
-    {
       "type": "dev.suresh.http.ErrorStatus",
       "fields": [
         {
@@ -302,50 +231,7 @@
       ]
     },
     {
-      "type": "dev.suresh.lang.Address",
-      "fields": [
-        {
-          "name": "_atomic$volatile"
-        }
-      ]
-    },
-    {
-      "type": "dev.suresh.lang.Name",
-      "fields": [
-        {
-          "name": "_atomic$volatile"
-        }
-      ]
-    },
-    {
-      "type": "dev.suresh.lang.Person",
-      "fields": [
-        {
-          "name": "_atomic$volatile"
-        }
-      ]
-    },
-    {
-      "type": "dev.suresh.lang.PrivateInfo",
-      "fields": [
-        {
-          "name": "_atomic$volatile"
-        }
-      ]
-    },
-    {
       "type": "dev.suresh.plugins.custom.CookieSession"
-    },
-    {
-      "type": "io.ktor.callid.CallIdKt"
-    },
-    {
-      "type": "io.ktor.callid.CallIdKt$withCallId$2",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
     },
     {
       "type": "io.ktor.http.HttpStatusCode"
@@ -378,34 +264,7 @@
       "type": "io.ktor.server.application.ApplicationCall"
     },
     {
-      "type": "io.ktor.server.application.PluginBuilder",
-      "methods": [
-        {
-          "name": "onDefaultPhaseWithMessage",
-          "parameterTypes": [
-            "java.util.List",
-            "io.ktor.util.pipeline.PipelinePhase",
-            "java.lang.String",
-            "kotlin.jvm.functions.Function2",
-            "kotlin.jvm.functions.Function4"
-          ]
-        }
-      ]
-    },
-    {
       "type": "io.ktor.server.application.PluginInstance"
-    },
-    {
-      "type": "io.ktor.server.application.hooks.CallFailed",
-      "methods": [
-        {
-          "name": "install",
-          "parameterTypes": [
-            "io.ktor.server.application.ApplicationCallPipeline",
-            "kotlin.jvm.functions.Function3"
-          ]
-        }
-      ]
     },
     {
       "type": "io.ktor.server.application.hooks.CallFailed$install$1",
@@ -424,50 +283,21 @@
       ]
     },
     {
-      "type": "io.ktor.server.application.hooks.CallSetup",
-      "methods": [
-        {
-          "name": "install",
-          "parameterTypes": [
-            "io.ktor.server.application.ApplicationCallPipeline",
-            "kotlin.jvm.functions.Function2"
-          ]
-        }
-      ]
-    },
-    {
       "type": "io.ktor.server.auth.Authentication"
     },
     {
       "type": "io.ktor.server.config.HoconConfigLoader"
     },
     {
-      "type": "io.ktor.server.engine.BaseApplicationEngineKt",
-      "methods": [
-        {
-          "name": "installDefaultInterceptors",
-          "parameterTypes": [
-            "io.ktor.server.application.Application"
-          ]
-        },
-        {
-          "name": "installDefaultTransformationChecker",
-          "parameterTypes": [
-            "io.ktor.server.application.Application"
-          ]
-        }
-      ]
+      "type": "io.ktor.server.engine.BaseApplicationResponse"
     },
     {
-      "type": "io.ktor.server.engine.BaseApplicationEngineKt$installDefaultTransformationChecker$1",
+      "type": "io.ktor.server.engine.BaseApplicationResponse$Companion$setupFallbackResponse$1",
       "fields": [
         {
           "name": "label"
         }
       ]
-    },
-    {
-      "type": "io.ktor.server.engine.BaseApplicationResponse"
     },
     {
       "type": "io.ktor.server.engine.DefaultEnginePipelineKt$defaultEnginePipeline$1",
@@ -487,9 +317,6 @@
     },
     {
       "type": "io.ktor.server.engine.ShutDownUrl"
-    },
-    {
-      "type": "io.ktor.server.html.RespondHtmlKt"
     },
     {
       "type": "io.ktor.server.http.content.CompressedFileType"
@@ -570,104 +397,16 @@
       "type": "io.ktor.server.plugins.callid.CallIdConfig"
     },
     {
-      "type": "io.ktor.server.plugins.callid.CallIdKt$CallId$2$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
+      "type": "io.ktor.server.plugins.callid.CallIdKt$CallId$2$1"
     },
     {
-      "type": "io.ktor.server.plugins.callid.CallIdKt$CallId$2$1$2",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.plugins.callid.CallIdSetup$install$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$1$invokeSuspend$$inlined$withMDC$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$2",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.plugins.calllogging.CallLoggingKt$logCallsWithMDC$2$invokeSuspend$$inlined$withMDC$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
+      "type": "io.ktor.server.plugins.callid.CallIdSetup$install$1"
     },
     {
       "type": "io.ktor.server.plugins.calllogging.KtorMDCProvider"
     },
     {
-      "type": "io.ktor.server.plugins.calllogging.MDCHookKt$MDCHook$1",
-      "methods": [
-        {
-          "name": "install",
-          "parameterTypes": [
-            "io.ktor.server.application.ApplicationCallPipeline",
-            "kotlin.jvm.functions.Function3"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.plugins.calllogging.MDCHookKt$MDCHook$1$install$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.plugins.calllogging.MDCHookKt$MDCHook$1$install$1$1"
-    },
-    {
       "type": "io.ktor.server.plugins.forwardedheaders.ForwardedHeaderValue"
-    },
-    {
-      "type": "io.ktor.server.plugins.statuspages.BeforeFallback",
-      "methods": [
-        {
-          "name": "install",
-          "parameterTypes": [
-            "io.ktor.server.application.ApplicationCallPipeline",
-            "kotlin.jvm.functions.Function2"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.plugins.swagger.SwaggerKt$swaggerUI$5$2"
     },
     {
       "type": "io.ktor.server.response.ApplicationResponsePropertiesKt"
@@ -676,60 +415,13 @@
       "type": "io.ktor.server.response.ResponseHeaders"
     },
     {
-      "type": "io.ktor.server.routing.RoutingNode$buildPipeline$1$1"
-    },
-    {
       "type": "io.ktor.server.routing.RoutingRoot"
     },
     {
-      "type": "io.ktor.server.routing.RoutingRoot$Plugin",
-      "methods": [
-        {
-          "name": "install",
-          "parameterTypes": [
-            "io.ktor.server.application.Application",
-            "kotlin.jvm.functions.Function1"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.routing.RoutingRoot$Plugin$install$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.routing.RoutingRoot$executeResult$$inlined$execute$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.routing.RoutingRoot$executeResult$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.routing.RoutingRoot$interceptor$1",
-      "fields": [
-        {
-          "name": "label"
-        }
-      ]
-    },
-    {
-      "type": "io.ktor.server.sessions.SessionData"
-    },
-    {
       "type": "io.ktor.server.sessions.SessionProvider"
+    },
+    {
+      "type": "io.ktor.server.sessions.StatefulSession"
     },
     {
       "type": "io.ktor.server.websocket.WebSockets"
@@ -756,9 +448,6 @@
         },
         {
           "name": "_prev"
-        },
-        {
-          "name": "_removedRef"
         },
         {
           "name": "removedRef"
@@ -834,15 +523,6 @@
       "type": "io.netty.channel.AbstractChannelHandlerContext$7"
     },
     {
-      "type": "io.netty.channel.ChannelHandlerAdapter"
-    },
-    {
-      "type": "io.netty.channel.ChannelInboundHandlerAdapter"
-    },
-    {
-      "type": "io.netty.channel.ChannelInitializer"
-    },
-    {
       "type": "io.netty.channel.ChannelOutboundBuffer",
       "fields": [
         {
@@ -852,12 +532,6 @@
           "name": "unwritable"
         }
       ]
-    },
-    {
-      "type": "io.netty.channel.ChannelOutboundHandlerAdapter"
-    },
-    {
-      "type": "io.netty.channel.CombinedChannelDuplexHandler"
     },
     {
       "type": "io.netty.channel.DefaultChannelConfig",
@@ -996,54 +670,6 @@
       "type": "io.netty.util.internal.ThreadExecutorMap$2"
     },
     {
-      "type": "io.netty.util.internal.shaded.org.jctools.queues.BaseMpscLinkedArrayQueueColdProducerFields",
-      "fields": [
-        {
-          "name": "producerLimit"
-        }
-      ]
-    },
-    {
-      "type": "io.netty.util.internal.shaded.org.jctools.queues.BaseMpscLinkedArrayQueueConsumerFields",
-      "fields": [
-        {
-          "name": "consumerIndex"
-        }
-      ]
-    },
-    {
-      "type": "io.netty.util.internal.shaded.org.jctools.queues.BaseMpscLinkedArrayQueueProducerFields",
-      "fields": [
-        {
-          "name": "producerIndex"
-        }
-      ]
-    },
-    {
-      "type": "io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueueConsumerIndexField",
-      "fields": [
-        {
-          "name": "consumerIndex"
-        }
-      ]
-    },
-    {
-      "type": "io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueueProducerIndexField",
-      "fields": [
-        {
-          "name": "producerIndex"
-        }
-      ]
-    },
-    {
-      "type": "io.netty.util.internal.shaded.org.jctools.queues.MpscArrayQueueProducerLimitField",
-      "fields": [
-        {
-          "name": "producerLimit"
-        }
-      ]
-    },
-    {
       "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.BaseMpscLinkedAtomicArrayQueueColdProducerFields",
       "fields": [
         {
@@ -1098,9 +724,6 @@
       "type": "java.io.FileDescriptor"
     },
     {
-      "type": "java.io.FilePermission"
-    },
-    {
       "type": "java.lang.Boolean",
       "fields": [
         {
@@ -1152,10 +775,6 @@
       ]
     },
     {
-      "type": "java.lang.Error",
-      "allDeclaredFields": true
-    },
-    {
       "type": "java.lang.Exception",
       "allDeclaredFields": true
     },
@@ -1168,20 +787,12 @@
       ]
     },
     {
-      "type": "java.lang.IncompatibleClassChangeError",
-      "allDeclaredFields": true
-    },
-    {
       "type": "java.lang.Integer",
       "fields": [
         {
           "name": "TYPE"
         }
       ]
-    },
-    {
-      "type": "java.lang.LinkageError",
-      "allDeclaredFields": true
     },
     {
       "type": "java.lang.Long",
@@ -1197,18 +808,6 @@
         {
           "name": "getDescriptor",
           "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "java.lang.NoSuchMethodError",
-      "allDeclaredFields": true,
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String"
-          ]
         }
       ]
     },
@@ -1234,9 +833,6 @@
       "allDeclaredFields": true
     },
     {
-      "type": "java.lang.RuntimePermission"
-    },
-    {
       "type": "java.lang.Short",
       "fields": [
         {
@@ -1256,12 +852,7 @@
       ]
     },
     {
-      "type": "java.lang.Thread",
-      "fields": [
-        {
-          "name": "threadLocalRandomProbe"
-        }
-      ]
+      "type": "java.lang.Thread"
     },
     {
       "type": "java.lang.Throwable",
@@ -1322,17 +913,6 @@
       ]
     },
     {
-      "type": "java.lang.management.ManagementPermission",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String"
-          ]
-        }
-      ]
-    },
-    {
       "type": "java.lang.management.MemoryMXBean"
     },
     {
@@ -1372,39 +952,7 @@
       "type": "java.math.BigInteger"
     },
     {
-      "type": "java.net.NetPermission"
-    },
-    {
-      "type": "java.net.SocketPermission"
-    },
-    {
-      "type": "java.net.URLPermission",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String",
-            "java.lang.String"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.nio.Bits"
-    },
-    {
-      "type": "java.nio.Buffer",
-      "fields": [
-        {
-          "name": "address"
-        }
-      ]
-    },
-    {
       "type": "java.nio.ByteBuffer"
-    },
-    {
-      "type": "java.nio.DirectByteBuffer"
     },
     {
       "type": "java.nio.channels.FileChannel"
@@ -1430,13 +978,7 @@
       "type": "java.security.AlgorithmParametersSpi"
     },
     {
-      "type": "java.security.AllPermission"
-    },
-    {
       "type": "java.security.KeyStoreSpi"
-    },
-    {
-      "type": "java.security.SecurityPermission"
     },
     {
       "type": "java.util.Arrays$ArrayList",
@@ -1472,64 +1014,11 @@
       "type": "java.util.Map"
     },
     {
-      "type": "java.util.PropertyPermission",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String",
-            "java.lang.String"
-          ]
-        }
-      ]
-    },
-    {
       "type": "java.util.concurrent.Executors",
       "methods": [
         {
           "name": "newVirtualThreadPerTaskExecutor",
           "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "java.util.concurrent.ForkJoinTask",
-      "fields": [
-        {
-          "name": "aux"
-        },
-        {
-          "name": "status"
-        }
-      ]
-    },
-    {
-      "type": "java.util.concurrent.ScheduledThreadPoolExecutor"
-    },
-    {
-      "type": "java.util.concurrent.atomic.AtomicBoolean",
-      "fields": [
-        {
-          "name": "value"
-        }
-      ]
-    },
-    {
-      "type": "java.util.concurrent.atomic.AtomicReference",
-      "fields": [
-        {
-          "name": "value"
-        }
-      ]
-    },
-    {
-      "type": "java.util.concurrent.atomic.Striped64",
-      "fields": [
-        {
-          "name": "base"
-        },
-        {
-          "name": "cellsBusy"
         }
       ]
     },
@@ -1587,18 +1076,6 @@
           "parameterTypes": [
             "java.rmi.server.RemoteRef"
           ]
-        }
-      ]
-    },
-    {
-      "type": "javax.smartcardio.CardPermission"
-    },
-    {
-      "type": "jdk.internal.misc.Unsafe",
-      "methods": [
-        {
-          "name": "getUnsafe",
-          "parameterTypes": []
         }
       ]
     },
@@ -1862,39 +1339,6 @@
       ]
     },
     {
-      "type": "kotlinx.coroutines.debug.internal.ByteBuddyDynamicAttach"
-    },
-    {
-      "type": "kotlinx.coroutines.debug.internal.ConcurrentWeakMap",
-      "fields": [
-        {
-          "name": "_size$volatile"
-        },
-        {
-          "name": "core$volatile"
-        }
-      ]
-    },
-    {
-      "type": "kotlinx.coroutines.debug.internal.ConcurrentWeakMap$Core",
-      "fields": [
-        {
-          "name": "load$volatile"
-        }
-      ]
-    },
-    {
-      "type": "kotlinx.coroutines.debug.internal.DebugProbesImpl$DebugProbesImpl$VolatileWrapper$atomicfu$private",
-      "fields": [
-        {
-          "name": "installations$volatile"
-        },
-        {
-          "name": "sequenceNumber$volatile"
-        }
-      ]
-    },
-    {
       "type": "kotlinx.coroutines.internal.ConcurrentLinkedListNode",
       "fields": [
         {
@@ -2036,26 +1480,6 @@
       ]
     },
     {
-      "type": "kotlinx.coroutines.sync.SemaphoreImpl",
-      "fields": [
-        {
-          "name": "_availablePermits$volatile"
-        },
-        {
-          "name": "deqIdx$volatile"
-        },
-        {
-          "name": "enqIdx$volatile"
-        },
-        {
-          "name": "head$volatile"
-        },
-        {
-          "name": "tail$volatile"
-        }
-      ]
-    },
-    {
       "type": "one.jfr.event.CPULoad"
     },
     {
@@ -2087,22 +1511,6 @@
     },
     {
       "type": "sun.management.RuntimeImpl"
-    },
-    {
-      "type": "sun.misc.Unsafe",
-      "fields": [
-        {
-          "name": "theUnsafe"
-        }
-      ],
-      "methods": [
-        {
-          "name": "invokeCleaner",
-          "parameterTypes": [
-            "java.nio.ByteBuffer"
-          ]
-        }
-      ]
     },
     {
       "type": "sun.misc.VM"
@@ -2184,24 +1592,6 @@
           "parameterTypes": [
             "java.security.SecureRandomParameters"
           ]
-        }
-      ]
-    },
-    {
-      "type": "sun.security.provider.JavaKeyStore$DualFormatJKS",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "sun.security.provider.JavaKeyStore$JKS",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": []
         }
       ]
     },
@@ -2418,9 +1808,6 @@
       "glob": "META-INF/services/io.ktor.server.config.ConfigLoader"
     },
     {
-      "glob": "META-INF/services/java.lang.System$LoggerFinder"
-    },
-    {
       "glob": "META-INF/services/java.net.spi.InetAddressResolverProvider"
     },
     {
@@ -2454,19 +1841,16 @@
       "glob": "app"
     },
     {
-      "glob": "app/composeWeb/76cf560c9a7f20030646.wasm"
+      "glob": "app/composeWeb/0a51249fc2eff04ae0b0.wasm"
     },
     {
-      "glob": "app/composeWeb/91c2c955c032773a8c68.wasm"
+      "glob": "app/composeWeb/5223114fdc5fd927d231.wasm"
     },
     {
       "glob": "app/composeWeb/cmp.js"
     },
     {
       "glob": "app/composeWeb/composeResources/dev.suresh.compose.res/drawable/ic-fluent-rocket.svg"
-    },
-    {
-      "glob": "app/composeWeb/dd568dbcd078c0adf7cf.wasm"
     },
     {
       "glob": "app/composeWeb/index.html"
@@ -2490,9 +1874,6 @@
       "glob": "app/js/css/xterm.css"
     },
     {
-      "glob": "app/js/favicon.ico"
-    },
-    {
       "glob": "app/js/index.html"
     },
     {
@@ -2502,13 +1883,10 @@
       "glob": "app/js/web.js"
     },
     {
-      "glob": "app/wasm/9b75629d0fababd0f852.wasm"
+      "glob": "app/wasm/398353d2cb065135df23.wasm"
     },
     {
       "glob": "app/wasm/css/app.css"
-    },
-    {
-      "glob": "app/wasm/d53ec6dceb5265b17282.wasm"
     },
     {
       "glob": "app/wasm/index.html"
@@ -2550,6 +1928,12 @@
       "glob": "flame.html"
     },
     {
+      "glob": "kotlin/collections/collections.kotlin_builtins"
+    },
+    {
+      "glob": "kotlin/kotlin.kotlin_builtins"
+    },
+    {
       "glob": "logback-test.scmo"
     },
     {
@@ -2565,198 +1949,6 @@
       "glob": "openapi/documentation.yaml"
     },
     {
-      "glob": "reference.conf"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/native/libnetty_transport_native_kqueue.dylib"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/native/libnetty_transport_native_kqueue.jnilib"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/native/libnetty_transport_native_kqueue_aarch_64.dylib"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/native/libnetty_transport_native_kqueue_aarch_64.jnilib"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/ch.qos.logback.classic.spi.Configurator"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/io.ktor.serialization.kotlinx.KotlinxSerializationExtensionProvider"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/io.ktor.server.config.ConfigLoader"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/java.lang.System$LoggerFinder"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/java.net.spi.InetAddressResolverProvider"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/java.nio.channels.spi.SelectorProvider"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/java.nio.charset.spi.CharsetProvider"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/java.time.zone.ZoneRulesProvider"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/javax.management.remote.JMXConnectorServerProvider"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/javax.xml.parsers.SAXParserFactory"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/kotlin.metadata.internal.extensions.MetadataExtensions"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/kotlin.reflect.jvm.internal.impl.resolve.ExternalOverridabilityCondition"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/kotlin.reflect.jvm.internal.impl.util.ModuleVisibilityHelper"
-    },
-    {
-      "module": "",
-      "glob": "META-INF/services/org.slf4j.spi.SLF4JServiceProvider"
-    },
-    {
-      "module": "",
-      "glob": "app"
-    },
-    {
-      "module": "",
-      "glob": "app/index.html"
-    },
-    {
-      "module": "",
-      "glob": "app/js/css/app.css"
-    },
-    {
-      "module": "",
-      "glob": "app/js/css/bulma.min.css"
-    },
-    {
-      "module": "",
-      "glob": "app/js/css/hljs/github.min.css"
-    },
-    {
-      "module": "",
-      "glob": "app/js/css/xterm.css"
-    },
-    {
-      "module": "",
-      "glob": "app/js/index.html"
-    },
-    {
-      "module": "",
-      "glob": "app/js/logo/kotlin-logo.svg"
-    },
-    {
-      "module": "",
-      "glob": "app/js/web.js"
-    },
-    {
-      "module": "",
-      "glob": "app/wasm/css/app.css"
-    },
-    {
-      "module": "",
-      "glob": "app/wasm/index.html"
-    },
-    {
-      "module": "",
-      "glob": "app/wasm/kotlin-mpp-playground-web-wasm-js.wasm"
-    },
-    {
-      "module": "",
-      "glob": "app/wasm/logo/kotlin-logo.svg"
-    },
-    {
-      "module": "",
-      "glob": "app/wasm/web.js"
-    },
-    {
-      "module": "",
-      "glob": "application.conf"
-    },
-    {
-      "module": "",
-      "glob": "backend-js-res.txt"
-    },
-    {
-      "module": "",
-      "glob": "backend-jvm-res.txt"
-    },
-    {
-      "module": "",
-      "glob": "backend-main-res.txt"
-    },
-    {
-      "module": "",
-      "glob": "backend-wasm-res.txt"
-    },
-    {
-      "module": "",
-      "glob": "common-js-res.txt"
-    },
-    {
-      "module": "",
-      "glob": "common-jvm-res.txt"
-    },
-    {
-      "module": "",
-      "glob": "common-main-res.txt"
-    },
-    {
-      "module": "",
-      "glob": "common-wasm-res.txt"
-    },
-    {
-      "module": "",
-      "glob": "flame.html"
-    },
-    {
-      "module": "",
-      "glob": "logback-test.scmo"
-    },
-    {
-      "module": "",
-      "glob": "logback-test.xml"
-    },
-    {
-      "module": "",
-      "glob": "logback.scmo"
-    },
-    {
-      "module": "",
-      "glob": "logback.xml"
-    },
-    {
-      "module": "",
-      "glob": "openapi/documentation.yaml"
-    },
-    {
-      "module": "",
       "glob": "reference.conf"
     },
     {
@@ -2765,19 +1957,11 @@
     },
     {
       "module": "java.base",
-      "glob": "jdk/internal/icu/impl/data/icudt74b/nfkc.nrm"
-    },
-    {
-      "module": "java.base",
       "glob": "sun/net/www/content-types.properties"
     },
     {
       "module": "java.xml",
       "glob": "jdk/xml/internal/jdkcatalog/JDKCatalog.xml"
-    },
-    {
-      "module": "jdk.jfr",
-      "glob": "jdk/jfr/internal/EventWriterFactoryRecipe.class"
     },
     {
       "module": "jdk.jfr",
@@ -2797,17 +1981,6 @@
     }
   ],
   "bundles": [],
-  "serialization": [
-    {
-      "type": "java.rmi.server.RemoteObject"
-    },
-    {
-      "type": "java.rmi.server.RemoteStub"
-    },
-    {
-      "type": "javax.management.remote.rmi.RMIServerImpl_Stub"
-    }
-  ],
   "jni": [
     {
       "type": "[Lcom.sun.management.internal.DiagnosticCommandArgumentInfo;"
@@ -2836,19 +2009,6 @@
     {
       "type": "com.sun.management.internal.DiagnosticCommandInfo",
       "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String",
-            "java.lang.String",
-            "java.lang.String",
-            "java.lang.String",
-            "java.lang.String",
-            "java.lang.String",
-            "boolean",
-            "java.util.List"
-          ]
-        },
         {
           "name": "<init>",
           "parameterTypes": [
