@@ -1,7 +1,7 @@
 package dev.suresh.tls
 
 import java.security.cert.X509Certificate
-import javax.net.ssl.X509TrustManager
+import javax.net.ssl.*
 
 class SavingTrustManager : X509TrustManager {
 
@@ -19,4 +19,12 @@ class SavingTrustManager : X509TrustManager {
   }
 
   override fun getAcceptedIssuers(): Array<X509Certificate> = emptyArray()
+}
+
+fun SavingTrustManager.newTLSSocket(): SSLSocket {
+  val tm = this
+  return SSLContext.getInstance("TLS").run {
+    init(null, arrayOf(tm), null)
+    socketFactory.createSocket() as SSLSocket
+  }
 }

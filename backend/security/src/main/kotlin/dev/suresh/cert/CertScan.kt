@@ -1,13 +1,12 @@
 package dev.suresh.cert
 
 import dev.suresh.tls.SavingTrustManager
+import dev.suresh.tls.newTLSSocket
 import java.net.InetSocketAddress
 import java.security.cert.X509Certificate
 import javax.net.ssl.SNIHostName
-import javax.net.ssl.SSLContext
-import javax.net.ssl.SSLSocket
 import kotlin.time.Duration
-import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 object CertScan {
 
@@ -15,19 +14,14 @@ object CertScan {
       host: String,
       port: Int = 443,
       sni: String? = null,
-      timeout: Duration = 2_000.milliseconds
+      timeout: Duration = 2.seconds
   ): List<X509Certificate> {
     val trustManager = SavingTrustManager()
-    val socket =
-        SSLContext.getInstance("TLS").run {
-          init(null, arrayOf(trustManager), null)
-          socketFactory.createSocket() as SSLSocket
-        }
-
+    val socket = trustManager.newTLSSocket()
     return socket.use { sock ->
       val handshake = runCatching {
         sni?.let {
-          // sock.sslParameters will create a new object
+          // sock.sslParameters will create a new copy
           val sslParams = sock.sslParameters
           sslParams.serverNames = listOf(SNIHostName(sni))
           sock.sslParameters = sslParams
