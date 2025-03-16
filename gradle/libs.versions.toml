@@ -390,8 +390,9 @@ oshi-core                            = { module = "com.github.oshi:oshi-core-jav
 
 ktor-cohort-core                     = { module = "com.sksamuel.cohort:cohort-ktor"                            , version.ref = "ktor-cohort"}
 ktor-cohort-hikari                   = { module = "com.sksamuel.cohort:cohort-hikari"                          , version.ref = "ktor-cohort"}
-rsocket-ktor-client                  = { module = "io.rsocket.kotlin:rsocket-ktor-client"                      , version.ref = "rsocket"}
-rsocket-ktor-server                  = { module = "io.rsocket.kotlin:rsocket-ktor-server"                      , version.ref = "rsocket"}
+rsocket-ktor-client                  = { module = "io.rsocket.kotlin:ktor-client-rsocket"                      , version.ref = "rsocket"}
+rsocket-ktor-server                  = { module = "io.rsocket.kotlin:ktor-server-rsocket"                      , version.ref = "rsocket"}
+rsocket-ktor-tcp                     = { module = "io.rsocket.kotlin:rsocket-transport-ktor-tcp"               , version.ref = "rsocket"}
 uri-kmp                              = { module = "com.eygraber:uri-kmp"                                       , version.ref = "uri-kmp"}
 kotlinx-jsonpath                     = { module = "com.eygraber:jsonpathkt-kotlinx"                            , version.ref = "kotlinx-jsonpath"}
 json-sugar                           = { module = "com.eygraber:json-sugar"                                    , version.ref = "json-sugar"}
@@ -634,7 +635,7 @@ ldaptive                             = { module = "org.ldaptive:ldaptive"       
 
 # Maven Plugin
 maven-plugin-api                     = { module = "org.apache.maven:maven-plugin-api"                                       , version.ref = "maven-plugin-api" }
-maven-plugin-annotations             = { module = "rg.apache.maven.plugin-tools:maven-plugin-annotations"           , version.ref = "maven-plugin-annotations" }
+maven-plugin-annotations             = { module = "rg.apache.maven.plugin-tools:maven-plugin-annotations"                   , version.ref = "maven-plugin-annotations" }
 
 [bundles]
 ajalt                                = ["ajalt-colormath",
