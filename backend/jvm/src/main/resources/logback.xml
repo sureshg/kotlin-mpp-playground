@@ -23,7 +23,7 @@
         <file>${LOG_DIR}/app1.log</file>
         <rollingPolicy class="TimeBasedRollingPolicy">
             <!-- weekly rollover -->
-            <fileNamePattern>app1.%d{yyyy-ww}.log</fileNamePattern>
+            <fileNamePattern>app1.%d{yyyy-ww}.gz</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
