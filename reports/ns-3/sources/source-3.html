@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     100%
   </span>
   <span class="absValue">
-    (4/4)
+    (3/3)
   </span>
 </td>
 <td class="coverageStat">
@@ -79,15 +79,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     100%
   </span>
   <span class="absValue">
-    (9/9)
+    (7/7)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    72.7%
+    61.8%
   </span>
   <span class="absValue">
-    (56/77)
+    (34/55)
   </span>
 </td>
 </tr>
@@ -107,7 +107,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import kotlin.concurrent.atomics.*
 &nbsp;import kotlin.time.Duration.Companion.seconds
 &nbsp;import kotlin.uuid.Uuid
-&nbsp;import kotlinx.atomicfu.locks.*
 &nbsp;import kotlinx.serialization.json.Json
 &nbsp;
 &nbsp;class Greeting {
@@ -127,7 +126,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;                Address(
 &nbsp;                    street = &quot;123 Main St&quot;, city = &quot;San Francisco&quot;, state = &quot;CA&quot;, zip = &quot;95000&quot;),
 &nbsp;            privateInfo = PrivateInfo(ssn = &quot;123-45-6789&quot;, dob = &quot;01/01/2000&quot;))
-&nbsp;    val modPerson = person.copy() // { address.city = &quot;San Jose&quot; }
+&nbsp;    val modPerson = person.copy { address.city = &quot;San Jose&quot; }
 &nbsp;    appendLine(&quot;Person: $person&quot;)
 &nbsp;    appendLine(&quot;Modified Person: $modPerson&quot;)
 &nbsp;  }
@@ -139,8 +138,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    a.doWork(1234)
 &nbsp;    appendLine(&quot;Final value: ${a.x}&quot;)
 &nbsp;    check(a.x == 1234)
-&nbsp;    check(a.synchronizedFoo(42) == 42)
-&nbsp;    appendLine(&quot;Synchronized foo: ${a.synchronizedFoo(42)}&quot;)
 &nbsp;  }
 &nbsp;
 &nbsp;  private fun kotlinxTests(): String {
@@ -190,9 +187,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;}
 &nbsp;
 <b class="fc">&nbsp;class AtomicSample {</b>
-&nbsp;
-<b class="fc">&nbsp;  private val lock = reentrantLock()</b>
-&nbsp;
 <b class="fc">&nbsp;  private val _x = AtomicInt(0)</b>
 &nbsp;
 &nbsp;  val x
@@ -204,8 +198,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="pc">&nbsp;    check(x == 3)</b>
 <b class="pc">&nbsp;    check(_x.compareAndSet(3, finalValue))</b>
 &nbsp;  }
-&nbsp;
-<b class="fc">&nbsp;  fun synchronizedFoo(value: Int) = lock.withLock { value }</b>
 &nbsp;}
 &nbsp;
 &nbsp;enum class YesNo {
@@ -235,7 +227,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-21 02:49</div>
+    <div style="float:right;">generated on 2025-03-21 16:03</div>
 </div>
 </body>
 </html>
