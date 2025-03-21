@@ -5,7 +5,6 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.devtools.ksp.gradle.KspAATask
 import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
-import java.util.jar.Attributes
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
@@ -135,14 +134,8 @@ tasks {
   }
 
   pluginManager.withPlugin("com.gradleup.shadow") {
-    val shadowJar by
-        existing(ShadowJar::class) {
-          // https://gradleup.com/shadow/kmp-plugin/
-          manifest {
-            attributes[Attributes.Name.MAIN_CLASS.toString()] = libs.versions.app.mainclass
-          }
-        }
-
+    // https://gradleup.com/shadow/kmp-plugin/
+    val shadowJar by existing(ShadowJar::class)
     val buildExecutable by
         registering(ReallyExecJar::class) {
           jarFile = shadowJar.flatMap { it.archiveFile }
@@ -163,7 +156,6 @@ tasks {
       configurations = listOf(runtimeDepConfig)
       archiveClassifier = "jvm-all"
       mergeServiceFiles()
-      manifest { attributes[Attributes.Name.MAIN_CLASS.toString()] = libs.versions.app.mainclass }
       duplicatesStrategy = DuplicatesStrategy.INCLUDE
     }
   }

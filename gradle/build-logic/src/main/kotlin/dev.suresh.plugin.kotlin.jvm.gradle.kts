@@ -143,9 +143,9 @@ tasks {
   }
 
   pluginManager.withPlugin("com.gradleup.shadow") {
+    val shadowJar by existing(Jar::class)
     val buildExecutable by
         registering(ReallyExecJar::class) {
-          val shadowJar by existing(Jar::class)
           jarFile = shadowJar.flatMap { it.archiveFile }
           // javaOpts = application.applicationDefaultJvmArgs
           javaOpts = named<JavaExec>("run").get().jvmArgs
@@ -159,7 +159,6 @@ tasks {
       description = "Print Java Platform Module dependencies of the application."
       group = LifecycleBasePlugin.BUILD_GROUP
 
-      val shadowJar by existing(Jar::class)
       doLast {
         val jarFile = shadowJar.get().archiveFile.get().asFile
 
@@ -193,7 +192,6 @@ tasks {
 
     val jdepExtn = extensions.create<JdeprscanExtension>("jdeprscan")
     register<Jdeprscan>("jdeprscan", jdepExtn).configure {
-      val shadowJar by existing(Jar::class)
       jarFile = shadowJar.flatMap { it.archiveFile }
     }
   }
