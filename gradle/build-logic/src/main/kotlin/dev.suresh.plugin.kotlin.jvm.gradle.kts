@@ -1,7 +1,6 @@
 import com.github.ajalt.mordant.rendering.TextColors
 import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
-import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
 import java.io.PrintWriter
 import java.io.StringWriter
@@ -19,7 +18,6 @@ plugins {
   com.google.devtools.ksp
   dev.zacsweers.redacted
   com.javiersc.kotlin.kopy
-  org.jetbrains.kotlinx.atomicfu
   id("dev.suresh.plugin.common")
   id("dev.suresh.plugin.kotlin.docs")
   // kotlin("plugin.atomicfu")
@@ -64,11 +62,6 @@ testing {
   }
 }
 
-atomicfu {
-  transformJvm = true
-  jvmVariant = "VH"
-}
-
 ksp {
   arg("autoserviceKsp.verify", "true")
   arg("autoserviceKsp.verbose", "true")
@@ -82,7 +75,11 @@ redacted {
   replacementString = "█"
 }
 
-kopy { functions = KopyFunctions.Copy }
+kopy {
+  copyFunctions = listOf(KopyCopyFunctions.Copy)
+  // debug = false
+  // reportPath = layout.buildDirectory.dir("reports/kopy")
+}
 
 // Java agent configuration for jib
 val javaAgent by configurations.registering { isTransitive = false }

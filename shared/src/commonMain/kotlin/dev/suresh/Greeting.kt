@@ -6,7 +6,6 @@ import dev.suresh.serde.toJsonElement
 import kotlin.concurrent.atomics.*
 import kotlin.time.Duration.Companion.seconds
 import kotlin.uuid.Uuid
-import kotlinx.atomicfu.locks.*
 import kotlinx.serialization.json.Json
 
 class Greeting {
@@ -26,7 +25,7 @@ class Greeting {
                 Address(
                     street = "123 Main St", city = "San Francisco", state = "CA", zip = "95000"),
             privateInfo = PrivateInfo(ssn = "123-45-6789", dob = "01/01/2000"))
-    val modPerson = person.copy() // { address.city = "San Jose" }
+    val modPerson = person.copy { address.city = "San Jose" }
     appendLine("Person: $person")
     appendLine("Modified Person: $modPerson")
   }
@@ -38,8 +37,6 @@ class Greeting {
     a.doWork(1234)
     appendLine("Final value: ${a.x}")
     check(a.x == 1234)
-    check(a.synchronizedFoo(42) == 42)
-    appendLine("Synchronized foo: ${a.synchronizedFoo(42)}")
   }
 
   private fun kotlinxTests(): String {
@@ -89,9 +86,6 @@ class Greeting {
 }
 
 class AtomicSample {
-
-  private val lock = reentrantLock()
-
   private val _x = AtomicInt(0)
 
   val x
@@ -103,8 +97,6 @@ class AtomicSample {
     check(x == 3)
     check(_x.compareAndSet(3, finalValue))
   }
-
-  fun synchronizedFoo(value: Int) = lock.withLock { value }
 }
 
 enum class YesNo {

@@ -3,7 +3,6 @@
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.devtools.ksp.gradle.KspAATask
-import com.javiersc.kotlin.kopy.args.KopyFunctions
 import common.*
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
@@ -23,7 +22,6 @@ plugins {
   com.google.devtools.ksp
   dev.zacsweers.redacted
   com.javiersc.kotlin.kopy
-  org.jetbrains.kotlinx.atomicfu
   // kotlin("plugin.atomicfu")
   // kotlin("plugin.compose")
   // io.github.terrakok.`kmp-hierarchy`
@@ -74,11 +72,6 @@ kotlin {
   // explicitApiWarning()
 }
 
-atomicfu {
-  transformJvm = true
-  jvmVariant = "VH"
-}
-
 ksp {
   arg("autoserviceKsp.verify", "true")
   arg("autoserviceKsp.verbose", "true")
@@ -93,7 +86,11 @@ redacted {
   replacementString = "█"
 }
 
-kopy { functions = KopyFunctions.Copy }
+kopy {
+  copyFunctions = listOf(KopyCopyFunctions.Copy)
+  // debug = false
+  // reportPath = layout.buildDirectory.dir("reports/kopy")
+}
 
 tasks {
   val buildConfigExtn = extensions.create<BuildConfigExtension>("buildConfig")
