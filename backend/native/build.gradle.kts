@@ -163,4 +163,11 @@ tasks {
 
   jibDockerBuild { dependsOn(prepareJib) }
   // publish { finalizedBy(jibDockerBuild) }
+
+  // Pass arguments to run task : runReleaseExecutableMacosArm64 -PrunArgs="blah blah"
+  withType<Exec>().configureEach {
+    val arguments = providers.gradleProperty("runArgs")
+    argumentProviders.add(
+        CommandLineArgumentProvider { arguments.orNull?.split(" ") ?: emptyList() })
+  }
 }
