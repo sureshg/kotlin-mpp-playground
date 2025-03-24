@@ -45,6 +45,7 @@ $dokka.location:/BuildConfig/buildTimeUTC/#/PointingToDeclaration/shared/[root]
 $dokka.location:/BuildConfig/buildkonfig/#/PointingToDeclaration/shared/[root]/-build-config/buildkonfig.html
 $dokka.location:/BuildConfig/bytesize/#/PointingToDeclaration/shared/[root]/-build-config/bytesize.html
 $dokka.location:/BuildConfig/cache4k/#/PointingToDeclaration/shared/[root]/-build-config/cache4k.html
+$dokka.location:/BuildConfig/caffeineCoroutines/#/PointingToDeclaration/shared/[root]/-build-config/caffeine-coroutines.html
 $dokka.location:/BuildConfig/cardiologist/#/PointingToDeclaration/shared/[root]/-build-config/cardiologist.html
 $dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/-build-config/cash-turbine.html
 $dokka.location:/BuildConfig/cel/#/PointingToDeclaration/shared/[root]/-build-config/cel.html
