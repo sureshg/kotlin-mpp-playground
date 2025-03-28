@@ -57,16 +57,16 @@ if (isSpringBootEnabled) {
 // }
 
 val Settings.isNativeTargetEnabled: Boolean
-  get() = gradleBooleanProperty("kotlin.target.native.enabled").get()
+  get() = gradleBooleanProp("kotlin.target.native.enabled").get()
 
 val Settings.isComposeEnabled: Boolean
-  get() = gradleBooleanProperty("composeBuild").get()
+  get() = gradleBooleanProp("composeBuild").get()
 
 val Settings.isSpringBootEnabled: Boolean
-  get() = gradleBooleanProperty("springBoot").get()
+  get() = gradleBooleanProp("springBoot").get()
 
 val Settings.isWinTargetEnabled: Boolean
-  get() = gradleBooleanProperty("kotlin.target.win.enabled").get()
+  get() = gradleBooleanProp("kotlin.target.win.enabled").get()
 
-fun Settings.gradleBooleanProperty(name: String): Provider<Boolean> =
+fun Settings.gradleBooleanProp(name: String): Provider<Boolean> =
     providers.gradleProperty(name).map(String::toBoolean).orElse(false)

@@ -137,7 +137,7 @@ fun RepositoryHandler.nodeJS() {
 }
 
 fun RepositoryHandler.mavenSnapshot() {
-  val mvnSnapshot = gradleBooleanProperty("maven.snapshot.repo.enabled").get()
+  val mvnSnapshot = gradleBooleanProp("maven.snapshot.repo.enabled").get()
   if (mvnSnapshot) {
     logger.lifecycle("❖ Maven Snapshot is enabled!")
     maven(url = versionCatalog?.getString("repo-mvn-snapshot").orEmpty()) {

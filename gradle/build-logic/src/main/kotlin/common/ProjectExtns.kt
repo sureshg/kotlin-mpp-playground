@@ -64,7 +64,7 @@ val Project.isSharedProject
   get() = name == sharedProjectName
 
 val Project.skipTest
-  get() = gradleBooleanProperty("skip.test").get()
+  get() = gradleBooleanProp("skip.test").get()
 
 val Project.hasCleanTask
   get() = gradle.startParameter.taskNames.any { it in listOf("clean", "cleanAll") }
@@ -74,19 +74,16 @@ val Project.runsOnCI
 
 // val debug: String? by project
 val Project.debugEnabled
-  get() = gradleBooleanProperty("debug").get()
+  get() = gradleBooleanProp("debug").get()
 
 val Project.isSnapshotVersion
   get() = version.toString().endsWith("-SNAPSHOT", true)
 
-val Project.isKmpExecEnabled
-  get() = extra.has("enableKmpExec") && extra["enableKmpExec"] as Boolean
-
 val Project.isNativeTargetEnabled: Boolean
-  get() = gradleBooleanProperty("kotlin.target.native.enabled").get()
+  get() = gradleBooleanProp("kotlin.target.native.enabled").get()
 
 val Project.isWinTargetEnabled: Boolean
-  get() = gradleBooleanProperty("kotlin.target.win.enabled").get()
+  get() = gradleBooleanProp("kotlin.target.win.enabled").get()
 
 /** Java version properties. */
 val Project.javaVersion
@@ -105,7 +102,7 @@ val Project.addModules
   get() = libs.versions.java.addModules.get()
 
 val Project.isAutomaticModuleEnabled
-  get() = gradleBooleanProperty("java.automatic.module.enabled").get()
+  get() = gradleBooleanProp("java.automatic.module.enabled").get()
 
 val Project.defaultJarManifest
   get() = buildMap {
@@ -632,7 +629,7 @@ fun Project.appRunCmd(binary: Path, args: List<String>): String {
       prefix =
           """
              |To Run the app,
-             |${'$'} java -jar $lineCont $newLine
+             |$ java -jar $lineCont $newLine
              """
               .trimMargin(),
       postfix = "$newLine$indent$path",
@@ -746,8 +743,13 @@ fun Project.addFileToJavaComponent(file: File) {
   }
 }
 
-fun Project.gradleBooleanProperty(name: String): Provider<Boolean> =
+fun Project.gradleBooleanProp(name: String): Provider<Boolean> =
     providers.gradleProperty(name).map(String::toBoolean).orElse(false)
+
+inline fun <reified T> Project.extraProp(name: String, defaultValue: T): T =
+    if (extra.has(name)) {
+      extra[name] as? T ?: defaultValue
+    } else defaultValue
 
 /** Lazy version of [TaskContainer.maybeCreate] */
 inline fun <reified T : Task> TaskContainer.maybeRegister(

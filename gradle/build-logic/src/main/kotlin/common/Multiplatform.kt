@@ -103,7 +103,7 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
         testRuns.configureEach { executionTask.configure { configureJavaTest() } }
 
         // Configures JavaExec task with name "runJvm" and Gradle distribution "jvmDistZip"
-        if (isKmpExecEnabled) {
+        if (extraProp("enableKmpExec", false)) {
           binaries {
             executable {
               mainClass = libs.versions.app.mainclass
