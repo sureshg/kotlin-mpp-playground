@@ -57,6 +57,7 @@ $dokka.location:/BuildConfig/composeIcons/#/PointingToDeclaration/shared/[root]
 $dokka.location:/BuildConfig/composeRouting/#/PointingToDeclaration/shared/[root]/-build-config/compose-routing.html
 $dokka.location:/BuildConfig/config4k/#/PointingToDeclaration/shared/[root]/-build-config/config4k.html
 $dokka.location:/BuildConfig/cyclonedxPlugin/#/PointingToDeclaration/shared/[root]/-build-config/cyclonedx-plugin.html
+$dokka.location:/BuildConfig/decoroutinator/#/PointingToDeclaration/shared/[root]/-build-config/decoroutinator.html
 $dokka.location:/BuildConfig/description/#/PointingToDeclaration/shared/[root]/-build-config/description.html
 $dokka.location:/BuildConfig/detekt/#/PointingToDeclaration/shared/[root]/-build-config/detekt.html
 $dokka.location:/BuildConfig/detektComposeRules/#/PointingToDeclaration/shared/[root]/-build-config/detekt-compose-rules.html
@@ -114,6 +115,8 @@ $dokka.location:/BuildConfig/jibNativeimageExtn/#/PointingToDeclaration/shared/
 $dokka.location:/BuildConfig/jibPlugin/#/PointingToDeclaration/shared/[root]/-build-config/jib-plugin.html
 $dokka.location:/BuildConfig/jimfs/#/PointingToDeclaration/shared/[root]/-build-config/jimfs.html
 $dokka.location:/BuildConfig/jlama/#/PointingToDeclaration/shared/[root]/-build-config/jlama.html
+$dokka.location:/BuildConfig/jline/#/PointingToDeclaration/shared/[root]/-build-config/jline.html
+$dokka.location:/BuildConfig/jlinkJib/#/PointingToDeclaration/shared/[root]/-build-config/jlink-jib.html
 $dokka.location:/BuildConfig/jmh/#/PointingToDeclaration/shared/[root]/-build-config/jmh.html
 $dokka.location:/BuildConfig/jsch/#/PointingToDeclaration/shared/[root]/-build-config/jsch.html
 $dokka.location:/BuildConfig/jsonSchemaValidator/#/PointingToDeclaration/shared/[root]/-build-config/json-schema-validator.html
