@@ -1,5 +1,6 @@
 package ui
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.DrawModifier
@@ -41,7 +42,15 @@ fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modi
       )
 }
 
-inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -> Modifier) =
+@Composable
+fun buildModifier(builder: @Composable MutableList<Modifier>.() -> Unit): Modifier {
+  val modifiers = mutableListOf<Modifier>()
+  modifiers.builder()
+  // The first Modifier is the empty, starter Modifier object
+  return modifiers.fold(Modifier as Modifier) { acc, modifier -> acc then modifier }
+}
+
+fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -> Modifier) =
     then(if (value) builder() else Modifier)
 
 fun Modifier.flipped() = then(FlippedModifier())

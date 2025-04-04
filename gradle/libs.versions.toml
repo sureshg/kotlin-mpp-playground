@@ -29,8 +29,8 @@ kotlinx-atomicfu               = "0.27.0"
 kotlinx-coroutines             = "1.10.1"
 kotlinx-datetime               = "0.6.2"
 kotlinx-datetime-zoneinfo      = "2025a-spi.0.6.2"
-kotlinx-serialization          = "1.8.0"
-kotlinx-rpc                    = "0.5.1"
+kotlinx-serialization          = "1.8.1"
+kotlinx-rpc                    = "0.6.0"
 kotlinx-collections-immutable  = "0.3.8"
 kotlinx-lincheck               = "2.38"
 kotlinx-html                   = "0.12.0"
@@ -39,7 +39,7 @@ kotlinx-benchmark              = "0.4.13"
 kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.3.26"
+kotlin-wrappers                = "2025.4.3"
 kotlin-redacted                = "1.13.0"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
@@ -54,6 +54,7 @@ akkurate                       = "0.11.0"
 kaml                           = "0.74.0"
 snakeyaml-engine-kmp           = "3.1.1"
 konsist                        = "0.17.3"
+decoroutinator                 = "2.4.8"
 spring-boot                    = "3.4.4"
 spring-depmgmt                 = "1.1.7"
 ktor                           = "3.1.2"
@@ -61,7 +62,7 @@ ktor-cohort                    = "2.6.2"
 otel                           = "1.48.0"
 otel-instr                     = "2.14.0"
 otel-instr-alpha               = "2.14.0-alpha"
-otel-semconv                   = "1.30.0"
+otel-semconv                   = "1.32.0"
 otel-samplers                  = "1.45.0-alpha"
 elastic-otel                   = "0.4.0"
 okio                           = "3.10.2"
@@ -72,6 +73,7 @@ zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "3.0.2"
 ajalt-clikt                    = "5.0.3"
 ajalt-colormath                = "3.6.1"
+jline                          = "3.29.0"
 classgraph                     = "4.8.179"
 cache4k                        = "0.14.0"
 intellij-coverage              = "1.0.766"
@@ -141,7 +143,7 @@ micrometer                     = "1.14.5"
 swagger-ui                     = "5.17.14"
 hoplite                        = "2.9.0"
 config4k                       = "0.7.0"
-shedlock                       = "6.3.0"
+shedlock                       = "6.3.1"
 sherlock                       = "1.0.3"
 sqids                          = "0.1.0"
 tsid                           = "2.1.4"
@@ -159,7 +161,7 @@ async-profiler                 = "3.0"
 ap-loader-all                  = "3.0-9"
 openjdk-jmc                    = "9.1.0"
 airlift-aircompressor          = "2.0.2"
-airlift-security               = "326"
+airlift-security               = "327"
 directory-keystore             = "1.1.1"
 maven-mima                     = "3.0.0-alpha-3"
 maven-archeologist             = "0.0.10"
@@ -180,7 +182,7 @@ mcp-kotlin                     = "0.4.0"
 mcp4k                          = "0.3.6"
 dflib                          = "2.0.0-M2"
 ldaptive                       = "2.4.1"
-chicory                        = "1.2.0"
+chicory                        = "1.2.1"
 weh-bindings                   = "0.4"
 wasm2class                     = "0.2"
 log4k                          = "0.40.0"
@@ -192,10 +194,10 @@ jetbrains-compose              = "1.8.0-beta01"
 jetbrains-compose-viewmodel    = "2.9.0-alpha05"
 jetbrains-compose-nav          = "2.9.0-alpha15"
 jetbrains-compose-adaptive     = "1.1.0-beta01"
-kobweb                         = "0.20.4"
+kobweb                         = "0.21.0"
 detekt                         = "1.23.8"
 detekt-compose-rules           = "0.4.22"
-compose-hotreload              = "1.0.0-alpha03"
+compose-hotreload              = "1.0.0-alpha04"
 compose-icons                  = "1.1.1"
 compose-routing                = "0.4.0"
 kottie                         = "2.0.1"
@@ -218,7 +220,7 @@ nmcp                           = "0.0.9"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.31.0"
 gradle-publish                 = "1.3.1"
-shadow                         = "9.0.0-beta11"
+shadow                         = "9.0.0-beta12"
 spotless                       = "7.0.2"
 semver-plugin                  = "0.8.0"
 vercraft                       = "0.5.0"
@@ -233,7 +235,7 @@ github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 wire-plugin                    = "5.3.1"
 buildkonfig                    = "0.17.0"
-gmazzo-buildconfig             = "5.5.4"
+gmazzo-buildconfig             = "5.6.1"
 cyclonedx-plugin               = "1.10.0"
 modulegraph                    = "0.12.0"
 npm-publish-plugin             = "3.5.3"
@@ -245,10 +247,11 @@ tomlj                          = "1.1.1"
 animalsniffer                  = "2.0.0"
 badass-runtime                 = "1.13.1-patch-1"
 badass-jlink                   = "3.1.0"
+jlink-jib                      = "0.4.1"
 maven-plugin-api               = "3.9.9"
 maven-plugin-annotations       = "3.15.1"
 gradlex-maven-plugin           = "1.0.3"
-typesafe-conventions           = "0.6.0-RC1"
+typesafe-conventions           = "0.6.0"
 
 # Repositories
 repo-mvn-central               = "https://repo.maven.apache.org/maven2/"
@@ -465,6 +468,7 @@ ajalt-colormath                      = { module = "com.github.ajalt.colormath:co
 ajalt-clikt-core                     = { module = "com.github.ajalt.clikt:clikt-core"                          , version.ref = "ajalt-clikt"}
 ajalt-clikt                          = { module = "com.github.ajalt.clikt:clikt"                               , version.ref = "ajalt-clikt"}
 ajalt-clikt-markdown                 = { module = "com.github.ajalt.clikt:clikt-markdown"                      , version.ref = "ajalt-clikt"}
+jline-terminal-ffm                   = { module = "org.jline:jline-terminal-ffm"                               , version.ref = "jline"}
 mosaic-runtime                       = { module = "com.jakewharton.mosaic:mosaic-runtime"                      , version.ref = "mosaic"}
 jgit                                 = { module = "org.eclipse.jgit:org.eclipse.jgit"                          , version.ref = "jgit" }
 jte                                  = { module = "gg.jte:jte"                                                 , version.ref = "jte" }
@@ -564,6 +568,7 @@ otel-bom                             = { module = "io.opentelemetry:opentelemetr
 otel-api                             = { module = "io.opentelemetry:opentelemetry-api"                                                      , version.ref = "otel"}
 otel-autoconfigure                   = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure"                              , version.ref = "otel"}
 otel-autoconfigure-spi               = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi"                          , version.ref = "otel"}
+otel-exporter-otlp                   = { module = "io.opentelemetry:opentelemetry-exporter-otlp"                                            , version.ref = "otel"}
 otel-semconv                         = { module = "io.opentelemetry.semconv:opentelemetry-semconv"                                          , version.ref = "otel-semconv"}
 otel-samplers                        = { module = "io.opentelemetry.contrib:opentelemetry-samplers"                                         , version.ref = "otel-samplers"}
 
@@ -688,6 +693,7 @@ jetbrains-compose-hotreload          = { id = "org.jetbrains.compose.hot-reload"
 jetbrains-ktor                       = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }
 jetbrains-exposed                    = { id = "com.jetbrains.exposed.gradle.plugin"                            , version.ref = "exposed-plugin" }
 jetbrains-dokka                      = { id = "org.jetbrains.dokka"                                            , version.ref = "kotlin-dokka"}
+decoroutinator                       = { id = "dev.reformator.stacktracedecoroutinator"                        , version.ref = "decoroutinator"}
 graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"                                  , version.ref = "graalvm-nativeimage"}
 serviceloader-compiler               = { id = "app.softwork.serviceloader-compiler"                            , version.ref = "kotlin-serviceloader" }
 kopy                                 = { id = "com.javiersc.kotlin.kopy"                                       , version.ref = "kopy"}
@@ -721,6 +727,7 @@ build-vercraft                       = { id = "com.akuleshov7.vercraft.plugin-gr
 kmbed-plugin                         = { id = "io.karma.kmbed.kmbed-gradle-plugin"                             , version.ref = "kmbed" }
 badass-jlink                         = { id = "com.dua3.gradle.jlink"                                          , version.ref = "badass-jlink" }
 badass-runtime                       = { id = "com.dua3.gradle.runtime"                                        , version.ref = "badass-runtime" }
+jlink-jib                            = { id = "com.ryandens.jlink-jib"                                         , version.ref = "jlink-jib" }
 gradlex-maven-plugin                 = { id = "org.gradlex.maven-plugin-development"                           , version.ref = "gradlex-maven-plugin" }
 typesafe-conventions                 = { id = "dev.panuszewski.typesafe-conventions"                           , version.ref = "typesafe-conventions" }
 wasm2class                           = { id = "at.released.wasm2class.plugin"                                  , version.ref = "wasm2class" }
