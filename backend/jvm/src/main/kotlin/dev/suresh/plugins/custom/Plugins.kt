@@ -2,7 +2,7 @@ package dev.suresh.plugins.custom
 
 import dev.suresh.plugins.isApi
 import io.ktor.server.application.*
-import io.ktor.util.AttributeKey
+import io.ktor.util.*
 import io.opentelemetry.api.trace.Span
 
 /**

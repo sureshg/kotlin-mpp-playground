@@ -23,7 +23,7 @@ object FFM {
   }
 
   private fun KLogger.strlen(str: String) {
-    val strlenAddr = SYMBOL_LOOKUP.findOrNull("strlen")
+    val strlenAddr = SYMBOL_LOOKUP.findOrThrow("strlen")
     val strlenDescriptor = FunctionDescriptor.of(ValueLayout.JAVA_INT, AddressLayout.ADDRESS)
     val strlen = LINKER.downcallHandle(strlenAddr, strlenDescriptor)
     Arena.ofConfined().use { arena ->
@@ -35,7 +35,7 @@ object FFM {
 
   private fun KLogger.currTime() {
     // Print the current time.
-    val timeAddr = SYMBOL_LOOKUP.findOrNull("time")
+    val timeAddr = SYMBOL_LOOKUP.findOrThrow("time")
     val timeDesc = FunctionDescriptor.of(ValueLayout.JAVA_LONG)
     val time = LINKER.downcallHandle(timeAddr, timeDesc)
     val timeResult = time.invokeExact() as Long
@@ -43,7 +43,7 @@ object FFM {
   }
 
   private fun KLogger.gmtime() {
-    val gmtAddr = SYMBOL_LOOKUP.findOrNull("gmtime")
+    val gmtAddr = SYMBOL_LOOKUP.findOrThrow("gmtime")
     val gmtDesc =
         FunctionDescriptor.of(
             AddressLayout.ADDRESS.withTargetLayout(TM.LAYOUT), AddressLayout.ADDRESS)
@@ -58,7 +58,7 @@ object FFM {
   }
 
   private fun KLogger.getPid() {
-    val getpidAddr = SYMBOL_LOOKUP.findOrNull("getpid")
+    val getpidAddr = SYMBOL_LOOKUP.findOrThrow("getpid")
     val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)
     val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)
     val pid = getpid.invokeExact() as Int

@@ -1,35 +1,44 @@
 package dev.suresh.plugins
 
+import BuildConfig
+import io.ktor.http.HttpMethod
 import io.ktor.server.application.*
-import io.opentelemetry.api.OpenTelemetry
+import io.ktor.server.request.httpMethod
+import io.opentelemetry.api.trace.SpanKind
+import io.opentelemetry.instrumentation.ktor.v3_0.*
+import io.opentelemetry.sdk.OpenTelemetrySdk
 import io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk
 import io.opentelemetry.semconv.ServiceAttributes
+import kotlin.time.Clock
 
 fun Application.configureOTel() {
+  install(KtorServerTelemetry) {
+    setOpenTelemetry(getOpenTelemetry(BuildConfig.name))
+
+    spanKindExtractor {
+      if (httpMethod == HttpMethod.Post) {
+        SpanKind.PRODUCER
+      } else {
+        SpanKind.CLIENT
+      }
+    }
+
+    attributesExtractor {
+      onStart { attributes.put("start-time", Clock.System.now().toEpochMilliseconds()) }
+      onEnd { attributes.put("end-time", Clock.System.now().toEpochMilliseconds()) }
+    }
+  }
   // install(OTelExtnPlugin) { enabled = true }
-  //
-  //  install(KtorServerTracing) {
-  //    setOpenTelemetry(GlobalOpenTelemetry.get())
-  //    attributeExtractor {
-  //      onStart { attributes.put("start-time", Clock.System.now().toEpochMilliseconds()) }
-  //      onEnd { attributes.put("end-time", Clock.System.now().toEpochMilliseconds()) }
-  //    }
-  //  }
 }
 
-/**
- * [Manual
- * instrumentation](https://opentelemetry.io/docs/languages/java/instrumentation/#acquiring-a-tracer-in-java-agent)
- */
-fun getOpenTelemetry(serviceName: String): OpenTelemetry {
-  return AutoConfiguredOpenTelemetrySdk.builder()
-      .addResourceCustomizer { oldResource, _ ->
-        oldResource
-            .toBuilder()
-            .putAll(oldResource.attributes)
-            .put(ServiceAttributes.SERVICE_NAME, serviceName)
-            .build()
-      }
-      .build()
-      .openTelemetrySdk
-}
+/** See [Configure the SDK](https://opentelemetry.io/docs/languages/java/configuration/) */
+fun getOpenTelemetry(serviceName: String): OpenTelemetrySdk =
+    AutoConfiguredOpenTelemetrySdk.builder()
+        .addResourceCustomizer { res, _ ->
+          res.toBuilder()
+              .putAll(res.attributes)
+              .put(ServiceAttributes.SERVICE_NAME, serviceName)
+              .build()
+        }
+        .build()
+        .openTelemetrySdk
