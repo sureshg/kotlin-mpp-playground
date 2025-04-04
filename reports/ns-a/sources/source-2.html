@@ -159,7 +159,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;
 &nbsp;  private fun KLogger.strlen(str: String) {
-<b class="nc">&nbsp;    val strlenAddr = SYMBOL_LOOKUP.findOrNull(&quot;strlen&quot;)</b>
+<b class="nc">&nbsp;    val strlenAddr = SYMBOL_LOOKUP.findOrThrow(&quot;strlen&quot;)</b>
 <b class="nc">&nbsp;    val strlenDescriptor = FunctionDescriptor.of(ValueLayout.JAVA_INT, AddressLayout.ADDRESS)</b>
 <b class="nc">&nbsp;    val strlen = LINKER.downcallHandle(strlenAddr, strlenDescriptor)</b>
 <b class="nc">&nbsp;    Arena.ofConfined().use { arena -&gt;</b>
@@ -171,7 +171,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;  private fun KLogger.currTime() {
 &nbsp;    // Print the current time.
-<b class="nc">&nbsp;    val timeAddr = SYMBOL_LOOKUP.findOrNull(&quot;time&quot;)</b>
+<b class="nc">&nbsp;    val timeAddr = SYMBOL_LOOKUP.findOrThrow(&quot;time&quot;)</b>
 <b class="nc">&nbsp;    val timeDesc = FunctionDescriptor.of(ValueLayout.JAVA_LONG)</b>
 <b class="nc">&nbsp;    val time = LINKER.downcallHandle(timeAddr, timeDesc)</b>
 <b class="nc">&nbsp;    val timeResult = time.invokeExact() as Long</b>
@@ -179,7 +179,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;
 &nbsp;  private fun KLogger.gmtime() {
-<b class="nc">&nbsp;    val gmtAddr = SYMBOL_LOOKUP.findOrNull(&quot;gmtime&quot;)</b>
+<b class="nc">&nbsp;    val gmtAddr = SYMBOL_LOOKUP.findOrThrow(&quot;gmtime&quot;)</b>
 <b class="nc">&nbsp;    val gmtDesc =</b>
 <b class="nc">&nbsp;        FunctionDescriptor.of(</b>
 <b class="nc">&nbsp;            AddressLayout.ADDRESS.withTargetLayout(TM.LAYOUT), AddressLayout.ADDRESS)</b>
@@ -194,7 +194,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  }
 &nbsp;
 &nbsp;  private fun KLogger.getPid() {
-<b class="nc">&nbsp;    val getpidAddr = SYMBOL_LOOKUP.findOrNull(&quot;getpid&quot;)</b>
+<b class="nc">&nbsp;    val getpidAddr = SYMBOL_LOOKUP.findOrThrow(&quot;getpid&quot;)</b>
 <b class="nc">&nbsp;    val getpidDesc = FunctionDescriptor.of(ValueLayout.JAVA_INT)</b>
 <b class="nc">&nbsp;    val getpid = LINKER.downcallHandle(getpidAddr, getpidDesc)</b>
 <b class="nc">&nbsp;    val pid = getpid.invokeExact() as Int</b>
@@ -376,7 +376,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-31 23:00</div>
+    <div style="float:right;">generated on 2025-04-04 15:41</div>
 </div>
 </body>
 </html>

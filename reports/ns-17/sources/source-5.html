@@ -52,7 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/6)
+    (0/7)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/11)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/62)
+    (0/107)
   </span>
 </td>
 </tr>
@@ -115,7 +115,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/9)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -131,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/22)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/193)
+    (0/238)
   </span>
 </td>
 </tr>
@@ -152,6 +152,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package ui
 &nbsp;
+&nbsp;import androidx.compose.runtime.Composable
 &nbsp;import androidx.compose.ui.Modifier
 &nbsp;import androidx.compose.ui.composed
 &nbsp;import androidx.compose.ui.draw.DrawModifier
@@ -193,7 +194,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      )
 &nbsp;}
 &nbsp;
-&nbsp;inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -&gt; Modifier) =
+&nbsp;@Composable
+<b class="nc">&nbsp;fun buildModifier(builder: @Composable MutableList&lt;Modifier&gt;.() -&gt; Unit): Modifier {</b>
+<b class="nc">&nbsp;  val modifiers = mutableListOf&lt;Modifier&gt;()</b>
+<b class="nc">&nbsp;  modifiers.builder()</b>
+&nbsp;  // The first Modifier is the empty, starter Modifier object
+<b class="nc">&nbsp;  return modifiers.fold(Modifier as Modifier) { acc, modifier -&gt; acc then modifier }</b>
+&nbsp;}
+&nbsp;
+&nbsp;fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -&gt; Modifier) =
 <b class="nc">&nbsp;    then(if (value) builder() else Modifier)</b>
 &nbsp;
 <b class="nc">&nbsp;fun Modifier.flipped() = then(FlippedModifier())</b>
@@ -226,7 +235,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-31 23:00</div>
+    <div style="float:right;">generated on 2025-04-04 15:41</div>
 </div>
 </body>
 </html>

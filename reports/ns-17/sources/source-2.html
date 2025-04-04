@@ -94,6 +94,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package ui
 &nbsp;
+&nbsp;import androidx.compose.runtime.Composable
 &nbsp;import androidx.compose.ui.Modifier
 &nbsp;import androidx.compose.ui.composed
 &nbsp;import androidx.compose.ui.draw.DrawModifier
@@ -135,7 +136,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      )
 &nbsp;}
 &nbsp;
-&nbsp;inline fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -&gt; Modifier) =
+&nbsp;@Composable
+&nbsp;fun buildModifier(builder: @Composable MutableList&lt;Modifier&gt;.() -&gt; Unit): Modifier {
+&nbsp;  val modifiers = mutableListOf&lt;Modifier&gt;()
+&nbsp;  modifiers.builder()
+&nbsp;  // The first Modifier is the empty, starter Modifier object
+&nbsp;  return modifiers.fold(Modifier as Modifier) { acc, modifier -&gt; acc then modifier }
+&nbsp;}
+&nbsp;
+&nbsp;fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -&gt; Modifier) =
 &nbsp;    then(if (value) builder() else Modifier)
 &nbsp;
 &nbsp;fun Modifier.flipped() = then(FlippedModifier())
@@ -168,7 +177,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-03-31 23:00</div>
+    <div style="float:right;">generated on 2025-04-04 15:41</div>
 </div>
 </body>
 </html>
