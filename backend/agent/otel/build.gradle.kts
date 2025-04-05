@@ -82,7 +82,7 @@ tasks {
 
 dependencies {
   // Interfaces and SPIs that we implement. We use `compileOnly` dependency because
-  // during runtime all necessary classes are provided by javaagent itself.
+  // during runtime all necessary classes are provided by java-agent itself.
   implementation(platform(libs.otel.bom))
   implementation(platform(libs.otel.instr.bom))
   compileOnly(libs.bundles.otel.agent.extn)

@@ -6,7 +6,6 @@
 [![Kotlin release][kt_img]][kt_url]
 [![Maven Central Version][maven_img]][maven_url]
 [![Ktor][ktor_img]][ktor_url]
-[![Compose MP][cmp_img]][cmp_url]
 [![Style guide][ktfmt_img]][ktfmt_url]
 
 This repo shows a Gradle multi-project build structure that uses the [Kotlin Multiplatform][Kotlin Multiplatform] to
@@ -16,19 +15,15 @@ and [Compose Web (wasm)][Compose-Multiplatform] applications.
 ### Install OpenJDK EA Build
 
 ```bash
-# Mac OS
 $ curl -s "https://get.sdkman.io" | bash
 $ sdk i java 25.ea-open
-$ sdk u java 25.ea-open
 ```
 
 ### Build & Run
 
 ```bash
 $ ./gradlew build [-Pskip.test]
-
-# Run the app
-$ ./gradlew :backend:jvm:run
+$ OTEL_SDK_DISABLED=true backend/jvm/build/libs/jvm-app
 
 # Publish to local repo
 $ ./gradlew buildAndPublish
@@ -90,6 +85,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 * Containers
 
   ```bash
+  # Running app on container
   $ docker run \
            -it \
            --rm \
@@ -99,8 +95,9 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            --publish 8081:8081 \
            --name kotlin-mpp-playground \
            --mount type=bind,source=$(pwd),destination=/app,readonly \
-           openjdk:25-slim /bin/bash -c "printenv && nohup jwebserver -b 0.0.0.0 -p 8081 -d / & backend/jvm/build/libs/jvm-app"
+           openjdk:25-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm-app"
 
+   # Build a container image and run
    $ ./gradlew :backend:jvm:jibDockerBuild
    $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
    $ docker stats
@@ -109,23 +106,17 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 * OpenTelemetry
 
   ```bash
-   # Install otel-desktop-viewer or Jaeger
-   $ brew tap CtrlSpice/homebrew-otel-desktop-viewer
-   $ brew install otel-desktop-viewer
-   $ otel-desktop-viewer
+   # Run otel tui
+   $ brew install ymtdzzz/tap/otel-tui
+   $ otel-tui
 
-
-   # or run the Jaeger collector
+   # or run the Jaeger
    $ docker run -it --rm --pull=always \
                 -e COLLECTOR_OTLP_ENABLED=true \
                 -p 4317:4317 \
                 -p 16686:16686 \
                 jaegertracing/all-in-one:latest
    $ open http://localhost:16686
-
-   # Run otel tui
-   $ brew install ymtdzzz/tap/otel-tui
-   $ otel-tui
 
    # Run the app
    $ docker run -it --rm \
@@ -136,7 +127,6 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
                 -e OTEL_TRACES_EXPORTER="otlp" \
                 -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
                 -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
-                -e OTEL_DROP_SPANS="/swagger" \
                 sureshg/jvm:latest
    $ curl -v -X GET http://localhost:8080/trace
 
@@ -160,25 +150,26 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 
   ```bash
   # Training Run
+  $
   $ java --enable-preview \
-         -XX:+UnlockExperimentalVMOptions \
-         -XX:+UseCompactObjectHeaders \
+         -XX:+UseZGC \
+         -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders \
          -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf \
          -jar backend/jvm/build/libs/jvm-all.jar
 
   # Create AOT archive
   $ java --enable-preview \
-     -XX:+UnlockExperimentalVMOptions \
-     -XX:+UseCompactObjectHeaders \
-     -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot \
-     -jar backend/jvm/build/libs/jvm-all.jar
+         -XX:+UseZGC \
+         -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders \
+         -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot \
+         -jar backend/jvm/build/libs/jvm-all.jar
 
   # Run with AOT
   $ java --enable-preview \
-     -XX:+UnlockExperimentalVMOptions \
-     -XX:+UseCompactObjectHeaders \
-     -XX:AOTCache=app.aot \
-     -jar backend/jvm/build/libs/jvm-all.jar
+         -XX:+UseZGC \
+         -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders \
+         -XX:AOTCache=app.aot \
+         -jar backend/jvm/build/libs/jvm-all.jar
 
   # Show native memory details
   $ jcmd jvm-app System.map

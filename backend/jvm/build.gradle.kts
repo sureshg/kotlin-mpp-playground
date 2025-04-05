@@ -83,7 +83,6 @@ jib {
     environment =
         mapOf(
             "OTEL_JAVAAGENT_ENABLED" to "false",
-            "OTEL_SDK_DISABLED" to "true",
             "OTEL_TRACES_EXPORTER" to "logging",
             "OTEL_METRICS_EXPORTER" to "logging",
             "OTEL_LOGS_EXPORTER" to "logging",
