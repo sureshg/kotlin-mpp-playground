@@ -8,7 +8,7 @@ actual fun httpClient(
     name: String,
     timeout: Timeout,
     retry: Retry,
-    httpLogger: KLogger,
+    kLogger: KLogger,
     config: HttpClientConfig<*>.() -> Unit
 ) =
     HttpClient(Curl) {

@@ -45,7 +45,7 @@ data class MediaApiClient(
               name = "Media API Client",
               timeout = timeout,
               retry = retry,
-              httpLogger = log,
+              kLogger = log,
           )
           .config {
             defaultRequest { url("https://suresh.dev/") }

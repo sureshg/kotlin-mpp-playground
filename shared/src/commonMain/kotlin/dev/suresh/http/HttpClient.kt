@@ -45,7 +45,7 @@ expect fun httpClient(
     name: String = "Api Client",
     timeout: Timeout = Timeout.DEFAULT,
     retry: Retry = Retry.DEFAULT,
-    httpLogger: KLogger = log,
+    kLogger: KLogger = log,
     config: HttpClientConfig<*>.() -> Unit = {
       install(Resources)
 
@@ -75,15 +75,15 @@ expect fun httpClient(
       install(Logging) {
         level =
             when {
-              httpLogger.isDebugEnabled() -> LogLevel.ALL
-              httpLogger.isLoggingOff() -> LogLevel.NONE
+              kLogger.isDebugEnabled() -> LogLevel.ALL
+              kLogger.isLoggingOff() -> LogLevel.NONE
               else -> LogLevel.INFO
             }
 
         logger =
             object : Logger {
               override fun log(message: String) {
-                httpLogger.info { message }
+                kLogger.info { message }
               }
             }
         format = LoggingFormat.OkHttp
@@ -119,7 +119,7 @@ expect fun httpClient(
         handleResponseExceptionWithRequest { ex, req ->
           val resException = ex as? ResponseException ?: return@handleResponseExceptionWithRequest
           val res = resException.response
-          httpLogger.trace { "Request failed: ${req.method.value} ${req.url} -> ${res.status}" }
+          kLogger.trace { "Request failed: ${req.method.value} ${req.url} -> ${res.status}" }
         }
       }
     }
