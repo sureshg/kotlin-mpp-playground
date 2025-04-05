@@ -39,7 +39,7 @@ kotlinx-benchmark              = "0.4.13"
 kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.4.4"
+kotlin-wrappers                = "2025.4.5"
 kotlin-redacted                = "1.13.0"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
@@ -49,7 +49,7 @@ kotlin-statistics              = "0.4.0-RC1"
 evas                           = "1.2.0"
 kopy                           = "0.15.0+2.1.20"
 poko                           = "0.18.5"
-mappie                         = "2.1.20-1.2.0"
+mappie                         = "2.1.20-1.2.1"
 akkurate                       = "0.11.0"
 kaml                           = "0.74.0"
 snakeyaml-engine-kmp           = "3.1.1"
@@ -59,7 +59,7 @@ spring-boot                    = "3.4.4"
 spring-depmgmt                 = "1.1.7"
 ktor                           = "3.1.2"
 ktor-cohort                    = "2.6.2"
-otel                           = "1.48.0"
+otel                           = "1.49.0"
 otel-instr                     = "2.14.0"
 otel-instr-alpha               = "2.14.0-alpha"
 otel-semconv                   = "1.32.0"
@@ -88,6 +88,7 @@ oshi                           = "6.8.0"
 junit                          = "5.13.0-M2"
 koin                           = "4.1.0-Beta6"
 koin-annotations               = "2.0.0"
+metro                          = "0.1.1"
 kotest                         = "6.0.0.M3"
 mockk                          = "1.13.17"
 mokkery                        = "2.7.2"
@@ -566,9 +567,8 @@ okapibarcode                         = { module = "uk.org.okapibarcode:okapibarc
 # OpenTelemetry
 otel-bom                             = { module = "io.opentelemetry:opentelemetry-bom"                                                      , version.ref = "otel"}
 otel-api                             = { module = "io.opentelemetry:opentelemetry-api"                                                      , version.ref = "otel"}
-otel-autoconfigure                   = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure"                              , version.ref = "otel"}
-otel-autoconfigure-spi               = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure-spi"                          , version.ref = "otel"}
 otel-exporter-otlp                   = { module = "io.opentelemetry:opentelemetry-exporter-otlp"                                            , version.ref = "otel"}
+otel-autoconfigure                   = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure"                              , version.ref = "otel"}
 otel-semconv                         = { module = "io.opentelemetry.semconv:opentelemetry-semconv"                                          , version.ref = "otel-semconv"}
 otel-samplers                        = { module = "io.opentelemetry.contrib:opentelemetry-samplers"                                         , version.ref = "otel-samplers"}
 
@@ -665,10 +665,8 @@ otel                                 = ["otel-instr-annotations",
                                         "otel-instr-ktor",
                                         "otel-instr-logback-mdc",
                                         "otel-instr-logback-appender"]
-otel-agent-extn                      = ["otel-autoconfigure-spi",
-                                        "otel-instr-api",
-                                        "otel-instr-extension-api",
-                                        "otel-semconv"]
+otel-agent-extn                      = ["otel-instr-api",
+                                        "otel-instr-extension-api"]
 
 
 [plugins]
@@ -699,6 +697,7 @@ serviceloader-compiler               = { id = "app.softwork.serviceloader-compil
 kopy                                 = { id = "com.javiersc.kotlin.kopy"                                       , version.ref = "kopy"}
 semver                               = { id = "com.javiersc.semver"                                            , version.ref = "semver-plugin" }
 redacted                             = { id = "dev.zacsweers.redacted"                                         , version.ref = "kotlin-redacted"}
+metro                                = { id = "dev.zacsweers.metro"                                            , version.ref = "metro"}
 gradle-develocity                    = { id = "com.gradle.develocity"                                          , version.ref = "gradle-develocity" }
 mrjar                                = { id = "me.champeau.mrjar"                                              , version.ref = "mrjar"}
 nexus-publish                        = { id = "io.github.gradle-nexus.publish-plugin"                          , version.ref = "nexus-publish"}
