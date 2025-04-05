@@ -27,12 +27,13 @@ fun main(args: Array<String>): Unit = runBlocking {
   val ps =
       Process.Builder(command = "ls")
           .args("-l")
+          .onError { println("Error: $it") }
           .destroySignal(Signal.SIGKILL)
           .stdout(Stdio.Inherit)
           .stderr(Stdio.Inherit)
 
-  val exit = ps.spawn { it.waitForAsync(2.seconds) ?: -1 }
-  println("Process exited: $exit")
+  val exit = runCatching { ps.spawn { it.waitForAsync(2.seconds) ?: -1 } }
+  println("Process exited: ${exit.getOrElse { -1 }}")
 
   println("Reflection Simple name ${this::class.simpleName}")
   println("Reflection Simple name ${this::class.qualifiedName}")

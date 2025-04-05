@@ -5,9 +5,9 @@ import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.cloud.tools.jib.gradle.extension.nativeimage.JibNativeImageExtension
 import common.*
 import common.Platform
-import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.plugin.mpp.NativeBuildType
+import org.jetbrains.kotlin.gradle.plugin.mpp.*
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
+import org.jetbrains.kotlin.konan.target.Family
 
 plugins {
   dev.suresh.plugin.kotlin.mpp
@@ -24,12 +24,13 @@ kotlin {
 
   targets.withType<KotlinNativeTarget>().configureEach {
     binaries {
-      executable(setOf(DEBUG)) {
+      executable(setOf(RELEASE)) {
         entryPoint = "main"
         // Fix for libcrypt.so.1 not-found error on distroless
-        if (target.targetName.startsWith("linux")) {
-          linkerOpts("--as-needed")
-          freeCompilerArgs += "-Xoverride-konan-properties=linkerGccFlags.linux=-lgcc -lgcc_eh -lc"
+        if (target.konanTarget.family == Family.LINUX) {
+          linkerOpts("-Wl,--as-needed", "-Wl,-Bstatic", "-lz", "-Wl,-Bdynamic")
+          // freeCompilerArgs += "-Xoverride-konan-properties=linkerGccFlags.linux=-lgcc -lgcc_eh
+          // -lc"
         }
 
         if (buildType == NativeBuildType.RELEASE) {
@@ -119,7 +120,7 @@ jib {
 sourceSets.maybeCreate("main")
 
 tasks {
-  val buildType = "Debug"
+  val buildType = "Release"
   val macOsUniversalBinary by
       registering(Exec::class) {
         val macosX64 = named<KotlinNativeLink>("link${buildType}ExecutableMacosX64")
