@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    name: String = &quot;Api Client&quot;,
 &nbsp;    timeout: Timeout = Timeout.DEFAULT,
 &nbsp;    retry: Retry = Retry.DEFAULT,
-&nbsp;    httpLogger: KLogger = log,
+&nbsp;    kLogger: KLogger = log,
 &nbsp;    config: HttpClientConfig&lt;*&gt;.() -&gt; Unit = {
 &nbsp;      install(Resources)
 &nbsp;
@@ -169,15 +169,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      install(Logging) {
 &nbsp;        level =
 &nbsp;            when {
-&nbsp;              httpLogger.isDebugEnabled() -&gt; LogLevel.ALL
-&nbsp;              httpLogger.isLoggingOff() -&gt; LogLevel.NONE
+&nbsp;              kLogger.isDebugEnabled() -&gt; LogLevel.ALL
+&nbsp;              kLogger.isLoggingOff() -&gt; LogLevel.NONE
 &nbsp;              else -&gt; LogLevel.INFO
 &nbsp;            }
 &nbsp;
 &nbsp;        logger =
 &nbsp;            object : Logger {
 &nbsp;              override fun log(message: String) {
-&nbsp;                httpLogger.info { message }
+&nbsp;                kLogger.info { message }
 &nbsp;              }
 &nbsp;            }
 &nbsp;        format = LoggingFormat.OkHttp
@@ -213,7 +213,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;        handleResponseExceptionWithRequest { ex, req -&gt;
 &nbsp;          val resException = ex as? ResponseException ?: return@handleResponseExceptionWithRequest
 &nbsp;          val res = resException.response
-&nbsp;          httpLogger.trace { &quot;Request failed: ${req.method.value} ${req.url} -&gt; ${res.status}&quot; }
+&nbsp;          kLogger.trace { &quot;Request failed: ${req.method.value} ${req.url} -&gt; ${res.status}&quot; }
 &nbsp;        }
 &nbsp;      }
 &nbsp;    }
@@ -241,7 +241,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-04-04 16:09</div>
+    <div style="float:right;">generated on 2025-04-07 01:56</div>
 </div>
 </body>
 </html>

@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     96.3%
   </span>
   <span class="absValue">
-    (595/618)
+    (598/621)
   </span>
 </td>
 </tr>
@@ -206,7 +206,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     94.8%
   </span>
   <span class="absValue">
-    (657/693)
+    (660/696)
   </span>
 </td>
 </tr>
@@ -227,7 +227,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import java.util.concurrent.CompletableFuture;
 &nbsp;
 &nbsp;import static dev.suresh.Expr.eval;
-&nbsp;import static java.io.IO.println;
 &nbsp;import static java.lang.System.out;
 &nbsp;import static java.util.Objects.requireNonNull;
 &nbsp;
@@ -250,7 +249,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;                END
 <b class="fc">&nbsp;                &quot;&quot;&quot;.formatted(new Person(&quot;Foo&quot;, 40));</b>
 <b class="fc">&nbsp;        future.complete(textBlock);</b>
-<b class="fc">&nbsp;        println(future.get());</b>
+<b class="fc">&nbsp;        out.println(future.get());</b>
 &nbsp;
 <b class="fc">&nbsp;        stringTemplates();</b>
 <b class="fc">&nbsp;        amberReflections();</b>
@@ -281,7 +280,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="fc">&nbsp;            case FullName(var first, var last) -&gt; &quot;%s, %s&quot;.formatted(first, last);</b>
 <b class="nc">&nbsp;            default -&gt; &quot;Invalid name&quot;;</b>
 <b class="fc">&nbsp;        };</b>
-<b class="fc">&nbsp;        println(result);</b>
+<b class="fc">&nbsp;        out.println(result);</b>
 &nbsp;
 <b class="pc">&nbsp;        if (name instanceof FullName&lt;?&gt; f) {</b>
 <b class="fc">&nbsp;            out.printf(&quot;%s, %s%n&quot;, f.firstName(), f.lastName());</b>
@@ -351,7 +350,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="fc">&nbsp;                };</b>
 &nbsp;
 <b class="fc">&nbsp;                out.printf(&quot;Deserialized record: %s%n&quot;, rec);</b>
-<b class="fc">&nbsp;                println(result);</b>
+<b class="fc">&nbsp;                out.println(result);</b>
 &nbsp;            }
 &nbsp;        }
 &nbsp;
@@ -402,7 +401,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-04-04 16:09</div>
+    <div style="float:right;">generated on 2025-04-07 01:56</div>
 </div>
 </body>
 </html>
