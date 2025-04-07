@@ -197,6 +197,7 @@ $dokka.location:/BuildConfig/mavenPluginAnnotations/#/PointingToDeclaration/sha
 $dokka.location:/BuildConfig/mavenPluginApi/#/PointingToDeclaration/shared/[root]/-build-config/maven-plugin-api.html
 $dokka.location:/BuildConfig/mcp4k/#/PointingToDeclaration/shared/[root]/-build-config/mcp4k.html
 $dokka.location:/BuildConfig/mcpKotlin/#/PointingToDeclaration/shared/[root]/-build-config/mcp-kotlin.html
+$dokka.location:/BuildConfig/metro/#/PointingToDeclaration/shared/[root]/-build-config/metro.html
 $dokka.location:/BuildConfig/micrometer/#/PointingToDeclaration/shared/[root]/-build-config/micrometer.html
 $dokka.location:/BuildConfig/mockk/#/PointingToDeclaration/shared/[root]/-build-config/mockk.html
 $dokka.location:/BuildConfig/modulegraph/#/PointingToDeclaration/shared/[root]/-build-config/modulegraph.html
