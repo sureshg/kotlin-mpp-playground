@@ -62,11 +62,7 @@ testing {
   }
 }
 
-ksp {
-  arg("autoserviceKsp.verify", "true")
-  arg("autoserviceKsp.verbose", "true")
-  allWarningsAsErrors = false
-}
+ksp { allWarningsAsErrors = false }
 
 powerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
 
@@ -98,7 +94,7 @@ tasks {
   // Configure jvm args for JavaExec tasks except `run`
   withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(jvmArguments()) }
 
-  // Configure KSP2
+  // Configure KSP
   withType<KspAATask>().configureEach { configureKspConfig() }
 
   withType<Jar>().configureEach {
