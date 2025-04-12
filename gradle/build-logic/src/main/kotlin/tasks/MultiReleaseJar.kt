@@ -7,15 +7,15 @@ import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.jvm.toolchain.JavaLanguageVersion
 import org.gradle.jvm.toolchain.JavaToolchainService
-import org.gradle.kotlin.dsl.get
+import org.gradle.kotlin.dsl.*
 import org.gradle.process.CommandLineArgumentProvider
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinJvmCompilation
 
 private val Project.sourceSets: SourceSetContainer
-  get() = this.extensions.getByName("sourceSets") as SourceSetContainer
+  get() = extensions.getByName("sourceSets") as SourceSetContainer
 
 private val Project.javaToolchains: JavaToolchainService
-  get() = this.extensions.getByName("javaToolchains") as JavaToolchainService
+  get() = extensions.getByName("javaToolchains") as JavaToolchainService
 
 /**
  * Setup tasks to compile `module-info.java` file for a module named [moduleName] from a source set
@@ -46,11 +46,10 @@ fun Project.configureJava9ModuleInfoCompilation(
     targetCompatibility = "9"
     sourceCompatibility = "9"
 
-    javaCompiler.set(javaToolchains.compilerFor { languageVersion.set(toolchainVersion) })
-
+    javaCompiler = javaToolchains.compilerFor { languageVersion = toolchainVersion }
     val javaSourceSet = sourceSets[sourceSetName].java
-    destinationDirectory.set(
-        javaSourceSet.destinationDirectory.asFile.get().resolve("META-INF/versions/9"))
+    destinationDirectory =
+        javaSourceSet.destinationDirectory.asFile.get().resolve("META-INF/versions/9")
     options.sourcepath = files(javaSourceSet.srcDirs)
     val moduleFiles = objects.fileCollection().from(moduleOutputs)
     val modulePath = javaCompileClasspath.filter { it !in moduleFiles.files }
