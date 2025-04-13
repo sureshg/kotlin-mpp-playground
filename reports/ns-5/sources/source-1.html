@@ -100,13 +100,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import kotlin.String
 &nbsp;import kotlin.collections.Map
 &nbsp;import org.jetbrains.compose.resources.DrawableResource
-&nbsp;import org.jetbrains.compose.resources.ExperimentalResourceApi
 &nbsp;import org.jetbrains.compose.resources.FontResource
 &nbsp;import org.jetbrains.compose.resources.PluralStringResource
 &nbsp;import org.jetbrains.compose.resources.StringArrayResource
 &nbsp;import org.jetbrains.compose.resources.StringResource
 &nbsp;
-&nbsp;@ExperimentalResourceApi
 <b class="nc">&nbsp;public actual val Res.allDrawableResources: Map&lt;String, DrawableResource&gt; by lazy {</b>
 <b class="nc">&nbsp;  val map = mutableMapOf&lt;String, DrawableResource&gt;()</b>
 <b class="nc">&nbsp;  _collectCommonMainDrawable0Resources(map)</b>
@@ -114,28 +112,24 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;}
 &nbsp;
 &nbsp;
-&nbsp;@ExperimentalResourceApi
 <b class="nc">&nbsp;public actual val Res.allStringResources: Map&lt;String, StringResource&gt; by lazy {</b>
 <b class="nc">&nbsp;  val map = mutableMapOf&lt;String, StringResource&gt;()</b>
 <b class="nc">&nbsp;  return@lazy map</b>
 &nbsp;}
 &nbsp;
 &nbsp;
-&nbsp;@ExperimentalResourceApi
 <b class="nc">&nbsp;public actual val Res.allStringArrayResources: Map&lt;String, StringArrayResource&gt; by lazy {</b>
 <b class="nc">&nbsp;  val map = mutableMapOf&lt;String, StringArrayResource&gt;()</b>
 <b class="nc">&nbsp;  return@lazy map</b>
 &nbsp;}
 &nbsp;
 &nbsp;
-&nbsp;@ExperimentalResourceApi
 <b class="nc">&nbsp;public actual val Res.allPluralStringResources: Map&lt;String, PluralStringResource&gt; by lazy {</b>
 <b class="nc">&nbsp;  val map = mutableMapOf&lt;String, PluralStringResource&gt;()</b>
 <b class="nc">&nbsp;  return@lazy map</b>
 &nbsp;}
 &nbsp;
 &nbsp;
-&nbsp;@ExperimentalResourceApi
 <b class="nc">&nbsp;public actual val Res.allFontResources: Map&lt;String, FontResource&gt; by lazy {</b>
 <b class="nc">&nbsp;  val map = mutableMapOf&lt;String, FontResource&gt;()</b>
 <b class="nc">&nbsp;  return@lazy map</b>
@@ -164,7 +158,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-04-09 01:53</div>
+    <div style="float:right;">generated on 2025-04-13 00:07</div>
 </div>
 </body>
 </html>
