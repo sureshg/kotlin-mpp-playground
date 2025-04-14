@@ -380,7 +380,7 @@ fun KotlinTarget.setTargetAttribute() {
 fun JavaToolchainSpec.configureJvmToolchain(project: Project) =
     with(project) {
       languageVersion = toolchainVersion
-      nativeImageCapable = toolchainVendor.map { it == JvmVendorSpec.GRAAL_VM }
+      nativeImageCapable = toolchainVendor.map { it.matches("graalvm community") }
       // vendor = toolchainVendor
     }
 
