@@ -41,8 +41,7 @@ kotlin {
         "kotlinx.serialization.ExperimentalSerializationApi",
         "org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi",
         "org.jetbrains.kotlin.gradle.ExperimentalWasmDsl",
-        "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl",
-        "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDceDsl")
+        "org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalDistributionDsl")
   }
 }
 
@@ -136,8 +135,6 @@ jte {
 }
 
 dependencies {
-  implementation(platform(libs.kotlin.bom))
-  implementation(libs.kotlin.stdlib)
   implementation(libs.kotlinx.coroutines.core)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization.json)
