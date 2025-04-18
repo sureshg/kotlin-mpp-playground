@@ -1,7 +1,6 @@
-import kotlin.test.assertEquals
-import kotlinx.io.Buffer
+import kotlin.test.*
+import kotlinx.io.*
 import kotlinx.io.files.*
-import kotlinx.io.readFloat
 
 fun buffer() {
   val buffer = Buffer()
@@ -13,4 +12,8 @@ fun dir() {
   println("SystemPathSeparator = $SystemPathSeparator")
   println("SystemTemporaryDirectory: $SystemTemporaryDirectory")
   SystemFileSystem.list(Path(".")).forEach { println(it) }
+}
+
+fun Path.append(data: String) {
+  SystemFileSystem.sink(this, append = true).buffered().use { f -> f.writeString(data) }
 }
