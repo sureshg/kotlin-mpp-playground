@@ -90,6 +90,7 @@ $dokka.location:/BuildConfig/gradleDevelocity/#/PointingToDeclaration/shared/[r
 $dokka.location:/BuildConfig/gradleKotlinDsl/#/PointingToDeclaration/shared/[root]/-build-config/gradle-kotlin-dsl.html
 $dokka.location:/BuildConfig/gradlePublish/#/PointingToDeclaration/shared/[root]/-build-config/gradle-publish.html
 $dokka.location:/BuildConfig/gradlexMavenPlugin/#/PointingToDeclaration/shared/[root]/-build-config/gradlex-maven-plugin.html
+$dokka.location:/BuildConfig/gratatouille/#/PointingToDeclaration/shared/[root]/-build-config/gratatouille.html
 $dokka.location:/BuildConfig/group/#/PointingToDeclaration/shared/[root]/-build-config/group.html
 $dokka.location:/BuildConfig/h2/#/PointingToDeclaration/shared/[root]/-build-config/h2.html
 $dokka.location:/BuildConfig/hikariCP/#/PointingToDeclaration/shared/[root]/-build-config/hikari-c-p.html
