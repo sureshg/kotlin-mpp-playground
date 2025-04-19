@@ -14,10 +14,10 @@
 
     <!-- [%d{ISO8601}] -->
     <property name="pattern"
-              value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} %X{trace-id} %-5level %X{remoteHost} [%thread]  %logger{16} - %msg%n%rEx"/>
+              value="%date{yyyy-MM-dd'T'HH:mm:ss.SSS z, America/Los_Angeles} %X{trace-id} %-5level %X{remoteHost} [%thread]  %logger{16} - %msg%n%rEx"/>
 
     <property name="otel-pattern"
-              value="%d{YYYY-MM-dd HH:mm:ss.SSS z, America/Los_Angeles} trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags} %-5level %logger{16} - %msg%n"/>
+              value="%date{yyyy-MM-dd'T'HH:mm:ss.SSS z, America/Los_Angeles} trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags} %-5level %logger{16} - %msg%n"/>
 
     <appender name="APP1" class="RollingFileAppender">
         <file>${LOG_DIR}/app1.log</file>
