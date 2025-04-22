@@ -151,7 +151,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -159,7 +159,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/13)
+    (0/14)
   </span>
 </td>
 <td class="coverageStat">
@@ -167,7 +167,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/128)
+    (0/164)
   </span>
 </td>
   </tr>
@@ -195,7 +195,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/22)
+    (0/15)
   </span>
 </td>
   </tr>
@@ -312,7 +312,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/26)
+    (0/31)
   </span>
 </td>
 <td class="coverageStat">
@@ -320,7 +320,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/85)
+    (0/86)
   </span>
 </td>
 <td class="coverageStat">
@@ -328,7 +328,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/798)
+    (0/827)
   </span>
 </td>
 </tr>
@@ -490,13 +490,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    }
 &nbsp;  }
 &nbsp;
-<b class="nc">&nbsp;  get(&quot;/profile&quot;) {</b>
+<b class="nc">&nbsp;  get(&quot;/profile/{type?}&quot;) {</b>
 <b class="nc">&nbsp;    when (mutex.isLocked) {</b>
 <b class="nc">&nbsp;      true -&gt; call.respondText(&quot;Profile operation is already running&quot;)</b>
 &nbsp;      else -&gt;
 <b class="nc">&nbsp;          mutex.withLock {</b>
-<b class="nc">&nbsp;            when (call.request.queryParameters.contains(&quot;download&quot;)) {</b>
-<b class="nc">&nbsp;              true -&gt; {</b>
+<b class="nc">&nbsp;            val type = call.parameters[&quot;type&quot;]?.lowercase() ?: &quot;html&quot;</b>
+<b class="nc">&nbsp;            when (type) {</b>
+&nbsp;              &quot;download&quot; -&gt; {
 <b class="nc">&nbsp;                val jfrPath = Profiling.jfrSnapshot()</b>
 <b class="nc">&nbsp;                call.response.header(</b>
 <b class="nc">&nbsp;                    ContentDisposition,</b>
@@ -504,8 +505,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;                call.respondFile(jfrPath.toFile())</b>
 <b class="nc">&nbsp;                jfrPath.deleteIfExists()</b>
 &nbsp;              }
-&nbsp;              else -&gt;
-<b class="nc">&nbsp;                  call.respondText(contentType = ContentType.Text.Html) { Profiling.flameGraph() }</b>
+&nbsp;
+&nbsp;              &quot;html&quot;,
+&nbsp;              &quot;heatmap&quot; -&gt;
+<b class="nc">&nbsp;                  call.respondText(contentType = ContentType.Text.Html) {</b>
+<b class="nc">&nbsp;                    Profiling.convertJfr(type)</b>
+&nbsp;                  }
+<b class="nc">&nbsp;              else -&gt; error(&quot;Invalid profile type: $type&quot;)</b>
 &nbsp;            }
 <b class="nc">&nbsp;          }</b>
 &nbsp;    }
@@ -595,7 +601,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-04-21 22:35</div>
+    <div style="float:right;">generated on 2025-04-22 23:58</div>
 </div>
 </body>
 </html>
