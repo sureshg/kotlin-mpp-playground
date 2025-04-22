@@ -149,13 +149,14 @@ fun Route.mgmtRoutes() {
     }
   }
 
-  get("/profile") {
+  get("/profile/{type?}") {
     when (mutex.isLocked) {
       true -> call.respondText("Profile operation is already running")
       else ->
           mutex.withLock {
-            when (call.request.queryParameters.contains("download")) {
-              true -> {
+            val type = call.parameters["type"]?.lowercase() ?: "html"
+            when (type) {
+              "download" -> {
                 val jfrPath = Profiling.jfrSnapshot()
                 call.response.header(
                     ContentDisposition,
@@ -163,8 +164,13 @@ fun Route.mgmtRoutes() {
                 call.respondFile(jfrPath.toFile())
                 jfrPath.deleteIfExists()
               }
-              else ->
-                  call.respondText(contentType = ContentType.Text.Html) { Profiling.flameGraph() }
+
+              "html",
+              "heatmap" ->
+                  call.respondText(contentType = ContentType.Text.Html) {
+                    Profiling.convertJfr(type)
+                  }
+              else -> error("Invalid profile type: $type")
             }
           }
     }

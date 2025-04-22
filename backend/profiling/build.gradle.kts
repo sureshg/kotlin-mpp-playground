@@ -17,7 +17,8 @@ kotlin {
       dependencies {
         implementation(libs.jmc.common)
         implementation(libs.jmc.jfr)
-        implementation(libs.ap.converter)
+        implementation(libs.ap.jfr.converter)
+        implementation(libs.bytesize)
         // implementation(libs.ap.loader.all)
       }
       kotlin.srcDir("src/main/kotlin")
