@@ -6,6 +6,10 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
 
+  hostmetrics:
+    scrapers:
+      memory:
+
   prometheus:
     config:
       scrape_configs:
@@ -22,10 +26,8 @@ processors:
     check_interval: 2s
     limit_mib: 1800
     spike_limit_mib: 500
-  resourcedetection/system:
-    detectors: [ "system" ]
-    system:
-      hostname_sources: [ "os" ]
+  resourcedetection:
+    detectors: [ system ]
   resource:
     attributes:
       - key: service.name
@@ -34,6 +36,8 @@ processors:
 
 exporters:
   debug:
+    verbosity: detailed
+
   clickhouse:
     endpoint: tcp://clickhouse:9000
     database: otel
@@ -71,14 +75,14 @@ service:
   pipelines:
     logs:
       receivers: [ otlp ]
-      processors: [ memory_limiter, resourcedetection/system, resource, batch ]
+      processors: [ memory_limiter, resourcedetection, resource, batch ]
       exporters: [ clickhouse ]
     traces:
       receivers: [ otlp ]
-      processors: [ memory_limiter, resourcedetection/system, resource, batch ]
+      processors: [ memory_limiter, resourcedetection, resource, batch ]
       exporters: [ clickhouse ]
     metrics:
       receivers: [ otlp ]
-      processors: [ memory_limiter, resourcedetection/system, resource, batch ]
+      processors: [ memory_limiter, resourcedetection, resource, batch ]
       exporters: [ clickhouse ]
       # exporters: [otlphttp/metrics,debug/metrics]
