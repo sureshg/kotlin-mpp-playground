@@ -12,6 +12,7 @@ plugins {
   com.github.`ben-manes`.versions
   dev.iurysouza.modulegraph
   com.dorongold.`task-tree`
+  id("com.gradleup.nmcp.aggregation")
   // id("gg.jte.gradle")
   // com.autonomousapps.`dependency-analysis`
 }

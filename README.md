@@ -291,7 +291,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ export ORG_GRADLE_PROJECT_signingInMemoryKey=$(gpg --export-secret-keys --armor ${ORG_GRADLE_PROJECT_signingInMemoryKeyId} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n')
 
   # For aggregated publication (preferred) to Central
-  $ ./gradlew publishAggregatedPublicationToCentralPortal
+  $ ./gradlew publishAggregationToCentralPortal
 
   # For all publications (separate publications)
   $ ./gradlew publishAllPublicationsToCentralPortal

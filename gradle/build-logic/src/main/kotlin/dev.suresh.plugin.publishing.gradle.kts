@@ -1,7 +1,6 @@
 import com.google.cloud.tools.jib.gradle.JibExtension
 import common.*
 import java.time.Year
-import nmcp.NmcpPublishTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 
 plugins {
@@ -116,7 +115,7 @@ signing {
 }
 
 nmcp {
-  publishAllPublications {
+  centralPortal {
     username = mavenCentralUsername
     password = mavenCentralPassword
   }
@@ -156,9 +155,6 @@ fun MavenPublication.configurePom() {
 tasks {
   // Suppressing publication validation errors
   withType<GenerateModuleMetadata> { suppressedValidationErrors.add("enforced-platform") }
-
-  // For maven central portal publications - https://github.com/gradle/gradle/issues/26091
-  withType<NmcpPublishTask>().configureEach { mustRunAfter(withType<Sign>()) }
 
   withType<AbstractPublishToMaven>().configureEach { mustRunAfter(withType<Sign>()) }
 

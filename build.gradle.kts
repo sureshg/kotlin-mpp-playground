@@ -8,6 +8,14 @@ plugins {
 
 description = "Kotlin Multiplatform Playground!"
 
+nmcp {
+  centralPortal {
+    username = mavenCentralUsername
+    password = mavenCentralPassword
+    publishingType = "AUTOMATIC"
+  }
+}
+
 dependencies {
   dokka(project(":shared"))
   dokka(project(":meta:ksp:processor"))
@@ -17,26 +25,16 @@ dependencies {
   dokka(project(":backend:profiling"))
   dokka(project(":backend:security"))
   dokka(project(":web"))
-}
 
-nmcp {
-  publishAggregation {
-    project(":shared")
-    project(":dep-mgmt:bom")
-    project(":dep-mgmt:catalog")
-    project(":meta:ksp:processor")
-    project(":meta:compiler:plugin")
-    project(":backend:jvm")
-    project(":backend:data")
-    project(":backend:profiling")
-    project(":backend:security")
-    project(":web")
-    // project(":backend:native")
-    // project(":compose:cmp")
-    // project(":compose:html")
-
-    username = mavenCentralUsername
-    password = mavenCentralPassword
-    publicationType = "AUTOMATIC"
-  }
+  //  nmcpAggregation(project(":shared"))
+  //  nmcpAggregation(project(":dep-mgmt:bom"))
+  //  nmcpAggregation(project(":dep-mgmt:catalog"))
+  //  nmcpAggregation(project(":meta:ksp:processor"))
+  //  nmcpAggregation(project(":meta:compiler:plugin"))
+  //  nmcpAggregation(project(":backend:jvm"))
+  //  nmcpAggregation(project(":backend:data"))
+  //  nmcpAggregation(project(":backend:profiling"))
+  //  nmcpAggregation(project(":backend:security"))
+  //  nmcpAggregation(project(":web"))
+  //  nmcpAggregation(// project(":backend:native")
 }
