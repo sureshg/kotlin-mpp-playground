@@ -107,6 +107,7 @@ $dokka.location:/BuildConfig/javaVendor/#/PointingToDeclaration/shared/[root]/-
 $dokka.location:/BuildConfig/jctools/#/PointingToDeclaration/shared/[root]/-build-config/jctools.html
 $dokka.location:/BuildConfig/jetbrainsCompose/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose.html
 $dokka.location:/BuildConfig/jetbrainsComposeAdaptive/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-adaptive.html
+$dokka.location:/BuildConfig/jetbrainsComposeIcons/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-icons.html
 $dokka.location:/BuildConfig/jetbrainsComposeNav/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-nav.html
 $dokka.location:/BuildConfig/jetbrainsComposeViewmodel/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-viewmodel.html
 $dokka.location:/BuildConfig/jfreeChart/#/PointingToDeclaration/shared/[root]/-build-config/jfree-chart.html
