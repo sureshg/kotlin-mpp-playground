@@ -41,6 +41,7 @@ kotlin {
       implementation(libs.compose.material3.adaptive.layout)
       implementation(libs.compose.material3.adaptive.nav)
       implementation(libs.compose.material3.windowsize)
+      implementation(libs.compose.material.icons.core)
       implementation(libs.compose.kottie)
 
       // implementation(compose.materialIconsExtended)

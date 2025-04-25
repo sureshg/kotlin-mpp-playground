@@ -195,6 +195,7 @@ jetbrains-compose              = "1.8.0-rc01"
 jetbrains-compose-viewmodel    = "2.9.0-alpha07"
 jetbrains-compose-nav          = "2.9.0-alpha17"
 jetbrains-compose-adaptive     = "1.1.0-rc01"
+jetbrains-compose-icons        = "1.7.3"
 kobweb                         = "0.21.1"
 detekt                         = "1.23.8"
 detekt-compose-rules           = "0.4.22"
@@ -592,6 +593,7 @@ compose-material3-windowsize         = { module = "org.jetbrains.compose.materia
 compose-material3-adaptive           = { module = "org.jetbrains.compose.material3.adaptive:adaptive"                       , version.ref = "jetbrains-compose-adaptive" }
 compose-material3-adaptive-layout    = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout"                , version.ref = "jetbrains-compose-adaptive" }
 compose-material3-adaptive-nav       = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation"            , version.ref = "jetbrains-compose-adaptive" }
+compose-material-icons-core          = { module = "org.jetbrains.compose.material:material-icons-core"                      , version.ref = "jetbrains-compose-icons" }
 compose-routing                      = { module = "app.softwork:routing-compose"                                            , version.ref = "compose-routing" }
 compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"                            , version.ref = "compose-icons" }
 detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                                          , version.ref = "detekt-compose-rules" }
