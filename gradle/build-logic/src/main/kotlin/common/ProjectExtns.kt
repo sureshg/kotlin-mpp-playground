@@ -85,6 +85,12 @@ val Project.isNativeTargetEnabled: Boolean
 val Project.isWinTargetEnabled: Boolean
   get() = gradleBooleanProp("kotlin.target.win.enabled").get()
 
+val Project.isComposeModuleEnabled: Boolean
+  get() = gradleBooleanProp("module.compose.enabled").get()
+
+val Project.isBootModuleEnabled: Boolean
+  get() = gradleBooleanProp("module.boot.enabled").get()
+
 /** Java version properties. */
 val Project.javaVersion
   get() = libs.versions.java.asProvider().map { JavaVersion.toVersion(it) }

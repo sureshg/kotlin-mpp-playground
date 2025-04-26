@@ -158,7 +158,6 @@ dependencies {
   implementation(libs.plugins.gradle.develocity.dep)
   implementation(libs.plugins.foojay.resolver.dep)
   implementation(libs.plugins.redacted.dep)
-  implementation(libs.plugins.nmcp.dep)
   implementation(libs.plugins.spotless.dep)
   implementation(libs.plugins.shadow.dep)
   implementation(libs.plugins.mrjar.dep)
@@ -171,6 +170,8 @@ dependencies {
   implementation(libs.plugins.modulegraph.dep)
   implementation(libs.plugins.kopy.dep)
   implementation(libs.plugins.github.changelog.dep)
+  implementation(libs.plugins.nmcp.project.dep)
+  implementation(libs.plugins.nmcp.aggregation.dep)
 
   implementation(libs.tomlj)
   implementation(libs.jib.nativeimage.extn)

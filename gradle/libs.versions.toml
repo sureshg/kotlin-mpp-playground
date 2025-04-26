@@ -218,7 +218,7 @@ swagger-style                  = "https://unpkg.com/swagger-ui-themes@3.0.1/them
 benmanes                       = "0.52.0"
 foojay-resolver                = "0.10.0"
 gradle-develocity              = "4.0.1"
-nmcp                           = "0.1.1"
+nmcp                           = "0.1.2"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.31.0"
 gradle-publish                 = "1.3.1"
@@ -714,7 +714,8 @@ sigstore                             = { id = "dev.sigstore.sign"               
 sigstore-base                        = { id = "dev.sigstore.sign-base"                                         , version.ref = "sigstore" }
 buildkonfig                          = { id = "com.codingfeline.buildkonfig"                                   , version.ref = "buildkonfig"}
 detekt                               = { id = "io.github.detekt.gradle.compiler-plugin"                        , version.ref = "detekt"}
-nmcp                                 = { id = "com.gradleup.nmcp"                                              , version.ref = "nmcp"}
+nmcp-project                         = { id = "com.gradleup.nmcp"                                              , version.ref = "nmcp"}
+nmcp-aggregation                     = { id = "com.gradleup.nmcp.aggregation"                                  , version.ref = "nmcp"}
 vanniktech-publish                   = { id = "com.vanniktech.maven.publish"                                   , version.ref = "vanniktech-publish" }
 gradle-publish                       = { id = "com.gradle.plugin-publish"                                      , version.ref = "gradle-publish" }
 kobweb-application                   = { id = "com.varabyte.kobweb.application"                                , version.ref = "kobweb" }

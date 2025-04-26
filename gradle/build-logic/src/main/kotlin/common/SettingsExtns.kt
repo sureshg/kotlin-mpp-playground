@@ -1,6 +1,5 @@
 package common
 
-import kotlin.text.toBoolean
 import org.gradle.api.initialization.Settings
 import org.gradle.api.provider.Provider
 
@@ -13,8 +12,8 @@ val Settings.isNativeTargetEnabled: Boolean
 val Settings.isWinTargetEnabled: Boolean
   get() = gradleBooleanProp("kotlin.target.win.enabled").get()
 
-val Settings.isComposeEnabled: Boolean
-  get() = gradleBooleanProp("compose.enabled").get()
+val Settings.isComposeModuleEnabled: Boolean
+  get() = gradleBooleanProp("module.compose.enabled").get()
 
-val Settings.isSpringBootEnabled: Boolean
-  get() = gradleBooleanProp("springboot.enabled").get()
+val Settings.isBootModuleEnabled: Boolean
+  get() = gradleBooleanProp("module.boot.enabled").get()

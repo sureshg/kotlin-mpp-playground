@@ -17,24 +17,28 @@ nmcp {
 }
 
 dependencies {
-  dokka(project(":shared"))
-  dokka(project(":meta:ksp:processor"))
-  dokka(project(":meta:compiler:plugin"))
-  dokka(project(":backend:jvm"))
-  dokka(project(":backend:data"))
-  dokka(project(":backend:profiling"))
-  dokka(project(":backend:security"))
-  dokka(project(":web"))
+  dokka(projects.shared)
+  dokka(projects.meta.ksp.processor)
+  dokka(projects.meta.compiler.plugin)
+  dokka(projects.backend.jvm)
+  dokka(projects.backend.data)
+  dokka(projects.backend.profiling)
+  dokka(projects.backend.security)
+  dokka(projects.web)
 
-  //  nmcpAggregation(project(":shared"))
-  //  nmcpAggregation(project(":dep-mgmt:bom"))
-  //  nmcpAggregation(project(":dep-mgmt:catalog"))
-  //  nmcpAggregation(project(":meta:ksp:processor"))
-  //  nmcpAggregation(project(":meta:compiler:plugin"))
-  //  nmcpAggregation(project(":backend:jvm"))
-  //  nmcpAggregation(project(":backend:data"))
-  //  nmcpAggregation(project(":backend:profiling"))
-  //  nmcpAggregation(project(":backend:security"))
-  //  nmcpAggregation(project(":web"))
-  //  nmcpAggregation(// project(":backend:native")
+  nmcpAggregation(projects.shared)
+  nmcpAggregation(projects.depMgmt.bom)
+  nmcpAggregation(projects.depMgmt.catalog)
+  nmcpAggregation(projects.meta.ksp.processor)
+  nmcpAggregation(projects.meta.compiler.plugin)
+  nmcpAggregation(projects.backend.jvm)
+  nmcpAggregation(projects.backend.data)
+  nmcpAggregation(projects.backend.profiling)
+  nmcpAggregation(projects.backend.security)
+  nmcpAggregation(projects.web)
+
+  // Optional modules
+  findProject(":backend:native")?.let { nmcpAggregation(it) }
+  findProject(":compose:cmp")?.let { nmcpAggregation(it) }
+  findProject(":compose:html")?.let { nmcpAggregation(it) }
 }

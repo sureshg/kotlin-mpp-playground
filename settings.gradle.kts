@@ -1,3 +1,5 @@
+import common.*
+
 pluginManagement {
   repositories {
     mavenCentral()
@@ -40,13 +42,13 @@ if (isNativeTargetEnabled) {
   include(":backend:native")
 }
 
-if (isComposeEnabled) {
+if (isComposeModuleEnabled) {
   include(":compose:cmp")
   // include(":compose:cli")
   // include(":compose:html")
 }
 
-if (isSpringBootEnabled) {
+if (isBootModuleEnabled) {
   include(":backend:boot")
 }
 
@@ -55,18 +57,3 @@ if (isSpringBootEnabled) {
 //        substitute(module("dev.suresh:misc-build")).using(project(":"))
 //    }
 // }
-
-val Settings.isNativeTargetEnabled: Boolean
-  get() = gradleBooleanProp("kotlin.target.native.enabled").get()
-
-val Settings.isComposeEnabled: Boolean
-  get() = gradleBooleanProp("composeBuild").get()
-
-val Settings.isSpringBootEnabled: Boolean
-  get() = gradleBooleanProp("springBoot").get()
-
-val Settings.isWinTargetEnabled: Boolean
-  get() = gradleBooleanProp("kotlin.target.win.enabled").get()
-
-fun Settings.gradleBooleanProp(name: String): Provider<Boolean> =
-    providers.gradleProperty(name).map(String::toBoolean).orElse(false)
