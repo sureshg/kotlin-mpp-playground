@@ -212,7 +212,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;  suspend fun images() = client.get(ImgRes()).body&lt;List&lt;Image&gt;&gt;()
 &nbsp;
-&nbsp;  suspend fun videos() = client.get(VideoRes()).body&lt;List&lt;Video&gt;&gt;()
+&nbsp;  suspend fun videos() = client.get(VideoRes()) { skipSavingBody() }.body&lt;List&lt;Video&gt;&gt;()
 &nbsp;
 &nbsp;  suspend fun multiPart() {
 &nbsp;    val multipart = client.post(MultiPartRes()).body&lt;MultiPartData&gt;()
@@ -260,7 +260,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-04-27 00:24</div>
+    <div style="float:right;">generated on 2025-04-27 01:18</div>
 </div>
 </body>
 </html>

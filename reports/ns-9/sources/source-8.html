@@ -69,7 +69,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/135)
+    (0/139)
   </span>
 </td>
 </tr>
@@ -151,7 +151,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/185)
+    (0/189)
   </span>
 </td>
 </tr>
@@ -224,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="nc">&nbsp;  suspend fun images() = client.get(ImgRes()).body&lt;List&lt;Image&gt;&gt;()</b>
 &nbsp;
-<b class="nc">&nbsp;  suspend fun videos() = client.get(VideoRes()).body&lt;List&lt;Video&gt;&gt;()</b>
+<b class="nc">&nbsp;  suspend fun videos() = client.get(VideoRes()) { skipSavingBody() }.body&lt;List&lt;Video&gt;&gt;()</b>
 &nbsp;
 &nbsp;  suspend fun multiPart() {
 <b class="nc">&nbsp;    val multipart = client.post(MultiPartRes()).body&lt;MultiPartData&gt;()</b>
@@ -272,7 +272,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-04-27 00:24</div>
+    <div style="float:right;">generated on 2025-04-27 01:18</div>
 </div>
 </body>
 </html>
