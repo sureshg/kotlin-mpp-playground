@@ -115,6 +115,10 @@ expect fun httpClient(
 
       expectSuccess = true
 
+      // install(SaveBodyPlugin) {
+      //   disabled = true
+      // }
+
       HttpResponseValidator {
         handleResponseExceptionWithRequest { ex, req ->
           val resException = ex as? ResponseException ?: return@handleResponseExceptionWithRequest

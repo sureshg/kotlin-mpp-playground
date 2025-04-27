@@ -60,7 +60,7 @@ data class MediaApiClient(
 
   suspend fun images() = client.get(ImgRes()).body<List<Image>>()
 
-  suspend fun videos() = client.get(VideoRes()).body<List<Video>>()
+  suspend fun videos() = client.get(VideoRes()) { skipSavingBody() }.body<List<Video>>()
 
   suspend fun multiPart() {
     val multipart = client.post(MultiPartRes()).body<MultiPartData>()
