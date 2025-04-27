@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Dependency Versions
-bc-plugins                     = "1.31.0"
+bc-plugins                     = "1.33.0"
 kotlinx-kover                  = "0.9.1"
 kotlinx-bcv                    = "0.17.0"
 kotlin-dokka                   = "2.0.0"
@@ -61,11 +61,11 @@ spring-depmgmt                 = "1.1.7"
 ktor                           = "3.1.2"
 ktor-cohort                    = "2.7.0"
 otel                           = "1.49.0"
+otel-alpha                     = "1.49.0-alpha"
 otel-instr                     = "2.15.0"
 otel-instr-alpha               = "2.15.0-alpha"
 otel-semconv                   = "1.32.0"
 otel-samplers                  = "1.46.0-alpha"
-elastic-otel                   = "0.4.0"
 okio                           = "3.11.0"
 sslcontext-kickstart           = "9.1.0"
 ksp-auto-service               = "1.2.0"
@@ -571,7 +571,9 @@ okapibarcode                         = { module = "uk.org.okapibarcode:okapibarc
 otel-bom                             = { module = "io.opentelemetry:opentelemetry-bom"                                                      , version.ref = "otel"}
 otel-api                             = { module = "io.opentelemetry:opentelemetry-api"                                                      , version.ref = "otel"}
 otel-exporter-otlp                   = { module = "io.opentelemetry:opentelemetry-exporter-otlp"                                            , version.ref = "otel"}
-otel-autoconfigure                   = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure"                              , version.ref = "otel"}
+otel-exporter-logging                = { module = "io.opentelemetry:opentelemetry-exporter-logging"                                         , version.ref = "otel"}
+otel-sdk-autoconf                    = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure"                              , version.ref = "otel"}
+otel-sdk-extn                        = { module = "io.opentelemetry:opentelemetry-sdk-extension-incubator"                                  , version.ref = "otel-alpha"}
 otel-semconv                         = { module = "io.opentelemetry.semconv:opentelemetry-semconv"                                          , version.ref = "otel-semconv"}
 otel-samplers                        = { module = "io.opentelemetry.contrib:opentelemetry-samplers"                                         , version.ref = "otel-samplers"}
 
@@ -664,7 +666,8 @@ dataviz                              = ["kotlinx-dataframe-csv",
 json-extra                           = ["kotlinx-jsonpath","json-schema-validator"]
 keystore                             = ["sslcontext-kickstart","directory-keystore"]
 otel                                 = ["otel-instr-annotations",
-                                        "otel-autoconfigure",
+                                        "otel-sdk-autoconf",
+                                        "otel-sdk-extn",
                                         "otel-semconv",
                                         "otel-instr-ktor",
                                         "otel-instr-logback-mdc",
