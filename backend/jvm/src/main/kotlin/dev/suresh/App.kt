@@ -23,11 +23,11 @@ fun main(args: Array<String>) =
 fun Application.module() {
   log.info("Starting ${BuildConfig.description} v${BuildConfig.version}...")
   AppConfig.init(environment.config)
+  configureOTel()
   configureInterceptors()
   configureHTTP()
   configureSecurity()
   errorRoutes()
-  configureOTel()
 
   routing {
     adminRoutes()
