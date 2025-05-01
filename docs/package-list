@@ -65,8 +65,9 @@ $dokka.location:/BuildConfig/devEmail/#/PointingToDeclaration/shared/[root]/-bu
 $dokka.location:/BuildConfig/devName/#/PointingToDeclaration/shared/[root]/-build-config/dev-name.html
 $dokka.location:/BuildConfig/dflib/#/PointingToDeclaration/shared/[root]/-build-config/dflib.html
 $dokka.location:/BuildConfig/directoryKeystore/#/PointingToDeclaration/shared/[root]/-build-config/directory-keystore.html
-$dokka.location:/BuildConfig/elasticOtel/#/PointingToDeclaration/shared/[root]/-build-config/elastic-otel.html
 $dokka.location:/BuildConfig/evas/#/PointingToDeclaration/shared/[root]/-build-config/evas.html
+$dokka.location:/BuildConfig/exoquery/#/PointingToDeclaration/shared/[root]/-build-config/exoquery.html
+$dokka.location:/BuildConfig/exoqueryPlugin/#/PointingToDeclaration/shared/[root]/-build-config/exoquery-plugin.html
 $dokka.location:/BuildConfig/expiringmap/#/PointingToDeclaration/shared/[root]/-build-config/expiringmap.html
 $dokka.location:/BuildConfig/exposed/#/PointingToDeclaration/shared/[root]/-build-config/exposed.html
 $dokka.location:/BuildConfig/exposedPlugin/#/PointingToDeclaration/shared/[root]/-build-config/exposed-plugin.html
@@ -137,6 +138,7 @@ $dokka.location:/BuildConfig/kmpmt/#/PointingToDeclaration/shared/[root]/-build
 $dokka.location:/BuildConfig/kobweb/#/PointingToDeclaration/shared/[root]/-build-config/kobweb.html
 $dokka.location:/BuildConfig/koin/#/PointingToDeclaration/shared/[root]/-build-config/koin.html
 $dokka.location:/BuildConfig/koinAnnotations/#/PointingToDeclaration/shared/[root]/-build-config/koin-annotations.html
+$dokka.location:/BuildConfig/koja/#/PointingToDeclaration/shared/[root]/-build-config/koja.html
 $dokka.location:/BuildConfig/konsist/#/PointingToDeclaration/shared/[root]/-build-config/konsist.html
 $dokka.location:/BuildConfig/kopy/#/PointingToDeclaration/shared/[root]/-build-config/kopy.html
 $dokka.location:/BuildConfig/kotest/#/PointingToDeclaration/shared/[root]/-build-config/kotest.html
@@ -148,7 +150,6 @@ $dokka.location:/BuildConfig/kotlinCryptography/#/PointingToDeclaration/shared/
 $dokka.location:/BuildConfig/kotlinDiff/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-diff.html
 $dokka.location:/BuildConfig/kotlinDokka/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-dokka.html
 $dokka.location:/BuildConfig/kotlinDslJvmtarget/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-dsl-jvmtarget.html
-$dokka.location:/BuildConfig/kotlinJsonSchema/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-json-schema.html
 $dokka.location:/BuildConfig/kotlinJvmtarget/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-jvmtarget.html
 $dokka.location:/BuildConfig/kotlinKsp/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-ksp.html
 $dokka.location:/BuildConfig/kotlinLangVersion/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-lang-version.html
@@ -223,6 +224,7 @@ $dokka.location:/BuildConfig/orgName/#/PointingToDeclaration/shared/[root]/-bui
 $dokka.location:/BuildConfig/orgUrl/#/PointingToDeclaration/shared/[root]/-build-config/org-url.html
 $dokka.location:/BuildConfig/oshi/#/PointingToDeclaration/shared/[root]/-build-config/oshi.html
 $dokka.location:/BuildConfig/otel/#/PointingToDeclaration/shared/[root]/-build-config/otel.html
+$dokka.location:/BuildConfig/otelAlpha/#/PointingToDeclaration/shared/[root]/-build-config/otel-alpha.html
 $dokka.location:/BuildConfig/otelInstr/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr.html
 $dokka.location:/BuildConfig/otelInstrAlpha/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr-alpha.html
 $dokka.location:/BuildConfig/otelSamplers/#/PointingToDeclaration/shared/[root]/-build-config/otel-samplers.html
@@ -243,6 +245,7 @@ $dokka.location:/BuildConfig/repoNodejs/#/PointingToDeclaration/shared/[root]/-
 $dokka.location:/BuildConfig/reproducibleBuilds/#/PointingToDeclaration/shared/[root]/-build-config/reproducible-builds.html
 $dokka.location:/BuildConfig/rsocket/#/PointingToDeclaration/shared/[root]/-build-config/rsocket.html
 $dokka.location:/BuildConfig/rwmutex/#/PointingToDeclaration/shared/[root]/-build-config/rwmutex.html
+$dokka.location:/BuildConfig/schemaKenerator/#/PointingToDeclaration/shared/[root]/-build-config/schema-kenerator.html
 $dokka.location:/BuildConfig/semverPlugin/#/PointingToDeclaration/shared/[root]/-build-config/semver-plugin.html
 $dokka.location:/BuildConfig/shadow/#/PointingToDeclaration/shared/[root]/-build-config/shadow.html
 $dokka.location:/BuildConfig/shedlock/#/PointingToDeclaration/shared/[root]/-build-config/shedlock.html
