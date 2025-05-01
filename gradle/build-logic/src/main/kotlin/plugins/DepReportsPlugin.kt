@@ -24,7 +24,7 @@ class DepReportsPlugin : Plugin<Project> {
         pluginManager.withPlugin("java-base") {
           val listResolvedArtifacts by
               tasks.registering(ListResolvedArtifacts::class) {
-                // Get the runtime resolved artifacts
+                // Get the runtime-resolved artifacts
                 val runtimeClasspath by target.configurations
                 val resolvedArtifacts = runtimeClasspath.incoming.artifacts.resolvedArtifacts
 

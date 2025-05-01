@@ -91,6 +91,12 @@ val Project.isComposeModuleEnabled: Boolean
 val Project.isBootModuleEnabled: Boolean
   get() = gradleBooleanProp("module.boot.enabled").get()
 
+val Project.isMvnSnapshotRepoEnabled: Boolean
+  get() = gradleBooleanProp("maven.snapshot.repo.enabled").get()
+
+val Project.isAutomaticModuleEnabled
+  get() = gradleBooleanProp("java.automatic.module.enabled").get()
+
 /** Java version properties. */
 val Project.javaVersion
   get() = libs.versions.java.asProvider().map { JavaVersion.toVersion(it) }
@@ -106,9 +112,6 @@ val Project.toolchainVendor
 
 val Project.addModules
   get() = libs.versions.java.addModules.get()
-
-val Project.isAutomaticModuleEnabled
-  get() = gradleBooleanProp("java.automatic.module.enabled").get()
 
 val Project.defaultJarManifest
   get() = buildMap {
@@ -442,6 +445,10 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
           "-Xwhen-guards",
           "-Xmulti-dollar-interpolation",
           "-Xnon-local-break-continue",
+          "-Xnested-type-aliases",
+          "-Xreport-all-warnings",
+          // "-Wextra",
+          // "-Xexpected-type-guided-resolution",
           // "-XXLanguage:+ExplicitBackingFields",
           // "-Xsuppress-version-warnings",
           // "-P",
@@ -466,8 +473,8 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
 fun KspAATask.configureKspConfig() =
     with(project) {
       kspConfig.apply {
-        apiVersion = kotlinApiVersion.map { it.version }
         jvmTarget = kotlinJvmTarget.map { it.target }
+        apiVersion = kotlinApiVersion.map { it.version }
         languageVersion = kotlinLangVersion.map { it.version }
         allWarningsAsErrors = false
       }
@@ -499,7 +506,6 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm(project: Project) =
           "-Xassertions=jvm",
           "-Xemit-jvm-type-annotations",
           "-Xjspecify-annotations=strict",
-          "-Xextended-compiler-checks",
           "-Xskip-prerelease-check",
           // Remove null check intrinsics from bytecode
           "-Xno-param-assertions",
@@ -514,6 +520,7 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm(project: Project) =
           // "-Xgenerate-strict-metadata-version",
           // "-Xuse-kapt4",
       )
+      // jvmDefault = JvmDefaultMode.NO_COMPATIBILITY
     }
 
 fun Test.configureJavaTest() {
@@ -586,8 +593,8 @@ fun TestLoggingContainer.configureLogEvents() {
 }
 
 fun KotlinJsCompilerOptions.configureKotlinJs() {
-  // freeCompilerArgs.addAll("-Xir-per-file")
-  // target = "es2015"
+  freeCompilerArgs.addAll("-Xir-per-file")
+  target = "es2015"
   // sourceMap = true
   // sourceMapEmbedSources = "always"
 }

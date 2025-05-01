@@ -1,9 +1,9 @@
 import com.github.ajalt.mordant.rendering.TextColors
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
-import java.io.PrintWriter
-import java.io.StringWriter
+import java.io.*
 import java.util.spi.ToolProvider
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
@@ -16,11 +16,10 @@ plugins {
   kotlin("plugin.serialization")
   kotlin("plugin.power-assert")
   com.google.devtools.ksp
-  dev.zacsweers.redacted
-  com.javiersc.kotlin.kopy
+  // dev.zacsweers.redacted
+  // com.javiersc.kotlin.kopy
   id("dev.suresh.plugin.common")
   id("dev.suresh.plugin.kotlin.docs")
-  // kotlin("plugin.atomicfu")
   // `test-suite-base`
 }
 
@@ -64,18 +63,22 @@ testing {
 
 ksp { allWarningsAsErrors = false }
 
-powerAssert { functions = listOf("kotlin.assert", "kotlin.test.assertTrue") }
-
-redacted {
-  enabled = true
-  replacementString = "█"
+powerAssert {
+  functions =
+      listOf(
+          "kotlin.assert",
+          "kotlin.test.assertTrue",
+          "kotlin.test.assertEquals",
+          "kotlin.test.assertNull",
+          "kotlin.require")
 }
 
-kopy {
-  copyFunctions = listOf(KopyCopyFunctions.Copy)
-  // debug = false
-  // reportPath = layout.buildDirectory.dir("reports/kopy")
-}
+// redacted {
+//  enabled = true
+//  replacementString = "█"
+// }
+
+// kopy { copyFunctions = listOf(KopyCopyFunctions.Copy) }
 
 // Java agent configuration for jib
 val javaAgent by configurations.registering { isTransitive = false }
@@ -136,12 +139,11 @@ tasks {
   }
 
   pluginManager.withPlugin("com.gradleup.shadow") {
-    val shadowJar by existing(Jar::class)
     val buildExecutable by
         registering(ReallyExecJar::class) {
-          jarFile = shadowJar.flatMap { it.archiveFile }
+          jarFile = named<ShadowJar>("shadowJar").flatMap { it.archiveFile }
           // javaOpts = application.applicationDefaultJvmArgs
-          javaOpts = named<JavaExec>("run").get().jvmArgs
+          javaOpts = jvmRunArgs
           execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
           onlyIf { OperatingSystem.current().isUnix }
         }
@@ -152,6 +154,7 @@ tasks {
       description = "Print Java Platform Module dependencies of the application."
       group = LifecycleBasePlugin.BUILD_GROUP
 
+      val shadowJar = named<ShadowJar>("shadowJar")
       doLast {
         val jarFile = shadowJar.get().archiveFile.get().asFile
 
@@ -185,7 +188,7 @@ tasks {
 
     val jdepExtn = extensions.create<JdeprscanExtension>("jdeprscan")
     register<Jdeprscan>("jdeprscan", jdepExtn).configure {
-      jarFile = shadowJar.flatMap { it.archiveFile }
+      jarFile = named<ShadowJar>("shadowJar").flatMap { it.archiveFile }
     }
   }
 
