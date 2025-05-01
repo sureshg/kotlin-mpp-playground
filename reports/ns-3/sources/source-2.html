@@ -175,11 +175,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;fun Application.module() {
 <b class="nc">&nbsp;  log.info(&quot;Starting ${BuildConfig.description} v${BuildConfig.version}...&quot;)</b>
 <b class="nc">&nbsp;  AppConfig.init(environment.config)</b>
+<b class="nc">&nbsp;  configureOTel()</b>
 <b class="nc">&nbsp;  configureInterceptors()</b>
 <b class="nc">&nbsp;  configureHTTP()</b>
 <b class="nc">&nbsp;  configureSecurity()</b>
 <b class="nc">&nbsp;  errorRoutes()</b>
-<b class="nc">&nbsp;  configureOTel()</b>
 &nbsp;
 <b class="nc">&nbsp;  routing {</b>
 <b class="nc">&nbsp;    adminRoutes()</b>
@@ -238,7 +238,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-04-29 00:23</div>
+    <div style="float:right;">generated on 2025-05-01 18:03</div>
 </div>
 </body>
 </html>
