@@ -1,13 +1,14 @@
 package dev.suresh.plugins
 
+import dev.suresh.http.log
 import io.ktor.http.HttpMethod
 import io.ktor.server.application.*
 import io.ktor.server.request.httpMethod
+import io.opentelemetry.api.*
 import io.opentelemetry.api.trace.SpanKind
 import io.opentelemetry.instrumentation.ktor.v3_0.*
 import io.opentelemetry.sdk.extension.incubator.fileconfig.*
-import kotlin.io.path.Path
-import kotlin.io.path.inputStream
+import kotlin.io.path.*
 import kotlin.time.Clock
 
 fun Application.configureOTel() {
@@ -33,7 +34,7 @@ fun Application.configureOTel() {
 }
 
 /** See [Configure the SDK](https://opentelemetry.io/docs/languages/java/configuration/) */
-val openTelemetrySdk by lazy {
+val openTelemetrySdk: OpenTelemetry by lazy {
   val sdkConfPath =
       System.getenv("OTEL_EXPERIMENTAL_CONFIG_FILE")?.takeIf { it.isNotBlank() }?.let { Path(it) }
   val ins =
@@ -41,5 +42,7 @@ val openTelemetrySdk by lazy {
         null -> object {}::class.java.getResourceAsStream("/otel/sdk-config.yaml")
         else -> sdkConfPath.inputStream()
       }
-  DeclarativeConfiguration.parseAndCreate(ins)
+  runCatching { DeclarativeConfiguration.parseAndCreate(ins) }
+      .onFailure { log.error(it) {} }
+      .getOrElse { GlobalOpenTelemetry.get() }
 }
