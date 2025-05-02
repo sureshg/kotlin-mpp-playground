@@ -66,13 +66,14 @@ $dokka.location:/BuildConfig/devName/#/PointingToDeclaration/shared/[root]/-bui
 $dokka.location:/BuildConfig/dflib/#/PointingToDeclaration/shared/[root]/-build-config/dflib.html
 $dokka.location:/BuildConfig/directoryKeystore/#/PointingToDeclaration/shared/[root]/-build-config/directory-keystore.html
 $dokka.location:/BuildConfig/evas/#/PointingToDeclaration/shared/[root]/-build-config/evas.html
-$dokka.location:/BuildConfig/exoquery/#/PointingToDeclaration/shared/[root]/-build-config/exoquery.html
 $dokka.location:/BuildConfig/exoqueryPlugin/#/PointingToDeclaration/shared/[root]/-build-config/exoquery-plugin.html
+$dokka.location:/BuildConfig/exoquerySql/#/PointingToDeclaration/shared/[root]/-build-config/exoquery-sql.html
 $dokka.location:/BuildConfig/expiringmap/#/PointingToDeclaration/shared/[root]/-build-config/expiringmap.html
 $dokka.location:/BuildConfig/exposed/#/PointingToDeclaration/shared/[root]/-build-config/exposed.html
 $dokka.location:/BuildConfig/exposedPlugin/#/PointingToDeclaration/shared/[root]/-build-config/exposed-plugin.html
 $dokka.location:/BuildConfig/filekitDialogs/#/PointingToDeclaration/shared/[root]/-build-config/filekit-dialogs.html
 $dokka.location:/BuildConfig/foojayResolver/#/PointingToDeclaration/shared/[root]/-build-config/foojay-resolver.html
+$dokka.location:/BuildConfig/fusionauthHttp/#/PointingToDeclaration/shared/[root]/-build-config/fusionauth-http.html
 $dokka.location:/BuildConfig/gitFullMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-full-message.html
 $dokka.location:/BuildConfig/gitHash/#/PointingToDeclaration/shared/[root]/-build-config/git-hash.html
 $dokka.location:/BuildConfig/gitMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-message.html
@@ -225,9 +226,9 @@ $dokka.location:/BuildConfig/orgUrl/#/PointingToDeclaration/shared/[root]/-buil
 $dokka.location:/BuildConfig/oshi/#/PointingToDeclaration/shared/[root]/-build-config/oshi.html
 $dokka.location:/BuildConfig/otel/#/PointingToDeclaration/shared/[root]/-build-config/otel.html
 $dokka.location:/BuildConfig/otelAlpha/#/PointingToDeclaration/shared/[root]/-build-config/otel-alpha.html
+$dokka.location:/BuildConfig/otelContrib/#/PointingToDeclaration/shared/[root]/-build-config/otel-contrib.html
 $dokka.location:/BuildConfig/otelInstr/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr.html
 $dokka.location:/BuildConfig/otelInstrAlpha/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr-alpha.html
-$dokka.location:/BuildConfig/otelSamplers/#/PointingToDeclaration/shared/[root]/-build-config/otel-samplers.html
 $dokka.location:/BuildConfig/otelSemconv/#/PointingToDeclaration/shared/[root]/-build-config/otel-semconv.html
 $dokka.location:/BuildConfig/otp/#/PointingToDeclaration/shared/[root]/-build-config/otp.html
 $dokka.location:/BuildConfig/palantirJavaformat/#/PointingToDeclaration/shared/[root]/-build-config/palantir-javaformat.html
