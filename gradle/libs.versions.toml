@@ -1,7 +1,7 @@
 [versions]
 java                           = "25"
 kotlin                         = "2.2.0-Beta2"
-kotlin-ksp                     = "2.2.0-Beta1-2.0.0"
+kotlin-ksp                     = "2.2.0-Beta2-2.0.1"
 kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.2"
@@ -39,7 +39,7 @@ kotlinx-benchmark              = "0.4.13"
 kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.1.0"
-kotlin-wrappers                = "2025.5.0"
+kotlin-wrappers                = "2025.5.2"
 kotlin-redacted                = "1.13.0"
 kotlin-serviceloader           = "0.0.15"
 kotlinx-multik                 = "0.2.3"
@@ -47,8 +47,8 @@ kotlinx-dataframe              = "1.0.0-dev-6805"
 kotlinx-kandy                  = "0.8.0"
 kotlin-statistics              = "0.4.0-RC1"
 gradle-kotlin-dsl              = "6.1.0"
-exoquery-plugin                = "2.1.0-1.0.1.PL"
-exoquery                       = "1.0.1.PL-1.0.1"
+exoquery-plugin                = "2.1.0-1.1.2.PL"
+exoquery-sql                   = "1.1.2.PL-1.1.2"
 exposed                        = "0.61.0"
 postgresql                     = "42.7.5"
 evas                           = "1.2.0"
@@ -64,12 +64,13 @@ spring-boot                    = "3.4.5"
 spring-depmgmt                 = "1.1.7"
 ktor                           = "3.1.2"
 ktor-cohort                    = "2.7.0"
+fusionauth-http                = "0.4.0-RC.4"
 otel                           = "1.49.0"
 otel-alpha                     = "1.49.0-alpha"
 otel-instr                     = "2.15.0"
 otel-instr-alpha               = "2.15.0-alpha"
 otel-semconv                   = "1.32.0"
-otel-samplers                  = "1.46.0-alpha"
+otel-contrib                   = "1.46.0-alpha"
 okio                           = "3.11.0"
 sslcontext-kickstart           = "9.1.0"
 ksp-auto-service               = "1.2.0"
@@ -89,8 +90,8 @@ sshj                           = "0.39.0"
 jsch                           = "0.2.26"
 pty4j                          = "0.13.4"
 oshi                           = "6.8.1"
-junit                          = "5.13.0-M2"
-koin                           = "4.1.0-Beta7"
+junit                          = "5.13.0-M3"
+koin                           = "4.1.0-Beta8"
 koin-annotations               = "2.0.1-RC1"
 metro                          = "0.2.0"
 kotest                         = "6.0.0.M3"
@@ -180,7 +181,7 @@ cel                            = "0.9.1"
 kfswatch                       = "1.3.0"
 kmp-process                    = "0.2.0"
 kmbed                          = "1.8.4"
-langchain4j                    = "1.0.0-beta3"
+langchain4j                    = "1.0.0-rc1"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.5.1"
 mcp4k                          = "0.4.0"
@@ -207,7 +208,7 @@ compose-icons                  = "1.1.1"
 compose-routing                = "0.4.0"
 kottie                         = "2.0.1"
 mosaic                         = "0.17.0"
-filekit-dialogs                = "0.10.0-beta02"
+filekit-dialogs                = "0.10.0-beta03"
 
 # NPM Dependencies
 npm-highlightjs                = "11.11.0"
@@ -397,6 +398,7 @@ sshj                                 = { module = "com.hierynomus:sshj"         
 jsch                                 = { module = "com.github.mwiede:jsch"                                     , version.ref = "jsch"}
 sslcontext-kickstart                 = { module = "io.github.hakky54:sslcontext-kickstart"                     , version.ref = "sslcontext-kickstart"}
 oshi-core                            = { module = "com.github.oshi:oshi-core-java11"                           , version.ref = "oshi"}
+fusionauth-http                      = { module = "io.fusionauth:java-http"                                    , version.ref = "oshi"}
 
 ktor-cohort-core                     = { module = "com.sksamuel.cohort:cohort-ktor"                            , version.ref = "ktor-cohort"}
 ktor-cohort-hikari                   = { module = "com.sksamuel.cohort:cohort-hikari"                          , version.ref = "ktor-cohort"}
@@ -424,8 +426,10 @@ exposed-money                        = { module = "org.jetbrains.exposed:exposed
 exposed-migration                    = { module = "org.jetbrains.exposed:exposed-migration"                    , version.ref = "exposed"}
 postgresql                           = { module = "org.postgresql:postgresql"                                  , version.ref = "postgresql"}
 hikariCP                             = { module = "com.zaxxer:HikariCP"                                        , version.ref = "hikariCP"}
-exoquery-jdbc                        = { module = "io.exoquery:exoquery-runner-jdbc"                           , version.ref = "exoquery"}
-exoquery-native                      = { module = "io.exoquery:exoquery-runner-native"                         , version.ref = "exoquery"}
+exoquery-engine                      = { module = "io.exoquery:exoquery-engine"                                , version.ref = "exoquery-sql" }
+exoquery-runner-core                 = { module = "io.exoquery:exoquery-runner-core"                           , version.ref = "exoquery-sql" }
+exoquery-runner-jdbc                 = { module = "io.exoquery:exoquery-runner-jdbc"                           , version.ref = "exoquery-sql"}
+exoquery-runner-native               = { module = "io.exoquery:exoquery-runner-native"                         , version.ref = "exoquery-sql"}
 micrometer-prometheus                = { module = "io.micrometer:micrometer-registry-prometheus"               , version.ref = "micrometer"}
 h2                                   = { module = "com.h2database:h2"                                          , version.ref = "h2"}
 shedlock-jdbc                        = { module = "net.javacrumbs.shedlock:shedlock-provider-jdbc"             , version.ref = "shedlock"}
@@ -580,7 +584,9 @@ otel-exporter-logging                = { module = "io.opentelemetry:opentelemetr
 otel-sdk-autoconf                    = { module = "io.opentelemetry:opentelemetry-sdk-extension-autoconfigure"                              , version.ref = "otel"}
 otel-sdk-extn                        = { module = "io.opentelemetry:opentelemetry-sdk-extension-incubator"                                  , version.ref = "otel-alpha"}
 otel-semconv                         = { module = "io.opentelemetry.semconv:opentelemetry-semconv"                                          , version.ref = "otel-semconv"}
-otel-samplers                        = { module = "io.opentelemetry.contrib:opentelemetry-samplers"                                         , version.ref = "otel-samplers"}
+otel-contrib-noop                    = { module = "io.opentelemetry.contrib:opentelemetry-noop-api"                                         , version.ref = "otel-contrib"}
+otel-contrib-samplers                = { module = "io.opentelemetry.contrib:opentelemetry-samplers"                                         , version.ref = "otel-contrib"}
+otel-contrib-jfrevents               = { module = "io.opentelemetry.contrib:opentelemetry-jfr-events"                                       , version.ref = "otel-contrib"}
 
 otel-instr-bom                       = { module = "io.opentelemetry.instrumentation:opentelemetry-instrumentation-bom"                      , version.ref = "otel-instr"}
 otel-instr-javaagent                 = { module = "io.opentelemetry.javaagent:opentelemetry-javaagent"                                      , version.ref = "otel-instr"}

@@ -11,8 +11,9 @@ plugins {
   dev.suresh.plugin.graalvm
   com.gradleup.shadow
   alias(libs.plugins.jetbrains.ktor)
-  alias(libs.plugins.jetbrains.exposed)
+  // alias(libs.plugins.exoquery)
   dev.suresh.plugin.publishing
+  // alias(libs.plugins.jetbrains.exposed)
 }
 
 description = "Ktor backend jvm application"
@@ -32,7 +33,7 @@ jte {
   jteExtension("gg.jte.models.generator.ModelExtension") { property("language", "Kotlin") }
 }
 
-exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
+// exposedCodeGeneratorConfig { outputDirectory.set(file("src/main/kotlin/dev/suresh")) }
 
 jib {
   from {
@@ -198,13 +199,14 @@ dependencies {
   implementation(libs.ktor.client.websockets)
 
   // Database
-  implementation(libs.exposed.core)
-  implementation(libs.exposed.jdbc)
-  implementation(libs.exposed.dao)
-  implementation(libs.exposed.kotlin.datetime)
+  // implementation(libs.exoquery.runner.jdbc)
   implementation(libs.postgresql)
   implementation(libs.hikariCP)
   implementation(libs.sherlock.sql)
+  // implementation(libs.exposed.core)
+  // implementation(libs.exposed.jdbc)
+  // implementation(libs.exposed.dao)
+  // implementation(libs.exposed.kotlin.datetime)
 
   // Wasm
   implementation(libs.chicory)
