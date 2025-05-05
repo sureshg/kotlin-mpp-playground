@@ -205,7 +205,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import kotlin.time.Duration.Companion.minutes
 &nbsp;import kotlin.time.Duration.Companion.seconds
 &nbsp;import kotlin.time.toJavaDuration
-&nbsp;import me.saket.bytesize.binaryBytes
+&nbsp;import me.saket.bytesize.*
 &nbsp;import one.convert.*
 &nbsp;import one.jfr.JfrReader
 &nbsp;
@@ -269,7 +269,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;              }
 &nbsp;        }
 &nbsp;        log.info {
-<b class="nc">&nbsp;          &quot;JFR file written to ${jfrPath.toAbsolutePath()} (${jfrPath.fileSize().binaryBytes})&quot;</b>
+<b class="nc">&nbsp;          &quot;JFR file written to ${jfrPath.toAbsolutePath()} (${jfrPath.fileSize().decimalBytes})&quot;</b>
 &nbsp;        }
 &nbsp;        jfrPath
 &nbsp;      }
@@ -324,7 +324,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-05-04 00:15</div>
+    <div style="float:right;">generated on 2025-05-05 21:58</div>
 </div>
 </body>
 </html>
