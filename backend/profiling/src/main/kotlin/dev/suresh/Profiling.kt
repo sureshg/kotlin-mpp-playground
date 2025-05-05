@@ -19,7 +19,7 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.toJavaDuration
-import me.saket.bytesize.binaryBytes
+import me.saket.bytesize.*
 import one.convert.*
 import one.jfr.JfrReader
 
@@ -83,7 +83,7 @@ object Profiling {
               }
         }
         log.info {
-          "JFR file written to ${jfrPath.toAbsolutePath()} (${jfrPath.fileSize().binaryBytes})"
+          "JFR file written to ${jfrPath.toAbsolutePath()} (${jfrPath.fileSize().decimalBytes})"
         }
         jfrPath
       }

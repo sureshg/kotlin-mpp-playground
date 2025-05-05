@@ -199,7 +199,7 @@ dependencies {
   implementation(libs.ktor.client.websockets)
 
   // Database
-  // implementation(libs.exoquery.runner.jdbc)
+  implementation(libs.exoquery.runner.jdbc)
   implementation(libs.postgresql)
   implementation(libs.hikariCP)
   implementation(libs.sherlock.sql)
