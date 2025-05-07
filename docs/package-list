@@ -65,6 +65,8 @@ $dokka.location:/BuildConfig/devEmail/#/PointingToDeclaration/shared/[root]/-bu
 $dokka.location:/BuildConfig/devName/#/PointingToDeclaration/shared/[root]/-build-config/dev-name.html
 $dokka.location:/BuildConfig/dflib/#/PointingToDeclaration/shared/[root]/-build-config/dflib.html
 $dokka.location:/BuildConfig/directoryKeystore/#/PointingToDeclaration/shared/[root]/-build-config/directory-keystore.html
+$dokka.location:/BuildConfig/embeddedPostgres/#/PointingToDeclaration/shared/[root]/-build-config/embedded-postgres.html
+$dokka.location:/BuildConfig/embeddedPostgresBom/#/PointingToDeclaration/shared/[root]/-build-config/embedded-postgres-bom.html
 $dokka.location:/BuildConfig/evas/#/PointingToDeclaration/shared/[root]/-build-config/evas.html
 $dokka.location:/BuildConfig/exoqueryPlugin/#/PointingToDeclaration/shared/[root]/-build-config/exoquery-plugin.html
 $dokka.location:/BuildConfig/exoquerySql/#/PointingToDeclaration/shared/[root]/-build-config/exoquery-sql.html
