@@ -20,7 +20,7 @@ plugins {
   id("dev.suresh.plugin.common")
   id("dev.suresh.plugin.kotlin.docs")
   com.google.devtools.ksp
-  // dev.zacsweers.redacted
+  dev.zacsweers.redacted
   // com.javiersc.kotlin.kopy
   // kotlin("plugin.compose")
   // org.gradle.kotlin.`kotlin-dsl`
@@ -84,10 +84,10 @@ powerAssert {
           "kotlin.require")
 }
 
-// redacted {
-//   enabled = true
-//   replacementString = "█"
-// }
+redacted {
+  enabled = true
+  replacementString = "█"
+}
 
 // kopy { copyFunctions = listOf(KopyCopyFunctions.Copy) }
 
