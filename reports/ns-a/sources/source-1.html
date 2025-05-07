@@ -95,15 +95,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lang
 &nbsp;
 &nbsp;// import com.javiersc.kotlin.kopy.Kopy
-&nbsp;// import dev.zacsweers.redacted.annotations.Redacted
+&nbsp;import dev.zacsweers.redacted.annotations.Redacted
 &nbsp;
-&nbsp;data class Person(val name: Name, val address: Address, val privateInfo: PrivateInfo)
+&nbsp;data class Person(val name: Name, val address: Address, @Redacted val privateInfo: PrivateInfo)
 &nbsp;
 &nbsp;data class Name(val first: String, val last: String)
 &nbsp;
 <b class="fc">&nbsp;data class Address(val street: String, val city: String, val state: String, val zip: String)</b>
 &nbsp;
-&nbsp;data class PrivateInfo(val ssn: String, val dob: String)
+&nbsp;data class PrivateInfo(@Redacted val ssn: String, val dob: String)
 </code>
 </pre>
 </div>
@@ -127,7 +127,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-05-05 23:58</div>
+    <div style="float:right;">generated on 2025-05-07 19:05</div>
 </div>
 </body>
 </html>
