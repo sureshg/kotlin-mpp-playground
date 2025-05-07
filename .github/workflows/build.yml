@@ -94,13 +94,17 @@ jobs:
         if: ${{ false }}
         uses: gradle/actions/setup-gradle@v4
 
+      - name: 📖 Get Kotlin version
+        id: kotlin-version
+        run: |
+          KOTLIN_VERSION=$(grep "^kotlin[[:space:]]*=" gradle/libs.versions.toml | cut -d '"' -f2)
+          echo "version=$KOTLIN_VERSION" >> "$GITHUB_OUTPUT"
+
       - name: 💽 Cache Kotlin Native
         uses: actions/cache@v4
         with:
           path: ~/.konan
-          key: ${{ runner.os }}-konan-${{ hashFiles('**/gradle/libs.versions.toml') }}
-          restore-keys: |
-            ${{ runner.os }}-konan-
+          key: konan-${{ runner.os }}-${{ steps.kotlin-version.outputs.version }}
 
       - name: 🏗️ Gradle Build & Run
         id: gradle-build
