@@ -29,8 +29,11 @@ kotlin {
         // Fix for libcrypt.so.1 not-found error on distroless
         if (target.konanTarget.family == Family.LINUX) {
           linkerOpts("-Wl,--as-needed", "-Wl,-Bstatic", "-lz", "-Wl,-Bdynamic")
-          // freeCompilerArgs += "-Xoverride-konan-properties=linkerGccFlags.linux=-lgcc -lgcc_eh
-          // -lc"
+          // freeCompilerArgs +=
+          //     listOf(
+          //         "-Xverbose-phases=Linker",
+          //         "-Xruntime-logs=gc=info",
+          //         "-Xoverride-konan-properties=linkerGccFlags.linux=-lgcc -lgcc_eh -lc")
         }
 
         if (buildType == NativeBuildType.RELEASE) {
