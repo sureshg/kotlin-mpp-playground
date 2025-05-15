@@ -24,16 +24,19 @@ buildConfig {
 kotlinMissingTargets {}
 
 dependencies {
-  commonMainApi(libs.evas)
-  commonMainApi(libs.uri.kmp)
-  commonMainApi(libs.intellij.markdown)
-  commonMainApi(libs.kotlin.codepoints.deluxe)
-  commonMainApi(libs.multiplatform.settings.coroutines)
-
+  // commonMainApi(libs.bundles.ajalt)
+  // commonMainApi(libs.evas)
+  // commonMainApi(libs.uri.kmp)
+  // commonMainApi(libs.kotlin.bignum)
+  // commonMainApi(libs.kotlin.bignum.serialization)
+  // commonMainApi(libs.intellij.markdown)
+  // commonMainApi(libs.kotlin.codepoints.deluxe)
+  // commonMainApi(libs.kotlin.cryptography.core)
+  // commonMainApi(libs.kotlin.cryptography.random)
+  // commonMainApi(libs.multiplatform.settings.coroutines)
   // commonMainApi(libs.mappie.api)
   // commonMainApi(libs.bundles.json.extra)
   // commonMainApi(libs.urlencoder)
-  // commonMainApi(libs.arrow.suspendapp)
   // commonMainApi(libs.parsus)
   // jvmMainApi(libs.kotlin.reflect)
   // jvmMainApi(libs.logback.classic)
