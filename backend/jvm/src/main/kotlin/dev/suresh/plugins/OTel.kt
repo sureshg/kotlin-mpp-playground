@@ -1,20 +1,40 @@
 package dev.suresh.plugins
 
-import dev.suresh.http.log
-import io.ktor.http.HttpMethod
+import dev.suresh.plugins.custom.*
+import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.request.httpMethod
+import io.ktor.server.request.*
 import io.opentelemetry.api.*
 import io.opentelemetry.api.trace.SpanKind
 import io.opentelemetry.instrumentation.ktor.v3_0.*
-import io.opentelemetry.sdk.extension.incubator.fileconfig.*
 import kotlin.io.path.*
 import kotlin.time.Clock
 
+/**
+ * Configures OpenTelemetry for the application. Checks if the OTel Java agent is active and
+ * installs the custom OTel extension plugin. The agent status is logged for monitoring purposes.
+ */
 fun Application.configureOTel() {
-  install(KtorServerTelemetry) {
-    setOpenTelemetry(openTelemetrySdk)
+  val globalOtel = GlobalOpenTelemetry.get()
+  val isAgentActive = globalOtel !== OpenTelemetry.noop()
+  when (isAgentActive) {
+    true -> log.info("OTel Java agent is active")
+    else -> log.warn("OTel Java agent is inactive!!")
+  }
 
+  install(OTelExtnPlugin) { enabled = true }
+  // otelSdk.shutdown().join(10, TimeUnit.SECONDS);
+}
+
+/**
+ * Configures OpenTelemetry instrumentation for Ktor server.
+ *
+ * Important: When using Ktor plugins for instrumentation, disable the Java agent's Ktor
+ * instrumentation by setting the environment variable: `OTEL_INSTRUMENTATION_KTOR_ENABLED=false`
+ */
+fun Application.otelInstrumentation() {
+  install(KtorServerTelemetry) {
+    setOpenTelemetry(GlobalOpenTelemetry.get())
     spanKindExtractor {
       if (httpMethod == HttpMethod.Post) {
         SpanKind.PRODUCER
@@ -28,21 +48,22 @@ fun Application.configureOTel() {
       onEnd { attributes.put("end-time", Clock.System.now().toEpochMilliseconds()) }
     }
   }
-  // install(OTelExtnPlugin) { enabled = true }
-
-  // openTelemetrySdk.shutdown().join(10, TimeUnit.SECONDS);
 }
 
-/** See [Configure the SDK](https://opentelemetry.io/docs/languages/java/configuration/) */
-val openTelemetrySdk: OpenTelemetry by lazy {
-  val sdkConfPath =
-      System.getenv("OTEL_EXPERIMENTAL_CONFIG_FILE")?.takeIf { it.isNotBlank() }?.let { Path(it) }
+/**
+ * Declarative OpenTelemetry SDK configuration. Loads configuration from either:
+ * - Environment variable OTEL_CONFIG_FILE if specified
+ * - Default configuration from resources/otel/sdk-config.yaml
+ *
+ * For detailed configuration options, see:
+ * [Configure the SDK](https://opentelemetry.io/docs/languages/java/configuration/)
+ */
+val declarativeOtelSdk: OpenTelemetry by lazy {
+  val sdkConfPath = System.getenv("OTEL_CONFIG_FILE")?.takeIf { it.isNotBlank() }?.let { Path(it) }
   val ins =
       when (sdkConfPath) {
         null -> object {}::class.java.getResourceAsStream("/otel/sdk-config.yaml")
         else -> sdkConfPath.inputStream()
       }
-  runCatching { DeclarativeConfiguration.parseAndCreate(ins) }
-      .onFailure { log.error(it) {} }
-      .getOrElse { GlobalOpenTelemetry.get() }
+  TODO("DeclarativeConfiguration.parseAndCreate(ins)")
 }

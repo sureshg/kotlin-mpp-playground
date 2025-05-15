@@ -62,19 +62,6 @@ jib {
     entrypoint = buildList {
       add("java")
       add("-javaagent:${appRoot}/otel/otel-javaagent.jar")
-      add("-Dnet.bytebuddy.experimental=true")
-      add("-Dotel.service.name=${project.name}")
-      add("-Dotel.javaagent.logging=application")
-      add("-Dotel.instrumentation.runtime-telemetry-java17.enable-all=true")
-      add("-Dotel.instrumentation.runtime-telemetry.emit-experimental-telemetry=true")
-      // add("-Dotel.resource.attributes.service.name=${project.name}")
-      // add("-Dotel.resource.attributes.service.namespace=${project.group}")
-      // add("-Dotel.resource.attributes.service.instance.id=localhost:8080")
-      // add("-Dotel.javaagent.enabled=false")
-      // add("-Dotel.traces.exporter=logging")
-      // add("-Dotel.metrics.exporter=logging")
-      // add("-Dotel.logs.exporter=logging")
-      // add("-Dotel.instrumentation.kotlinx-coroutines.enabled=false")
       addAll(application.applicationDefaultJvmArgs.map { it.replace(tmp, "/tmp/") })
       add("-cp")
       add("@${appRoot}/jib-classpath-file")
@@ -83,16 +70,9 @@ jib {
 
     environment =
         mapOf(
-            "OTEL_JAVAAGENT_ENABLED" to "false",
-            "OTEL_TRACES_EXPORTER" to "logging",
-            "OTEL_METRICS_EXPORTER" to "logging",
-            "OTEL_LOGS_EXPORTER" to "logging",
-            "OTEL_RESOURCE_ATTRIBUTES" to
-                "service.name=${project.name},service.namespace=${project.group}",
-            // "OTEL_EXPORTER_OTLP_PROTOCOL" to "grpc",
-            // "OTEL_EXPORTER_OTLP_ENDPOINT" to "http://host.docker.internal:4317",
-            // "OTEL_INSTRUMENTATION_RUNTIME_TELEMETRY_EMIT_EXPERIMENTAL_TELEMETRY" to "true",
-            // "OTEL_INSTRUMENTATION_RUNTIME_TELEMETRY_JAVA17_ENABLE_ALL" to "true",
+            "OTEL_JAVAAGENT_ENABLED" to "true",
+            "OTEL_JAVAAGENT_LOGGING" to "application",
+            "OTEL_EXPERIMENTAL_CONFIG_FILE" to "${appRoot}/otel/sdk-config.yaml",
         )
 
     args = listOf(project.name, project.version.toString())
@@ -222,6 +202,7 @@ dependencies {
 
   // OpenTelemetry
   javaAgent(projects.backend.agent.otel)
+  javaAgent(layout.files("src/main/resources/otel"))
   implementation(libs.bundles.otel)
   implementation(libs.ktor.cohort.core)
   implementation(libs.ktor.cohort.hikari)
