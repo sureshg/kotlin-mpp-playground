@@ -38,7 +38,7 @@
 file_format: "0.4"
 # Configure if the SDK is disabled or not.
 # If omitted or null, false is used.
-disabled: ${OTEL_SDK_DISABLED:-true}
+disabled: ${OTEL_SDK_DISABLED:-false}
 # Configure the log level of the internal logger used by the SDK.
 # If omitted, info is used.
 log_level: ${OTEL_LOG_LEVEL:-info}
@@ -51,6 +51,11 @@ resource:
   attributes:
     - name: service.name
       value: ${OTEL_SERVICE_NAME:-unknown_service}
+    - name: service.namespace
+      value: ${OTEL_SERVICE_NAMESPACE:-dev}
+    - name: service.instance.id
+      value: ${OTEL_SERVICE_INSTANCE_ID:-${HOSTNAME:-unknown}}
+      
   # Configure resource attributes. Entries have lower priority than entries from .resource.attributes.
   # The value is a list of comma separated key-value pairs matching the format of OTEL_RESOURCE_ATTRIBUTES. See https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/configuration/sdk-environment-variables.md#general-sdk-configuration for details.
   # If omitted or null, no resource attributes are added.
@@ -372,3 +377,6 @@ instrumentation:
         capture-logger-context-attributes: false
         capture-arguments: false
         capture-mdc-attributes: false
+    ktor:
+      # Disable default ktor instrumentation.
+      enabled: false
