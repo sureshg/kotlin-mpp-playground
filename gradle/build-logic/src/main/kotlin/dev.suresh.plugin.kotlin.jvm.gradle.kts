@@ -38,9 +38,9 @@ configurations.configureEach {
 }
 
 java {
-  withSourcesJar()
-  withJavadocJar()
   toolchain { configureJvmToolchain(project) }
+  // withSourcesJar()
+  // withJavadocJar()
 }
 
 kotlin {
@@ -196,9 +196,14 @@ tasks {
   pluginManager.withPlugin("com.google.cloud.tools.jib") {
     val copyOtelAgent by
         registering(Copy::class) {
-          from(javaAgent)
+          from(javaAgent) {
+            eachFile {
+              if (name.startsWith("opentelemetry-javaagent")) {
+                name = "otel-javaagent.jar"
+              }
+            }
+          }
           into(layout.buildDirectory.dir("otel"))
-          rename { "otel-javaagent.jar" }
           duplicatesStrategy = DuplicatesStrategy.INCLUDE
         }
 
@@ -207,7 +212,8 @@ tasks {
     // Docker command to run the image
     withType<BuildDockerTask>().configureEach {
       doLast {
-        val portMapping = jib?.container?.ports.orEmpty().joinToString(" ") { "-p $it:$it" }
+        val portMapping =
+            jib?.container?.ports.orEmpty().joinToString(" \\\n     ") { "-p $it:$it" }
         val image = jib?.to?.image ?: project.name
         val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
         val env =
@@ -215,12 +221,17 @@ tasks {
                 ?.environment
                 .orEmpty()
                 .map { "-e ${it.key}=${it.value}" }
-                .joinToString(" ")
+                .joinToString(" \\\n     ")
         logger.lifecycle(
             TextColors.cyan(
                 """
-                |Run: docker run -it --rm --name ${project.name} $portMapping $env $image:$tag
-                """
+                      |Run: docker run \
+                      |     -it --rm \
+                      |     --name ${project.name} \
+                      |     $portMapping \
+                      |     $env \
+                      |     $image:$tag
+                      """
                     .trimMargin()))
       }
     }
@@ -256,7 +267,6 @@ dependencies {
   implementation(libs.kotlin.redacted.annotations)
   implementation(libs.jspecify)
   implementation(libs.bundles.keystore)
-  implementation(libs.bundles.ajalt)
   implementation(libs.slf4j.api)
   // implementation(libs.slf4j.jul)
 

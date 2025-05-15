@@ -42,12 +42,6 @@ fun KotlinMultiplatformExtension.commonTarget(project: Project) =
             api(libs.kotlin.retry)
             api(libs.kotlin.logging)
             api(libs.kotlinx.html)
-            api(libs.bundles.ajalt)
-            api(libs.kotlinx.jsonpath)
-            api(libs.kotlin.cryptography.core)
-            api(libs.kotlin.cryptography.random)
-            api(libs.kotlin.bignum)
-            api(libs.kotlin.bignum.serialization)
             api(libs.ktor.client.core)
             api(libs.ktor.client.cio)
             api(libs.ktor.client.content.negotiation)
@@ -302,7 +296,7 @@ fun KotlinMultiplatformExtension.nativeTargets(
       if (isNativeTargetEnabled) {
         fun KotlinNativeTarget.configureAll() {
           compilerOptions {
-            // freeCompilerArgs.addAll("-Xverbose-phases=Linker", "-Xruntime-logs=gc=info")
+            // freeCompilerArgs.addAll()
           }
           configure()
         }

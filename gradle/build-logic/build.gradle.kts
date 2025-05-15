@@ -20,7 +20,7 @@ val dslJavaVersion = libs.versions.kotlin.dsl.jvmtarget
 idea {
   module {
     isDownloadJavadoc = false
-    isDownloadSources = true
+    isDownloadSources = false
   }
 }
 
