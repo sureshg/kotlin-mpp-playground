@@ -51,5 +51,5 @@ val OTelExtnPlugin =
 
 class OTelExtnPluginConfig {
   var enabled: Boolean = false
-  var traceIdHeader: String = "X-Trace-Id"
+  var traceIdHeader: String = "X-TraceId"
 }
