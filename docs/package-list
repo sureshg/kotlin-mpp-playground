@@ -191,6 +191,7 @@ $dokka.location:/BuildConfig/ktor/#/PointingToDeclaration/shared/[root]/-build-
 $dokka.location:/BuildConfig/ktorCohort/#/PointingToDeclaration/shared/[root]/-build-config/ktor-cohort.html
 $dokka.location:/BuildConfig/kubernetesClient/#/PointingToDeclaration/shared/[root]/-build-config/kubernetes-client.html
 $dokka.location:/BuildConfig/langchain4j/#/PointingToDeclaration/shared/[root]/-build-config/langchain4j.html
+$dokka.location:/BuildConfig/langchain4jKotlin/#/PointingToDeclaration/shared/[root]/-build-config/langchain4j-kotlin.html
 $dokka.location:/BuildConfig/ldaptive/#/PointingToDeclaration/shared/[root]/-build-config/ldaptive.html
 $dokka.location:/BuildConfig/log4j/#/PointingToDeclaration/shared/[root]/-build-config/log4j.html
 $dokka.location:/BuildConfig/log4k/#/PointingToDeclaration/shared/[root]/-build-config/log4k.html
