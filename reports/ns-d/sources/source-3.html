@@ -52,6 +52,49 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/94)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">OTelKt$declarativeOtelSdk$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
     (0/8)
   </span>
 </td>
@@ -60,7 +103,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/14)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,20 +111,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/19)
+    (0/66)
   </span>
 </td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/152)
-  </span>
-</td>
-</tr>
+  </tr>
   <tr>
-    <td class="name">OTelKt$openTelemetrySdk$2$ins$1</td>
+    <td class="name">OTelKt$declarativeOtelSdk$2$ins$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -131,7 +166,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/20)
+    (0/23)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +174,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/154)
+    (0/162)
   </span>
 </td>
 </tr>
@@ -152,21 +187,41 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.plugins
 &nbsp;
-&nbsp;import dev.suresh.http.log
-&nbsp;import io.ktor.http.HttpMethod
+&nbsp;import dev.suresh.plugins.custom.*
+&nbsp;import io.ktor.http.*
 &nbsp;import io.ktor.server.application.*
-&nbsp;import io.ktor.server.request.httpMethod
+&nbsp;import io.ktor.server.request.*
 &nbsp;import io.opentelemetry.api.*
 &nbsp;import io.opentelemetry.api.trace.SpanKind
 &nbsp;import io.opentelemetry.instrumentation.ktor.v3_0.*
-&nbsp;import io.opentelemetry.sdk.extension.incubator.fileconfig.*
 &nbsp;import kotlin.io.path.*
 &nbsp;import kotlin.time.Clock
 &nbsp;
+&nbsp;/**
+&nbsp; * Configures OpenTelemetry for the application. Checks if the OTel Java agent is active and
+&nbsp; * installs the custom OTel extension plugin. The agent status is logged for monitoring purposes.
+&nbsp; */
 &nbsp;fun Application.configureOTel() {
-<b class="nc">&nbsp;  install(KtorServerTelemetry) {</b>
-<b class="nc">&nbsp;    setOpenTelemetry(openTelemetrySdk)</b>
+<b class="nc">&nbsp;  val globalOtel = GlobalOpenTelemetry.get()</b>
+<b class="nc">&nbsp;  val isAgentActive = globalOtel !== OpenTelemetry.noop()</b>
+<b class="nc">&nbsp;  when (isAgentActive) {</b>
+<b class="nc">&nbsp;    true -&gt; log.info(&quot;OTel Java agent is active&quot;)</b>
+<b class="nc">&nbsp;    else -&gt; log.warn(&quot;OTel Java agent is inactive!!&quot;)</b>
+&nbsp;  }
 &nbsp;
+<b class="nc">&nbsp;  install(OTelExtnPlugin) { enabled = true }</b>
+&nbsp;  // otelSdk.shutdown().join(10, TimeUnit.SECONDS);
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * Configures OpenTelemetry instrumentation for Ktor server.
+&nbsp; *
+&nbsp; * Important: When using Ktor plugins for instrumentation, disable the Java agent&#39;s Ktor
+&nbsp; * instrumentation by setting the environment variable: `OTEL_INSTRUMENTATION_KTOR_ENABLED=false`
+&nbsp; */
+&nbsp;fun Application.otelInstrumentation() {
+<b class="nc">&nbsp;  install(KtorServerTelemetry) {</b>
+<b class="nc">&nbsp;    setOpenTelemetry(GlobalOpenTelemetry.get())</b>
 <b class="nc">&nbsp;    spanKindExtractor {</b>
 <b class="nc">&nbsp;      if (httpMethod == HttpMethod.Post) {</b>
 <b class="nc">&nbsp;        SpanKind.PRODUCER</b>
@@ -180,23 +235,24 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;      onEnd { attributes.put(&quot;end-time&quot;, Clock.System.now().toEpochMilliseconds()) }</b>
 &nbsp;    }
 &nbsp;  }
-&nbsp;  // install(OTelExtnPlugin) { enabled = true }
-&nbsp;
-&nbsp;  // openTelemetrySdk.shutdown().join(10, TimeUnit.SECONDS);
 &nbsp;}
 &nbsp;
-&nbsp;/** See [Configure the SDK](https://opentelemetry.io/docs/languages/java/configuration/) */
-<b class="nc">&nbsp;val openTelemetrySdk: OpenTelemetry by lazy {</b>
-<b class="nc">&nbsp;  val sdkConfPath =</b>
-<b class="nc">&nbsp;      System.getenv(&quot;OTEL_EXPERIMENTAL_CONFIG_FILE&quot;)?.takeIf { it.isNotBlank() }?.let { Path(it) }</b>
+&nbsp;/**
+&nbsp; * Declarative OpenTelemetry SDK configuration. Loads configuration from either:
+&nbsp; * - Environment variable OTEL_CONFIG_FILE if specified
+&nbsp; * - Default configuration from resources/otel/sdk-config.yaml
+&nbsp; *
+&nbsp; * For detailed configuration options, see:
+&nbsp; * [Configure the SDK](https://opentelemetry.io/docs/languages/java/configuration/)
+&nbsp; */
+<b class="nc">&nbsp;val declarativeOtelSdk: OpenTelemetry by lazy {</b>
+<b class="nc">&nbsp;  val sdkConfPath = System.getenv(&quot;OTEL_CONFIG_FILE&quot;)?.takeIf { it.isNotBlank() }?.let { Path(it) }</b>
 <b class="nc">&nbsp;  val ins =</b>
 <b class="nc">&nbsp;      when (sdkConfPath) {</b>
 <b class="nc">&nbsp;        null -&gt; object {}::class.java.getResourceAsStream(&quot;/otel/sdk-config.yaml&quot;)</b>
 <b class="nc">&nbsp;        else -&gt; sdkConfPath.inputStream()</b>
 &nbsp;      }
-<b class="nc">&nbsp;  runCatching { DeclarativeConfiguration.parseAndCreate(ins) }</b>
-<b class="nc">&nbsp;      .onFailure { log.error(it) {} }</b>
-<b class="nc">&nbsp;      .getOrElse { GlobalOpenTelemetry.get() }</b>
+<b class="nc">&nbsp;  TODO(&quot;DeclarativeConfiguration.parseAndCreate(ins)&quot;)</b>
 &nbsp;}
 </code>
 </pre>
@@ -221,7 +277,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-05-12 23:11</div>
+    <div style="float:right;">generated on 2025-05-15 19:09</div>
 </div>
 </body>
 </html>
