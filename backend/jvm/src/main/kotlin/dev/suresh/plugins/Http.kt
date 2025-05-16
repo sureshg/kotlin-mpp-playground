@@ -25,7 +25,6 @@ import io.ktor.server.sessions.*
 import io.ktor.server.sse.*
 import io.ktor.server.websocket.*
 import kotlin.concurrent.atomics.AtomicLong
-import kotlin.concurrent.atomics.incrementAndFetch
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
 import org.slf4j.event.Level
@@ -93,16 +92,16 @@ fun Application.configureHTTP() {
 
   install(HSTS)
 
-  install(CallId) {
-    header(HttpHeaders.XRequestId)
-    generate {
-      when (it.isApi) {
-        true -> "$TRACE_ID-${counter.incrementAndFetch()}"
-        else -> "$TRACE_ID-00000"
-      }
-    }
-    verify { it.isNotEmpty() }
-  }
+  // install(CallId) {
+  //   header(HttpHeaders.XRequestId)
+  //   generate {
+  //     when (it.isApi) {
+  //       true -> "$TRACE_ID-${counter.incrementAndFetch()}"
+  //       else -> "$TRACE_ID-00000"
+  //     }
+  //   }
+  //   verify { it.isNotEmpty() }
+  // }
 
   install(CallLogging) {
     level = Level.INFO
@@ -111,7 +110,7 @@ fun Application.configureHTTP() {
 
     // Add MDC entries
     mdc("remoteHost") { call -> call.request.origin.remoteHost }
-    callIdMdc(TRACE_ID)
+    // callIdMdc(TRACE_ID)
 
     // Enable logging for API routes only
     filter { it.isApi }

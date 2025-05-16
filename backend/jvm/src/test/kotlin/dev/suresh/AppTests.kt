@@ -21,13 +21,10 @@ import io.ktor.server.testing.*
 import kotlinx.coroutines.slf4j.MDCContext
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty
-import org.slf4j.LoggerFactory
-import org.slf4j.MDC
-import org.testcontainers.containers.GenericContainer
-import org.testcontainers.containers.PostgreSQLContainer
+import org.slf4j.*
+import org.testcontainers.containers.*
 import org.testcontainers.containers.output.Slf4jLogConsumer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.images.builder.Transferable
@@ -65,8 +62,18 @@ class AppTests {
 
   @Test
   fun appTest() = testApplication {
+    val infoLogs = mutableListOf<String>()
+    val errorLogs = mutableListOf<String>()
+
     environment {
-      log = logger
+      log = object : Logger by logger{
+          override fun info(msg: String) {
+              infoLogs += msg
+          }
+          override fun error(msg: String) {
+              errorLogs += msg
+          }
+      }
       config = MapApplicationConfig("ktor.environment" to "test")
     }
 
@@ -170,7 +177,7 @@ class AppTests {
       it.start()
       val endPoint = "https://${it.host}:${it.getMappedPort(tlsPort)}/"
       val statusCode = testHttpClient.get(endPoint).status
-      assertTrue(statusCode.value == 200)
+      assertEquals(statusCode.value, 200)
     }
   }
 

@@ -369,14 +369,13 @@ instrumentation:
     # https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/logback/logback-appender-1.0/javaagent
     logback-appender:
       enabled: true
-      experimental-log-attributes: false
+      experimental-log-attributes: true
       experimental:
         capture-code-attributes: false
-        capture-marker-attributes: false
+        capture-marker-attributes: true
         capture-key-value-pair-attributes: false
         capture-logger-context-attributes: false
         capture-arguments: false
-        capture-mdc-attributes: false
+        capture-mdc-attributes: true
     ktor:
-      # Disable default ktor instrumentation.
-      enabled: false
+      enabled: true
