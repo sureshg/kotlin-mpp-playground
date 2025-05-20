@@ -390,7 +390,7 @@ fun JavaToolchainSpec.configureJvmToolchain(project: Project) =
     with(project) {
       languageVersion = toolchainVersion
       nativeImageCapable = toolchainVendor.map { it.matches("graalvm community") }
-      // vendor = toolchainVendor
+      vendor = toolchainVendor
     }
 
 fun JavaCompile.configureJavac(project: Project) =
