@@ -88,7 +88,7 @@ object JvmPlatform : Platform {
 }
 
 val Dispatchers.Virtual
-  get() = platform.virtualDispatcher
+  get() = platform.virtualDispatcher + CoroutineName("Virtual")
 
 /**
  * Runs the given suspend block on [Dispatchers.Virtual], so that we can call blocking I/O APIs from
