@@ -47,8 +47,8 @@ kotlinx-dataframe              = "1.0.0-Beta1"
 kotlinx-kandy                  = "0.8.0"
 kotlin-statistics              = "0.4.0-RC1"
 gradle-kotlin-dsl              = "6.1.2"
-exoquery-plugin                = "2.1.20-1.2.4.PL"
-exoquery-sql                   = "1.2.4.PL-1.2.4"
+exoquery-plugin                = "2.1.20-1.2.5.PL"
+exoquery-sql                   = "1.2.5.PL-1.2.5"
 exposed                        = "1.0.0-beta-2"
 postgresql                     = "42.7.5"
 embedded-postgres              = "2.1.0"
@@ -73,6 +73,7 @@ otel-instr                     = "2.16.0"
 otel-instr-alpha               = "2.16.0-alpha"
 otel-semconv                   = "1.32.0"
 otel-contrib                   = "1.46.0-alpha"
+otel-kotlin                    = "0.1.1"
 okio                           = "3.11.0"
 sslcontext-kickstart           = "9.1.0"
 ksp-auto-service               = "1.2.0"
@@ -429,7 +430,6 @@ exposed-money                        = { module = "org.jetbrains.exposed:exposed
 exposed-migration                    = { module = "org.jetbrains.exposed:exposed-migration"                    , version.ref = "exposed"}
 postgresql                           = { module = "org.postgresql:postgresql"                                  , version.ref = "postgresql"}
 hikariCP                             = { module = "com.zaxxer:HikariCP"                                        , version.ref = "hikariCP"}
-exoquery-engine                      = { module = "io.exoquery:exoquery-engine"                                , version.ref = "exoquery-sql" }
 exoquery-runner-core                 = { module = "io.exoquery:exoquery-runner-core"                           , version.ref = "exoquery-sql" }
 exoquery-runner-jdbc                 = { module = "io.exoquery:exoquery-runner-jdbc"                           , version.ref = "exoquery-sql"}
 exoquery-runner-native               = { module = "io.exoquery:exoquery-runner-native"                         , version.ref = "exoquery-sql"}
@@ -601,6 +601,10 @@ otel-instr-extension-api             = { module = "io.opentelemetry.javaagent:op
 otel-instr-ktor                      = { module = "io.opentelemetry.instrumentation:opentelemetry-ktor-3.0"                                 , version.ref = "otel-instr-alpha"}
 otel-instr-logback-appender          = { module = "io.opentelemetry.instrumentation:opentelemetry-logback-appender-1.0"                     , version.ref = "otel-instr-alpha"}
 otel-instr-logback-mdc               = { module = "io.opentelemetry.instrumentation:opentelemetry-logback-mdc-1.0"                          , version.ref = "otel-instr-alpha"}
+
+otel-kotlin-api                      = { module = "io.embrace.opentelemetry.kotlin:opentelemetry-kotlin-api"                                , version.ref = "otel-kotlin" }
+otel-kotlin-apiext                   = { module = "io.embrace.opentelemetry.kotlin:opentelemetry-kotlin-api-ext"                            , version.ref = "otel-kotlin" }
+otel-kotlin-compat                   = { module = "io.embrace.opentelemetry.kotlin:compat-kotlin-to-official"                               , version.ref = "otel-kotlin" }
 
 # Compose
 compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                                   , version.ref = "jetbrains-compose" }
