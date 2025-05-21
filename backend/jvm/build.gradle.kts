@@ -150,7 +150,6 @@ dependencies {
   implementation(libs.ktor.server.default.headers)
   implementation(libs.ktor.server.forwarded.header)
   implementation(libs.ktor.server.swagger)
-  // implementation(libs.ktor.server.openapi)
   implementation(libs.ktor.server.http.redirect)
   implementation(libs.ktor.server.compression)
   implementation(libs.ktor.server.cors)
@@ -168,6 +167,7 @@ dependencies {
   implementation(libs.ktor.server.sse)
   implementation(libs.ktor.serialization.json)
   implementation(libs.kotlinx.serialization.hocon)
+  // implementation(libs.ktor.server.openapi)
 
   // Client dependencies
   implementation(libs.ktor.client.java)
@@ -187,6 +187,9 @@ dependencies {
   // implementation(libs.exposed.jdbc)
   // implementation(libs.exposed.dao)
   // implementation(libs.exposed.kotlin.datetime)
+
+  // Scheduler
+  implementation(libs.cardiologist)
 
   // Wasm
   implementation(libs.chicory)

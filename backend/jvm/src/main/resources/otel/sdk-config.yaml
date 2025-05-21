@@ -54,7 +54,7 @@ resource:
     - name: service.namespace
       value: ${OTEL_SERVICE_NAMESPACE:-dev}
     - name: service.instance.id
-      value: ${OTEL_SERVICE_INSTANCE_ID:-${HOSTNAME:-unknown}}
+      value: ${OTEL_SERVICE_INSTANCE_ID:-unknown}
       
   # Configure resource attributes. Entries have lower priority than entries from .resource.attributes.
   # The value is a list of comma separated key-value pairs matching the format of OTEL_RESOURCE_ATTRIBUTES. See https://github.com/open-telemetry/opentelemetry-specification/blob/main/specification/configuration/sdk-environment-variables.md#general-sdk-configuration for details.
@@ -109,7 +109,7 @@ tracer_provider:
           otlp_http:
             # Configure endpoint, including the trace specific path.
             # If omitted or null, http://localhost:4318/v1/traces is used.
-            endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:-http://localhost:4318/v1/traces}
+            endpoint: ${OTEL_EXPORTER_OTLP_TRACES_ENDPOINT:-http://host.docker.internal:4318/v1/traces}
             # Configure certificate used to verify a server's TLS credentials.
             # Absolute path to certificate file in PEM format.
             # If omitted or null, system default certificate verification is used for secure connections.
@@ -225,7 +225,7 @@ meter_provider:
           otlp_http:
             # Configure endpoint, including the metric specific path.
             # If omitted or null, http://localhost:4318/v1/metrics is used.
-            endpoint: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT:-http://localhost:4318/v1/metrics}
+            endpoint: ${OTEL_EXPORTER_OTLP_METRICS_ENDPOINT:-http://host.docker.internal:4318/v1/metrics}
             # Configure certificate used to verify a server's TLS credentials.
             # Absolute path to certificate file in PEM format.
             # If omitted or null, system default certificate verification is used for secure connections.
@@ -290,7 +290,7 @@ logger_provider:
         exporter:
           # Configure exporter to be OTLP with HTTP transport.
           otlp_http:
-            endpoint: ${OTEL_EXPORTER_OTLP_LOGS_ENDPOINT:-http://localhost:4318/v1/logs}
+            endpoint: ${OTEL_EXPORTER_OTLP_LOGS_ENDPOINT:-http://host.docker.internal:4318/v1/logs}
             # Configure certificate used to verify a server's TLS credentials.
             # Absolute path to certificate file in PEM format.
             # If omitted or null, system default certificate verification is used for secure connections.
