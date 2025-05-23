@@ -52,7 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/18)
+    (0/19)
   </span>
 </td>
 <td class="coverageStat">
@@ -60,7 +60,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,7 +68,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/60)
+    (0/59)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,10 +76,38 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/342)
+    (0/371)
   </span>
 </td>
 </tr>
+  <tr>
+    <td class="name">HttpKt$configureHTTP$6$3$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+  </tr>
   <tr>
     <td class="name">HttpKt$configureInterceptors$1</td>
 <td class="coverageStat">
@@ -122,7 +150,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/19)
+    (0/21)
   </span>
 </td>
 <td class="coverageStat">
@@ -130,7 +158,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/10)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -146,7 +174,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/375)
+    (0/410)
   </span>
 </td>
 </tr>
@@ -167,7 +195,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.application.*
 &nbsp;import io.ktor.server.plugins.*
 &nbsp;import io.ktor.server.plugins.autohead.*
-&nbsp;import io.ktor.server.plugins.callid.*
 &nbsp;import io.ktor.server.plugins.calllogging.*
 &nbsp;import io.ktor.server.plugins.compression.*
 &nbsp;import io.ktor.server.plugins.contentnegotiation.*
@@ -176,6 +203,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.plugins.forwardedheaders.*
 &nbsp;import io.ktor.server.plugins.hsts.*
 &nbsp;import io.ktor.server.plugins.partialcontent.*
+&nbsp;import io.ktor.server.plugins.ratelimit.*
 &nbsp;import io.ktor.server.request.*
 &nbsp;import io.ktor.server.resources.*
 &nbsp;import io.ktor.server.response.*
@@ -184,7 +212,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.sse.*
 &nbsp;import io.ktor.server.websocket.*
 &nbsp;import kotlin.concurrent.atomics.AtomicLong
-&nbsp;import kotlin.concurrent.atomics.incrementAndFetch
 &nbsp;import kotlin.time.Duration
 &nbsp;import kotlin.time.Duration.Companion.seconds
 &nbsp;import org.slf4j.event.Level
@@ -250,18 +277,32 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    }
 &nbsp;  }
 &nbsp;
+<b class="nc">&nbsp;  install(RateLimit) {</b>
+<b class="nc">&nbsp;    global {</b>
+&nbsp;      // requestKey {}
+<b class="nc">&nbsp;      rateLimiter(limit = 100, refillPeriod = 60.seconds)</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    register { rateLimiter(limit = 5, refillPeriod = 60.seconds) }</b>
+&nbsp;
+<b class="nc">&nbsp;    register(RateLimitName(&quot;api&quot;)) {</b>
+<b class="nc">&nbsp;      requestKey {}</b>
+<b class="nc">&nbsp;      rateLimiter(limit = 100, refillPeriod = 60.seconds)</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
 <b class="nc">&nbsp;  install(HSTS)</b>
 &nbsp;
-<b class="nc">&nbsp;  install(CallId) {</b>
-<b class="nc">&nbsp;    header(HttpHeaders.XRequestId)</b>
-<b class="nc">&nbsp;    generate {</b>
-<b class="nc">&nbsp;      when (it.isApi) {</b>
-<b class="nc">&nbsp;        true -&gt; &quot;$TRACE_ID-${counter.incrementAndFetch()}&quot;</b>
-<b class="nc">&nbsp;        else -&gt; &quot;$TRACE_ID-00000&quot;</b>
-&nbsp;      }
-&nbsp;    }
-<b class="nc">&nbsp;    verify { it.isNotEmpty() }</b>
-&nbsp;  }
+&nbsp;  // install(CallId) {
+&nbsp;  //   header(HttpHeaders.XRequestId)
+&nbsp;  //   generate {
+&nbsp;  //     when (it.isApi) {
+&nbsp;  //       true -&gt; &quot;$TRACE_ID-${counter.incrementAndFetch()}&quot;
+&nbsp;  //       else -&gt; &quot;$TRACE_ID-00000&quot;
+&nbsp;  //     }
+&nbsp;  //   }
+&nbsp;  //   verify { it.isNotEmpty() }
+&nbsp;  // }
 &nbsp;
 <b class="nc">&nbsp;  install(CallLogging) {</b>
 <b class="nc">&nbsp;    level = Level.INFO</b>
@@ -270,7 +311,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;    // Add MDC entries
 <b class="nc">&nbsp;    mdc(&quot;remoteHost&quot;) { call -&gt; call.request.origin.remoteHost }</b>
-<b class="nc">&nbsp;    callIdMdc(TRACE_ID)</b>
+&nbsp;    // callIdMdc(TRACE_ID)
 &nbsp;
 &nbsp;    // Enable logging for API routes only
 <b class="nc">&nbsp;    filter { it.isApi }</b>
@@ -331,7 +372,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-05-15 19:09</div>
+    <div style="float:right;">generated on 2025-05-23 06:20</div>
 </div>
 </body>
 </html>
