@@ -1,7 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.github.ajalt.mordant.rendering.TextColors.magenta
-import common.byteDisplaySize
+import me.saket.bytesize.*
 
 plugins {
   java
@@ -39,8 +39,7 @@ val extendedAgent by
       doLast {
         val agent = archiveFile.get().asFile
         logger.lifecycle(
-            magenta(
-                "OpenTelemetry Agent: ${agent.absolutePath} (${agent.length().byteDisplaySize()})"))
+            magenta("OpenTelemetry Agent: ${agent.absolutePath} (${agent.length().decimalBytes})"))
       }
     }
 

@@ -1,4 +1,4 @@
-import common.jvmRunArgs
+import common.*
 
 plugins {
   dev.suresh.plugin.kotlin.jvm
@@ -42,4 +42,4 @@ dependencies {
 //       }
 //     }
 
-tasks { bootRun { jvmArgs = project.jvmRunArgs } }
+tasks { bootRun { jvmArgs = project.runJvmArgs } }

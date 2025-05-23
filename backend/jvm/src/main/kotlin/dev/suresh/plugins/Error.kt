@@ -19,6 +19,10 @@ fun Application.errorRoutes() {
       }
     }
 
+    status(HttpStatusCode.NotFound) { call, _ ->
+      call.respondRedirect("/app", permanent = true) // 301
+    }
+
     exception<Throwable> { call, cause ->
       val status =
           when (cause) {
@@ -28,10 +32,6 @@ fun Application.errorRoutes() {
 
       call.application.log.error(status.description, cause)
       call.respondError(status, cause.message ?: "Unknown error", cause)
-    }
-
-    status(HttpStatusCode.NotFound) { call, _ ->
-      call.respondRedirect("/app", permanent = true) // 301
     }
 
     unhandled {

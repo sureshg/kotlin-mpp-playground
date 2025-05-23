@@ -1,4 +1,4 @@
-import common.jvmRunArgs
+import common.*
 import kotlin.collections.plus
 
 plugins {
@@ -12,7 +12,7 @@ description = "JVM JFR Agent!"
 
 application {
   mainClass = libs.versions.app.mainclass.get()
-  applicationDefaultJvmArgs += project.jvmRunArgs
+  applicationDefaultJvmArgs += ""
 }
 
 tasks {

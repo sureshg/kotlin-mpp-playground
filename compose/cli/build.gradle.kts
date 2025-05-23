@@ -1,4 +1,4 @@
-import common.jvmRunArgs
+import common.*
 
 plugins {
   application
@@ -24,5 +24,5 @@ kotlin {
 
 application {
   mainClass = libs.versions.app.mainclass.get()
-  applicationDefaultJvmArgs += project.jvmRunArgs
+  applicationDefaultJvmArgs += project.runJvmArgs
 }

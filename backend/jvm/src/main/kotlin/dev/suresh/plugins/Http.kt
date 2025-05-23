@@ -8,7 +8,6 @@ import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.autohead.*
-import io.ktor.server.plugins.callid.*
 import io.ktor.server.plugins.calllogging.*
 import io.ktor.server.plugins.compression.*
 import io.ktor.server.plugins.contentnegotiation.*
@@ -17,6 +16,7 @@ import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
 import io.ktor.server.plugins.hsts.*
 import io.ktor.server.plugins.partialcontent.*
+import io.ktor.server.plugins.ratelimit.*
 import io.ktor.server.request.*
 import io.ktor.server.resources.*
 import io.ktor.server.response.*
@@ -87,6 +87,20 @@ fun Application.configureHTTP() {
         httpOnly = true
         extensions["SameSite"] = "lax"
       }
+    }
+  }
+
+  install(RateLimit) {
+    global {
+      // requestKey {}
+      rateLimiter(limit = 100, refillPeriod = 60.seconds)
+    }
+
+    register { rateLimiter(limit = 5, refillPeriod = 60.seconds) }
+
+    register(RateLimitName("api")) {
+      requestKey {}
+      rateLimiter(limit = 100, refillPeriod = 60.seconds)
     }
   }
 

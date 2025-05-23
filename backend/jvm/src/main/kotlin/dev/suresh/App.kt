@@ -28,6 +28,7 @@ fun Application.module() {
   configureHTTP()
   configureSecurity()
   errorRoutes()
+  scheduledTasks()
 
   routing {
     adminRoutes()

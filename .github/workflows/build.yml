@@ -129,7 +129,7 @@ jobs:
         with:
           name: ${{ steps.gradle-build.outputs.artifact_name }}
           path: |
-            backend/jvm/build/libs/jvm-app
+            backend/jvm/build/libs/jvm
           if-no-files-found: error
 
       - name: 🕸 Deploy Wasm, Js & Compose webapp to Github Pages

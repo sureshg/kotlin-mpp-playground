@@ -75,7 +75,7 @@ compose {
         // $APPDIR macro is used by jpackage.
         // To debug _JAVA_LAUNCHER_DEBUG=1
         add("-splash:${'$'}APPDIR/resources/splash.jpg")
-        addAll(jvmArguments(appRun = true, headless = false))
+        addAll(runJvmArgs)
         // Resource localization
         // add("-Duser.language=en")
 

@@ -18,10 +18,7 @@ plugins {
 
 description = "Ktor backend jvm application"
 
-application {
-  mainClass = libs.versions.app.mainclass.get()
-  applicationDefaultJvmArgs += project.jvmRunArgs
-}
+application { mainClass = libs.versions.app.mainclass.get() }
 
 ktor { fatJar { archiveFileName = "${project.name}-all.jar" } }
 
@@ -62,7 +59,7 @@ jib {
     entrypoint = buildList {
       add("java")
       add("-javaagent:${appRoot}/otel/otel-javaagent.jar")
-      addAll(application.applicationDefaultJvmArgs.map { it.replace(tmp, "/tmp/") })
+      addAll(runJvmArgs.map { it.replace(tmp, "/tmp/") })
       add("-cp")
       add("@${appRoot}/jib-classpath-file")
       add("@${appRoot}/jib-main-class-file")
