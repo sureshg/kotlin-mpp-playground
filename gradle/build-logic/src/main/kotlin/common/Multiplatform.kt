@@ -90,7 +90,7 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
 
         mainRun {
           mainClass = libs.versions.app.mainclass
-          setArgs(jvmRunArgs)
+          setArgs(runJvmArgs)
         }
 
         // val test by testRuns.existing
@@ -101,7 +101,7 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
           binaries {
             executable {
               mainClass = libs.versions.app.mainclass
-              applicationDefaultJvmArgs = jvmRunArgs
+              applicationDefaultJvmArgs = runJvmArgs
               applicationDistribution.duplicatesStrategy = DuplicatesStrategy.INCLUDE
             }
           }

@@ -177,6 +177,7 @@ dependencies {
   implementation(libs.jib.nativeimage.extn)
   implementation(libs.zip.prefixer)
   implementation(libs.kmpmt)
+  implementation(libs.bytesize)
   implementation(files(libs.javaClass.superclass.protectionDomain.codeSource.location))
   testImplementation(gradleTestKit())
   // compileOnly(libs.jte.kotlin)

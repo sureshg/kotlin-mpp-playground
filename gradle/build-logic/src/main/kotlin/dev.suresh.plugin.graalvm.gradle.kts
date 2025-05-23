@@ -2,6 +2,7 @@
 
 import common.*
 import common.Platform
+import me.saket.bytesize.*
 import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
 plugins {
@@ -99,7 +100,7 @@ graalvmNative {
     //   }
     // }
 
-    jvmArgs = jvmArguments()
+    jvmArgs = defaultJvmArgs
     systemProperties = mapOf("java.awt.headless" to "false")
     javaLauncher = javaToolchains.launcherFor { configureJvmToolchain(project) }
   }
@@ -175,7 +176,7 @@ tasks {
 
           val binFile = archiveFile.get().asFile
           logger.lifecycle(
-              "Native Image Archive: ${binFile.absolutePath} (${binFile.length().byteDisplaySize()})")
+              "Native Image Archive: ${binFile.absolutePath} (${binFile.length().decimalBytes})")
         }
       }
 

@@ -65,7 +65,7 @@ kotlin {
   // targets.withType<KotlinJvmTarget>().configureEach { compilerOptions {} }
   // targets.matching { it.platformType == js }.configureEach { apply(plugin = ...) }
 
-  // kotlinDaemonJvmArgs = jvmArguments
+  // kotlinDaemonJvmArgs = defaultJvmArgs
   // explicitApiWarning()
 }
 
@@ -134,8 +134,8 @@ tasks {
         registering(ReallyExecJar::class) {
           // https://gradleup.com/shadow/kotlin-plugins/
           jarFile = named<ShadowJar>("shadowJar").flatMap { it.archiveFile }
-          javaOpts = jvmRunArgs
-          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
+          javaOpts = runJvmArgs
+          execJarFile = layout.buildDirectory.dir("libs").map { it.file(project.name) }
           onlyIf { OperatingSystem.current().isUnix }
         }
 

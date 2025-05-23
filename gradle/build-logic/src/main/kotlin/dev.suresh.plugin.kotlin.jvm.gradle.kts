@@ -95,7 +95,7 @@ tasks {
   // withType<KotlinJvmCompile>().configureEach { finalizedBy("spotlessApply") }
 
   // Configure jvm args for JavaExec tasks except `run`
-  withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(jvmArguments()) }
+  withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(defaultJvmArgs) }
 
   // Configure KSP
   withType<KspAATask>().configureEach { configureKspConfig() }
@@ -142,9 +142,8 @@ tasks {
     val buildExecutable by
         registering(ReallyExecJar::class) {
           jarFile = named<ShadowJar>("shadowJar").flatMap { it.archiveFile }
-          // javaOpts = application.applicationDefaultJvmArgs
-          javaOpts = jvmRunArgs
-          execJarFile = layout.buildDirectory.dir("libs").map { it.file("${project.name}-app") }
+          javaOpts = runJvmArgs
+          execJarFile = layout.buildDirectory.dir("libs").map { it.file(project.name) }
           onlyIf { OperatingSystem.current().isUnix }
         }
 

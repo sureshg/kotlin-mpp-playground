@@ -2,13 +2,9 @@ package common
 
 import java.io.File
 import java.lang.reflect.Proxy
-import java.nio.file.FileSystems
-import java.nio.file.Files
-import java.nio.file.Path
-import java.text.DecimalFormat
-import java.text.NumberFormat
-import kotlin.math.ln
-import kotlin.math.pow
+import java.nio.file.*
+import java.text.*
+import kotlin.math.*
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.full.isSubtypeOf
 import kotlin.reflect.typeOf
@@ -52,10 +48,6 @@ inline fun <reified T> mock() =
       // InvocationHandler.invokeDefault(proxy, method, args)
     } as T
 
-/** Returns the file size in a human-readable format. */
-val File.displaySize
-  get() = length().byteDisplaySize()
-
 val Long.compactFmt: String
   get() = NumberFormat.getCompactNumberInstance().format(this)
 
@@ -73,7 +65,7 @@ val String.camelCase: String
  * - [SI](https://en.wikipedia.org/wiki/International_System_of_Units#Prefixes)
  * - [Binary](https://en.wikipedia.org/wiki/Binary_prefix)
  */
-fun Long.byteDisplaySize(si: Boolean = true): String {
+private fun Long.byteDisplaySize(si: Boolean = true): String {
   require(this >= 0) { "Bytes can't be negative" }
   val unit = if (si) 1000 else 1024
   return when (this < unit) {
@@ -98,11 +90,8 @@ fun IntArray.codePointsToString(separator: String = "") =
     joinToString(separator) { Character.toString(it) }
 
 /** Find the file ends with given [format] under the directory. */
-fun File.findPkg(format: String?) =
-    when (format != null) {
-      true -> walk().firstOrNull { it.isFile && it.name.endsWith(format, ignoreCase = true) }
-      else -> null
-    }
+fun File.findPkg(format: String) =
+    walk().firstOrNull { it.isFile && it.name.endsWith(format, ignoreCase = true) }
 
 /** List files based on the glob [pattern] */
 fun Path.glob(pattern: String): List<Path> {

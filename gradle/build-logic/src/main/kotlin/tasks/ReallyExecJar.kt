@@ -4,6 +4,7 @@ import com.github.ajalt.mordant.rendering.TextColors
 import common.*
 import java.nio.file.attribute.PosixFilePermissions
 import kotlin.io.path.*
+import me.saket.bytesize.*
 import net.e175.klaus.zip.ZipPrefixer
 import org.gradle.api.*
 import org.gradle.api.file.RegularFileProperty
@@ -59,6 +60,6 @@ abstract class ReallyExecJar : DefaultTask() {
     binFile.setPosixFilePermissions(PosixFilePermissions.fromString("rwxr-xr-x"))
     logger.quiet(
         TextColors.magenta(
-            "Executable Binary: ${binFile.pathString} ${binFile.fileSize().byteDisplaySize()}"))
+            "Executable Binary: ${binFile.pathString} ${binFile.fileSize().decimalBytes}"))
   }
 }

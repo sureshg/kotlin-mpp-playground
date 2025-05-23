@@ -18,8 +18,10 @@ import org.gradle.api.Task
 import org.gradle.api.artifacts.Configuration
 import org.gradle.api.artifacts.ExternalDependency
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.artifacts.component.*
 import org.gradle.api.attributes.*
 import org.gradle.api.component.AdhocComponentWithVariants
+import org.gradle.api.plugins.JavaApplication
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.provider.*
 import org.gradle.api.tasks.*
@@ -29,7 +31,6 @@ import org.gradle.api.tasks.testing.logging.*
 import org.gradle.internal.os.OperatingSystem
 import org.gradle.jvm.toolchain.*
 import org.gradle.kotlin.dsl.*
-import org.gradle.kotlin.dsl.extra
 import org.jetbrains.kotlin.gradle.dsl.*
 import org.jetbrains.kotlin.gradle.plugin.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.KotlinNpmInstallTask
@@ -111,25 +112,7 @@ val Project.toolchainVendor
   get() = libs.versions.java.vendor.map(JvmVendorSpec::matching)
 
 val Project.addModules
-  get() = libs.versions.java.addModules.get()
-
-val Project.defaultJarManifest
-  get() = buildMap {
-    put("Enable-Native-Access", "ALL-UNNAMED")
-    put("Built-By", System.getProperty("user.name"))
-    put("Built-Jdk", System.getProperty("java.runtime.version"))
-    put(
-        "Built-OS",
-        "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}")
-    put("Build-Timestamp", DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()))
-    put("Created-By", "Gradle ${gradle.gradleVersion}")
-    put(Attributes.Name.IMPLEMENTATION_TITLE.toString(), project.name)
-    put(Attributes.Name.IMPLEMENTATION_VERSION.toString(), project.version)
-    put(Attributes.Name.IMPLEMENTATION_VENDOR.toString(), project.group)
-    if (isAutomaticModuleEnabled) {
-      put("Automatic-Module-Name", project.group)
-    }
-  }
+  get() = libs.versions.java.addmodules.get()
 
 /** Kotlin version properties. */
 val Project.kotlinVersion
@@ -182,209 +165,188 @@ val Project.githubPackagesUsername
 
 val Project.githubPackagesPassword
   get() = providers.gradleProperty("githubPackagesPassword")
-/** Kotlin Dependencies extension functions. */
-val Project.isKotlinMultiplatformProject
+
+val Project.hasKmpPlugin
   get() = plugins.hasPlugin("org.jetbrains.kotlin.multiplatform")
 
-@Suppress("UnstableApiUsage")
-val Project.gradleSystemProperties
-  get() =
-      providers.systemPropertiesPrefixedBy("systemProp.").map {
-        it.mapKeys { (k, _) -> k.substringAfter("systemProp.") }
-      }
-
-/** Adds the give java module to all jvm tasks. Eg: `withModule("jdk.incubator.vector", false)` */
-fun Project.withJavaModule(moduleName: String, supportedInNative: Boolean = false) =
-    tasks.run {
-      val argsToAdd = listOf("--add-modules", moduleName)
-      withType<JavaCompile>().configureEach { options.compilerArgs.addAll(argsToAdd) }
-      withType<Test>().configureEach { jvmArgs(argsToAdd) }
-      withType<JavaExec>().configureEach { jvmArgs(argsToAdd) }
-      if (supportedInNative) {
-        project.pluginManager.withPlugin("org.graalvm.buildtools.native") {
-          configure<GraalVMExtension> { binaries.all { jvmArgs(argsToAdd) } }
-        }
-      }
+val Project.defaultJarManifest
+  get() = buildMap {
+    put("Enable-Native-Access", "ALL-UNNAMED")
+    put("Built-By", System.getProperty("user.name"))
+    put("Built-Jdk", System.getProperty("java.runtime.version"))
+    put(
+        "Built-OS",
+        "${System.getProperty("os.name")} ${System.getProperty("os.arch")} ${System.getProperty("os.version")}")
+    put("Build-Timestamp", DateTimeFormatter.ISO_INSTANT.format(ZonedDateTime.now()))
+    put("Created-By", "Gradle ${gradle.gradleVersion}")
+    put(Attributes.Name.IMPLEMENTATION_TITLE.toString(), project.name)
+    put(Attributes.Name.IMPLEMENTATION_VERSION.toString(), project.version)
+    put(Attributes.Name.IMPLEMENTATION_VENDOR.toString(), project.group)
+    if (isAutomaticModuleEnabled) {
+      put("Automatic-Module-Name", project.group)
     }
+  }
+
+val Project.defaultJvmArgs
+  get() = buildList {
+    addAll(libs.versions.java.jvmargs.get().split(",", " ").filter(String::isNotBlank))
+    add("--add-modules=$addModules")
+  }
 
 /**
- * JVM arguments for running (**java**) or compiling (**javac**) java/kotlin build tasks.
- * - [Java-Command](https://docs.oracle.com/en/java/javase/20/docs/specs/man/java.html)
- * - [Java-Networking-Parameters](https://docs.oracle.com/en/java/javase/20/core/java-networking.html#GUID-E6C82625-7C02-4AB3-B15D-0DF8A249CD73)
+ * Runtime JVM arguments. If the user has provided a custom *jvmArgs*(`-PjvmArgs=...`) gradle
+ * property, it will be used.
+ * - [Java-Command](https://docs.oracle.com/en/java/javase/24/docs/specs/man/java.html)
+ * - [Java-Networking-Parameters](https://docs.oracle.com/en/java/javase/24/core/java-networking.html#GUID-E6C82625-7C02-4AB3-B15D-0DF8A249CD73)
  * - [JSR166](https://cs.oswego.edu/dl/jsr166/dist/jsr166.jar)
  * - [Hotspot Options](https://chriswhocodes.com/hotspot_option_differences.html)
  * - [JFR Events](https://sap.github.io/SapMachine/jfrevents)
- *
- * @param appRun Specifies if the JVM arguments are to be used for running the application. Default
- *   value is `false`.
- * @param headless Specifies if the application is to be run in headless mode. Default value is
- *   `true`.
- * @return A list of JVM arguments for the project.
  */
-fun Project.jvmArguments(appRun: Boolean = false, headless: Boolean = true) = buildList {
-  val jvmArgs = libs.versions.java.jvmArguments.get().split(",", " ").filter { it.isNotBlank() }
-  addAll(jvmArgs)
-  add("--add-modules=$addModules")
-  // add("--add-opens=java.base/jdk.internal.classfile=ALL-UNNAMED")
-  // 'java' arguments.
-  if (appRun) {
-    addAll(
-        listOf(
-            "--show-version",
-            "-XX:+PrintCommandLineFlags",
-            "--enable-native-access=ALL-UNNAMED",
-            "--illegal-native-access=warn",
-            "--sun-misc-unsafe-memory-access=warn",
-            "-Xmx128M",
-            "-XX:+UseZGC",
-            "-XX:+UseStringDeduplication",
-            "-XX:+UnlockExperimentalVMOptions",
-            "-XX:+UseCompactObjectHeaders",
-            "-XX:MaxRAMPercentage=0.8",
-            // "-XX:+UseLargePages",
-            // "-XX:+UseEpsilonGC",
-            // "-XX:+AlwaysPreTouch",
-            """-Xlog:gc*,stringdedup*:
-              |file="$tmp$name-gc-%p-%t.log":
-              |level,tags,time,uptime,pid,tid:
-              |filecount=5,
-              |filesize=10m"""
-                .joinToConfigString(),
-            """-Xlog:class+load:file=$tmp$name-cds.log:
+val Project.runJvmArgs
+  get() = buildList {
+    val appJvmArgs =
+        extensions.findByType<JavaApplication>()?.applicationDefaultJvmArgs?.toList().orEmpty()
+    when (appJvmArgs.isNotEmpty()) {
+      true -> addAll(appJvmArgs)
+      else -> {
+        addAll(defaultJvmArgs)
+        addAll(
+            listOf(
+                "--show-version",
+                "-XX:+PrintCommandLineFlags",
+                "--enable-native-access=ALL-UNNAMED",
+                "--illegal-native-access=warn",
+                "--sun-misc-unsafe-memory-access=warn",
+                "-Xmx128M",
+                "-XX:+UseZGC",
+                "-XX:+UseStringDeduplication",
+                "-XX:+UnlockExperimentalVMOptions",
+                "-XX:+UseCompactObjectHeaders",
+                "-XX:MaxRAMPercentage=0.8",
+                // "-XX:+UseLargePages",
+                // "-XX:+UseEpsilonGC",
+                // "-XX:+AlwaysPreTouch",
+                """-Xlog:gc*,stringdedup*:
+                |file="$tmp$name-gc-%p-%t.log":
+                |level,tags,time,uptime,pid,tid:
+                |filecount=5,
+                |filesize=10m"""
+                    .joinToConfigString(),
+                """-Xlog:class+load:file=$tmp$name-cds.log:
                 |uptime,level,tags,pid:filesize=0"""
-                .joinToConfigString(),
-            // java -XX:StartFlightRecording:help
-            """-XX:StartFlightRecording=
-              |filename=$tmp$name.jfr,
-              |name=$name,
-              |maxsize=100M,
-              |maxage=1d,
-              |path-to-gc-roots=true,
-              |dumponexit=true,
-              |memory-leaks=gc-roots,
-              |gc=detailed,
-              |+jdk.VirtualThreadStart#enabled=true,
-              |+jdk.VirtualThreadEnd#enabled=true,
-              |+jdk.ObjectCount#enabled=true,
-              |+jdk.SecurityPropertyModification#enabled=true,
-              |+jdk.SecurityProviderService#enabled=true,
-              |+jdk.TLSHandshake#enabled=true,
-              |+jdk.TLSHandshake#stackTrace=true,
-              |+jdk.X509Certificate#enabled=true,
-              |+jdk.X509Validation#enabled=true,
-              |settings=profile"""
-                .joinToConfigString(),
-            "-XX:FlightRecorderOptions:stackdepth=64",
-            "-XX:+HeapDumpOnOutOfMemoryError",
-            "-XX:HeapDumpPath=$tmp$name-%p.hprof",
-            "-XX:ErrorFile=$tmp$name-hs-err-%p.log",
-            // "-XX:+ErrorFileToStderr",
-            "-XX:+ExitOnOutOfMemoryError",
-            "-XX:+UnlockDiagnosticVMOptions",
-            "-XX:NativeMemoryTracking=detail",
-            "-XX:+EnableDynamicAgentLoading",
-            "-XX:+LogVMOutput",
-            "-XX:LogFile=$tmp$name-jvm.log",
-            "-Djdk.attach.allowAttachSelf=true",
-            "-Djdk.traceVirtualThreadLocals=false",
-            "-Djdk.tracePinnedThreads=full",
-            // "-Djava.security.debug=properties",
-            "-Djava.security.egd=file:/dev/./urandom",
-            "-Djdk.includeInExceptions=hostInfo,jar",
-            "-Dkotlinx.coroutines.debug",
-            "-Djdk.incubator.vector.VECTOR_ACCESS_OOB_CHECK=0",
-            "-Dcom.sun.management.jmxremote",
-            "-Dcom.sun.management.jmxremote.local.only=false",
-            "-Dcom.sun.management.jmxremote.port=9898",
-            "-Dcom.sun.management.jmxremote.host=0.0.0.0",
-            "-Dcom.sun.management.jmxremote.rmi.port=9898",
-            "-Dcom.sun.management.jmxremote.authenticate=false",
-            "-Dcom.sun.management.jmxremote.ssl=false",
-            "-Djava.rmi.server.hostname=0.0.0.0",
-            "-Dio.ktor.development=${project.hasProperty("development")}",
-            // "--sun-misc-unsafe-memory-access=warn",
-            // "--finalization=enabled",
-            // "-XX:OnOutOfMemoryError='kill -9 %p'",
-            // "-ea",
-            // "-XshowSettings:vm",
-            // "-XshowSettings:system",
-            // "-XshowSettings:properties",
-            // "--show-module-resolution",
-            // "-XX:-StackTraceInThrowable",
-            // "-XX:+ShowHiddenFrames",
-            // "-verbose:module",
-            // "-XX:ConcGCThreads=2",
-            // "-XX:VMOptionsFile=vm_options",
-            // "-XX:+IgnoreUnrecognizedVMOptions",
-            // "-XX:+StartAttachListener", // For jcmd Dynamic Attach Mechanism
-            // "-XX:+DisableAttachMechanism",
-            // "-XX:OnOutOfMemoryError="./restart.sh"",
-            // "-XX:SelfDestructTimer=0.05",
-            // "-XX:NativeMemoryTracking=[off|summary|detail]",
-            // "-XX:+PrintNMTStatistics",
-            // "-XX:OnError=\"gdb - %p\"", // Attach gdb on segfault
-            // "-Djava.security.properties=/path/to/custom/java.security", // == to override
-            // "-Duser.timezone=\"PST8PDT\"",
-            // ----- Networking -----
-            // "-Djdk.net.hosts.file=/etc/host/style/file",
-            // "-Djava.net.preferIPv4Stack=true",
-            // "-Djava.net.preferIPv6Addresses=true",
-            // "-Djavax.net.debug=all",
-            // "-Dhttps.protocols=TLSv1.3",
-            // "-Dhttps.agent=$name",
-            // "-Dhttp.keepAlive=true",
-            // "-Dhttp.maxConnections=5",
-            // ----- Java HTTP Client -----
-            // "-Djdk.internal.httpclient.disableHostnameVerification",
-            // "-Djdk.httpclient.HttpClient.log=errors,requests,headers",
-            // "-Djdk.internal.httpclient.debug=false",
-            // "-Djdk.tls.client.protocols=\"TLSv1.2,TLSv1.3\"",
-            // "-Djdk.tls.maxCertificateChainLength=10",
-            // "-Djdk.tls.maxHandshakeMessageSize=32768",
-            // "-Djsse.enableSNIExtension=false",
-            // "-Djdk.tls.client.enableCAExtension=true",
-            // ----- Misc -----
-            // "-Djava.security.manager=allow",
-            // "-Dfile.encoding=COMPAT", // uses '-Dnative.encoding'
-            // "-Djdbc.drivers=org.postgresql.Driver",
-            // "-Djava.io.tmpdir=/var/data/tmp",
-            // "-Djava.locale.providers=COMPAT,CLDR",
-            // "-Djdk.lang.Process.launchMechanism=vfork",
-            // "-Djdk.virtualThreadScheduler.parallelism=10",
-            // "-Djdk.virtualThreadScheduler.maxPoolSize=256",
-            // "--add-exports=java.management/sun.management=ALL-UNNAMED",
-            // "--add-exports=jdk.attach/sun.tools.attach=ALL-UNNAMED",
-            // "--add-opens=java.base/java.net=ALL-UNNAMED",
-            // "--add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED",
-            // "--patch-module java.base="$DIR/jsr166.jar",
-            // "-javaagent:path/to/glowroot.jar",
-            // "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
-            // "-agentlib:jdwp=transport=dt_socket,server=n,address=host:5005,suspend=y,onthrow=<FQ
-            // exception class name>,onuncaught=<y/n>"
-        ))
-
-    if (headless) {
-      add("-Djava.awt.headless=true")
+                    .joinToConfigString(),
+                // java -XX:StartFlightRecording:help
+                """-XX:StartFlightRecording=
+                |filename=$tmp$name.jfr,
+                |name=$name,
+                |maxsize=100M,
+                |maxage=1d,
+                |path-to-gc-roots=true,
+                |dumponexit=true,
+                |memory-leaks=gc-roots,
+                |gc=detailed,
+                |+jdk.VirtualThreadStart#enabled=true,
+                |+jdk.VirtualThreadEnd#enabled=true,
+                |+jdk.ObjectCount#enabled=true,
+                |+jdk.SecurityPropertyModification#enabled=true,
+                |+jdk.SecurityProviderService#enabled=true,
+                |+jdk.TLSHandshake#enabled=true,
+                |+jdk.TLSHandshake#stackTrace=true,
+                |+jdk.X509Certificate#enabled=true,
+                |+jdk.X509Validation#enabled=true,
+                |settings=profile"""
+                    .joinToConfigString(),
+                "-XX:FlightRecorderOptions:stackdepth=64",
+                "-XX:+HeapDumpOnOutOfMemoryError",
+                "-XX:HeapDumpPath=$tmp$name-%p.hprof",
+                "-XX:ErrorFile=$tmp$name-hs-err-%p.log",
+                // "-XX:+ErrorFileToStderr",
+                "-XX:+ExitOnOutOfMemoryError",
+                "-XX:+UnlockDiagnosticVMOptions",
+                "-XX:NativeMemoryTracking=detail",
+                "-XX:+EnableDynamicAgentLoading",
+                "-XX:+LogVMOutput",
+                "-XX:LogFile=$tmp$name-jvm.log",
+                "-Djdk.attach.allowAttachSelf=true",
+                "-Djdk.traceVirtualThreadLocals=false",
+                "-Djdk.tracePinnedThreads=full",
+                // "-Djava.security.debug=properties",
+                "-Djava.security.egd=file:/dev/./urandom",
+                "-Djdk.includeInExceptions=hostInfo,jar",
+                "-Dkotlinx.coroutines.debug",
+                "-Djdk.incubator.vector.VECTOR_ACCESS_OOB_CHECK=0",
+                "-Dcom.sun.management.jmxremote",
+                "-Dcom.sun.management.jmxremote.local.only=false",
+                "-Dcom.sun.management.jmxremote.port=9898",
+                "-Dcom.sun.management.jmxremote.host=0.0.0.0",
+                "-Dcom.sun.management.jmxremote.rmi.port=9898",
+                "-Dcom.sun.management.jmxremote.authenticate=false",
+                "-Dcom.sun.management.jmxremote.ssl=false",
+                "-Djava.rmi.server.hostname=0.0.0.0",
+                "-Dio.ktor.development=${project.hasProperty("development")}",
+                // "--sun-misc-unsafe-memory-access=warn",
+                // "--finalization=enabled",
+                // "-XX:OnOutOfMemoryError='kill -9 %p'",
+                // "-ea",
+                // "-XshowSettings:vm",
+                // "-XshowSettings:system",
+                // "-XshowSettings:properties",
+                // "--show-module-resolution",
+                // "-XX:-StackTraceInThrowable",
+                // "-XX:+ShowHiddenFrames",
+                // "-verbose:module",
+                // "-XX:ConcGCThreads=2",
+                // "-XX:VMOptionsFile=vm_options",
+                // "-XX:+IgnoreUnrecognizedVMOptions",
+                // "-XX:+StartAttachListener", // For jcmd Dynamic Attach Mechanism
+                // "-XX:+DisableAttachMechanism",
+                // "-XX:OnOutOfMemoryError="./restart.sh"",
+                // "-XX:SelfDestructTimer=0.05",
+                // "-XX:NativeMemoryTracking=[off|summary|detail]",
+                // "-XX:+PrintNMTStatistics",
+                // "-XX:OnError=\"gdb - %p\"", // Attach gdb on segfault
+                // "-Djava.security.properties=/path/to/custom/java.security", // == to override
+                // "-Duser.timezone=\"PST8PDT\"",
+                // ----- Networking -----
+                // "-Djdk.net.hosts.file=/etc/host/style/file",
+                // "-Djava.net.preferIPv4Stack=true",
+                // "-Djava.net.preferIPv6Addresses=true",
+                // "-Djavax.net.debug=all",
+                // "-Dhttps.protocols=TLSv1.3",
+                // "-Dhttps.agent=$name",
+                // "-Dhttp.keepAlive=true",
+                // "-Dhttp.maxConnections=5",
+                // ----- Java HTTP Client -----
+                // "-Djdk.internal.httpclient.disableHostnameVerification",
+                // "-Djdk.httpclient.HttpClient.log=errors,requests,headers",
+                // "-Djdk.internal.httpclient.debug=false",
+                // "-Djdk.tls.client.protocols=\"TLSv1.2,TLSv1.3\"",
+                // "-Djdk.tls.maxCertificateChainLength=10",
+                // "-Djdk.tls.maxHandshakeMessageSize=32768",
+                // "-Djsse.enableSNIExtension=false",
+                // "-Djdk.tls.client.enableCAExtension=true",
+                // ----- Misc -----
+                // "-Djava.security.manager=allow",
+                // "-Dfile.encoding=COMPAT", // uses '-Dnative.encoding'
+                // "-Djdbc.drivers=org.postgresql.Driver",
+                // "-Djava.io.tmpdir=/var/data/tmp",
+                // "-Djava.locale.providers=COMPAT,CLDR",
+                // "-Djdk.lang.Process.launchMechanism=vfork",
+                // "-Djdk.virtualThreadScheduler.parallelism=10",
+                // "-Djdk.virtualThreadScheduler.maxPoolSize=256",
+                // "--add-exports=java.management/sun.management=ALL-UNNAMED",
+                // "--add-exports=jdk.attach/sun.tools.attach=ALL-UNNAMED",
+                // "--add-opens=java.base/java.net=ALL-UNNAMED",
+                // "--add-opens=jdk.attach/sun.tools.attach=ALL-UNNAMED",
+                // "--patch-module java.base="$DIR/jsr166.jar",
+                // "-javaagent:path/to/glowroot.jar",
+                // "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005",
+                // "-agentlib:jdwp=transport=dt_socket,server=n,address=host:5005,suspend=y,onthrow=<FQ
+                // exception class name>,onuncaught=<y/n>"
+            ))
+      }
     }
   }
-}
-
-/**
- * JVM arguments for running java/kotlin applications. If the user has provided a custom
- * *jvmArgs*(`-PjvmArgs=...`) gradle property, it will be used instead of the default [jvmArguments]
- */
-val Project.jvmRunArgs
-  get() = run {
-    val jvmArgs: String? by this
-    jvmArgs?.split(",") ?: jvmArguments(appRun = true)
-  }
-
-// https://kotlinlang.org/docs/multiplatform-set-up-targets.html#distinguish-several-targets-for-one-platform
-val mppTargetAttr = Attribute.of("mpp.target.name", String::class.java)
-
-fun KotlinTarget.setTargetAttribute() {
-  attributes.attribute(mppTargetAttr, targetName)
-}
 
 fun JavaToolchainSpec.configureJvmToolchain(project: Project) =
     with(project) {
@@ -401,12 +363,10 @@ fun JavaCompile.configureJavac(project: Project) =
         isIncremental = true
         isFork = true
         debugOptions.debugLevel = "source,lines,vars"
-        // For Gradle worker daemon.
-        forkOptions.jvmArgs?.addAll(jvmArguments())
-        // Javac options
+        forkOptions.jvmArgs?.addAll(defaultJvmArgs)
         compilerArgs.addAll(
             buildList {
-              addAll(jvmArguments())
+              addAll(defaultJvmArgs)
               add("-Xlint:all")
               add("-parameters")
               // add("-Xlint:-deprecation")
@@ -526,13 +486,12 @@ fun KotlinJvmCompilerOptions.configureKotlinJvm(project: Project) =
 fun Test.configureJavaTest() {
   enabled = true
   useJUnitPlatform()
-  jvmArgs(project.jvmArguments())
+  jvmArgs(project.defaultJvmArgs)
 
   // For JUnit5 @EnabledIfSystemProperty
   systemProperty("ktorTest", project.hasProperty("ktorTest"))
   systemProperty("k8sTest", project.hasProperty("k8sTest"))
   systemProperty("spring.classformat.ignore", true)
-
   // Custom hosts file for tests
   val customHostFile = project.layout.projectDirectory.file("src/test/resources/hosts").asFile
   if (customHostFile.exists()) {
@@ -549,15 +508,22 @@ fun Test.configureJavaTest() {
   afterSuite(
       KotlinClosure2({ desc: TestDescriptor, result: TestResult ->
         if (desc.parent == null) { // will match the outermost suite
+          val status =
+              when {
+                result.failedTestCount > 0 -> "❌ FAILED"
+                result.skippedTestCount == result.testCount -> "⚠️SKIPPED"
+                else -> "✅ PASSED"
+              }
           println(
               """
               |
-              |Test Results
-              |------------
-              |Tests     : ${result.resultType} (${result.testCount})
-              |Successes : ${result.successfulTestCount}
-              |Failures  : ${result.failedTestCount}
-              |Skipped   : ${result.skippedTestCount}
+              |Test Results: $status
+              |━━━━━━━━━━━━━━━━━━━━━━━
+              |Total    : ${result.testCount}
+              |Passed   : ${result.successfulTestCount}
+              |Failed   : ${result.failedTestCount}
+              |Skipped  : ${result.skippedTestCount}
+              |
               """
                   .trimMargin())
         }
@@ -621,17 +587,21 @@ fun KotlinSourceSet.ksp(dependencyNotation: Any) {
   project.dependencies.add("ksp$kspConfiguration", dependencyNotation)
 }
 
-/** Returns the path of dependency jar in the runtime classpath. */
-fun Project.depPathOf(dep: ExternalDependency) = provider {
-  configurations
-      .named("runtimeClasspath")
-      .get()
-      .resolvedConfiguration
-      .resolvedArtifacts
-      .find { it.moduleVersion.id.module == dep.module }
-      ?.file
-      ?.path
-}
+/** Returns the path of the dependency jar in the runtime classpath. */
+fun Project.depPathOf(dep: ExternalDependency): Provider<String?> =
+    configurations
+        .named("runtimeClasspath")
+        .flatMap { it.incoming.artifacts.resolvedArtifacts }
+        .map {
+          it.find { artifact ->
+                when (val id = artifact.id) {
+                  is ModuleComponentIdentifier -> id.module == dep.module.name
+                  else -> false
+                }
+              }
+              ?.file
+              ?.path
+        }
 
 /** Returns the application `run` command. */
 fun Project.appRunCmd(binary: Path, args: List<String>): String {
@@ -756,6 +726,20 @@ fun Project.addFileToJavaComponent(file: File) {
     mapToOptional()
   }
 }
+
+/** Adds the give java module to all jvm tasks. Eg: `withModule("jdk.incubator.vector", false)` */
+fun Project.withJavaModule(moduleName: String, supportedInNative: Boolean = false) =
+    tasks.run {
+      val argsToAdd = listOf("--add-modules", moduleName)
+      withType<JavaCompile>().configureEach { options.compilerArgs.addAll(argsToAdd) }
+      withType<Test>().configureEach { jvmArgs(argsToAdd) }
+      withType<JavaExec>().configureEach { jvmArgs(argsToAdd) }
+      if (supportedInNative) {
+        project.pluginManager.withPlugin("org.graalvm.buildtools.native") {
+          configure<GraalVMExtension> { binaries.all { jvmArgs(argsToAdd) } }
+        }
+      }
+    }
 
 fun Project.gradleBooleanProp(name: String): Provider<Boolean> =
     providers.gradleProperty(name).map(String::toBoolean).orElse(false)
