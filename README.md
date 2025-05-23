@@ -23,7 +23,7 @@ $ sdk i java 25.ea-open
 
 ```bash
 $ ./gradlew build [-Pskip.test]
-$ OTEL_SDK_DISABLED=true backend/jvm/build/libs/jvm-app
+$ backend/jvm/build/libs/jvm
 
 # Publish to local repo
 $ ./gradlew buildAndPublish
@@ -95,52 +95,52 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            --publish 8081:8081 \
            --name kotlin-mpp-playground \
            --mount type=bind,source=$(pwd),destination=/app,readonly \
-           openjdk:25-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm-app"
+           openjdk:25-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm"
 
    # Build a container image and run
    $ ./gradlew :backend:jvm:jibDockerBuild
-   $ docker run -it --rm --name jvm-app -p 8080:8080 -p 9898:9898 sureshg/jvm
+   $ docker run -it --rm --name jvm -p 8080:8080 -p 9898:9898 sureshg/jvm
    $ docker stats
   ```
 
-* OpenTelemetry
+  * OpenTelemetry
 
-  ```bash
-   # Run otel tui
-   $ brew install ymtdzzz/tap/otel-tui
-   $ otel-tui
+    ```bash
+     # Run otel tui
+     $ brew install ymtdzzz/tap/otel-tui
+     $ otel-tui
 
-   # or run the Jaeger
-   $ docker run -it --rm --pull=always \
-                -e COLLECTOR_OTLP_ENABLED=true \
-                -p 4317:4317 \
-                -p 16686:16686 \
-                jaegertracing/all-in-one:latest
-   $ open http://localhost:16686
+     # or run hyperdx
+     $ docker run \
+              -it --rm \
+              -p 8081:8080 \
+              -p 8123:8123 \
+              -p 4317:4317 \
+              -p 4318:4318 \
+              --name hyperdx \
+              --ulimit nofile=262144:262144 \
+               docker.hyperdx.io/hyperdx/hyperdx-local:2-beta
+     $ open http://localhost:8081/search
 
-   # Run the app
-   $ docker run -it --rm \
-                --name jvm \
-                -p 8080:8080 \
-                -p 9898:9898 \
-                -e OTEL_JAVAAGENT_ENABLED=true \
-                -e OTEL_TRACES_EXPORTER="otlp" \
-                -e OTEL_EXPORTER_OTLP_PROTOCOL="grpc" \
-                -e OTEL_EXPORTER_OTLP_ENDPOINT="http://host.docker.internal:4317" \
-                sureshg/jvm:latest
-   $ curl -v -X GET http://localhost:8080/trace
+     # Run the app
+     $ docker run -it --rm \
+                  --name jvm \
+                  -p 8080:8080 \
+                  -p 9898:9898 \
+                  sureshg/jvm:latest
+     $ curl -v -X GET http://localhost:8080/trace
 
-   # Change/Reset log level
-   $ curl -v -X POST http://localhost:8080/loglevel/dev.suresh.http/debug
-   $ curl -v -X POST http://localhost:8080/loglevel/reset
-  ```
+     # Change/Reset log level
+     $ curl -v -X POST http://localhost:8080/loglevel/dev.suresh.http/debug
+     $ curl -v -X POST http://localhost:8080/loglevel/reset
+    ```
 
 * JVM Agents
 
   ```bash
   # Normal agent with Launcher-Agent-Class
   $ ./gradlew :backend:agent:jfr:build
-  $ backend/agent/jfr/build/libs/jfr-app
+  $ backend/agent/jfr/build/libs/jfr
 
   # Custom OpenTelemetry agent
   $ ./gradlew :backend:agent:otel:build
@@ -150,7 +150,6 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 
   ```bash
   # Training Run
-  $
   $ java --enable-preview \
          -XX:+UseZGC \
          -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders \
@@ -172,7 +171,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
          -jar backend/jvm/build/libs/jvm-all.jar
 
   # Show native memory details
-  $ jcmd jvm-app System.map
+  $ jcmd jvm System.map
   ```
 
 * Tests
@@ -220,7 +219,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 
   # Native container image
   $ ./gradlew :backend:native:jibDockerBuild
-  $ docker run -it --rm --name native-app sureshg/native
+  $ docker run -it --rm --name native sureshg/native
 
   # Debug distroless image
   # docker run -it --entrypoint=sh gcr.io/distroless/cc-debian12:debug
