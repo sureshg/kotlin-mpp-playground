@@ -103,8 +103,8 @@ $dokka.location:/BuildConfig/includegitPlugin/#/PointingToDeclaration/shared/[r
 $dokka.location:/BuildConfig/intellijCoverage/#/PointingToDeclaration/shared/[root]/-build-config/intellij-coverage.html
 $dokka.location:/BuildConfig/intellijMarkdown/#/PointingToDeclaration/shared/[root]/-build-config/intellij-markdown.html
 $dokka.location:/BuildConfig/java/#/PointingToDeclaration/shared/[root]/-build-config/java.html
-$dokka.location:/BuildConfig/javaAddModules/#/PointingToDeclaration/shared/[root]/-build-config/java-add-modules.html
-$dokka.location:/BuildConfig/javaJvmArguments/#/PointingToDeclaration/shared/[root]/-build-config/java-jvm-arguments.html
+$dokka.location:/BuildConfig/javaAddmodules/#/PointingToDeclaration/shared/[root]/-build-config/java-addmodules.html
+$dokka.location:/BuildConfig/javaJvmargs/#/PointingToDeclaration/shared/[root]/-build-config/java-jvmargs.html
 $dokka.location:/BuildConfig/javaKeychain/#/PointingToDeclaration/shared/[root]/-build-config/java-keychain.html
 $dokka.location:/BuildConfig/javaKeyring/#/PointingToDeclaration/shared/[root]/-build-config/java-keyring.html
 $dokka.location:/BuildConfig/javaVendor/#/PointingToDeclaration/shared/[root]/-build-config/java-vendor.html
@@ -119,7 +119,6 @@ $dokka.location:/BuildConfig/jfreeSvg/#/PointingToDeclaration/shared/[root]/-bu
 $dokka.location:/BuildConfig/jgit/#/PointingToDeclaration/shared/[root]/-build-config/jgit.html
 $dokka.location:/BuildConfig/jibNativeimageExtn/#/PointingToDeclaration/shared/[root]/-build-config/jib-nativeimage-extn.html
 $dokka.location:/BuildConfig/jibPlugin/#/PointingToDeclaration/shared/[root]/-build-config/jib-plugin.html
-$dokka.location:/BuildConfig/jimfs/#/PointingToDeclaration/shared/[root]/-build-config/jimfs.html
 $dokka.location:/BuildConfig/jlama/#/PointingToDeclaration/shared/[root]/-build-config/jlama.html
 $dokka.location:/BuildConfig/jline/#/PointingToDeclaration/shared/[root]/-build-config/jline.html
 $dokka.location:/BuildConfig/jlinkJib/#/PointingToDeclaration/shared/[root]/-build-config/jlink-jib.html
@@ -143,6 +142,7 @@ $dokka.location:/BuildConfig/koin/#/PointingToDeclaration/shared/[root]/-build-
 $dokka.location:/BuildConfig/koinAnnotations/#/PointingToDeclaration/shared/[root]/-build-config/koin-annotations.html
 $dokka.location:/BuildConfig/koja/#/PointingToDeclaration/shared/[root]/-build-config/koja.html
 $dokka.location:/BuildConfig/konsist/#/PointingToDeclaration/shared/[root]/-build-config/konsist.html
+$dokka.location:/BuildConfig/koog/#/PointingToDeclaration/shared/[root]/-build-config/koog.html
 $dokka.location:/BuildConfig/kopy/#/PointingToDeclaration/shared/[root]/-build-config/kopy.html
 $dokka.location:/BuildConfig/kotest/#/PointingToDeclaration/shared/[root]/-build-config/kotest.html
 $dokka.location:/BuildConfig/kotlin/#/PointingToDeclaration/shared/[root]/-build-config/kotlin.html
@@ -232,6 +232,7 @@ $dokka.location:/BuildConfig/otelAlpha/#/PointingToDeclaration/shared/[root]/-b
 $dokka.location:/BuildConfig/otelContrib/#/PointingToDeclaration/shared/[root]/-build-config/otel-contrib.html
 $dokka.location:/BuildConfig/otelInstr/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr.html
 $dokka.location:/BuildConfig/otelInstrAlpha/#/PointingToDeclaration/shared/[root]/-build-config/otel-instr-alpha.html
+$dokka.location:/BuildConfig/otelKotlin/#/PointingToDeclaration/shared/[root]/-build-config/otel-kotlin.html
 $dokka.location:/BuildConfig/otelSemconv/#/PointingToDeclaration/shared/[root]/-build-config/otel-semconv.html
 $dokka.location:/BuildConfig/otp/#/PointingToDeclaration/shared/[root]/-build-config/otp.html
 $dokka.location:/BuildConfig/palantirJavaformat/#/PointingToDeclaration/shared/[root]/-build-config/palantir-javaformat.html
@@ -241,6 +242,7 @@ $dokka.location:/BuildConfig/poko/#/PointingToDeclaration/shared/[root]/-build-
 $dokka.location:/BuildConfig/postgresql/#/PointingToDeclaration/shared/[root]/-build-config/postgresql.html
 $dokka.location:/BuildConfig/pty4j/#/PointingToDeclaration/shared/[root]/-build-config/pty4j.html
 $dokka.location:/BuildConfig/pwallJsonSchema/#/PointingToDeclaration/shared/[root]/-build-config/pwall-json-schema.html
+$dokka.location:/BuildConfig/quickjs4j/#/PointingToDeclaration/shared/[root]/-build-config/quickjs4j.html
 $dokka.location:/BuildConfig/reflectTypeparamresolver/#/PointingToDeclaration/shared/[root]/-build-config/reflect-typeparamresolver.html
 $dokka.location:/BuildConfig/reflectTypetools/#/PointingToDeclaration/shared/[root]/-build-config/reflect-typetools.html
 $dokka.location:/BuildConfig/repoMvnCentral/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-central.html
@@ -285,6 +287,7 @@ $dokka.location:/BuildConfig/wirePlugin/#/PointingToDeclaration/shared/[root]/-
 $dokka.location:/BuildConfig/wiremock/#/PointingToDeclaration/shared/[root]/-build-config/wiremock.html
 $dokka.location:/BuildConfig/wiremockKotlin/#/PointingToDeclaration/shared/[root]/-build-config/wiremock-kotlin.html
 $dokka.location:/BuildConfig/xchart/#/PointingToDeclaration/shared/[root]/-build-config/xchart.html
+$dokka.location:/BuildConfig/zerofs/#/PointingToDeclaration/shared/[root]/-build-config/zerofs.html
 $dokka.location:/BuildConfig/zipPrefixer/#/PointingToDeclaration/shared/[root]/-build-config/zip-prefixer.html
 $dokka.location:/ClassVisitor///PointingToDeclaration/processor/[root]/-class-visitor/index.html
 $dokka.location:/ClassVisitor/ClassVisitor/#/PointingToDeclaration/processor/[root]/-class-visitor/-class-visitor.html
