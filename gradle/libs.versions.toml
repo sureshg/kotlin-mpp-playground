@@ -6,10 +6,10 @@ kotlin-jvmtarget               = "21"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.2"
 kotlin-lang-version            = "2.2"
-gradle                         = "8.14"
+gradle                         = "8.14.1"
 java-vendor                    = "Oracle"
-java-jvmArguments              = "--enable-preview"
-java-addModules                = "jdk.incubator.vector"
+java-jvmargs                   = "--enable-preview"
+java-addmodules                = "jdk.incubator.vector"
 
 # Project specifc config
 group                          = "dev.suresh.kmp"
@@ -47,12 +47,12 @@ kotlinx-dataframe              = "1.0.0-Beta1"
 kotlinx-kandy                  = "0.8.0"
 kotlin-statistics              = "0.4.0-RC1"
 gradle-kotlin-dsl              = "6.1.2"
-exoquery-plugin                = "2.1.20-1.2.5.PL"
-exoquery-sql                   = "1.2.5.PL-1.2.5"
+exoquery-plugin                = "2.1.20-1.2.6.PL"
+exoquery-sql                   = "1.2.6.PL-1.2.6"
 exposed                        = "1.0.0-beta-2"
 postgresql                     = "42.7.5"
 embedded-postgres              = "2.1.0"
-embedded-postgres-bom          = "17.4.0"
+embedded-postgres-bom          = "17.5.0"
 evas                           = "1.3.0"
 kopy                           = "0.15.0+2.1.20"
 poko                           = "0.18.7"
@@ -81,14 +81,13 @@ zip-prefixer                   = "0.3.1"
 ajalt-mordant                  = "3.0.2"
 ajalt-clikt                    = "5.0.3"
 ajalt-colormath                = "3.6.1"
-jline                          = "3.30.2"
+jline                          = "3.30.3"
 classgraph                     = "4.8.179"
 cache4k                        = "0.14.0"
 intellij-coverage              = "1.0.766"
 intellij-markdown              = "0.7.3"
 jgit                           = "7.2.1.202505142326-r"
 jte                            = "3.2.1"
-jimfs                          = "1.3.0"
 sshj                           = "0.39.0"
 jsch                           = "2.27.0"
 pty4j                          = "0.13.4"
@@ -99,7 +98,7 @@ koin-annotations               = "2.0.1-RC1"
 metro                          = "0.3.2"
 kotest                         = "6.0.0.M4"
 mockk                          = "1.14.2"
-mokkery                        = "2.7.2"
+mokkery                        = "2.8.0"
 wiremock                       = "4.0.0-beta.9"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.0.0-alpha.14"
@@ -188,12 +187,15 @@ langchain4j                    = "1.0.1"
 langchain4j-kotlin             = "0.2.0"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.5.1"
+koog                           = "0.1.0"
 mcp4k                          = "0.4.0"
 dflib                          = "2.0.0-M2"
 ldaptive                       = "2.4.1"
 chicory                        = "1.3.0"
 weh-bindings                   = "0.5"
 wasm2class                     = "0.3"
+zerofs                         = "0.0.1"
+quickjs4j                      = "0.0.4"
 log4k                          = "0.50.0"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.3"
@@ -443,7 +445,6 @@ expiringmap                          = { module = "net.jodah:expiringmap"       
 password4j                           = { module = "com.password4j:password4j"                                  , version.ref = "password4j"}
 otp-java                             = { module = "com.github.bastiaanjansen:otp-java"                         , version.ref = "otp"}
 cel                                  = { module = "dev.cel:cel"                                                , version.ref = "cel"}
-jimfs                                = { module = "com.google.jimfs:jimfs"                                     , version.ref = "jimfs" }
 tomlj                                = { module = "org.tomlj:tomlj"                                            , version.ref = "tomlj" }
 bytesize                             = { module = "me.saket.bytesize:bytesize"                                 , version.ref = "bytesize" }
 zip-prefixer                         = { module = "net.e175.klaus:zip-prefixer"                                , version.ref = "zip-prefixer" }
@@ -652,6 +653,7 @@ weh-chasm-wasip1                     = { module = "at.released.weh:bindings-chas
 weh-chasm-emscripten                 = { module = "at.released.weh:bindings-chasm-emscripten"                               , version.ref = "weh-bindings" }
 weh-chicory-wasip1                   = { module = "at.released.weh:bindings-chicory-wasip1"                                 , version.ref = "weh-bindings" }
 weh-chicory-emscripten               = { module = "at.released.weh:bindings-chicory-emscripten"                             , version.ref = "weh-bindings" }
+zerofs                               = { module = "io.roastedroot:zerofs"                                                   , version.ref = "zerofs" }
 
 # AI/ML
 langchain4j                          = { module = "dev.langchain4j:langchain4j"                                             , version.ref = "langchain4j" }
@@ -662,6 +664,9 @@ jlama-core                           = { module = "com.github.tjake:jlama-core" 
 jlama-native                         = { module = "com.github.tjake:jlama-native"                                           , version.ref = "jlama" }
 dflib                                = { module = "org.dflib:dflib"                                                         , version.ref = "dflib" }
 mcp-kotlin                           = { module = "io.modelcontextprotocol:kotlin-sdk"                                      , version.ref = "mcp-kotlin"}
+koog-agents                          = { module = "ai.koog:koog-agents"                                                     , version.ref = "koog"}
+
+# Social
 ozone-bluesky                        = { module = "sh.christian.ozone:bluesky"                                              , version.ref = "bluesky-ozone"}
 ozone-jetstream                      = { module = "sh.christian.ozone:jetstream"                                            , version.ref = "bluesky-ozone"}
 
