@@ -1,17 +1,60 @@
 package dev.suresh.lc
 
-sealed class Tree<out T>
+import dev.suresh.lc.Order.*
+
+sealed interface Tree<out T>
 
 data class Node<out T>(val value: T, val left: Tree<T> = Empty, val right: Tree<T> = Empty) :
-    Tree<T>()
+    Tree<T>
 
-data object Empty : Tree<Nothing>()
+data object Empty : Tree<Nothing>
 
-fun <T> Tree<T>.dfs(): List<T> =
+enum class Order {
+  PRE,
+  IN,
+  POST
+}
+
+fun <T> Tree<T>.dfs(order: Order = IN): List<T> =
     when (this) {
       Empty -> emptyList()
-      is Node<T> -> left.dfs() + listOf(value) + right.dfs()
+      is Node<T> -> {
+        val (value, left, right) = this
+        when (order) {
+          IN -> left.dfs(order) + value + right.dfs(order)
+          PRE -> listOf(value) + left.dfs(order) + right.dfs(order)
+          POST -> left.dfs(order) + right.dfs(order) + value
+        }
+      }
     }
+
+fun <T> Tree<T>.dfsTo(order: Order = IN, dest: MutableList<T>) {
+  when (this) {
+    Empty -> Unit
+    is Node<T> -> {
+      val (value, left, right) = this
+      when (order) {
+        PRE -> {
+          dest.add(value)
+          left.dfsTo(order, dest)
+          right.dfsTo(order, dest)
+        }
+
+        IN -> {
+          left.dfsTo(order, dest)
+          dest.add(value)
+          right.dfsTo(order, dest)
+        }
+
+        POST -> {
+          left.dfsTo(order, dest)
+          right.dfsTo(order, dest)
+          dest.add(value)
+        }
+      }
+    }
+  }
+}
 
 fun <T> Tree<T>.bfs(): List<T> {
   val result = mutableListOf<T>()

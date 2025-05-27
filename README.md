@@ -98,42 +98,42 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            openjdk:25-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm"
 
    # Build a container image and run
-   $ ./gradlew :backend:jvm:jibDockerBuild
+   $ ./gradlew :backend:jvm:jibDockerBuild --no-configuration-cache
    $ docker run -it --rm --name jvm -p 8080:8080 -p 9898:9898 sureshg/jvm
    $ docker stats
   ```
 
-  * OpenTelemetry
+* OpenTelemetry
 
-    ```bash
-     # Run otel tui
-     $ brew install ymtdzzz/tap/otel-tui
-     $ otel-tui
+  ```bash
+   # Run otel tui
+   $ brew install ymtdzzz/tap/otel-tui
+   $ otel-tui
 
-     # or run hyperdx
-     $ docker run \
-              -it --rm \
-              -p 8081:8080 \
-              -p 8123:8123 \
-              -p 4317:4317 \
-              -p 4318:4318 \
-              --name hyperdx \
-              --ulimit nofile=262144:262144 \
-               docker.hyperdx.io/hyperdx/hyperdx-local:2-beta
-     $ open http://localhost:8081/search
+   # or run hyperdx
+   $ docker run \
+            -it --rm \
+            -p 8081:8080 \
+            -p 8123:8123 \
+            -p 4317:4317 \
+            -p 4318:4318 \
+            --name hyperdx \
+            --ulimit nofile=262144:262144 \
+             docker.hyperdx.io/hyperdx/hyperdx-local:2-beta
+   $ open http://localhost:8081/search
 
-     # Run the app
-     $ docker run -it --rm \
-                  --name jvm \
-                  -p 8080:8080 \
-                  -p 9898:9898 \
-                  sureshg/jvm:latest
-     $ curl -v -X GET http://localhost:8080/trace
+   # Run the app
+   $ docker run -it --rm \
+                --name jvm \
+                -p 8080:8080 \
+                -p 9898:9898 \
+                sureshg/jvm:latest
+   $ curl -v -X GET http://localhost:8080/trace
 
-     # Change/Reset log level
-     $ curl -v -X POST http://localhost:8080/loglevel/dev.suresh.http/debug
-     $ curl -v -X POST http://localhost:8080/loglevel/reset
-    ```
+   # Change/Reset log level
+   $ curl -v -X POST http://localhost:8080/loglevel/dev.suresh.http/debug
+   $ curl -v -X POST http://localhost:8080/loglevel/reset
+  ```
 
 * JVM Agents
 
@@ -218,7 +218,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :backend:native:macOsUniversalBinary
 
   # Native container image
-  $ ./gradlew :backend:native:jibDockerBuild
+  $ ./gradlew :backend:native:jibDockerBuild --no-configuration-cache
   $ docker run -it --rm --name native sureshg/native
 
   # Debug distroless image
