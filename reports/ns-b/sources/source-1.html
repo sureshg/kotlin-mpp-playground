@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/3)
+    (0/2)
   </span>
 </td>
 </tr>
@@ -94,18 +94,61 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.lc
 &nbsp;
-&nbsp;sealed class Tree&lt;out T&gt;
+&nbsp;import dev.suresh.lc.Order.*
+&nbsp;
+&nbsp;sealed interface Tree&lt;out T&gt;
 &nbsp;
 &nbsp;data class Node&lt;out T&gt;(val value: T, val left: Tree&lt;T&gt; = Empty, val right: Tree&lt;T&gt; = Empty) :
-&nbsp;    Tree&lt;T&gt;()
+&nbsp;    Tree&lt;T&gt;
 &nbsp;
-<b class="nc">&nbsp;data object Empty : Tree&lt;Nothing&gt;()</b>
+<b class="nc">&nbsp;data object Empty : Tree&lt;Nothing&gt;</b>
 &nbsp;
-&nbsp;fun &lt;T&gt; Tree&lt;T&gt;.dfs(): List&lt;T&gt; =
+&nbsp;enum class Order {
+&nbsp;  PRE,
+&nbsp;  IN,
+&nbsp;  POST
+&nbsp;}
+&nbsp;
+&nbsp;fun &lt;T&gt; Tree&lt;T&gt;.dfs(order: Order = IN): List&lt;T&gt; =
 &nbsp;    when (this) {
 &nbsp;      Empty -&gt; emptyList()
-&nbsp;      is Node&lt;T&gt; -&gt; left.dfs() + listOf(value) + right.dfs()
+&nbsp;      is Node&lt;T&gt; -&gt; {
+&nbsp;        val (value, left, right) = this
+&nbsp;        when (order) {
+&nbsp;          IN -&gt; left.dfs(order) + value + right.dfs(order)
+&nbsp;          PRE -&gt; listOf(value) + left.dfs(order) + right.dfs(order)
+&nbsp;          POST -&gt; left.dfs(order) + right.dfs(order) + value
+&nbsp;        }
+&nbsp;      }
 &nbsp;    }
+&nbsp;
+&nbsp;fun &lt;T&gt; Tree&lt;T&gt;.dfsTo(order: Order = IN, dest: MutableList&lt;T&gt;) {
+&nbsp;  when (this) {
+&nbsp;    Empty -&gt; Unit
+&nbsp;    is Node&lt;T&gt; -&gt; {
+&nbsp;      val (value, left, right) = this
+&nbsp;      when (order) {
+&nbsp;        PRE -&gt; {
+&nbsp;          dest.add(value)
+&nbsp;          left.dfsTo(order, dest)
+&nbsp;          right.dfsTo(order, dest)
+&nbsp;        }
+&nbsp;
+&nbsp;        IN -&gt; {
+&nbsp;          left.dfsTo(order, dest)
+&nbsp;          dest.add(value)
+&nbsp;          right.dfsTo(order, dest)
+&nbsp;        }
+&nbsp;
+&nbsp;        POST -&gt; {
+&nbsp;          left.dfsTo(order, dest)
+&nbsp;          right.dfsTo(order, dest)
+&nbsp;          dest.add(value)
+&nbsp;        }
+&nbsp;      }
+&nbsp;    }
+&nbsp;  }
+&nbsp;}
 &nbsp;
 &nbsp;fun &lt;T&gt; Tree&lt;T&gt;.bfs(): List&lt;T&gt; {
 &nbsp;  val result = mutableListOf&lt;T&gt;()
@@ -197,7 +240,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-05-26 22:42</div>
+    <div style="float:right;">generated on 2025-05-27 01:09</div>
 </div>
 </body>
 </html>
