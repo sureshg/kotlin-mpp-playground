@@ -187,6 +187,19 @@ val Project.defaultJarManifest
     }
   }
 
+val Project.containerLabels
+  get() =
+      mapOf(
+          "maintainer" to project.githubUser,
+          "org.opencontainers.image.authors" to project.githubUser,
+          "org.opencontainers.image.title" to project.name,
+          "org.opencontainers.image.description" to "🐳 ${project.description}",
+          "org.opencontainers.image.version" to project.version.toString(),
+          "org.opencontainers.image.vendor" to project.githubUser,
+          "org.opencontainers.image.url" to project.githubRepo,
+          "org.opencontainers.image.source" to project.githubRepo,
+          "org.opencontainers.image.licenses" to "Apache-2.0")
+
 val Project.defaultJvmArgs
   get() = buildList {
     addAll(libs.versions.java.jvmargs.get().split(",", " ").filter(String::isNotBlank))
@@ -581,6 +594,7 @@ fun KotlinSourceSet.ksp(dependencyNotation: Any) {
             listOf(
                 KotlinSourceSet.COMMON_MAIN_SOURCE_SET_NAME,
                 KotlinSourceSet.COMMON_TEST_SOURCE_SET_NAME) -> "commonMainMetadata"
+
         name.endsWith("Main") -> name.substringBeforeLast("Main")
         else -> name
       }.replaceFirstChar { it.uppercaseChar() }

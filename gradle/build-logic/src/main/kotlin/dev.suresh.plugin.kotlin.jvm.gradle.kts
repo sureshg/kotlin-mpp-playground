@@ -1,6 +1,4 @@
-import com.github.ajalt.mordant.rendering.TextColors
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
 import java.io.*
@@ -176,9 +174,8 @@ tasks {
         logger.quiet(
             """
             |Application modules for OpenJDK-${javaRelease.get()} are,
-            |${modules.split(",")
-                        .mapIndexed { i, module -> " ${(i + 1).toString().padStart(2)}) $module" }
-                        .joinToString(System.lineSeparator())}
+            |${modules.split(",").mapIndexed { i, module -> " ${(i + 1).toString()
+                      .padStart(2)}) $module" }.joinToString(System.lineSeparator())}
             """
                 .trimMargin())
       }
@@ -207,33 +204,6 @@ tasks {
         }
 
     processResources { dependsOn(copyOtelAgent) }
-
-    // Docker command to run the image
-    withType<BuildDockerTask>().configureEach {
-      doLast {
-        val portMapping =
-            jib?.container?.ports.orEmpty().joinToString(" \\\n     ") { "-p $it:$it" }
-        val image = jib?.to?.image ?: project.name
-        val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
-        val env =
-            jib?.container
-                ?.environment
-                .orEmpty()
-                .map { "-e ${it.key}=${it.value}" }
-                .joinToString(" \\\n     ")
-        logger.lifecycle(
-            TextColors.cyan(
-                """
-                      |Run: docker run \
-                      |     -it --rm \
-                      |     --name ${project.name} \
-                      |     $portMapping \
-                      |     $env \
-                      |     $image:$tag
-                      """
-                    .trimMargin()))
-      }
-    }
   }
 
   pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {

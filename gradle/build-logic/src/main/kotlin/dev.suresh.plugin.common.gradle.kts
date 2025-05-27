@@ -1,9 +1,43 @@
+import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.rendering.TextColors.*
+import com.google.cloud.tools.jib.gradle.BuildDockerTask
 import me.saket.bytesize.*
-import org.gradle.api.internal.artifacts.result.*
 import org.gradle.kotlin.dsl.*
 
 tasks {
+  pluginManager.withPlugin("com.google.cloud.tools.jib") {
+    withType<BuildDockerTask>().configureEach {
+      doLast {
+        val indent = " ".repeat(9)
+        val portMapping =
+            jib?.container?.ports.orEmpty().joinToString(" \\\n $indent") { "-p $it:$it" }
+        val image = jib?.to?.image ?: project.name
+        val tag = jib?.to?.tags?.firstOrNull() ?: "latest"
+        val env =
+            jib?.container
+                ?.environment
+                .orEmpty()
+                .map { "-e ${it.key}=${it.value}" }
+                .joinToString(" \\\n $indent")
+
+        val cmd = buildString {
+          appendLine("To run the container,")
+          appendLine("$ docker run \\")
+          appendLine("$indent -it --rm \\")
+          appendLine("$indent --name ${project.name} \\")
+          if (portMapping.isNotBlank()) {
+            appendLine("$indent $portMapping \\")
+          }
+          if (env.isNotBlank()) {
+            appendLine("$indent $env \\")
+          }
+          appendLine("$indent $image:$tag")
+        }
+        logger.lifecycle(TextColors.cyan(cmd))
+      }
+    }
+  }
+
   register("printArtifacts") {
     doLast {
       val configsWithArtifacts =
@@ -53,7 +87,7 @@ tasks {
           configuration
               .flatMap { it.incoming.artifacts.resolvedArtifacts }
               .get()
-              .filterIsInstance<DefaultResolvedArtifactResult>()
+              .filterIsInstance<ResolvedArtifactResult>()
       logger.lifecycle("Found ${allResolvedArtifacts.size} resolved artifacts")
     }
   }
