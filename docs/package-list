@@ -48,6 +48,7 @@ $dokka.location:/BuildConfig/cache4k/#/PointingToDeclaration/shared/[root]/-bui
 $dokka.location:/BuildConfig/caffeineCoroutines/#/PointingToDeclaration/shared/[root]/-build-config/caffeine-coroutines.html
 $dokka.location:/BuildConfig/cardiologist/#/PointingToDeclaration/shared/[root]/-build-config/cardiologist.html
 $dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/-build-config/cash-turbine.html
+$dokka.location:/BuildConfig/caupain/#/PointingToDeclaration/shared/[root]/-build-config/caupain.html
 $dokka.location:/BuildConfig/cel/#/PointingToDeclaration/shared/[root]/-build-config/cel.html
 $dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
 $dokka.location:/BuildConfig/chicory/#/PointingToDeclaration/shared/[root]/-build-config/chicory.html
@@ -217,7 +218,6 @@ $dokka.location:/BuildConfig/nmcp/#/PointingToDeclaration/shared/[root]/-build-
 $dokka.location:/BuildConfig/npmHighlightjs/#/PointingToDeclaration/shared/[root]/-build-config/npm-highlightjs.html
 $dokka.location:/BuildConfig/npmJsjodaTz/#/PointingToDeclaration/shared/[root]/-build-config/npm-jsjoda-tz.html
 $dokka.location:/BuildConfig/npmKotlinPlayground/#/PointingToDeclaration/shared/[root]/-build-config/npm-kotlin-playground.html
-$dokka.location:/BuildConfig/npmPublishPlugin/#/PointingToDeclaration/shared/[root]/-build-config/npm-publish-plugin.html
 $dokka.location:/BuildConfig/npmVegaLite/#/PointingToDeclaration/shared/[root]/-build-config/npm-vega-lite.html
 $dokka.location:/BuildConfig/npmXtermjs/#/PointingToDeclaration/shared/[root]/-build-config/npm-xtermjs.html
 $dokka.location:/BuildConfig/okapibarcode/#/PointingToDeclaration/shared/[root]/-build-config/okapibarcode.html
