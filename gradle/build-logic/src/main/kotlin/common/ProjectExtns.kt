@@ -602,7 +602,7 @@ fun KotlinSourceSet.ksp(dependencyNotation: Any) {
 }
 
 /** Returns the path of the dependency jar in the runtime classpath. */
-fun Project.depPathOf(dep: ExternalDependency): Provider<String?> =
+fun Project.depPathOf(dep: ExternalDependency): Provider<String> =
     configurations
         .named("runtimeClasspath")
         .flatMap { it.incoming.artifacts.resolvedArtifacts }

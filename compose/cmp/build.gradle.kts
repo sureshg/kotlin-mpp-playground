@@ -119,8 +119,10 @@ compose {
           iconFile = layout.projectDirectory.file("src/assets/icons/mac.icns")
 
           notarization {
-            appleID = "test.app@example.com"
-            password = "@keychain:NOTARIZATION_PASSWORD"
+            val providers = project.providers
+            appleID.set(providers.environmentVariable("NOTARIZATION_APPLE_ID"))
+            password.set(providers.environmentVariable("NOTARIZATION_PASSWORD"))
+            teamID.set(providers.environmentVariable("NOTARIZATION_TEAM_ID"))
           }
         }
 

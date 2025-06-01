@@ -119,7 +119,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
             -p 4318:4318 \
             --name hyperdx \
             --ulimit nofile=262144:262144 \
-             docker.hyperdx.io/hyperdx/hyperdx-local:2-beta
+             hyperdx/hyperdx-local:2-beta
    $ open http://localhost:8081/search
 
    # Run the app
