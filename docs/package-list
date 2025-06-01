@@ -115,6 +115,7 @@ $dokka.location:/BuildConfig/jetbrainsComposeAdaptive/#/PointingToDeclaration/s
 $dokka.location:/BuildConfig/jetbrainsComposeIcons/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-icons.html
 $dokka.location:/BuildConfig/jetbrainsComposeNav/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-nav.html
 $dokka.location:/BuildConfig/jetbrainsComposeViewmodel/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-viewmodel.html
+$dokka.location:/BuildConfig/jextract/#/PointingToDeclaration/shared/[root]/-build-config/jextract.html
 $dokka.location:/BuildConfig/jfreeChart/#/PointingToDeclaration/shared/[root]/-build-config/jfree-chart.html
 $dokka.location:/BuildConfig/jfreeSvg/#/PointingToDeclaration/shared/[root]/-build-config/jfree-svg.html
 $dokka.location:/BuildConfig/jgit/#/PointingToDeclaration/shared/[root]/-build-config/jgit.html
