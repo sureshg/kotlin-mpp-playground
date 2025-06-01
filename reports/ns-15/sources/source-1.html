@@ -61,7 +61,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/9)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +69,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/75)
+    (0/76)
   </span>
 </td>
 </tr>
@@ -131,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/13)
+    (0/14)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/141)
+    (0/142)
   </span>
 </td>
 </tr>
@@ -152,12 +152,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.wasm
 &nbsp;
-&nbsp;import com.dylibso.chicory.experimental.aot.AotMachine
+&nbsp;import com.dylibso.chicory.compiler.MachineFactoryCompiler
 &nbsp;import com.dylibso.chicory.runtime.HostFunction
 &nbsp;import com.dylibso.chicory.runtime.Instance
 &nbsp;import com.dylibso.chicory.wasm.Parser
-&nbsp;import com.dylibso.chicory.wasm.types.ValueType
-&nbsp;import io.ktor.server.response.respondText
+&nbsp;import com.dylibso.chicory.wasm.types.FunctionType
+&nbsp;import com.dylibso.chicory.wasm.types.ValType
+&nbsp;import io.ktor.server.response.*
 &nbsp;import io.ktor.server.routing.*
 &nbsp;
 &nbsp;/**
@@ -169,7 +170,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  val wasmRes = Thread.currentThread().contextClassLoader.getResourceAsStream(&quot;wasm/factorial.wasm&quot;)</b>
 &nbsp;  // val wasmRes = object {}.javaClass.getResourceAsStream(&quot;wasm/factorial.wasm&quot;)
 <b class="nc">&nbsp;  val wasmMod = Parser.parse(wasmRes)</b>
-<b class="nc">&nbsp;  Instance.builder(wasmMod).withMachineFactory(::AotMachine).build()</b>
+<b class="nc">&nbsp;  Instance.builder(wasmMod).withMachineFactory(MachineFactoryCompiler::compile).build()</b>
 &nbsp;}
 &nbsp;
 &nbsp;fun Routing.wasm() {
@@ -186,14 +187,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;}
 &nbsp;
 &nbsp;fun logFunction() =
-<b class="nc">&nbsp;    HostFunction(&quot;console&quot;, &quot;log&quot;, listOf(ValueType.I32, ValueType.I32), emptyList()) {</b>
-&nbsp;        instance,
-&nbsp;        args -&gt;
-<b class="nc">&nbsp;      val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())</b>
-<b class="nc">&nbsp;      println(&quot;WASM: $msg&quot;)</b>
-&nbsp;      // Value.i32(0)
-&nbsp;      longArrayOf()
-&nbsp;    }
+<b class="nc">&nbsp;    HostFunction(</b>
+<b class="nc">&nbsp;        &quot;console&quot;, &quot;log&quot;, FunctionType.of(listOf(ValType.I32, ValType.I32), emptyList())) {</b>
+&nbsp;            instance,
+&nbsp;            args -&gt;
+<b class="nc">&nbsp;          val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())</b>
+<b class="nc">&nbsp;          println(&quot;WASM: $msg&quot;)</b>
+&nbsp;          // Value.i32(0)
+&nbsp;          longArrayOf()
+&nbsp;        }
 </code>
 </pre>
 </div>
@@ -217,7 +219,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-06-01 00:16</div>
+    <div style="float:right;">generated on 2025-06-01 10:51</div>
 </div>
 </body>
 </html>
