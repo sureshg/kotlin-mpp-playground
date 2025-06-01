@@ -1,11 +1,12 @@
 package dev.suresh.wasm
 
-import com.dylibso.chicory.experimental.aot.AotMachine
+import com.dylibso.chicory.compiler.MachineFactoryCompiler
 import com.dylibso.chicory.runtime.HostFunction
 import com.dylibso.chicory.runtime.Instance
 import com.dylibso.chicory.wasm.Parser
-import com.dylibso.chicory.wasm.types.ValueType
-import io.ktor.server.response.respondText
+import com.dylibso.chicory.wasm.types.FunctionType
+import com.dylibso.chicory.wasm.types.ValType
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 /**
@@ -17,7 +18,7 @@ val factWasmInst: Instance by lazy {
   val wasmRes = Thread.currentThread().contextClassLoader.getResourceAsStream("wasm/factorial.wasm")
   // val wasmRes = object {}.javaClass.getResourceAsStream("wasm/factorial.wasm")
   val wasmMod = Parser.parse(wasmRes)
-  Instance.builder(wasmMod).withMachineFactory(::AotMachine).build()
+  Instance.builder(wasmMod).withMachineFactory(MachineFactoryCompiler::compile).build()
 }
 
 fun Routing.wasm() {
@@ -34,11 +35,12 @@ fun Routing.wasm() {
 }
 
 fun logFunction() =
-    HostFunction("console", "log", listOf(ValueType.I32, ValueType.I32), emptyList()) {
-        instance,
-        args ->
-      val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())
-      println("WASM: $msg")
-      // Value.i32(0)
-      longArrayOf()
-    }
+    HostFunction(
+        "console", "log", FunctionType.of(listOf(ValType.I32, ValType.I32), emptyList())) {
+            instance,
+            args ->
+          val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())
+          println("WASM: $msg")
+          // Value.i32(0)
+          longArrayOf()
+        }

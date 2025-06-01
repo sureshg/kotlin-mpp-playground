@@ -178,8 +178,7 @@ dependencies {
   implementation(libs.cardiologist)
 
   // Wasm
-  implementation(libs.chicory)
-  implementation(libs.chicory.aot)
+  implementation(libs.chicory.compiler)
 
   // Templating
   jteGenerate(libs.jte.models)
