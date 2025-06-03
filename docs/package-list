@@ -247,6 +247,7 @@ $dokka.location:/BuildConfig/quickjs4j/#/PointingToDeclaration/shared/[root]/-b
 $dokka.location:/BuildConfig/reflectTypeparamresolver/#/PointingToDeclaration/shared/[root]/-build-config/reflect-typeparamresolver.html
 $dokka.location:/BuildConfig/reflectTypetools/#/PointingToDeclaration/shared/[root]/-build-config/reflect-typetools.html
 $dokka.location:/BuildConfig/repoMvnCentral/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-central.html
+$dokka.location:/BuildConfig/repoMvnKotlindev/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-kotlindev.html
 $dokka.location:/BuildConfig/repoMvnSnapshot/#/PointingToDeclaration/shared/[root]/-build-config/repo-mvn-snapshot.html
 $dokka.location:/BuildConfig/repoNodejs/#/PointingToDeclaration/shared/[root]/-build-config/repo-nodejs.html
 $dokka.location:/BuildConfig/reproducibleBuilds/#/PointingToDeclaration/shared/[root]/-build-config/reproducible-builds.html
