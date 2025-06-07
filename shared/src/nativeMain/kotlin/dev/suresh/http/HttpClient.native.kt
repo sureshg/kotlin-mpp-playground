@@ -9,9 +9,15 @@ actual fun httpClient(
     timeout: Timeout,
     retry: Retry,
     kLogger: KLogger,
-    config: HttpClientConfig<*>.() -> Unit
+    config: HttpClientConfigurer
 ) =
     HttpClient(Curl) {
       config(this)
-      engine { sslVerify = true }
+      engine {
+        // https://youtrack.jetbrains.com/issue/KTOR-8339
+        if (Platform.osFamily == OsFamily.LINUX) {
+          caPath = "/etc/ssl/certs"
+        }
+        sslVerify = true
+      }
     }

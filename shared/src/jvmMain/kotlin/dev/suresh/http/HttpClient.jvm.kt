@@ -24,7 +24,7 @@ actual fun httpClient(
     timeout: Timeout,
     retry: Retry,
     kLogger: KLogger,
-    config: HttpClientConfig<*>.() -> Unit
+    config: HttpClientConfigurer
 ) =
     HttpClient(Java) {
       config(this)

@@ -9,7 +9,7 @@ actual fun httpClient(
     timeout: Timeout,
     retry: Retry,
     kLogger: KLogger,
-    config: HttpClientConfig<*>.() -> Unit
+    config: HttpClientConfigurer
 ) = HttpClient(Js) { config(this) }
 
 fun getKtorEnvLogLevel(): String? = js("process.env.KTOR_LOG_LEVEL")

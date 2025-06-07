@@ -36,6 +36,8 @@ val json by lazy {
   }
 }
 
+typealias HttpClientConfigurer = HttpClientConfig<*>.() -> Unit
+
 /**
  * Multiplatform HTTP client engine configuration
  *
@@ -46,85 +48,89 @@ expect fun httpClient(
     timeout: Timeout = Timeout.DEFAULT,
     retry: Retry = Retry.DEFAULT,
     kLogger: KLogger = log,
-    config: HttpClientConfig<*>.() -> Unit = {
-      install(Resources)
-
-      install(ContentNegotiation) { json(json) }
-
-      install(ContentEncoding) {
-        deflate(1.0F)
-        gzip(0.9F)
-      }
-
-      install(HttpRequestRetry) {
-        maxRetries = retry.attempts
-        retryOnException(retryOnTimeout = true)
-        retryOnServerErrors()
-        exponentialDelay(maxDelayMs = retry.maxDelay.inWholeMilliseconds)
-        // modifyRequest { it.headers.append("X_RETRY_COUNT", retryCount.toString()) }
-      }
-
-      install(HttpTimeout) {
-        connectTimeoutMillis = timeout.connection.inWholeMilliseconds
-        requestTimeoutMillis = timeout.read.inWholeMilliseconds
-        socketTimeoutMillis = timeout.write.inWholeMilliseconds
-      }
-
-      install(HttpCookies)
-
-      install(Logging) {
-        level =
-            when {
-              kLogger.isDebugEnabled() -> LogLevel.ALL
-              kLogger.isLoggingOff() -> LogLevel.NONE
-              else -> LogLevel.INFO
-            }
-
-        logger =
-            object : Logger {
-              override fun log(message: String) {
-                kLogger.info { message }
-              }
-            }
-        format = LoggingFormat.OkHttp
-        sanitizeHeader { header -> header == HttpHeaders.Authorization }
-
-        // filter { it.url.host.contains("localhost").not() }
-      }
-
-      engine {
-        pipelining = true
-        // proxy  = ProxyBuilder.http()
-      }
-
-      followRedirects = true
-
-      install(UserAgent) { agent = "$name-${BuildConfig.version}" }
-
-      install(DefaultRequest) {
-        headers.appendIfNameAndValueAbsent(
-            HttpHeaders.ContentType, ContentType.Application.Json.toString())
-      }
-
-      install(SSE) {
-        maxReconnectionAttempts = retry.attempts
-        reconnectionTime = timeout.connection
-      }
-
-      install(WebSockets) { pingInterval = timeout.read }
-
-      expectSuccess = true
-
-      // install(SaveBodyPlugin) {
-      //   disabled = true
-      // }
-
-      HttpResponseValidator {
-        handleResponseExceptionWithRequest { ex, req ->
-          val resException = ex as? ResponseException ?: return@handleResponseExceptionWithRequest
-          val res = resException.response
-          kLogger.trace { "Request failed: ${req.method.value} ${req.url} -> ${res.status}" }
-        }
-      }
-    }
+    config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, kLogger)
 ): HttpClient
+
+fun defaultHttpClientConfig(
+    name: String,
+    timeout: Timeout,
+    retry: Retry,
+    kLogger: KLogger
+): HttpClientConfigurer = {
+  install(Resources)
+  install(ContentNegotiation) { json(json) }
+  install(ContentEncoding) {
+    deflate(1.0F)
+    gzip(0.9F)
+  }
+
+  install(HttpRequestRetry) {
+    maxRetries = retry.attempts
+    retryOnException(retryOnTimeout = true)
+    retryOnServerErrors()
+    exponentialDelay(maxDelayMs = retry.maxDelay.inWholeMilliseconds)
+    // modifyRequest { it.headers.append("X_RETRY_COUNT", retryCount.toString()) }
+  }
+
+  install(HttpTimeout) {
+    connectTimeoutMillis = timeout.connection.inWholeMilliseconds
+    requestTimeoutMillis = timeout.read.inWholeMilliseconds
+    socketTimeoutMillis = timeout.write.inWholeMilliseconds
+  }
+
+  install(HttpCookies)
+
+  install(Logging) {
+    level =
+        when {
+          kLogger.isDebugEnabled() -> LogLevel.ALL
+          kLogger.isLoggingOff() -> LogLevel.NONE
+          else -> LogLevel.INFO
+        }
+
+    logger =
+        object : Logger {
+          override fun log(message: String) {
+            kLogger.info { message }
+          }
+        }
+    format = LoggingFormat.OkHttp
+    sanitizeHeader { header -> header == HttpHeaders.Authorization }
+    // filter { it.url.host.contains("localhost").not() }
+  }
+
+  engine {
+    pipelining = true
+    // proxy  = ProxyBuilder.http()
+  }
+
+  followRedirects = true
+
+  install(UserAgent) { agent = "$name-${BuildConfig.version}" }
+
+  install(DefaultRequest) {
+    headers.appendIfNameAndValueAbsent(
+        HttpHeaders.ContentType, ContentType.Application.Json.toString())
+  }
+
+  install(SSE) {
+    maxReconnectionAttempts = retry.attempts
+    reconnectionTime = timeout.connection
+  }
+
+  install(WebSockets) { pingInterval = timeout.read }
+
+  expectSuccess = true
+
+  // install(SaveBodyPlugin) {
+  //   disabled = true
+  // }
+
+  HttpResponseValidator {
+    handleResponseExceptionWithRequest { ex, req ->
+      val resException = ex as? ResponseException ?: return@handleResponseExceptionWithRequest
+      val res = resException.response
+      kLogger.trace { "Request failed: ${req.method.value} ${req.url} -> ${res.status}" }
+    }
+  }
+}
