@@ -5,17 +5,16 @@ import io.github.kevincianfarini.cardiologist.*
 import io.ktor.server.application.*
 import io.ktor.util.logging.*
 import io.opentelemetry.instrumentation.annotations.*
-import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.*
 import kotlinx.datetime.*
 
 fun Application.scheduledTasks() {
   log.info("Starting scheduled tasks...")
   virtualThreadScope.launch {
-    Clock.System.fixedPeriodPulse(10.seconds).beat(RecurringJobMode.Skip) { scheduled, occurred ->
-      context(log){
-        task("Task at ${occurred.toLocalDateTime(TimeZone.currentSystemDefault())}")
-      }
+    Clock.System.fixedPeriodPulse(10.seconds).beat(PulseBackpressureStrategy.SkipNext) { scheduled
+      ->
+      context(log) { task("Task at ${scheduled.toLocalDateTime(TimeZone.currentSystemDefault())}") }
     }
   }
 }
