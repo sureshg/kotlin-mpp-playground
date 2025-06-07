@@ -15,8 +15,10 @@ actual fun httpClient(
       config(this)
       engine {
         // https://youtrack.jetbrains.com/issue/KTOR-8339
+        val cacertPath = "/etc/ssl/certs"
         if (Platform.osFamily == OsFamily.LINUX) {
-          caPath = "/etc/ssl/certs"
+          caPath = cacertPath
+          kLogger.warn { "Setting CA path to $caPath" }
         }
         sslVerify = true
       }
