@@ -87,6 +87,6 @@ jobs:
           find jextract -type f
 
       - name: 📌 Checkin the generated source
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "Generated source using jextract"
