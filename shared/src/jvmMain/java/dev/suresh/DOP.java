@@ -111,7 +111,7 @@ public class DOP {
         serialFile.deleteOnExit();
 
         try (var oos = new ObjectOutputStream(new FileOutputStream(serialFile))) {
-            List<Record> recs = List.of(new Lang("Java", 25), new Lang("Kotlin", 10), (Record) Result.success(100));
+            List<Record> recs = List.of(new Lang("Java", 26), new Lang("Kotlin", 10), (Record) Result.success(100));
 
             for (Record rec : recs) {
                 out.printf("Serializing record: %s%n", rec);
