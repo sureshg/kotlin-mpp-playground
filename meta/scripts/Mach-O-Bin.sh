@@ -43,7 +43,7 @@ echo "$C_CODE" >"$TERM_SIZE_C"
 rm -f "$TERM_SIZE_BIN"
 
 #  Create Mach-O universal binary with 2 architectures: x86_64 & arm64
-clang -Ofast -Wall -Wextra -pedantic -std=c99 -arch arm64 -arch x86_64 -o "$TERM_SIZE_BIN" "$TERM_SIZE_C"
+clang -O3 -Wall -Wextra -pedantic -std=c99 -arch arm64 -arch x86_64 -o "$TERM_SIZE_BIN" "$TERM_SIZE_C"
 
 # Clean up the temporary file
 rm "$TERM_SIZE_C"
