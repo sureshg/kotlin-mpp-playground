@@ -4,6 +4,7 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.client.call.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.resources.*
+import io.ktor.http.HttpMethod
 import io.ktor.http.content.*
 import io.ktor.resources.*
 import kotlinx.serialization.Serializable
@@ -60,7 +61,12 @@ data class MediaApiClient(
 
   suspend fun images() = client.get(ImgRes()).body<List<Image>>()
 
-  suspend fun videos() = client.get(VideoRes()) { skipSavingBody() }.body<List<Video>>()
+  suspend fun videos() =  suspend{
+     val s =  client.prepareRequest(ImgRes()) {
+          this.method = HttpMethod.Get
+      }
+      client.get(VideoRes()).body<List<Video>>()
+  }
 
   suspend fun multiPart() {
     val multipart = client.post(MultiPartRes()).body<MultiPartData>()
