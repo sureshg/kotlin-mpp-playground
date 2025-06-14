@@ -32,7 +32,7 @@ fun main(args: Array<String>): Unit = runBlocking {
           .stdout(Stdio.Inherit)
           .stderr(Stdio.Inherit)
 
-  val exit = runCatching { ps.spawn { it.waitForAsync(2.seconds) ?: -1 } }
+  val exit = runCatching { ps.useSpawn { it.waitForAsync(2.seconds) ?: -1 } }
   println("Process exited: ${exit.getOrElse { -1 }}")
 
   println("Reflection Simple name ${this::class.simpleName}")
