@@ -146,7 +146,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :backend:agent:otel:build
   ```
 
-* AOT Linking
+* AOT Cache
 
   ```bash
   # Training Run
