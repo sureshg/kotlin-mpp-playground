@@ -152,21 +152,21 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   # Training Run
   $ java --enable-preview \
          -XX:+UseZGC \
-         -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders \
+         -XX:+UseCompactObjectHeaders \
          -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf \
          -jar backend/jvm/build/libs/jvm-all.jar
 
   # Create AOT archive
   $ java --enable-preview \
          -XX:+UseZGC \
-         -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders \
+         -XX:+UseCompactObjectHeaders \
          -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot \
          -jar backend/jvm/build/libs/jvm-all.jar
 
   # Run with AOT
   $ java --enable-preview \
          -XX:+UseZGC \
-         -XX:+UnlockExperimentalVMOptions -XX:+UseCompactObjectHeaders \
+         -XX:+UseCompactObjectHeaders \
          -XX:AOTCache=app.aot \
          -jar backend/jvm/build/libs/jvm-all.jar
 
