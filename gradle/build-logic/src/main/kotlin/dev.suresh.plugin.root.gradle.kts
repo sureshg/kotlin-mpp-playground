@@ -1,7 +1,7 @@
 import com.github.ajalt.mordant.rendering.TextColors.*
 import common.*
 import common.Platform
-import org.gradle.api.publish.plugins.PublishingPlugin.PUBLISH_LIFECYCLE_TASK_NAME
+import org.gradle.api.publish.plugins.PublishingPlugin.*
 import org.gradle.kotlin.dsl.*
 
 plugins {
@@ -10,7 +10,6 @@ plugins {
   id("dev.suresh.plugin.kotlin.docs")
   id("dev.suresh.plugin.publishing")
   com.github.`ben-manes`.versions
-  dev.iurysouza.modulegraph
   com.dorongold.`task-tree`
   id("com.gradleup.nmcp.aggregation")
   // id("gg.jte.gradle")
@@ -39,11 +38,6 @@ idea {
     isDownloadSources = false
   }
   project.vcs = "Git"
-}
-
-moduleGraphConfig {
-  readmePath = "./README.md"
-  heading = "### Module Dependency"
 }
 
 // jte {

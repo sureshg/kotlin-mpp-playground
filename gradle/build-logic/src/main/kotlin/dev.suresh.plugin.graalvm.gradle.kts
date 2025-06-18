@@ -27,14 +27,14 @@ graalvmNative {
     quickBuild = quickBuildEnabled
     richOutput = true
     buildArgs = buildList {
+      add("--native-image-info")
       add("--enable-preview")
       add("--enable-native-access=ALL-UNNAMED")
-      add("--native-image-info")
       add("--enable-https")
-      add("--install-exit-handlers")
+      add("--future-defaults=all")
       add("-R:MaxHeapSize=64m")
       add("-H:+UnlockExperimentalVMOptions")
-      add("-H:+CompactingOldGen")
+      add("-H:+VectorAPISupport")
       add("-H:+ReportExceptionStackTraces")
       add("-O3")
       // add("-Os")
@@ -46,16 +46,17 @@ graalvmNative {
       // add("-H:IncludeResources=.*(message\\.txt|\\app.properties)\$")
       // add("--features=graal.aot.RuntimeFeature")
       // add("--enable-url-protocols=http,https,jar,unix")
+      // add("--enable-all-security-services")
       // add("--initialize-at-build-time=kotlinx,kotlin,org.slf4j")
       // add("-EBUILD_NUMBER=${project.version}")
       // add("-ECOMMIT_HASH=${semverExtn.commits.get().first().hash}")
 
       val monOpts = buildString {
         append("heapdump,jfr,jvmstat,threaddump,nmt")
-        if (Platform.isUnix) {
-          append(",")
-          append("jcmd")
-        }
+        // if (Platform.isUnix) {
+        //   append(",")
+        //   append("jcmd")
+        // }
       }
       add("--enable-monitoring=$monOpts")
 

@@ -167,7 +167,6 @@ dependencies {
   implementation(libs.plugins.mokkery.dep)
   implementation(libs.plugins.jte.dep)
   implementation(libs.plugins.jib.dep)
-  implementation(libs.plugins.modulegraph.dep)
   implementation(libs.plugins.kopy.dep)
   implementation(libs.plugins.github.changelog.dep)
   implementation(libs.plugins.nmcp.project.dep)

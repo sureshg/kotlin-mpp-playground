@@ -267,6 +267,7 @@ val Project.runJvmArgs
                 |+jdk.TLSHandshake#stackTrace=true,
                 |+jdk.X509Certificate#enabled=true,
                 |+jdk.X509Validation#enabled=true,
+                |+jdk.CPUTimeSample#enabled=true,
                 |settings=profile"""
                     .joinToConfigString(),
                 "-XX:FlightRecorderOptions:stackdepth=64",
@@ -287,7 +288,6 @@ val Project.runJvmArgs
                 "-Djava.security.egd=file:/dev/./urandom",
                 "-Djdk.includeInExceptions=hostInfo,jar",
                 "-Dkotlinx.coroutines.debug",
-                "-Djdk.incubator.vector.VECTOR_ACCESS_OOB_CHECK=0",
                 "-Dcom.sun.management.jmxremote",
                 "-Dcom.sun.management.jmxremote.local.only=false",
                 "-Dcom.sun.management.jmxremote.port=9898",
