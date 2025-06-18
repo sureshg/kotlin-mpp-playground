@@ -18,6 +18,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.testing.*
+import kotlin.test.*
 import kotlinx.coroutines.slf4j.MDCContext
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withContext
@@ -31,7 +32,6 @@ import org.testcontainers.images.builder.Transferable
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
 import org.testcontainers.utility.DockerImageName
-import kotlin.test.*
 
 @Testcontainers
 @EnabledIfSystemProperty(named = "ktorTest", matches = "true")
@@ -66,14 +66,16 @@ class AppTests {
     val errorLogs = mutableListOf<String>()
 
     environment {
-      log = object : Logger by logger{
-          override fun info(msg: String) {
+      log =
+          object : Logger by logger {
+            override fun info(msg: String) {
               infoLogs += msg
-          }
-          override fun error(msg: String) {
+            }
+
+            override fun error(msg: String) {
               errorLogs += msg
+            }
           }
-      }
       config = MapApplicationConfig("ktor.environment" to "test")
     }
 
