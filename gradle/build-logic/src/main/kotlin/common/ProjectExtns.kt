@@ -214,6 +214,7 @@ val Project.defaultJvmArgs
  * - [JSR166](https://cs.oswego.edu/dl/jsr166/dist/jsr166.jar)
  * - [Hotspot Options](https://chriswhocodes.com/hotspot_option_differences.html)
  * - [JFR Events](https://sap.github.io/SapMachine/jfrevents)
+ * - [Profile.jfc](https://github.com/openjdk/jdk/blob/master/src/jdk.jfr/share/conf/jfr/profile.jfc)
  */
 val Project.runJvmArgs
   get() = buildList {
