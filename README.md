@@ -149,18 +149,11 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 * AOT Cache
 
   ```bash
-  # Training Run
+  # Training Run to create AOT cache
   $ java --enable-preview \
          -XX:+UseZGC \
          -XX:+UseCompactObjectHeaders \
-         -XX:AOTMode=record -XX:AOTConfiguration=app.aotconf \
-         -jar backend/jvm/build/libs/jvm-all.jar
-
-  # Create AOT archive
-  $ java --enable-preview \
-         -XX:+UseZGC \
-         -XX:+UseCompactObjectHeaders \
-         -XX:AOTMode=create -XX:AOTConfiguration=app.aotconf -XX:AOTCache=app.aot \
+         -XX:AOTCacheOutput=app.aot \
          -jar backend/jvm/build/libs/jvm-all.jar
 
   # Run with AOT
