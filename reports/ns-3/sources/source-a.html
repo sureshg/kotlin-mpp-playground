@@ -90,7 +90,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/1)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -104,7 +103,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/9)
+    (0/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/13)
   </span>
 </td>
   </tr>
@@ -162,7 +169,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/24)
+    (0/26)
   </span>
 </td>
 <td class="coverageStat">
@@ -170,7 +177,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/42)
+    (0/43)
   </span>
 </td>
 <td class="coverageStat">
@@ -178,7 +185,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/358)
+    (0/362)
   </span>
 </td>
 </tr>
@@ -290,8 +297,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;/** Adds a periodic event to the JFR stream. */
 &nbsp;inline fun &lt;reified T : Event&gt; addPeriodicJFREvent(event: T, crossinline block: T.() -&gt; Unit) {
 <b class="nc">&nbsp;  FlightRecorder.addPeriodicEvent(T::class.java) {</b>
-<b class="nc">&nbsp;    block(event)</b>
-<b class="nc">&nbsp;    event.commit()</b>
+<b class="nc">&nbsp;    if (event.shouldCommit()) {</b>
+<b class="nc">&nbsp;      block(event)</b>
+<b class="nc">&nbsp;      event.commit()</b>
+&nbsp;    }
 &nbsp;  }
 &nbsp;}
 &nbsp;
@@ -340,7 +349,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-06-17 02:21</div>
+    <div style="float:right;">generated on 2025-06-19 04:53</div>
 </div>
 </body>
 </html>

@@ -200,8 +200,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;/** Adds a periodic event to the JFR stream. */
 &nbsp;inline fun &lt;reified T : Event&gt; addPeriodicJFREvent(event: T, crossinline block: T.() -&gt; Unit) {
 &nbsp;  FlightRecorder.addPeriodicEvent(T::class.java) {
-&nbsp;    block(event)
-&nbsp;    event.commit()
+&nbsp;    if (event.shouldCommit()) {
+&nbsp;      block(event)
+&nbsp;      event.commit()
+&nbsp;    }
 &nbsp;  }
 &nbsp;}
 &nbsp;
@@ -250,7 +252,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-06-17 02:21</div>
+    <div style="float:right;">generated on 2025-06-19 04:53</div>
 </div>
 </body>
 </html>
