@@ -99,8 +99,10 @@ fun IntArray.codePointsToString(separator: String = "") =
 /** Adds a periodic event to the JFR stream. */
 inline fun <reified T : Event> addPeriodicJFREvent(event: T, crossinline block: T.() -> Unit) {
   FlightRecorder.addPeriodicEvent(T::class.java) {
-    block(event)
-    event.commit()
+    if (event.shouldCommit()) {
+      block(event)
+      event.commit()
+    }
   }
 }
 

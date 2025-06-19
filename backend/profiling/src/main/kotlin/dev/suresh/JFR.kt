@@ -16,6 +16,7 @@ import kotlin.time.toJavaDuration
 @Category("Services", BuildConfig.name)
 @Period("1 s")
 @StackTrace(false)
+@Throttle("100/s")
 class Counter(@Label("Count") private var count: Long = 0) : Event() {
   fun inc() = count++
 }
