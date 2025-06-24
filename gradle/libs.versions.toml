@@ -202,7 +202,7 @@ rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.3"
 
 # Compose
-jetbrains-compose              = "1.8.1"
+jetbrains-compose              = "1.8.2"
 jetbrains-compose-viewmodel    = "2.9.0"
 jetbrains-compose-nav          = "2.9.0-beta02"
 jetbrains-compose-adaptive     = "1.1.1"
