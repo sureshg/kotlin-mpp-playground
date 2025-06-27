@@ -118,11 +118,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;/* GENERATED, DO NOT EDIT MANUALLY! */
 &nbsp;
 &nbsp;
-&nbsp;import kotlinx.datetime.*
+&nbsp;import kotlin.time.*
+&nbsp;import kotlinx.datetime.TimeZone
+&nbsp;import kotlinx.datetime.toLocalDateTime
 &nbsp;
 &nbsp;data object BuildConfig {
 &nbsp;
-&nbsp;   const val buildTimeEpochMillis = 1750736783815
+&nbsp;   const val buildTimeEpochMillis = 1750984178841
 &nbsp;
 <b class="fc">&nbsp;   val buildTimeUTC = Instant.fromEpochMilliseconds(buildTimeEpochMillis).toLocalDateTime(TimeZone.UTC)</b>
 &nbsp;
@@ -133,7 +135,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;         const val os = &quot;Linux 6.11.0-1015-azure-amd64&quot;
 &nbsp;
-&nbsp;         const val name = &quot;fv-az1934-854&quot;
+&nbsp;         const val name = &quot;fv-az1384-782&quot;
 &nbsp;
 &nbsp;         const val cpuCores = 4
 &nbsp;
@@ -149,18 +151,18 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val description = &quot;Kotlin Multiplatform Playground!&quot;
 &nbsp;   
-&nbsp;   const val version = &quot;0.1.0.0+1586ffb&quot;
+&nbsp;   const val version = &quot;0.1.0.0+dd67a74&quot;
 &nbsp;   
 &nbsp;
 &nbsp;   
-&nbsp;   const val gitHash = &quot;&quot;&quot;1586ffb706bacf5b99293c40d91d0e433edca289&quot;&quot;&quot;
+&nbsp;   const val gitHash = &quot;&quot;&quot;dd67a74e477e5c51ae65351d50d57180eadb7208&quot;&quot;&quot;
 &nbsp;   
-&nbsp;   const val gitMessage = &quot;&quot;&quot;Merge daec46cbd49013ccf306563b71c91b15886c468c into c48c4db1f7c229d30aee35d449f4578095fc7520&quot;&quot;&quot;
+&nbsp;   const val gitMessage = &quot;&quot;&quot;chore: configuration cache changes for Jib task&quot;&quot;&quot;
 &nbsp;   
-&nbsp;   const val gitFullMessage = &quot;&quot;&quot;Merge daec46cbd49013ccf306563b71c91b15886c468c into c48c4db1f7c229d30aee35d449f4578095fc7520
+&nbsp;   const val gitFullMessage = &quot;&quot;&quot;chore: configuration cache changes for Jib task
 &nbsp;&quot;&quot;&quot;
 &nbsp;   
-&nbsp;   const val gitTimestampEpochSecond = &quot;&quot;&quot;1750736581&quot;&quot;&quot;
+&nbsp;   const val gitTimestampEpochSecond = &quot;&quot;&quot;1750983873&quot;&quot;&quot;
 &nbsp;   
 &nbsp;   const val gitTags = &quot;&quot;&quot;&quot;&quot;&quot;
 &nbsp;   
@@ -192,7 +194,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val autonomousappsBestpractices = &quot;0.10&quot;
 &nbsp;   
-&nbsp;   const val autonomousappsDepanalysis = &quot;2.18.0&quot;
+&nbsp;   const val autonomousappsDepanalysis = &quot;2.19.0&quot;
 &nbsp;   
 &nbsp;   const val badassJlink = &quot;3.1.0&quot;
 &nbsp;   
@@ -200,7 +202,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val batik = &quot;1.19&quot;
 &nbsp;   
-&nbsp;   const val bcPlugins = &quot;2.5.0&quot;
+&nbsp;   const val bcPlugins = &quot;2.5.1&quot;
 &nbsp;   
 &nbsp;   const val benmanes = &quot;0.52.0&quot;
 &nbsp;   
@@ -212,7 +214,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val cache4k = &quot;0.14.0&quot;
 &nbsp;   
-&nbsp;   const val caffeineCoroutines = &quot;2.0.1&quot;
+&nbsp;   const val caffeineCoroutines = &quot;2.0.2&quot;
 &nbsp;   
 &nbsp;   const val cardiologist = &quot;0.5.0&quot;
 &nbsp;   
@@ -220,13 +222,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val caupain = &quot;1.3.0&quot;
 &nbsp;   
-&nbsp;   const val cel = &quot;0.9.1&quot;
+&nbsp;   const val cel = &quot;0.10.1&quot;
 &nbsp;   
-&nbsp;   const val chasm = &quot;0.9.70&quot;
+&nbsp;   const val chasm = &quot;0.9.71&quot;
 &nbsp;   
 &nbsp;   const val chicory = &quot;1.4.1&quot;
 &nbsp;   
-&nbsp;   const val classgraph = &quot;4.8.179&quot;
+&nbsp;   const val classgraph = &quot;4.8.180&quot;
 &nbsp;   
 &nbsp;   const val composeHotreload = &quot;1.0.0-alpha11&quot;
 &nbsp;   
@@ -258,9 +260,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val evas = &quot;1.3.0&quot;
 &nbsp;   
-&nbsp;   const val exoqueryPlugin = &quot;2.1.20-1.3.4.PL&quot;
+&nbsp;   const val exoqueryPlugin = &quot;2.1.20-1.3.5.PL&quot;
 &nbsp;   
-&nbsp;   const val exoquerySql = &quot;1.3.4.PL-1.3.4&quot;
+&nbsp;   const val exoquerySql = &quot;1.3.5.PL-1.3.5&quot;
 &nbsp;   
 &nbsp;   const val expiringmap = &quot;0.5.11&quot;
 &nbsp;   
@@ -330,15 +332,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val jctools = &quot;4.0.5&quot;
 &nbsp;   
-&nbsp;   const val jetbrainsCompose = &quot;1.8.1&quot;
+&nbsp;   const val jetbrainsCompose = &quot;1.8.2&quot;
 &nbsp;   
-&nbsp;   const val jetbrainsComposeAdaptive = &quot;1.1.1&quot;
+&nbsp;   const val jetbrainsComposeAdaptive = &quot;1.1.2&quot;
 &nbsp;   
 &nbsp;   const val jetbrainsComposeIcons = &quot;1.7.3&quot;
 &nbsp;   
-&nbsp;   const val jetbrainsComposeNav = &quot;2.9.0-beta02&quot;
+&nbsp;   const val jetbrainsComposeNav = &quot;2.9.0-beta03&quot;
 &nbsp;   
-&nbsp;   const val jetbrainsComposeViewmodel = &quot;2.9.0&quot;
+&nbsp;   const val jetbrainsComposeViewmodel = &quot;2.9.1&quot;
 &nbsp;   
 &nbsp;   const val jextract = &quot;0.5.0&quot;
 &nbsp;   
@@ -370,7 +372,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val jte = &quot;3.2.1&quot;
 &nbsp;   
-&nbsp;   const val junit = &quot;5.13.1&quot;
+&nbsp;   const val junit = &quot;5.13.2&quot;
 &nbsp;   
 &nbsp;   const val kaml = &quot;0.82.0&quot;
 &nbsp;   
@@ -400,11 +402,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val koog = &quot;0.2.1&quot;
 &nbsp;   
-&nbsp;   const val kopy = &quot;0.16.0+2.1.21&quot;
+&nbsp;   const val kopy = &quot;0.16.3+2.1.21&quot;
 &nbsp;   
 &nbsp;   const val kotest = &quot;6.0.0.M4&quot;
 &nbsp;   
-&nbsp;   const val kotlin = &quot;2.2.0-RC3&quot;
+&nbsp;   const val kotlin = &quot;2.2.0&quot;
 &nbsp;   
 &nbsp;   const val kotlinApiVersion = &quot;2.2&quot;
 &nbsp;   
@@ -422,25 +424,25 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val kotlinJvmtarget = &quot;24&quot;
 &nbsp;   
-&nbsp;   const val kotlinKsp = &quot;2.2.0-RC3-2.0.2&quot;
+&nbsp;   const val kotlinKsp = &quot;2.2.0-2.0.2&quot;
 &nbsp;   
 &nbsp;   const val kotlinLangVersion = &quot;2.2&quot;
 &nbsp;   
 &nbsp;   const val kotlinLogging = &quot;7.0.7&quot;
 &nbsp;   
-&nbsp;   const val kotlinRedacted = &quot;1.14.0-alpha01&quot;
+&nbsp;   const val kotlinRedacted = &quot;1.14.0&quot;
 &nbsp;   
 &nbsp;   const val kotlinRetry = &quot;2.0.1&quot;
 &nbsp;   
-&nbsp;   const val kotlinServiceloader = &quot;0.0.16&quot;
+&nbsp;   const val kotlinServiceloader = &quot;0.0.17&quot;
 &nbsp;   
 &nbsp;   const val kotlinStatistics = &quot;0.4.0-RC1&quot;
 &nbsp;   
-&nbsp;   const val kotlinWrappers = &quot;2025.6.5&quot;
+&nbsp;   const val kotlinWrappers = &quot;2025.6.11&quot;
 &nbsp;   
-&nbsp;   const val kotlinxAtomicfu = &quot;0.28.0&quot;
+&nbsp;   const val kotlinxAtomicfu = &quot;0.29.0&quot;
 &nbsp;   
-&nbsp;   const val kotlinxBcv = &quot;0.17.0&quot;
+&nbsp;   const val kotlinxBcv = &quot;0.18.0&quot;
 &nbsp;   
 &nbsp;   const val kotlinxBenchmark = &quot;0.4.14&quot;
 &nbsp;   
@@ -452,19 +454,19 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val kotlinxDataframe = &quot;1.0.0-Beta2&quot;
 &nbsp;   
-&nbsp;   const val kotlinxDatetime = &quot;0.6.2&quot;
+&nbsp;   const val kotlinxDatetime = &quot;0.7.0-0.6.x-compat&quot;
 &nbsp;   
-&nbsp;   const val kotlinxDatetimeZoneinfo = &quot;2025a-spi.0.6.2&quot;
+&nbsp;   const val kotlinxDatetimeZoneinfo = &quot;2025b-spi.0.7.0&quot;
 &nbsp;   
 &nbsp;   const val kotlinxFuzz = &quot;0.2.2&quot;
 &nbsp;   
 &nbsp;   const val kotlinxHtml = &quot;0.12.0&quot;
 &nbsp;   
-&nbsp;   const val kotlinxIo = &quot;0.7.0&quot;
+&nbsp;   const val kotlinxIo = &quot;0.8.0&quot;
 &nbsp;   
 &nbsp;   const val kotlinxJsonpath = &quot;3.0.2&quot;
 &nbsp;   
-&nbsp;   const val kotlinxKandy = &quot;0.8.0&quot;
+&nbsp;   const val kotlinxKandy = &quot;0.8.1-local-1-dev-64&quot;
 &nbsp;   
 &nbsp;   const val kotlinxKover = &quot;0.9.1&quot;
 &nbsp;   
@@ -486,7 +488,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val kspAutoService = &quot;1.2.0&quot;
 &nbsp;   
-&nbsp;   const val ktfmt = &quot;0.55&quot;
+&nbsp;   const val ktfmt = &quot;0.56&quot;
 &nbsp;   
 &nbsp;   const val ktor = &quot;3.2.0&quot;
 &nbsp;   
@@ -510,7 +512,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val logbackTyler = &quot;1.0.2&quot;
 &nbsp;   
-&nbsp;   const val mappie = &quot;2.1.21-1.3.0&quot;
+&nbsp;   const val mappie = &quot;2.2.0-1.3.0&quot;
 &nbsp;   
 &nbsp;   const val mavenArcheologist = &quot;0.0.10&quot;
 &nbsp;   
@@ -518,21 +520,21 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val mavenPluginAnnotations = &quot;3.15.1&quot;
 &nbsp;   
-&nbsp;   const val mavenPluginApi = &quot;4.0.0-rc-3&quot;
+&nbsp;   const val mavenPluginApi = &quot;4.0.0-rc-4&quot;
 &nbsp;   
 &nbsp;   const val mcpKotlin = &quot;0.5.1&quot;
 &nbsp;   
 &nbsp;   const val mcp4k = &quot;0.4.1&quot;
 &nbsp;   
-&nbsp;   const val metro = &quot;0.4.0-2.2.0-RC2-alpha07&quot;
+&nbsp;   const val metro = &quot;0.4.0&quot;
 &nbsp;   
 &nbsp;   const val micrometer = &quot;1.15.1&quot;
 &nbsp;   
-&nbsp;   const val mockk = &quot;1.14.2&quot;
+&nbsp;   const val mockk = &quot;1.14.4&quot;
 &nbsp;   
 &nbsp;   const val modulegraph = &quot;0.12.0&quot;
 &nbsp;   
-&nbsp;   const val mokkery = &quot;2.8.0&quot;
+&nbsp;   const val mokkery = &quot;2.9.0&quot;
 &nbsp;   
 &nbsp;   const val mosaic = &quot;0.17.0&quot;
 &nbsp;   
@@ -540,7 +542,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val nexusPublish = &quot;2.0.0&quot;
 &nbsp;   
-&nbsp;   const val nmcp = &quot;0.1.5&quot;
+&nbsp;   const val nmcp = &quot;0.2.1&quot;
 &nbsp;   
 &nbsp;   const val npmHighlightjs = &quot;11.11.0&quot;
 &nbsp;   
@@ -576,19 +578,19 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val otelInstrAlpha = &quot;2.16.0-alpha&quot;
 &nbsp;   
-&nbsp;   const val otelKotlin = &quot;0.1.1&quot;
+&nbsp;   const val otelKotlin = &quot;0.1.3&quot;
 &nbsp;   
 &nbsp;   const val otelSemconv = &quot;1.34.0&quot;
 &nbsp;   
 &nbsp;   const val otp = &quot;2.1.0&quot;
 &nbsp;   
-&nbsp;   const val palantirJavaformat = &quot;2.68.0&quot;
+&nbsp;   const val palantirJavaformat = &quot;2.69.0&quot;
 &nbsp;   
 &nbsp;   const val parsus = &quot;0.6.1&quot;
 &nbsp;   
 &nbsp;   const val password4j = &quot;1.8.3&quot;
 &nbsp;   
-&nbsp;   const val poko = &quot;0.18.7&quot;
+&nbsp;   const val poko = &quot;0.19.0&quot;
 &nbsp;   
 &nbsp;   const val postgresql = &quot;42.7.7&quot;
 &nbsp;   
@@ -616,7 +618,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val rwmutex = &quot;1.0.0&quot;
 &nbsp;   
-&nbsp;   const val schemaKenerator = &quot;2.1.3&quot;
+&nbsp;   const val schemaKenerator = &quot;2.1.4&quot;
 &nbsp;   
 &nbsp;   const val semverPlugin = &quot;0.8.0&quot;
 &nbsp;   
@@ -636,7 +638,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val spotless = &quot;7.0.4&quot;
 &nbsp;   
-&nbsp;   const val springBoot = &quot;3.5.0&quot;
+&nbsp;   const val springBoot = &quot;3.5.3&quot;
 &nbsp;   
 &nbsp;   const val springDepmgmt = &quot;1.1.7&quot;
 &nbsp;   
@@ -668,11 +670,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val urlencoder = &quot;1.6.0&quot;
 &nbsp;   
-&nbsp;   const val vanniktechPublish = &quot;0.32.0&quot;
+&nbsp;   const val vanniktechPublish = &quot;0.33.0&quot;
 &nbsp;   
 &nbsp;   const val vercraft = &quot;0.6.0&quot;
 &nbsp;   
-&nbsp;   const val wasm2class = &quot;0.3&quot;
+&nbsp;   const val wasm2class = &quot;0.4.0&quot;
 &nbsp;   
 &nbsp;   const val webjarsXterm = &quot;5.3.0&quot;
 &nbsp;   
@@ -680,7 +682,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;   
 &nbsp;   const val wirePlugin = &quot;5.3.3&quot;
 &nbsp;   
-&nbsp;   const val wiremock = &quot;4.0.0-beta.10&quot;
+&nbsp;   const val wiremock = &quot;4.0.0-beta.13&quot;
 &nbsp;   
 &nbsp;   const val wiremockKotlin = &quot;2.1.1&quot;
 &nbsp;   
@@ -714,7 +716,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-06-24 03:52</div>
+    <div style="float:right;">generated on 2025-06-27 00:35</div>
 </div>
 </body>
 </html>

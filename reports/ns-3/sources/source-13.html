@@ -113,28 +113,28 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import java.time.format.DateTimeFormatter
 &nbsp;import java.util.*
 &nbsp;import java.util.concurrent.ExecutorService
-&nbsp;import java.util.concurrent.Executors
-<b class="nc">&nbsp;import javax.net.ssl.TrustManagerFactory</b>
+<b class="nc">&nbsp;import java.util.concurrent.Executors</b>
+&nbsp;import javax.net.ssl.TrustManagerFactory
 &nbsp;import javax.net.ssl.X509TrustManager
-&nbsp;import kotlinx.coroutines.*
-<b class="nc">&nbsp;import org.slf4j.LoggerFactory</b>
+<b class="nc">&nbsp;import kotlinx.coroutines.*</b>
+&nbsp;import org.slf4j.LoggerFactory
 &nbsp;
-&nbsp;actual val platform: Platform = JvmPlatform
-<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;actual val platform: Platform = JvmPlatform</b>
+&nbsp;
 &nbsp;object JvmPlatform : Platform {
 &nbsp;
-&nbsp;  private val log = LoggerFactory.getLogger(this::class.java)
+<b class="fc">&nbsp;  private val log = LoggerFactory.getLogger(this::class.java)</b>
 <b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;  override val name: String = &quot;JVM&quot;</b>
 <b class="fc">&nbsp;</b>
-<b class="fc">&nbsp;  override fun env(key: String, def: String?): String? = System.getenv(key) ?: def</b>
+&nbsp;  override fun env(key: String, def: String?): String? = System.getenv(key) ?: def
 &nbsp;
 &nbsp;  override fun sysProp(key: String, def: String?): String? = System.getProperty(key, def)
-&nbsp;
-<b class="fc">&nbsp;  override val tzShortId: String</b>
+<b class="fc">&nbsp;</b>
+&nbsp;  override val tzShortId: String
 &nbsp;    get() {
 &nbsp;      // ZoneId.systemDefault().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH)
-&nbsp;      return DateTimeFormatter.ofPattern(&quot;zzz&quot;)
+<b class="fc">&nbsp;      return DateTimeFormatter.ofPattern(&quot;zzz&quot;)</b>
 <b class="fc">&nbsp;          .withLocale(Locale.ENGLISH)</b>
 <b class="fc">&nbsp;          .withZone(ZoneId.systemDefault())</b>
 <b class="fc">&nbsp;          .format(Instant.now())</b>
@@ -156,23 +156,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="fc">&nbsp;    execService.asCoroutineDispatcher()</b>
 <b class="fc">&nbsp;    // Via Reflection</b>
 <b class="fc">&nbsp;    // (Executors::class.java.getMethod(&quot;newVirtualThreadPerTaskExecutor&quot;).invoke(null) as</b>
-<b class="fc">&nbsp;    // ExecutorService).asCoroutineDispatcher()</b>
-&nbsp;  }
+&nbsp;    // ExecutorService).asCoroutineDispatcher()
+<b class="fc">&nbsp;  }</b>
 <b class="fc">&nbsp;</b>
 <b class="fc">&nbsp;  override val appInfo: Map&lt;String, String&gt;</b>
 <b class="fc">&nbsp;    get() =</b>
 <b class="fc">&nbsp;        super.appInfo +</b>
 <b class="fc">&nbsp;            mapOf(</b>
 <b class="fc">&nbsp;                &quot;uptime&quot; to</b>
-<b class="fc">&nbsp;                    run {</b>
+&nbsp;                    run {
 &nbsp;                      val processEpochSec =
-&nbsp;                          ProcessHandle.current().info().startInstant().get().epochSecond
-<b class="nc">&nbsp;                      epochSecToString(processEpochSec)</b>
-&nbsp;                    })
-<b class="fc">&nbsp;</b>
+<b class="nc">&nbsp;                          ProcessHandle.current().info().startInstant().get().epochSecond</b>
+&nbsp;                      epochSecToString(processEpochSec)
+<b class="fc">&nbsp;                    })</b>
+&nbsp;
 &nbsp;  override val osInfo: Map&lt;String, String?&gt;
-&nbsp;    get() =
-<b class="fc">&nbsp;        super.osInfo +</b>
+<b class="fc">&nbsp;    get() =</b>
+&nbsp;        super.osInfo +
 &nbsp;            mapOf(
 &nbsp;                &quot;name&quot; to sysProp(&quot;os.name&quot;),
 &nbsp;                &quot;version&quot; to sysProp(&quot;os.version&quot;),
@@ -372,7 +372,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-06-24 03:52</div>
+    <div style="float:right;">generated on 2025-06-27 00:35</div>
 </div>
 </body>
 </html>

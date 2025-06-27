@@ -174,15 +174,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    get() =
 &nbsp;        super.osInfo +
 &nbsp;            mapOf(
-&nbsp;                &quot;name&quot; to sysProp(&quot;os.name&quot;),
-<b class="nc">&nbsp;                &quot;version&quot; to sysProp(&quot;os.version&quot;),</b>
+<b class="nc">&nbsp;                &quot;name&quot; to sysProp(&quot;os.name&quot;),</b>
+&nbsp;                &quot;version&quot; to sysProp(&quot;os.version&quot;),
 &nbsp;                &quot;arch&quot; to sysProp(&quot;os.arch&quot;),
-&nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),
-<b class="nc">&nbsp;            )</b>
+<b class="nc">&nbsp;                &quot;user&quot; to sysProp(&quot;user.name&quot;),</b>
+&nbsp;            )
 &nbsp;}
 &nbsp;
-&nbsp;val Dispatchers.Virtual
-<b class="nc">&nbsp;  get() = platform.virtualDispatcher + CoroutineName(&quot;Virtual&quot;)</b>
+<b class="nc">&nbsp;val Dispatchers.Virtual</b>
+&nbsp;  get() = platform.virtualDispatcher + CoroutineName(&quot;Virtual&quot;)
 &nbsp;
 &nbsp;/**
 &nbsp; * Runs the given suspend block on [Dispatchers.Virtual], so that we can call blocking I/O APIs from
@@ -372,7 +372,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-06-24 03:52</div>
+    <div style="float:right;">generated on 2025-06-27 00:35</div>
 </div>
 </body>
 </html>
