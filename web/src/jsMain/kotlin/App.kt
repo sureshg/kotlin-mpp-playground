@@ -3,6 +3,7 @@ import dev.suresh.flow.timerComposeFlow
 import dev.suresh.http.MediaApiClient
 import dev.suresh.log
 import interop.topLevelJsFun
+import js.promise.await
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.browser.document

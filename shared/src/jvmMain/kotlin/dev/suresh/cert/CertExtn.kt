@@ -8,9 +8,8 @@ import java.security.cert.PKIXParameters
 import java.security.cert.TrustAnchor
 import java.security.cert.X509Certificate
 import javax.naming.ldap.LdapName
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toKotlinInstant
-import kotlinx.datetime.toLocalDateTime
+import kotlin.time.*
+import kotlinx.datetime.*
 
 /** Returns the certificate subject DN (common name) from the certificate */
 val X509Certificate.commonName

@@ -6,10 +6,9 @@ import BuildConfig
 import BuildConfig.Host
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlin.jvm.JvmName
+import kotlin.time.*
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
 
@@ -90,7 +89,6 @@ val utcDateTimeNow
 val localDateTimeNow
   get() = Clock.System.now().toLocalDateTime(TimeZone.currentSystemDefault())
 
-// Expect classes are not stable
 // expect class Platform {
 //    val name: String
 // }
