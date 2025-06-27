@@ -8,7 +8,7 @@ plugins {
 
 description = "Kotlin Multiplatform Playground!"
 
-nmcp {
+nmcpAggregation {
   centralPortal {
     username = mavenCentralUsername
     password = mavenCentralPassword

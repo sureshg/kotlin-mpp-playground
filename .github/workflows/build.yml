@@ -17,7 +17,7 @@ on:
       - main
 
   schedule:
-    - cron: "0 0 * * 0" # Every week on Sunday at 00:00
+    - cron: "0 0 * * 0"
 
   workflow_dispatch:
 
@@ -49,11 +49,9 @@ jobs:
       fail-fast: true
       max-parallel: 3
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ ubuntu-latest ]
         jdk: [ ea ]
         include:
-          - os: macos-latest
-            native_task: :macosArm64Test
           - os: ubuntu-latest
             native_task: :linuxX64Test
 

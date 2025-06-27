@@ -98,7 +98,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            openjdk:26-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm"
 
    # Build a container image and run
-   $ ./gradlew :backend:jvm:jibDockerBuild --no-configuration-cache
+   $ ./gradlew :backend:jvm:jibDockerBuild
    $ docker run -it --rm --name jvm -p 8080:8080 -p 9898:9898 sureshg/jvm
    $ docker stats
   ```
@@ -192,6 +192,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :web:jsBrowserProductionRun -t
   $ ./gradlew :web:wasmJsBrowserProductionRun -t
   $ ./gradlew kotlinUpgradePackageLock
+  $ ./gradlew kotlinWasmUpgradePackageLock
 
   # Kobweb
   $ kobweb run -p compose/web
@@ -211,7 +212,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :backend:native:macOsUniversalBinary
 
   # Native container image
-  $ ./gradlew :backend:native:jibDockerBuild --no-configuration-cache
+  $ ./gradlew :backend:native:jibDockerBuild
   $ docker run -it --rm --name native sureshg/native
 
   # Debug distroless image
@@ -287,6 +288,9 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 
   # For aggregated publication (preferred) to Central
   $ ./gradlew publishAggregationToCentralPortal
+
+  # For publishing snapshots
+  $ ./gradlew publishAggregationToCentralPortalSnapshots
 
   # For all publications (separate publications)
   $ ./gradlew publishAllPublicationsToCentralPortal
