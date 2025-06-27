@@ -114,13 +114,6 @@ signing {
   }
 }
 
-nmcp {
-  centralPortal {
-    username = mavenCentralUsername
-    password = mavenCentralPassword
-  }
-}
-
 fun MavenPublication.configurePom() {
   pom {
     name = provider { "${project.group}:${project.name}" }

@@ -203,7 +203,9 @@ val Project.containerLabels
 val Project.defaultJvmArgs
   get() = buildList {
     addAll(libs.versions.java.jvmargs.get().split(",", " ").filter(String::isNotBlank))
-    add("--add-modules=$addModules")
+    if (addModules.isNotBlank()) {
+      add("--add-modules=$addModules")
+    }
   }
 
 /**
@@ -297,7 +299,6 @@ val Project.runJvmArgs
                 "-Dcom.sun.management.jmxremote.authenticate=false",
                 "-Dcom.sun.management.jmxremote.ssl=false",
                 "-Djava.rmi.server.hostname=0.0.0.0",
-                "-Dio.ktor.development=${project.hasProperty("development")}",
                 // "--sun-misc-unsafe-memory-access=warn",
                 // "--finalization=enabled",
                 // "-XX:OnOutOfMemoryError='kill -9 %p'",

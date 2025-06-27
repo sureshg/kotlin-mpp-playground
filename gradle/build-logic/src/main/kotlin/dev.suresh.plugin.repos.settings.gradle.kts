@@ -10,7 +10,7 @@ import org.gradle.toolchains.foojay.FoojayToolchainResolver
 import org.tomlj.Toml
 
 val versionCatalog by lazy {
-  // A hack to read version catalog from settings
+  // A hack to read the version catalog from settings
   runCatching {
         Toml.parse(settingsDir.resolve("gradle/libs.versions.toml").readText()).getTable("versions")
       }

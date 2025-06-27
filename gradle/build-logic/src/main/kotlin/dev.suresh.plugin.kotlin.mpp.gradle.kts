@@ -1,7 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.google.devtools.ksp.gradle.KspAATask
+import com.google.cloud.tools.jib.gradle.JibTask
 import common.*
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
@@ -98,8 +98,6 @@ tasks {
   kotlin.sourceSets.commonMain { kotlin.srcDirs(buildConfig) }
   // compileKotlinMetadata { dependsOn(buildConfig) }
 
-  withType<KspAATask>().configureEach { configureKspConfig() }
-
   withType<KotlinNpmInstallTask>().configureEach { configureKotlinNpm() }
 
   // withType<Kotlin2JsCompile>().configureEach {}
@@ -152,6 +150,14 @@ tasks {
       archiveClassifier = "jvm-all"
       mergeServiceFiles()
       duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    }
+  }
+
+  pluginManager.withPlugin("com.google.cloud.tools.jib") {
+    // Disable configuration cache for Jib
+    withType<JibTask>().configureEach {
+      notCompatibleWithConfigurationCache(
+          "because https://github.com/GoogleContainerTools/jib/issues/3132")
     }
   }
 

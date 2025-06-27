@@ -1,5 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.google.devtools.ksp.gradle.KspAATask
+import com.google.cloud.tools.jib.gradle.JibTask
 import common.*
 import java.io.*
 import java.util.spi.ToolProvider
@@ -95,9 +95,6 @@ tasks {
   // Configure jvm args for JavaExec tasks except `run`
   withType<JavaExec>().matching { it.name != "run" }.configureEach { jvmArgs(defaultJvmArgs) }
 
-  // Configure KSP
-  withType<KspAATask>().configureEach { configureKspConfig() }
-
   withType<Jar>().configureEach {
     manifest { attributes(defaultJarManifest) }
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
@@ -129,11 +126,13 @@ tasks {
       encoding = Charsets.UTF_8.name()
       linkSource(true)
       addBooleanOption("-enable-preview", true)
-      addStringOption("-add-modules", addModules)
+      if (addModules.isNotBlank()) {
+        addStringOption("-add-modules", addModules)
+      }
       addStringOption("-release", javaRelease.get().toString())
       addStringOption("Xdoclint:none", "-quiet")
     }
-    exclude("**/Main.java")
+    // exclude("**/Main.java")
   }
 
   pluginManager.withPlugin("com.gradleup.shadow") {
@@ -204,6 +203,12 @@ tasks {
         }
 
     processResources { dependsOn(copyOtelAgent) }
+
+    // Disable configuration cache for Jib
+    withType<JibTask>().configureEach {
+      notCompatibleWithConfigurationCache(
+          "because https://github.com/GoogleContainerTools/jib/issues/3132")
+    }
   }
 
   pluginManager.withPlugin("org.jetbrains.kotlinx.binary-compatibility-validator") {
