@@ -8,8 +8,7 @@ import androidx.compose.ui.window.*
 import java.awt.Dimension
 import java.io.File
 import kotlin.jvm.optionals.getOrElse
-import kotlinx.datetime.Clock
-import kotlinx.datetime.toJavaInstant
+import kotlin.time.*
 import ui.crash.windowExceptionHandlerFactory
 
 val resource by lazy {

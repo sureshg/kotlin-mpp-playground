@@ -5,9 +5,8 @@ import java.security.PublicKey
 import java.security.cert.*
 import javax.naming.ldap.LdapName
 import kotlin.io.encoding.Base64
-import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toKotlinInstant
-import kotlinx.datetime.toLocalDateTime
+import kotlin.time.*
+import kotlinx.datetime.*
 
 const val ALT_RFC822_NAME = 1
 const val ALT_DNS_NAME = 2
