@@ -1,7 +1,7 @@
 @import common.camelCase
 @import gg.jte.Content
 @import gg.jte.support.ForSupport
-@import kotlinx.datetime.*
+@import kotlin.time.*
 @import java.net.InetAddress
 @import com.sun.management.OperatingSystemMXBean
 @import java.lang.management.ManagementFactory
@@ -18,7 +18,9 @@
 /* GENERATED, DO NOT EDIT MANUALLY! */
 @if(pkg.isNotBlank())package ${pkg}@endif
 
-import kotlinx.datetime.*
+import kotlin.time.*
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 data object ${className} {
 
