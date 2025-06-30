@@ -2,6 +2,7 @@ package dev.suresh.serde
 
 import kotlin.reflect.KClass
 import kotlin.time.Duration
+import kotlin.time.Instant
 import kotlin.uuid.Uuid
 import kotlinx.serialization.*
 import kotlinx.serialization.builtins.*
@@ -37,6 +38,7 @@ val BUILTIN_SERIALIZERS: Map<KClass<*>, KSerializer<*>> by lazy {
       Unit::class to Unit.serializer(),
       Nothing::class to NothingSerializer(),
       Duration::class to Duration.serializer(),
+      Instant::class to Instant.serializer(),
       Uuid::class to Uuid.serializer())
 }
 

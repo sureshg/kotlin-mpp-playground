@@ -4,6 +4,7 @@ import dev.suresh.http.json
 import dev.suresh.lang.*
 import dev.suresh.serde.toJsonElement
 import kotlin.concurrent.atomics.*
+import kotlin.time.Clock
 import kotlin.time.Duration.Companion.seconds
 import kotlin.uuid.Uuid
 import kotlinx.serialization.json.Json
@@ -60,6 +61,7 @@ class Greeting {
                 "triple" to Triple("foo", "bar", "baz"),
                 "unit" to Unit,
                 "duration" to 2.seconds,
+                "instant" to Clock.System.now(),
                 "uuid" to Uuid.random(),
                 "boolArray" to booleanArrayOf(true, false, true),
                 "byteArray" to byteArrayOf(1, 2, 3),
