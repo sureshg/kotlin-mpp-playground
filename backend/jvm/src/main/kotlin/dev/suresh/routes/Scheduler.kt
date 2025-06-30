@@ -5,9 +5,11 @@ import io.github.kevincianfarini.cardiologist.*
 import io.ktor.server.application.*
 import io.ktor.util.logging.*
 import io.opentelemetry.instrumentation.annotations.*
+import kotlin.time.*
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.*
-import kotlinx.datetime.*
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 
 fun Application.scheduledTasks() {
   log.info("Starting scheduled tasks...")
