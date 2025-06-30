@@ -1,5 +1,3 @@
-import common.*
-
 plugins {
   dev.suresh.plugin.root
   // alias(libs.plugins.kotlin.multiplatform) apply false
@@ -7,14 +5,6 @@ plugins {
 }
 
 description = "Kotlin Multiplatform Playground!"
-
-nmcpAggregation {
-  centralPortal {
-    username = mavenCentralUsername
-    password = mavenCentralPassword
-    publishingType = "AUTOMATIC"
-  }
-}
 
 dependencies {
   dokka(projects.shared)
@@ -26,19 +16,7 @@ dependencies {
   dokka(projects.backend.security)
   dokka(projects.web)
 
-  nmcpAggregation(projects.shared)
-  nmcpAggregation(projects.depMgmt.bom)
-  nmcpAggregation(projects.depMgmt.catalog)
-  nmcpAggregation(projects.meta.ksp.processor)
-  nmcpAggregation(projects.meta.compiler.plugin)
-  nmcpAggregation(projects.backend.jvm)
-  nmcpAggregation(projects.backend.data)
-  nmcpAggregation(projects.backend.profiling)
-  nmcpAggregation(projects.backend.security)
-  nmcpAggregation(projects.web)
-
-  // Optional modules
-  findProject(":backend:native")?.let { nmcpAggregation(it) }
-  findProject(":compose:cmp")?.let { nmcpAggregation(it) }
-  findProject(":compose:html")?.let { nmcpAggregation(it) }
+  findProject(":backend:native")?.let { dokka(it) }
+  findProject(":compose:cmp")?.let { dokka(it) }
+  findProject(":compose:html")?.let { dokka(it) }
 }

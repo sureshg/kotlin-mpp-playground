@@ -169,8 +169,7 @@ dependencies {
   implementation(libs.plugins.jib.dep)
   implementation(libs.plugins.kopy.dep)
   implementation(libs.plugins.github.changelog.dep)
-  implementation(libs.plugins.nmcp.project.dep)
-  implementation(libs.plugins.nmcp.aggregation.dep)
+  implementation(libs.plugins.vanniktech.publish.dep)
 
   implementation(libs.tomlj)
   implementation(libs.jib.nativeimage.extn)

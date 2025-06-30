@@ -6,7 +6,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 plugins {
   `maven-publish`
   signing
-  com.gradleup.nmcp
 }
 
 group = libs.versions.group.get()
