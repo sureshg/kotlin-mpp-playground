@@ -1,14 +1,18 @@
 $dokka.format:html-v1
 $dokka.linkExtension:html
 $dokka.location:////PointingToDeclaration/web/[root]/index.html
+$dokka.location://App/#/PointingToDeclaration/cmp/[root]/-app.html
 $dokka.location://KotlinPlayground/#kotlin.String/PointingToDeclaration/web/[root]/-kotlin-playground.html
+$dokka.location://hideSpinner/#/PointingToDeclaration/cmp/[root]/hide-spinner.html
 $dokka.location://langFeatures/#/PointingToDeclaration/shared/[root]/lang-features.html
 $dokka.location://log/#/PointingToDeclaration/web/[root]/log.html
 $dokka.location://main/#/PointingToDeclaration/web/[root]/[wasm-js]main.html
 $dokka.location://mainScope/#/PointingToDeclaration/web/[root]/main-scope.html
+$dokka.location://resource/#/PointingToDeclaration/cmp/[root]/resource.html
 $dokka.location://runCoroutines/#/PointingToDeclaration/web/[root]/run-coroutines.html
 $dokka.location://runTerminal/#/PointingToDeclaration/web/[root]/run-terminal.html
 $dokka.location://sayHello/org.w3c.dom.Node#/PointingToDeclaration/web/[root]/say-hello.html
+$dokka.location://showStartupTime/#/PointingToDeclaration/cmp/[root]/show-startup-time.html
 $dokka.location://stdlibFeatures/#/PointingToDeclaration/shared/[root]/stdlib-features.html
 $dokka.location:/BuildConfig.Host///PointingToDeclaration/shared/[root]/-build-config/-host/index.html
 $dokka.location:/BuildConfig.Host/cpuCores/#/PointingToDeclaration/shared/[root]/-build-config/-host/cpu-cores.html
@@ -342,6 +346,16 @@ dev.suresh
 dev.suresh.cert
 dev.suresh.security
 dev.suresh.tls
+module:cmp
+dev.suresh.compose.res
+nav
+ui
+ui.birds
+ui.crash
+ui.file
+ui.home
+ui.lottie
+ui.misc
 module:shared
 dev.suresh
 dev.suresh.cert
