@@ -55,6 +55,7 @@ $dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/
 $dokka.location:/BuildConfig/caupain/#/PointingToDeclaration/shared/[root]/-build-config/caupain.html
 $dokka.location:/BuildConfig/cel/#/PointingToDeclaration/shared/[root]/-build-config/cel.html
 $dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
+$dokka.location:/BuildConfig/chasmPlugin/#/PointingToDeclaration/shared/[root]/-build-config/chasm-plugin.html
 $dokka.location:/BuildConfig/chicory/#/PointingToDeclaration/shared/[root]/-build-config/chicory.html
 $dokka.location:/BuildConfig/classgraph/#/PointingToDeclaration/shared/[root]/-build-config/classgraph.html
 $dokka.location:/BuildConfig/composeHotreload/#/PointingToDeclaration/shared/[root]/-build-config/compose-hotreload.html
@@ -162,6 +163,7 @@ $dokka.location:/BuildConfig/kotlinDslJvmtarget/#/PointingToDeclaration/shared/
 $dokka.location:/BuildConfig/kotlinJvmtarget/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-jvmtarget.html
 $dokka.location:/BuildConfig/kotlinKsp/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-ksp.html
 $dokka.location:/BuildConfig/kotlinLangVersion/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-lang-version.html
+$dokka.location:/BuildConfig/kotlinLincheck/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-lincheck.html
 $dokka.location:/BuildConfig/kotlinLogging/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-logging.html
 $dokka.location:/BuildConfig/kotlinRedacted/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-redacted.html
 $dokka.location:/BuildConfig/kotlinRetry/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-retry.html
@@ -183,7 +185,6 @@ $dokka.location:/BuildConfig/kotlinxIo/#/PointingToDeclaration/shared/[root]/-b
 $dokka.location:/BuildConfig/kotlinxJsonpath/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-jsonpath.html
 $dokka.location:/BuildConfig/kotlinxKandy/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-kandy.html
 $dokka.location:/BuildConfig/kotlinxKover/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-kover.html
-$dokka.location:/BuildConfig/kotlinxLincheck/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-lincheck.html
 $dokka.location:/BuildConfig/kotlinxMetadata/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-metadata.html
 $dokka.location:/BuildConfig/kotlinxMultik/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-multik.html
 $dokka.location:/BuildConfig/kotlinxReflectLite/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-reflect-lite.html
