@@ -25,12 +25,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <h1>Coverage Summary for Class: QueryKt (dev.suresh.db)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -55,6 +52,50 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
+    (0/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/968)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">QueryKt$batch$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
     (0/1)
   </span>
 </td>
@@ -63,7 +104,18 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/30)
+    (0/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
   </span>
 </td>
 <td class="coverageStat">
@@ -71,7 +123,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -79,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/38)
+    (0/29)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,11 +139,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/472)
+    (0/970)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -127,7 +178,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val name: String,
 &nbsp;)
 &nbsp;
-<b class="nc">&nbsp;typealias sql = capture</b>
+&nbsp;typealias sql = capture
 &nbsp;
 &nbsp;// Applicative capture
 <b class="nc">&nbsp;val people = sql { Table&lt;People&gt;() }</b>
@@ -138,7 +189,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;val pQuery =</b>
 <b class="nc">&nbsp;    sql.select {</b>
 <b class="nc">&nbsp;      val p = from(people)</b>
-<b class="nc">&nbsp;      p</b>
+&nbsp;      p
 &nbsp;    }
 &nbsp;
 <b class="nc">&nbsp;val map = sql { people.map { it.name to it.age } }</b>
@@ -155,14 +206,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="nc">&nbsp;val limitAndOffest = sql { people.drop(1).take(10) }</b>
 &nbsp;
-<b class="nc">&nbsp;val union = sql {</b>
-<b class="nc">&nbsp;  people.filter { it.name.startsWith(&quot;aaa&quot;) } union people.filter { it.name.startsWith(&quot;bbb&quot;) }</b>
-&nbsp;}
+<b class="nc">&nbsp;val union = sql { people.filter { it.name == &quot;aaa%&quot; } union people.filter { it.name == &quot;bbb%&quot; } }</b>
 &nbsp;
 &nbsp;data class CommonType(val id: Long, val name: String)
 &nbsp;
 &nbsp;// Map to common type and union
-<b class="nc">&nbsp;val commonTyep = sql {</b>
+<b class="nc">&nbsp;val commonType = sql {</b>
 <b class="nc">&nbsp;  people.map { CommonType(it.id, it.name) } union robot.map { CommonType(it.id, it.name) }</b>
 &nbsp;}
 &nbsp;
@@ -170,11 +219,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  val s =</b>
 <b class="nc">&nbsp;      sql.select {</b>
 <b class="nc">&nbsp;        val p = from(people)</b>
-<b class="nc">&nbsp;        val a = join(address) { a -&gt; a.id == p.addressId }</b>
-<b class="nc">&nbsp;        where { p.age &gt; 10 }</b>
-<b class="nc">&nbsp;        groupBy(p.name, p.age)</b>
-<b class="nc">&nbsp;        sortBy(p.name to Ord.Asc, p.age to Ord.Desc)</b>
-<b class="nc">&nbsp;        p to a</b>
+<b class="nc">&nbsp;        val a = join(address) { a -&gt; a.id == p.addressId &amp;&amp; a.city == &quot;San Francisco%&quot; }</b>
+&nbsp;        where { p.age &gt; 10 }
+&nbsp;        groupBy(p.name, p.age)
+&nbsp;        sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
+&nbsp;        p to a
 &nbsp;      }
 <b class="nc">&nbsp;  println(s.buildFor.Postgres().value)</b>
 &nbsp;}
@@ -184,8 +233,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="nc">&nbsp;  sql {</b>
 <b class="nc">&nbsp;    insert&lt;People&gt; { setParams(p).excluding(id) }</b>
-<b class="nc">&nbsp;        .returning {</b>
-<b class="nc">&nbsp;          it.id</b>
+&nbsp;        .returning {
+&nbsp;          it.id
 &nbsp;          // Output(it.id, it.name)
 &nbsp;        }
 &nbsp;  }
@@ -193,8 +242,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;fun upsert(p: People) {
 <b class="nc">&nbsp;  sql {</b>
-<b class="nc">&nbsp;    insert&lt;People&gt; {</b>
-<b class="nc">&nbsp;      setParams(p).onConflictUpdate(id) { excluding -&gt; set(name to &quot;name&quot; + &quot;-&quot; + excluding.name) }</b>
+&nbsp;    insert&lt;People&gt; {
+<b class="nc">&nbsp;      setParams(p).onConflictUpdate(id) { excluding -&gt; set(name to name + &quot;-&quot; + excluding.name) }</b>
 &nbsp;      // setParams(p).onConflictIgnore(id) - Do nothing
 &nbsp;    }
 &nbsp;  }
@@ -234,7 +283,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-01 02:18</div>
+    <div style="float:right;">generated on 2025-07-02 05:41</div>
 </div>
 </body>
 </html>

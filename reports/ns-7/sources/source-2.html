@@ -148,14 +148,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;val limitAndOffest = sql { people.drop(1).take(10) }
 &nbsp;
-&nbsp;val union = sql {
-&nbsp;  people.filter { it.name.startsWith(&quot;aaa&quot;) } union people.filter { it.name.startsWith(&quot;bbb&quot;) }
-&nbsp;}
+&nbsp;val union = sql { people.filter { it.name == &quot;aaa%&quot; } union people.filter { it.name == &quot;bbb%&quot; } }
 &nbsp;
 <b class="nc">&nbsp;data class CommonType(val id: Long, val name: String)</b>
 &nbsp;
 &nbsp;// Map to common type and union
-&nbsp;val commonTyep = sql {
+&nbsp;val commonType = sql {
 &nbsp;  people.map { CommonType(it.id, it.name) } union robot.map { CommonType(it.id, it.name) }
 &nbsp;}
 &nbsp;
@@ -163,7 +161,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  val s =
 &nbsp;      sql.select {
 &nbsp;        val p = from(people)
-&nbsp;        val a = join(address) { a -&gt; a.id == p.addressId }
+&nbsp;        val a = join(address) { a -&gt; a.id == p.addressId &amp;&amp; a.city == &quot;San Francisco%&quot; }
 &nbsp;        where { p.age &gt; 10 }
 &nbsp;        groupBy(p.name, p.age)
 &nbsp;        sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
@@ -187,7 +185,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;fun upsert(p: People) {
 &nbsp;  sql {
 &nbsp;    insert&lt;People&gt; {
-&nbsp;      setParams(p).onConflictUpdate(id) { excluding -&gt; set(name to &quot;name&quot; + &quot;-&quot; + excluding.name) }
+&nbsp;      setParams(p).onConflictUpdate(id) { excluding -&gt; set(name to name + &quot;-&quot; + excluding.name) }
 &nbsp;      // setParams(p).onConflictIgnore(id) - Do nothing
 &nbsp;    }
 &nbsp;  }
@@ -227,7 +225,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-01 02:18</div>
+    <div style="float:right;">generated on 2025-07-02 05:41</div>
 </div>
 </body>
 </html>
