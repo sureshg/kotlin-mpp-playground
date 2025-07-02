@@ -11,7 +11,7 @@ plugins {
   dev.suresh.plugin.graalvm
   com.gradleup.shadow
   alias(libs.plugins.jetbrains.ktor)
-  // alias(libs.plugins.exoquery)
+  alias(libs.plugins.exoquery)
   dev.suresh.plugin.publishing
   // alias(libs.plugins.jetbrains.exposed)
 }

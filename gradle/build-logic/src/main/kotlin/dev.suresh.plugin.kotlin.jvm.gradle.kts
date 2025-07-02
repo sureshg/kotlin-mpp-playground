@@ -254,7 +254,7 @@ dependencies {
   testImplementation(kotlin("reflect"))
   testImplementation(kotlin("test-junit5"))
   testImplementation(libs.junit.jupiter)
-  testImplementation(libs.kotlinx.lincheck)
+  testImplementation(libs.kotlin.lincheck)
   testImplementation(libs.kotlinx.coroutines.test)
   testImplementation(libs.mockk)
   // testImplementation(libs.slf4j.simple)

@@ -32,23 +32,23 @@ kotlinx-datetime-zoneinfo      = "2025b-spi.0.7.0"
 kotlinx-serialization          = "1.9.0"
 kotlinx-rpc                    = "0.8.0"
 kotlinx-collections-immutable  = "0.4.0"
-kotlinx-lincheck               = "2.39"
 kotlinx-html                   = "0.12.0"
 kotlinx-browser                = "0.3"
 kotlinx-benchmark              = "0.4.14"
 kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
-kotlin-wrappers                = "2025.6.15"
+kotlin-lincheck                = "3.0"
+kotlin-wrappers                = "2025.7.0"
 kotlin-redacted                = "1.14.1"
-kotlin-serviceloader           = "0.0.17"
+kotlin-serviceloader           = "0.0.18"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "1.0.0-Beta2"
 kotlinx-kandy                  = "0.8.1-local-1-dev-64"
 kotlin-statistics              = "0.4.0-RC1"
 gradle-kotlin-dsl              = "6.1.2"
-exoquery-plugin                = "2.1.20-1.3.5.PL"
-exoquery-sql                   = "1.3.5.PL-1.3.5"
+exoquery-plugin                = "2.2.0-1.4.0.PL.RC1"
+exoquery-sql                   = "1.4.0.PL.RC1"
 exposed                        = "1.0.0-beta-2"
 postgresql                     = "42.7.7"
 embedded-postgres              = "2.1.0"
@@ -73,8 +73,8 @@ otel-instr                     = "2.17.0"
 otel-instr-alpha               = "2.17.0-alpha"
 otel-semconv                   = "1.34.0"
 otel-contrib                   = "1.46.0-alpha"
-otel-kotlin                    = "0.1.3"
-okio                           = "3.14.0"
+otel-kotlin                    = "0.1.4"
+okio                           = "3.15.0"
 sslcontext-kickstart           = "9.1.0"
 ksp-auto-service               = "1.2.0"
 zip-prefixer                   = "0.3.1"
@@ -90,7 +90,7 @@ jgit                           = "7.3.0.202506031305-r"
 jte                            = "3.2.1"
 sshj                           = "0.40.0"
 jsch                           = "2.27.2"
-pty4j                          = "0.13.8"
+pty4j                          = "0.13.9"
 oshi                           = "6.8.2"
 junit                          = "6.0.0-M1"
 koin                           = "4.1.0"
@@ -124,9 +124,9 @@ kotlin-bignum                  = "0.3.10"
 kotlin-diff                    = "1.1.0"
 kotlin-retry                   = "2.0.1"
 kotlinx-jsonpath               = "3.0.2"
-kotlin-cryptography            = "0.4.0"
+kotlin-cryptography            = "0.5.0"
 koja                           = "0.4.0"
-json-sugar                     = "0.7.0"
+json-sugar                     = "0.7.1"
 json-schema-validator          = "0.5.1"
 pwall-json-schema              = "0.57"
 schema-kenerator               = "2.1.4"
@@ -156,7 +156,7 @@ sqids                          = "0.1.0"
 tsid                           = "2.1.4"
 expiringmap                    = "0.5.11"
 otp                            = "2.1.0"
-password4j                     = "1.8.3"
+password4j                     = "1.8.4"
 apache-commons-imaging         = "1.0.0-alpha6"
 testcontainers                 = "1.21.3"
 sourceBuddy                    = "2.5.3"
@@ -190,7 +190,7 @@ jlama                          = "0.8.4"
 mcp-kotlin                     = "0.5.1"
 koog                           = "0.2.1"
 mcp4k                          = "0.4.1"
-dflib                          = "2.0.0-M2"
+dflib                          = "2.0.0-M3"
 ldaptive                       = "2.4.1"
 chicory                        = "1.4.1"
 weh-bindings                   = "0.5"
@@ -210,7 +210,7 @@ jetbrains-compose-icons        = "1.7.3"
 kobweb                         = "0.22.0"
 detekt                         = "1.23.8"
 detekt-compose-rules           = "0.4.22"
-compose-hotreload              = "1.0.0-beta01"
+compose-hotreload              = "1.0.0-beta02"
 compose-icons                  = "1.1.1"
 compose-routing                = "0.4.0"
 kottie                         = "2.0.1"
@@ -230,14 +230,15 @@ benmanes                       = "0.52.0"
 caupain                        = "1.3.0"
 foojay-resolver                = "1.0.0"
 gradle-develocity              = "4.0.2"
-nmcp                           = "1.0.0-rc.0"
+nmcp                           = "1.0.0-rc.1"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.33.0"
 gradle-publish                 = "1.3.1"
 shadow                         = "9.0.0-beta17"
 spotless                       = "7.0.4"
 semver-plugin                  = "0.8.0"
-gratatouille                   = "0.0.10"
+chasm-plugin                   = "0.1.1"
+gratatouille                   = "0.1.0"
 vercraft                       = "0.6.0"
 kmpmt                          = "0.1.1"
 tasktree                       = "4.0.1"
@@ -266,7 +267,7 @@ jextract                       = "0.5.0"
 maven-plugin-api               = "4.0.0-rc-4"
 maven-plugin-annotations       = "3.15.1"
 gradlex-maven-plugin           = "1.0.3"
-typesafe-conventions           = "0.7.3"
+typesafe-conventions           = "0.7.4"
 
 # Repositories
 repo-mvn-central               = "https://repo.maven.apache.org/maven2/"
@@ -299,7 +300,6 @@ kotlinx-io-bytestring                = { module = "org.jetbrains.kotlinx:kotlinx
 kotlinx-io-core                      = { module = "org.jetbrains.kotlinx:kotlinx-io-core"                           , version.ref = "kotlinx-io"}
 kotlinx-io-filesystem                = { module = "org.jetbrains.kotlinx:kotlinx-io-filesystem"                     , version.ref = "kotlinx-io"}
 kotlinx-io-okio                      = { module = "org.jetbrains.kotlinx:kotlinx-io-okio"                           , version.ref = "kotlinx-io"}
-kotlinx-lincheck                     = { module = "org.jetbrains.kotlinx:lincheck"                                  , version.ref = "kotlinx-lincheck"}
 kotlinx-fuzz-jazzer                  = { module = "org.jetbrains:kotlinx.fuzz.jazzer"                               , version.ref = "kotlinx-fuzz"}
 kotlinx-reflect-lite                 = { module = "org.jetbrains.kotlinx:kotlinx.reflect.lite"                      , version.ref = "kotlinx-reflect-lite"}
 kotlinx-collections-immutable        = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable"             , version.ref = "kotlinx-collections-immutable"}
@@ -314,12 +314,13 @@ kotlinx-dataframe-jdbc               = { module = "org.jetbrains.kotlinx:datafra
 kotlinx-kandy                        = { module = "org.jetbrains.kotlinx:kandy-lets-plot"                           , version.ref = "kotlinx-kandy"}
 kotlinx-kandy-geo                    = { module = "org.jetbrains.kotlinx:kandy-geo"                                 , version.ref = "kotlinx-kandy"}
 kotlinx-kandy-echarts                = { module = "org.jetbrains.kotlinx:kandy-echarts"                             , version.ref = "kotlinx-kandy"}
+kotlin-lincheck                      = { module = "org.jetbrains.lincheck:lincheck"                                 , version.ref = "kotlin-lincheck"}
 kotlin-statistics                    = { module = "org.jetbrains.kotlinx:kotlin-statistics"                         , version.ref = "kotlin-statistics"}
 kotlin-ksp-api                       = { module = "com.google.devtools.ksp:symbol-processing-api"                   , version.ref = "kotlin-ksp"}
 kotlin-redacted-annotations          = { module = "dev.zacsweers.redacted:redacted-compiler-plugin-annotations"     , version.ref = "kotlin-redacted"}
 kotlin-cryptography-core             = { module = "dev.whyoleg.cryptography:cryptography-core"                      , version.ref = "kotlin-cryptography"}
 kotlin-cryptography-random           = { module = "dev.whyoleg.cryptography:cryptography-random"                    , version.ref = "kotlin-cryptography"}
-kotlin-cryptography-webcrypto        = { module = "dev.whyoleg.cryptography:cryptography-provider-webcrypto"        , version.ref = "kotlin-cryptography"}
+kotlin-cryptography-optimal          = { module = "dev.whyoleg.cryptography:cryptography-provider-optimal"          , version.ref = "kotlin-cryptography"}
 jspecify                             = { module = "org.jspecify:jspecify"                                           , version.ref = "jspecify"}
 kmpmt                                = { module = "com.jakewharton.kmpmt:kmpmt-gradle-plugin"                       , version.ref = "kmpmt" }
 
@@ -737,6 +738,7 @@ graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"   
 serviceloader-compiler               = { id = "app.softwork.serviceloader-compiler"                            , version.ref = "kotlin-serviceloader" }
 exoquery                             = { id = "io.exoquery.exoquery-plugin"                                    , version.ref = "exoquery-plugin" }
 kopy                                 = { id = "com.javiersc.kotlin.kopy"                                       , version.ref = "kopy"}
+chasm                                = { id = "io.github.charlietap.chasm.gradle"                              , version.ref = "chasm-plugin"}
 semver                               = { id = "com.javiersc.semver"                                            , version.ref = "semver-plugin" }
 redacted                             = { id = "dev.zacsweers.redacted"                                         , version.ref = "kotlin-redacted"}
 metro                                = { id = "dev.zacsweers.metro"                                            , version.ref = "metro"}

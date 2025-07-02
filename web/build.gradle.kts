@@ -12,10 +12,9 @@ val sharedWasmRes by configurations.creating
 
 dependencies {
   commonMainImplementation(projects.shared)
+  commonMainImplementation(libs.kotlin.cryptography.optimal)
   jsMainImplementation(npm("highlight.js", libs.versions.npm.highlightjs.get()))
   jsMainImplementation(npm("@xterm/xterm", libs.versions.npm.xtermjs.get()))
-  jsMainImplementation(libs.kotlin.cryptography.webcrypto)
-  wasmJsMainImplementation(libs.kotlin.cryptography.webcrypto)
 
   sharedJsRes(project(path = projects.shared.path, configuration = "sharedJsResources"))
   sharedWasmRes(project(path = projects.shared.path, configuration = "sharedWasmResources"))

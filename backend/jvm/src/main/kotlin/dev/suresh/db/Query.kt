@@ -54,14 +54,12 @@ val distinct = sql { people.map { it.name to it.age }.distinct() }
 
 val limitAndOffest = sql { people.drop(1).take(10) }
 
-val union = sql {
-  people.filter { it.name.startsWith("aaa") } union people.filter { it.name.startsWith("bbb") }
-}
+val union = sql { people.filter { it.name == "aaa%" } union people.filter { it.name == "bbb%" } }
 
 data class CommonType(val id: Long, val name: String)
 
 // Map to common type and union
-val commonTyep = sql {
+val commonType = sql {
   people.map { CommonType(it.id, it.name) } union robot.map { CommonType(it.id, it.name) }
 }
 
@@ -69,7 +67,7 @@ fun select() {
   val s =
       sql.select {
         val p = from(people)
-        val a = join(address) { a -> a.id == p.addressId }
+        val a = join(address) { a -> a.id == p.addressId && a.city == "San Francisco%" }
         where { p.age > 10 }
         groupBy(p.name, p.age)
         sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
@@ -93,7 +91,7 @@ fun insert(p: People) {
 fun upsert(p: People) {
   sql {
     insert<People> {
-      setParams(p).onConflictUpdate(id) { excluding -> set(name to "name" + "-" + excluding.name) }
+      setParams(p).onConflictUpdate(id) { excluding -> set(name to name + "-" + excluding.name) }
       // setParams(p).onConflictIgnore(id) - Do nothing
     }
   }
