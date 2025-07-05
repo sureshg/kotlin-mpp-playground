@@ -95,6 +95,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.db
 &nbsp;
 &nbsp;import io.exoquery.*
+&nbsp;import io.exoquery.annotation.*
 &nbsp;
 &nbsp;@JvmInline value class Email(val value: String)
 &nbsp;
@@ -122,6 +123,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;typealias sql = capture
 &nbsp;
+&nbsp;@CapturedFunction
+&nbsp;fun String.like(value: String) =
+&nbsp;    capture.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
+&nbsp;
 &nbsp;// Applicative capture
 &nbsp;val people = sql { Table&lt;People&gt;() }
 &nbsp;val address = sql { Table&lt;Address&gt;() }
@@ -148,7 +153,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;val limitAndOffest = sql { people.drop(1).take(10) }
 &nbsp;
-&nbsp;val union = sql { people.filter { it.name == &quot;aaa%&quot; } union people.filter { it.name == &quot;bbb%&quot; } }
+&nbsp;val union = sql {
+&nbsp;  people.filter { it.name.like(&quot;aaa%&quot;).use } union people.filter { it.name.like(&quot;bbb%&quot;).use }
+&nbsp;}
 &nbsp;
 <b class="nc">&nbsp;data class CommonType(val id: Long, val name: String)</b>
 &nbsp;
@@ -161,7 +168,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  val s =
 &nbsp;      sql.select {
 &nbsp;        val p = from(people)
-&nbsp;        val a = join(address) { a -&gt; a.id == p.addressId &amp;&amp; a.city == &quot;San Francisco%&quot; }
+&nbsp;        val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;).use }
 &nbsp;        where { p.age &gt; 10 }
 &nbsp;        groupBy(p.name, p.age)
 &nbsp;        sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
@@ -225,7 +232,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-05 01:40</div>
+    <div style="float:right;">generated on 2025-07-05 08:34</div>
 </div>
 </body>
 </html>
