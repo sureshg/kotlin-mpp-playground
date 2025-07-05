@@ -1,6 +1,7 @@
 package dev.suresh.db
 
 import io.exoquery.*
+import io.exoquery.annotation.*
 
 @JvmInline value class Email(val value: String)
 
@@ -28,6 +29,10 @@ data class Robot(
 
 typealias sql = capture
 
+@CapturedFunction
+fun String.like(value: String) =
+    capture.expression { free("${this@like} LIKE $value").asPure<Boolean>() }
+
 // Applicative capture
 val people = sql { Table<People>() }
 val address = sql { Table<Address>() }
@@ -54,7 +59,9 @@ val distinct = sql { people.map { it.name to it.age }.distinct() }
 
 val limitAndOffest = sql { people.drop(1).take(10) }
 
-val union = sql { people.filter { it.name == "aaa%" } union people.filter { it.name == "bbb%" } }
+val union = sql {
+  people.filter { it.name.like("aaa%").use } union people.filter { it.name.like("bbb%").use }
+}
 
 data class CommonType(val id: Long, val name: String)
 
@@ -67,7 +74,7 @@ fun select() {
   val s =
       sql.select {
         val p = from(people)
-        val a = join(address) { a -> a.id == p.addressId && a.city == "San Francisco%" }
+        val a = join(address) { it.id == p.addressId && it.city.like("%San Francisco%").use }
         where { p.age > 10 }
         groupBy(p.name, p.age)
         sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
