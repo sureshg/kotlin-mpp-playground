@@ -80,7 +80,7 @@ fun select() {
         sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
         p to a
       }
-  println(s.buildFor.Postgres().value)
+  println("SQL: ${s.buildPrettyFor.Postgres().value}")
 }
 
 fun insert(p: People) {
