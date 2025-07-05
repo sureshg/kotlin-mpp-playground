@@ -255,7 +255,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :compose:cmp:suggestModules
 
   # Hot Reload
-  $ ./gradlew :compose:cmp:jvmRunHot --mainClass=MainKt [--auto]
+  $ ./gradlew :compose:cmp:hotRunJvm --mainClass=MainKt [--auto]
 
   # Compose Web
   $ ./gradlew :compose:cmp:wasmJsBrowserProductionRun -t
