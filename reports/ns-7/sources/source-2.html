@@ -123,10 +123,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;typealias sql = capture
 &nbsp;
-&nbsp;@CapturedFunction
-&nbsp;fun String.like(value: String) =
-&nbsp;    capture.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
-&nbsp;
 &nbsp;// Applicative capture
 &nbsp;val people = sql { Table&lt;People&gt;() }
 &nbsp;val address = sql { Table&lt;Address&gt;() }
@@ -209,6 +205,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;fun batch(p: Sequence&lt;People&gt;) {
 &nbsp;  sql.batch(p) { p -&gt; insert&lt;People&gt; { setParams(p).excluding(id) } }
 &nbsp;}
+&nbsp;
+&nbsp;@CapturedFunction
+&nbsp;context(_: CapturedBlock)
+&nbsp;fun String.like(value: String) =
+&nbsp;    capture.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
 </code>
 </pre>
 </div>
@@ -232,7 +233,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-06 00:19</div>
+    <div style="float:right;">generated on 2025-07-07 04:49</div>
 </div>
 </body>
 </html>
