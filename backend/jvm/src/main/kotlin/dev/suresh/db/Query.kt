@@ -29,10 +29,6 @@ data class Robot(
 
 typealias sql = capture
 
-@CapturedFunction
-fun String.like(value: String) =
-    capture.expression { free("${this@like} LIKE $value").asPure<Boolean>() }
-
 // Applicative capture
 val people = sql { Table<People>() }
 val address = sql { Table<Address>() }
@@ -115,3 +111,8 @@ fun delete(p: People) {
 fun batch(p: Sequence<People>) {
   sql.batch(p) { p -> insert<People> { setParams(p).excluding(id) } }
 }
+
+@CapturedFunction
+context(_: CapturedBlock)
+fun String.like(value: String) =
+    capture.expression { free("${this@like} LIKE $value").asPure<Boolean>() }
