@@ -72,7 +72,7 @@ powerAssert {
 }
 
 redacted {
-  enabled = true
+  enabled = false
   replacementString = "█"
 }
 

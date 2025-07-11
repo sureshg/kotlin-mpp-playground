@@ -92,6 +92,8 @@ tasks {
     }
   }
 
+  withType<AbstractTestTask>().configureEach { failOnNoDiscoveredTests = false }
+
   //  register<Copy>("copyTemplates") {
   //    description = "Generate template classes"
   //    group = LifecycleBasePlugin.BUILD_GROUP

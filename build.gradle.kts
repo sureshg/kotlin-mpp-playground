@@ -7,15 +7,15 @@ plugins {
 description = "Kotlin Multiplatform Playground!"
 
 dependencies {
-  dokka(projects.shared)
-  dokka(projects.meta.ksp.processor)
-  dokka(projects.meta.compiler.plugin)
-  dokka(projects.backend.jvm)
-  dokka(projects.backend.data)
-  dokka(projects.backend.profiling)
-  dokka(projects.backend.security)
-  dokka(projects.web)
+  dokka(project(":shared"))
+  dokka(project(":meta:ksp:processor"))
+  dokka(project(":meta:compiler:plugin"))
+  dokka(project(":backend:jvm"))
+  dokka(project(":backend:data"))
+  dokka(project(":backend:profiling"))
+  dokka(project(":backend:security"))
 
+  findProject(":web")?.let { dokka(it) }
   findProject(":backend:native")?.let { dokka(it) }
   findProject(":compose:cmp")?.let { dokka(it) }
   findProject(":compose:html")?.let { dokka(it) }

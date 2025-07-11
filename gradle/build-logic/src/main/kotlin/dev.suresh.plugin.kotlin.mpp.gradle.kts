@@ -85,7 +85,7 @@ powerAssert {
 }
 
 redacted {
-  enabled = true
+  enabled = false
   replacementString = "█"
 }
 
@@ -186,8 +186,6 @@ plugins.withType<NodeJsPlugin> {
 
   rootProject.the<NpmExtension>().apply {
     lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
-    packageLockMismatchReport = LockFileMismatchReport.WARNING
-    packageLockAutoReplace = false
   }
 }
 
@@ -199,8 +197,6 @@ plugins.withType<WasmNodeJsPlugin> {
   }
   rootProject.the<WasmNpmExtension>().apply {
     lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store/wasm")
-    packageLockMismatchReport = LockFileMismatchReport.WARNING
-    packageLockAutoReplace = false
   }
 }
 
