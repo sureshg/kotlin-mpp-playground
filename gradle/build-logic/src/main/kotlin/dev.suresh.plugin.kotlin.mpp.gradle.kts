@@ -1,15 +1,15 @@
 @file:Suppress("UnstableApiUsage")
 
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-import com.google.cloud.tools.jib.gradle.JibTask
+import com.github.jengelman.gradle.plugins.shadow.tasks.*
+import com.google.cloud.tools.jib.gradle.*
 import common.*
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
-import org.jetbrains.kotlin.gradle.targets.js.npm.*
+import org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.*
 import org.jetbrains.kotlin.gradle.targets.wasm.nodejs.*
-import org.jetbrains.kotlin.gradle.targets.wasm.npm.*
+import org.jetbrains.kotlin.gradle.targets.wasm.npm.WasmNpmExtension
 import tasks.*
 
 plugins {
@@ -175,13 +175,10 @@ tasks {
   }
 }
 
-// var npmEnabled: String? by rootProject.extra
-
 plugins.withType<NodeJsPlugin> {
   the<NodeJsEnvSpec>().apply {
     download = true
     // version = libs.versions.nodejs.version.get()
-    // downloadBaseUrl = "https://nodejs.org/download/nightly"
   }
 
   rootProject.the<NpmExtension>().apply {
@@ -193,8 +190,8 @@ plugins.withType<WasmNodeJsPlugin> {
   the<WasmNodeJsEnvSpec>().apply {
     download = true
     // version = libs.versions.nodejs.version.get()
-    // downloadBaseUrl = "https://nodejs.org/download/nightly"
   }
+
   rootProject.the<WasmNpmExtension>().apply {
     lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store/wasm")
   }
