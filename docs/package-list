@@ -280,6 +280,7 @@ $dokka.location:/BuildConfig/tasktree/#/PointingToDeclaration/shared/[root]/-bu
 $dokka.location:/BuildConfig/tcpJavanioproxy/#/PointingToDeclaration/shared/[root]/-build-config/tcp-javanioproxy.html
 $dokka.location:/BuildConfig/testcontainers/#/PointingToDeclaration/shared/[root]/-build-config/testcontainers.html
 $dokka.location:/BuildConfig/tomlj/#/PointingToDeclaration/shared/[root]/-build-config/tomlj.html
+$dokka.location:/BuildConfig/trieKmp/#/PointingToDeclaration/shared/[root]/-build-config/trie-kmp.html
 $dokka.location:/BuildConfig/tsid/#/PointingToDeclaration/shared/[root]/-build-config/tsid.html
 $dokka.location:/BuildConfig/twelvemonkeys/#/PointingToDeclaration/shared/[root]/-build-config/twelvemonkeys.html
 $dokka.location:/BuildConfig/typesafeConventions/#/PointingToDeclaration/shared/[root]/-build-config/typesafe-conventions.html
