@@ -6,10 +6,10 @@ import common.*
 import kotlinx.validation.*
 import org.gradle.internal.os.OperatingSystem
 import org.jetbrains.kotlin.gradle.targets.js.nodejs.*
-import org.jetbrains.kotlin.gradle.targets.js.npm.NpmExtension
+import org.jetbrains.kotlin.gradle.targets.js.npm.*
 import org.jetbrains.kotlin.gradle.targets.js.npm.tasks.*
 import org.jetbrains.kotlin.gradle.targets.wasm.nodejs.*
-import org.jetbrains.kotlin.gradle.targets.wasm.npm.WasmNpmExtension
+import org.jetbrains.kotlin.gradle.targets.wasm.npm.*
 import tasks.*
 
 plugins {
@@ -183,6 +183,7 @@ plugins.withType<NodeJsPlugin> {
 
   rootProject.the<NpmExtension>().apply {
     lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store")
+    packageLockMismatchReport = LockFileMismatchReport.WARNING
   }
 }
 
@@ -194,6 +195,7 @@ plugins.withType<WasmNodeJsPlugin> {
 
   rootProject.the<WasmNpmExtension>().apply {
     lockFileDirectory = project.rootDir.resolve("gradle/kotlin-js-store/wasm")
+    packageLockMismatchReport = LockFileMismatchReport.WARNING
   }
 }
 
