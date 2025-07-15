@@ -1,4 +1,3 @@
-import com.diffplug.spotless.kotlin.KtfmtStep
 import common.*
 import java.time.Year
 import org.hildan.github.changelog.plugin.GitHubChangelogExtension
@@ -83,34 +82,41 @@ dokka {
 }
 
 spotless {
-  java {
-    // googleJavaFormat(libs.versions.google.javaformat.get())
-    palantirJavaFormat(libs.versions.palantir.javaformat.get()).formatJavadoc(true)
-    target("**/*.java_disabled")
+  pluginManager.withPlugin("java") {
+    java {
+      palantirJavaFormat(libs.versions.palantir.javaformat.get()).formatJavadoc(true)
+      target("src/**/*.java1")
+      targetExclude("**/build/**", "**/generated/**")
+    }
   }
-  // if(plugins.hasPlugin(JavaPlugin::class.java)){ }
 
-  val ktfmtVersion = maxOf(KtfmtStep.defaultVersion(), libs.versions.ktfmt.get())
   kotlin {
-    ktfmt(ktfmtVersion)
-    target("src/**/*.kts", "src/**/*.kt")
+    ktfmt(libs.versions.ktfmt.get())
+    target("src/**/*.kt")
+    targetExclude("**/build/**", "**/generated/**")
     trimTrailingWhitespace()
-    suppressLintsFor { step = "ktfmt" }
-    // licenseHeader(rootProject.file("gradle/license-header.txt"))
+    endWithNewline()
+    // licenseHeaderFile(rootProject.file("gradle/license-header.txt"))
+    // suppressLintsFor {
+    //   step = "ktfmt"
+    //   shortCode = "ktfmt"
+    // }
   }
 
   kotlinGradle {
-    ktfmt(ktfmtVersion)
-    target("**/*.gradle.kts")
+    ktfmt(libs.versions.ktfmt.get())
+    target("**/*.kts", "*.kts")
     targetExclude("**/build/**")
     trimTrailingWhitespace()
+    endWithNewline()
   }
 
   format("misc") {
-    target("**/*.md", "**/.kte")
+    target("*.md", "*.kte")
     targetExclude("**/build/**")
     trimTrailingWhitespace()
     leadingTabsToSpaces(2)
+    endWithNewline()
   }
 }
 

@@ -3,8 +3,8 @@ package dev.suresh;
 import java.io.Serializable;
 
 /**
- * A discriminated union that encapsulates a successful outcome with a value of type T or a failure
- * with an arbitrary Throwable exception.
+ * A discriminated union that encapsulates a successful outcome with a value of type T or a failure with an arbitrary
+ * Throwable exception.
  *
  * @param <T> Result value type.
  */
@@ -41,12 +41,11 @@ sealed interface Result<T> extends Serializable {
                 Success   -> %3$s
                 Failure   -> %4$s
                 Exception -> %5$s
-                """.formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());
+                """
+                .formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());
     }
 
-    record Success<T>(T value) implements Result<T> {
-    }
+    record Success<T>(T value) implements Result<T> {}
 
-    record Failure<T>(Throwable error) implements Result<T> {
-    }
+    record Failure<T>(Throwable error) implements Result<T> {}
 }

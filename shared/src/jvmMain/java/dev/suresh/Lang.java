@@ -1,8 +1,6 @@
 package dev.suresh;
 
-public record Lang(String name) {
-}
-
+public record Lang(String name) {}
 
 record Model(String name, float temp, int tokens) {
 
@@ -13,7 +11,6 @@ record Model(String name, float temp, int tokens) {
     void main() {
 
         var b = Model.builder().name("test").build();
-
     }
 }
 

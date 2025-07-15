@@ -1,5 +1,9 @@
 package dev.suresh;
 
+import static dev.suresh.Expr.eval;
+import static java.lang.System.out;
+import static java.util.Objects.requireNonNull;
+
 import java.io.*;
 import java.lang.reflect.RecordComponent;
 import java.nio.file.Files;
@@ -7,17 +11,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-import static dev.suresh.Expr.eval;
-import static java.lang.System.out;
-import static java.util.Objects.requireNonNull;
-
 public class DOP {
     public static void run() throws Exception {
-        record Person(String name, int age) {
-        }
+        record Person(String name, int age) {}
 
         var future = new CompletableFuture<>();
-        var textBlock = """
+        var textBlock =
+                """
                 This is text block
                 This will join \
                 with the line : %s
@@ -28,7 +28,8 @@ public class DOP {
                 \\d+
                 Escape char: \u00A0 \u2000 \u3000 \uFEFF \u200B \u200C \u200D \u2028 \u2029
                 END
-                """.formatted(new Person("Foo", 40));
+                """
+                        .formatted(new Person("Foo", 40));
         future.complete(textBlock);
         out.println(future.get());
 
@@ -50,17 +51,16 @@ public class DOP {
         out.printf("x + y = %d%n", x + y);
     }
 
-    interface Name<T> {
-    }
+    interface Name<T> {}
 
-    record FullName<T>(T firstName, T lastName) implements Name<T> {
-    }
+    record FullName<T>(T firstName, T lastName) implements Name<T> {}
 
     private static <T> void print(Name<T> name) {
-        var result = switch (name) {
-            case FullName(var first, var last) -> "%s, %s".formatted(first, last);
-            default -> "Invalid name";
-        };
+        var result =
+                switch (name) {
+                    case FullName(var first, var last) -> "%s, %s".formatted(first, last);
+                    default -> "Invalid name";
+                };
         out.println(result);
 
         if (name instanceof FullName<?> f) {
@@ -95,7 +95,6 @@ public class DOP {
         }
     }
 
-
     private static void serializeRecord() throws Exception {
         // Local record
         record Lang(String name, int year) implements Serializable {
@@ -123,12 +122,13 @@ public class DOP {
         try (var ois = new ObjectInputStream(new FileInputStream(serialFile))) {
             Object rec;
             while ((rec = ois.readObject()) != null) {
-                var result = switch (rec) {
-                    case Lang l when l.year >= 20 -> l.toString();
-                    case Lang(var name, var year) -> name;
-                    case Result<?> r -> "Result value: %s".formatted(r.getOrNull());
-                    default -> "Invalid serialized data. Expected Result, but found %s".formatted(rec);
-                };
+                var result =
+                        switch (rec) {
+                            case Lang l when l.year >= 20 -> l.toString();
+                            case Lang(var name, var year) -> name;
+                            case Result<?> r -> "Result value: %s".formatted(r.getOrNull());
+                            default -> "Invalid serialized data. Expected Result, but found %s".formatted(rec);
+                        };
 
                 out.printf("Deserialized record: %s%n", rec);
                 out.println(result);
@@ -136,11 +136,12 @@ public class DOP {
         }
 
         results().forEach(r -> {
-            var result = switch (r) {
-                case null -> "n/a";
-                case Result.Success<?> s -> s.toString();
-                case Result.Failure<?> f -> f.toString();
-            };
+            var result =
+                    switch (r) {
+                        case null -> "n/a";
+                        case Result.Success<?> s -> s.toString();
+                        case Result.Failure<?> f -> f.toString();
+                    };
             out.printf("Result (Sealed Type): %s%n", result);
         });
     }
@@ -158,4 +159,3 @@ public class DOP {
         };
     }
 }
-

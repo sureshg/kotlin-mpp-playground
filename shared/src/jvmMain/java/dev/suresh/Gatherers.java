@@ -41,7 +41,7 @@ public class Gatherers {
         return Gatherer.ofSequential(initializer, integrator, finisher);
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         Stream.of(1, 2, 3, 4, 5).gather(map(e -> e + 1)).gather(group(2)).forEach(System.out::println);
     }
 }
