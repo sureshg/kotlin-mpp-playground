@@ -65,10 +65,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 <td class="coverageStat">
   <span class="percent">
-    70%
+    72.7%
   </span>
   <span class="absValue">
-    (7/10)
+    (8/11)
   </span>
 </td>
 <td class="coverageStat">
@@ -328,10 +328,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    68.4%
   </span>
   <span class="absValue">
-    (12/18)
+    (13/19)
   </span>
 </td>
 <td class="coverageStat">
@@ -356,30 +356,22 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;@NullMarked
 &nbsp;public sealed interface Expr {
-<b class="fc">&nbsp;    record Add(Expr left, Expr right) implements Expr {</b>
-&nbsp;    }
+<b class="fc">&nbsp;    record Add(Expr left, Expr right) implements Expr {}</b>
 &nbsp;
-<b class="nc">&nbsp;    record Mul(Expr left, Expr right) implements Expr {</b>
-&nbsp;    }
+<b class="nc">&nbsp;    record Mul(Expr left, Expr right) implements Expr {}</b>
 &nbsp;
-<b class="fc">&nbsp;    record Div(Expr left, Expr right) implements Expr {</b>
-&nbsp;    }
+<b class="fc">&nbsp;    record Div(Expr left, Expr right) implements Expr {}</b>
 &nbsp;
-<b class="nc">&nbsp;    record Neg(Expr e) implements Expr {</b>
-&nbsp;    }
+<b class="nc">&nbsp;    record Neg(Expr e) implements Expr {}</b>
 &nbsp;
 &nbsp;    sealed interface Const extends Expr {
-<b class="fc">&nbsp;        record Int(int i) implements Const {</b>
-&nbsp;        }
+<b class="fc">&nbsp;        record Int(int i) implements Const {}</b>
 &nbsp;
-<b class="fc">&nbsp;        record Double(double d) implements Const {</b>
-&nbsp;        }
+<b class="fc">&nbsp;        record Double(double d) implements Const {}</b>
 &nbsp;
-<b class="fc">&nbsp;        record Long(long l) implements Const {</b>
-&nbsp;        }
+<b class="fc">&nbsp;        record Long(long l) implements Const {}</b>
 &nbsp;
-<b class="nc">&nbsp;        record Str(String s) implements Const {</b>
-&nbsp;        }
+<b class="nc">&nbsp;        record Str(String s) implements Const {}</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    static long eval(Expr expr) {
@@ -388,12 +380,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;            case Expr.Mul(var l, var r) -&gt; eval(l) * eval(r);</b>
 <b class="fc">&nbsp;            case Expr.Div(var l, var r) -&gt; eval(l) / eval(r);</b>
 <b class="nc">&nbsp;            case Expr.Neg(var e) -&gt; -eval(e);</b>
-<b class="pc">&nbsp;            case Expr.Const c -&gt; switch (c) {</b>
-<b class="pc">&nbsp;                case Expr.Const.Int(var i) -&gt; i;</b>
-<b class="pc">&nbsp;                case Expr.Const.Double(var d) -&gt; (long) d;</b>
-<b class="pc">&nbsp;                case Expr.Const.Long(var l) -&gt; l;</b>
-<b class="nc">&nbsp;                case Expr.Const.Str(var s) -&gt; Long.parseLong(s);</b>
-&nbsp;            };
+<b class="fc">&nbsp;            case Expr.Const c -&gt;</b>
+<b class="pc">&nbsp;                switch (c) {</b>
+<b class="pc">&nbsp;                    case Expr.Const.Int(var i) -&gt; i;</b>
+<b class="pc">&nbsp;                    case Expr.Const.Double(var d) -&gt; (long) d;</b>
+<b class="pc">&nbsp;                    case Expr.Const.Long(var l) -&gt; l;</b>
+<b class="nc">&nbsp;                    case Expr.Const.Str(var s) -&gt; Long.parseLong(s);</b>
+&nbsp;                };
 &nbsp;        };
 &nbsp;    }
 &nbsp;}
@@ -420,7 +413,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-14 22:07</div>
+    <div style="float:right;">generated on 2025-07-15 00:40</div>
 </div>
 </body>
 </html>

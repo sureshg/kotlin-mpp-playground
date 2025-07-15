@@ -183,8 +183,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import java.io.Serializable;
 &nbsp;
 &nbsp;/**
-&nbsp; * A discriminated union that encapsulates a successful outcome with a value of type T or a failure
-&nbsp; * with an arbitrary Throwable exception.
+&nbsp; * A discriminated union that encapsulates a successful outcome with a value of type T or a failure with an arbitrary
+&nbsp; * Throwable exception.
 &nbsp; *
 &nbsp; * @param &lt;T&gt; Result value type.
 &nbsp; */
@@ -221,14 +221,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;                Success   -&gt; %3$s
 &nbsp;                Failure   -&gt; %4$s
 &nbsp;                Exception -&gt; %5$s
-<b class="nc">&nbsp;                &quot;&quot;&quot;.formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());</b>
+&nbsp;                &quot;&quot;&quot;
+<b class="nc">&nbsp;                .formatted(toString(), getOrNull(), isSuccess(), isFailure(), exceptionOrNull());</b>
 &nbsp;    }
 &nbsp;
-<b class="fc">&nbsp;    record Success&lt;T&gt;(T value) implements Result&lt;T&gt; {</b>
-&nbsp;    }
+<b class="fc">&nbsp;    record Success&lt;T&gt;(T value) implements Result&lt;T&gt; {}</b>
 &nbsp;
-<b class="fc">&nbsp;    record Failure&lt;T&gt;(Throwable error) implements Result&lt;T&gt; {</b>
-&nbsp;    }
+<b class="fc">&nbsp;    record Failure&lt;T&gt;(Throwable error) implements Result&lt;T&gt; {}</b>
 &nbsp;}
 </code>
 </pre>
@@ -253,7 +252,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-14 22:07</div>
+    <div style="float:right;">generated on 2025-07-15 00:40</div>
 </div>
 </body>
 </html>

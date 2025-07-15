@@ -219,6 +219,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh;
 &nbsp;
+&nbsp;import static dev.suresh.Expr.eval;
+&nbsp;import static java.lang.System.out;
+&nbsp;import static java.util.Objects.requireNonNull;
+&nbsp;
 &nbsp;import java.io.*;
 &nbsp;import java.lang.reflect.RecordComponent;
 &nbsp;import java.nio.file.Files;
@@ -226,17 +230,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import java.util.List;
 &nbsp;import java.util.concurrent.CompletableFuture;
 &nbsp;
-&nbsp;import static dev.suresh.Expr.eval;
-&nbsp;import static java.lang.System.out;
-&nbsp;import static java.util.Objects.requireNonNull;
-&nbsp;
 <b class="nc">&nbsp;public class DOP {</b>
 &nbsp;    public static void run() throws Exception {
-<b class="fc">&nbsp;        record Person(String name, int age) {</b>
-&nbsp;        }
+<b class="fc">&nbsp;        record Person(String name, int age) {}</b>
 &nbsp;
 <b class="fc">&nbsp;        var future = new CompletableFuture&lt;&gt;();</b>
-<b class="fc">&nbsp;        var textBlock = &quot;&quot;&quot;</b>
+<b class="fc">&nbsp;        var textBlock =</b>
+&nbsp;                &quot;&quot;&quot;
 &nbsp;                This is text block
 &nbsp;                This will join \
 &nbsp;                with the line : %s
@@ -247,7 +247,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;                \\d+
 &nbsp;                Escape char: \u00A0 \u2000 \u3000 \uFEFF \u200B \u200C \u200D \u2028 \u2029
 &nbsp;                END
-<b class="fc">&nbsp;                &quot;&quot;&quot;.formatted(new Person(&quot;Foo&quot;, 40));</b>
+&nbsp;                &quot;&quot;&quot;
+<b class="fc">&nbsp;                        .formatted(new Person(&quot;Foo&quot;, 40));</b>
 <b class="fc">&nbsp;        future.complete(textBlock);</b>
 <b class="fc">&nbsp;        out.println(future.get());</b>
 &nbsp;
@@ -269,17 +270,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="fc">&nbsp;        out.printf(&quot;x + y = %d%n&quot;, x + y);</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    interface Name&lt;T&gt; {
-&nbsp;    }
+&nbsp;    interface Name&lt;T&gt; {}
 &nbsp;
-<b class="fc">&nbsp;    record FullName&lt;T&gt;(T firstName, T lastName) implements Name&lt;T&gt; {</b>
-&nbsp;    }
+<b class="fc">&nbsp;    record FullName&lt;T&gt;(T firstName, T lastName) implements Name&lt;T&gt; {}</b>
 &nbsp;
 &nbsp;    private static &lt;T&gt; void print(Name&lt;T&gt; name) {
-<b class="pc">&nbsp;        var result = switch (name) {</b>
-<b class="fc">&nbsp;            case FullName(var first, var last) -&gt; &quot;%s, %s&quot;.formatted(first, last);</b>
-<b class="nc">&nbsp;            default -&gt; &quot;Invalid name&quot;;</b>
-<b class="fc">&nbsp;        };</b>
+&nbsp;        var result =
+<b class="pc">&nbsp;                switch (name) {</b>
+<b class="fc">&nbsp;                    case FullName(var first, var last) -&gt; &quot;%s, %s&quot;.formatted(first, last);</b>
+<b class="nc">&nbsp;                    default -&gt; &quot;Invalid name&quot;;</b>
+<b class="fc">&nbsp;                };</b>
 <b class="fc">&nbsp;        out.println(result);</b>
 &nbsp;
 <b class="pc">&nbsp;        if (name instanceof FullName&lt;?&gt; f) {</b>
@@ -314,7 +314,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;        }
 &nbsp;    }
 &nbsp;
-&nbsp;
 &nbsp;    private static void serializeRecord() throws Exception {
 &nbsp;        // Local record
 <b class="fc">&nbsp;        record Lang(String name, int year) implements Serializable {</b>
@@ -342,12 +341,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="fc">&nbsp;        try (var ois = new ObjectInputStream(new FileInputStream(serialFile))) {</b>
 &nbsp;            Object rec;
 <b class="fc">&nbsp;            while ((rec = ois.readObject()) != null) {</b>
-<b class="pc">&nbsp;                var result = switch (rec) {</b>
-<b class="fc">&nbsp;                    case Lang l when l.year &gt;= 20 -&gt; l.toString();</b>
-<b class="pc">&nbsp;                    case Lang(var name, var year) -&gt; name;</b>
-<b class="fc">&nbsp;                    case Result&lt;?&gt; r -&gt; &quot;Result value: %s&quot;.formatted(r.getOrNull());</b>
-<b class="nc">&nbsp;                    default -&gt; &quot;Invalid serialized data. Expected Result, but found %s&quot;.formatted(rec);</b>
-<b class="fc">&nbsp;                };</b>
+&nbsp;                var result =
+<b class="pc">&nbsp;                        switch (rec) {</b>
+<b class="fc">&nbsp;                            case Lang l when l.year &gt;= 20 -&gt; l.toString();</b>
+<b class="pc">&nbsp;                            case Lang(var name, var year) -&gt; name;</b>
+<b class="fc">&nbsp;                            case Result&lt;?&gt; r -&gt; &quot;Result value: %s&quot;.formatted(r.getOrNull());</b>
+<b class="nc">&nbsp;                            default -&gt; &quot;Invalid serialized data. Expected Result, but found %s&quot;.formatted(rec);</b>
+<b class="fc">&nbsp;                        };</b>
 &nbsp;
 <b class="fc">&nbsp;                out.printf(&quot;Deserialized record: %s%n&quot;, rec);</b>
 <b class="fc">&nbsp;                out.println(result);</b>
@@ -355,11 +355,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;        }
 &nbsp;
 <b class="fc">&nbsp;        results().forEach(r -&gt; {</b>
-<b class="pc">&nbsp;            var result = switch (r) {</b>
-<b class="nc">&nbsp;                case null -&gt; &quot;n/a&quot;;</b>
-<b class="fc">&nbsp;                case Result.Success&lt;?&gt; s -&gt; s.toString();</b>
-<b class="fc">&nbsp;                case Result.Failure&lt;?&gt; f -&gt; f.toString();</b>
-<b class="fc">&nbsp;            };</b>
+&nbsp;            var result =
+<b class="pc">&nbsp;                    switch (r) {</b>
+<b class="nc">&nbsp;                        case null -&gt; &quot;n/a&quot;;</b>
+<b class="fc">&nbsp;                        case Result.Success&lt;?&gt; s -&gt; s.toString();</b>
+<b class="fc">&nbsp;                        case Result.Failure&lt;?&gt; f -&gt; f.toString();</b>
+<b class="fc">&nbsp;                    };</b>
 <b class="fc">&nbsp;            out.printf(&quot;Result (Sealed Type): %s%n&quot;, result);</b>
 &nbsp;        });
 &nbsp;    }
@@ -377,7 +378,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;        };
 &nbsp;    }
 &nbsp;}
-&nbsp;
 </code>
 </pre>
 </div>
@@ -401,7 +401,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-07-14 22:07</div>
+    <div style="float:right;">generated on 2025-07-15 00:40</div>
 </div>
 </body>
 </html>
