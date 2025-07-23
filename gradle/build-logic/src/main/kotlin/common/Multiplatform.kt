@@ -134,6 +134,7 @@ fun KotlinMultiplatformExtension.jvmTarget(project: Project) =
             api(project.dependencies.platform(libs.testcontainers.bom))
             api(kotlin("test-junit5"))
             api(libs.mockk)
+            api(libs.mockk.bdd)
             api(libs.slf4j.simple)
             api(libs.testcontainers.junit5)
             api(libs.testcontainers.postgresql)
