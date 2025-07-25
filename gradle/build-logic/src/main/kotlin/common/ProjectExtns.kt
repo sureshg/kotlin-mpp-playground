@@ -422,6 +422,7 @@ fun KotlinCommonCompilerOptions.configureKotlinCommon(project: Project) =
           "-Xnon-local-break-continue",
           "-Xnested-type-aliases",
           "-Xreport-all-warnings",
+          "-Xreturn-value-checker=check",
           // "-Wextra",
           // "-Xexpected-type-guided-resolution",
           // "-XXLanguage:+ExplicitBackingFields",
