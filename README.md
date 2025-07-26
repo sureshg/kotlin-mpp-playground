@@ -149,7 +149,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 * AOT Cache
 
   ```bash
-  # Training Run to create AOT cache
+  # Training Run to create AOT cache (JDK_AOT_VM_OPTIONS)
   $ java --enable-preview \
          -XX:+UseZGC \
          -XX:+UseCompactObjectHeaders \
