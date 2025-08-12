@@ -30,7 +30,7 @@ jobs:
 
     steps:
       - name: 🛎️ Check out the source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: ⚙ Set OS, Arch and Package
         run: jextract/gen/script/set-package.sh
@@ -71,7 +71,7 @@ jobs:
     needs: jextract
     steps:
       - name: 🛎️ Check out the source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: 🧹 Clean up jextract src
         run: rm -rf jextract/src || true
