@@ -80,7 +80,7 @@ jobs:
 
       - name: ☕ Set up OpenJDK ${{ matrix.jdk }}
         id: setup-java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         if: always() && steps.download-jdk.outcome == 'success'
         with:
           distribution: jdkfile
