@@ -21,7 +21,8 @@ class TM(private val segment: MemorySegment) {
             ValueLayout.JAVA_INT.withName("wday"),
             ValueLayout.JAVA_INT.withName("yday"),
             ValueLayout.JAVA_BOOLEAN.withName("isdst"),
-            MemoryLayout.paddingLayout(24))
+            MemoryLayout.paddingLayout(24),
+        )
 
     private val yearVH = LAYOUT.varHandle(MemoryLayout.PathElement.groupElement("year"))
     private val monthVH = LAYOUT.varHandle(MemoryLayout.PathElement.groupElement("mon"))

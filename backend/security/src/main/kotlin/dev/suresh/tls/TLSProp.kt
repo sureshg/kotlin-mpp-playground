@@ -27,7 +27,8 @@ enum class TLSProp(val prop: String, val desc: String, val system: Boolean = tru
   CertPathDisabledAlgos(
       "jdk.certpath.disabledAlgorithms",
       "Disabled certificate verification cryptographic algorithms",
-      false),
+      false,
+  ),
   TLSDisabledAlgos("jdk.tls.disabledAlgorithms", "Disabled/Restricted Algorithms", false);
 
   /** Sets the JSSE system/security property to the given value. */

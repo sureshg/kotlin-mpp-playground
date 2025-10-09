@@ -1,6 +1,6 @@
 plugins {
-  dev.suresh.plugin.kotlin.jvm
-  dev.suresh.plugin.publishing
+  id("dev.suresh.plugin.kotlin.jvm")
+  id("dev.suresh.plugin.publishing")
 }
 
 description = "Kotlin Compiler Plugin"

@@ -36,11 +36,12 @@ fun Routing.wasm() {
 
 fun logFunction() =
     HostFunction(
-        "console", "log", FunctionType.of(listOf(ValType.I32, ValType.I32), emptyList())) {
-            instance,
-            args ->
-          val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())
-          println("WASM: $msg")
-          // Value.i32(0)
-          longArrayOf()
-        }
+        "console",
+        "log",
+        FunctionType.of(listOf(ValType.I32, ValType.I32), emptyList()),
+    ) { instance, args ->
+      val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())
+      println("WASM: $msg")
+      // Value.i32(0)
+      longArrayOf()
+    }

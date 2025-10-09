@@ -28,7 +28,8 @@ class TestProcessor(val codeGenerator: CodeGenerator, val logger: KSPLogger) : S
             dependencies = Dependencies.ALL_FILES,
             packageName = "",
             fileName = "Foo",
-            extensionName = "kt")
+            extensionName = "kt",
+        )
         .use { output ->
           OutputStreamWriter(output).use { writer ->
             writer.write("package com.example\n\n")
@@ -48,7 +49,7 @@ class ClassVisitor : KSTopDownVisitor<OutputStreamWriter, Unit>() {
 
   override fun visitClassDeclaration(
       classDeclaration: KSClassDeclaration,
-      data: OutputStreamWriter
+      data: OutputStreamWriter,
   ) {
     super.visitClassDeclaration(classDeclaration, data)
     val symbolName = classDeclaration.simpleName.asString().lowercase()

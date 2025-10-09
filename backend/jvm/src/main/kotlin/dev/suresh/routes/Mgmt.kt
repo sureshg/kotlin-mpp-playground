@@ -39,7 +39,8 @@ fun Route.mgmtRoutes() {
 
   get("/info") {
     call.respond(
-        ScopedValue.where(DEBUG, call.debug).call(CallableOp { jvmRuntimeInfo(DEBUG.get()) }))
+        ScopedValue.where(DEBUG, call.debug).call(CallableOp { jvmRuntimeInfo(DEBUG.get()) })
+    )
   }
 
   get("/browse/{param...}") {
@@ -131,7 +132,8 @@ fun Route.mgmtRoutes() {
                 |"""
                     .trimMargin(),
                 contentType = ContentType.Text.Html,
-                status = HttpStatusCode.OK)
+                status = HttpStatusCode.OK,
+            )
           }
           else -> call.respondFile(path.toFile())
         }
@@ -160,7 +162,8 @@ fun Route.mgmtRoutes() {
                 val jfrPath = Profiling.jfrSnapshot()
                 call.response.header(
                     ContentDisposition,
-                    Attachment.withParameter(FileName, jfrPath.fileName.name).toString())
+                    Attachment.withParameter(FileName, jfrPath.fileName.name).toString(),
+                )
                 call.respondFile(jfrPath.toFile())
                 jfrPath.deleteIfExists()
               }
@@ -180,7 +183,8 @@ fun Route.mgmtRoutes() {
     val heapDumpPath = Profiling.heapdump()
     call.response.header(
         ContentDisposition,
-        Attachment.withParameter(FileName, heapDumpPath.fileName.name).toString())
+        Attachment.withParameter(FileName, heapDumpPath.fileName.name).toString(),
+    )
     call.respondFile(heapDumpPath.toFile())
     heapDumpPath.deleteIfExists()
   }

@@ -39,7 +39,7 @@ internal class ReentrantLazy<T : Any?>(initializer: () -> T) : Lazy<T> {
 /** A virtual thread friendly [kotlin.lazy] implementation. */
 fun <T : Any?> vtLazy(
     threadSafetyMode: LazyThreadSafetyMode = NONE,
-    initializer: () -> T
+    initializer: () -> T,
 ): Lazy<T> =
     when (threadSafetyMode) {
       SYNCHRONIZED -> ReentrantLazy(initializer)

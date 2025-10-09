@@ -2,10 +2,10 @@ import common.*
 import kotlin.collections.plus
 
 plugins {
-  dev.suresh.plugin.kotlin.jvm
+  id("dev.suresh.plugin.kotlin.jvm")
+  id("dev.suresh.plugin.publishing")
   application
-  com.gradleup.shadow
-  dev.suresh.plugin.publishing
+  id("com.gradleup.shadow")
 }
 
 description = "JVM JFR Agent!"

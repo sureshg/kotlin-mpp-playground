@@ -14,7 +14,7 @@ object CertScan {
       host: String,
       port: Int = 443,
       sni: String? = null,
-      timeout: Duration = 2.seconds
+      timeout: Duration = 2.seconds,
   ): List<X509Certificate> {
     val trustManager = SavingTrustManager()
     val socket = trustManager.newTLSSocket()

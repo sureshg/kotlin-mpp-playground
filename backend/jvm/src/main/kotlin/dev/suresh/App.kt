@@ -1,7 +1,7 @@
 package dev.suresh
 
 import BuildConfig
-import dev.suresh.config.AppConfig
+import dev.suresh.di.configureDI
 import dev.suresh.plugins.*
 import dev.suresh.routes.*
 import io.ktor.server.application.*
@@ -20,9 +20,9 @@ fun main(args: Array<String>) =
       log.error("Failed to start ${BuildConfig.description}: ${e.message}", e)
     }
 
-fun Application.module() {
+suspend fun Application.module() {
   log.info("Starting ${BuildConfig.description} v${BuildConfig.version}...")
-  AppConfig.init(environment.config)
+  configureDI()
   configureOTel()
   configureInterceptors()
   configureHTTP()

@@ -5,16 +5,11 @@ import me.saket.bytesize.*
 
 plugins {
   java
-  com.gradleup.shadow
-  dev.suresh.plugin.publishing
+  id("com.gradleup.shadow")
+  id("dev.suresh.plugin.publishing")
 }
 
 description = "OpenTelemetry agent with custom instrumentation!"
-
-java {
-  withSourcesJar()
-  withJavadocJar()
-}
 
 val otel by configurations.registering { isTransitive = false }
 
@@ -39,7 +34,8 @@ val extendedAgent by
       doLast {
         val agent = archiveFile.get().asFile
         logger.lifecycle(
-            magenta("OpenTelemetry Agent: ${agent.absolutePath} (${agent.length().decimalBytes})"))
+            magenta("OpenTelemetry Agent: ${agent.absolutePath} (${agent.length().decimalBytes})")
+        )
       }
     }
 

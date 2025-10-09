@@ -20,6 +20,6 @@ val UNSAFE by lazy {
 fun downcallHandle(
     symbol: String,
     fdesc: FunctionDescriptor,
-    vararg options: Linker.Option
+    vararg options: Linker.Option,
 ): MethodHandle? =
     SYMBOL_LOOKUP.findOrThrow(symbol).let { LINKER.downcallHandle(it, fdesc, *options) }

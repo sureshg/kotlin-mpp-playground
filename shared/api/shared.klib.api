@@ -25,6 +25,29 @@ final enum class /Planet : kotlin/Enum</Planet> { // /Planet|null[0]
     final fun values(): kotlin/Array</Planet> // /Planet.values|values#static(){}[0]
 }
 
+final enum class dev.suresh.lc/Order : kotlin/Enum<dev.suresh.lc/Order> { // dev.suresh.lc/Order|null[0]
+    enum entry IN // dev.suresh.lc/Order.IN|null[0]
+    enum entry POST // dev.suresh.lc/Order.POST|null[0]
+    enum entry PRE // dev.suresh.lc/Order.PRE|null[0]
+
+    final val entries // dev.suresh.lc/Order.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<dev.suresh.lc/Order> // dev.suresh.lc/Order.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): dev.suresh.lc/Order // dev.suresh.lc/Order.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<dev.suresh.lc/Order> // dev.suresh.lc/Order.values|values#static(){}[0]
+}
+
+final enum class dev.suresh/YesNo : kotlin/Enum<dev.suresh/YesNo> { // dev.suresh/YesNo|null[0]
+    enum entry NO // dev.suresh/YesNo.NO|null[0]
+    enum entry YES // dev.suresh/YesNo.YES|null[0]
+
+    final val entries // dev.suresh/YesNo.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<dev.suresh/YesNo> // dev.suresh/YesNo.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): dev.suresh/YesNo // dev.suresh/YesNo.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<dev.suresh/YesNo> // dev.suresh/YesNo.values|values#static(){}[0]
+}
+
 abstract interface dev.suresh/Platform { // dev.suresh/Platform|null[0]
     abstract val name // dev.suresh/Platform.name|{}name[0]
         abstract fun <get-name>(): kotlin/String // dev.suresh/Platform.name.<get-name>|<get-name>(){}[0]
@@ -39,11 +62,43 @@ abstract interface dev.suresh/Platform { // dev.suresh/Platform|null[0]
     open val tzShortId // dev.suresh/Platform.tzShortId|{}tzShortId[0]
         open fun <get-tzShortId>(): kotlin/String // dev.suresh/Platform.tzShortId.<get-tzShortId>|<get-tzShortId>(){}[0]
     open val virtualDispatcher // dev.suresh/Platform.virtualDispatcher|{}virtualDispatcher[0]
-        open fun <get-virtualDispatcher>(): kotlinx.coroutines/CoroutineDispatcher? // dev.suresh/Platform.virtualDispatcher.<get-virtualDispatcher>|<get-virtualDispatcher>(){}[0]
+        open fun <get-virtualDispatcher>(): kotlinx.coroutines/CoroutineDispatcher // dev.suresh/Platform.virtualDispatcher.<get-virtualDispatcher>|<get-virtualDispatcher>(){}[0]
 
     open fun env(kotlin/String, kotlin/String? = ...): kotlin/String? // dev.suresh/Platform.env|env(kotlin.String;kotlin.String?){}[0]
     open fun epochSecToString(kotlin/Long): kotlin/String // dev.suresh/Platform.epochSecToString|epochSecToString(kotlin.Long){}[0]
     open fun sysProp(kotlin/String, kotlin/String? = ...): kotlin/String? // dev.suresh/Platform.sysProp|sysProp(kotlin.String;kotlin.String?){}[0]
+}
+
+sealed interface <#A: out kotlin/Any?> dev.suresh.lc/Tree // dev.suresh.lc/Tree|null[0]
+
+final class <#A: out kotlin/Any?> dev.suresh.lc/Node : dev.suresh.lc/Tree<#A> { // dev.suresh.lc/Node|null[0]
+    constructor <init>(#A, dev.suresh.lc/Tree<#A> = ..., dev.suresh.lc/Tree<#A> = ...) // dev.suresh.lc/Node.<init>|<init>(1:0;dev.suresh.lc.Tree<1:0>;dev.suresh.lc.Tree<1:0>){}[0]
+
+    final val left // dev.suresh.lc/Node.left|{}left[0]
+        final fun <get-left>(): dev.suresh.lc/Tree<#A> // dev.suresh.lc/Node.left.<get-left>|<get-left>(){}[0]
+    final val right // dev.suresh.lc/Node.right|{}right[0]
+        final fun <get-right>(): dev.suresh.lc/Tree<#A> // dev.suresh.lc/Node.right.<get-right>|<get-right>(){}[0]
+    final val value // dev.suresh.lc/Node.value|{}value[0]
+        final fun <get-value>(): #A // dev.suresh.lc/Node.value.<get-value>|<get-value>(){}[0]
+
+    final fun component1(): #A // dev.suresh.lc/Node.component1|component1(){}[0]
+    final fun component2(): dev.suresh.lc/Tree<#A> // dev.suresh.lc/Node.component2|component2(){}[0]
+    final fun component3(): dev.suresh.lc/Tree<#A> // dev.suresh.lc/Node.component3|component3(){}[0]
+    final fun copy(#A = ..., dev.suresh.lc/Tree<#A> = ..., dev.suresh.lc/Tree<#A> = ...): dev.suresh.lc/Node<#A> // dev.suresh.lc/Node.copy|copy(1:0;dev.suresh.lc.Tree<1:0>;dev.suresh.lc.Tree<1:0>){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.lc/Node.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.lc/Node.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.lc/Node.toString|toString(){}[0]
+}
+
+final class dev.suresh.http/CurlLoggingConfig { // dev.suresh.http/CurlLoggingConfig|null[0]
+    constructor <init>() // dev.suresh.http/CurlLoggingConfig.<init>|<init>(){}[0]
+
+    final var enabled // dev.suresh.http/CurlLoggingConfig.enabled|{}enabled[0]
+        final fun <get-enabled>(): kotlin/Boolean // dev.suresh.http/CurlLoggingConfig.enabled.<get-enabled>|<get-enabled>(){}[0]
+        final fun <set-enabled>(kotlin/Boolean) // dev.suresh.http/CurlLoggingConfig.enabled.<set-enabled>|<set-enabled>(kotlin.Boolean){}[0]
+    final var logger // dev.suresh.http/CurlLoggingConfig.logger|{}logger[0]
+        final fun <get-logger>(): io.github.oshai.kotlinlogging/KLogger? // dev.suresh.http/CurlLoggingConfig.logger.<get-logger>|<get-logger>(){}[0]
+        final fun <set-logger>(io.github.oshai.kotlinlogging/KLogger?) // dev.suresh.http/CurlLoggingConfig.logger.<set-logger>|<set-logger>(io.github.oshai.kotlinlogging.KLogger?){}[0]
 }
 
 final class dev.suresh.http/ErrorStatus { // dev.suresh.http/ErrorStatus|null[0]
@@ -143,7 +198,25 @@ final class dev.suresh.http/MediaApiClient : kotlin/AutoCloseable { // dev.sures
     final fun hashCode(): kotlin/Int // dev.suresh.http/MediaApiClient.hashCode|hashCode(){}[0]
     final fun toString(): kotlin/String // dev.suresh.http/MediaApiClient.toString|toString(){}[0]
     final suspend fun images(): kotlin.collections/List<dev.suresh.http/Image> // dev.suresh.http/MediaApiClient.images|images(){}[0]
+    final suspend fun multiPart() // dev.suresh.http/MediaApiClient.multiPart|multiPart(){}[0]
     final suspend fun videos(): kotlin.collections/List<dev.suresh.http/Video> // dev.suresh.http/MediaApiClient.videos|videos(){}[0]
+}
+
+final class dev.suresh.http/MultiPartRes { // dev.suresh.http/MultiPartRes|null[0]
+    constructor <init>() // dev.suresh.http/MultiPartRes.<init>|<init>(){}[0]
+
+    final object $serializer : kotlinx.serialization.internal/GeneratedSerializer<dev.suresh.http/MultiPartRes> { // dev.suresh.http/MultiPartRes.$serializer|null[0]
+        final val descriptor // dev.suresh.http/MultiPartRes.$serializer.descriptor|{}descriptor[0]
+            final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.http/MultiPartRes.$serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+        final fun childSerializers(): kotlin/Array<kotlinx.serialization/KSerializer<*>> // dev.suresh.http/MultiPartRes.$serializer.childSerializers|childSerializers(){}[0]
+        final fun deserialize(kotlinx.serialization.encoding/Decoder): dev.suresh.http/MultiPartRes // dev.suresh.http/MultiPartRes.$serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+        final fun serialize(kotlinx.serialization.encoding/Encoder, dev.suresh.http/MultiPartRes) // dev.suresh.http/MultiPartRes.$serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;dev.suresh.http.MultiPartRes){}[0]
+    }
+
+    final object Companion { // dev.suresh.http/MultiPartRes.Companion|null[0]
+        final fun serializer(): kotlinx.serialization/KSerializer<dev.suresh.http/MultiPartRes> // dev.suresh.http/MultiPartRes.Companion.serializer|serializer(){}[0]
+    }
 }
 
 final class dev.suresh.http/Retry { // dev.suresh.http/Retry|null[0]
@@ -331,7 +404,6 @@ final class dev.suresh/AtomicSample { // dev.suresh/AtomicSample|null[0]
         final fun <get-x>(): kotlin/Int // dev.suresh/AtomicSample.x.<get-x>|<get-x>(){}[0]
 
     final fun doWork(kotlin/Int) // dev.suresh/AtomicSample.doWork|doWork(kotlin.Int){}[0]
-    final fun synchronizedFoo(kotlin/Int): kotlin/Int // dev.suresh/AtomicSample.synchronizedFoo|synchronizedFoo(kotlin.Int){}[0]
 }
 
 final class dev.suresh/Greeting { // dev.suresh/Greeting|null[0]
@@ -355,23 +427,33 @@ final object /MyService { // /MyService|null[0]
     final fun toString(): kotlin/String // /MyService.toString|toString(){}[0]
 }
 
-final object dev.suresh.http/ByteArrayAsBase64Serializer : kotlinx.serialization/KSerializer<kotlin/ByteArray> { // dev.suresh.http/ByteArrayAsBase64Serializer|null[0]
-    final val descriptor // dev.suresh.http/ByteArrayAsBase64Serializer.descriptor|{}descriptor[0]
-        final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.http/ByteArrayAsBase64Serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+final object dev.suresh.lc/Empty : dev.suresh.lc/Tree<kotlin/Nothing> { // dev.suresh.lc/Empty|null[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // dev.suresh.lc/Empty.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // dev.suresh.lc/Empty.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // dev.suresh.lc/Empty.toString|toString(){}[0]
+}
 
-    final fun deserialize(kotlinx.serialization.encoding/Decoder): kotlin/ByteArray // dev.suresh.http/ByteArrayAsBase64Serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
-    final fun serialize(kotlinx.serialization.encoding/Encoder, kotlin/ByteArray) // dev.suresh.http/ByteArrayAsBase64Serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;kotlin.ByteArray){}[0]
+final object dev.suresh.serde/ByteArrayAsBase64Serializer : kotlinx.serialization/KSerializer<kotlin/ByteArray> { // dev.suresh.serde/ByteArrayAsBase64Serializer|null[0]
+    final val descriptor // dev.suresh.serde/ByteArrayAsBase64Serializer.descriptor|{}descriptor[0]
+        final fun <get-descriptor>(): kotlinx.serialization.descriptors/SerialDescriptor // dev.suresh.serde/ByteArrayAsBase64Serializer.descriptor.<get-descriptor>|<get-descriptor>(){}[0]
+
+    final fun deserialize(kotlinx.serialization.encoding/Decoder): kotlin/ByteArray // dev.suresh.serde/ByteArrayAsBase64Serializer.deserialize|deserialize(kotlinx.serialization.encoding.Decoder){}[0]
+    final fun serialize(kotlinx.serialization.encoding/Encoder, kotlin/ByteArray) // dev.suresh.serde/ByteArrayAsBase64Serializer.serialize|serialize(kotlinx.serialization.encoding.Encoder;kotlin.ByteArray){}[0]
 }
 
 final const val dev.suresh.lang/HAS_SEMI // dev.suresh.lang/HAS_SEMI|{}HAS_SEMI[0]
     final fun <get-HAS_SEMI>(): kotlin/Long // dev.suresh.lang/HAS_SEMI.<get-HAS_SEMI>|<get-HAS_SEMI>(){}[0]
 
+final val dev.suresh.http/CurlLogging // dev.suresh.http/CurlLogging|{}CurlLogging[0]
+    final fun <get-CurlLogging>(): io.ktor.client.plugins.api/ClientPlugin<dev.suresh.http/CurlLoggingConfig> // dev.suresh.http/CurlLogging.<get-CurlLogging>|<get-CurlLogging>(){}[0]
 final val dev.suresh.http/json // dev.suresh.http/json|{}json[0]
     final fun <get-json>(): kotlinx.serialization.json/Json // dev.suresh.http/json.<get-json>|<get-json>(){}[0]
 final val dev.suresh.lang/hasSemi // dev.suresh.lang/hasSemi|@kotlin.Long{}hasSemi[0]
     final inline fun (kotlin/Long).<get-hasSemi>(): kotlin/Boolean // dev.suresh.lang/hasSemi.<get-hasSemi>|<get-hasSemi>@kotlin.Long(){}[0]
 final val dev.suresh.lang/hasZeroByte // dev.suresh.lang/hasZeroByte|@kotlin.Long{}hasZeroByte[0]
     final inline fun (kotlin/Long).<get-hasZeroByte>(): kotlin/Boolean // dev.suresh.lang/hasZeroByte.<get-hasZeroByte>|<get-hasZeroByte>@kotlin.Long(){}[0]
+final val dev.suresh.serde/BUILTIN_SERIALIZERS // dev.suresh.serde/BUILTIN_SERIALIZERS|{}BUILTIN_SERIALIZERS[0]
+    final fun <get-BUILTIN_SERIALIZERS>(): kotlin.collections/Map<kotlin.reflect/KClass<*>, kotlinx.serialization/KSerializer<*>> // dev.suresh.serde/BUILTIN_SERIALIZERS.<get-BUILTIN_SERIALIZERS>|<get-BUILTIN_SERIALIZERS>(){}[0]
 final val dev.suresh/localDateTimeNow // dev.suresh/localDateTimeNow|{}localDateTimeNow[0]
     final fun <get-localDateTimeNow>(): kotlinx.datetime/LocalDateTime // dev.suresh/localDateTimeNow.<get-localDateTimeNow>|<get-localDateTimeNow>(){}[0]
 final val dev.suresh/log // dev.suresh/log|{}log[0]
@@ -381,10 +463,37 @@ final val dev.suresh/platform // dev.suresh/platform|{}platform[0]
 final val dev.suresh/utcDateTimeNow // dev.suresh/utcDateTimeNow|{}utcDateTimeNow[0]
     final fun <get-utcDateTimeNow>(): kotlinx.datetime/LocalDateTime // dev.suresh/utcDateTimeNow.<get-utcDateTimeNow>|<get-utcDateTimeNow>(){}[0]
 
+final fun (kotlin.collections/Collection<*>).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.collections.Collection<*>(){}[0]
+final fun (kotlin.collections/Map<*, *>).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.collections.Map<*,*>(){}[0]
+final fun (kotlin.reflect/KClass<*>?).dev.suresh.serde/builtinSerializerOrNull(): kotlinx.serialization/KSerializer<*>? // dev.suresh.serde/builtinSerializerOrNull|builtinSerializerOrNull@kotlin.reflect.KClass<*>?(){}[0]
+final fun (kotlin/Any?).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.Any?(){}[0]
+final fun (kotlin/Array<*>).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.Array<*>(){}[0]
+final fun (kotlin/BooleanArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.BooleanArray(){}[0]
+final fun (kotlin/ByteArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.ByteArray(){}[0]
+final fun (kotlin/CharArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.CharArray(){}[0]
+final fun (kotlin/DoubleArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.DoubleArray(){}[0]
+final fun (kotlin/FloatArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.FloatArray(){}[0]
+final fun (kotlin/IntArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.IntArray(){}[0]
+final fun (kotlin/LongArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.LongArray(){}[0]
+final fun (kotlin/Pair<*, *>).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.Pair<*,*>(){}[0]
+final fun (kotlin/ShortArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.ShortArray(){}[0]
+final fun (kotlin/Triple<*, *, *>).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.Triple<*,*,*>(){}[0]
+final fun (kotlin/UByteArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.UByteArray(){}[0]
+final fun (kotlin/UIntArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.UIntArray(){}[0]
+final fun (kotlin/ULongArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.ULongArray(){}[0]
+final fun (kotlin/UShortArray).dev.suresh.serde/toJsonElement(): kotlinx.serialization.json/JsonElement // dev.suresh.serde/toJsonElement|toJsonElement@kotlin.UShortArray(){}[0]
 final fun /langFeatures() // /langFeatures|langFeatures(){}[0]
 final fun /stdlibFeatures() // /stdlibFeatures|stdlibFeatures(){}[0]
+final fun <#A: kotlin/Any?> (dev.suresh.lc/Tree<#A>).dev.suresh.lc/bfs(): kotlin.collections/List<#A> // dev.suresh.lc/bfs|bfs@dev.suresh.lc.Tree<0:0>(){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (dev.suresh.lc/Tree<#A>).dev.suresh.lc/depth(): kotlin/Int // dev.suresh.lc/depth|depth@dev.suresh.lc.Tree<0:0>(){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (dev.suresh.lc/Tree<#A>).dev.suresh.lc/dfs(dev.suresh.lc/Order = ...): kotlin.collections/List<#A> // dev.suresh.lc/dfs|dfs@dev.suresh.lc.Tree<0:0>(dev.suresh.lc.Order){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (dev.suresh.lc/Tree<#A>).dev.suresh.lc/dfsTo(dev.suresh.lc/Order = ..., kotlin.collections/MutableList<#A>) // dev.suresh.lc/dfsTo|dfsTo@dev.suresh.lc.Tree<0:0>(dev.suresh.lc.Order;kotlin.collections.MutableList<0:0>){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Any?> (dev.suresh.lc/Tree<#A>).dev.suresh.lc/print() // dev.suresh.lc/print|print@dev.suresh.lc.Tree<0:0>(){0§<kotlin.Any?>}[0]
+final fun <#A: kotlin/Number> (dev.suresh.lc/Tree<#A>).dev.suresh.lc/sum(): kotlin/Long // dev.suresh.lc/sum|sum@dev.suresh.lc.Tree<0:0>(){0§<kotlin.Number>}[0]
 final fun dev.suresh.flow/timerComposeFlow(kotlinx.datetime/TimeZone = ...): kotlinx.coroutines.flow/Flow<kotlinx.datetime/LocalDateTime> // dev.suresh.flow/timerComposeFlow|timerComposeFlow(kotlinx.datetime.TimeZone){}[0]
+final fun dev.suresh.http/defaultHttpClientConfig(kotlin/String, dev.suresh.http/Timeout, dev.suresh.http/Retry, io.github.oshai.kotlinlogging/KLogger): kotlin/Function1<io.ktor.client/HttpClientConfig<*>, kotlin/Unit> // dev.suresh.http/defaultHttpClientConfig|defaultHttpClientConfig(kotlin.String;dev.suresh.http.Timeout;dev.suresh.http.Retry;io.github.oshai.kotlinlogging.KLogger){}[0]
 final fun dev.suresh.http/httpClient(kotlin/String = ..., dev.suresh.http/Timeout = ..., dev.suresh.http/Retry = ..., io.github.oshai.kotlinlogging/KLogger = ..., kotlin/Function1<io.ktor.client/HttpClientConfig<*>, kotlin/Unit> = ...): io.ktor.client/HttpClient // dev.suresh.http/httpClient|httpClient(kotlin.String;dev.suresh.http.Timeout;dev.suresh.http.Retry;io.github.oshai.kotlinlogging.KLogger;kotlin.Function1<io.ktor.client.HttpClientConfig<*>,kotlin.Unit>){}[0]
+final fun dev.suresh.lc/main() // dev.suresh.lc/main|main(){}[0]
 
 // Targets: [js]
 final object dev.suresh/JsPlatform : dev.suresh/Platform { // dev.suresh/JsPlatform|null[0]

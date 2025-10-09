@@ -26,7 +26,7 @@ fun agentmain(agentArgs: String?, inst: Instrumentation?) {
 
 fun main() {
   logger.log(INFO) { "JFR Agent Sample..Enter to exit!" }
-  readln()
+  val _ = readln()
   SystemExitInvoker()
 }
 

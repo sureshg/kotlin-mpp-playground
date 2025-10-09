@@ -56,7 +56,8 @@ interface Platform {
                       "gradle" to gradle,
                       "jdk-vendor" to Host.jdkVendor,
                       "java-release-version" to java,
-                      "kotlin-jvm-target" to kotlinJvmtarget),
+                      "kotlin-jvm-target" to kotlinJvmtarget,
+                  ),
               "runtime" to
                   mapOf(
                       "java" to sysProp("java.runtime.version", "n/a"),
@@ -68,8 +69,10 @@ interface Platform {
                       "commit-hash" to gitHash,
                       "commit-message" to gitMessage,
                       "commit-time" to epochSecToString(gitTimestampEpochSecond.toLong()),
-                      "tag" to gitTags),
-              "os" to osInfo)
+                      "tag" to gitTags,
+                  ),
+              "os" to osInfo,
+          )
         }
 
   fun env(key: String, def: String? = null): String? = def

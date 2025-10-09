@@ -1,12 +1,12 @@
 import common.*
 
 plugins {
-  dev.suresh.plugin.kotlin.jvm
+  id("dev.suresh.plugin.kotlin.jvm")
   alias(libs.plugins.spring.boot)
   alias(libs.plugins.spring.depmgmt)
   `kotlin-spring`
-  // org.graalvm.buildtools.native
-  // dev.suresh.plugin.publishing
+  // id("dev.suresh.plugin.graalvm")
+  // id("dev.suresh.plugin.publishing")
 }
 
 description = "Kotlin SpringBoot app"
@@ -30,16 +30,5 @@ dependencies {
   testImplementation("org.testcontainers:postgresql")
   testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
-
-// Fix for https://github.com/Kotlin/dokka/issues/3472
-// configurations
-//     .matching { it.name.startsWith("dokka") }
-//     .configureEach {
-//       resolutionStrategy.eachDependency {
-//         if (requested.group.startsWith("com.fasterxml.jackson")) {
-//           useVersion("2.15.3")
-//         }
-//       }
-//     }
 
 tasks { bootRun { jvmArgs = project.runJvmArgs } }

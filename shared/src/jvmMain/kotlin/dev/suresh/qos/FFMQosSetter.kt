@@ -16,7 +16,8 @@ object FFMQosSetter {
     val result =
         downcallHandle(
                 "pthread_set_qos_class_self_np",
-                FunctionDescriptor.of(JAVA_INT, JAVA_INT, JAVA_INT))
+                FunctionDescriptor.of(JAVA_INT, JAVA_INT, JAVA_INT),
+            )
             ?.invokeExact(qosClass.raw, relativePriority) as Int
 
     when (result != 0) {
@@ -56,6 +57,7 @@ val BackgroundQosCoroutineDispatcher by lazy {
                 name = "QosThreadPool-${threadId()}"
               }
             }
-          })
+          },
+      )
       .asCoroutineDispatcher()
 }

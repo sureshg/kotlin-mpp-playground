@@ -12,7 +12,7 @@ data object Empty : Tree<Nothing>
 enum class Order {
   PRE,
   IN,
-  POST
+  POST,
 }
 
 fun <T> Tree<T>.dfs(order: Order = IN): List<T> =
@@ -116,7 +116,8 @@ fun main() {
       Node(
           1,
           left = Node(2, left = Node(4), right = Node(6)),
-          right = Node(3, left = Node(5), right = Node(7)))
+          right = Node(3, left = Node(5), right = Node(7)),
+      )
 
   println("Sum: ${root.sum()}")
   println("Depth: ${root.depth()}")

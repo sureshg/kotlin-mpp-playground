@@ -1,56 +1,19 @@
 {
   "reflection": [
     {
-      "type": "[B"
-    },
-    {
-      "type": "[C"
-    },
-    {
-      "type": "[D"
-    },
-    {
-      "type": "[F"
-    },
-    {
-      "type": "[I"
-    },
-    {
-      "type": "[J"
-    },
-    {
-      "type": "[Ljava.lang.Comparable;"
-    },
-    {
-      "type": "[Ljava.lang.Integer;",
-      "fields": [
-        {
-          "name": "Companion"
-        }
-      ]
-    },
-    {
-      "type": "[Ljava.lang.String;",
-      "fields": [
-        {
-          "name": "Companion"
-        }
-      ]
-    },
-    {
-      "type": "[Ljavax.management.openmbean.CompositeData;"
-    },
-    {
-      "type": "[S"
-    },
-    {
-      "type": "[Z"
-    },
-    {
       "type": "_COROUTINE._BOUNDARY"
     },
     {
       "type": "android.os.Build"
+    },
+    {
+      "type": "android.os.Build$VERSION"
+    },
+    {
+      "type": "boolean[]"
+    },
+    {
+      "type": "byte[]"
     },
     {
       "type": "ch.qos.logback.classic.encoder.PatternLayoutEncoder",
@@ -161,6 +124,9 @@
       ]
     },
     {
+      "type": "char[]"
+    },
+    {
       "type": "com.sun.management.GarbageCollectorMXBean"
     },
     {
@@ -177,6 +143,49 @@
     },
     {
       "type": "com.sun.management.VMOption"
+    },
+    {
+      "type": "com.sun.management.internal.DiagnosticCommandArgumentInfo",
+      "jniAccessible": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String",
+            "boolean",
+            "boolean",
+            "boolean",
+            "int"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "com.sun.management.internal.DiagnosticCommandArgumentInfo[]",
+      "jniAccessible": true
+    },
+    {
+      "type": "com.sun.management.internal.DiagnosticCommandInfo",
+      "jniAccessible": true,
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String",
+            "java.lang.String",
+            "boolean",
+            "java.util.List"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "com.sun.management.internal.DiagnosticCommandInfo[]",
+      "jniAccessible": true
     },
     {
       "type": "com.sun.management.internal.GarbageCollectorExtImpl"
@@ -204,12 +213,43 @@
     },
     {
       "type": "dev.suresh.AppKt",
+      "jniAccessible": true,
       "methods": [
+        {
+          "name": "main",
+          "parameterTypes": [
+            "java.lang.String[]"
+          ]
+        },
         {
           "name": "module",
           "parameterTypes": [
             "io.ktor.server.application.Application"
           ]
+        },
+        {
+          "name": "module",
+          "parameterTypes": [
+            "io.ktor.server.application.Application",
+            "kotlin.coroutines.Continuation"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "dev.suresh.di.Auth",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
+    },
+    {
+      "type": "dev.suresh.di.Auth$Companion",
+      "methods": [
+        {
+          "name": "serializer",
+          "parameterTypes": []
         }
       ]
     },
@@ -232,6 +272,15 @@
     },
     {
       "type": "dev.suresh.plugins.custom.CookieSession"
+    },
+    {
+      "type": "double[]"
+    },
+    {
+      "type": "float[]"
+    },
+    {
+      "type": "int[]"
     },
     {
       "type": "io.ktor.http.HttpStatusCode"
@@ -281,6 +330,9 @@
           "name": "label"
         }
       ]
+    },
+    {
+      "type": "io.ktor.server.auth.AuthenticateProvidersRegistration"
     },
     {
       "type": "io.ktor.server.auth.Authentication"
@@ -406,13 +458,40 @@
       "type": "io.ktor.server.plugins.calllogging.KtorMDCProvider"
     },
     {
+      "type": "io.ktor.server.plugins.di.DependencyInitializer$Explicit"
+    },
+    {
+      "type": "io.ktor.server.plugins.di.DependencyRegistry"
+    },
+    {
+      "type": "io.ktor.server.plugins.di.PluginModuleParametersInjector"
+    },
+    {
       "type": "io.ktor.server.plugins.forwardedheaders.ForwardedHeaderValue"
+    },
+    {
+      "type": "io.ktor.server.plugins.ratelimit.DefaultRateLimiter"
+    },
+    {
+      "type": "io.ktor.server.plugins.ratelimit.ProviderKey"
+    },
+    {
+      "type": "io.ktor.server.plugins.ratelimit.RateLimitName"
+    },
+    {
+      "type": "io.ktor.server.plugins.ratelimit.RateLimitProvider"
+    },
+    {
+      "type": "io.ktor.server.plugins.ratelimit.RateLimiter"
     },
     {
       "type": "io.ktor.server.response.ApplicationResponsePropertiesKt"
     },
     {
       "type": "io.ktor.server.response.ResponseHeaders"
+    },
+    {
+      "type": "io.ktor.server.routing.RoutingCall"
     },
     {
       "type": "io.ktor.server.routing.RoutingRoot"
@@ -428,6 +507,9 @@
     },
     {
       "type": "io.ktor.util.Attributes"
+    },
+    {
+      "type": "io.ktor.util.collections.ConcurrentMap"
     },
     {
       "type": "io.ktor.util.collections.CopyOnWriteHashMap",
@@ -512,6 +594,15 @@
       ]
     },
     {
+      "type": "io.netty.buffer.AdaptivePoolingAllocator$Chunk"
+    },
+    {
+      "type": "io.netty.buffer.AdaptivePoolingAllocator$Magazine"
+    },
+    {
+      "type": "io.netty.channel.AbstractChannel$AbstractUnsafe$8"
+    },
+    {
       "type": "io.netty.channel.AbstractChannelHandlerContext",
       "fields": [
         {
@@ -560,6 +651,9 @@
     },
     {
       "type": "io.netty.channel.DefaultFileRegion"
+    },
+    {
+      "type": "io.netty.channel.SingleThreadIoEventLoop"
     },
     {
       "type": "io.netty.channel.epoll.NativeDatagramPacketArray$NativeDatagramPacket"
@@ -641,6 +735,9 @@
       "type": "io.netty.util.concurrent.FastThreadLocalRunnable"
     },
     {
+      "type": "io.netty.util.concurrent.MpscIntQueue$MpscAtomicIntegerArrayQueue"
+    },
+    {
       "type": "io.netty.util.concurrent.SingleThreadEventExecutor",
       "fields": [
         {
@@ -653,6 +750,22 @@
     },
     {
       "type": "io.netty.util.concurrent.SingleThreadEventExecutor$4"
+    },
+    {
+      "type": "io.netty.util.concurrent.SingleThreadEventExecutor$5"
+    },
+    {
+      "type": "io.netty.util.internal.CleanerJava25$CleanableDirectBufferImpl",
+      "methods": [
+        {
+          "name": "<init>",
+          "parameterTypes": [
+            "java.lang.AutoCloseable",
+            "java.nio.ByteBuffer",
+            "long"
+          ]
+        }
+      ]
     },
     {
       "type": "io.netty.util.internal.NativeLibraryUtil",
@@ -694,6 +807,12 @@
       ]
     },
     {
+      "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.MpmcAtomicArrayQueueConsumerIndexField"
+    },
+    {
+      "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.MpmcAtomicArrayQueueProducerIndexField"
+    },
+    {
       "type": "io.netty.util.internal.shaded.org.jctools.queues.atomic.unpadded.MpscAtomicUnpaddedArrayQueueConsumerIndexField",
       "fields": [
         {
@@ -718,16 +837,31 @@
       ]
     },
     {
+      "type": "io.opentelemetry.sdk.autoconfigure.AutoConfiguredOpenTelemetrySdk"
+    },
+    {
       "type": "java.io.File"
     },
     {
       "type": "java.io.FileDescriptor"
     },
     {
+      "type": "java.io.Serializable"
+    },
+    {
       "type": "java.lang.Boolean",
+      "jniAccessible": true,
       "fields": [
         {
           "name": "TYPE"
+        }
+      ],
+      "methods": [
+        {
+          "name": "getBoolean",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
         }
       ]
     },
@@ -749,7 +883,12 @@
     },
     {
       "type": "java.lang.Class",
+      "jniAccessible": true,
       "methods": [
+        {
+          "name": "getCanonicalName",
+          "parameterTypes": []
+        },
         {
           "name": "getModule",
           "parameterTypes": []
@@ -762,6 +901,9 @@
     },
     {
       "type": "java.lang.ClassValue"
+    },
+    {
+      "type": "java.lang.Comparable[]"
     },
     {
       "type": "java.lang.Deprecated"
@@ -795,6 +937,14 @@
       ]
     },
     {
+      "type": "java.lang.Integer[]",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
+    },
+    {
       "type": "java.lang.Long",
       "fields": [
         {
@@ -807,6 +957,10 @@
       "methods": [
         {
           "name": "getDescriptor",
+          "parameterTypes": []
+        },
+        {
+          "name": "isNativeAccessEnabled",
           "parameterTypes": []
         }
       ]
@@ -845,14 +999,62 @@
     },
     {
       "type": "java.lang.String",
+      "jniAccessible": true,
       "fields": [
         {
           "name": "TYPE"
         }
+      ],
+      "methods": [
+        {
+          "name": "lastIndexOf",
+          "parameterTypes": [
+            "int"
+          ]
+        },
+        {
+          "name": "substring",
+          "parameterTypes": [
+            "int"
+          ]
+        }
       ]
     },
     {
-      "type": "java.lang.Thread"
+      "type": "java.lang.String[]",
+      "fields": [
+        {
+          "name": "Companion"
+        }
+      ]
+    },
+    {
+      "type": "java.lang.System",
+      "jniAccessible": true,
+      "methods": [
+        {
+          "name": "getProperty",
+          "parameterTypes": [
+            "java.lang.String"
+          ]
+        },
+        {
+          "name": "setProperty",
+          "parameterTypes": [
+            "java.lang.String",
+            "java.lang.String"
+          ]
+        }
+      ]
+    },
+    {
+      "type": "java.lang.Thread",
+      "methods": [
+        {
+          "name": "isVirtual",
+          "parameterTypes": []
+        }
+      ]
     },
     {
       "type": "java.lang.Throwable",
@@ -872,10 +1074,37 @@
       ]
     },
     {
+      "type": "java.lang.VersionProps",
+      "jniAccessible": true,
+      "methods": [
+        {
+          "name": "print",
+          "parameterTypes": [
+            "boolean"
+          ]
+        }
+      ]
+    },
+    {
       "type": "java.lang.Void",
       "fields": [
         {
           "name": "TYPE"
+        }
+      ]
+    },
+    {
+      "type": "java.lang.foreign.Arena",
+      "methods": [
+        {
+          "name": "allocate",
+          "parameterTypes": [
+            "long"
+          ]
+        },
+        {
+          "name": "ofShared",
+          "parameterTypes": []
         }
       ]
     },
@@ -888,6 +1117,19 @@
             "java.lang.foreign.FunctionDescriptor",
             "java.lang.foreign.Linker$Option[]"
           ]
+        }
+      ]
+    },
+    {
+      "type": "java.lang.foreign.MemorySegment",
+      "methods": [
+        {
+          "name": "address",
+          "parameterTypes": []
+        },
+        {
+          "name": "asByteBuffer",
+          "parameterTypes": []
         }
       ]
     },
@@ -952,7 +1194,15 @@
       "type": "java.math.BigInteger"
     },
     {
-      "type": "java.nio.ByteBuffer"
+      "type": "java.nio.ByteBuffer",
+      "methods": [
+        {
+          "name": "alignedSlice",
+          "parameterTypes": [
+            "int"
+          ]
+        }
+      ]
     },
     {
       "type": "java.nio.channels.FileChannel"
@@ -979,6 +1229,18 @@
     },
     {
       "type": "java.security.KeyStoreSpi"
+    },
+    {
+      "type": "java.util.Arrays",
+      "jniAccessible": true,
+      "methods": [
+        {
+          "name": "asList",
+          "parameterTypes": [
+            "java.lang.Object[]"
+          ]
+        }
+      ]
     },
     {
       "type": "java.util.Arrays$ArrayList",
@@ -1023,6 +1285,9 @@
       ]
     },
     {
+      "type": "java.util.concurrent.ScheduledThreadPoolExecutor"
+    },
+    {
       "type": "java.util.logging.LogManager",
       "methods": [
         {
@@ -1054,6 +1319,9 @@
     },
     {
       "type": "javax.management.openmbean.CompositeData"
+    },
+    {
+      "type": "javax.management.openmbean.CompositeData[]"
     },
     {
       "type": "javax.management.openmbean.OpenMBeanOperationInfoSupport"
@@ -1108,6 +1376,12 @@
     },
     {
       "type": "kotlin.Boolean"
+    },
+    {
+      "type": "kotlin.ByteArray"
+    },
+    {
+      "type": "kotlin.Cloneable"
     },
     {
       "type": "kotlin.Long"
@@ -1192,6 +1466,9 @@
       "type": "kotlin.collections.MutableMap"
     },
     {
+      "type": "kotlin.coroutines.Continuation"
+    },
+    {
       "type": "kotlin.coroutines.jvm.internal.BaseContinuationImpl"
     },
     {
@@ -1210,6 +1487,9 @@
       ]
     },
     {
+      "type": "kotlin.reflect.jvm.internal.impl.km.jvm.internal.JvmMetadataExtensions"
+    },
+    {
       "type": "kotlin.reflect.jvm.internal.impl.load.java.ErasedOverridabilityCondition"
     },
     {
@@ -1220,7 +1500,42 @@
     },
     {
       "type": "kotlin.reflect.jvm.internal.impl.resolve.scopes.DescriptorKindFilter",
-      "allPublicFields": true
+      "allPublicFields": true,
+      "fields": [
+        {
+          "name": "ALL"
+        },
+        {
+          "name": "CALLABLES"
+        },
+        {
+          "name": "CLASSIFIERS"
+        },
+        {
+          "name": "Companion"
+        },
+        {
+          "name": "FUNCTIONS"
+        },
+        {
+          "name": "NON_SINGLETON_CLASSIFIERS"
+        },
+        {
+          "name": "PACKAGES"
+        },
+        {
+          "name": "SINGLETON_CLASSIFIERS"
+        },
+        {
+          "name": "TYPE_ALIASES"
+        },
+        {
+          "name": "VALUES"
+        },
+        {
+          "name": "VARIABLES"
+        }
+      ]
     },
     {
       "type": "kotlinx.coroutines.AbstractCoroutine"
@@ -1244,6 +1559,9 @@
           "name": "_state$volatile"
         }
       ]
+    },
+    {
+      "type": "kotlinx.coroutines.CancelledContinuation"
     },
     {
       "type": "kotlinx.coroutines.CompletedExceptionally",
@@ -1410,6 +1728,9 @@
       "type": "kotlinx.coroutines.internal.StackTraceRecoveryKt"
     },
     {
+      "type": "kotlinx.coroutines.internal.ThreadSafeHeap"
+    },
+    {
       "type": "kotlinx.coroutines.intrinsics.UndispatchedKt"
     },
     {
@@ -1480,6 +1801,9 @@
       ]
     },
     {
+      "type": "long[]"
+    },
+    {
       "type": "one.jfr.event.CPULoad"
     },
     {
@@ -1487,6 +1811,42 @@
     },
     {
       "type": "one.jfr.event.ObjectCount"
+    },
+    {
+      "type": "short[]"
+    },
+    {
+      "type": "sun.launcher.LauncherHelper",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "isStaticMain"
+        },
+        {
+          "name": "noArgMain"
+        }
+      ],
+      "methods": [
+        {
+          "name": "checkAndLoadMain",
+          "parameterTypes": [
+            "boolean",
+            "int",
+            "java.lang.String"
+          ]
+        },
+        {
+          "name": "getApplicationClass",
+          "parameterTypes": []
+        },
+        {
+          "name": "makePlatformString",
+          "parameterTypes": [
+            "boolean",
+            "byte[]"
+          ]
+        }
+      ]
     },
     {
       "type": "sun.management.ClassLoadingImpl"
@@ -1511,6 +1871,36 @@
     },
     {
       "type": "sun.management.RuntimeImpl"
+    },
+    {
+      "type": "sun.management.VMManagementImpl",
+      "jniAccessible": true,
+      "fields": [
+        {
+          "name": "compTimeMonitoringSupport"
+        },
+        {
+          "name": "currentThreadCpuTimeSupport"
+        },
+        {
+          "name": "objectMonitorUsageSupport"
+        },
+        {
+          "name": "otherThreadCpuTimeSupport"
+        },
+        {
+          "name": "remoteDiagnosticCommandsSupport"
+        },
+        {
+          "name": "synchronizerUsageSupport"
+        },
+        {
+          "name": "threadAllocatedMemorySupport"
+        },
+        {
+          "name": "threadContentionMonitoringSupport"
+        }
+      ]
     },
     {
       "type": "sun.misc.VM"
@@ -1783,6 +2173,27 @@
           ]
         }
       ]
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData"
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData_en"
+    },
+    {
+      "type": "sun.text.resources.cldr.FormatData_en_US"
+    },
+    {
+      "type": "sun.util.resources.cldr.CalendarData"
+    },
+    {
+      "type": "sun.util.resources.cldr.TimeZoneNames"
+    },
+    {
+      "type": "sun.util.resources.cldr.TimeZoneNames_en"
+    },
+    {
+      "type": "sun.util.resources.cldr.TimeZoneNames_en_US"
     }
   ],
   "resources": [
@@ -1805,7 +2216,13 @@
       "glob": "META-INF/services/io.ktor.serialization.kotlinx.KotlinxSerializationExtensionProvider"
     },
     {
+      "glob": "META-INF/services/io.ktor.server.application.ModuleParametersInjector"
+    },
+    {
       "glob": "META-INF/services/io.ktor.server.config.ConfigLoader"
+    },
+    {
+      "glob": "META-INF/services/io.ktor.server.plugins.di.DependencyMapExtension"
     },
     {
       "glob": "META-INF/services/java.net.spi.InetAddressResolverProvider"
@@ -1827,6 +2244,9 @@
     },
     {
       "glob": "META-INF/services/kotlin.metadata.internal.extensions.MetadataExtensions"
+    },
+    {
+      "glob": "META-INF/services/kotlin.reflect.jvm.internal.impl.km.internal.extensions.MetadataExtensions"
     },
     {
       "glob": "META-INF/services/kotlin.reflect.jvm.internal.impl.resolve.ExternalOverridabilityCondition"
@@ -1978,197 +2398,6 @@
     {
       "module": "jdk.management.agent",
       "glob": "jdk/internal/agent/resources/agent_en_US.properties"
-    }
-  ],
-  "bundles": [],
-  "jni": [
-    {
-      "type": "[Lcom.sun.management.internal.DiagnosticCommandArgumentInfo;"
-    },
-    {
-      "type": "[Lcom.sun.management.internal.DiagnosticCommandInfo;"
-    },
-    {
-      "type": "com.sun.management.internal.DiagnosticCommandArgumentInfo",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String",
-            "java.lang.String",
-            "java.lang.String",
-            "java.lang.String",
-            "boolean",
-            "boolean",
-            "boolean",
-            "int"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "com.sun.management.internal.DiagnosticCommandInfo",
-      "methods": [
-        {
-          "name": "<init>",
-          "parameterTypes": [
-            "java.lang.String",
-            "java.lang.String",
-            "java.lang.String",
-            "boolean",
-            "java.util.List"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "dev.suresh.AppKt",
-      "methods": [
-        {
-          "name": "main",
-          "parameterTypes": [
-            "java.lang.String[]"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.lang.Boolean",
-      "methods": [
-        {
-          "name": "getBoolean",
-          "parameterTypes": [
-            "java.lang.String"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.lang.Class",
-      "methods": [
-        {
-          "name": "getCanonicalName",
-          "parameterTypes": []
-        }
-      ]
-    },
-    {
-      "type": "java.lang.String",
-      "methods": [
-        {
-          "name": "lastIndexOf",
-          "parameterTypes": [
-            "int"
-          ]
-        },
-        {
-          "name": "substring",
-          "parameterTypes": [
-            "int"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.lang.System",
-      "methods": [
-        {
-          "name": "getProperty",
-          "parameterTypes": [
-            "java.lang.String"
-          ]
-        },
-        {
-          "name": "setProperty",
-          "parameterTypes": [
-            "java.lang.String",
-            "java.lang.String"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.lang.VersionProps",
-      "methods": [
-        {
-          "name": "print",
-          "parameterTypes": [
-            "boolean"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "java.util.Arrays",
-      "methods": [
-        {
-          "name": "asList",
-          "parameterTypes": [
-            "java.lang.Object[]"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "sun.launcher.LauncherHelper",
-      "fields": [
-        {
-          "name": "isStaticMain"
-        },
-        {
-          "name": "noArgMain"
-        }
-      ],
-      "methods": [
-        {
-          "name": "checkAndLoadMain",
-          "parameterTypes": [
-            "boolean",
-            "int",
-            "java.lang.String"
-          ]
-        },
-        {
-          "name": "getApplicationClass",
-          "parameterTypes": []
-        },
-        {
-          "name": "makePlatformString",
-          "parameterTypes": [
-            "boolean",
-            "byte[]"
-          ]
-        }
-      ]
-    },
-    {
-      "type": "sun.management.VMManagementImpl",
-      "fields": [
-        {
-          "name": "compTimeMonitoringSupport"
-        },
-        {
-          "name": "currentThreadCpuTimeSupport"
-        },
-        {
-          "name": "objectMonitorUsageSupport"
-        },
-        {
-          "name": "otherThreadCpuTimeSupport"
-        },
-        {
-          "name": "remoteDiagnosticCommandsSupport"
-        },
-        {
-          "name": "synchronizerUsageSupport"
-        },
-        {
-          "name": "threadAllocatedMemorySupport"
-        },
-        {
-          "name": "threadContentionMonitoringSupport"
-        }
-      ]
     }
   ]
 }

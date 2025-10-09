@@ -2,7 +2,7 @@ package dev.suresh
 
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.suspendCancellableCoroutine
 import org.khronos.webgl.ArrayBuffer
 import org.w3c.dom.Document
 import org.w3c.dom.HTMLInputElement
@@ -17,7 +17,7 @@ import org.w3c.files.FileReader
  * [Read Files](https://web.dev/articles/read-files)
  */
 suspend fun Document.selectFileFromDisk(accept: String? = null, multiple: Boolean = false) =
-    suspendCoroutine { cont ->
+    suspendCancellableCoroutine { cont ->
       val input = createElement("input") as HTMLInputElement
       input.apply {
         type = "file"
@@ -38,7 +38,7 @@ suspend fun Document.selectFileFromDisk(accept: String? = null, multiple: Boolea
       input.remove()
     }
 
-suspend fun File.readAsText() = suspendCoroutine { cont ->
+suspend fun File.readAsText() = suspendCancellableCoroutine { cont ->
   val reader = FileReader()
   reader.onload = {
     try {
@@ -61,7 +61,7 @@ suspend fun File.readAsText() = suspendCoroutine { cont ->
   reader.readAsText(this, "UTF-8")
 }
 
-suspend fun File.readAsByteArray() = suspendCoroutine { cont ->
+suspend fun File.readAsByteArray() = suspendCancellableCoroutine { cont ->
   val reader = FileReader()
   reader.onload = {
     try {

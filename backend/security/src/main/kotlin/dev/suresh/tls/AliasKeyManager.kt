@@ -13,6 +13,6 @@ class AliasKeyManager(private val delegate: X509KeyManager, private val aliasNam
   override fun chooseClientAlias(
       keyType: Array<String>,
       issuers: Array<Principal>,
-      socket: Socket
+      socket: Socket,
   ): String = aliasName
 }

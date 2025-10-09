@@ -24,7 +24,9 @@ class CommonTest {
   @Test
   fun greetings() {
     assertTrue(
-        actual = Greeting().greeting().contains("Kotlin"), message = "Check 'Kotlin' is mentioned")
+        actual = Greeting().greeting().contains("Kotlin"),
+        message = "Check 'Kotlin' is mentioned",
+    )
   }
 
   @Test
@@ -55,7 +57,9 @@ class CommonTest {
           followRedirects = true
           defaultRequest {
             headers.appendIfNameAndValueAbsent(
-                HttpHeaders.ContentType, ContentType.Application.Json.toString())
+                HttpHeaders.ContentType,
+                ContentType.Application.Json.toString(),
+            )
           }
 
           HttpResponseValidator {
@@ -76,7 +80,8 @@ class CommonTest {
       assertEquals(
           expected = "Client Error Response",
           actual = e.response.bodyAsText(),
-          message = "Check response body")
+          message = "Check response body",
+      )
     }
   }
 }

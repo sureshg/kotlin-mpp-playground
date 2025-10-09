@@ -138,8 +138,10 @@ class AppTests {
                     # -outform der -keyform der
                     """
                         .trimIndent(),
-                    365),
-                "$certDir/gen-certs.sh")
+                    365,
+                ),
+                "$certDir/gen-certs.sh",
+            )
             .withCopyToContainer(
                 Transferable.of(
                     $$"""
@@ -168,8 +170,10 @@ class AppTests {
                     exec nginx -g "daemon off;"
                     """
                         .trimIndent(),
-                    365),
-                "/entrypoint.sh")
+                    365,
+                ),
+                "/entrypoint.sh",
+            )
             .withCommand("sh", "-c", "$certDir/gen-certs.sh && /entrypoint.sh")
             .withExposedPorts(tlsPort)
             .withLogConsumer(Slf4jLogConsumer(logger, false))

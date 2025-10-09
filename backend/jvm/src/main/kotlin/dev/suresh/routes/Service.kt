@@ -39,7 +39,8 @@ fun Routing.services() {
 
   get("/trace") {
     call.respond(
-        mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall().toString()))
+        mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall().toString())
+    )
   }
 
   route("/session") {
@@ -85,20 +86,21 @@ fun Routing.services() {
       serialize = { typeInfo, data ->
         val serializer = json.serializersModule.serializer(typeInfo.kotlinType!!)
         json.encodeToString(serializer, data)
-      }) {
-        val name = call.parameters["name"] ?: "World"
-        var counter = 0
-        while (isActive) {
-          send(Name("Hello", "$name ${counter++}"))
-        }
+      },
+  ) {
+    val name = call.parameters["name"] ?: "World"
+    var counter = 0
+    while (isActive) {
+      send(Name("Hello", "$name ${counter++}"))
+    }
 
-        heartbeat {
-          period = 10.seconds
-          event = ServerSentEvent("heartbeat")
-        }
+    heartbeat {
+      period = 10.seconds
+      event = ServerSentEvent("heartbeat")
+    }
 
-        close()
-      }
+    close()
+  }
 
   get("/no-compression") {
     // Prevent response body compression
@@ -113,7 +115,7 @@ fun Routing.services() {
 
 suspend fun ApplicationCall.respondLogStream(
     contentType: ContentType = ContentType.Text.EventStream,
-    block: suspend KLogger.() -> Unit
+    block: suspend KLogger.() -> Unit,
 ) {
   respondTextWriter(contentType = contentType) { block(RespLogger(this, logger)) }
 }

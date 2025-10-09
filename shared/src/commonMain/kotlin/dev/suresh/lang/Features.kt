@@ -13,7 +13,7 @@ enum class Planet(val moon: Int) {
   JUPITER(5),
   SATURN(66),
   URANUS(62),
-  NEPTUNE(13)
+  NEPTUNE(13),
 }
 
 data object MyService

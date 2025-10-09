@@ -20,7 +20,7 @@ class CustomSSLSocketFactory(private val delegate: SSLSocketFactory) : SSLSocket
       host: String,
       port: Int,
       localHost: InetAddress,
-      localPort: Int
+      localPort: Int,
   ): Socket =
       delegate.createSocket(host, port, localHost, localPort).apply { reconfigureSSLSocket() }
 
@@ -31,7 +31,7 @@ class CustomSSLSocketFactory(private val delegate: SSLSocketFactory) : SSLSocket
       address: InetAddress,
       port: Int,
       localAddress: InetAddress,
-      localPort: Int
+      localPort: Int,
   ): Socket =
       delegate.createSocket(address, port, localAddress, localPort).apply { reconfigureSSLSocket() }
 }

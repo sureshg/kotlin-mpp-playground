@@ -31,7 +31,7 @@ class SystemExitTransformer : ClassFileTransformer {
       className: String,
       classBeingRedefined: Class<*>,
       protectionDomain: ProtectionDomain,
-      classBytes: ByteArray
+      classBytes: ByteArray,
   ): ByteArray? {
     return if (loader != ClassLoader.getPlatformClassLoader()) blockSystemExit(classBytes) else null
   }
@@ -52,7 +52,11 @@ fun blockSystemExit(classBytes: ByteArray): ByteArray? {
             .dup()
             .ldc(java.lang.String("System.exit not allowed"))
             .invokespecial(
-                rte, "<init>", MethodTypeDesc.ofDescriptor("(Ljava/lang/String;)V"), false)
+                rte,
+                "<init>",
+                MethodTypeDesc.ofDescriptor("(Ljava/lang/String;)V"),
+                false,
+            )
             .athrow()
         modified.set(true)
       }

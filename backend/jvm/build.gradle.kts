@@ -1,26 +1,41 @@
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
+import io.ktor.plugin.OpenApiPreview
 import kotlin.io.path.Path
 
 plugins {
-  dev.suresh.plugin.kotlin.jvm
+  id("dev.suresh.plugin.kotlin.jvm")
   application
-  com.google.cloud.tools.jib
-  gg.jte.gradle
-  dev.suresh.plugin.graalvm
-  com.gradleup.shadow
+  id("com.google.cloud.tools.jib")
+  id("gg.jte.gradle")
+  id("dev.suresh.plugin.graalvm")
+  id("com.gradleup.shadow")
   alias(libs.plugins.jetbrains.ktor)
   // alias(libs.plugins.exoquery)
-  dev.suresh.plugin.publishing
+  id("dev.suresh.plugin.publishing")
   // alias(libs.plugins.jetbrains.exposed)
 }
 
 description = "Ktor backend jvm application"
 
-application { mainClass = libs.versions.app.mainclass.get() }
+application {
+  mainClass = libs.versions.app.mainclass.get()
+  // applicationDefaultJvmArgs += listOf("")
+}
 
-ktor { fatJar { archiveFileName = "${project.name}-all.jar" } }
+ktor {
+  @OptIn(OpenApiPreview::class)
+  openApi {
+    title = rootProject.name
+    version = project.version.toString()
+    summary = project.description
+    description = project.description
+    target = project.layout.buildDirectory.file("open-api.json")
+  }
+
+  fatJar { archiveFileName = "${project.name}-all.jar" }
+}
 
 jte {
   contentType = gg.jte.ContentType.Html
@@ -127,6 +142,7 @@ dependencies {
 
   // Server dependencies
   implementation(libs.ktor.server.core)
+  implementation(libs.ktor.server.di)
   implementation(libs.ktor.server.netty)
   implementation(libs.ktor.server.content.negotiation)
   implementation(libs.ktor.server.metrics.micrometer)
@@ -135,8 +151,8 @@ dependencies {
   implementation(libs.ktor.server.status.pages)
   implementation(libs.ktor.server.default.headers)
   implementation(libs.ktor.server.forwarded.header)
-  implementation(libs.ktor.server.swagger)
   implementation(libs.ktor.server.http.redirect)
+  implementation(libs.ktor.server.request.validation)
   implementation(libs.ktor.server.compression)
   implementation(libs.ktor.server.cors)
   implementation(libs.ktor.server.hsts)
@@ -151,8 +167,13 @@ dependencies {
   implementation(libs.ktor.server.auth.jwt)
   implementation(libs.ktor.server.websockets)
   implementation(libs.ktor.server.sse)
+  implementation(libs.ktor.server.html)
   implementation(libs.ktor.serialization.json)
   implementation(libs.kotlinx.serialization.hocon)
+  implementation(libs.kotlin.metadata.jvm)
+
+  // OpenAPI
+  implementation(libs.ktor.server.swagger)
   // implementation(libs.ktor.server.openapi)
 
   // Client dependencies
@@ -237,3 +258,10 @@ dependencies {
 
 // JS build output files.
 // tasks.named(jsWebpack).get().outputs.files
+
+configurations.all {
+  resolutionStrategy {
+    force("org.bouncycastle:bcutil-jdk18on:${libs.versions.bc.asProvider().get()}")
+    force("org.bouncycastle:bcprov-jdk18on:${libs.versions.bc.asProvider().get()}")
+  }
+}

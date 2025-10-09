@@ -53,17 +53,14 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 
   ```bash
   # Kotlin Multiplatform
-  $ ./gradlew :shared:runJvm
-  $ ./gradlew :shared:jvmDistZip
-  # Run task for target 'jvm' and compilation 'main' (it's confusing)
   $ ./gradlew :shared:jvmRun
+  $ ./gradlew :shared:jvmDistZip
 
   # Kotlin JVM
   $ ./gradlew :backend:jvm:run
   $ ./gradlew :backend:jvm:build
   $ ./gradlew :backend:jvm:jdeprscan
   $ ./gradlew :backend:jvm:printModuleDeps
-
 
   # Benchmark
   $ ./gradlew :benchmark:benchmark
@@ -175,11 +172,11 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :backend:jvm:jvmRun -DmainClass=dev.suresh.lang.SysCallKt --quiet
   ```
 
-* BinCompat & Missing Targets
+* ABI Validation & Missing Targets
 
   ```bash
-  $ ./gradlew :backend:security:apiDump
-  $ ./gradlew :backend:security:apiCheck
+  $ ./gradlew :shared:updateLegacyAbi
+  $ ./gradlew :shared:checkLegacyAbi
 
   # KMP missing targets report
   $ ./gradlew :shared:kmpMissingTargets
@@ -286,14 +283,8 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ export ORG_GRADLE_PROJECT_signingInMemoryKeyPassword=<Password>
   $ export ORG_GRADLE_PROJECT_signingInMemoryKey=$(gpg --export-secret-keys --armor ${ORG_GRADLE_PROJECT_signingInMemoryKeyId} | grep -v '\-\-' | grep -v '^=.' | tr -d '\n')
 
-  # For aggregated publication (preferred) to Central
-  $ ./gradlew publishAggregationToCentralPortal
-
-  # For publishing snapshots
-  $ ./gradlew publishAggregationToCentralPortalSnapshots
-
-  # For all publications (separate publications)
-  $ ./gradlew publishAllPublicationsToCentralPortal
+  # For publishing to MavenCentral
+  $ ./gradlew publishToMavenCentral
   ```
 
 ### Misc
@@ -308,10 +299,9 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 
   $ ./gradlew :backend:jvm:listResolvedArtifacts
 
-  # KMP hierarchy and module graphs
-  $ ./gradlew :shared:printHierarchy
-  $ ./gradlew createModuleGraph
-  $ ./gradlew generateChangelog
+  # Task Graph
+  $ ./gradlew tasks --all
+  $ ./gradlew build --task-graph
 
   # Clean
   $ ./gradlew cleanAll

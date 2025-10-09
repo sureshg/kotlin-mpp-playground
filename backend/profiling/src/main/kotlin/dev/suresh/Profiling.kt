@@ -37,7 +37,10 @@ object Profiling {
     val server = ManagementFactory.getPlatformMBeanServer()
     val hotspot =
         ManagementFactory.newPlatformMXBeanProxy(
-            server, diagnosticObjName, HotSpotDiagnosticMXBean::class.java)
+            server,
+            diagnosticObjName,
+            HotSpotDiagnosticMXBean::class.java,
+        )
 
     val heapDumpPath = createTempFile("heapdump", ".hprof")
     heapDumpPath.deleteIfExists()
@@ -50,7 +53,10 @@ object Profiling {
     val server = ManagementFactory.getPlatformMBeanServer()
     val hotspot =
         ManagementFactory.newPlatformMXBeanProxy(
-            server, diagnosticObjName, HotSpotDiagnosticMXBean::class.java)
+            server,
+            diagnosticObjName,
+            HotSpotDiagnosticMXBean::class.java,
+        )
 
     val heapDumpPath = createTempFile("heapdump", ".hprof")
     heapDumpPath.deleteIfExists()

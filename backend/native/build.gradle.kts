@@ -10,9 +10,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinNativeLink
 import org.jetbrains.kotlin.konan.target.Family
 
 plugins {
-  dev.suresh.plugin.kotlin.mpp
+  id("dev.suresh.plugin.kotlin.mpp")
+  id("dev.suresh.plugin.publishing")
   com.google.cloud.tools.jib
-  dev.suresh.plugin.publishing
 }
 
 val appBinName = "app"
@@ -126,7 +126,8 @@ tasks {
             "-output",
             binName,
             macosArm64.get().outputFile.get(),
-            macosX64.get().outputFile.get())
+            macosX64.get().outputFile.get(),
+        )
         workingDir = layout.buildDirectory.dir("bin").get().asFile
         group = "Build"
         description = "Builds universal macOS binary"
@@ -134,7 +135,9 @@ tasks {
         doLast {
           logger.lifecycle(
               TextColors.cyan(
-                  "Universal macOS binary created: ${workingDir.resolve(binName).absolutePath}"))
+                  "Universal macOS binary created: ${workingDir.resolve(binName).absolutePath}"
+              )
+          )
         }
 
         onlyIf { Platform.isMac }
@@ -162,6 +165,7 @@ tasks {
   withType<Exec>().configureEach {
     val arguments = providers.gradleProperty("runArgs")
     argumentProviders.add(
-        CommandLineArgumentProvider { arguments.orNull?.split(" ") ?: emptyList() })
+        CommandLineArgumentProvider { arguments.orNull?.split(" ") ?: emptyList() }
+    )
   }
 }

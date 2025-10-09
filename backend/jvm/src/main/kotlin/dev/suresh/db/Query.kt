@@ -10,7 +10,7 @@ data class People(
     val name: String,
     val email: Email?,
     val age: Int,
-    val addressId: Long?
+    val addressId: Long?,
 )
 
 data class Address(
@@ -19,7 +19,7 @@ data class Address(
     val city: String,
     val state: String?,
     val zipCode: String?,
-    val country: String
+    val country: String,
 )
 
 data class Robot(
@@ -73,6 +73,7 @@ fun select() {
         val a = join(address) { it.id == p.addressId && it.city.like("%San Francisco%").use }
         where { p.age > 10 }
         groupBy(p.name, p.age)
+        having { p95(p.age).use > 50 }
         sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
         p to a
       }
@@ -113,6 +114,35 @@ fun batch(p: Sequence<People>) {
 }
 
 @CapturedFunction
-context(_: CapturedBlock)
+// context(_: CapturedBlock)
 fun String.like(value: String) =
     capture.expression { free("${this@like} LIKE $value").asPure<Boolean>() }
+
+@CapturedFunction fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }
+
+// data class User(val id: Long, val name: String, val active: Int)
+//
+// data class Comment(
+//    val id: Long,
+//    val content: String,
+//    val userId: Long,
+//    val createdAt: LocalDateTime
+// )
+//
+// val user = sql { Table<User>() }
+// val comment = sql { Table<Comment>() }
+//
+// fun select1() {
+//  val date = Clock.System.now().plus(30.days).toLocalDateTime(TimeZone.currentSystemDefault())
+//  val s = sql {
+//    select {
+//          val u = from(user)
+//          val c = join(comment) { it.userId == u.id }
+//          where { u.active == 1 && c.createdAt > param(date) }
+//          groupBy(u.id)
+//          u to count(c.id)
+//        }
+//        .filter { it.second > 5 }
+//  }
+//  println("SQL: ${s.buildPrettyFor.Postgres().value}")
+// }

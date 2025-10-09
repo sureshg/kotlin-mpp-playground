@@ -1,6 +1,5 @@
 package dev.suresh
 
-import com.github.marschall.directorykeystore.*
 import java.nio.file.Path
 import java.security.KeyStore
 import java.security.Security
@@ -20,16 +19,16 @@ object TrustStore {
           .map { it.substringAfter("KeyStore.").trim() }
           .distinct()
 
-  fun systemTrustStore(type: TrustStoreType): KeyStore =
-      when (type) {
-        is TrustStoreType.Directory -> {
-          if (Security.getProvider(DirectoryKeystoreProvider.NAME) == null) {
-            Security.addProvider(DirectoryKeystoreProvider())
-          }
-          KeyStore.getInstance(type.name).apply { load(DirectoryLoadStoreParameter(type.path)) }
-        }
-        else -> KeyStore.getInstance(type.name).apply { load(null, null) }
-      }
+  // fun systemTrustStore(type: TrustStoreType): KeyStore =
+  //    when (type) {
+  //      is TrustStoreType.Directory -> {
+  //        if (Security.getProvider(DirectoryKeystoreProvider.NAME) == null) {
+  //          Security.addProvider(DirectoryKeystoreProvider())
+  //        }
+  //        KeyStore.getInstance(type.name).apply { load(DirectoryLoadStoreParameter(type.path)) }
+  //      }
+  //      else -> KeyStore.getInstance(type.name).apply { load(null, null) }
+  //    }
 
   val caCerts =
       TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {

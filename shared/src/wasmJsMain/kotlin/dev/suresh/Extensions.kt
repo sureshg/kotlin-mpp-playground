@@ -30,7 +30,8 @@ fun ArrayBuffer?.toByteArray() =
           const mem8 = new Int8Array(wasmExports.memory.buffer, dstAddr, size);
           mem8.set(src);
          }
-         """)
+         """
+)
 internal external fun jsExportInt8ArrayToWasm(src: Int8Array, size: Int, dstAddr: Int)
 
 internal fun jsInt8ArrayToKotlinByteArray(x: Int8Array): ByteArray {

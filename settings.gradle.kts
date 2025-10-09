@@ -1,11 +1,26 @@
 import common.*
 
 pluginManagement {
+  val buildPluginVer =
+      settingsDir
+          .resolve("gradle/libs.versions.toml")
+          .readLines()
+          .first { it.contains("bc-plugins") }
+          .split("\"")[1]
+          .trim()
+
+  resolutionStrategy {
+    eachPlugin {
+      if (requested.id.id.startsWith("dev.suresh.plugin")) {
+        useVersion(buildPluginVer)
+      }
+    }
+  }
+
   repositories {
     mavenCentral()
     gradlePluginPortal()
   }
-  includeBuild("gradle/build-logic")
 }
 
 plugins { id("dev.suresh.plugin.repos") }
@@ -30,7 +45,7 @@ include(":backend:agent:jfr")
 
 include(":backend:agent:otel")
 
-include(":web")
+// include(":web")
 
 include(":benchmark")
 
@@ -42,18 +57,18 @@ if (isNativeTargetEnabled) {
   include(":backend:native")
 }
 
-if (isComposeModuleEnabled) {
-  include(":compose:cmp")
-  // include(":compose:cli")
-  // include(":compose:html")
-}
-
-if (isBootModuleEnabled) {
-  include(":backend:boot")
-}
-
-// includeBuild("misc/build") {
-//    dependencySubstitution {
-//        substitute(module("dev.suresh:misc-build")).using(project(":"))
-//    }
+// if (isComposeModuleEnabled) {
+//  include(":compose:cmp")
+//  // include(":compose:cli")
+//  // include(":compose:html")
 // }
+//
+// if (isBootModuleEnabled) {
+//  include(":backend:boot")
+// }
+//
+//// includeBuild("misc/build") {
+////    dependencySubstitution {
+////        substitute(module("dev.suresh:misc-build")).using(project(":"))
+////    }
+//// }

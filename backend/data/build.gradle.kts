@@ -1,8 +1,9 @@
 import common.jvmTarget
+import org.jetbrains.kotlin.gradle.*
 
 plugins {
-  dev.suresh.plugin.kotlin.mpp
-  dev.suresh.plugin.publishing
+  id("dev.suresh.plugin.kotlin.mpp")
+  id("dev.suresh.plugin.publishing")
 }
 
 description = "Kotlin Data Science!"
@@ -11,8 +12,6 @@ kotlin {
   jvmTarget(project)
 
   sourceSets {
-    commonMain { dependencies { implementation(projects.shared) } }
-
     jvmMain {
       dependencies {
         implementation(libs.pty4j)
@@ -24,10 +23,7 @@ kotlin {
       kotlin.srcDir("src/main/kotlin")
       resources.srcDir("src/main/resources")
     }
-
-    jvmTest {
-      kotlin.srcDir("src/test/kotlin")
-      resources.srcDir("src/test/resources")
-    }
   }
+
+  @OptIn(ExperimentalKotlinGradlePluginApi::class) dependencies { implementation(projects.shared) }
 }

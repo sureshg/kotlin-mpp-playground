@@ -46,7 +46,9 @@ object FFM {
     val gmtAddr = SYMBOL_LOOKUP.findOrThrow("gmtime")
     val gmtDesc =
         FunctionDescriptor.of(
-            AddressLayout.ADDRESS.withTargetLayout(TM.LAYOUT), AddressLayout.ADDRESS)
+            AddressLayout.ADDRESS.withTargetLayout(TM.LAYOUT),
+            AddressLayout.ADDRESS,
+        )
     val gmtime = LINKER.downcallHandle(gmtAddr, gmtDesc)
 
     Arena.ofConfined().use { arena ->
@@ -149,7 +151,8 @@ object FFM {
             ValueLayout.JAVA_INT,
             ValueLayout.JAVA_INT,
             ValueLayout.JAVA_LONG,
-            AddressLayout.ADDRESS.withTargetLayout(winsize))
+            AddressLayout.ADDRESS.withTargetLayout(winsize),
+        )
     val isAttyFun = FunctionDescriptor.of(ValueLayout.JAVA_INT, ValueLayout.JAVA_INT)
 
     // For capturing the errno value

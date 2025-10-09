@@ -48,14 +48,14 @@ expect fun httpClient(
     timeout: Timeout = Timeout.DEFAULT,
     retry: Retry = Retry.DEFAULT,
     kLogger: KLogger = log,
-    config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, kLogger)
+    config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, kLogger),
 ): HttpClient
 
 fun defaultHttpClientConfig(
     name: String,
     timeout: Timeout,
     retry: Retry,
-    kLogger: KLogger
+    kLogger: KLogger,
 ): HttpClientConfigurer = {
   install(Resources)
   install(ContentNegotiation) { json(json) }
@@ -110,7 +110,9 @@ fun defaultHttpClientConfig(
 
   install(DefaultRequest) {
     headers.appendIfNameAndValueAbsent(
-        HttpHeaders.ContentType, ContentType.Application.Json.toString())
+        HttpHeaders.ContentType,
+        ContentType.Application.Json.toString(),
+    )
   }
 
   install(SSE) {

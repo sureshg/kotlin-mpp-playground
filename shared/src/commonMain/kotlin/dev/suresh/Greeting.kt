@@ -24,8 +24,13 @@ class Greeting {
             name = Name(first = "Foo", last = "Bar"),
             address =
                 Address(
-                    street = "123 Main St", city = "San Francisco", state = "CA", zip = "95000"),
-            privateInfo = PrivateInfo(ssn = "123-45-6789", dob = "01/01/2000"))
+                    street = "123 Main St",
+                    city = "San Francisco",
+                    state = "CA",
+                    zip = "95000",
+                ),
+            privateInfo = PrivateInfo(ssn = "123-45-6789", dob = "01/01/2000"),
+        )
     val modPerson = person.copy() // { address.city = "San Jose" }
     appendLine("Person: $person")
     appendLine("Modified Person: $modPerson")
@@ -103,5 +108,5 @@ class AtomicSample {
 
 enum class YesNo {
   YES,
-  NO
+  NO,
 }

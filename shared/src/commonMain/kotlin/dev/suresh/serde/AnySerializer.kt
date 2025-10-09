@@ -39,7 +39,8 @@ val BUILTIN_SERIALIZERS: Map<KClass<*>, KSerializer<*>> by lazy {
       Nothing::class to NothingSerializer(),
       Duration::class to Duration.serializer(),
       Instant::class to Instant.serializer(),
-      Uuid::class to Uuid.serializer())
+      Uuid::class to Uuid.serializer(),
+  )
 }
 
 fun KClass<*>?.builtinSerializerOrNull() = BUILTIN_SERIALIZERS[this]
