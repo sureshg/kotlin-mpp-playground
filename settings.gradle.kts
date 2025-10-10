@@ -63,10 +63,10 @@ if (isComposeModuleEnabled) {
   // include(":compose:html")
 }
 
-// if (isBootModuleEnabled) {
-//  include(":backend:boot")
-// }
-//
+if (isBootModuleEnabled) {
+  include(":backend:boot")
+}
+
 //// includeBuild("misc/build") {
 ////    dependencySubstitution {
 ////        substitute(module("dev.suresh:misc-build")).using(project(":"))

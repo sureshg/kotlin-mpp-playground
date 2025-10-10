@@ -2,9 +2,9 @@ import common.*
 
 plugins {
   id("dev.suresh.plugin.kotlin.jvm")
+  kotlin("plugin.spring")
   alias(libs.plugins.spring.boot)
   alias(libs.plugins.spring.depmgmt)
-  `kotlin-spring`
   // id("dev.suresh.plugin.graalvm")
   // id("dev.suresh.plugin.publishing")
 }
