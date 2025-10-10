@@ -37,9 +37,11 @@ $dokka.location:/BuildConfig/arrowSuspendapp/#/PointingToDeclaration/shared/[ro
 $dokka.location:/BuildConfig/asyncProfiler/#/PointingToDeclaration/shared/[root]/-build-config/async-profiler.html
 $dokka.location:/BuildConfig/autonomousappsBestpractices/#/PointingToDeclaration/shared/[root]/-build-config/autonomousapps-bestpractices.html
 $dokka.location:/BuildConfig/autonomousappsDepanalysis/#/PointingToDeclaration/shared/[root]/-build-config/autonomousapps-depanalysis.html
+$dokka.location:/BuildConfig/ayza/#/PointingToDeclaration/shared/[root]/-build-config/ayza.html
 $dokka.location:/BuildConfig/badassJlink/#/PointingToDeclaration/shared/[root]/-build-config/badass-jlink.html
 $dokka.location:/BuildConfig/badassRuntime/#/PointingToDeclaration/shared/[root]/-build-config/badass-runtime.html
 $dokka.location:/BuildConfig/batik/#/PointingToDeclaration/shared/[root]/-build-config/batik.html
+$dokka.location:/BuildConfig/bc/#/PointingToDeclaration/shared/[root]/-build-config/bc.html
 $dokka.location:/BuildConfig/bcPlugins/#/PointingToDeclaration/shared/[root]/-build-config/bc-plugins.html
 $dokka.location:/BuildConfig/benmanes/#/PointingToDeclaration/shared/[root]/-build-config/benmanes.html
 $dokka.location:/BuildConfig/blueskyOzone/#/PointingToDeclaration/shared/[root]/-build-config/bluesky-ozone.html
@@ -55,9 +57,10 @@ $dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/
 $dokka.location:/BuildConfig/caupain/#/PointingToDeclaration/shared/[root]/-build-config/caupain.html
 $dokka.location:/BuildConfig/cel/#/PointingToDeclaration/shared/[root]/-build-config/cel.html
 $dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
-$dokka.location:/BuildConfig/chasmPlugin/#/PointingToDeclaration/shared/[root]/-build-config/chasm-plugin.html
 $dokka.location:/BuildConfig/chicory/#/PointingToDeclaration/shared/[root]/-build-config/chicory.html
+$dokka.location:/BuildConfig/cidre/#/PointingToDeclaration/shared/[root]/-build-config/cidre.html
 $dokka.location:/BuildConfig/classgraph/#/PointingToDeclaration/shared/[root]/-build-config/classgraph.html
+$dokka.location:/BuildConfig/composeFluent/#/PointingToDeclaration/shared/[root]/-build-config/compose-fluent.html
 $dokka.location:/BuildConfig/composeHotreload/#/PointingToDeclaration/shared/[root]/-build-config/compose-hotreload.html
 $dokka.location:/BuildConfig/composeIcons/#/PointingToDeclaration/shared/[root]/-build-config/compose-icons.html
 $dokka.location:/BuildConfig/composeRouting/#/PointingToDeclaration/shared/[root]/-build-config/compose-routing.html
@@ -81,7 +84,7 @@ $dokka.location:/BuildConfig/exposed/#/PointingToDeclaration/shared/[root]/-bui
 $dokka.location:/BuildConfig/exposedPlugin/#/PointingToDeclaration/shared/[root]/-build-config/exposed-plugin.html
 $dokka.location:/BuildConfig/filekitDialogs/#/PointingToDeclaration/shared/[root]/-build-config/filekit-dialogs.html
 $dokka.location:/BuildConfig/foojayResolver/#/PointingToDeclaration/shared/[root]/-build-config/foojay-resolver.html
-$dokka.location:/BuildConfig/fusionauthHttp/#/PointingToDeclaration/shared/[root]/-build-config/fusionauth-http.html
+$dokka.location:/BuildConfig/fusionauthJwt/#/PointingToDeclaration/shared/[root]/-build-config/fusionauth-jwt.html
 $dokka.location:/BuildConfig/gitFullMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-full-message.html
 $dokka.location:/BuildConfig/gitHash/#/PointingToDeclaration/shared/[root]/-build-config/git-hash.html
 $dokka.location:/BuildConfig/gitMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-message.html
@@ -91,6 +94,7 @@ $dokka.location:/BuildConfig/githubChangelog/#/PointingToDeclaration/shared/[ro
 $dokka.location:/BuildConfig/githubDepgraph/#/PointingToDeclaration/shared/[root]/-build-config/github-depgraph.html
 $dokka.location:/BuildConfig/gmazzoBuildconfig/#/PointingToDeclaration/shared/[root]/-build-config/gmazzo-buildconfig.html
 $dokka.location:/BuildConfig/googleAutoService/#/PointingToDeclaration/shared/[root]/-build-config/google-auto-service.html
+$dokka.location:/BuildConfig/googleAutoValue/#/PointingToDeclaration/shared/[root]/-build-config/google-auto-value.html
 $dokka.location:/BuildConfig/googleJavaformat/#/PointingToDeclaration/shared/[root]/-build-config/google-javaformat.html
 $dokka.location:/BuildConfig/googleTink/#/PointingToDeclaration/shared/[root]/-build-config/google-tink.html
 $dokka.location:/BuildConfig/graalvm/#/PointingToDeclaration/shared/[root]/-build-config/graalvm.html
@@ -106,10 +110,10 @@ $dokka.location:/BuildConfig/h2/#/PointingToDeclaration/shared/[root]/-build-co
 $dokka.location:/BuildConfig/hikariCP/#/PointingToDeclaration/shared/[root]/-build-config/hikari-c-p.html
 $dokka.location:/BuildConfig/hoplite/#/PointingToDeclaration/shared/[root]/-build-config/hoplite.html
 $dokka.location:/BuildConfig/includegitPlugin/#/PointingToDeclaration/shared/[root]/-build-config/includegit-plugin.html
-$dokka.location:/BuildConfig/intellijCoverage/#/PointingToDeclaration/shared/[root]/-build-config/intellij-coverage.html
 $dokka.location:/BuildConfig/intellijMarkdown/#/PointingToDeclaration/shared/[root]/-build-config/intellij-markdown.html
 $dokka.location:/BuildConfig/java/#/PointingToDeclaration/shared/[root]/-build-config/java.html
 $dokka.location:/BuildConfig/javaAddmodules/#/PointingToDeclaration/shared/[root]/-build-config/java-addmodules.html
+$dokka.location:/BuildConfig/javaHttp/#/PointingToDeclaration/shared/[root]/-build-config/java-http.html
 $dokka.location:/BuildConfig/javaJvmargs/#/PointingToDeclaration/shared/[root]/-build-config/java-jvmargs.html
 $dokka.location:/BuildConfig/javaKeychain/#/PointingToDeclaration/shared/[root]/-build-config/java-keychain.html
 $dokka.location:/BuildConfig/javaKeyring/#/PointingToDeclaration/shared/[root]/-build-config/java-keyring.html
@@ -142,12 +146,10 @@ $dokka.location:/BuildConfig/kmbed/#/PointingToDeclaration/shared/[root]/-build
 $dokka.location:/BuildConfig/kmpAppdirs/#/PointingToDeclaration/shared/[root]/-build-config/kmp-appdirs.html
 $dokka.location:/BuildConfig/kmpProcess/#/PointingToDeclaration/shared/[root]/-build-config/kmp-process.html
 $dokka.location:/BuildConfig/kmpSettings/#/PointingToDeclaration/shared/[root]/-build-config/kmp-settings.html
-$dokka.location:/BuildConfig/kmpStore5/#/PointingToDeclaration/shared/[root]/-build-config/kmp-store5.html
 $dokka.location:/BuildConfig/kmpmt/#/PointingToDeclaration/shared/[root]/-build-config/kmpmt.html
 $dokka.location:/BuildConfig/kobweb/#/PointingToDeclaration/shared/[root]/-build-config/kobweb.html
 $dokka.location:/BuildConfig/koin/#/PointingToDeclaration/shared/[root]/-build-config/koin.html
 $dokka.location:/BuildConfig/koinAnnotations/#/PointingToDeclaration/shared/[root]/-build-config/koin-annotations.html
-$dokka.location:/BuildConfig/koja/#/PointingToDeclaration/shared/[root]/-build-config/koja.html
 $dokka.location:/BuildConfig/konsist/#/PointingToDeclaration/shared/[root]/-build-config/konsist.html
 $dokka.location:/BuildConfig/koog/#/PointingToDeclaration/shared/[root]/-build-config/koog.html
 $dokka.location:/BuildConfig/kopy/#/PointingToDeclaration/shared/[root]/-build-config/kopy.html
@@ -171,7 +173,6 @@ $dokka.location:/BuildConfig/kotlinServiceloader/#/PointingToDeclaration/shared
 $dokka.location:/BuildConfig/kotlinStatistics/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-statistics.html
 $dokka.location:/BuildConfig/kotlinWrappers/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-wrappers.html
 $dokka.location:/BuildConfig/kotlinxAtomicfu/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-atomicfu.html
-$dokka.location:/BuildConfig/kotlinxBcv/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-bcv.html
 $dokka.location:/BuildConfig/kotlinxBenchmark/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-benchmark.html
 $dokka.location:/BuildConfig/kotlinxBrowser/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-browser.html
 $dokka.location:/BuildConfig/kotlinxCollectionsImmutable/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-collections-immutable.html
@@ -230,6 +231,7 @@ $dokka.location:/BuildConfig/npmXtermjs/#/PointingToDeclaration/shared/[root]/-
 $dokka.location:/BuildConfig/okapibarcode/#/PointingToDeclaration/shared/[root]/-build-config/okapibarcode.html
 $dokka.location:/BuildConfig/okhttp/#/PointingToDeclaration/shared/[root]/-build-config/okhttp.html
 $dokka.location:/BuildConfig/okio/#/PointingToDeclaration/shared/[root]/-build-config/okio.html
+$dokka.location:/BuildConfig/onnx/#/PointingToDeclaration/shared/[root]/-build-config/onnx.html
 $dokka.location:/BuildConfig/openjdkJmc/#/PointingToDeclaration/shared/[root]/-build-config/openjdk-jmc.html
 $dokka.location:/BuildConfig/orgName/#/PointingToDeclaration/shared/[root]/-build-config/org-name.html
 $dokka.location:/BuildConfig/orgUrl/#/PointingToDeclaration/shared/[root]/-build-config/org-url.html
@@ -273,9 +275,10 @@ $dokka.location:/BuildConfig/springBoot/#/PointingToDeclaration/shared/[root]/-
 $dokka.location:/BuildConfig/springDepmgmt/#/PointingToDeclaration/shared/[root]/-build-config/spring-depmgmt.html
 $dokka.location:/BuildConfig/sqids/#/PointingToDeclaration/shared/[root]/-build-config/sqids.html
 $dokka.location:/BuildConfig/sshj/#/PointingToDeclaration/shared/[root]/-build-config/sshj.html
-$dokka.location:/BuildConfig/sslcontextKickstart/#/PointingToDeclaration/shared/[root]/-build-config/sslcontext-kickstart.html
+$dokka.location:/BuildConfig/swaggerCodegen/#/PointingToDeclaration/shared/[root]/-build-config/swagger-codegen.html
 $dokka.location:/BuildConfig/swaggerStyle/#/PointingToDeclaration/shared/[root]/-build-config/swagger-style.html
 $dokka.location:/BuildConfig/swaggerUi/#/PointingToDeclaration/shared/[root]/-build-config/swagger-ui.html
+$dokka.location:/BuildConfig/sweetspi/#/PointingToDeclaration/shared/[root]/-build-config/sweetspi.html
 $dokka.location:/BuildConfig/tasktree/#/PointingToDeclaration/shared/[root]/-build-config/tasktree.html
 $dokka.location:/BuildConfig/tcpJavanioproxy/#/PointingToDeclaration/shared/[root]/-build-config/tcp-javanioproxy.html
 $dokka.location:/BuildConfig/testcontainers/#/PointingToDeclaration/shared/[root]/-build-config/testcontainers.html
@@ -287,8 +290,8 @@ $dokka.location:/BuildConfig/typesafeConventions/#/PointingToDeclaration/shared
 $dokka.location:/BuildConfig/uriKmp/#/PointingToDeclaration/shared/[root]/-build-config/uri-kmp.html
 $dokka.location:/BuildConfig/urlencoder/#/PointingToDeclaration/shared/[root]/-build-config/urlencoder.html
 $dokka.location:/BuildConfig/vanniktechPublish/#/PointingToDeclaration/shared/[root]/-build-config/vanniktech-publish.html
-$dokka.location:/BuildConfig/vercraft/#/PointingToDeclaration/shared/[root]/-build-config/vercraft.html
 $dokka.location:/BuildConfig/version/#/PointingToDeclaration/shared/[root]/-build-config/version.html
+$dokka.location:/BuildConfig/voices/#/PointingToDeclaration/shared/[root]/-build-config/voices.html
 $dokka.location:/BuildConfig/wasm2class/#/PointingToDeclaration/shared/[root]/-build-config/wasm2class.html
 $dokka.location:/BuildConfig/webjarsXterm/#/PointingToDeclaration/shared/[root]/-build-config/webjars-xterm.html
 $dokka.location:/BuildConfig/wehBindings/#/PointingToDeclaration/shared/[root]/-build-config/weh-bindings.html
@@ -332,8 +335,8 @@ dev.suresh
 dev.suresh.gen
 module:jvm
 dev.suresh
-dev.suresh.config
 dev.suresh.db
+dev.suresh.di
 dev.suresh.lang
 dev.suresh.log
 dev.suresh.plugins

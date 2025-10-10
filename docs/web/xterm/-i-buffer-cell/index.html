@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>IBufferCell</title>
-<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../styles/main.css" rel="Stylesheet">
 <link href="../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
                     kotlin-mpp-playground
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.1.0.0+a71a705
+        <div class="library-version" id="library-version">0.1.0.0+8778784
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector js-like" data-active="" data-filter=":web/jsMain">js</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector js-like" data-active="" aria-pressed="true" data-filter=":web/jsMain">js</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,7 +62,7 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
                 <a class="navigation-controls--btn navigation-controls--btn_homepage" id="homepage-link" href="https://github.com/sureshg/kotlin-mpp-playground"></a>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
@@ -72,40 +70,42 @@
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kotlin-mpp-playground
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="web::xterm/IBufferCell///PointingToDeclaration//-299927057">
   <div class="breadcrumbs"><a href="../../index.html">web</a><span class="delimiter">/</span><a href="../index.html">xterm</a><span class="delimiter">/</span><span class="current">IBufferCell</span></div>
   <div class="cover ">
     <h1 class="cover"><span>IBuffer</span><wbr><span><span>Cell</span></span></h1>
     <div class="platform-hinted  with-platform-tabs" data-platform-hinted="data-platform-hinted">
       <div class="platform-bookmarks-row" data-toggle-list="data-toggle-list"><button class="platform-bookmark" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain" data-active="" data-toggle=":web/jsMain">js</button></div>
-<div class="content sourceset-dependent-content" data-active="" data-togglable=":web/jsMain"><div class="symbol monospace"><span class="token keyword">external </span><span class="token keyword">interface </span><a href="index.html">IBufferCell</a><span class="clearfix"><span class="floating-right">(<a href="https://github.com/sureshg/kotlin-mpp-playground/tree/main/web/src/jsMain/kotlin/xterm/Xterm.kt#L690">source</a>)</span></span></div></div>    </div>
+<div class="content sourceset-dependent-content" data-active="" data-togglable=":web/jsMain"><div class="symbol monospace"><span class="token keyword">external </span><span class="token keyword">interface </span><a href="index.html">IBufferCell</a><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/sureshg/kotlin-mpp-playground/tree/main/web/src/jsMain/kotlin/xterm/Xterm.kt#L690">source</a>)</span></span></div></div>    </div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="-1016940922%2FFunctions%2F-299927057" anchor-label="getBgColor" id="-1016940922%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-bg-color.html"><span>get</span><wbr><span>Bg</span><wbr><span><span>Color</span></span></a></div>
@@ -122,7 +122,7 @@
             </div>
           </div>
 <a data-name="78409123%2FFunctions%2F-299927057" anchor-label="getBgColorMode" id="78409123%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-bg-color-mode.html"><span>get</span><wbr><span>Bg</span><wbr><span>Color</span><wbr><span><span>Mode</span></span></a></div>
@@ -139,7 +139,7 @@
             </div>
           </div>
 <a data-name="1831319399%2FFunctions%2F-299927057" anchor-label="getChars" id="1831319399%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-chars.html"><span>get</span><wbr><span><span>Chars</span></span></a></div>
@@ -156,7 +156,7 @@
             </div>
           </div>
 <a data-name="1538263209%2FFunctions%2F-299927057" anchor-label="getCode" id="1538263209%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-code.html"><span>get</span><wbr><span><span>Code</span></span></a></div>
@@ -173,7 +173,7 @@
             </div>
           </div>
 <a data-name="-467421694%2FFunctions%2F-299927057" anchor-label="getFgColor" id="-467421694%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-fg-color.html"><span>get</span><wbr><span>Fg</span><wbr><span><span>Color</span></span></a></div>
@@ -190,7 +190,7 @@
             </div>
           </div>
 <a data-name="-710324449%2FFunctions%2F-299927057" anchor-label="getFgColorMode" id="-710324449%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-fg-color-mode.html"><span>get</span><wbr><span>Fg</span><wbr><span>Color</span><wbr><span><span>Mode</span></span></a></div>
@@ -207,7 +207,7 @@
             </div>
           </div>
 <a data-name="-726423138%2FFunctions%2F-299927057" anchor-label="getWidth" id="-726423138%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="get-width.html"><span>get</span><wbr><span><span>Width</span></span></a></div>
@@ -224,7 +224,7 @@
             </div>
           </div>
 <a data-name="2098757631%2FFunctions%2F-299927057" anchor-label="isAttributeDefault" id="2098757631%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-attribute-default.html"><span>is</span><wbr><span>Attribute</span><wbr><span><span>Default</span></span></a></div>
@@ -241,7 +241,7 @@
             </div>
           </div>
 <a data-name="2035034682%2FFunctions%2F-299927057" anchor-label="isBgDefault" id="2035034682%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-bg-default.html"><span>is</span><wbr><span>Bg</span><wbr><span><span>Default</span></span></a></div>
@@ -258,7 +258,7 @@
             </div>
           </div>
 <a data-name="-281854144%2FFunctions%2F-299927057" anchor-label="isBgPalette" id="-281854144%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-bg-palette.html"><span>is</span><wbr><span>Bg</span><wbr><span><span>Palette</span></span></a></div>
@@ -275,7 +275,7 @@
             </div>
           </div>
 <a data-name="935002158%2FFunctions%2F-299927057" anchor-label="isBgRGB" id="935002158%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-bg-r-g-b.html"><span>is</span><wbr><span>Bg</span><wbr><span><span>RGB</span></span></a></div>
@@ -292,7 +292,7 @@
             </div>
           </div>
 <a data-name="-1338376806%2FFunctions%2F-299927057" anchor-label="isBlink" id="-1338376806%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-blink.html"><span>is</span><wbr><span><span>Blink</span></span></a></div>
@@ -309,7 +309,7 @@
             </div>
           </div>
 <a data-name="616363007%2FFunctions%2F-299927057" anchor-label="isBold" id="616363007%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-bold.html"><span>is</span><wbr><span><span>Bold</span></span></a></div>
@@ -326,7 +326,7 @@
             </div>
           </div>
 <a data-name="-444781522%2FFunctions%2F-299927057" anchor-label="isDim" id="-444781522%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-dim.html"><span>is</span><wbr><span><span>Dim</span></span></a></div>
@@ -343,7 +343,7 @@
             </div>
           </div>
 <a data-name="1842035382%2FFunctions%2F-299927057" anchor-label="isFgDefault" id="1842035382%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-fg-default.html"><span>is</span><wbr><span>Fg</span><wbr><span><span>Default</span></span></a></div>
@@ -360,7 +360,7 @@
             </div>
           </div>
 <a data-name="-474853444%2FFunctions%2F-299927057" anchor-label="isFgPalette" id="-474853444%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-fg-palette.html"><span>is</span><wbr><span>Fg</span><wbr><span><span>Palette</span></span></a></div>
@@ -377,7 +377,7 @@
             </div>
           </div>
 <a data-name="980266666%2FFunctions%2F-299927057" anchor-label="isFgRGB" id="980266666%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-fg-r-g-b.html"><span>is</span><wbr><span>Fg</span><wbr><span><span>RGB</span></span></a></div>
@@ -394,7 +394,7 @@
             </div>
           </div>
 <a data-name="688094726%2FFunctions%2F-299927057" anchor-label="isInverse" id="688094726%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-inverse.html"><span>is</span><wbr><span><span>Inverse</span></span></a></div>
@@ -411,7 +411,7 @@
             </div>
           </div>
 <a data-name="-618351127%2FFunctions%2F-299927057" anchor-label="isInvisible" id="-618351127%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-invisible.html"><span>is</span><wbr><span><span>Invisible</span></span></a></div>
@@ -428,7 +428,7 @@
             </div>
           </div>
 <a data-name="-1882510092%2FFunctions%2F-299927057" anchor-label="isItalic" id="-1882510092%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-italic.html"><span>is</span><wbr><span><span>Italic</span></span></a></div>
@@ -445,7 +445,7 @@
             </div>
           </div>
 <a data-name="-1198218852%2FFunctions%2F-299927057" anchor-label="isOverline" id="-1198218852%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-overline.html"><span>is</span><wbr><span><span>Overline</span></span></a></div>
@@ -462,7 +462,7 @@
             </div>
           </div>
 <a data-name="270592259%2FFunctions%2F-299927057" anchor-label="isStrikethrough" id="270592259%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-strikethrough.html"><span>is</span><wbr><span><span>Strikethrough</span></span></a></div>
@@ -479,7 +479,7 @@
             </div>
           </div>
 <a data-name="1429643178%2FFunctions%2F-299927057" anchor-label="isUnderline" id="1429643178%2FFunctions%2F-299927057" data-filterable-set=":web/jsMain"></a>
-          <div class="table-row" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
+          <div class="table-row table-row_content" data-filterable-current=":web/jsMain" data-filterable-set=":web/jsMain">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="is-underline.html"><span>is</span><wbr><span><span>Underline</span></span></a></div>
@@ -501,17 +501,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>Copyright © 2025 suresh.dev</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2025 suresh.dev</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -1,22 +1,22 @@
 <!doctype html>
-<html class="no-js">
+<html class="no-js" lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
     <title>RespLogger</title>
-<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg">    <script>var pathToRoot = "../../../../";</script>
-    <script>document.documentElement.classList.replace("no-js","js");</script>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
     <script>const storage = localStorage.getItem("dokka-dark-mode")
-    if (storage == null) {
+      if (storage == null) {
         const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
         if (osDarkSchemePreferred === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    } else {
+      } else {
         const savedDarkMode = JSON.parse(storage)
-        if(savedDarkMode === true) {
-            document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
         }
-    }
+      }
     </script>
 <script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
 <script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
@@ -24,33 +24,31 @@
 <link href="../../../../styles/main.css" rel="Stylesheet">
 <link href="../../../../styles/prism.css" rel="Stylesheet">
 <link href="../../../../styles/logo-styles.css" rel="Stylesheet">
-<link href="../../../../styles/font-jb-sans-auto.css" rel="Stylesheet">
 <link href="../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
-<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/safe-local-storage_blocking.js"></script>
 <script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
 <script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
 <script type="text/javascript" src="../../../../scripts/main.js" defer></script>
 <script type="text/javascript" src="../../../../scripts/prism.js" async></script>
-<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script>
-<script type="text/javascript" src="../../../../scripts/symbol-parameters-wrapper_deferred.js" defer></script></head>
+<script type="text/javascript" src="../../../../ui-kit/ui-kit.min.js" defer></script></head>
 <body>
-    <div class="root">
-    <nav class="navigation theme-dark" id="navigation-wrapper">
-<a class="library-name--link" href="../../../../index.html">
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../index.html" tabindex="1">
                     kotlin-mpp-playground
             </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
         </button>
         <div class="navigation-controls--break ui-kit_mobile-only"></div>
-        <div class="library-version" id="library-version">0.1.0.0+a71a705
+        <div class="library-version" id="library-version">0.1.0.0+8778784
         </div>
         <div class="navigation-controls">
-        <div class="filter-section filter-section_loading" id="filter-section">
-                <button class="platform-tag platform-selector jvm-like" data-active="" data-filter=":backend:jvm/main">jvm</button>
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":backend:jvm/main">jvm</button>
             <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
                 <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
-                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox">
-                    <div class="dropdown--header"><span>Platform filter</span>
-                        <button class="button" data-role="dropdown-toggle" aria-label="Close platform filter">
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
                             <i class="ui-kit-icon ui-kit-icon_cross"></i>
                         </button>
                     </div>
@@ -64,7 +62,7 @@
                 </ul>
                 <div class="dropdown--overlay"></div>
             </div>
-        </div>
+        </ul>
                 <a class="navigation-controls--btn navigation-controls--btn_homepage" id="homepage-link" href="https://github.com/sureshg/kotlin-mpp-playground"></a>
             <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
             </button>
@@ -72,38 +70,40 @@
                 API
             </div>
         </div>
-    </nav>
-        <div id="container">
-            <div class="sidebar" id="leftColumn">
-                <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
-                    <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox">
-                        <div class="dropdown--header">
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
                             <span>
                                     kotlin-mpp-playground
                             </span>
-                            <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
-                                <i class="ui-kit-icon ui-kit-icon_cross"></i>
-                            </button>
-                        </div>
-                        <div class="sidebar--inner" id="sideMenu"></div>
-                    </ul>
-                    <div class="dropdown--overlay"></div>
-                </div>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
             </div>
-            <div id="main">
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
 <div class="main-content" data-page-type="classlike" id="content" pageids="jvm::dev.suresh.log/RespLogger///PointingToDeclaration//-156615831">
   <div class="breadcrumbs"><a href="../../index.html">jvm</a><span class="delimiter">/</span><a href="../index.html">dev.suresh.log</a><span class="delimiter">/</span><span class="current">RespLogger</span></div>
   <div class="cover ">
     <h1 class="cover"><span>Resp</span><wbr><span><span>Logger</span></span></h1>
-    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":backend:jvm/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">RespLogger</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">out<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/io/Writer.html">Writer</a><span class="token punctuation">, </span></span><span class="parameter ">logger<span class="token operator">: </span><span data-unresolved-link="io.github.oshai.kotlinlogging/KLogger///PointingToDeclaration/">KLogger</span><span class="token operator"> = </span>log</span></span><span class="token punctuation">)</span> : <span data-unresolved-link="io.github.oshai.kotlinlogging/KLogger///PointingToDeclaration/">KLogger</span><span class="clearfix"><span class="floating-right">(<a href="https://github.com/sureshg/kotlin-mpp-playground/tree/main/backend/jvm/src/main/kotlin/dev/suresh/log/RespLogger.kt#L7">source</a>)</span></span></div></div></div>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":backend:jvm/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="index.html">RespLogger</a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">out<span class="token operator">: </span><a href="https://docs.oracle.com/en/java/javase/24/docs/api/java.base/java/io/Writer.html">Writer</a><span class="token punctuation">, </span></span><span class="parameter ">logger<span class="token operator">: </span><span data-unresolved-link="io.github.oshai.kotlinlogging/KLogger///PointingToDeclaration/">KLogger</span><span class="token operator"> = </span>log</span></span><span class="token punctuation">)</span> : <span data-unresolved-link="io.github.oshai.kotlinlogging/KLogger///PointingToDeclaration/">KLogger</span><span class="source-link-wrapper"><span class="source-link" data-element-type="source-link">(<a href="https://github.com/sureshg/kotlin-mpp-playground/tree/main/backend/jvm/src/main/kotlin/dev/suresh/log/RespLogger.kt#L7">source</a>)</span></span></div></div></div>
   </div>
   <div class="tabbedcontent">
     <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
     <div class="tabs-section-body">
       <div data-togglable="CONSTRUCTOR">
-        <h2 class="">Constructors</h2>
+        <h2 class="tableheader">Constructors</h2>
         <div class="table"><a data-name="324781874%2FConstructors%2F-156615831" anchor-label="RespLogger" id="324781874%2FConstructors%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-togglable="CONSTRUCTOR" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-togglable="CONSTRUCTOR" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="-resp-logger.html"><span>Resp</span><wbr><span><span>Logger</span></span></a></div>
@@ -120,9 +120,9 @@
         </div>
       </div>
       <div data-togglable="PROPERTY">
-        <h2 class="">Properties</h2>
+        <h2 class="tableheader">Properties</h2>
         <div class="table"><a data-name="-1651398936%2FProperties%2F-156615831" anchor-label="name" id="-1651398936%2FProperties%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-1651398936%2FProperties%2F-156615831"><span><span>name</span></span></a></div>
@@ -139,9 +139,9 @@
         </div>
       </div>
       <div data-togglable="FUNCTION">
-        <h2 class="">Functions</h2>
+        <h2 class="tableheader">Functions</h2>
         <div class="table"><a data-name="-1964931430%2FFunctions%2F-156615831" anchor-label="at" id="-1964931430%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-1964931430%2FFunctions%2F-156615831"><span><span>at</span></span></a></div>
@@ -156,7 +156,7 @@
             </div>
           </div>
 <a data-name="1803342065%2FFunctions%2F-156615831" anchor-label="atDebug" id="1803342065%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#1748730248%2FFunctions%2F-156615831"><span>at</span><wbr><span><span>Debug</span></span></a></div>
@@ -171,7 +171,7 @@
             </div>
           </div>
 <a data-name="-2125463673%2FFunctions%2F-156615831" anchor-label="atError" id="-2125463673%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-1675666061%2FFunctions%2F-156615831"><span>at</span><wbr><span><span>Error</span></span></a></div>
@@ -186,7 +186,7 @@
             </div>
           </div>
 <a data-name="-1704494881%2FFunctions%2F-156615831" anchor-label="atInfo" id="-1704494881%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-1910830605%2FFunctions%2F-156615831"><span>at</span><wbr><span><span>Info</span></span></a></div>
@@ -201,7 +201,7 @@
             </div>
           </div>
 <a data-name="977065741%2FFunctions%2F-156615831" anchor-label="atTrace" id="977065741%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-1166266666%2FFunctions%2F-156615831"><span>at</span><wbr><span><span>Trace</span></span></a></div>
@@ -216,7 +216,7 @@
             </div>
           </div>
 <a data-name="-54425121%2FFunctions%2F-156615831" anchor-label="atWarn" id="-54425121%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#1842548507%2FFunctions%2F-156615831"><span>at</span><wbr><span><span>Warn</span></span></a></div>
@@ -231,7 +231,7 @@
             </div>
           </div>
 <a data-name="-760666427%2FFunctions%2F-156615831" anchor-label="catching" id="-760666427%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-760666427%2FFunctions%2F-156615831"><span><span>catching</span></span></a></div>
@@ -246,7 +246,7 @@
             </div>
           </div>
 <a data-name="-1219264114%2FFunctions%2F-156615831" anchor-label="debug" id="-1219264114%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-2005093023%2FFunctions%2F-156615831"><span><span>debug</span></span></a></div>
@@ -261,7 +261,7 @@
             </div>
           </div>
 <a data-name="486924781%2FFunctions%2F-156615831" anchor-label="entry" id="486924781%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#486924781%2FFunctions%2F-156615831"><span><span>entry</span></span></a></div>
@@ -276,7 +276,7 @@
             </div>
           </div>
 <a data-name="935878755%2FFunctions%2F-156615831" anchor-label="error" id="935878755%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-640223402%2FFunctions%2F-156615831"><span><span>error</span></span></a></div>
@@ -291,7 +291,7 @@
             </div>
           </div>
 <a data-name="1310249298%2FFunctions%2F-156615831" anchor-label="exit" id="1310249298%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#50455477%2FFunctions%2F-156615831"><span><span>exit</span></span></a></div>
@@ -306,7 +306,7 @@
             </div>
           </div>
 <a data-name="-618762872%2FFunctions%2F-156615831" anchor-label="info" id="-618762872%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="info.html"><span><span>info</span></span></a></div>
@@ -321,7 +321,7 @@
             </div>
           </div>
 <a data-name="-2116087529%2FFunctions%2F-156615831" anchor-label="isDebugEnabled" id="-2116087529%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-2116087529%2FFunctions%2F-156615831"><span>is</span><wbr><span>Debug</span><wbr><span><span>Enabled</span></span></a></div>
@@ -336,7 +336,7 @@
             </div>
           </div>
 <a data-name="-80476542%2FFunctions%2F-156615831" anchor-label="isErrorEnabled" id="-80476542%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-80476542%2FFunctions%2F-156615831"><span>is</span><wbr><span>Error</span><wbr><span><span>Enabled</span></span></a></div>
@@ -351,7 +351,7 @@
             </div>
           </div>
 <a data-name="1203834804%2FFunctions%2F-156615831" anchor-label="isInfoEnabled" id="1203834804%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#1203834804%2FFunctions%2F-156615831"><span>is</span><wbr><span>Info</span><wbr><span><span>Enabled</span></span></a></div>
@@ -366,7 +366,7 @@
             </div>
           </div>
 <a data-name="2109014172%2FFunctions%2F-156615831" anchor-label="isLoggingEnabledFor" id="2109014172%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#2109014172%2FFunctions%2F-156615831"><span>is</span><wbr><span>Logging</span><wbr><span>Enabled</span><wbr><span><span>For</span></span></a></div>
@@ -381,7 +381,7 @@
             </div>
           </div>
 <a data-name="350035641%2FFunctions%2F-156615831" anchor-label="isLoggingOff" id="350035641%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#350035641%2FFunctions%2F-156615831"><span>is</span><wbr><span>Logging</span><wbr><span><span>Off</span></span></a></div>
@@ -396,7 +396,7 @@
             </div>
           </div>
 <a data-name="1466649957%2FFunctions%2F-156615831" anchor-label="isTraceEnabled" id="1466649957%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#1466649957%2FFunctions%2F-156615831"><span>is</span><wbr><span>Trace</span><wbr><span><span>Enabled</span></span></a></div>
@@ -411,7 +411,7 @@
             </div>
           </div>
 <a data-name="-104298276%2FFunctions%2F-156615831" anchor-label="isWarnEnabled" id="-104298276%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-104298276%2FFunctions%2F-156615831"><span>is</span><wbr><span>Warn</span><wbr><span><span>Enabled</span></span></a></div>
@@ -426,7 +426,7 @@
             </div>
           </div>
 <a data-name="-251328784%2FFunctions%2F-156615831" anchor-label="throwing" id="-251328784%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#-251328784%2FFunctions%2F-156615831"><span><span>throwing</span></span></a></div>
@@ -441,7 +441,7 @@
             </div>
           </div>
 <a data-name="-1455970368%2FFunctions%2F-156615831" anchor-label="trace" id="-1455970368%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#768943827%2FFunctions%2F-156615831"><span><span>trace</span></span></a></div>
@@ -456,7 +456,7 @@
             </div>
           </div>
 <a data-name="1686632321%2FFunctions%2F-156615831" anchor-label="warn" id="1686632321%2FFunctions%2F-156615831" data-filterable-set=":backend:jvm/main"></a>
-          <div class="table-row" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
+          <div class="table-row table-row_content" data-filterable-current=":backend:jvm/main" data-filterable-set=":backend:jvm/main">
             <div class="main-subrow keyValue ">
               <div class=""><span class="inline-flex">
                   <div><a href="index.html#354744552%2FFunctions%2F-156615831"><span><span>warn</span></span></a></div>
@@ -476,17 +476,21 @@
   </div>
 </div>
     <div class="footer">
-        <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
-        <span>Copyright © 2025 suresh.dev</span>
-        <span class="pull-right">
-            <span>Generated by </span>
-            <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
-                <span>dokka</span>
-            </a>
-        </span>
-    </div>
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>Copyright © 2025 suresh.dev</div>
+                </div>
             </div>
         </div>
     </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
