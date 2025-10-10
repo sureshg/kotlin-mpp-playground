@@ -140,7 +140,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;enum class Order {
 &nbsp;  PRE,
 &nbsp;  IN,
-&nbsp;  POST
+&nbsp;  POST,
 &nbsp;}
 &nbsp;
 <b class="nc">&nbsp;fun &lt;T&gt; Tree&lt;T&gt;.dfs(order: Order = IN): List&lt;T&gt; =</b>
@@ -244,7 +244,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;      Node(</b>
 <b class="nc">&nbsp;          1,</b>
 <b class="nc">&nbsp;          left = Node(2, left = Node(4), right = Node(6)),</b>
-<b class="nc">&nbsp;          right = Node(3, left = Node(5), right = Node(7)))</b>
+<b class="nc">&nbsp;          right = Node(3, left = Node(5), right = Node(7)),</b>
+&nbsp;      )
 &nbsp;
 <b class="nc">&nbsp;  println(&quot;Sum: ${root.sum()}&quot;)</b>
 <b class="nc">&nbsp;  println(&quot;Depth: ${root.depth()}&quot;)</b>
@@ -274,7 +275,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

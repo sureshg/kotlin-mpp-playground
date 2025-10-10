@@ -125,8 +125,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;            name = Name(first = &quot;Foo&quot;, last = &quot;Bar&quot;),
 &nbsp;            address =
 &nbsp;                Address(
-&nbsp;                    street = &quot;123 Main St&quot;, city = &quot;San Francisco&quot;, state = &quot;CA&quot;, zip = &quot;95000&quot;),
-&nbsp;            privateInfo = PrivateInfo(ssn = &quot;123-45-6789&quot;, dob = &quot;01/01/2000&quot;))
+&nbsp;                    street = &quot;123 Main St&quot;,
+&nbsp;                    city = &quot;San Francisco&quot;,
+&nbsp;                    state = &quot;CA&quot;,
+&nbsp;                    zip = &quot;95000&quot;,
+&nbsp;                ),
+&nbsp;            privateInfo = PrivateInfo(ssn = &quot;123-45-6789&quot;, dob = &quot;01/01/2000&quot;),
+&nbsp;        )
 &nbsp;    val modPerson = person.copy() // { address.city = &quot;San Jose&quot; }
 &nbsp;    appendLine(&quot;Person: $person&quot;)
 &nbsp;    appendLine(&quot;Modified Person: $modPerson&quot;)
@@ -204,7 +209,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;enum class YesNo {
 &nbsp;  YES,
-&nbsp;  NO
+&nbsp;  NO,
 &nbsp;}
 </code>
 </pre>
@@ -229,7 +234,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

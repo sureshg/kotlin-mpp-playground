@@ -192,7 +192,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/26)
+    (0/24)
   </span>
 </td>
   </tr>
@@ -549,7 +549,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/831)
+    (0/829)
   </span>
 </td>
 </tr>
@@ -601,7 +601,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="nc">&nbsp;  get(&quot;/trace&quot;) {</b>
 <b class="nc">&nbsp;    call.respond(</b>
-<b class="nc">&nbsp;        mapOf(&quot;OpenTelemetry&quot; to BuildConfig.otelInstr, &quot;Image Size&quot; to mediaApiCall().toString()))</b>
+<b class="nc">&nbsp;        mapOf(&quot;OpenTelemetry&quot; to BuildConfig.otelInstr, &quot;Image Size&quot; to mediaApiCall().toString())</b>
+&nbsp;    )
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  route(&quot;/session&quot;) {</b>
@@ -647,20 +648,21 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      serialize = { typeInfo, data -&gt;
 <b class="nc">&nbsp;        val serializer = json.serializersModule.serializer(typeInfo.kotlinType!!)</b>
 <b class="nc">&nbsp;        json.encodeToString(serializer, data)</b>
-&nbsp;      }) {
-<b class="nc">&nbsp;        val name = call.parameters[&quot;name&quot;] ?: &quot;World&quot;</b>
-<b class="nc">&nbsp;        var counter = 0</b>
-<b class="nc">&nbsp;        while (isActive) {</b>
-<b class="nc">&nbsp;          send(Name(&quot;Hello&quot;, &quot;$name ${counter++}&quot;))</b>
-&nbsp;        }
+&nbsp;      },
+&nbsp;  ) {
+<b class="nc">&nbsp;    val name = call.parameters[&quot;name&quot;] ?: &quot;World&quot;</b>
+<b class="nc">&nbsp;    var counter = 0</b>
+<b class="nc">&nbsp;    while (isActive) {</b>
+<b class="nc">&nbsp;      send(Name(&quot;Hello&quot;, &quot;$name ${counter++}&quot;))</b>
+&nbsp;    }
 &nbsp;
-<b class="nc">&nbsp;        heartbeat {</b>
-<b class="nc">&nbsp;          period = 10.seconds</b>
-<b class="nc">&nbsp;          event = ServerSentEvent(&quot;heartbeat&quot;)</b>
-&nbsp;        }
+<b class="nc">&nbsp;    heartbeat {</b>
+<b class="nc">&nbsp;      period = 10.seconds</b>
+<b class="nc">&nbsp;      event = ServerSentEvent(&quot;heartbeat&quot;)</b>
+&nbsp;    }
 &nbsp;
-<b class="nc">&nbsp;        close()</b>
-&nbsp;      }
+<b class="nc">&nbsp;    close()</b>
+&nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  get(&quot;/no-compression&quot;) {</b>
 &nbsp;    // Prevent response body compression
@@ -675,7 +677,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;suspend fun ApplicationCall.respondLogStream(
 <b class="nc">&nbsp;    contentType: ContentType = ContentType.Text.EventStream,</b>
-&nbsp;    block: suspend KLogger.() -&gt; Unit
+&nbsp;    block: suspend KLogger.() -&gt; Unit,
 &nbsp;) {
 <b class="nc">&nbsp;  respondTextWriter(contentType = contentType) { block(RespLogger(this, logger)) }</b>
 &nbsp;}
@@ -702,7 +704,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

@@ -69,10 +69,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/66)
+    (0/69)
   </span>
 </td>
 </tr>
+  <tr>
+    <td class="name">Profiling$convertJfr$1</td>
+    <td class="coverageStat"/>
+  </tr>
   <tr>
     <td class="name">Profiling$convertJfr-8Mi8wO0$$inlined$runOnVirtualThread$1</td>
 <td class="coverageStat">
@@ -173,7 +177,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/81)
+    (0/84)
   </span>
 </td>
 </tr>
@@ -223,7 +227,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val server = ManagementFactory.getPlatformMBeanServer()
 &nbsp;    val hotspot =
 &nbsp;        ManagementFactory.newPlatformMXBeanProxy(
-&nbsp;            server, diagnosticObjName, HotSpotDiagnosticMXBean::class.java)
+&nbsp;            server,
+&nbsp;            diagnosticObjName,
+&nbsp;            HotSpotDiagnosticMXBean::class.java,
+&nbsp;        )
 &nbsp;
 &nbsp;    val heapDumpPath = createTempFile(&quot;heapdump&quot;, &quot;.hprof&quot;)
 &nbsp;    heapDumpPath.deleteIfExists()
@@ -236,7 +243,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val server = ManagementFactory.getPlatformMBeanServer()
 &nbsp;    val hotspot =
 &nbsp;        ManagementFactory.newPlatformMXBeanProxy(
-&nbsp;            server, diagnosticObjName, HotSpotDiagnosticMXBean::class.java)
+&nbsp;            server,
+&nbsp;            diagnosticObjName,
+&nbsp;            HotSpotDiagnosticMXBean::class.java,
+&nbsp;        )
 &nbsp;
 &nbsp;    val heapDumpPath = createTempFile(&quot;heapdump&quot;, &quot;.hprof&quot;)
 &nbsp;    heapDumpPath.deleteIfExists()
@@ -324,7 +334,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

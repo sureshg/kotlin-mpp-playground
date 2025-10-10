@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/13)
+    (0/11)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/24)
+    (0/20)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/156)
+    (0/130)
   </span>
 </td>
 </tr>
@@ -101,40 +101,40 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import kotlin.collections.MutableMap
 &nbsp;import org.jetbrains.compose.resources.DrawableResource
 &nbsp;import org.jetbrains.compose.resources.InternalResourceApi
+&nbsp;import org.jetbrains.compose.resources.ResourceContentHash
 &nbsp;import org.jetbrains.compose.resources.ResourceItem
 &nbsp;
 &nbsp;private const val MD: String = &quot;composeResources/dev.suresh.compose.res/&quot;
 &nbsp;
-<b class="nc">&nbsp;public val Res.drawable.animated_svg: DrawableResource by lazy {</b>
-<b class="nc">&nbsp;      DrawableResource(&quot;drawable:animated_svg&quot;, setOf(</b>
-<b class="nc">&nbsp;        ResourceItem(setOf(), &quot;${MD}drawable/animated_svg&quot;, -1, -1),</b>
-&nbsp;      ))
-&nbsp;    }
-&nbsp;
+&nbsp;@delegate:ResourceContentHash(1_312_740_965)
 <b class="nc">&nbsp;public val Res.drawable.compose_logo: DrawableResource by lazy {</b>
 <b class="nc">&nbsp;      DrawableResource(&quot;drawable:compose_logo&quot;, setOf(</b>
 <b class="nc">&nbsp;        ResourceItem(setOf(), &quot;${MD}drawable/compose-logo.svg&quot;, -1, -1),</b>
 &nbsp;      ))
 &nbsp;    }
 &nbsp;
+&nbsp;@delegate:ResourceContentHash(-1_747_863_810)
 <b class="nc">&nbsp;public val Res.drawable.compose_multiplatform: DrawableResource by lazy {</b>
 <b class="nc">&nbsp;      DrawableResource(&quot;drawable:compose_multiplatform&quot;, setOf(</b>
 <b class="nc">&nbsp;        ResourceItem(setOf(), &quot;${MD}drawable/compose-multiplatform.xml&quot;, -1, -1),</b>
 &nbsp;      ))
 &nbsp;    }
 &nbsp;
+&nbsp;@delegate:ResourceContentHash(459_941_733)
 <b class="nc">&nbsp;public val Res.drawable.ic_fluent_rocket: DrawableResource by lazy {</b>
 <b class="nc">&nbsp;      DrawableResource(&quot;drawable:ic_fluent_rocket&quot;, setOf(</b>
 <b class="nc">&nbsp;        ResourceItem(setOf(), &quot;${MD}drawable/ic-fluent-rocket.svg&quot;, -1, -1),</b>
 &nbsp;      ))
 &nbsp;    }
 &nbsp;
+&nbsp;@delegate:ResourceContentHash(1_880_155_328)
 <b class="nc">&nbsp;public val Res.drawable.idea_logo: DrawableResource by lazy {</b>
 <b class="nc">&nbsp;      DrawableResource(&quot;drawable:idea_logo&quot;, setOf(</b>
 <b class="nc">&nbsp;        ResourceItem(setOf(), &quot;${MD}drawable/idea-logo.svg&quot;, -1, -1),</b>
 &nbsp;      ))
 &nbsp;    }
 &nbsp;
+&nbsp;@delegate:ResourceContentHash(-523_063_422)
 <b class="nc">&nbsp;public val Res.drawable.particles: DrawableResource by lazy {</b>
 <b class="nc">&nbsp;      DrawableResource(&quot;drawable:particles&quot;, setOf(</b>
 <b class="nc">&nbsp;        ResourceItem(setOf(), &quot;${MD}drawable/particles.gif&quot;, -1, -1),</b>
@@ -143,7 +143,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;@InternalResourceApi
 &nbsp;internal fun _collectCommonMainDrawable0Resources(map: MutableMap&lt;String, DrawableResource&gt;) {
-<b class="nc">&nbsp;  map.put(&quot;animated_svg&quot;, Res.drawable.animated_svg)</b>
 <b class="nc">&nbsp;  map.put(&quot;compose_logo&quot;, Res.drawable.compose_logo)</b>
 <b class="nc">&nbsp;  map.put(&quot;compose_multiplatform&quot;, Res.drawable.compose_multiplatform)</b>
 <b class="nc">&nbsp;  map.put(&quot;ic_fluent_rocket&quot;, Res.drawable.ic_fluent_rocket)</b>
@@ -173,7 +172,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

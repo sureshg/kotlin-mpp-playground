@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Email</title>
+  <title>: Coverage Report > Auth</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,18 +19,15 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.db</a>
+    <a href="../index.html">dev.suresh.di</a>
 </div>
 
-<h1>Coverage Summary for Class: Email (dev.suresh.db)</h1>
+<h1>Coverage Summary for Class: Auth (dev.suresh.di)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -49,7 +46,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Email</td>
+  <td class="name">Auth</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -58,6 +55,33 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/1)
   </span>
 </td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Auth$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -80,11 +104,45 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/8)
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/50)
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
@@ -92,124 +150,18 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.db
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.di
 &nbsp;
-&nbsp;import io.exoquery.*
-&nbsp;import io.exoquery.annotation.*
+&nbsp;import dev.zacsweers.redacted.annotations.Redacted
+&nbsp;import kotlinx.serialization.SerialName
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
-<b class="nc">&nbsp;@JvmInline value class Email(val value: String)</b>
+<b class="nc">&nbsp;@Serializable data class Auth(val api: API, val admin: Admin)</b>
 &nbsp;
-&nbsp;data class People(
-&nbsp;    val id: Long,
-&nbsp;    val name: String,
-&nbsp;    val email: Email?,
-&nbsp;    val age: Int,
-&nbsp;    val addressId: Long?
-&nbsp;)
+&nbsp;@Serializable
+&nbsp;data class API(val user: String, @Redacted @SerialName(&quot;bearer-token&quot;) val bearerToken: String)
 &nbsp;
-&nbsp;data class Address(
-&nbsp;    val id: Long,
-&nbsp;    val street: String,
-&nbsp;    val city: String,
-&nbsp;    val state: String?,
-&nbsp;    val zipCode: String?,
-&nbsp;    val country: String
-&nbsp;)
-&nbsp;
-&nbsp;data class Robot(
-&nbsp;    val id: Long,
-&nbsp;    val name: String,
-&nbsp;)
-&nbsp;
-&nbsp;typealias sql = capture
-&nbsp;
-&nbsp;// Applicative capture
-&nbsp;val people = sql { Table&lt;People&gt;() }
-&nbsp;val address = sql { Table&lt;Address&gt;() }
-&nbsp;val robot = sql { Table&lt;Robot&gt;() }
-&nbsp;
-&nbsp;// Both people (Applicative capture) and pQuery (Direct capture) are isomorphic.
-&nbsp;val pQuery =
-&nbsp;    sql.select {
-&nbsp;      val p = from(people)
-&nbsp;      p
-&nbsp;    }
-&nbsp;
-&nbsp;val map = sql { people.map { it.name to it.age } }
-&nbsp;
-&nbsp;val filter = sql { people.filter { it.age &gt; 10 } }
-&nbsp;
-&nbsp;// Correlated subqueries
-&nbsp;val subQueries = sql { people.filter { it.age &gt; people.map { it.age }.avg() } }
-&nbsp;
-&nbsp;// Position aggregators
-&nbsp;val aggregators = sql { people.map { count(it.name) to avg(it.age) } }
-&nbsp;
-&nbsp;val distinct = sql { people.map { it.name to it.age }.distinct() }
-&nbsp;
-&nbsp;val limitAndOffest = sql { people.drop(1).take(10) }
-&nbsp;
-&nbsp;val union = sql {
-&nbsp;  people.filter { it.name.like(&quot;aaa%&quot;).use } union people.filter { it.name.like(&quot;bbb%&quot;).use }
-&nbsp;}
-&nbsp;
-&nbsp;data class CommonType(val id: Long, val name: String)
-&nbsp;
-&nbsp;// Map to common type and union
-&nbsp;val commonType = sql {
-&nbsp;  people.map { CommonType(it.id, it.name) } union robot.map { CommonType(it.id, it.name) }
-&nbsp;}
-&nbsp;
-&nbsp;fun select() {
-&nbsp;  val s =
-&nbsp;      sql.select {
-&nbsp;        val p = from(people)
-&nbsp;        val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;).use }
-&nbsp;        where { p.age &gt; 10 }
-&nbsp;        groupBy(p.name, p.age)
-&nbsp;        sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
-&nbsp;        p to a
-&nbsp;      }
-&nbsp;  println(&quot;SQL: ${s.buildPrettyFor.Postgres().value}&quot;)
-&nbsp;}
-&nbsp;
-&nbsp;fun insert(p: People) {
-&nbsp;  val set = sql { insert&lt;People&gt; { set(name to &quot;xxxx&quot;) } }
-&nbsp;
-&nbsp;  sql {
-&nbsp;    insert&lt;People&gt; { setParams(p).excluding(id) }
-&nbsp;        .returning {
-&nbsp;          it.id
-&nbsp;          // Output(it.id, it.name)
-&nbsp;        }
-&nbsp;  }
-&nbsp;}
-&nbsp;
-&nbsp;fun upsert(p: People) {
-&nbsp;  sql {
-&nbsp;    insert&lt;People&gt; {
-&nbsp;      setParams(p).onConflictUpdate(id) { excluding -&gt; set(name to name + &quot;-&quot; + excluding.name) }
-&nbsp;      // setParams(p).onConflictIgnore(id) - Do nothing
-&nbsp;    }
-&nbsp;  }
-&nbsp;}
-&nbsp;
-&nbsp;fun update(p: People) {
-&nbsp;  sql { update&lt;People&gt; { setParams(p) }.where { id == param(p.id) } }
-&nbsp;}
-&nbsp;
-&nbsp;fun delete(p: People) {
-&nbsp;  sql { delete&lt;People&gt;().where { id == param(p.id) } }
-&nbsp;}
-&nbsp;
-&nbsp;fun batch(p: Sequence&lt;People&gt;) {
-&nbsp;  sql.batch(p) { p -&gt; insert&lt;People&gt; { setParams(p).excluding(id) } }
-&nbsp;}
-&nbsp;
-&nbsp;@CapturedFunction
-&nbsp;context(_: CapturedBlock)
-&nbsp;fun String.like(value: String) =
-&nbsp;    capture.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
+&nbsp;@Serializable data class Admin(val user: String, @Redacted val password: String)
 </code>
 </pre>
 </div>
@@ -233,7 +185,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

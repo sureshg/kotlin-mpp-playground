@@ -250,7 +250,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
-&nbsp;import com.github.marschall.directorykeystore.*
 &nbsp;import java.nio.file.Path
 &nbsp;import java.security.KeyStore
 &nbsp;import java.security.Security
@@ -270,16 +269,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;          .map { it.substringAfter(&quot;KeyStore.&quot;).trim() }
 &nbsp;          .distinct()
 &nbsp;
-&nbsp;  fun systemTrustStore(type: TrustStoreType): KeyStore =
-&nbsp;      when (type) {
-&nbsp;        is TrustStoreType.Directory -&gt; {
-&nbsp;          if (Security.getProvider(DirectoryKeystoreProvider.NAME) == null) {
-&nbsp;            Security.addProvider(DirectoryKeystoreProvider())
-&nbsp;          }
-&nbsp;          KeyStore.getInstance(type.name).apply { load(DirectoryLoadStoreParameter(type.path)) }
-&nbsp;        }
-&nbsp;        else -&gt; KeyStore.getInstance(type.name).apply { load(null, null) }
-&nbsp;      }
+&nbsp;  // fun systemTrustStore(type: TrustStoreType): KeyStore =
+&nbsp;  //    when (type) {
+&nbsp;  //      is TrustStoreType.Directory -&gt; {
+&nbsp;  //        if (Security.getProvider(DirectoryKeystoreProvider.NAME) == null) {
+&nbsp;  //          Security.addProvider(DirectoryKeystoreProvider())
+&nbsp;  //        }
+&nbsp;  //        KeyStore.getInstance(type.name).apply { load(DirectoryLoadStoreParameter(type.path)) }
+&nbsp;  //      }
+&nbsp;  //      else -&gt; KeyStore.getInstance(type.name).apply { load(null, null) }
+&nbsp;  //    }
 &nbsp;
 &nbsp;  val caCerts =
 &nbsp;      TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).run {
@@ -333,7 +332,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

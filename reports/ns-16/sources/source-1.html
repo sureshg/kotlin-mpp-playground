@@ -61,7 +61,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/10)
+    (0/13)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +69,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/76)
+    (0/79)
   </span>
 </td>
 </tr>
@@ -131,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/14)
+    (0/17)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/142)
+    (0/145)
   </span>
 </td>
 </tr>
@@ -188,14 +188,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;fun logFunction() =
 <b class="nc">&nbsp;    HostFunction(</b>
-<b class="nc">&nbsp;        &quot;console&quot;, &quot;log&quot;, FunctionType.of(listOf(ValType.I32, ValType.I32), emptyList())) {</b>
-&nbsp;            instance,
-&nbsp;            args -&gt;
-<b class="nc">&nbsp;          val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())</b>
-<b class="nc">&nbsp;          println(&quot;WASM: $msg&quot;)</b>
-&nbsp;          // Value.i32(0)
-&nbsp;          longArrayOf()
-&nbsp;        }
+<b class="nc">&nbsp;        &quot;console&quot;,</b>
+<b class="nc">&nbsp;        &quot;log&quot;,</b>
+<b class="nc">&nbsp;        FunctionType.of(listOf(ValType.I32, ValType.I32), emptyList()),</b>
+<b class="nc">&nbsp;    ) { instance, args -&gt;</b>
+<b class="nc">&nbsp;      val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())</b>
+<b class="nc">&nbsp;      println(&quot;WASM: $msg&quot;)</b>
+&nbsp;      // Value.i32(0)
+&nbsp;      longArrayOf()
+&nbsp;    }
 </code>
 </pre>
 </div>
@@ -219,7 +220,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

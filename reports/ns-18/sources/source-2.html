@@ -128,12 +128,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;          val stroke =
 &nbsp;              Stroke(
 &nbsp;                  width = strokeWidthPx,
-&nbsp;                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f))
+&nbsp;                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f),
+&nbsp;              )
 &nbsp;          drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))
 &nbsp;        }
 &nbsp;      }
 &nbsp;      // .border(border = BorderStroke(strokeWidth, color),shape = RoundedCornerShape(cornerRadius))
-&nbsp;      )
+&nbsp;  )
 &nbsp;}
 &nbsp;
 &nbsp;@Composable
@@ -177,7 +178,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

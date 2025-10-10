@@ -132,7 +132,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      className: String,
 &nbsp;      classBeingRedefined: Class&lt;*&gt;,
 &nbsp;      protectionDomain: ProtectionDomain,
-&nbsp;      classBytes: ByteArray
+&nbsp;      classBytes: ByteArray,
 &nbsp;  ): ByteArray? {
 <b class="nc">&nbsp;    return if (loader != ClassLoader.getPlatformClassLoader()) blockSystemExit(classBytes) else null</b>
 &nbsp;  }
@@ -153,7 +153,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;            .dup()
 &nbsp;            .ldc(java.lang.String(&quot;System.exit not allowed&quot;))
 &nbsp;            .invokespecial(
-&nbsp;                rte, &quot;&lt;init&gt;&quot;, MethodTypeDesc.ofDescriptor(&quot;(Ljava/lang/String;)V&quot;), false)
+&nbsp;                rte,
+&nbsp;                &quot;&lt;init&gt;&quot;,
+&nbsp;                MethodTypeDesc.ofDescriptor(&quot;(Ljava/lang/String;)V&quot;),
+&nbsp;                false,
+&nbsp;            )
 &nbsp;            .athrow()
 &nbsp;        modified.set(true)
 &nbsp;      }
@@ -201,7 +205,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

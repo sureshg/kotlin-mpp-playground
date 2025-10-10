@@ -84,10 +84,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 <td class="coverageStat">
   <span class="percent">
-    83.8%
+    84.4%
   </span>
   <span class="absValue">
-    (109/130)
+    (114/135)
   </span>
 </td>
 </tr>
@@ -158,7 +158,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;                &quot;newVirtualThreadPerTaskExecutor&quot;,</b>
 <b class="nc">&nbsp;                MethodType.methodType(</b>
 <b class="nc">&nbsp;                    ExecutorService::class.java,</b>
-&nbsp;                ))
+&nbsp;                ),
+&nbsp;            )
 <b class="nc">&nbsp;    val execService = mh.invokeExact() as ExecutorService</b>
 <b class="nc">&nbsp;    execService.asCoroutineDispatcher()</b>
 &nbsp;    // Via Reflection
@@ -175,7 +176,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="fc">&nbsp;                      val processEpochSec =</b>
 <b class="fc">&nbsp;                          ProcessHandle.current().info().startInstant().get().epochSecond</b>
 <b class="fc">&nbsp;                      epochSecToString(processEpochSec)</b>
-&nbsp;                    })
+&nbsp;                    }
+&nbsp;            )
 &nbsp;
 &nbsp;  override val osInfo: Map&lt;String, String?&gt;
 &nbsp;    get() =
@@ -222,7 +224,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-CPU] System CPU Usage     : ${osMxBean.cpuLoad}&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [JVM-CPU] JVM CPU Usage        : ${osMxBean.processCpuLoad}&quot;)
 &nbsp;  appendLine(
-&nbsp;      &quot;✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}&quot;)
+&nbsp;      &quot;✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}&quot;
+&nbsp;  )
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Total Memory                  : ${osMxBean.totalMemorySize / unit} MiB&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [SYS-MEM] Free  Memory                  : ${osMxBean.freeMemorySize / unit} MiB&quot;)
 &nbsp;  appendLine(&quot;✧✧✧ [JVM-MEM] Current Heap Size (Committed) : ${heapSize / unit} MiB&quot;)
@@ -379,7 +382,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

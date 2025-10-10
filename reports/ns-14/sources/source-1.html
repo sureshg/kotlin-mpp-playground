@@ -79,7 +79,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/27)
+    (0/30)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,7 +87,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/134)
+    (0/143)
   </span>
 </td>
 </tr>
@@ -132,7 +132,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      className: String,
 &nbsp;      classBeingRedefined: Class&lt;*&gt;,
 &nbsp;      protectionDomain: ProtectionDomain,
-&nbsp;      classBytes: ByteArray
+&nbsp;      classBytes: ByteArray,
 &nbsp;  ): ByteArray? {
 &nbsp;    return if (loader != ClassLoader.getPlatformClassLoader()) blockSystemExit(classBytes) else null
 &nbsp;  }
@@ -153,7 +153,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;            .dup()</b>
 <b class="nc">&nbsp;            .ldc(java.lang.String(&quot;System.exit not allowed&quot;))</b>
 <b class="nc">&nbsp;            .invokespecial(</b>
-<b class="nc">&nbsp;                rte, &quot;&lt;init&gt;&quot;, MethodTypeDesc.ofDescriptor(&quot;(Ljava/lang/String;)V&quot;), false)</b>
+<b class="nc">&nbsp;                rte,</b>
+<b class="nc">&nbsp;                &quot;&lt;init&gt;&quot;,</b>
+<b class="nc">&nbsp;                MethodTypeDesc.ofDescriptor(&quot;(Ljava/lang/String;)V&quot;),</b>
+<b class="nc">&nbsp;                false,</b>
+&nbsp;            )
 <b class="nc">&nbsp;            .athrow()</b>
 <b class="nc">&nbsp;        modified.set(true)</b>
 &nbsp;      }
@@ -201,7 +205,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

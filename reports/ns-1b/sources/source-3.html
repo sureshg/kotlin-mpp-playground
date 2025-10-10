@@ -68,7 +68,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/49)
+    (0/50)
   </span>
 </td>
 <td class="coverageStat">
@@ -144,7 +144,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">FileBrowser_jvmKt$FileListView$lambda$29$lambda$28$$inlined$items$default$1</td>
+    <td class="name">FileBrowser_jvmKt$FileListView$lambda$0$0$$inlined$items$default$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -156,7 +156,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <td class="coverageStat"/>
   </tr>
   <tr>
-    <td class="name">FileBrowser_jvmKt$FileListView$lambda$29$lambda$28$$inlined$items$default$2</td>
+    <td class="name">FileBrowser_jvmKt$FileListView$lambda$0$0$$inlined$items$default$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -168,7 +168,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <td class="coverageStat"/>
   </tr>
   <tr>
-    <td class="name">FileBrowser_jvmKt$FileListView$lambda$29$lambda$28$$inlined$items$default$3</td>
+    <td class="name">FileBrowser_jvmKt$FileListView$lambda$0$0$$inlined$items$default$3</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -180,7 +180,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <td class="coverageStat"/>
   </tr>
   <tr>
-    <td class="name">FileBrowser_jvmKt$FileListView$lambda$29$lambda$28$$inlined$items$default$4</td>
+    <td class="name">FileBrowser_jvmKt$FileListView$lambda$0$0$$inlined$items$default$4</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -214,7 +214,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/62)
+    (0/63)
   </span>
 </td>
 <td class="coverageStat">
@@ -327,37 +327,40 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;      modifier =
 <b class="nc">&nbsp;          modifier</b>
 <b class="nc">&nbsp;              .dashedBorder(strokeWidth = 2.dp, color = dndColor, cornerRadius = 8.dp)</b>
-<b class="nc">&nbsp;              .dragAndDropTarget(shouldStartDragAndDrop = { true }, target = dndTarget)) {</b>
-<b class="nc">&nbsp;        Column(modifier = Modifier.align(Alignment.Center)) {</b>
-<b class="nc">&nbsp;          Text(</b>
-<b class="nc">&nbsp;              &quot;Drag &amp; drop files here&quot;,</b>
-<b class="nc">&nbsp;              modifier = Modifier.padding(20.dp),</b>
-<b class="nc">&nbsp;              color = dndColor,</b>
-<b class="nc">&nbsp;              fontSize = 14.sp)</b>
+<b class="nc">&nbsp;              .dragAndDropTarget(shouldStartDragAndDrop = { true }, target = dndTarget)</b>
+&nbsp;  ) {
+<b class="nc">&nbsp;    Column(modifier = Modifier.align(Alignment.Center)) {</b>
+<b class="nc">&nbsp;      Text(</b>
+<b class="nc">&nbsp;          &quot;Drag &amp; drop files here&quot;,</b>
+<b class="nc">&nbsp;          modifier = Modifier.padding(20.dp),</b>
+<b class="nc">&nbsp;          color = dndColor,</b>
+<b class="nc">&nbsp;          fontSize = 14.sp,</b>
+&nbsp;      )
 &nbsp;
-<b class="nc">&nbsp;          OutlinedButton(</b>
-<b class="nc">&nbsp;              modifier = modifier.align(Alignment.CenterHorizontally).padding(10.dp),</b>
-<b class="nc">&nbsp;              enabled = isDragging.not(),</b>
-<b class="nc">&nbsp;              shape = RoundedCornerShape(10.dp),</b>
-<b class="nc">&nbsp;              onClick = { fdOpen = !fdOpen }) {</b>
-&nbsp;                Icon(Icons.Default.KeyboardArrowUp, &quot;Upload&quot;)
-&nbsp;                Text(&quot;Select&quot;)
+<b class="nc">&nbsp;      OutlinedButton(</b>
+<b class="nc">&nbsp;          modifier = modifier.align(Alignment.CenterHorizontally).padding(10.dp),</b>
+<b class="nc">&nbsp;          enabled = isDragging.not(),</b>
+<b class="nc">&nbsp;          shape = RoundedCornerShape(10.dp),</b>
+<b class="nc">&nbsp;          onClick = { fdOpen = !fdOpen },</b>
+&nbsp;      ) {
+&nbsp;        Icon(Icons.Default.KeyboardArrowUp, &quot;Upload&quot;)
+&nbsp;        Text(&quot;Select&quot;)
+&nbsp;      }
+&nbsp;
+<b class="nc">&nbsp;      if (fdOpen) {</b>
+<b class="nc">&nbsp;        FileDialog { files -&gt;</b>
+<b class="nc">&nbsp;          val data =</b>
+<b class="nc">&nbsp;              object : DragData.FilesList {</b>
+<b class="nc">&nbsp;                override fun readFiles() = files.map { it.toURI().toString() }</b>
 &nbsp;              }
 &nbsp;
-<b class="nc">&nbsp;          if (fdOpen) {</b>
-<b class="nc">&nbsp;            FileDialog { files -&gt;</b>
-<b class="nc">&nbsp;              val data =</b>
-<b class="nc">&nbsp;                  object : DragData.FilesList {</b>
-<b class="nc">&nbsp;                    override fun readFiles() = files.map { it.toURI().toString() }</b>
-&nbsp;                  }
-&nbsp;
-<b class="nc">&nbsp;              onDrop(data)</b>
-<b class="nc">&nbsp;              fdOpen = false</b>
-&nbsp;            }
-&nbsp;            // DisposableEffect(isOpen) {// open FileChooser}
-&nbsp;          }
-<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;          onDrop(data)</b>
+<b class="nc">&nbsp;          fdOpen = false</b>
+&nbsp;        }
+&nbsp;        // DisposableEffect(isOpen) {// open FileChooser}
 <b class="nc">&nbsp;      }</b>
+<b class="nc">&nbsp;    }</b>
+<b class="nc">&nbsp;  }</b>
 <b class="nc">&nbsp;}</b>
 &nbsp;
 &nbsp;@Composable
@@ -366,13 +369,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    items(files) {</b>
 &nbsp;      Box(
 &nbsp;          modifier =
-&nbsp;              Modifier.padding(5.dp).background(FileColors.fileItemBg, RoundedCornerShape(10.dp))) {
-&nbsp;            Text(
-&nbsp;                modifier = Modifier.padding(4.dp),
-&nbsp;                text = it.fileName.toString(),
-&nbsp;                color = FileColors.fileItemFg,
-&nbsp;                fontSize = 14.sp)
-&nbsp;          }
+&nbsp;              Modifier.padding(5.dp).background(FileColors.fileItemBg, RoundedCornerShape(10.dp))
+&nbsp;      ) {
+&nbsp;        Text(
+&nbsp;            modifier = Modifier.padding(4.dp),
+&nbsp;            text = it.fileName.toString(),
+&nbsp;            color = FileColors.fileItemFg,
+&nbsp;            fontSize = 14.sp,
+&nbsp;        )
+&nbsp;      }
 &nbsp;    }
 &nbsp;  }
 <b class="nc">&nbsp;}</b>
@@ -399,7 +404,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

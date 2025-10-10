@@ -65,10 +65,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 <td class="coverageStat">
   <span class="percent">
-    25.9%
+    25.5%
   </span>
   <span class="absValue">
-    (14/54)
+    (14/55)
   </span>
 </td>
 <td class="coverageStat">
@@ -163,10 +163,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 <td class="coverageStat">
   <span class="percent">
-    23.7%
+    23.3%
   </span>
   <span class="absValue">
-    (14/59)
+    (14/60)
   </span>
 </td>
 <td class="coverageStat">
@@ -235,14 +235,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    timeout: Timeout = Timeout.DEFAULT,
 &nbsp;    retry: Retry = Retry.DEFAULT,
 &nbsp;    kLogger: KLogger = log,
-&nbsp;    config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, kLogger)
+&nbsp;    config: HttpClientConfigurer = defaultHttpClientConfig(name, timeout, retry, kLogger),
 &nbsp;): HttpClient
 &nbsp;
 &nbsp;fun defaultHttpClientConfig(
 &nbsp;    name: String,
 &nbsp;    timeout: Timeout,
 &nbsp;    retry: Retry,
-&nbsp;    kLogger: KLogger
+&nbsp;    kLogger: KLogger,
 <b class="nc">&nbsp;): HttpClientConfigurer = {</b>
 <b class="nc">&nbsp;  install(Resources)</b>
 <b class="nc">&nbsp;  install(ContentNegotiation) { json(json) }</b>
@@ -297,7 +297,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="nc">&nbsp;  install(DefaultRequest) {</b>
 <b class="nc">&nbsp;    headers.appendIfNameAndValueAbsent(</b>
-<b class="nc">&nbsp;        HttpHeaders.ContentType, ContentType.Application.Json.toString())</b>
+<b class="nc">&nbsp;        HttpHeaders.ContentType,</b>
+<b class="nc">&nbsp;        ContentType.Application.Json.toString(),</b>
+&nbsp;    )
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  install(SSE) {</b>
@@ -344,7 +346,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

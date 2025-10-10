@@ -167,7 +167,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;/** A virtual thread friendly [kotlin.lazy] implementation. */
 &nbsp;fun &lt;T : Any?&gt; vtLazy(
 <b class="nc">&nbsp;    threadSafetyMode: LazyThreadSafetyMode = NONE,</b>
-&nbsp;    initializer: () -&gt; T
+&nbsp;    initializer: () -&gt; T,
 &nbsp;): Lazy&lt;T&gt; =
 <b class="nc">&nbsp;    when (threadSafetyMode) {</b>
 <b class="nc">&nbsp;      SYNCHRONIZED -&gt; ReentrantLazy(initializer)</b>
@@ -196,7 +196,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

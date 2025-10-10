@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/31)
+    (0/33)
   </span>
 </td>
 <td class="coverageStat">
@@ -71,7 +71,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/10)
+    (0/12)
   </span>
 </td>
 <td class="coverageStat">
@@ -79,7 +79,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/39)
+    (0/40)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,7 +87,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/507)
+    (0/538)
   </span>
 </td>
 </tr>
@@ -111,7 +111,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val name: String,
 &nbsp;    val email: Email?,
 &nbsp;    val age: Int,
-&nbsp;    val addressId: Long?
+&nbsp;    val addressId: Long?,
 &nbsp;)
 &nbsp;
 &nbsp;data class Address(
@@ -120,7 +120,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val city: String,
 &nbsp;    val state: String?,
 &nbsp;    val zipCode: String?,
-&nbsp;    val country: String
+&nbsp;    val country: String,
 &nbsp;)
 &nbsp;
 &nbsp;data class Robot(
@@ -128,7 +128,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val name: String,
 &nbsp;)
 &nbsp;
-<b class="nc">&nbsp;typealias sql = capture</b>
+&nbsp;typealias sql = capture
 &nbsp;
 &nbsp;// Applicative capture
 <b class="nc">&nbsp;val people = sql { Table&lt;People&gt;() }</b>
@@ -174,6 +174,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;        val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;).use }</b>
 <b class="nc">&nbsp;        where { p.age &gt; 10 }</b>
 <b class="nc">&nbsp;        groupBy(p.name, p.age)</b>
+<b class="nc">&nbsp;        having { p95(p.age).use &gt; 50 }</b>
 <b class="nc">&nbsp;        sortBy(p.name to Ord.Asc, p.age to Ord.Desc)</b>
 <b class="nc">&nbsp;        p to a</b>
 &nbsp;      }
@@ -214,9 +215,38 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;}
 &nbsp;
 &nbsp;@CapturedFunction
-&nbsp;context(_: CapturedBlock)
+&nbsp;// context(_: CapturedBlock)
 &nbsp;fun String.like(value: String) =
 <b class="nc">&nbsp;    capture.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }</b>
+&nbsp;
+<b class="nc">&nbsp;@CapturedFunction fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }</b>
+&nbsp;
+&nbsp;// data class User(val id: Long, val name: String, val active: Int)
+&nbsp;//
+&nbsp;// data class Comment(
+&nbsp;//    val id: Long,
+&nbsp;//    val content: String,
+&nbsp;//    val userId: Long,
+&nbsp;//    val createdAt: LocalDateTime
+&nbsp;// )
+&nbsp;//
+&nbsp;// val user = sql { Table&lt;User&gt;() }
+&nbsp;// val comment = sql { Table&lt;Comment&gt;() }
+&nbsp;//
+&nbsp;// fun select1() {
+&nbsp;//  val date = Clock.System.now().plus(30.days).toLocalDateTime(TimeZone.currentSystemDefault())
+&nbsp;//  val s = sql {
+&nbsp;//    select {
+&nbsp;//          val u = from(user)
+&nbsp;//          val c = join(comment) { it.userId == u.id }
+&nbsp;//          where { u.active == 1 &amp;&amp; c.createdAt &gt; param(date) }
+&nbsp;//          groupBy(u.id)
+&nbsp;//          u to count(c.id)
+&nbsp;//        }
+&nbsp;//        .filter { it.second &gt; 5 }
+&nbsp;//  }
+&nbsp;//  println(&quot;SQL: ${s.buildPrettyFor.Postgres().value}&quot;)
+&nbsp;// }
 </code>
 </pre>
 </div>
@@ -240,7 +270,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

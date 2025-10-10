@@ -129,7 +129,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;            dependencies = Dependencies.ALL_FILES,</b>
 <b class="nc">&nbsp;            packageName = &quot;&quot;,</b>
 <b class="nc">&nbsp;            fileName = &quot;Foo&quot;,</b>
-<b class="nc">&nbsp;            extensionName = &quot;kt&quot;)</b>
+<b class="nc">&nbsp;            extensionName = &quot;kt&quot;,</b>
+&nbsp;        )
 <b class="nc">&nbsp;        .use { output -&gt;</b>
 <b class="nc">&nbsp;          OutputStreamWriter(output).use { writer -&gt;</b>
 <b class="nc">&nbsp;            writer.write(&quot;package com.example\n\n&quot;)</b>
@@ -149,7 +150,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;  override fun visitClassDeclaration(
 &nbsp;      classDeclaration: KSClassDeclaration,
-&nbsp;      data: OutputStreamWriter
+&nbsp;      data: OutputStreamWriter,
 &nbsp;  ) {
 &nbsp;    super.visitClassDeclaration(classDeclaration, data)
 &nbsp;    val symbolName = classDeclaration.simpleName.asString().lowercase()
@@ -179,7 +180,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

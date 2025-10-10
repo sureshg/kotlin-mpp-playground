@@ -87,7 +87,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/61)
+    (0/64)
   </span>
 </td>
 </tr>
@@ -117,7 +117,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    val result =</b>
 <b class="nc">&nbsp;        downcallHandle(</b>
 <b class="nc">&nbsp;                &quot;pthread_set_qos_class_self_np&quot;,</b>
-<b class="nc">&nbsp;                FunctionDescriptor.of(JAVA_INT, JAVA_INT, JAVA_INT))</b>
+<b class="nc">&nbsp;                FunctionDescriptor.of(JAVA_INT, JAVA_INT, JAVA_INT),</b>
+&nbsp;            )
 <b class="nc">&nbsp;            ?.invokeExact(qosClass.raw, relativePriority) as Int</b>
 &nbsp;
 <b class="nc">&nbsp;    when (result != 0) {</b>
@@ -157,7 +158,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;                name = &quot;QosThreadPool-${threadId()}&quot;
 &nbsp;              }
 &nbsp;            }
-&nbsp;          })
+&nbsp;          },
+&nbsp;      )
 &nbsp;      .asCoroutineDispatcher()
 &nbsp;}
 </code>
@@ -183,7 +185,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/54)
+    (0/60)
   </span>
 </td>
 </tr>
@@ -114,7 +114,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;fun downcallHandle(
 &nbsp;    symbol: String,
 &nbsp;    fdesc: FunctionDescriptor,
-&nbsp;    vararg options: Linker.Option
+&nbsp;    vararg options: Linker.Option,
 &nbsp;): MethodHandle? =
 <b class="nc">&nbsp;    SYMBOL_LOOKUP.findOrThrow(symbol).let { LINKER.downcallHandle(it, fdesc, *options) }</b>
 </code>
@@ -140,7 +140,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

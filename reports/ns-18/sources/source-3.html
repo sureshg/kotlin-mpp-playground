@@ -177,7 +177,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;fun SaveToBitmap(
 <b class="nc">&nbsp;    modifier: Modifier = Modifier,</b>
 &nbsp;    onSave: (ImageBitmap) -&gt; Unit,
-&nbsp;    content: @Composable () -&gt; Unit
+&nbsp;    content: @Composable () -&gt; Unit,
 <b class="nc">&nbsp;) {</b>
 <b class="nc">&nbsp;  val coroutineScope = rememberCoroutineScope()</b>
 <b class="nc">&nbsp;  val graphicsLayer = rememberGraphicsLayer()</b>
@@ -197,9 +197,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;                  onSave(bitmap)</b>
 &nbsp;                }
 &nbsp;              }
-<b class="nc">&nbsp;              .background(Color.White)) {</b>
-<b class="nc">&nbsp;        content()</b>
-<b class="nc">&nbsp;      }</b>
+<b class="nc">&nbsp;              .background(Color.White)</b>
+&nbsp;  ) {
+<b class="nc">&nbsp;    content()</b>
+<b class="nc">&nbsp;  }</b>
 <b class="nc">&nbsp;}</b>
 </code>
 </pre>
@@ -224,7 +225,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>

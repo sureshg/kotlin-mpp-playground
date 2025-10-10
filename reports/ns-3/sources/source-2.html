@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/112)
+    (0/120)
   </span>
 </td>
 </tr>
@@ -107,6 +107,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/3)
   </span>
 </td>
+  </tr>
+  <tr>
+    <td class="name">AppKt$module$1</td>
+    <td class="coverageStat"/>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
@@ -139,7 +143,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/115)
+    (0/123)
   </span>
 </td>
 </tr>
@@ -153,7 +157,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh
 &nbsp;
 &nbsp;import BuildConfig
-&nbsp;import dev.suresh.config.AppConfig
+&nbsp;import dev.suresh.di.configureDI
 &nbsp;import dev.suresh.plugins.*
 &nbsp;import dev.suresh.routes.*
 &nbsp;import io.ktor.server.application.*
@@ -172,9 +176,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;      log.error(&quot;Failed to start ${BuildConfig.description}: ${e.message}&quot;, e)</b>
 &nbsp;    }
 &nbsp;
-&nbsp;fun Application.module() {
+&nbsp;suspend fun Application.module() {
 <b class="nc">&nbsp;  log.info(&quot;Starting ${BuildConfig.description} v${BuildConfig.version}...&quot;)</b>
-<b class="nc">&nbsp;  AppConfig.init(environment.config)</b>
+<b class="nc">&nbsp;  configureDI()</b>
 <b class="nc">&nbsp;  configureOTel()</b>
 <b class="nc">&nbsp;  configureInterceptors()</b>
 <b class="nc">&nbsp;  configureHTTP()</b>
@@ -239,7 +243,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-05 00:19</div>
+    <div style="float:right;">generated on 2025-10-10 21:27</div>
 </div>
 </body>
 </html>
