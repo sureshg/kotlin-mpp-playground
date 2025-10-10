@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Dependency Versions
-bc-plugins                     = "2.12.0"
+bc-plugins                     = "2.14.0"
 kotlinx-kover                  = "0.9.2"
 kotlin-dokka                   = "2.1.0-Beta"
 kotlinx-io                     = "0.8.0"
@@ -48,7 +48,7 @@ kotlin-statistics              = "0.4.0-RC1"
 gradle-kotlin-dsl              = "6.4.0"
 exoquery-plugin                = "2.2.20-1.7.1.PL"
 exoquery-sql                   = "1.7.1.PL"
-exposed                        = "1.0.0-rc-1"
+exposed                        = "1.0.0-rc-2"
 postgresql                     = "42.7.8"
 embedded-postgres              = "2.1.1"
 embedded-postgres-bom          = "17.6.0"
@@ -66,7 +66,7 @@ spring-depmgmt                 = "1.1.7"
 ktor                           = "3.3.1"
 swagger-codegen                = "3.0.74"
 ktor-cohort                    = "2.8.0"
-java-http                      = "1.1.1"
+java-http                      = "1.2.0"
 fusionauth-jwt                 = "5.3.3"
 otel                           = "1.54.1"
 otel-alpha                     = "1.54.1-alpha"
@@ -76,7 +76,7 @@ otel-semconv                   = "1.37.0"
 otel-contrib                   = "1.50.0-alpha"
 otel-kotlin                    = "0.6.0"
 bc                             = "1.82"
-okio                           = "3.16.0"
+okio                           = "3.16.1"
 ayza                           = "10.0.0"
 ksp-auto-service               = "1.2.0"
 sweetspi                       = "0.1.3"
@@ -103,7 +103,7 @@ mockk                          = "1.14.6"
 mokkery                        = "3.0.0-Beta2"
 wiremock                       = "4.0.0-beta.15"
 wiremock-kotlin                = "2.1.1"
-okhttp                         = "5.2.0"
+okhttp                         = "5.2.1"
 slf4j                          = "2.1.0-alpha1"
 logback                        = "1.5.19"
 logback-tyler                  = "1.0.2"
@@ -402,7 +402,7 @@ akkurate-ksp-plugin                  = { module = "dev.nesk.akkurate:akkurate-ks
 
 okio-bom                             = { module = "com.squareup.okio:okio-bom"                                 , version.ref = "okio"}
 okio                                 = { module = "com.squareup.okio:okio"                                     , version.ref = "okio"}
-okio-fakefilesystem                  = { module = "com.squareup.okio:okio-fakefilesystem"                       , version.ref = "okio"}
+okio-fakefilesystem                  = { module = "com.squareup.okio:okio-fakefilesystem"                      , version.ref = "okio"}
 arrow-suspendapp                     = { module = "io.arrow-kt:suspendapp"                                     , version.ref = "arrow-suspendapp" }
 arrow-suspendapp-ktor                = { module = "io.arrow-kt:suspendapp-ktor"                                , version.ref = "arrow-suspendapp" }
 kmp-appdirs                          = { module = "ca.gosyer:kotlin-multiplatform-appdirs"                     , version.ref = "kmp-appdirs"}

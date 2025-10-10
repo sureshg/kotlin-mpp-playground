@@ -20,8 +20,9 @@ fun FileBrowser(modifier: Modifier = Modifier, navToHome: () -> Unit) {
       modifier =
           modifier.fillMaxSize().padding(10.dp).debug(color = MaterialTheme.colorScheme.primary),
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.SpaceEvenly) {
-        DragDropListView()
-        HomeButton(navToHome)
-      }
+      verticalArrangement = Arrangement.SpaceEvenly,
+  ) {
+    DragDropListView()
+    HomeButton(navToHome)
+  }
 }

@@ -26,7 +26,8 @@ fun FileDialog(parent: Frame? = null, onClose: (result: List<File>) -> Unit) =
             }
           }
         },
-        dispose = FileDialog::dispose)
+        dispose = FileDialog::dispose,
+    )
 
 fun fileChooser(parent: Frame? = null, onClose: (result: List<File>) -> Unit) {
   UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())

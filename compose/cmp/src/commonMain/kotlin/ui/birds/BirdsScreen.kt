@@ -36,21 +36,22 @@ fun BirdImages(modifier: Modifier = Modifier, navToHome: () -> Unit) {
               .debug(color = Color.Black)
               .verticalScroll(scrollState),
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.SpaceEvenly) {
-        if (state.images.isEmpty()) {
-          CircularProgressIndicator(
-              modifier = Modifier.width(64.dp),
-              color = MaterialTheme.colorScheme.secondary,
-              trackColor = MaterialTheme.colorScheme.surfaceVariant,
-          )
-          Text("Loading images...")
-        } else {
-          state.images.forEach { image ->
-            SelectionContainer { Text(image.path) }
-            Spacer(modifier = Modifier.width(5.dp))
-          }
-        }
-        Spacer(modifier = Modifier.height(5.dp))
-        HomeButton(navToHome)
+      verticalArrangement = Arrangement.SpaceEvenly,
+  ) {
+    if (state.images.isEmpty()) {
+      CircularProgressIndicator(
+          modifier = Modifier.width(64.dp),
+          color = MaterialTheme.colorScheme.secondary,
+          trackColor = MaterialTheme.colorScheme.surfaceVariant,
+      )
+      Text("Loading images...")
+    } else {
+      state.images.forEach { image ->
+        SelectionContainer { Text(image.path) }
+        Spacer(modifier = Modifier.width(5.dp))
       }
+    }
+    Spacer(modifier = Modifier.height(5.dp))
+    HomeButton(navToHome)
+  }
 }

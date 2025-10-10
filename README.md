@@ -217,9 +217,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 
   # Test linux binary on ARM64 MacOS
   $ ./gradlew :backend:native:linuxArm64Binaries
-  $ docker run  \
-           -it \
-           --rm \
+  $ docker run -it -rm \
            --publish 8080:80 \
            --mount type=bind,source=$(pwd),destination=/app,readonly \
            debian:stable-slim
@@ -227,10 +225,8 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
     # libtree -v /app/backend/native/build/bin/linuxArm64/releaseExecutable/native.kexe
 
   # Build native binaries on container
-  $ docker run \
+  $ docker run -it --rm \
            --platform=linux/amd64 \
-           -it \
-           --rm \
            --pull always \
            --workdir /app \
            --name kotlin-native-build \

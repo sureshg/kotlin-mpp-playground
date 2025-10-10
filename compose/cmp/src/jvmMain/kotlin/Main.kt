@@ -23,7 +23,10 @@ fun main() = application {
   ) {
     val windowState =
         rememberWindowState(
-            width = 800.dp, height = 600.dp, position = WindowPosition(Alignment.Center))
+            width = 800.dp,
+            height = 600.dp,
+            position = WindowPosition(Alignment.Center),
+        )
 
     Window(title = resource, state = windowState, onCloseRequest = ::exitApplication) {
       // DevelopmentEntryPoint {

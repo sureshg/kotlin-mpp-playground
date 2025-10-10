@@ -34,12 +34,13 @@ fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modi
           val stroke =
               Stroke(
                   width = strokeWidthPx,
-                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f))
+                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f),
+              )
           drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))
         }
       }
       // .border(border = BorderStroke(strokeWidth, color),shape = RoundedCornerShape(cornerRadius))
-      )
+  )
 }
 
 @Composable

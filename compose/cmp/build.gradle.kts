@@ -10,12 +10,12 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
 
 plugins {
-  dev.suresh.plugin.kotlin.mpp
+  id("dev.suresh.plugin.kotlin.mpp")
   alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.jetbrains.compose)
   alias(libs.plugins.jetbrains.compose.hotreload)
   // alias(libs.plugins.detekt)
-  dev.suresh.plugin.publishing
+  id("dev.suresh.plugin.publishing")
 }
 
 description = "Compose Desktop App!"
@@ -53,17 +53,13 @@ kotlin {
       implementation(compose.desktop.components.animatedImage)
       implementation(libs.kotlinx.coroutines.swing)
       implementation(libs.slf4j.simple)
-      implementation(libs.evas.compose)
     }
 
     // jsMain.dependencies { implementation(compose.html.core) }
   }
 }
 
-composeCompiler {
-  reportsDestination = layout.buildDirectory.dir("compose_compiler")
-  // featureFlags.add(ComposeFeatureFlag.)
-}
+composeCompiler {}
 
 compose {
   desktop {
@@ -73,7 +69,7 @@ compose {
       jvmArgs += buildList {
         // $APPDIR macro is used by jpackage.
         // To debug _JAVA_LAUNCHER_DEBUG=1
-        add("-splash:${'$'}APPDIR/resources/splash.jpg")
+        add($$"-splash:$APPDIR/resources/splash.jpg")
         addAll(runJvmArgs)
         // Resource localization
         // add("-Duser.language=en")

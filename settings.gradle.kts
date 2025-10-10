@@ -57,12 +57,12 @@ if (isNativeTargetEnabled) {
   include(":backend:native")
 }
 
-// if (isComposeModuleEnabled) {
-//  include(":compose:cmp")
-//  // include(":compose:cli")
-//  // include(":compose:html")
-// }
-//
+if (isComposeModuleEnabled) {
+  include(":compose:cmp")
+  // include(":compose:cli")
+  // include(":compose:html")
+}
+
 // if (isBootModuleEnabled) {
 //  include(":backend:boot")
 // }

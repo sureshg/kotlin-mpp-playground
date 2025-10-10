@@ -17,7 +17,8 @@ fun NavRoot() {
     composable(Screen.Home.route) {
       Home(
           navToFile = { navController.navigate(Screen.FileBrowser.route) },
-          navToImage = { navController.navigate(Screen.Image.route) })
+          navToImage = { navController.navigate(Screen.Image.route) },
+      )
     }
     composable(Screen.FileBrowser.route) {
       FileBrowser(navToHome = { navController.popBackStack() })
@@ -27,9 +28,10 @@ fun NavRoot() {
 
     composable(
         route = Screen.Profile.route,
-        arguments = listOf(navArgument("userId") { type = NavType.StringType })) {
-          // val userId = it.arguments?.getString("userId")
-          // Profile(userId = userId)
-        }
+        arguments = listOf(navArgument("userId") { type = NavType.StringType }),
+    ) {
+      // val userId = it.arguments?.getString("userId")
+      // Profile(userId = userId)
+    }
   }
 }

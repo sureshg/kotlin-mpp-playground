@@ -25,7 +25,7 @@ fun ImageBitmap.toByteArray(): ByteArray? = asSkiaBitmap().readPixels()
 fun SaveToBitmap(
     modifier: Modifier = Modifier,
     onSave: (ImageBitmap) -> Unit,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
   val coroutineScope = rememberCoroutineScope()
   val graphicsLayer = rememberGraphicsLayer()
@@ -45,7 +45,8 @@ fun SaveToBitmap(
                   onSave(bitmap)
                 }
               }
-              .background(Color.White)) {
-        content()
-      }
+              .background(Color.White)
+  ) {
+    content()
+  }
 }

@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 
 data class BirdUiState(
     val images: List<Image> = emptyList(),
-    val videos: List<Video> = emptyList()
+    val videos: List<Video> = emptyList(),
 ) {
 
   val categories by lazy { images.map { it.category }.distinct() }

@@ -12,7 +12,7 @@ import org.jetbrains.kotlin.konan.target.Family
 plugins {
   id("dev.suresh.plugin.kotlin.mpp")
   id("dev.suresh.plugin.publishing")
-  com.google.cloud.tools.jib
+  id("com.google.cloud.tools.jib")
 }
 
 val appBinName = "app"

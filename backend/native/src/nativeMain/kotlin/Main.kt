@@ -70,7 +70,8 @@ fun main(args: Array<String>): Unit = runBlocking {
                  - Cindy
                  - Dan
           """
-              .trimIndent())
+              .trimIndent()
+      )
   println(yaml)
 }
 

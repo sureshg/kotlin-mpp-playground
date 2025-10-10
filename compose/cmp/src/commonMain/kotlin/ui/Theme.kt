@@ -14,9 +14,11 @@ fun AppTheme(content: @Composable () -> Unit) {
           MaterialTheme.shapes.copy(
               small = RoundedCornerShape(0.dp),
               medium = RoundedCornerShape(0.dp),
-              large = RoundedCornerShape(0.dp))) {
-        content()
-      }
+              large = RoundedCornerShape(0.dp),
+          ),
+  ) {
+    content()
+  }
 }
 
 object FileColors {

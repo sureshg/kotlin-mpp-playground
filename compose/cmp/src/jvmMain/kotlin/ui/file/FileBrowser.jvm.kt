@@ -92,37 +92,40 @@ fun DragDropBox(modifier: Modifier = Modifier, onDrop: (DragData) -> Unit) {
       modifier =
           modifier
               .dashedBorder(strokeWidth = 2.dp, color = dndColor, cornerRadius = 8.dp)
-              .dragAndDropTarget(shouldStartDragAndDrop = { true }, target = dndTarget)) {
-        Column(modifier = Modifier.align(Alignment.Center)) {
-          Text(
-              "Drag & drop files here",
-              modifier = Modifier.padding(20.dp),
-              color = dndColor,
-              fontSize = 14.sp)
+              .dragAndDropTarget(shouldStartDragAndDrop = { true }, target = dndTarget)
+  ) {
+    Column(modifier = Modifier.align(Alignment.Center)) {
+      Text(
+          "Drag & drop files here",
+          modifier = Modifier.padding(20.dp),
+          color = dndColor,
+          fontSize = 14.sp,
+      )
 
-          OutlinedButton(
-              modifier = modifier.align(Alignment.CenterHorizontally).padding(10.dp),
-              enabled = isDragging.not(),
-              shape = RoundedCornerShape(10.dp),
-              onClick = { fdOpen = !fdOpen }) {
-                Icon(Icons.Default.KeyboardArrowUp, "Upload")
-                Text("Select")
+      OutlinedButton(
+          modifier = modifier.align(Alignment.CenterHorizontally).padding(10.dp),
+          enabled = isDragging.not(),
+          shape = RoundedCornerShape(10.dp),
+          onClick = { fdOpen = !fdOpen },
+      ) {
+        Icon(Icons.Default.KeyboardArrowUp, "Upload")
+        Text("Select")
+      }
+
+      if (fdOpen) {
+        FileDialog { files ->
+          val data =
+              object : DragData.FilesList {
+                override fun readFiles() = files.map { it.toURI().toString() }
               }
 
-          if (fdOpen) {
-            FileDialog { files ->
-              val data =
-                  object : DragData.FilesList {
-                    override fun readFiles() = files.map { it.toURI().toString() }
-                  }
-
-              onDrop(data)
-              fdOpen = false
-            }
-            // DisposableEffect(isOpen) {// open FileChooser}
-          }
+          onDrop(data)
+          fdOpen = false
         }
+        // DisposableEffect(isOpen) {// open FileChooser}
       }
+    }
+  }
 }
 
 @Composable
@@ -131,13 +134,15 @@ fun FileListView(modifier: Modifier = Modifier, files: List<Path>) {
     items(files) {
       Box(
           modifier =
-              Modifier.padding(5.dp).background(FileColors.fileItemBg, RoundedCornerShape(10.dp))) {
-            Text(
-                modifier = Modifier.padding(4.dp),
-                text = it.fileName.toString(),
-                color = FileColors.fileItemFg,
-                fontSize = 14.sp)
-          }
+              Modifier.padding(5.dp).background(FileColors.fileItemBg, RoundedCornerShape(10.dp))
+      ) {
+        Text(
+            modifier = Modifier.padding(4.dp),
+            text = it.fileName.toString(),
+            color = FileColors.fileItemFg,
+            fontSize = 14.sp,
+        )
+      }
     }
   }
 }

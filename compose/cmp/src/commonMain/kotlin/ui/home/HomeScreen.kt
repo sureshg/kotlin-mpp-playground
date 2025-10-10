@@ -39,77 +39,83 @@ fun Home(navToFile: () -> Unit, navToImage: () -> Unit) {
       modifier =
           Modifier.fillMaxSize().padding(10.dp).debug(color = MaterialTheme.colorScheme.primary),
       horizontalAlignment = Alignment.CenterHorizontally,
-      verticalArrangement = Arrangement.SpaceEvenly) {
-        SelectionContainer {
-          Text(
-              text,
-              modifier = Modifier.basicMarquee().fillMaxWidth().align(Alignment.CenterHorizontally))
-        }
+      verticalArrangement = Arrangement.SpaceEvenly,
+  ) {
+    SelectionContainer {
+      Text(
+          text,
+          modifier = Modifier.basicMarquee().fillMaxWidth().align(Alignment.CenterHorizontally),
+      )
+    }
 
-        Button(
-            onClick = {
-              text = buildAnnotatedString {
-                append("Compose ${platform.name} App: ")
-                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
-                  append(BuildConfig.version)
-                }
-                appendLine()
-
-                append("Java : ")
-                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
-                  append(BuildConfig.java)
-                }
-                appendLine()
-
-                append("Kotlin : ")
-                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
-                  append(KotlinVersion.CURRENT.toString())
-                }
-                appendLine()
-
-                append("Compose Multiplatform : ")
-                withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
-                  append(BuildConfig.jetbrainsCompose)
-                }
-              }
-              showImage = !showImage
-            }) {
-              Text(text = "Click")
+    Button(
+        onClick = {
+          text = buildAnnotatedString {
+            append("Compose ${platform.name} App: ")
+            withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
+              append(BuildConfig.version)
             }
+            appendLine()
 
-        AnimatedVisibility(visible = showImage) {
-          Row {
-            Image(
-                modifier = Modifier.size(100.dp),
-                imageVector = vectorResource(Res.drawable.compose_multiplatform),
-                contentDescription = "Logo")
+            append("Java : ")
+            withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
+              append(BuildConfig.java)
+            }
+            appendLine()
 
-            lottie()
+            append("Kotlin : ")
+            withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
+              append(KotlinVersion.CURRENT.toString())
+            }
+            appendLine()
+
+            append("Compose Multiplatform : ")
+            withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
+              append(BuildConfig.jetbrainsCompose)
+            }
           }
+          showImage = !showImage
         }
+    ) {
+      Text(text = "Click")
+    }
 
-        Row {
-          ElevatedButton(onClick = navToFile) {
-            Icon(
-                painter = painterResource(Res.drawable.ic_fluent_rocket),
-                contentDescription = "File Browser",
-                modifier = Modifier.size(24.dp))
-            Spacer(modifier = Modifier.width(5.dp))
-            Text("File Browser!")
-          }
+    AnimatedVisibility(visible = showImage) {
+      Row {
+        Image(
+            modifier = Modifier.size(100.dp),
+            imageVector = vectorResource(Res.drawable.compose_multiplatform),
+            contentDescription = "Logo",
+        )
 
-          Spacer(modifier = Modifier.width(5.dp))
-
-          ElevatedButton(onClick = navToImage) {
-            Icon(
-                imageVector = Icons.Default.Star,
-                contentDescription = "Bird Images",
-                modifier = Modifier.size(24.dp))
-            Spacer(modifier = Modifier.width(5.dp))
-            Text("Bird Images!")
-          }
-        }
+        lottie()
       }
+    }
+
+    Row {
+      ElevatedButton(onClick = navToFile) {
+        Icon(
+            painter = painterResource(Res.drawable.ic_fluent_rocket),
+            contentDescription = "File Browser",
+            modifier = Modifier.size(24.dp),
+        )
+        Spacer(modifier = Modifier.width(5.dp))
+        Text("File Browser!")
+      }
+
+      Spacer(modifier = Modifier.width(5.dp))
+
+      ElevatedButton(onClick = navToImage) {
+        Icon(
+            imageVector = Icons.Default.Star,
+            contentDescription = "Bird Images",
+            modifier = Modifier.size(24.dp),
+        )
+        Spacer(modifier = Modifier.width(5.dp))
+        Text("Bird Images!")
+      }
+    }
+  }
 }
 
 @Composable
@@ -118,7 +124,8 @@ fun HomeButton(navToHome: () -> Unit) {
     Icon(
         imageVector = Icons.Default.Home,
         contentDescription = "Home",
-        modifier = Modifier.size(24.dp))
+        modifier = Modifier.size(24.dp),
+    )
     Spacer(modifier = Modifier.width(5.dp))
     Text("Back to Home")
   }

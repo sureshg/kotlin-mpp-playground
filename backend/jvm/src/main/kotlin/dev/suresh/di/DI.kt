@@ -1,18 +1,39 @@
 package dev.suresh.di
 
 import io.ktor.server.application.Application
+import io.ktor.server.application.install
 import io.ktor.server.application.log
 import io.ktor.server.config.ApplicationConfig
 import io.ktor.server.config.property
+import io.ktor.server.plugins.di.DI
+import io.ktor.server.plugins.di.DefaultConflictPolicy
+import io.ktor.server.plugins.di.DependencyConflictPolicy
 import io.ktor.server.plugins.di.dependencies
 import kotlin.reflect.full.withNullability
 import kotlin.reflect.typeOf
 import kotlin.time.Duration
 
 suspend fun Application.configureDI() {
+  // Override dependencies
+  install(DI) {
+    conflictPolicy = DependencyConflictPolicy { prev, curr ->
+      when (val result = DefaultConflictPolicy.resolve(prev, curr)) {
+        is Conflict -> KeepNew
+        else -> result
+      }
+    }
+  }
+
   log.info("Initializing config dependencies.")
   val app = this
-  dependencies { provide { app.property<Auth>("app.auth") } }
+  dependencies {
+    provide { app.property<Auth>("app.auth") }
+    // provide(MediaApiClient::class)
+    // provide { MediaApiClient(resolve()) }
+    // provide(::MediaApiClient)
+    // provide<()->Type> { {Factory(resolve(), ...)}}
+  }
+
   log.info("Auth config: ${dependencies.resolve<Auth>()}")
 }
 
