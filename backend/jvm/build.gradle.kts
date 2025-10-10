@@ -251,17 +251,12 @@ dependencies {
   //  }
 }
 
-// Remove slf4j simple provider from tests
-// configurations.testImplementation {
-//    exclude(module = libs.slf4j.simple.get().module.toString())
-// }
-
 // JS build output files.
 // tasks.named(jsWebpack).get().outputs.files
 
-configurations.all {
-  resolutionStrategy {
-    force("org.bouncycastle:bcutil-jdk18on:${libs.versions.bc.asProvider().get()}")
-    force("org.bouncycastle:bcprov-jdk18on:${libs.versions.bc.asProvider().get()}")
-  }
-}
+// configurations.all {
+//  resolutionStrategy {
+//    force("org.bouncycastle:bcutil-jdk18on:${libs.versions.bc.asProvider().get()}")
+//    force("org.bouncycastle:bcprov-jdk18on:${libs.versions.bc.asProvider().get()}")
+//  }
+// }
