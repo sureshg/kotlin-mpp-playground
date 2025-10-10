@@ -683,7 +683,7 @@ external interface IBufferLine {
   fun translateToString(
       trimRight: Boolean = definedExternally,
       startColumn: Number = definedExternally,
-      endColumn: Number = definedExternally
+      endColumn: Number = definedExternally,
   ): String
 }
 
@@ -750,12 +750,12 @@ external interface IFunctionIdentifier {
 external interface IParser {
   fun registerCsiHandler(
       id: IFunctionIdentifier,
-      callback: (params: Array<Any /* Number | Array<Number> */>) -> Any
+      callback: (params: Array<Any /* Number | Array<Number> */>) -> Any,
   ): IDisposable
 
   fun registerDcsHandler(
       id: IFunctionIdentifier,
-      callback: (data: String, param: Array<Any /* Number | Array<Number> */>) -> Any
+      callback: (data: String, param: Array<Any /* Number | Array<Number> */>) -> Any,
   ): IDisposable
 
   fun registerEscHandler(id: IFunctionIdentifier, handler: () -> Any): IDisposable

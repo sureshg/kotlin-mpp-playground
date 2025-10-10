@@ -3,11 +3,12 @@ import dev.suresh.flow.timerComposeFlow
 import dev.suresh.http.MediaApiClient
 import dev.suresh.log
 import interop.topLevelJsFun
-import js.promise.await
 import kotlin.random.Random
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.browser.document
+import kotlinx.browser.window
 import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.await
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -18,7 +19,6 @@ import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.progress
 import org.w3c.dom.*
-import web.navigator.navigator
 import xterm.*
 
 val mainScope = MainScope()
@@ -29,7 +29,7 @@ suspend fun main() {
 
   copy.onclick = {
     mainScope.launch {
-      navigator.clipboard.writeTextAsync(root.textContent.orEmpty()).await()
+      window.navigator.clipboard.writeText(root.textContent.orEmpty()).await()
       log.info { "Copied to clipboard using kotlinx-wrapper APIs!" }
     }
   }

@@ -45,7 +45,7 @@ include(":backend:agent:jfr")
 
 include(":backend:agent:otel")
 
-// include(":web")
+include(":web")
 
 include(":benchmark")
 
