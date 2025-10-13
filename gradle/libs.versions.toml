@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Dependency Versions
-bc-plugins                     = "2.15.0"
+bc-plugins                     = "2.16.0"
 kotlinx-kover                  = "0.9.2"
 kotlin-dokka                   = "2.1.0-Beta"
 kotlinx-io                     = "0.8.0"
@@ -38,7 +38,7 @@ kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.3.2"
-kotlin-wrappers                = "2025.10.4"
+kotlin-wrappers                = "2025.10.7"
 kotlin-redacted                = "1.15.0"
 kotlin-serviceloader           = "0.0.21"
 kotlinx-multik                 = "0.2.3"
@@ -55,7 +55,7 @@ embedded-postgres-bom          = "17.6.0"
 evas                           = "1.3.0"
 kopy                           = "0.19.0+2.2.20"
 poko                           = "0.20.0"
-mappie                         = "2.2.20-1.5.0"
+mappie                         = "2.2.20-1.6.0"
 akkurate                       = "0.11.0"
 kaml                           = "0.98.0"
 snakeyaml-engine-kmp           = "3.2.1"
@@ -75,6 +75,7 @@ otel-instr-alpha               = "2.20.1-alpha"
 otel-semconv                   = "1.37.0"
 otel-contrib                   = "1.50.0-alpha"
 otel-kotlin                    = "0.6.0"
+jackson                        = "3.0.0"
 bc                             = "1.82"
 okio                           = "3.16.1"
 ayza                           = "10.0.0"
@@ -180,7 +181,8 @@ xchart                         = "3.8.8"
 batik                          = "1.19"
 twelvemonkeys                  = "3.12.0"
 okapibarcode                   = "0.5.2"
-chasm                          = "1.1.0"
+chasm                          = "1.2.0"
+chasm-plugin                   = "2.0.0-1.2.0"
 cel                            = "0.11.0"
 kfswatch                       = "1.3.1"
 kmp-process                    = "0.4.0"
@@ -215,7 +217,7 @@ jetbrains-compose-icons        = "1.7.3"
 kobweb                         = "0.23.3"
 detekt                         = "1.23.8"
 detekt-compose-rules           = "0.4.27"
-compose-hotreload              = "1.0.0-rc01"
+compose-hotreload              = "1.0.0-rc02"
 compose-icons                  = "1.1.1"
 compose-routing                = "0.5.0"
 compose-fluent                 = "0.1.0"
@@ -418,6 +420,7 @@ ayza-for-pem                         = { module = "io.github.hakky54:ayza-for-pe
 oshi-core                            = { module = "com.github.oshi:oshi-core-java25"                           , version.ref = "oshi"}
 java-http                            = { module = "io.fusionauth:java-http"                                    , version.ref = "java-http"}
 fusionauth-jwt                       = { module = "io.fusionauth:fusionauth-jwt"                               , version.ref = "fusionauth-jwt"}
+jackson-databind                     = { module = "tools.jackson.core:jackson-databind"                        , version.ref = "jackson"}
 # airlift-aircompressor              = { module = "io.airlift:aircompressor"                                   , version.ref = "airlift-aircompressor"}
 # airlift-security                   = { module = "io.airlift:security"                                        , version.ref = "airlift-security"}
 # airlift-security-jwks              = { module = "io.airlift:security-jwks"                                   , version.ref = "airlift-security"}
@@ -767,7 +770,7 @@ graalvm-nativeimage                  = { id = "org.graalvm.buildtools.native"   
 serviceloader-compiler               = { id = "app.softwork.serviceloader-compiler"                            , version.ref = "kotlin-serviceloader" }
 exoquery                             = { id = "io.exoquery.exoquery-plugin"                                    , version.ref = "exoquery-plugin" }
 kopy                                 = { id = "com.javiersc.kotlin.kopy"                                       , version.ref = "kopy"}
-chasm                                = { id = "io.github.charlietap.chasm.gradle"                              , version.ref = "chasm"}
+chasm                                = { id = "io.github.charlietap.chasm.gradle"                              , version.ref = "chasm-plugin"}
 semver                               = { id = "com.javiersc.semver"                                            , version.ref = "semver-plugin" }
 redacted                             = { id = "dev.zacsweers.redacted"                                         , version.ref = "kotlin-redacted"}
 gradle-develocity                    = { id = "com.gradle.develocity"                                          , version.ref = "gradle-develocity" }
