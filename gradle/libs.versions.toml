@@ -68,8 +68,8 @@ swagger-codegen                = "3.0.74"
 ktor-cohort                    = "2.8.0"
 java-http                      = "1.2.0"
 fusionauth-jwt                 = "5.3.3"
-otel                           = "1.54.1"
-otel-alpha                     = "1.54.1-alpha"
+otel                           = "1.55.0"
+otel-alpha                     = "1.55.0-alpha"
 otel-instr                     = "2.20.1"
 otel-instr-alpha               = "2.20.1-alpha"
 otel-semconv                   = "1.37.0"
@@ -237,7 +237,7 @@ swagger-style                  = "https://unpkg.com/swagger-ui-themes@3.0.1/them
 benmanes                       = "0.53.0"
 caupain                        = "1.6.1"
 foojay-resolver                = "1.0.0"
-gradle-develocity              = "4.2.1"
+gradle-develocity              = "4.2.2"
 nmcp                           = "1.2.0"
 nexus-publish                  = "2.0.0"
 vanniktech-publish             = "0.34.0"
@@ -746,6 +746,7 @@ otel-agent-extn                      = ["otel-instr-api",
 
 [plugins]
 kotlin-multiplatform                 = { id = "org.jetbrains.kotlin.multiplatform"                             , version.ref = "kotlin"}
+kotlin-jvm                           = { id = "org.jetbrains.kotlin.jvm"                                       , version.ref = "kotlin"}
 kotlinx-serialization                = { id = "org.jetbrains.kotlin.plugin.serialization"                      , version.ref = "kotlin"}
 kotlin-powerassert                   = { id = "org.jetbrains.kotlin.plugin.power-assert"                       , version.ref = "kotlin"}
 kotlin-allopen                       = { id = "org.jetbrains.kotlin.plugin.allopen"                            , version.ref = "kotlin"}
