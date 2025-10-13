@@ -2,9 +2,11 @@ package dev.suresh.db
 
 import io.exoquery.*
 import io.exoquery.annotation.*
+import kotlinx.serialization.Serializable
 
-@JvmInline value class Email(val value: String)
+@JvmInline @Serializable value class Email(val value: String)
 
+@Serializable
 data class People(
     val id: Long,
     val name: String,
@@ -13,6 +15,7 @@ data class People(
     val addressId: Long?,
 )
 
+@Serializable
 data class Address(
     val id: Long,
     val street: String,
@@ -22,6 +25,7 @@ data class Address(
     val country: String,
 )
 
+@Serializable
 data class Robot(
     val id: Long,
     val name: String,
