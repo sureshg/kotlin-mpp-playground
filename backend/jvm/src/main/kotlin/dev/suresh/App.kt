@@ -5,7 +5,7 @@ import dev.suresh.di.configureDI
 import dev.suresh.plugins.*
 import dev.suresh.routes.*
 import io.ktor.server.application.*
-import io.ktor.server.netty.*
+import io.ktor.server.jetty.jakarta.EngineMain
 import io.ktor.server.routing.*
 import io.ktor.util.logging.*
 import kotlin.io.path.Path

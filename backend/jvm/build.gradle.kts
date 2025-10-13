@@ -143,7 +143,7 @@ dependencies {
   // Server dependencies
   implementation(libs.ktor.server.core)
   implementation(libs.ktor.server.di)
-  implementation(libs.ktor.server.netty)
+  implementation(libs.ktor.server.jetty.jakarta)
   implementation(libs.ktor.server.content.negotiation)
   implementation(libs.ktor.server.metrics.micrometer)
   implementation(libs.ktor.server.call.logging)
