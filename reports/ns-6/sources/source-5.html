@@ -103,9 +103,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;import io.exoquery.*
 &nbsp;import io.exoquery.annotation.*
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
-&nbsp;@JvmInline value class Email(val value: String)
+&nbsp;@JvmInline @Serializable value class Email(val value: String)
 &nbsp;
+&nbsp;@Serializable
 &nbsp;data class People(
 &nbsp;    val id: Long,
 &nbsp;    val name: String,
@@ -114,6 +116,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val addressId: Long?,
 &nbsp;)
 &nbsp;
+&nbsp;@Serializable
 &nbsp;data class Address(
 &nbsp;    val id: Long,
 &nbsp;    val street: String,
@@ -123,6 +126,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val country: String,
 &nbsp;)
 &nbsp;
+&nbsp;@Serializable
 &nbsp;data class Robot(
 &nbsp;    val id: Long,
 &nbsp;    val name: String,
@@ -270,7 +274,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-13 22:30</div>
+    <div style="float:right;">generated on 2025-10-14 18:14</div>
 </div>
 </body>
 </html>

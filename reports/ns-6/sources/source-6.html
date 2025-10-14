@@ -25,12 +25,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <h1>Coverage Summary for Class: Robot (dev.suresh.db)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -63,10 +60,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/2)
   </span>
 </td>
-    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -80,11 +76,73 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/12)
+    (0/42)
   </span>
 </td>
 </tr>
-
+  <tr>
+    <td class="name">Robot$Companion</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/46)
+  </span>
+</td>
+</tr>
 </table>
 
 <br/>
@@ -96,9 +154,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;import io.exoquery.*
 &nbsp;import io.exoquery.annotation.*
+&nbsp;import kotlinx.serialization.Serializable
 &nbsp;
-&nbsp;@JvmInline value class Email(val value: String)
+&nbsp;@JvmInline @Serializable value class Email(val value: String)
 &nbsp;
+&nbsp;@Serializable
 &nbsp;data class People(
 &nbsp;    val id: Long,
 &nbsp;    val name: String,
@@ -107,6 +167,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val addressId: Long?,
 &nbsp;)
 &nbsp;
+&nbsp;@Serializable
 &nbsp;data class Address(
 &nbsp;    val id: Long,
 &nbsp;    val street: String,
@@ -116,7 +177,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val country: String,
 &nbsp;)
 &nbsp;
-<b class="nc">&nbsp;data class Robot(</b>
+<b class="nc">&nbsp;@Serializable</b>
+&nbsp;data class Robot(
 <b class="nc">&nbsp;    val id: Long,</b>
 <b class="nc">&nbsp;    val name: String,</b>
 &nbsp;)
@@ -263,7 +325,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-13 22:30</div>
+    <div style="float:right;">generated on 2025-10-14 18:14</div>
 </div>
 </body>
 </html>
