@@ -57,6 +57,7 @@ $dokka.location:/BuildConfig/cashTurbine/#/PointingToDeclaration/shared/[root]/
 $dokka.location:/BuildConfig/caupain/#/PointingToDeclaration/shared/[root]/-build-config/caupain.html
 $dokka.location:/BuildConfig/cel/#/PointingToDeclaration/shared/[root]/-build-config/cel.html
 $dokka.location:/BuildConfig/chasm/#/PointingToDeclaration/shared/[root]/-build-config/chasm.html
+$dokka.location:/BuildConfig/chasmPlugin/#/PointingToDeclaration/shared/[root]/-build-config/chasm-plugin.html
 $dokka.location:/BuildConfig/chicory/#/PointingToDeclaration/shared/[root]/-build-config/chicory.html
 $dokka.location:/BuildConfig/cidre/#/PointingToDeclaration/shared/[root]/-build-config/cidre.html
 $dokka.location:/BuildConfig/classgraph/#/PointingToDeclaration/shared/[root]/-build-config/classgraph.html
@@ -111,6 +112,7 @@ $dokka.location:/BuildConfig/hikariCP/#/PointingToDeclaration/shared/[root]/-bu
 $dokka.location:/BuildConfig/hoplite/#/PointingToDeclaration/shared/[root]/-build-config/hoplite.html
 $dokka.location:/BuildConfig/includegitPlugin/#/PointingToDeclaration/shared/[root]/-build-config/includegit-plugin.html
 $dokka.location:/BuildConfig/intellijMarkdown/#/PointingToDeclaration/shared/[root]/-build-config/intellij-markdown.html
+$dokka.location:/BuildConfig/jackson/#/PointingToDeclaration/shared/[root]/-build-config/jackson.html
 $dokka.location:/BuildConfig/java/#/PointingToDeclaration/shared/[root]/-build-config/java.html
 $dokka.location:/BuildConfig/javaAddmodules/#/PointingToDeclaration/shared/[root]/-build-config/java-addmodules.html
 $dokka.location:/BuildConfig/javaHttp/#/PointingToDeclaration/shared/[root]/-build-config/java-http.html
