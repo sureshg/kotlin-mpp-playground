@@ -111,7 +111,7 @@ logback-tyler                  = "1.0.2"
 log4j                          = "3.0.0-beta3"
 jmh                            = "1.37"
 mrjar                          = "0.1.1"
-ktfmt                          = "0.58"
+ktfmt                          = "0.59"
 google-javaformat              = "1.30.0"
 palantir-javaformat            = "2.78.0"
 google-auto-value              = "1.11.0"
@@ -161,7 +161,7 @@ expiringmap                    = "0.5.11"
 otp                            = "2.1.0"
 password4j                     = "1.8.4"
 apache-commons-imaging         = "1.0.0-alpha6"
-testcontainers                 = "1.21.3"
+testcontainers                 = "2.0.0"
 sourceBuddy                    = "2.5.3"
 tcp-javanioproxy               = "1.6"
 kubernetes-client              = "24.0.0"
@@ -574,12 +574,12 @@ multiplatform-settings-serialization = { module = "com.russhwolf:multiplatform-s
 
 apache-commons-imaging               = { module = "org.apache.commons:commons-imaging"                         , version.ref = "apache-commons-imaging" }
 testcontainers-bom                   = { module = "org.testcontainers:testcontainers-bom"                      , version.ref = "testcontainers"}
-testcontainers-core                  = { module = "org.testcontainers:testcontainers" }
-testcontainers-postgresql            = { module = "org.testcontainers:postgresql" }
-testcontainers-cassandra             = { module = "org.testcontainers:cassandra" }
-testcontainers-k3s                   = { module = "org.testcontainers:k3s" }
-testcontainers-clickhouse            = { module = "org.testcontainers:clickhouse" }
-testcontainers-junit5                = { module = "org.testcontainers:junit-jupiter" }
+testcontainers-core                  = { module = "org.testcontainers:testcontainers"                          , version.ref = "testcontainers"}
+testcontainers-postgresql            = { module = "org.testcontainers:testcontainers-postgresql"               , version.ref = "testcontainers"}
+testcontainers-cassandra             = { module = "org.testcontainers:testcontainers-cassandra"                , version.ref = "testcontainers"}
+testcontainers-k3s                   = { module = "org.testcontainers:testcontainers-k3s"                      , version.ref = "testcontainers"}
+testcontainers-clickhouse            = { module = "org.testcontainers:testcontainers-clickhouse"               , version.ref = "testcontainers"}
+testcontainers-junit5                = { module = "org.testcontainers:testcontainers-junit-jupiter"            , version.ref = "testcontainers"}
 kubernetes-client                    = { module = "io.kubernetes:client-java"                                  , version.ref = "kubernetes-client"}
 
 tcp-javanioproxy                     = { module = "com.github.terma:javaniotcpproxy"                           , version.ref = "tcp-javanioproxy"}

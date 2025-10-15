@@ -1,7 +1,7 @@
 package dev.suresh
 
-import junit.framework.TestCase.*
 import kotlin.concurrent.thread
+import kotlin.test.assertEquals
 import org.jetbrains.lincheck.Lincheck
 
 class LincheckTests {

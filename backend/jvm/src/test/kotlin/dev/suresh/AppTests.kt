@@ -25,12 +25,13 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.*
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty
 import org.slf4j.*
-import org.testcontainers.containers.*
+import org.testcontainers.containers.GenericContainer
 import org.testcontainers.containers.output.Slf4jLogConsumer
 import org.testcontainers.containers.wait.strategy.Wait
 import org.testcontainers.images.builder.Transferable
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
+import org.testcontainers.postgresql.PostgreSQLContainer
 import org.testcontainers.utility.DockerImageName
 
 @Testcontainers
