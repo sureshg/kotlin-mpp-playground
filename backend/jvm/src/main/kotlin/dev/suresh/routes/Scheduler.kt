@@ -14,7 +14,7 @@ import kotlinx.datetime.toLocalDateTime
 fun Application.scheduledTasks() {
   log.info("Starting scheduled tasks...")
   virtualThreadScope.launch {
-    Clock.System.fixedPeriodPulse(10.seconds).beat(PulseBackpressureStrategy.SkipNext) { scheduled
+    Clock.System.fixedPeriodPulse(30.seconds).beat(PulseBackpressureStrategy.SkipNext) { scheduled
       ->
       context(log) { task("Task at ${scheduled.toLocalDateTime(TimeZone.currentSystemDefault())}") }
     }

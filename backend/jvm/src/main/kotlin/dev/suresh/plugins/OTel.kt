@@ -18,8 +18,8 @@ fun Application.configureOTel() {
   val globalOtel = GlobalOpenTelemetry.get()
   val isAgentActive = globalOtel !== OpenTelemetry.noop()
   when (isAgentActive) {
-    true -> log.info("OTel Java agent is active")
-    else -> log.warn("OTel Java agent is inactive!!")
+    true -> log.info("\uD83D\uDFE2 OTel Java agent is active")
+    else -> log.warn("\uD83D\uDFE1 OTel Java agent is inactive!!")
   }
 
   install(OTelExtnPlugin) { enabled = true }
@@ -58,12 +58,12 @@ fun Application.otelInstrumentation() {
  * For detailed configuration options, see:
  * [Configure the SDK](https://opentelemetry.io/docs/languages/java/configuration/)
  */
-val declarativeOtelSdk: OpenTelemetry by lazy {
+val dclOpenTelemetrySdk: OpenTelemetry by lazy {
   val sdkConfPath = System.getenv("OTEL_CONFIG_FILE")?.takeIf { it.isNotBlank() }?.let { Path(it) }
   val ins =
       when (sdkConfPath) {
         null -> object {}::class.java.getResourceAsStream("/otel/sdk-config.yaml")
         else -> sdkConfPath.inputStream()
       }
-  TODO("DeclarativeConfiguration.parseAndCreate(ins)")
+  TODO("FileConfiguration.parseAndCreate(ins)")
 }

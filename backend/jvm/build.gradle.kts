@@ -12,7 +12,7 @@ plugins {
   id("dev.suresh.plugin.graalvm")
   id("com.gradleup.shadow")
   alias(libs.plugins.jetbrains.ktor)
-  // alias(libs.plugins.exoquery)
+  alias(libs.plugins.exoquery)
   id("dev.suresh.plugin.publishing")
   // alias(libs.plugins.jetbrains.exposed)
 }
@@ -210,7 +210,8 @@ dependencies {
   implementation(libs.ktor.server.html)
 
   // OpenTelemetry
-  javaAgent(projects.backend.agent.otel)
+  // javaAgent(projects.backend.agent.otel)
+  javaAgent(libs.otel.instr.javaagent)
   javaAgent(layout.files("src/main/resources/otel"))
   implementation(libs.bundles.otel)
   implementation(libs.ktor.cohort.core)

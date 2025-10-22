@@ -56,11 +56,11 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :shared:jvmRun
   $ ./gradlew :shared:jvmDistZip
 
-  # Kotlin JVM
+  # Kotlin JVM (--no-parallel is required until we have fix for kotlin wasm plugin)
   $ ./gradlew :backend:jvm:run
-  $ ./gradlew :backend:jvm:build
-  $ ./gradlew :backend:jvm:jdeprscan
-  $ ./gradlew :backend:jvm:printModuleDeps
+  $ ./gradlew :backend:jvm:build --no-parallel
+  $ ./gradlew :backend:jvm:jdeprscan --no-parallel
+  $ ./gradlew :backend:jvm:printModuleDeps --no-parallel
 
   # Benchmark
   $ ./gradlew :benchmark:benchmark
@@ -95,7 +95,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            openjdk:26-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm"
 
    # Build a container image and run
-   $ ./gradlew :backend:jvm:jibDockerBuild
+   $ ./gradlew :backend:jvm:jibDockerBuild --no-parallel
    $ docker run -it --rm --name jvm -p 8080:8080 -p 9898:9898 sureshg/jvm
    $ docker stats
   ```
@@ -116,7 +116,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
             -p 4318:4318 \
             --name hyperdx \
             --ulimit nofile=262144:262144 \
-             hyperdx/hyperdx-local:2-beta
+             hyperdx/hyperdx-local:latest
    $ open http://localhost:8081/search
 
    # Run the app
