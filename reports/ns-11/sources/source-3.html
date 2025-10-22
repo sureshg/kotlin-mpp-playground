@@ -180,7 +180,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;fun Application.scheduledTasks() {
 <b class="nc">&nbsp;  log.info(&quot;Starting scheduled tasks...&quot;)</b>
 <b class="nc">&nbsp;  virtualThreadScope.launch {</b>
-<b class="nc">&nbsp;    Clock.System.fixedPeriodPulse(10.seconds).beat(PulseBackpressureStrategy.SkipNext) { scheduled</b>
+<b class="nc">&nbsp;    Clock.System.fixedPeriodPulse(30.seconds).beat(PulseBackpressureStrategy.SkipNext) { scheduled</b>
 &nbsp;      -&gt;
 <b class="nc">&nbsp;      context(log) { task(&quot;Task at ${scheduled.toLocalDateTime(TimeZone.currentSystemDefault())}&quot;) }</b>
 &nbsp;    }
@@ -220,7 +220,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-20 22:26</div>
+    <div style="float:right;">generated on 2025-10-22 02:06</div>
 </div>
 </body>
 </html>

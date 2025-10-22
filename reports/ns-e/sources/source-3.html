@@ -81,7 +81,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
 </tr>
   <tr>
-    <td class="name">OTelKt$declarativeOtelSdk$2</td>
+    <td class="name">OTelKt$dclOpenTelemetrySdk$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -116,7 +116,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">OTelKt$declarativeOtelSdk$2$ins$1</td>
+    <td class="name">OTelKt$dclOpenTelemetrySdk$2$ins$1</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -205,8 +205,8 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  val globalOtel = GlobalOpenTelemetry.get()</b>
 <b class="nc">&nbsp;  val isAgentActive = globalOtel !== OpenTelemetry.noop()</b>
 <b class="nc">&nbsp;  when (isAgentActive) {</b>
-<b class="nc">&nbsp;    true -&gt; log.info(&quot;OTel Java agent is active&quot;)</b>
-<b class="nc">&nbsp;    else -&gt; log.warn(&quot;OTel Java agent is inactive!!&quot;)</b>
+<b class="nc">&nbsp;    true -&gt; log.info(&quot;\uD83D\uDFE2 OTel Java agent is active&quot;)</b>
+<b class="nc">&nbsp;    else -&gt; log.warn(&quot;\uD83D\uDFE1 OTel Java agent is inactive!!&quot;)</b>
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  install(OTelExtnPlugin) { enabled = true }</b>
@@ -245,14 +245,14 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp; * For detailed configuration options, see:
 &nbsp; * [Configure the SDK](https://opentelemetry.io/docs/languages/java/configuration/)
 &nbsp; */
-<b class="nc">&nbsp;val declarativeOtelSdk: OpenTelemetry by lazy {</b>
+<b class="nc">&nbsp;val dclOpenTelemetrySdk: OpenTelemetry by lazy {</b>
 <b class="nc">&nbsp;  val sdkConfPath = System.getenv(&quot;OTEL_CONFIG_FILE&quot;)?.takeIf { it.isNotBlank() }?.let { Path(it) }</b>
 <b class="nc">&nbsp;  val ins =</b>
 <b class="nc">&nbsp;      when (sdkConfPath) {</b>
 <b class="nc">&nbsp;        null -&gt; object {}::class.java.getResourceAsStream(&quot;/otel/sdk-config.yaml&quot;)</b>
 <b class="nc">&nbsp;        else -&gt; sdkConfPath.inputStream()</b>
 &nbsp;      }
-<b class="nc">&nbsp;  TODO(&quot;DeclarativeConfiguration.parseAndCreate(ins)&quot;)</b>
+<b class="nc">&nbsp;  TODO(&quot;FileConfiguration.parseAndCreate(ins)&quot;)</b>
 &nbsp;}
 </code>
 </pre>
@@ -277,7 +277,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-20 22:26</div>
+    <div style="float:right;">generated on 2025-10-22 02:06</div>
 </div>
 </body>
 </html>
