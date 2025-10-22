@@ -71,20 +71,25 @@ jib {
   container {
     appRoot = "/app"
     ports = listOf("8080", "9898")
-    entrypoint = buildList {
-      add("java")
-      add("-javaagent:${appRoot}/otel/otel-javaagent.jar")
-      addAll(runJvmArgs.map { it.replace(tmp, "/tmp/") })
-      add("-cp")
-      add("@${appRoot}/jib-classpath-file")
-      add("@${appRoot}/jib-main-class-file")
-    }
-
+    entrypoint =
+        listOf(
+            "java",
+            "-cp",
+            "@${appRoot}/jib-classpath-file",
+            "@${appRoot}/jib-main-class-file",
+        )
     environment =
         mapOf(
-            "OTEL_JAVAAGENT_ENABLED" to "true",
-            "OTEL_JAVAAGENT_LOGGING" to "application",
+            "JDK_JAVA_OPTIONS" to
+                buildList {
+                      add("-javaagent:${appRoot}/otel/otel-javaagent.jar")
+                      addAll(runJvmArgs.map { it.replace(tmp, "/tmp/") })
+                    }
+                    .joinToString(" "),
             "OTEL_EXPERIMENTAL_CONFIG_FILE" to "${appRoot}/otel/sdk-config.yaml",
+            // "OTEL_JAVAAGENT_EXTENSIONS" to "${appRoot}/otel/extensions",
+            // "OTEL_JAVAAGENT_ENABLED" to "true",
+            // "OTEL_JAVAAGENT_LOGGING" to "application",
         )
 
     args = listOf(project.name, project.version.toString())
