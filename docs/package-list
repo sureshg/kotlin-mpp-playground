@@ -29,6 +29,7 @@ $dokka.location:/BuildConfig/ajaltClikt/#/PointingToDeclaration/shared/[root]/-
 $dokka.location:/BuildConfig/ajaltColormath/#/PointingToDeclaration/shared/[root]/-build-config/ajalt-colormath.html
 $dokka.location:/BuildConfig/ajaltMordant/#/PointingToDeclaration/shared/[root]/-build-config/ajalt-mordant.html
 $dokka.location:/BuildConfig/akkurate/#/PointingToDeclaration/shared/[root]/-build-config/akkurate.html
+$dokka.location:/BuildConfig/angusMail/#/PointingToDeclaration/shared/[root]/-build-config/angus-mail.html
 $dokka.location:/BuildConfig/animalsniffer/#/PointingToDeclaration/shared/[root]/-build-config/animalsniffer.html
 $dokka.location:/BuildConfig/apLoaderAll/#/PointingToDeclaration/shared/[root]/-build-config/ap-loader-all.html
 $dokka.location:/BuildConfig/apacheCommonsImaging/#/PointingToDeclaration/shared/[root]/-build-config/apache-commons-imaging.html
@@ -138,7 +139,6 @@ $dokka.location:/BuildConfig/jlinkJib/#/PointingToDeclaration/shared/[root]/-bu
 $dokka.location:/BuildConfig/jmh/#/PointingToDeclaration/shared/[root]/-build-config/jmh.html
 $dokka.location:/BuildConfig/jsch/#/PointingToDeclaration/shared/[root]/-build-config/jsch.html
 $dokka.location:/BuildConfig/jsonSchemaValidator/#/PointingToDeclaration/shared/[root]/-build-config/json-schema-validator.html
-$dokka.location:/BuildConfig/jsonSugar/#/PointingToDeclaration/shared/[root]/-build-config/json-sugar.html
 $dokka.location:/BuildConfig/jspecify/#/PointingToDeclaration/shared/[root]/-build-config/jspecify.html
 $dokka.location:/BuildConfig/jte/#/PointingToDeclaration/shared/[root]/-build-config/jte.html
 $dokka.location:/BuildConfig/junit/#/PointingToDeclaration/shared/[root]/-build-config/junit.html
@@ -269,6 +269,7 @@ $dokka.location:/BuildConfig/shadow/#/PointingToDeclaration/shared/[root]/-buil
 $dokka.location:/BuildConfig/shedlock/#/PointingToDeclaration/shared/[root]/-build-config/shedlock.html
 $dokka.location:/BuildConfig/sherlock/#/PointingToDeclaration/shared/[root]/-build-config/sherlock.html
 $dokka.location:/BuildConfig/sigstore/#/PointingToDeclaration/shared/[root]/-build-config/sigstore.html
+$dokka.location:/BuildConfig/simplemail/#/PointingToDeclaration/shared/[root]/-build-config/simplemail.html
 $dokka.location:/BuildConfig/slf4j/#/PointingToDeclaration/shared/[root]/-build-config/slf4j.html
 $dokka.location:/BuildConfig/snakeyamlEngineKmp/#/PointingToDeclaration/shared/[root]/-build-config/snakeyaml-engine-kmp.html
 $dokka.location:/BuildConfig/sourceBuddy/#/PointingToDeclaration/shared/[root]/-build-config/source-buddy.html
@@ -297,7 +298,6 @@ $dokka.location:/BuildConfig/voices/#/PointingToDeclaration/shared/[root]/-buil
 $dokka.location:/BuildConfig/wasm2class/#/PointingToDeclaration/shared/[root]/-build-config/wasm2class.html
 $dokka.location:/BuildConfig/webjarsXterm/#/PointingToDeclaration/shared/[root]/-build-config/webjars-xterm.html
 $dokka.location:/BuildConfig/wehBindings/#/PointingToDeclaration/shared/[root]/-build-config/weh-bindings.html
-$dokka.location:/BuildConfig/wirePlugin/#/PointingToDeclaration/shared/[root]/-build-config/wire-plugin.html
 $dokka.location:/BuildConfig/wiremock/#/PointingToDeclaration/shared/[root]/-build-config/wiremock.html
 $dokka.location:/BuildConfig/wiremockKotlin/#/PointingToDeclaration/shared/[root]/-build-config/wiremock-kotlin.html
 $dokka.location:/BuildConfig/xchart/#/PointingToDeclaration/shared/[root]/-build-config/xchart.html
