@@ -1,7 +1,7 @@
 [versions]
 java                           = "26"
 kotlin                         = "2.3.0-Beta1"
-kotlin-ksp                     = "2.2.21-RC2-2.0.4"
+kotlin-ksp                     = "2.3.0"
 kotlin-jvmtarget               = "24"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.3"
@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Dependency Versions
-bc-plugins                     = "2.16.0"
+bc-plugins                     = "2.17.0"
 kotlinx-kover                  = "0.9.3"
 kotlin-dokka                   = "2.1.0"
 kotlinx-io                     = "0.8.0"
@@ -38,7 +38,7 @@ kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.3.2"
-kotlin-wrappers                = "2025.10.10"
+kotlin-wrappers                = "2025.10.11"
 kotlin-redacted                = "1.15.0"
 kotlin-serviceloader           = "0.0.21"
 kotlinx-multik                 = "0.2.3"
@@ -57,8 +57,8 @@ kopy                           = "0.19.0+2.2.20"
 poko                           = "0.20.1"
 mappie                         = "2.2.20-1.6.0"
 akkurate                       = "0.11.0"
-kaml                           = "0.98.0"
-snakeyaml-engine-kmp           = "4.0.0"
+kaml                           = "0.99.0"
+snakeyaml-engine-kmp           = "4.0.1"
 konsist                        = "0.17.3"
 decoroutinator                 = "2.5.7"
 spring-boot                    = "4.0.0-M3"
@@ -75,7 +75,7 @@ otel-instr-alpha               = "2.21.0-alpha"
 otel-semconv                   = "1.37.0"
 otel-contrib                   = "1.51.0-alpha"
 otel-kotlin                    = "0.7.0"
-jackson                        = "3.0.0"
+jackson                        = "3.0.1"
 bc                             = "1.82"
 okio                           = "3.16.2"
 ayza                           = "10.0.1"
@@ -129,7 +129,6 @@ kotlin-diff                    = "1.1.0"
 kotlin-retry                   = "2.0.2"
 kotlinx-jsonpath               = "3.0.2"
 kotlin-cryptography            = "0.5.0"
-json-sugar                     = "0.7.2"
 json-schema-validator          = "0.5.2"
 pwall-json-schema              = "0.57"
 schema-kenerator               = "2.4.0"
@@ -207,12 +206,14 @@ bluesky-ozone                  = "0.3.3"
 cidre                          = "0.3.0"
 voices                         = "0.0.7"
 onnx                           = "1.23.1"
+angus-mail                     = "2.1.0-M1"
+simplemail                     = "8.12.6"
 
 # Compose
-jetbrains-compose              = "1.10.0-alpha02"
-jetbrains-compose-viewmodel    = "2.10.0-alpha02"
+jetbrains-compose              = "1.10.0-alpha03"
+jetbrains-compose-viewmodel    = "2.10.0-alpha03"
 jetbrains-compose-nav          = "2.9.1"
-jetbrains-compose-adaptive     = "1.2.0-alpha07"
+jetbrains-compose-adaptive     = "1.2.0-beta01"
 jetbrains-compose-icons        = "1.7.3"
 kobweb                         = "0.23.3"
 detekt                         = "2.0.0-alpha.1"
@@ -255,7 +256,6 @@ autonomousapps-bestpractices   = "0.10"
 graalvm-nativeimage            = "0.11.2"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
-wire-plugin                    = "5.4.0"
 buildkonfig                    = "0.17.1"
 gmazzo-buildconfig             = "5.7.0"
 cyclonedx-plugin               = "1.10.0"
@@ -434,7 +434,6 @@ rsocket-ktor-tcp                     = { module = "io.rsocket.kotlin:rsocket-tra
 uri-kmp                              = { module = "com.eygraber:uri-kmp"                                       , version.ref = "uri-kmp"}
 trie-kmp                             = { module = "com.eygraber:trie-kmp"                                      , version.ref = "trie-kmp"}
 kotlinx-jsonpath                     = { module = "com.eygraber:jsonpathkt-kotlinx"                            , version.ref = "kotlinx-jsonpath"}
-json-sugar                           = { module = "com.eygraber:json-sugar"                                    , version.ref = "json-sugar"}
 json-schema-validator                = { module = "io.github.optimumcode:json-schema-validator"                , version.ref = "json-schema-validator"}
 json-schema-kenerator                = { module = "io.github.smiley4:schema-kenerator-jsonschema"              , version.ref = "schema-kenerator"}
 pwall-json-schema                    = { module = "net.pwall.json:json-kotlin-schema"                          , version.ref = "pwall-json-schema"}
@@ -711,6 +710,9 @@ ozone-jetstream                      = { module = "sh.christian.ozone:jetstream"
 
 # Misc
 ldaptive                             = { module = "org.ldaptive:ldaptive"                                                   , version.ref = "ldaptive" }
+angus-mail                           = { module = "org.eclipse.angus:jakarta.mail"                                          , version.ref = "angus-mail" }
+simplemail                           = { module = "org.simplejavamail:simple-java-mail"                                     , version.ref = "simplemail" }
+simplemail-outlook                   = { module = "org.simplejavamail:outlook-module"                                       , version.ref = "simplemail" }
 
 # Maven Plugin
 maven-plugin-api                     = { module = "org.apache.maven:maven-plugin-api"                                       , version.ref = "maven-plugin-api" }
@@ -816,7 +818,6 @@ foojay-resolver                      = { id = "org.gradle.toolchains.foojay-reso
 gratatouille                         = { id = "com.gradleup.gratatouille"                                      , version.ref = "gratatouille" }
 cyclonedx                            = { id = "org.cyclonedx.cyclonedx"                                        , version.ref = "cyclonedx-plugin" }
 github-depgraph                      = { id = "org.gradle.github-dependency-graph"                             , version.ref = "github-depgraph"}
-wire                                 = { id = "com.squareup.wire"                                              , version.ref = "wire-plugin"}
 gmazzo-buildconfig                   = { id = "com.github.gmazzo.buildconfig"                                  , version.ref = "gmazzo-buildconfig"}
 mokkery                              = { id = "dev.mokkery"                                                    , version.ref = "mokkery"}
 modulegraph                          = { id = "dev.iurysouza.modulegraph"                                      , version.ref = "modulegraph"}
