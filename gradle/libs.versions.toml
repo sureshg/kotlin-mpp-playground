@@ -61,7 +61,7 @@ kaml                           = "0.99.0"
 snakeyaml-engine-kmp           = "4.0.1"
 konsist                        = "0.17.3"
 decoroutinator                 = "2.5.7"
-spring-boot                    = "4.0.0-M3"
+spring-boot                    = "4.0.0-RC1"
 spring-depmgmt                 = "1.1.7"
 ktor                           = "3.3.1"
 swagger-codegen                = "3.0.75"
@@ -213,6 +213,7 @@ simplemail                     = "8.12.6"
 jetbrains-compose              = "1.10.0-alpha03"
 jetbrains-compose-viewmodel    = "2.10.0-alpha03"
 jetbrains-compose-nav          = "2.9.1"
+jetbrains-compose-nav3         = "1.0.0-alpha03"
 jetbrains-compose-adaptive     = "1.2.0-beta01"
 jetbrains-compose-icons        = "1.7.3"
 kobweb                         = "0.23.3"
@@ -251,7 +252,7 @@ kmpmt                          = "0.1.1"
 tasktree                       = "4.0.1"
 sigstore                       = "2.0.0-rc2"
 reproducible-builds            = "1.1"
-autonomousapps-depanalysis     = "3.2.0"
+autonomousapps-depanalysis     = "3.3.0"
 autonomousapps-bestpractices   = "0.10"
 graalvm-nativeimage            = "0.11.2"
 github-depgraph                = "0.1.0"
@@ -634,7 +635,8 @@ otel-kotlin-compat                   = { module = "io.embrace.opentelemetry.kotl
 # Compose
 compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                                   , version.ref = "jetbrains-compose" }
 compose-html-core                    = { module = "org.jetbrains.compose.html:html-core"                                    , version.ref = "jetbrains-compose" }
-compose-navigation                   = { module = "org.jetbrains.androidx.navigation:navigation-compose"                    , version.ref = "jetbrains-compose-nav" }
+compose-nav                          = { module = "org.jetbrains.androidx.navigation:navigation-compose"                    , version.ref = "jetbrains-compose-nav" }
+compose-nav3                         = { module = "org.jetbrains.androidx.navigation3:navigation3-ui"                       , version.ref = "jetbrains-compose-nav3" }
 compose-lifecycle-viewmodel          = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose"            , version.ref = "jetbrains-compose-viewmodel" }
 compose-material3-windowsize         = { module = "org.jetbrains.compose.material3:material3-window-size-class"             , version.ref = "jetbrains-compose" }
 compose-material3-adaptive           = { module = "org.jetbrains.compose.material3.adaptive:adaptive"                       , version.ref = "jetbrains-compose-adaptive" }

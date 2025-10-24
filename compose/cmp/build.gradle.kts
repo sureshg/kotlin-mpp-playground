@@ -34,7 +34,7 @@ kotlin {
       implementation(compose.components.resources)
       implementation(compose.preview)
 
-      implementation(libs.compose.navigation)
+      implementation(libs.compose.nav)
       implementation(libs.compose.lifecycle.viewmodel)
       implementation(libs.compose.material3.adaptive)
       implementation(libs.compose.material3.adaptive.layout)
