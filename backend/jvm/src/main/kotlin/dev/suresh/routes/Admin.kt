@@ -38,6 +38,7 @@ fun Routing.adminRoutes() {
         val levelName = call.parameters["level"]?.uppercase() ?: INFO.levelStr
         try {
           val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext
+          // loggerCtx.isPackagingDataEnabled = true
           val matching =
               loggerCtx.loggerList
                   .filter { it.name.startsWith(prefix = loggerName, ignoreCase = true) }
