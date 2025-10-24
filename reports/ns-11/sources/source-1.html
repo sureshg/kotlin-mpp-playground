@@ -281,6 +281,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;        val levelName = call.parameters[&quot;level&quot;]?.uppercase() ?: INFO.levelStr</b>
 &nbsp;        try {
 <b class="nc">&nbsp;          val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
+&nbsp;          // loggerCtx.isPackagingDataEnabled = true
 <b class="nc">&nbsp;          val matching =</b>
 <b class="nc">&nbsp;              loggerCtx.loggerList</b>
 <b class="nc">&nbsp;                  .filter { it.name.startsWith(prefix = loggerName, ignoreCase = true) }</b>
@@ -329,7 +330,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-10-24 02:10</div>
+    <div style="float:right;">generated on 2025-10-24 19:09</div>
 </div>
 </body>
 </html>
