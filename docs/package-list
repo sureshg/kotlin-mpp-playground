@@ -121,6 +121,7 @@ $dokka.location:/BuildConfig/javaJvmargs/#/PointingToDeclaration/shared/[root]/
 $dokka.location:/BuildConfig/javaKeychain/#/PointingToDeclaration/shared/[root]/-build-config/java-keychain.html
 $dokka.location:/BuildConfig/javaKeyring/#/PointingToDeclaration/shared/[root]/-build-config/java-keyring.html
 $dokka.location:/BuildConfig/javaVendor/#/PointingToDeclaration/shared/[root]/-build-config/java-vendor.html
+$dokka.location:/BuildConfig/javelit/#/PointingToDeclaration/shared/[root]/-build-config/javelit.html
 $dokka.location:/BuildConfig/jctools/#/PointingToDeclaration/shared/[root]/-build-config/jctools.html
 $dokka.location:/BuildConfig/jetbrainsCompose/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose.html
 $dokka.location:/BuildConfig/jetbrainsComposeAdaptive/#/PointingToDeclaration/shared/[root]/-build-config/jetbrains-compose-adaptive.html
@@ -153,12 +154,14 @@ $dokka.location:/BuildConfig/kmpmt/#/PointingToDeclaration/shared/[root]/-build
 $dokka.location:/BuildConfig/kobweb/#/PointingToDeclaration/shared/[root]/-build-config/kobweb.html
 $dokka.location:/BuildConfig/koin/#/PointingToDeclaration/shared/[root]/-build-config/koin.html
 $dokka.location:/BuildConfig/koinAnnotations/#/PointingToDeclaration/shared/[root]/-build-config/koin-annotations.html
+$dokka.location:/BuildConfig/kommand/#/PointingToDeclaration/shared/[root]/-build-config/kommand.html
 $dokka.location:/BuildConfig/konsist/#/PointingToDeclaration/shared/[root]/-build-config/konsist.html
 $dokka.location:/BuildConfig/koog/#/PointingToDeclaration/shared/[root]/-build-config/koog.html
 $dokka.location:/BuildConfig/kopy/#/PointingToDeclaration/shared/[root]/-build-config/kopy.html
 $dokka.location:/BuildConfig/kotest/#/PointingToDeclaration/shared/[root]/-build-config/kotest.html
 $dokka.location:/BuildConfig/kotlin/#/PointingToDeclaration/shared/[root]/-build-config/kotlin.html
 $dokka.location:/BuildConfig/kotlinApiVersion/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-api-version.html
+$dokka.location:/BuildConfig/kotlinBase32/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-base32.html
 $dokka.location:/BuildConfig/kotlinBignum/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-bignum.html
 $dokka.location:/BuildConfig/kotlinCodepoints/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-codepoints.html
 $dokka.location:/BuildConfig/kotlinCryptography/#/PointingToDeclaration/shared/[root]/-build-config/kotlin-cryptography.html
@@ -297,7 +300,6 @@ $dokka.location:/BuildConfig/vanniktechPublish/#/PointingToDeclaration/shared/[
 $dokka.location:/BuildConfig/version/#/PointingToDeclaration/shared/[root]/-build-config/version.html
 $dokka.location:/BuildConfig/voices/#/PointingToDeclaration/shared/[root]/-build-config/voices.html
 $dokka.location:/BuildConfig/wasm2class/#/PointingToDeclaration/shared/[root]/-build-config/wasm2class.html
-$dokka.location:/BuildConfig/webjarsXterm/#/PointingToDeclaration/shared/[root]/-build-config/webjars-xterm.html
 $dokka.location:/BuildConfig/wehBindings/#/PointingToDeclaration/shared/[root]/-build-config/weh-bindings.html
 $dokka.location:/BuildConfig/wiremock/#/PointingToDeclaration/shared/[root]/-build-config/wiremock.html
 $dokka.location:/BuildConfig/wiremockKotlin/#/PointingToDeclaration/shared/[root]/-build-config/wiremock-kotlin.html
