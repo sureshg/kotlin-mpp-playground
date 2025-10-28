@@ -1,8 +1,8 @@
 [versions]
 java                           = "26"
-kotlin                         = "2.3.0-Beta1"
+kotlin                         = "2.3.0-Beta2"
 kotlin-ksp                     = "2.3.0"
-kotlin-jvmtarget               = "24"
+kotlin-jvmtarget               = "25"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.3"
 kotlin-lang-version            = "2.3"
@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Dependency Versions
-bc-plugins                     = "2.17.0"
+bc-plugins                     = "2.19.0"
 kotlinx-kover                  = "0.9.3"
 kotlin-dokka                   = "2.1.0"
 kotlinx-io                     = "0.8.0"
@@ -29,7 +29,7 @@ kotlinx-coroutines             = "1.10.2"
 kotlinx-datetime               = "0.7.1"
 kotlinx-datetime-zoneinfo      = "2025b-spi.0.7.1"
 kotlinx-serialization          = "1.9.0"
-kotlinx-rpc                    = "0.10.0"
+kotlinx-rpc                    = "0.10.1"
 kotlinx-collections-immutable  = "0.4.0"
 kotlinx-html                   = "0.12.0"
 kotlinx-browser                = "0.5.0"
@@ -38,13 +38,14 @@ kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.3.2"
-kotlin-wrappers                = "2025.10.12"
+kotlin-wrappers                = "2025.10.14"
 kotlin-redacted                = "1.15.0"
 kotlin-serviceloader           = "0.0.21"
 kotlinx-multik                 = "0.2.3"
 kotlinx-dataframe              = "1.0.0-Beta3"
 kotlinx-kandy                  = "0.9.0-dev-86"
 kotlin-statistics              = "0.4.0-RC1"
+kotlin-base32                  = "1.0.0"
 gradle-kotlin-dsl              = "6.4.1"
 exoquery-plugin                = "2.2.20-1.7.2.PL"
 exoquery-sql                   = "1.7.2.PL"
@@ -53,11 +54,11 @@ postgresql                     = "42.7.8"
 embedded-postgres              = "2.1.1"
 embedded-postgres-bom          = "17.6.0"
 evas                           = "1.3.0"
-kopy                           = "0.19.0+2.2.20"
+kopy                           = "0.20.0+2.2.21"
 poko                           = "0.20.1"
 mappie                         = "2.2.21-1.6.1"
 akkurate                       = "0.11.0"
-kaml                           = "0.99.0"
+kaml                           = "0.102.0"
 snakeyaml-engine-kmp           = "4.0.1"
 konsist                        = "0.17.3"
 decoroutinator                 = "2.5.7"
@@ -92,7 +93,7 @@ intellij-markdown              = "0.7.3"
 jgit                           = "7.4.0.202509020913-r"
 jte                            = "3.2.1"
 sshj                           = "0.40.0"
-jsch                           = "2.27.4"
+jsch                           = "2.27.5"
 pty4j                          = "0.13.11"
 oshi                           = "6.9.1"
 junit                          = "6.0.0"
@@ -101,18 +102,18 @@ koin-annotations               = "2.3.0"
 metro                          = "0.4.0"
 kotest                         = "6.0.4"
 mockk                          = "1.14.6"
-mokkery                        = "3.0.0-Beta2"
+mokkery                        = "3.0.0-Beta3"
 wiremock                       = "4.0.0-beta.15"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.2.1"
 slf4j                          = "2.1.0-alpha1"
 logback                        = "1.5.20"
-logback-tyler                  = "1.0.2"
+logback-tyler                  = "1.0.3"
 log4j                          = "3.0.0-beta3"
 jmh                            = "1.37"
 mrjar                          = "0.1.1"
 ktfmt                          = "0.59"
-google-javaformat              = "1.30.0"
+google-javaformat              = "1.31.0"
 palantir-javaformat            = "2.81.0"
 google-auto-value              = "1.11.0"
 google-auto-service            = "1.1.1"
@@ -125,7 +126,7 @@ caffeine-coroutines            = "2.0.3"
 kotlin-codepoints              = "0.11.0"
 kotlin-logging                 = "7.0.13"
 kotlin-bignum                  = "0.3.10"
-kotlin-diff                    = "1.1.0"
+kotlin-diff                    = "1.2.0"
 kotlin-retry                   = "2.0.2"
 kotlinx-jsonpath               = "3.0.2"
 kotlin-cryptography            = "0.5.0"
@@ -144,8 +145,7 @@ parsus                         = "0.6.1"
 ksoup                          = "0.2.5"
 java-keyring                   = "1.0.4"
 java-keychain                  = "1.1.0"
-webjars-xterm                  = "5.3.0"
-arrow-suspendapp               = "2.2.0-beta.3"
+arrow-suspendapp               = "2.2.0-beta.8"
 hikariCP                       = "7.0.2"
 h2                             = "2.4.240"
 micrometer                     = "1.16.0-RC1"
@@ -184,6 +184,7 @@ chasm                          = "1.2.0"
 chasm-plugin                   = "2.0.0-1.2.0"
 cel                            = "0.11.1"
 kfswatch                       = "1.4.0"
+kommand                        = "2.3.0"
 kmp-process                    = "0.4.0"
 kmbed                          = "1.8.4"
 langchain4j                    = "1.8.0"
@@ -192,7 +193,7 @@ langchain4j-kotlin             = "0.3.0"
 jlama                          = "0.8.4"
 mcp-kotlin                     = "0.7.4"
 koog                           = "0.5.1"
-mcp4k                          = "0.4.5"
+mcp4k                          = "0.4.6"
 dflib                          = "2.0.0-M4"
 ldaptive                       = "2.4.2"
 chicory                        = "1.5.3"
@@ -204,10 +205,11 @@ log4k                          = "1.1.2"
 rwmutex                        = "1.0.0"
 bluesky-ozone                  = "0.3.3"
 cidre                          = "0.3.0"
-voices                         = "0.0.7"
-onnx                           = "1.23.1"
+voices                         = "0.0.8"
+onnx                           = "1.23.2"
 angus-mail                     = "2.1.0-M1"
 simplemail                     = "8.12.6"
+javelit                        = "0.56.0"
 
 # Compose
 jetbrains-compose              = "1.10.0-alpha03"
@@ -274,7 +276,7 @@ jextract                       = "1.0.0"
 maven-plugin-api               = "4.0.0-rc-4"
 maven-plugin-annotations       = "3.15.1"
 gradlex-maven-plugin           = "1.0.3"
-typesafe-conventions           = "0.9.0"
+typesafe-conventions           = "0.9.1"
 
 # Repositories
 repo-mvn-central               = "https://repo.maven.apache.org/maven2/"
@@ -328,6 +330,7 @@ kotlin-redacted-annotations          = { module = "dev.zacsweers.redacted:redact
 kotlin-cryptography-core             = { module = "dev.whyoleg.cryptography:cryptography-core"                      , version.ref = "kotlin-cryptography"}
 kotlin-cryptography-random           = { module = "dev.whyoleg.cryptography:cryptography-random"                    , version.ref = "kotlin-cryptography"}
 kotlin-cryptography-optimal          = { module = "dev.whyoleg.cryptography:cryptography-provider-optimal"          , version.ref = "kotlin-cryptography"}
+kotlin-base32                        = { module = "com.osmerion.kotlin:kotlin-base32"                               , version.ref = "kotlin-base32"}
 jspecify                             = { module = "org.jspecify:jspecify"                                           , version.ref = "jspecify"}
 kmpmt                                = { module = "com.jakewharton.kmpmt:kmpmt-gradle-plugin"                       , version.ref = "kmpmt" }
 
@@ -562,7 +565,6 @@ log4j-core                           = { module = "org.apache.logging.log4j:log4
 log4j-jpl                            = { module = "org.apache.logging.log4j:log4j-jpl"                         , version.ref = "log4j"}
 java-keyring                         = { module = "com.github.javakeyring:java-keyring"                        , version.ref = "java-keyring"}
 java-keychain                        = { module = "pt.davidafsilva.apple:jkeychain"                            , version.ref = "java-keychain"}
-webjars-xterm                        = { module = "org.webjars.npm:xterm"                                      , version.ref = "webjars-xterm" }
 caffeine-coroutines                  = { module = "dev.hsbrysk:caffeine-coroutines"                            , version.ref = "caffeine-coroutines" }
 
 kotlin-wrappers-bom                  = { module = "org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom"          , version.ref = "kotlin-wrappers" }
@@ -660,10 +662,12 @@ kobwebx-serialization                = { module = "com.varabyte.kobwebx:kobwebx-
 silk-foundation                      = { module = "com.varabyte.kobweb:silk-foundation"                                     , version.ref = "kobweb" }
 silk-icons-fa                        = { module = "com.varabyte.kobwebx:silk-icons-fa"                                      , version.ref = "kobweb" }
 silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-icons-mdi"                                     , version.ref = "kobweb" }
+javelit                              = { module = "io.javelit:javelit"                                                      , version.ref = "javelit" }
 
 # Native
 kfswatch                             = { module = "io.github.irgaly.kfswatch:kfswatch"                                      , version.ref = "kfswatch" }
 kmp-process                          = { module = "io.matthewnelson.kmp-process:process"                                    , version.ref = "kmp-process" }
+kommand                              = { module = "com.kgit2:kommand"                                                       , version.ref = "kommand" }
 log4k-coroutines                     = { module = "io.github.smyrgeorge:log4k-coroutines"                                   , version.ref = "log4k" }
 log4k-slf4j                          = { module = "io.github.smyrgeorge:log4k-slf4j"                                        , version.ref = "log4k" }
 rwmutex                              = { module = "com.mayakapps.rwmutex:rwmutex"                                           , version.ref = "rwmutex" }
