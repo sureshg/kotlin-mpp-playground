@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/97)
+    (0/95)
   </span>
 </td>
 </tr>
@@ -174,7 +174,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/165)
+    (0/163)
   </span>
 </td>
 </tr>
@@ -206,10 +206,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  val isAgentActive = globalOtel !== OpenTelemetry.noop()</b>
 <b class="nc">&nbsp;  when (isAgentActive) {</b>
 <b class="nc">&nbsp;    true -&gt; log.info(&quot;\uD83D\uDFE2 OTel Java agent is active&quot;)</b>
-<b class="nc">&nbsp;    else -&gt; log.warn(&quot;\uD83D\uDFE1 OTel Java agent is inactive!!&quot;)</b>
+<b class="nc">&nbsp;    else -&gt; log.warn(&quot;\uD83D\uDFE1 OTel Java agent is inactive&quot;)</b>
 &nbsp;  }
 &nbsp;
-<b class="nc">&nbsp;  install(OTelExtnPlugin) { enabled = true }</b>
+<b class="nc">&nbsp;  install(OTelExtnPlugin)</b>
 &nbsp;  // otelSdk.shutdown().join(10, TimeUnit.SECONDS);
 &nbsp;}
 &nbsp;
@@ -277,7 +277,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-05 00:22</div>
+    <div style="float:right;">generated on 2025-11-06 07:03</div>
 </div>
 </body>
 </html>
