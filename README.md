@@ -92,7 +92,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            --publish 8081:8081 \
            --name kotlin-mpp-playground \
            --mount type=bind,source=$(pwd),destination=/app,readonly \
-           openjdk:26-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm"
+           openjdk:26-ea-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm"
 
    # Build a container image and run
    $ ./gradlew :backend:jvm:jibDockerBuild --no-parallel
@@ -232,7 +232,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            --name kotlin-native-build \
            --mount type=bind,source=$(pwd),destination=/app \
            --mount type=bind,source=${HOME}/.gradle,destination=/root/.gradle \
-           openjdk:26-slim /bin/bash
+           openjdk:26-ea-slim /bin/bash
   # apt update && apt install libtree tree
   # ./gradlew --no-daemon :backend:native:build
   #  backend/native/build/bin/linuxX64/releaseExecutable/native.kexe

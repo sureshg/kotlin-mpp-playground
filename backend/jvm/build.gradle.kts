@@ -49,7 +49,7 @@ jte {
 
 jib {
   from {
-    image = "openjdk:${javaVersion.get().majorVersion}-slim"
+    image = "openjdk:${javaVersion.get().majorVersion}-ea-slim"
 
     platforms {
       platform {
