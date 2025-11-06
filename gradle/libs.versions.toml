@@ -1,7 +1,7 @@
 [versions]
 java                           = "26"
 kotlin                         = "2.3.0-Beta2"
-kotlin-ksp                     = "2.3.0"
+kotlin-ksp                     = "2.3.1"
 kotlin-jvmtarget               = "25"
 kotlin-dsl-jvmtarget           = "21"
 kotlin-api-version             = "2.3"
@@ -38,7 +38,7 @@ kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.3.2"
-kotlin-wrappers                = "2025.10.14"
+kotlin-wrappers                = "2025.11.3"
 kotlin-redacted                = "1.15.0"
 kotlin-serviceloader           = "0.0.21"
 kotlinx-multik                 = "0.2.3"
@@ -54,20 +54,20 @@ postgresql                     = "42.7.8"
 embedded-postgres              = "2.1.1"
 embedded-postgres-bom          = "17.6.0"
 evas                           = "1.3.0"
-kopy                           = "0.20.0+2.2.21"
+kopy                           = "0.20.1+2.2.21"
 poko                           = "0.20.1"
 mappie                         = "2.2.21-1.6.1"
 akkurate                       = "0.11.0"
 kaml                           = "0.102.0"
 snakeyaml-engine-kmp           = "4.0.1"
 konsist                        = "0.17.3"
-decoroutinator                 = "2.5.7"
+decoroutinator                 = "2.5.8"
 spring-boot                    = "4.0.0-RC1"
 spring-depmgmt                 = "1.1.7"
-ktor                           = "3.3.1"
+ktor                           = "3.3.2"
 swagger-codegen                = "3.0.75"
 ktor-cohort                    = "2.8.0"
-java-http                      = "1.3.0"
+java-http                      = "1.3.1"
 fusionauth-jwt                 = "5.3.3"
 otel                           = "1.55.0"
 otel-alpha                     = "1.55.0-alpha"
@@ -96,8 +96,8 @@ sshj                           = "0.40.0"
 jsch                           = "2.27.5"
 pty4j                          = "0.13.11"
 oshi                           = "6.9.1"
-junit                          = "6.0.0"
-koin                           = "4.1.2-Beta1"
+junit                          = "6.0.1"
+koin                           = "4.2.0-alpha1"
 koin-annotations               = "2.3.0"
 metro                          = "0.4.0"
 kotest                         = "6.0.4"
@@ -145,7 +145,7 @@ parsus                         = "0.6.1"
 ksoup                          = "0.2.5"
 java-keyring                   = "1.0.4"
 java-keychain                  = "1.1.0"
-arrow-suspendapp               = "2.2.0-beta.11"
+arrow-suspendapp               = "2.2.0"
 hikariCP                       = "7.0.2"
 h2                             = "2.4.240"
 micrometer                     = "1.16.0-RC1"
@@ -209,22 +209,22 @@ voices                         = "0.0.8"
 onnx                           = "1.23.2"
 angus-mail                     = "2.1.0-M1"
 simplemail                     = "8.12.6"
-javelit                        = "0.58.0"
+javelit                        = "0.66.0"
 
 # Compose
-jetbrains-compose              = "1.10.0-alpha03"
-jetbrains-compose-viewmodel    = "2.10.0-alpha03"
-jetbrains-compose-nav          = "2.9.1"
-jetbrains-compose-nav3         = "1.0.0-alpha03"
-jetbrains-compose-adaptive     = "1.2.0"
-jetbrains-compose-icons        = "1.7.3"
-antdesign                      = "1.0.0"
+compose                        = "1.10.0-beta01"
+compose-material3              = "1.10.0-alpha04"
+compose-viewmodel              = "2.10.0-alpha04"
+compose-nav                    = "2.9.1"
+compose-nav3                   = "1.0.0-alpha04"
+compose-adaptive               = "1.3.0-alpha01"
+compose-icons                  = "1.7.3"
+compose-fontawesome            = "1.1.1"
 kobweb                         = "0.23.3"
+summon                         = "0.4.2.2"
 detekt                         = "2.0.0-alpha.1"
 detekt-compose-rules           = "0.4.27"
-compose-hotreload              = "1.0.0-rc02"
-compose-icons                  = "1.1.1"
-compose-routing                = "0.5.0"
+antdesign                      = "1.0.0"
 compose-fluent                 = "0.1.0"
 kottie                         = "2.2.0"
 mosaic                         = "0.18.0"
@@ -250,7 +250,7 @@ gradle-publish                 = "2.0.0"
 shadow                         = "9.2.2"
 spotless                       = "8.0.0"
 semver-plugin                  = "0.9.0"
-gratatouille                   = "0.1.2"
+gratatouille                   = "0.1.3"
 kmpmt                          = "0.1.1"
 tasktree                       = "4.0.1"
 sigstore                       = "2.0.0-rc2"
@@ -261,7 +261,7 @@ graalvm-nativeimage            = "0.11.2"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 buildkonfig                    = "0.17.1"
-gmazzo-buildconfig             = "5.7.0"
+gmazzo-buildconfig             = "5.7.1"
 cyclonedx-plugin               = "1.10.0"
 modulegraph                    = "0.13.0"
 exposed-plugin                 = "0.2.1"
@@ -270,14 +270,14 @@ jib-nativeimage-extn           = "0.1.0"
 includegit-plugin              = "0.1.6"
 tomlj                          = "1.1.1"
 animalsniffer                  = "2.0.1"
-badass-runtime                 = "2.0.0"
+badass-runtime                 = "2.0.1"
 badass-jlink                   = "3.1.4-rc"
 jlink-jib                      = "0.5.1"
-jextract                       = "1.0.0"
+jextract                       = "1.1.0"
 maven-plugin-api               = "4.0.0-rc-4"
 maven-plugin-annotations       = "3.15.1"
 gradlex-maven-plugin           = "1.0.3"
-typesafe-conventions           = "0.9.1"
+typesafe-conventions           = "0.10.0"
 
 # Repositories
 repo-mvn-central               = "https://repo.maven.apache.org/maven2/"
@@ -636,18 +636,25 @@ otel-kotlin                          = { module = "io.embrace.opentelemetry.kotl
 otel-kotlin-compat                   = { module = "io.embrace.opentelemetry.kotlin:opentelemetry-kotlin-compat"                             , version.ref = "otel-kotlin" }
 
 # Compose
-compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                                   , version.ref = "jetbrains-compose" }
-compose-html-core                    = { module = "org.jetbrains.compose.html:html-core"                                    , version.ref = "jetbrains-compose" }
-compose-nav                          = { module = "org.jetbrains.androidx.navigation:navigation-compose"                    , version.ref = "jetbrains-compose-nav" }
-compose-nav3                         = { module = "org.jetbrains.androidx.navigation3:navigation3-ui"                       , version.ref = "jetbrains-compose-nav3" }
-compose-lifecycle-viewmodel          = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose"            , version.ref = "jetbrains-compose-viewmodel" }
-compose-material3-windowsize         = { module = "org.jetbrains.compose.material3:material3-window-size-class"             , version.ref = "jetbrains-compose" }
-compose-material3-adaptive           = { module = "org.jetbrains.compose.material3.adaptive:adaptive"                       , version.ref = "jetbrains-compose-adaptive" }
-compose-material3-adaptive-layout    = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout"                , version.ref = "jetbrains-compose-adaptive" }
-compose-material3-adaptive-nav       = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation"            , version.ref = "jetbrains-compose-adaptive" }
-compose-material-icons-core          = { module = "org.jetbrains.compose.material:material-icons-core"                      , version.ref = "jetbrains-compose-icons" }
-compose-routing                      = { module = "app.softwork:routing-compose"                                            , version.ref = "compose-routing" }
-compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"                            , version.ref = "compose-icons" }
+compose-runtime                      = { module = "org.jetbrains.compose.runtime:runtime"                                   , version.ref = "compose" }
+compose-foundation                   = { module = "org.jetbrains.compose.foundation:foundation"                             , version.ref = "compose" }
+compose-ui                           = { module = "org.jetbrains.compose.ui:ui"                                             , version.ref = "compose" }
+compose-resources                    = { module = "org.jetbrains.compose.components:components-resources"                   , version.ref = "compose" }
+compose-ui-toolingpreview            = { module = "org.jetbrains.compose.ui:ui-tooling-preview"                             , version.ref = "compose" }
+compose-ui-test                      = { module = "org.jetbrains.compose.ui:ui-test"                                        , version.ref = "compose" }
+compose-animatedimage                = { module = "org.jetbrains.compose.components:components-animatedimage"               , version.ref = "compose" }
+compose-html                         = { module = "org.jetbrains.compose.html:html-core"                                    , version.ref = "compose" }
+compose-material3                    = { module = "org.jetbrains.compose.material3:material3"                               , version.ref = "compose-material3" }
+compose-nav                          = { module = "org.jetbrains.androidx.navigation:navigation-compose"                    , version.ref = "compose-nav" }
+compose-nav3                         = { module = "org.jetbrains.androidx.navigation3:navigation3-ui"                       , version.ref = "compose-nav3" }
+compose-lifecycle-viewmodel          = { module = "org.jetbrains.androidx.lifecycle:lifecycle-viewmodel-compose"            , version.ref = "compose-viewmodel" }
+compose-material3-windowsize         = { module = "org.jetbrains.compose.material3:material3-window-size-class"             , version.ref = "compose" }
+compose-material3-adaptive           = { module = "org.jetbrains.compose.material3.adaptive:adaptive"                       , version.ref = "compose-adaptive" }
+compose-material3-adaptive-layout    = { module = "org.jetbrains.compose.material3.adaptive:adaptive-layout"                , version.ref = "compose-adaptive" }
+compose-material3-adaptive-nav       = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation"            , version.ref = "compose-adaptive" }
+compose-material3-adaptive-nav3      = { module = "org.jetbrains.compose.material3.adaptive:adaptive-navigation3"           , version.ref = "compose-adaptive" }
+compose-material-icons-core          = { module = "org.jetbrains.compose.material:material-icons-core"                      , version.ref = "compose-icons" }
+compose-icons-fontAwesome            = { module = "br.com.devsrsouza.compose.icons:font-awesome"                            , version.ref = "compose-fontawesome" }
 detekt-compose-rules                 = { module = "io.nlopez.compose.rules:detekt"                                          , version.ref = "detekt-compose-rules" }
 compose-kottie                       = { module = "io.github.ismai117:kottie"                                               , version.ref = "kottie" }
 evas-compose                         = { module = "io.sellmair:evas-compose"                                                , version.ref = "evas" }
@@ -664,6 +671,7 @@ silk-foundation                      = { module = "com.varabyte.kobweb:silk-foun
 silk-icons-fa                        = { module = "com.varabyte.kobwebx:silk-icons-fa"                                      , version.ref = "kobweb" }
 silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-icons-mdi"                                     , version.ref = "kobweb" }
 antdesign-ui                         = { module = "digital.guimauve.antdesign:ui"                                           , version.ref = "antdesign" }
+summon                               = { module = "io.github.codeyousef:summon"                                             , version.ref = "summon" }
 javelit                              = { module = "io.javelit:javelit"                                                      , version.ref = "javelit" }
 
 # Native
@@ -773,8 +781,7 @@ kotlinx-benchmark                    = { id = "org.jetbrains.kotlinx.benchmark" 
 kotlinx-fuzz                         = { id = "kotlinx.fuzz.gradle"                                            , version.ref = "kotlinx-fuzz" }
 kotlinx-rpc                          = { id = "org.jetbrains.kotlinx.rpc.plugin"                               , version.ref = "kotlinx-rpc" }
 kotlinx-kover                        = { id = "org.jetbrains.kotlinx.kover"                                    , version.ref = "kotlinx-kover" }
-jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "jetbrains-compose"}
-jetbrains-compose-hotreload          = { id = "org.jetbrains.compose.hot-reload"                               , version.ref = "compose-hotreload"}
+jetbrains-compose                    = { id = "org.jetbrains.compose"                                          , version.ref = "compose"}
 jetbrains-ktor                       = { id = "io.ktor.plugin"                                                 , version.ref = "ktor" }
 jetbrains-exposed                    = { id = "com.jetbrains.exposed.gradle.plugin"                            , version.ref = "exposed-plugin" }
 jetbrains-dokka                      = { id = "org.jetbrains.dokka"                                            , version.ref = "kotlin-dokka"}

@@ -21,9 +21,11 @@ import io.ktor.server.request.*
 import io.ktor.server.resources.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.servlet.jakarta.*
 import io.ktor.server.sessions.*
 import io.ktor.server.sse.*
 import io.ktor.server.websocket.*
+import javax.net.ssl.SSLSession
 import kotlin.concurrent.atomics.AtomicLong
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -126,7 +128,15 @@ fun Application.configureHTTP() {
     mdc("remoteHost") { call -> call.request.origin.remoteHost }
     // callIdMdc(TRACE_ID)
 
-    // Enable logging for API routes only
+    // format { call ->
+    //   val status = call.response.status() ?: OK
+    //   val method = call.request.httpMethod.value
+    //   val path = call.request.path()
+    //   val took = call.processingTimeMillis()
+    //   val remote = call.request.origin.remoteHost
+    //   "[$remote] $status: $method $path (${took}ms)"
+    // }
+
     filter { it.isApi }
   }
 
@@ -141,9 +151,9 @@ fun Application.configureHTTP() {
 }
 
 fun Application.configureInterceptors() {
-  intercept(ApplicationCallPipeline.Plugins) {
-    println("Request: ${call.request.uri}")
-    if (call.request.headers["Custom-Header"] == "Test") {
+  intercept(ApplicationCallPipeline.Call) {
+    println("[${call.request.origin.remoteHost}] --> ${call.request.uri}")
+    if (call.request.headers["X-Custom"] == "Test") {
       call.respond(HttpStatusCode.Forbidden)
       finish()
     }
@@ -153,12 +163,15 @@ fun Application.configureInterceptors() {
 val ApplicationCall.debug
   get() = request.queryParameters.contains("debug")
 
+val ApplicationCall.sslSession
+  get() = request.servletRequestAttributes["jakarta.servlet.request.ssl_session"] as? SSLSession
+
 val ApplicationCall.isApi
   get() = run {
     val path = request.path()
     when {
       path.contains("/swagger") -> false
-      path.startsWith("/api/") -> true
+      path.startsWith("/") -> true
       else -> false
     }
   }

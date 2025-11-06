@@ -1,11 +1,9 @@
-@file:OptIn(ExperimentalComposeLibrary::class)
 @file:Suppress("UnstableApiUsage")
 
 import common.*
 import common.Platform
 import java.time.Year
 import kotlin.io.path.listDirectoryEntries
-import org.jetbrains.compose.ExperimentalComposeLibrary
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat.*
 import org.jetbrains.compose.desktop.application.tasks.AbstractJPackageTask
 
@@ -13,7 +11,6 @@ plugins {
   id("dev.suresh.plugin.kotlin.mpp")
   alias(libs.plugins.kotlin.compose.compiler)
   alias(libs.plugins.jetbrains.compose)
-  alias(libs.plugins.jetbrains.compose.hotreload)
   // alias(libs.plugins.detekt)
   id("dev.suresh.plugin.publishing")
 }
@@ -27,13 +24,7 @@ kotlin {
   sourceSets {
     commonMain.dependencies {
       implementation(projects.shared)
-      implementation(compose.runtime)
-      implementation(compose.foundation)
-      implementation(compose.material3)
-      implementation(compose.ui)
-      implementation(compose.components.resources)
-      implementation(compose.preview)
-
+      implementation(libs.compose.material3)
       implementation(libs.compose.nav)
       implementation(libs.compose.lifecycle.viewmodel)
       implementation(libs.compose.material3.adaptive)
@@ -41,16 +32,18 @@ kotlin {
       implementation(libs.compose.material3.adaptive.nav)
       implementation(libs.compose.material.icons.core)
       implementation(libs.compose.kottie)
+      implementation(libs.compose.resources)
+      implementation(libs.compose.ui.toolingpreview)
 
       // implementation(compose.materialIconsExtended)
       // project.dependencies.detektPlugins(libs.detekt.compose.rules)
     }
 
-    commonTest.dependencies { implementation(compose.uiTest) }
+    commonTest.dependencies { implementation(libs.compose.ui.test) }
 
     jvmMain.dependencies {
       implementation(compose.desktop.currentOs)
-      implementation(compose.desktop.components.animatedImage)
+      implementation(libs.compose.animatedimage)
       implementation(libs.kotlinx.coroutines.swing)
       implementation(libs.slf4j.simple)
     }

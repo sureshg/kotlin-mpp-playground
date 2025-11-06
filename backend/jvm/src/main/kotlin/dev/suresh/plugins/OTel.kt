@@ -19,10 +19,10 @@ fun Application.configureOTel() {
   val isAgentActive = globalOtel !== OpenTelemetry.noop()
   when (isAgentActive) {
     true -> log.info("\uD83D\uDFE2 OTel Java agent is active")
-    else -> log.warn("\uD83D\uDFE1 OTel Java agent is inactive!!")
+    else -> log.warn("\uD83D\uDFE1 OTel Java agent is inactive")
   }
 
-  install(OTelExtnPlugin) { enabled = true }
+  install(OTelExtnPlugin)
   // otelSdk.shutdown().join(10, TimeUnit.SECONDS);
 }
 

@@ -71,7 +71,7 @@ fun Home(navToFile: () -> Unit, navToImage: () -> Unit) {
 
             append("Compose Multiplatform : ")
             withStyle(style = SpanStyle(color = Color.Blue, fontWeight = FontWeight.Bold)) {
-              append(BuildConfig.jetbrainsCompose)
+              append(BuildConfig.compose)
             }
           }
           showImage = !showImage

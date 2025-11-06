@@ -4,12 +4,15 @@ import dev.suresh.JFR
 import dev.suresh.http.*
 import dev.suresh.lang.*
 import dev.suresh.log.RespLogger
+import dev.suresh.plugins.custom.AuthzPlugin
 import dev.suresh.plugins.custom.CookieSession
 import dev.suresh.wasm.wasm
 import io.github.oshai.kotlinlogging.KLogger
 import io.github.oshai.kotlinlogging.KotlinLogging
 import io.ktor.http.*
 import io.ktor.server.application.*
+import io.ktor.server.auth.UserIdPrincipal
+import io.ktor.server.auth.principal
 import io.ktor.server.http.content.*
 import io.ktor.server.plugins.csrf.*
 import io.ktor.server.response.*
@@ -108,6 +111,15 @@ fun Routing.services() {
     call.suppressDecompression()
     println(call.isDecompressionSuppressed)
     println(call.isCompressionSuppressed) // true
+  }
+
+  route("/authz") {
+    install(AuthzPlugin) {
+      enabled = true
+      roles = setOf("admin")
+      getRole = { it ?: "admin" }
+    }
+    get { call.respondText("Hello, ${call.principal<UserIdPrincipal>()?.name}!") }
   }
 }
 
