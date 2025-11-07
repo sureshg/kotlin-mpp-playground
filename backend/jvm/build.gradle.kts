@@ -9,11 +9,11 @@ plugins {
   application
   id("com.google.cloud.tools.jib")
   id("gg.jte.gradle")
-  id("dev.suresh.plugin.graalvm")
   id("com.gradleup.shadow")
   alias(libs.plugins.jetbrains.ktor)
   alias(libs.plugins.exoquery)
   id("dev.suresh.plugin.publishing")
+  // id("dev.suresh.plugin.graalvm")
   // alias(libs.plugins.jetbrains.exposed)
 }
 
@@ -31,7 +31,6 @@ ktor {
     version = project.version.toString()
     summary = project.description
     description = project.description
-    target = project.layout.buildDirectory.file("open-api.json")
   }
 
   fatJar { archiveFileName = "${project.name}-all.jar" }
@@ -131,6 +130,7 @@ tasks {
   processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     dependsOn(copyTasks)
+    // dependsOn(copyTasks, "buildOpenApi")
   }
 
   // Makes sure jte is generated before compilation
@@ -235,6 +235,9 @@ dependencies {
   testImplementation(libs.wiremock.kotlin)
   testImplementation(libs.kubernetes.client)
   testImplementation(libs.konsist)
+
+  // YAML Config
+  // implementation(libs.ktor.server.config.yaml)
 
   // Copy js, wasm, compose apps
   findProject(":web")?.let {
