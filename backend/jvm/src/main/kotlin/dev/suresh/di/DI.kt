@@ -1,27 +1,16 @@
 package dev.suresh.di
 
-import io.ktor.server.application.Application
-import io.ktor.server.application.install
-import io.ktor.server.application.log
-import io.ktor.server.config.ApplicationConfig
-import io.ktor.server.config.property
-import io.ktor.server.plugins.di.DI
-import io.ktor.server.plugins.di.DefaultConflictPolicy
-import io.ktor.server.plugins.di.DependencyConflictPolicy
-import io.ktor.server.plugins.di.dependencies
+import io.ktor.server.application.*
+import io.ktor.server.config.*
+import io.ktor.server.plugins.di.*
 import kotlin.reflect.full.withNullability
 import kotlin.reflect.typeOf
 import kotlin.time.Duration
 
 suspend fun Application.configureDI() {
-  // Override dependencies
   install(DI) {
-    conflictPolicy = DependencyConflictPolicy { prev, curr ->
-      when (val result = DefaultConflictPolicy.resolve(prev, curr)) {
-        is Conflict -> KeepNew
-        else -> result
-      }
-    }
+    conflictPolicy = DefaultConflictPolicy
+    // conflictPolicy = OverridePrevious
   }
 
   log.info("Initializing config dependencies.")
