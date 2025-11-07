@@ -52,7 +52,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/5)
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/14)
   </span>
 </td>
 <td class="coverageStat">
@@ -68,15 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/19)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/159)
+    (0/147)
   </span>
 </td>
 </tr>
@@ -131,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/7)
+    (0/6)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/16)
+    (0/14)
   </span>
 </td>
 <td class="coverageStat">
@@ -147,7 +147,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/20)
+    (0/17)
   </span>
 </td>
 <td class="coverageStat">
@@ -155,7 +155,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/171)
+    (0/159)
   </span>
 </td>
 </tr>
@@ -168,28 +168,17 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.di
 &nbsp;
-&nbsp;import io.ktor.server.application.Application
-&nbsp;import io.ktor.server.application.install
-&nbsp;import io.ktor.server.application.log
-&nbsp;import io.ktor.server.config.ApplicationConfig
-&nbsp;import io.ktor.server.config.property
-&nbsp;import io.ktor.server.plugins.di.DI
-&nbsp;import io.ktor.server.plugins.di.DefaultConflictPolicy
-&nbsp;import io.ktor.server.plugins.di.DependencyConflictPolicy
-&nbsp;import io.ktor.server.plugins.di.dependencies
+&nbsp;import io.ktor.server.application.*
+&nbsp;import io.ktor.server.config.*
+&nbsp;import io.ktor.server.plugins.di.*
 &nbsp;import kotlin.reflect.full.withNullability
 &nbsp;import kotlin.reflect.typeOf
 &nbsp;import kotlin.time.Duration
 &nbsp;
 &nbsp;suspend fun Application.configureDI() {
-&nbsp;  // Override dependencies
 <b class="nc">&nbsp;  install(DI) {</b>
-<b class="nc">&nbsp;    conflictPolicy = DependencyConflictPolicy { prev, curr -&gt;</b>
-<b class="nc">&nbsp;      when (val result = DefaultConflictPolicy.resolve(prev, curr)) {</b>
-<b class="nc">&nbsp;        is Conflict -&gt; KeepNew</b>
-<b class="nc">&nbsp;        else -&gt; result</b>
-&nbsp;      }
-&nbsp;    }
+<b class="nc">&nbsp;    conflictPolicy = DefaultConflictPolicy</b>
+&nbsp;    // conflictPolicy = OverridePrevious
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  log.info(&quot;Initializing config dependencies.&quot;)</b>
@@ -244,7 +233,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-07 02:56</div>
+    <div style="float:right;">generated on 2025-11-07 06:41</div>
 </div>
 </body>
 </html>
