@@ -97,7 +97,7 @@ jsch                           = "2.27.6"
 pty4j                          = "0.13.11"
 oshi                           = "6.9.1"
 junit                          = "6.0.1"
-koin                           = "4.2.0-alpha1"
+koin                           = "4.2.0-alpha2"
 koin-annotations               = "2.3.1"
 metro                          = "0.4.0"
 kotest                         = "6.0.4"
@@ -114,8 +114,8 @@ jmh                            = "1.37"
 mrjar                          = "0.1.1"
 ktfmt                          = "0.59"
 google-javaformat              = "1.32.0"
-palantir-javaformat            = "2.81.0"
-google-auto-value              = "1.11.0"
+palantir-javaformat            = "2.82.0"
+google-auto-value              = "1.11.1"
 google-auto-service            = "1.1.1"
 google-tink                    = "1.19.0"
 graalvm                        = "25.0.1"
@@ -210,7 +210,7 @@ voices                         = "0.0.8"
 onnx                           = "1.23.2"
 angus-mail                     = "2.1.0-M1"
 simplemail                     = "8.12.6"
-javelit                        = "0.67.0"
+javelit                        = "0.68.0"
 
 # Compose
 compose                        = "1.10.0-beta01"
@@ -246,7 +246,7 @@ foojay-resolver                = "1.0.0"
 gradle-develocity              = "4.2.2"
 nmcp                           = "1.2.0"
 nexus-publish                  = "2.0.0"
-vanniktech-publish             = "0.34.0"
+vanniktech-publish             = "0.35.0"
 gradle-publish                 = "2.0.0"
 shadow                         = "9.2.2"
 spotless                       = "8.0.0"
@@ -258,7 +258,7 @@ sigstore                       = "2.0.0-rc2"
 reproducible-builds            = "1.1"
 autonomousapps-depanalysis     = "3.4.1"
 autonomousapps-bestpractices   = "0.10"
-graalvm-nativeimage            = "0.11.2"
+graalvm-nativeimage            = "0.11.3"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 buildkonfig                    = "0.17.1"
@@ -712,10 +712,11 @@ koog-executor-openai                 = { module = "ai.koog:prompt-executor-opena
 koog-features-eventhandler           = { module = "ai.koog:agents-features-event-handler"                                   , version.ref = "koog" }
 koog-ktor                            = { module = "ai.koog:koog-ktor"                                                       , version.ref = "koog"}
 voices-chorus                        = { module = "org.pitest.voices:chorus"                                                , version.ref = "voices" }
+voices-alba                          = { module = "org.pitest.voices:alba"                                                  , version.ref = "voices" }
 voices-en-uk                         = { module = "org.pitest.voices:en_uk"                                                 , version.ref = "voices" }
 voices-en-us                         = { module = "org.pitest.voices:en_us"                                                 , version.ref = "voices" }
 voices-model-downloader              = { module = "org.pitest.voices:model-downloader"                                      , version.ref = "voices" }
-voices-alba                          = { module = "org.pitest.voices:alba"                                                  , version.ref = "voices" }
+voices-openvoice-phonemizer          = { module = "org.pitest.voices:openvoice-phonemizer"                                  , version.ref = "voices" }
 onnxruntime                          = { module = "com.microsoft.onnxruntime:onnxruntime"                                   , version.ref = "onnx" }
 onnxruntime-gpu                      = { module = "com.microsoft.onnxruntime:onnxruntime_gpu"                               , version.ref = "onnx" }
 
