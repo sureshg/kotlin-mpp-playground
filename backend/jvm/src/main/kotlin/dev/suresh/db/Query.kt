@@ -31,8 +31,6 @@ data class Robot(
     val name: String,
 )
 
-typealias sql = capture
-
 // Applicative capture
 val people = sql { Table<People>() }
 val address = sql { Table<Address>() }
@@ -60,7 +58,7 @@ val distinct = sql { people.map { it.name to it.age }.distinct() }
 val limitAndOffest = sql { people.drop(1).take(10) }
 
 val union = sql {
-  people.filter { it.name.like("aaa%").use } union people.filter { it.name.like("bbb%").use }
+  people.filter { it.name.like("aaa%") } union people.filter { it.name.like("bbb%") }
 }
 
 data class CommonType(val id: Long, val name: String)
@@ -74,7 +72,7 @@ fun select() {
   val s =
       sql.select {
         val p = from(people)
-        val a = join(address) { it.id == p.addressId && it.city.like("%San Francisco%").use }
+        val a = join(address) { it.id == p.addressId && it.city.like("%San Francisco%") }
         where { p.age > 10 }
         groupBy(p.name, p.age)
         having { p95(p.age).use > 50 }
@@ -117,12 +115,11 @@ fun batch(p: Sequence<People>) {
   sql.batch(p) { p -> insert<People> { setParams(p).excluding(id) } }
 }
 
-@CapturedFunction
-// context(_: CapturedBlock)
+@SqlFragment
 fun String.like(value: String) =
-    capture.expression { free("${this@like} LIKE $value").asPure<Boolean>() }
+    sql.expression { free("${this@like} LIKE $value").asPure<Boolean>() }
 
-@CapturedFunction fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }
+@SqlFragment fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }
 
 // data class User(val id: Long, val name: String, val active: Int)
 //
