@@ -68,7 +68,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/30)
+    (0/31)
   </span>
 </td>
 <td class="coverageStat">
@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1055)
+    (0/926)
   </span>
 </td>
 </tr>
@@ -131,7 +131,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/31)
+    (0/32)
   </span>
 </td>
 <td class="coverageStat">
@@ -139,7 +139,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1057)
+    (0/928)
   </span>
 </td>
 </tr>
@@ -183,8 +183,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    val name: String,
 &nbsp;)
 &nbsp;
-&nbsp;typealias sql = capture
-&nbsp;
 &nbsp;// Applicative capture
 <b class="nc">&nbsp;val people = sql { Table&lt;People&gt;() }</b>
 <b class="nc">&nbsp;val address = sql { Table&lt;Address&gt;() }</b>
@@ -212,7 +210,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;val limitAndOffest = sql { people.drop(1).take(10) }</b>
 &nbsp;
 <b class="nc">&nbsp;val union = sql {</b>
-<b class="nc">&nbsp;  people.filter { it.name.like(&quot;aaa%&quot;).use } union people.filter { it.name.like(&quot;bbb%&quot;).use }</b>
+<b class="nc">&nbsp;  people.filter { it.name.like(&quot;aaa%&quot;) } union people.filter { it.name.like(&quot;bbb%&quot;) }</b>
 &nbsp;}
 &nbsp;
 &nbsp;data class CommonType(val id: Long, val name: String)
@@ -226,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  val s =</b>
 <b class="nc">&nbsp;      sql.select {</b>
 <b class="nc">&nbsp;        val p = from(people)</b>
-<b class="nc">&nbsp;        val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;).use }</b>
+<b class="nc">&nbsp;        val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;) }</b>
 &nbsp;        where { p.age &gt; 10 }
 &nbsp;        groupBy(p.name, p.age)
 <b class="nc">&nbsp;        having { p95(p.age).use &gt; 50 }</b>
@@ -269,12 +267,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  sql.batch(p) { p -&gt; insert&lt;People&gt; { setParams(p).excluding(id) } }</b>
 &nbsp;}
 &nbsp;
-&nbsp;@CapturedFunction
-&nbsp;// context(_: CapturedBlock)
-&nbsp;fun String.like(value: String) =
-&nbsp;    capture.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
+&nbsp;@SqlFragment
+<b class="nc">&nbsp;fun String.like(value: String) =</b>
+&nbsp;    sql.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
 &nbsp;
-&nbsp;@CapturedFunction fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }
+&nbsp;@SqlFragment fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }
 &nbsp;
 &nbsp;// data class User(val id: Long, val name: String, val active: Int)
 &nbsp;//
@@ -325,7 +322,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-12 20:17</div>
+    <div style="float:right;">generated on 2025-11-13 17:29</div>
 </div>
 </body>
 </html>

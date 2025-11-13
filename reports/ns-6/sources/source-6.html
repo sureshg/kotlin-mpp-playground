@@ -183,8 +183,6 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    val name: String,</b>
 &nbsp;)
 &nbsp;
-&nbsp;typealias sql = capture
-&nbsp;
 &nbsp;// Applicative capture
 &nbsp;val people = sql { Table&lt;People&gt;() }
 &nbsp;val address = sql { Table&lt;Address&gt;() }
@@ -212,7 +210,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;val limitAndOffest = sql { people.drop(1).take(10) }
 &nbsp;
 &nbsp;val union = sql {
-&nbsp;  people.filter { it.name.like(&quot;aaa%&quot;).use } union people.filter { it.name.like(&quot;bbb%&quot;).use }
+&nbsp;  people.filter { it.name.like(&quot;aaa%&quot;) } union people.filter { it.name.like(&quot;bbb%&quot;) }
 &nbsp;}
 &nbsp;
 &nbsp;data class CommonType(val id: Long, val name: String)
@@ -226,7 +224,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  val s =
 &nbsp;      sql.select {
 &nbsp;        val p = from(people)
-&nbsp;        val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;).use }
+&nbsp;        val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;) }
 &nbsp;        where { p.age &gt; 10 }
 &nbsp;        groupBy(p.name, p.age)
 &nbsp;        having { p95(p.age).use &gt; 50 }
@@ -269,12 +267,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;  sql.batch(p) { p -&gt; insert&lt;People&gt; { setParams(p).excluding(id) } }
 &nbsp;}
 &nbsp;
-&nbsp;@CapturedFunction
-&nbsp;// context(_: CapturedBlock)
+&nbsp;@SqlFragment
 &nbsp;fun String.like(value: String) =
-&nbsp;    capture.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
+&nbsp;    sql.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
 &nbsp;
-&nbsp;@CapturedFunction fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }
+&nbsp;@SqlFragment fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }
 &nbsp;
 &nbsp;// data class User(val id: Long, val name: String, val active: Int)
 &nbsp;//
@@ -325,7 +322,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-11-12 20:17</div>
+    <div style="float:right;">generated on 2025-11-13 17:29</div>
 </div>
 </body>
 </html>
