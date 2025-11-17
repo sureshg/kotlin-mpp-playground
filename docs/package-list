@@ -302,6 +302,7 @@ $dokka.location:/BuildConfig/vanniktechPublish/#/PointingToDeclaration/shared/[
 $dokka.location:/BuildConfig/version/#/PointingToDeclaration/shared/[root]/-build-config/version.html
 $dokka.location:/BuildConfig/voices/#/PointingToDeclaration/shared/[root]/-build-config/voices.html
 $dokka.location:/BuildConfig/wasm2class/#/PointingToDeclaration/shared/[root]/-build-config/wasm2class.html
+$dokka.location:/BuildConfig/webauthn4j/#/PointingToDeclaration/shared/[root]/-build-config/webauthn4j.html
 $dokka.location:/BuildConfig/wehBindings/#/PointingToDeclaration/shared/[root]/-build-config/weh-bindings.html
 $dokka.location:/BuildConfig/wiremock/#/PointingToDeclaration/shared/[root]/-build-config/wiremock.html
 $dokka.location:/BuildConfig/wiremockKotlin/#/PointingToDeclaration/shared/[root]/-build-config/wiremock-kotlin.html
