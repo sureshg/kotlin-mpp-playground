@@ -38,7 +38,7 @@ kotlinx-fuzz                   = "0.2.2"
 kotlinx-metadata               = "0.9.0"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.3.2"
-kotlin-wrappers                = "2025.11.11"
+kotlin-wrappers                = "2025.11.12"
 kotlin-redacted                = "1.15.1"
 kotlin-serviceloader           = "0.0.22"
 kotlinx-multik                 = "0.2.3"
@@ -47,13 +47,13 @@ kotlinx-kandy                  = "0.9.0-dev-86"
 kotlin-statistics              = "0.4.0-RC1"
 kotlin-base32                  = "1.0.0"
 gradle-kotlin-dsl              = "6.4.2"
-exoquery-plugin                = "2.2.20-2.0.0.PL.RC1"
-exoquery-sql                   = "2.0.0.PL.RC1"
+exoquery-plugin                = "2.2.20-2.0.0.PL.RC2"
+exoquery-sql                   = "2.0.0.PL.RC2"
 exposed                        = "1.0.0-rc-3"
 postgresql                     = "42.7.8"
 embedded-postgres              = "2.2.0"
 embedded-postgres-bom          = "18.1.0"
-evas                           = "1.3.0"
+evas                           = "1.4.0"
 kopy                           = "0.20.2+2.2.21"
 poko                           = "0.20.2"
 mappie                         = "2.2.21-1.6.1"
@@ -103,7 +103,7 @@ koin-annotations               = "2.3.1"
 metro                          = "0.4.0"
 kotest                         = "6.0.5"
 mockk                          = "1.14.6"
-mokkery                        = "3.0.0-RC"
+mokkery                        = "3.0.0"
 wiremock                       = "4.0.0-beta.17"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.3.2"
@@ -153,7 +153,7 @@ micrometer                     = "1.16.0"
 swagger-ui                     = "5.17.14"
 hoplite                        = "3.0.0.RC1"
 config4k                       = "0.7.0"
-shedlock                       = "7.1.0"
+shedlock                       = "7.2.0"
 sherlock                       = "1.0.3"
 sqids                          = "0.1.0"
 tsid                           = "2.1.4"
@@ -211,7 +211,8 @@ voices                         = "0.0.8"
 onnx                           = "1.23.2"
 angus-mail                     = "2.1.0-M1"
 simplemail                     = "8.12.6"
-javelit                        = "0.73.0"
+javelit                        = "0.74.0"
+jwalker                        = "1.1.0"
 
 # Compose
 compose                        = "1.10.0-beta02"
@@ -223,7 +224,6 @@ compose-adaptive               = "1.3.0-alpha02"
 compose-icons                  = "1.7.3"
 compose-fontawesome            = "1.1.1"
 kobweb                         = "0.23.3"
-summon                         = "0.5.0.0"
 detekt                         = "2.0.0-alpha.1"
 detekt-compose-rules           = "0.4.28"
 antdesign                      = "1.0.0"
@@ -263,7 +263,7 @@ graalvm-nativeimage            = "0.11.3"
 github-depgraph                = "0.1.0"
 github-changelog               = "2.2.0"
 buildkonfig                    = "0.17.1"
-gmazzo-buildconfig             = "6.0.1"
+gmazzo-buildconfig             = "6.0.2"
 cyclonedx-plugin               = "1.10.0"
 modulegraph                    = "0.13.0"
 exposed-plugin                 = "0.2.1"
@@ -673,7 +673,6 @@ silk-foundation                      = { module = "com.varabyte.kobweb:silk-foun
 silk-icons-fa                        = { module = "com.varabyte.kobwebx:silk-icons-fa"                                      , version.ref = "kobweb" }
 silk-icons-mdi                       = { module = "com.varabyte.kobwebx:silk-icons-mdi"                                     , version.ref = "kobweb" }
 antdesign-ui                         = { module = "digital.guimauve.antdesign:ui"                                           , version.ref = "antdesign" }
-summon                               = { module = "codes.yousef:summon"                                                     , version.ref = "summon" }
 javelit                              = { module = "io.javelit:javelit"                                                      , version.ref = "javelit" }
 
 # Native
@@ -722,6 +721,7 @@ voices-model-downloader              = { module = "org.pitest.voices:model-downl
 voices-openvoice-phonemizer          = { module = "org.pitest.voices:openvoice-phonemizer"                                  , version.ref = "voices" }
 onnxruntime                          = { module = "com.microsoft.onnxruntime:onnxruntime"                                   , version.ref = "onnx" }
 onnxruntime-gpu                      = { module = "com.microsoft.onnxruntime:onnxruntime_gpu"                               , version.ref = "onnx" }
+jwalker                              = { module = "io.github.epieffe:jwalker"                                               , version.ref = "jwalker" }
 
 # Social
 ozone-bluesky                        = { module = "sh.christian.ozone:bluesky"                                              , version.ref = "bluesky-ozone"}
