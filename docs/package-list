@@ -145,6 +145,7 @@ $dokka.location:/BuildConfig/jsonSchemaValidator/#/PointingToDeclaration/shared
 $dokka.location:/BuildConfig/jspecify/#/PointingToDeclaration/shared/[root]/-build-config/jspecify.html
 $dokka.location:/BuildConfig/jte/#/PointingToDeclaration/shared/[root]/-build-config/jte.html
 $dokka.location:/BuildConfig/junit/#/PointingToDeclaration/shared/[root]/-build-config/junit.html
+$dokka.location:/BuildConfig/jwalker/#/PointingToDeclaration/shared/[root]/-build-config/jwalker.html
 $dokka.location:/BuildConfig/kaml/#/PointingToDeclaration/shared/[root]/-build-config/kaml.html
 $dokka.location:/BuildConfig/kfswatch/#/PointingToDeclaration/shared/[root]/-build-config/kfswatch.html
 $dokka.location:/BuildConfig/kmbed/#/PointingToDeclaration/shared/[root]/-build-config/kmbed.html
@@ -283,7 +284,6 @@ $dokka.location:/BuildConfig/springBoot/#/PointingToDeclaration/shared/[root]/-
 $dokka.location:/BuildConfig/springDepmgmt/#/PointingToDeclaration/shared/[root]/-build-config/spring-depmgmt.html
 $dokka.location:/BuildConfig/sqids/#/PointingToDeclaration/shared/[root]/-build-config/sqids.html
 $dokka.location:/BuildConfig/sshj/#/PointingToDeclaration/shared/[root]/-build-config/sshj.html
-$dokka.location:/BuildConfig/summon/#/PointingToDeclaration/shared/[root]/-build-config/summon.html
 $dokka.location:/BuildConfig/swaggerCodegen/#/PointingToDeclaration/shared/[root]/-build-config/swagger-codegen.html
 $dokka.location:/BuildConfig/swaggerStyle/#/PointingToDeclaration/shared/[root]/-build-config/swagger-style.html
 $dokka.location:/BuildConfig/swaggerUi/#/PointingToDeclaration/shared/[root]/-build-config/swagger-ui.html
