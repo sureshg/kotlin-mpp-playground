@@ -11,7 +11,7 @@ plugins {
   id("gg.jte.gradle")
   id("com.gradleup.shadow")
   alias(libs.plugins.jetbrains.ktor)
-  // alias(libs.plugins.exoquery)
+  alias(libs.plugins.exoquery)
   id("dev.suresh.plugin.publishing")
   kotlin("plugin.dataframe")
   // id("dev.suresh.plugin.graalvm")
