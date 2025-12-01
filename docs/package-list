@@ -257,6 +257,7 @@ $dokka.location:/BuildConfig/parsus/#/PointingToDeclaration/shared/[root]/-buil
 $dokka.location:/BuildConfig/password4j/#/PointingToDeclaration/shared/[root]/-build-config/password4j.html
 $dokka.location:/BuildConfig/poko/#/PointingToDeclaration/shared/[root]/-build-config/poko.html
 $dokka.location:/BuildConfig/postgresql/#/PointingToDeclaration/shared/[root]/-build-config/postgresql.html
+$dokka.location:/BuildConfig/protobuf4j/#/PointingToDeclaration/shared/[root]/-build-config/protobuf4j.html
 $dokka.location:/BuildConfig/pty4j/#/PointingToDeclaration/shared/[root]/-build-config/pty4j.html
 $dokka.location:/BuildConfig/pwallJsonSchema/#/PointingToDeclaration/shared/[root]/-build-config/pwall-json-schema.html
 $dokka.location:/BuildConfig/quickjs4j/#/PointingToDeclaration/shared/[root]/-build-config/quickjs4j.html
