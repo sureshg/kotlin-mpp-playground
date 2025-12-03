@@ -94,6 +94,7 @@ $dokka.location:/BuildConfig/exposedPlugin/#/PointingToDeclaration/shared/[root
 $dokka.location:/BuildConfig/filekitDialogs/#/PointingToDeclaration/shared/[root]/-build-config/filekit-dialogs.html
 $dokka.location:/BuildConfig/foojayResolver/#/PointingToDeclaration/shared/[root]/-build-config/foojay-resolver.html
 $dokka.location:/BuildConfig/fusionauthJwt/#/PointingToDeclaration/shared/[root]/-build-config/fusionauth-jwt.html
+$dokka.location:/BuildConfig/fusionauthSamlv2/#/PointingToDeclaration/shared/[root]/-build-config/fusionauth-samlv2.html
 $dokka.location:/BuildConfig/gitFullMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-full-message.html
 $dokka.location:/BuildConfig/gitHash/#/PointingToDeclaration/shared/[root]/-build-config/git-hash.html
 $dokka.location:/BuildConfig/gitMessage/#/PointingToDeclaration/shared/[root]/-build-config/git-message.html
