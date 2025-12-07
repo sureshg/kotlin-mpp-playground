@@ -1,4 +1,4 @@
-#!/usr/bin/env java --enable-preview --source 26
+#!/usr/bin/env java --enable-preview --source 27
 
 import com.sun.net.httpserver.SimpleFileServer;
 import com.sun.net.httpserver.SimpleFileServer.OutputLevel;
