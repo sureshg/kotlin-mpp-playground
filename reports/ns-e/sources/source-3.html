@@ -202,7 +202,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp; * installs the custom OTel extension plugin. The agent status is logged for monitoring purposes.
 &nbsp; */
 &nbsp;fun Application.configureOTel() {
-<b class="nc">&nbsp;  val globalOtel = GlobalOpenTelemetry.get()</b>
+<b class="nc">&nbsp;  val globalOtel = GlobalOpenTelemetry.getOrNoop()</b>
 <b class="nc">&nbsp;  val isAgentActive = globalOtel !== OpenTelemetry.noop()</b>
 <b class="nc">&nbsp;  when (isAgentActive) {</b>
 <b class="nc">&nbsp;    true -&gt; log.info(&quot;\uD83D\uDFE2 OTel Java agent is active&quot;)</b>
@@ -277,7 +277,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2025-12-07 06:26</div>
+    <div style="float:right;">generated on 2025-12-08 08:23</div>
 </div>
 </body>
 </html>
