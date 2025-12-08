@@ -15,7 +15,7 @@ import kotlin.time.Clock
  * installs the custom OTel extension plugin. The agent status is logged for monitoring purposes.
  */
 fun Application.configureOTel() {
-  val globalOtel = GlobalOpenTelemetry.get()
+  val globalOtel = GlobalOpenTelemetry.getOrNoop()
   val isAgentActive = globalOtel !== OpenTelemetry.noop()
   when (isAgentActive) {
     true -> log.info("\uD83D\uDFE2 OTel Java agent is active")
