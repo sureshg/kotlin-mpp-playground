@@ -102,9 +102,10 @@ tracer_provider:
         #   fallback_sampler:
         #     always_on:
         #   expressions:
-        #     # Drop health check endpoints
         #     - action: DROP
         #       expression: spanKind == 'SERVER' && attribute['url.path'].startsWith('/health')
+        #     - action: RECORD_AND_SAMPLE
+        #       expression: attribute['http.method'] == 'GET' && attribute['http.status_code'] < 400
         rule_based_routing:
           # Fallback to the always_on sampler if the criteria is not met.
           fallback_sampler:
