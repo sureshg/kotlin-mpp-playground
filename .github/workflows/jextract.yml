@@ -77,7 +77,7 @@ jobs:
         run: rm -rf jextract/src || true
 
       - name: 📥 Download source artifacts
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           path: jextract/src
 
