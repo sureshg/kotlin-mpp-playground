@@ -99,7 +99,7 @@ jobs:
           echo "version=$KOTLIN_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: 💽 Cache Kotlin Native
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.konan
           key: konan-${{ runner.os }}-${{ steps.kotlin-version.outputs.version }}
