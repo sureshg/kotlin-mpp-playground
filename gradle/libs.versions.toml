@@ -217,7 +217,7 @@ javelit                        = "0.76.0"
 jwalker                        = "1.1.0"
 
 # Compose
-compose                        = "1.10.0-rc02"
+compose                        = "1.11.0-alpha01"
 compose-material3              = "1.11.0-alpha01"
 compose-viewmodel              = "2.10.0-alpha07"
 compose-nav                    = "2.9.1"
