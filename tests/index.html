@@ -3,15 +3,54 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta http-equiv="x-ua-compatible" content="IE=edge"/>
-<title>Test results - Test Summary</title>
+<title>Test results - All Results</title>
 <link href="css/base-style.css" rel="stylesheet" type="text/css"/>
 <link href="css/style.css" rel="stylesheet" type="text/css"/>
 <script src="js/report.js" type="text/javascript"></script>
 </head>
 <body>
 <div id="content">
-<h1>Test Summary</h1>
-<div id="summary">
+<h1>All Results</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="successGroup" href="#">jsBrowserTest (1)</a>
+</li>
+<li>
+<a class="successGroup" href="#">Gradle Test Run :shared:jvmTest[jvm]</a>
+</li>
+<li>
+<a class="successGroup" href="#">wasmJsBrowserTest (1)</a>
+</li>
+<li>
+<a class="successGroup" href="#">jsBrowserTest (2)</a>
+</li>
+<li>
+<a class="skippedGroup" href="#">Gradle Test Run :backend:jvm:test</a>
+</li>
+<li>
+<a class="successGroup" href="#">Gradle Test Run :compose:cmp:jvmTest[jvm]</a>
+</li>
+<li>
+<a class="successGroup" href="#">wasmJsBrowserTest (2)</a>
+</li>
+<li>
+<a class="successGroup" href="#">Gradle Test Run :meta:compiler:plugin:test</a>
+</li>
+</ul>
+<div class="tab">
+<h2>jsBrowserTest (1)</h2>
+<h1>jsBrowserTest</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="" href="#">summary</a>
+</li>
+</ul>
+<div class="tab">
+<h2>summary</h2>
+<div>
+<div class="summary">
 <table>
 <tr>
 <td>
@@ -19,26 +58,26 @@
 <table>
 <tr>
 <td>
-<div class="infoBox" id="tests">
-<div class="counter">20</div>
+<div class="infoBox">
+<div class="counter">3</div>
 <p>tests</p>
 </div>
 </td>
 <td>
-<div class="infoBox" id="failures">
+<div class="infoBox">
 <div class="counter">0</div>
 <p>failures</p>
 </div>
 </td>
 <td>
-<div class="infoBox" id="ignored">
-<div class="counter">7</div>
-<p>ignored</p>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>skipped</p>
 </div>
 </td>
 <td>
-<div class="infoBox" id="duration">
-<div class="counter">17.054s</div>
+<div class="infoBox duration">
+<div class="counter">20.616s</div>
 <p>duration</p>
 </div>
 </td>
@@ -47,7 +86,7 @@
 </div>
 </td>
 <td>
-<div class="infoBox skipped" id="successRate">
+<div class="infoBox success successRate">
 <div class="percent">100%</div>
 <p>successful</p>
 </div>
@@ -55,194 +94,676 @@
 </tr>
 </table>
 </div>
+<table class="test-results">
+<thead>
+<tr>
+<th>Child</th>
+<th>Name</th>
+<th>Tests</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Duration</th>
+<th>Success rate</th>
+</tr>
+</thead>
+<tr>
+<td class="success">
+<a href="jsBrowserTest.dev.suresh.CommonTest/index.html">dev.suresh.CommonTest</a>
+</td>
+<td class="path">jsBrowserTest.dev.suresh.CommonTest</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.125s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="jsBrowserTest.dev.suresh.PlatformTest/index.html">dev.suresh.PlatformTest</a>
+</td>
+<td class="path">jsBrowserTest.dev.suresh.PlatformTest</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.002s</td>
+<td class="success">100%</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="tab">
+<h2>Gradle Test Run :shared:jvmTest[jvm]</h2>
+<h1>Gradle Test Run :shared:jvmTest[jvm]</h1>
 <div class="tab-container">
 <ul class="tabLinks">
 <li>
-<a href="#">Ignored tests</a>
-</li>
-<li>
-<a href="#">Packages</a>
-</li>
-<li>
-<a href="#">Classes</a>
+<a class="" href="#">summary</a>
 </li>
 </ul>
 <div class="tab">
-<h2>Ignored tests</h2>
-<ul class="linkList">
-<li>
-<a href="classes/dev.suresh.AppTests.html">AppTests</a>.
-<a href="classes/dev.suresh.AppTests.html#appTest()">appTest()</a>
-</li>
-<li>
-<a href="classes/dev.suresh.AppTests.html">AppTests</a>.
-<a href="classes/dev.suresh.AppTests.html#testDB()">testDB()</a>
-</li>
-<li>
-<a href="classes/dev.suresh.AppTests.html">AppTests</a>.
-<a href="classes/dev.suresh.AppTests.html#testGenericContainer()">testGenericContainer()</a>
-</li>
-<li>
-<a href="classes/dev.suresh.DnsTest.html">DnsTest</a>.
-<a href="classes/dev.suresh.DnsTest.html#hostFileTest()">hostFileTest()</a>
-</li>
-<li>
-<a href="classes/dev.suresh.DnsTest.html">DnsTest</a>.
-<a href="classes/dev.suresh.DnsTest.html#wireMockTest()">wireMockTest()</a>
-</li>
-<li>
-<a href="classes/dev.suresh.K8STests.html">K8STests</a>.
-<a href="classes/dev.suresh.K8STests.html#testK8S()">testK8S()</a>
-</li>
-<li>
-<a href="classes/dev.suresh.K8STests.html">K8STests</a>.
-<a href="classes/dev.suresh.K8STests.html#testK8SClient()">testK8SClient()</a>
-</li>
-</ul>
-</div>
-<div class="tab">
-<h2>Packages</h2>
+<h2>summary</h2>
+<div>
+<div class="summary">
 <table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox">
+<div class="counter">3</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>skipped</p>
+</div>
+</td>
+<td>
+<div class="infoBox duration">
+<div class="counter">13.284s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="test-results">
 <thead>
 <tr>
-<th>Package</th>
+<th>Child</th>
+<th>Name</th>
 <th>Tests</th>
 <th>Failures</th>
-<th>Ignored</th>
+<th>Skipped</th>
 <th>Duration</th>
 <th>Success rate</th>
 </tr>
 </thead>
-<tbody>
 <tr>
 <td class="success">
-<a href="packages/default-package.html">default-package</a>
+<a href="dev.suresh.CommonTest/index.html">CommonTest[jvm]</a>
 </td>
+<td class="path">dev.suresh.CommonTest</td>
 <td>2</td>
 <td>0</td>
 <td>0</td>
-<td>0.120s</td>
+<td>6.890s</td>
 <td class="success">100%</td>
 </tr>
 <tr>
-<td class="skipped">
-<a href="packages/dev.suresh.html">dev.suresh</a>
+<td class="success">
+<a href="dev.suresh.PlatformTest/index.html">PlatformTest[jvm]</a>
 </td>
-<td>16</td>
+<td class="path">dev.suresh.PlatformTest</td>
+<td>1</td>
 <td>0</td>
-<td>7</td>
-<td>10.067s</td>
+<td>0</td>
+<td>2.877s</td>
+<td class="success">100%</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="tab">
+<h2>wasmJsBrowserTest (1)</h2>
+<h1>wasmJsBrowserTest</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="" href="#">summary</a>
+</li>
+</ul>
+<div class="tab">
+<h2>summary</h2>
+<div>
+<div class="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox">
+<div class="counter">3</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>skipped</p>
+</div>
+</td>
+<td>
+<div class="infoBox duration">
+<div class="counter">5.103s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="test-results">
+<thead>
+<tr>
+<th>Child</th>
+<th>Name</th>
+<th>Tests</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Duration</th>
+<th>Success rate</th>
+</tr>
+</thead>
+<tr>
+<td class="success">
+<a href="wasmJsBrowserTest.dev.suresh.CommonTest/index.html">dev.suresh.CommonTest</a>
+</td>
+<td class="path">wasmJsBrowserTest.dev.suresh.CommonTest</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0.264s</td>
+<td class="success">100%</td>
+</tr>
+<tr>
+<td class="success">
+<a href="wasmJsBrowserTest.dev.suresh.PlatformTest/index.html">dev.suresh.PlatformTest</a>
+</td>
+<td class="path">wasmJsBrowserTest.dev.suresh.PlatformTest</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="success">100%</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="tab">
+<h2>jsBrowserTest (2)</h2>
+<h1>jsBrowserTest</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="" href="#">summary</a>
+</li>
+</ul>
+<div class="tab">
+<h2>summary</h2>
+<div>
+<div class="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>skipped</p>
+</div>
+</td>
+<td>
+<div class="infoBox duration">
+<div class="counter">20.315s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="test-results">
+<thead>
+<tr>
+<th>Child</th>
+<th>Name</th>
+<th>Tests</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Duration</th>
+<th>Success rate</th>
+</tr>
+</thead>
+<tr>
+<td class="success">
+<a href="jsBrowserTest.AppTest/index.html">AppTest</a>
+</td>
+<td class="path">jsBrowserTest.AppTest</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.008s</td>
+<td class="success">100%</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="tab">
+<h2>Gradle Test Run :backend:jvm:test</h2>
+<h1>Gradle Test Run :backend:jvm:test</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="" href="#">summary</a>
+</li>
+</ul>
+<div class="tab">
+<h2>summary</h2>
+<div>
+<div class="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox">
+<div class="counter">7</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">7</div>
+<p>skipped</p>
+</div>
+</td>
+<td>
+<div class="infoBox duration">
+<div class="counter">4.007s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox skipped successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="test-results">
+<thead>
+<tr>
+<th>Child</th>
+<th>Name</th>
+<th>Tests</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Duration</th>
+<th>Success rate</th>
+</tr>
+</thead>
+<tr>
+<td class="skipped">
+<a href="dev.suresh.AppTests/index.html">AppTests</a>
+</td>
+<td class="path">dev.suresh.AppTests</td>
+<td>3</td>
+<td>0</td>
+<td>3</td>
+<td>0.009s</td>
 <td class="skipped">100%</td>
 </tr>
 <tr>
-<td class="success">
-<a href="packages/ui.html">ui</a>
+<td class="skipped">
+<a href="dev.suresh.DnsTest/index.html">DnsTest</a>
 </td>
+<td class="path">dev.suresh.DnsTest</td>
 <td>2</td>
 <td>0</td>
-<td>0</td>
-<td>6.867s</td>
-<td class="success">100%</td>
+<td>2</td>
+<td>0.010s</td>
+<td class="skipped">100%</td>
 </tr>
-</tbody>
+<tr>
+<td class="skipped">
+<a href="dev.suresh.K8STests/index.html">K8STests</a>
+</td>
+<td class="path">dev.suresh.K8STests</td>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+<td>0.004s</td>
+<td class="skipped">100%</td>
+</tr>
 </table>
 </div>
+</div>
+</div>
+</div>
 <div class="tab">
-<h2>Classes</h2>
+<h2>Gradle Test Run :compose:cmp:jvmTest[jvm]</h2>
+<h1>Gradle Test Run :compose:cmp:jvmTest[jvm]</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="" href="#">summary</a>
+</li>
+</ul>
+<div class="tab">
+<h2>summary</h2>
+<div>
+<div class="summary">
 <table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>skipped</p>
+</div>
+</td>
+<td>
+<div class="infoBox duration">
+<div class="counter">15.542s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="test-results">
 <thead>
 <tr>
-<th>Class</th>
+<th>Child</th>
+<th>Name</th>
 <th>Tests</th>
 <th>Failures</th>
-<th>Ignored</th>
+<th>Skipped</th>
 <th>Duration</th>
 <th>Success rate</th>
 </tr>
 </thead>
-<tbody>
 <tr>
 <td class="success">
-<a href="classes/AppTest.html">AppTest</a>
+<a href="ui.ComposeTest/index.html">ComposeTest[jvm]</a>
 </td>
+<td class="path">ui.ComposeTest</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0.003s</td>
+<td>6.602s</td>
 <td class="success">100%</td>
 </tr>
-<tr>
-<td class="success">
-<a href="classes/PluginTest.html">PluginTest</a>
-</td>
-<td>1</td>
-<td>0</td>
-<td>0</td>
-<td>0.117s</td>
-<td class="success">100%</td>
-</tr>
-<tr>
-<td class="skipped">
-<a href="classes/dev.suresh.AppTests.html">dev.suresh.AppTests</a>
-</td>
-<td>3</td>
-<td>0</td>
-<td>3</td>
-<td>0.001s</td>
-<td class="skipped">-</td>
-</tr>
-<tr>
-<td class="success">
-<a href="classes/dev.suresh.CommonTest.html">dev.suresh.CommonTest</a>
-</td>
-<td>6</td>
-<td>0</td>
-<td>0</td>
-<td>7.445s</td>
-<td class="success">100%</td>
-</tr>
-<tr>
-<td class="skipped">
-<a href="classes/dev.suresh.DnsTest.html">dev.suresh.DnsTest</a>
-</td>
-<td>2</td>
-<td>0</td>
-<td>2</td>
-<td>0s</td>
-<td class="skipped">-</td>
-</tr>
-<tr>
-<td class="skipped">
-<a href="classes/dev.suresh.K8STests.html">dev.suresh.K8STests</a>
-</td>
-<td>2</td>
-<td>0</td>
-<td>2</td>
-<td>0s</td>
-<td class="skipped">-</td>
-</tr>
-<tr>
-<td class="success">
-<a href="classes/dev.suresh.PlatformTest.html">dev.suresh.PlatformTest</a>
-</td>
-<td>3</td>
-<td>0</td>
-<td>0</td>
-<td>2.621s</td>
-<td class="success">100%</td>
-</tr>
-<tr>
-<td class="success">
-<a href="classes/ui.ComposeTest.html">ui.ComposeTest</a>
-</td>
-<td>2</td>
-<td>0</td>
-<td>0</td>
-<td>6.867s</td>
-<td class="success">100%</td>
-</tr>
-</tbody>
 </table>
+</div>
+</div>
+</div>
+</div>
+<div class="tab">
+<h2>wasmJsBrowserTest (2)</h2>
+<h1>wasmJsBrowserTest</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="" href="#">summary</a>
+</li>
+</ul>
+<div class="tab">
+<h2>summary</h2>
+<div>
+<div class="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>skipped</p>
+</div>
+</td>
+<td>
+<div class="infoBox duration">
+<div class="counter">3.150s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="test-results">
+<thead>
+<tr>
+<th>Child</th>
+<th>Name</th>
+<th>Tests</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Duration</th>
+<th>Success rate</th>
+</tr>
+</thead>
+<tr>
+<td class="success">
+<a href="wasmJsBrowserTest.ui.ComposeTest/index.html">ui.ComposeTest</a>
+</td>
+<td class="path">wasmJsBrowserTest.ui.ComposeTest</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.001s</td>
+<td class="success">100%</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="tab">
+<h2>Gradle Test Run :meta:compiler:plugin:test</h2>
+<h1>Gradle Test Run :meta:compiler:plugin:test</h1>
+<div class="tab-container">
+<ul class="tabLinks">
+<li>
+<a class="" href="#">summary</a>
+</li>
+</ul>
+<div class="tab">
+<h2>summary</h2>
+<div>
+<div class="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox">
+<div class="counter">1</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox">
+<div class="counter">0</div>
+<p>skipped</p>
+</div>
+</td>
+<td>
+<div class="infoBox duration">
+<div class="counter">4.820s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<table class="test-results">
+<thead>
+<tr>
+<th>Child</th>
+<th hidden="">Name</th>
+<th>Tests</th>
+<th>Failures</th>
+<th>Skipped</th>
+<th>Duration</th>
+<th>Success rate</th>
+</tr>
+</thead>
+<tr>
+<td class="success">
+<a href="PluginTest/index.html">PluginTest</a>
+</td>
+<td class="path" hidden="">PluginTest</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0.159s</td>
+<td class="success">100%</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
 </div>
 </div>
 <div id="footer">
@@ -252,7 +773,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="https://www.gradle.org">Gradle 9.2.1</a> at Dec 22, 2025, 10:40:09 PM</p>
+<a href="https://www.gradle.org">Gradle 9.3.0-rc-2</a> at Dec 25, 2025, 12:27:02 AM</p>
 </div>
 </div>
 </body>
