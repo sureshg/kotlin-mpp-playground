@@ -68,6 +68,7 @@ $dokka.location:/BuildConfig/compose/#/PointingToDeclaration/shared/[root]/-bui
 $dokka.location:/BuildConfig/composeAdaptive/#/PointingToDeclaration/shared/[root]/-build-config/compose-adaptive.html
 $dokka.location:/BuildConfig/composeFluent/#/PointingToDeclaration/shared/[root]/-build-config/compose-fluent.html
 $dokka.location:/BuildConfig/composeFontawesome/#/PointingToDeclaration/shared/[root]/-build-config/compose-fontawesome.html
+$dokka.location:/BuildConfig/composeHotreload/#/PointingToDeclaration/shared/[root]/-build-config/compose-hotreload.html
 $dokka.location:/BuildConfig/composeIcons/#/PointingToDeclaration/shared/[root]/-build-config/compose-icons.html
 $dokka.location:/BuildConfig/composeMaterial3/#/PointingToDeclaration/shared/[root]/-build-config/compose-material3.html
 $dokka.location:/BuildConfig/composeNav/#/PointingToDeclaration/shared/[root]/-build-config/compose-nav.html
