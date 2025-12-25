@@ -212,6 +212,12 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
   $ ./gradlew :backend:native:jibDockerBuild
   $ docker run -it --rm --name native sureshg/native
 
+  # Testing Windows Binary
+  $  docker run --rm --platform="linux/amd64" \
+                -e DISPLAY=host.docker.internal:0 \
+                -v "$PWD":/app \
+                scottyhardy/docker-wine:latest wine /app/backend/native/build/bin/mingwX64/releaseExecutable/native.exe
+
   # Debug distroless image
   # docker run -it --entrypoint=sh gcr.io/distroless/cc-debian12:debug
 
