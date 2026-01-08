@@ -150,7 +150,6 @@ $dokka.location:/BuildConfig/junit/#/PointingToDeclaration/shared/[root]/-build
 $dokka.location:/BuildConfig/jwalker/#/PointingToDeclaration/shared/[root]/-build-config/jwalker.html
 $dokka.location:/BuildConfig/kaml/#/PointingToDeclaration/shared/[root]/-build-config/kaml.html
 $dokka.location:/BuildConfig/kfswatch/#/PointingToDeclaration/shared/[root]/-build-config/kfswatch.html
-$dokka.location:/BuildConfig/kmbed/#/PointingToDeclaration/shared/[root]/-build-config/kmbed.html
 $dokka.location:/BuildConfig/kmpAppdirs/#/PointingToDeclaration/shared/[root]/-build-config/kmp-appdirs.html
 $dokka.location:/BuildConfig/kmpProcess/#/PointingToDeclaration/shared/[root]/-build-config/kmp-process.html
 $dokka.location:/BuildConfig/kmpSettings/#/PointingToDeclaration/shared/[root]/-build-config/kmp-settings.html
@@ -204,6 +203,7 @@ $dokka.location:/BuildConfig/kotlinxSerialization/#/PointingToDeclaration/share
 $dokka.location:/BuildConfig/kottie/#/PointingToDeclaration/shared/[root]/-build-config/kottie.html
 $dokka.location:/BuildConfig/ksoup/#/PointingToDeclaration/shared/[root]/-build-config/ksoup.html
 $dokka.location:/BuildConfig/kspAutoService/#/PointingToDeclaration/shared/[root]/-build-config/ksp-auto-service.html
+$dokka.location:/BuildConfig/ktembed/#/PointingToDeclaration/shared/[root]/-build-config/ktembed.html
 $dokka.location:/BuildConfig/ktfmt/#/PointingToDeclaration/shared/[root]/-build-config/ktfmt.html
 $dokka.location:/BuildConfig/ktor/#/PointingToDeclaration/shared/[root]/-build-config/ktor.html
 $dokka.location:/BuildConfig/ktorCohort/#/PointingToDeclaration/shared/[root]/-build-config/ktor-cohort.html
