@@ -1,7 +1,6 @@
 package dev.suresh.db
 
 import io.exoquery.*
-import io.exoquery.annotation.*
 import kotlinx.serialization.Serializable
 
 @JvmInline @Serializable value class Email(val value: String)
