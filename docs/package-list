@@ -156,7 +156,6 @@ $dokka.location:/BuildConfig/kmpSettings/#/PointingToDeclaration/shared/[root]/
 $dokka.location:/BuildConfig/kmpmt/#/PointingToDeclaration/shared/[root]/-build-config/kmpmt.html
 $dokka.location:/BuildConfig/kobweb/#/PointingToDeclaration/shared/[root]/-build-config/kobweb.html
 $dokka.location:/BuildConfig/koin/#/PointingToDeclaration/shared/[root]/-build-config/koin.html
-$dokka.location:/BuildConfig/koinAnnotations/#/PointingToDeclaration/shared/[root]/-build-config/koin-annotations.html
 $dokka.location:/BuildConfig/kommand/#/PointingToDeclaration/shared/[root]/-build-config/kommand.html
 $dokka.location:/BuildConfig/konsist/#/PointingToDeclaration/shared/[root]/-build-config/konsist.html
 $dokka.location:/BuildConfig/koog/#/PointingToDeclaration/shared/[root]/-build-config/koog.html
@@ -199,6 +198,7 @@ $dokka.location:/BuildConfig/kotlinxMetadata/#/PointingToDeclaration/shared/[ro
 $dokka.location:/BuildConfig/kotlinxMultik/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-multik.html
 $dokka.location:/BuildConfig/kotlinxReflectLite/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-reflect-lite.html
 $dokka.location:/BuildConfig/kotlinxRpc/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-rpc.html
+$dokka.location:/BuildConfig/kotlinxSchema/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-schema.html
 $dokka.location:/BuildConfig/kotlinxSerialization/#/PointingToDeclaration/shared/[root]/-build-config/kotlinx-serialization.html
 $dokka.location:/BuildConfig/kottie/#/PointingToDeclaration/shared/[root]/-build-config/kottie.html
 $dokka.location:/BuildConfig/ksoup/#/PointingToDeclaration/shared/[root]/-build-config/ksoup.html
