@@ -4,6 +4,7 @@ import BuildConfig
 import dev.suresh.di.configureDI
 import dev.suresh.plugins.*
 import dev.suresh.routes.*
+import io.github.oshai.kotlinlogging.*
 import io.ktor.server.application.*
 import io.ktor.server.jetty.jakarta.*
 import io.ktor.server.routing.*
@@ -56,6 +57,7 @@ fun initProps() {
   System.setProperty("jdk.includeInExceptions", "hostInfo")
   System.setProperty("slf4j.internal.verbosity", "WARN")
   System.setProperty("LOG_DIR", logDir)
+  KotlinLoggingConfiguration.logStartupMessage = false
 
   println("⚡ ${BuildConfig.description} v${BuildConfig.version} ⚡")
   println("Log Dir: $logDir")

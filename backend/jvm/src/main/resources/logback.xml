@@ -17,11 +17,11 @@
     <property name="otel-pattern"
               value="%date{yyyy-MM-dd'T'HH:mm:ss.SSS z, America/Los_Angeles} trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags} %-5level %logger{16} - %msg%n"/>
 
-    <appender name="APP1" class="RollingFileAppender">
-        <file>${LOG_DIR}/app1.log</file>
+    <appender name="APP" class="RollingFileAppender">
+        <file>${LOG_DIR}/app.log</file>
         <rollingPolicy class="TimeBasedRollingPolicy">
             <!-- weekly rollover -->
-            <fileNamePattern>app1.%d{yyyy-ww}.gz</fileNamePattern>
+            <fileNamePattern>app.%d{yyyy-ww}.gz</fileNamePattern>
             <maxHistory>30</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
@@ -49,8 +49,8 @@
 
     <statusListener class="ch.qos.logback.core.status.NopStatusListener"/>
 
-    <!--appender name="ASYNC-APP1" class="AsyncAppender">
-        <appender-ref ref="APP1"/>
+    <!--appender name="ASYNC-APP" class="AsyncAppender">
+        <appender-ref ref="APP"/>
         <neverBlock>true</neverBlock>
     </appender-->
 
@@ -100,16 +100,17 @@
     </contextListener>
 
     <root level="INFO">
-        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="APP"/>
+        <!-- appender-ref ref="STDOUT"/-->
         <!-- appender-ref ref="OTEL"/-->
         <!-- appender-ref ref="JSON"/-->
-        <!-- appender-ref ref="ASYNC-APP1" /-->
+        <!-- appender-ref ref="ASYNC-APP" /-->
     </root>
 
-    <logger name="dev.suresh" level="INFO" additivity="false">
+    <!--logger name="dev.suresh" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
-    </logger>
+    </logger-->
 
     <logger name="io.netty" level="INFO"/>
-    <logger name="dev.suresh.http.MediaApiClient" level="INFO"/>
+    <logger name="dev.suresh" level="INFO"/>
 </configuration>

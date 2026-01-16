@@ -27,5 +27,5 @@ jre/
 **/.kobweb/*
 !**/.kobweb/conf.yaml
 
-# Gradle release
-cx.json
+# App log
+*.log
