@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > Retry</title>
+  <title>: Coverage Report > StreamingAppender</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.http</a>
+    <a href="../index.html">dev.suresh.log</a>
 </div>
 
-<h1>Coverage Summary for Class: Retry (dev.suresh.http)</h1>
+<h1>Coverage Summary for Class: StreamingAppender (dev.suresh.log)</h1>
 
 <table class="coverageStats">
 
@@ -46,22 +46,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">Retry</td>
+  <td class="name">StreamingAppender</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
+    (0/4)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,12 +60,28 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/23)
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/30)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">Retry$Companion</td>
+    <td class="name">StreamingAppender$Companion</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -97,7 +104,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/2)
   </span>
 </td>
   </tr>
@@ -108,16 +115,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/3)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/3)
+    (0/5)
   </span>
 </td>
 <td class="coverageStat">
@@ -125,7 +123,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/24)
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/32)
   </span>
 </td>
 </tr>
@@ -136,26 +150,39 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.http
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.log
 &nbsp;
-&nbsp;import kotlin.time.Duration
-&nbsp;import kotlin.time.Duration.Companion.seconds
-&nbsp;import kotlinx.serialization.Serializable
+&nbsp;import ch.qos.logback.classic.spi.ILoggingEvent
+&nbsp;import ch.qos.logback.core.UnsynchronizedAppenderBase
+&nbsp;import ch.qos.logback.core.encoder.Encoder
+&nbsp;import kotlinx.coroutines.channels.BufferOverflow
+&nbsp;import kotlinx.coroutines.flow.MutableSharedFlow
+&nbsp;import kotlinx.coroutines.flow.SharedFlow
 &nbsp;
-&nbsp;data class Timeout(val connection: Duration, val read: Duration, val write: Duration) {
+&nbsp;/**
+&nbsp; * Logback appender that broadcasts formatted log events via [SharedFlow]. Configure encoder in
+&nbsp; * logback.xml to reuse existing formatting.
+&nbsp; */
+<b class="nc">&nbsp;class StreamingAppender : UnsynchronizedAppenderBase&lt;ILoggingEvent&gt;() {</b>
+&nbsp;
+<b class="nc">&nbsp;  var encoder: Encoder&lt;ILoggingEvent&gt;? = null</b>
+&nbsp;
+&nbsp;  override fun append(event: ILoggingEvent) {
+<b class="nc">&nbsp;    val bytes = encoder?.encode(event) ?: return</b>
+<b class="nc">&nbsp;    logs.tryEmit(bytes.decodeToString().trimEnd())</b>
+&nbsp;  }
+&nbsp;
 &nbsp;  companion object {
-&nbsp;    val DEFAULT = Timeout(connection = 5.seconds, read = 5.seconds, write = 5.seconds)
+&nbsp;
+<b class="nc">&nbsp;    val logs: SharedFlow&lt;String&gt;</b>
+&nbsp;      field =
+<b class="nc">&nbsp;          MutableSharedFlow(</b>
+<b class="nc">&nbsp;              replay = 50,</b>
+<b class="nc">&nbsp;              extraBufferCapacity = 500,</b>
+<b class="nc">&nbsp;              onBufferOverflow = BufferOverflow.DROP_OLDEST,</b>
+&nbsp;          )
 &nbsp;  }
 &nbsp;}
-&nbsp;
-<b class="nc">&nbsp;data class Retry(val attempts: Int, val maxDelay: Duration) {</b>
-&nbsp;  companion object {
-<b class="nc">&nbsp;    val DEFAULT = Retry(attempts = 2, maxDelay = 5.seconds)</b>
-&nbsp;  }
-&nbsp;}
-&nbsp;
-&nbsp;@Serializable
-&nbsp;data class ErrorStatus(val code: Int, val message: String, val details: String? = null)
 </code>
 </pre>
 </div>
