@@ -190,7 +190,7 @@ fun Route.mgmtRoutes() {
     heapDumpPath.deleteIfExists()
   }
 
-  sse("/logs") { StreamingAppender.logs.collect { send(ServerSentEvent(data = it)) } }
+  sse("/logs") { StreamingAppender.logs.collect { send(data = it) } }
 
   sse("/virtualThreadStats") {
     val vtMxBean = Profiling.virtualThreadMxBean
