@@ -2,6 +2,7 @@ package dev.suresh.routes
 
 import dev.suresh.Profiling
 import dev.suresh.jvmRuntimeInfo
+import dev.suresh.log.StreamingAppender
 import dev.suresh.plugins.debug
 import io.ktor.http.*
 import io.ktor.http.ContentDisposition.Companion.Attachment
@@ -188,6 +189,8 @@ fun Route.mgmtRoutes() {
     call.respondFile(heapDumpPath.toFile())
     heapDumpPath.deleteIfExists()
   }
+
+  sse("/logs") { StreamingAppender.logs.collect { send(ServerSentEvent(data = it)) } }
 
   sse("/virtualThreadStats") {
     val vtMxBean = Profiling.virtualThreadMxBean

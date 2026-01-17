@@ -83,6 +83,12 @@
         </encoder>
     </appender>
 
+    <appender name="STREAM" class="dev.suresh.log.StreamingAppender">
+        <encoder class="PatternLayoutEncoder">
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
     <!-- Inject the Span and Trace ID to MDC -->
     <appender name="OTEL-MDC" class="io.opentelemetry.instrumentation.logback.mdc.v1_0.OpenTelemetryAppender">
         <appender-ref ref="STDOUT"/>
@@ -101,6 +107,7 @@
 
     <root level="INFO">
         <appender-ref ref="APP"/>
+        <appender-ref ref="STREAM"/>
         <!-- appender-ref ref="STDOUT"/-->
         <!-- appender-ref ref="OTEL"/-->
         <!-- appender-ref ref="JSON"/-->
