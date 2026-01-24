@@ -6,6 +6,7 @@ import ch.qos.logback.classic.Level.INFO
 import ch.qos.logback.classic.LoggerContext
 import ch.qos.logback.classic.util.ContextInitializer
 import io.ktor.http.ContentType
+import io.ktor.openapi.OpenApiInfo
 import io.ktor.server.auth.authenticate
 import io.ktor.server.http.content.staticResources
 import io.ktor.server.plugins.swagger.*
@@ -15,12 +16,18 @@ import org.slf4j.Logger.ROOT_LOGGER_NAME
 import org.slf4j.LoggerFactory
 
 fun Routing.adminRoutes() {
-  swaggerUI(path = "docs", swaggerFile = "openapi/documentation.yaml") {
+  get("/") { call.respondRedirect("/docs") }
+
+  swaggerUI(path = "docs") {
+    info =
+        OpenApiInfo(
+            title = BuildConfig.name,
+            version = BuildConfig.version,
+            description = BuildConfig.description,
+        )
     version = BuildConfig.swaggerUi
     customStyle(BuildConfig.swaggerStyle)
   }
-
-  get("/") { call.respondRedirect("/docs") }
 
   authenticate("admin") {
     route("/loglevel") {

@@ -1,7 +1,6 @@
 import com.google.cloud.tools.jib.api.buildplan.ImageFormat
 import com.google.devtools.ksp.gradle.KspAATask
 import common.*
-import io.ktor.plugin.OpenApiPreview
 import kotlin.io.path.Path
 
 plugins {
@@ -11,7 +10,7 @@ plugins {
   id("gg.jte.gradle")
   id("com.gradleup.shadow")
   alias(libs.plugins.jetbrains.ktor)
-  // alias(libs.plugins.exoquery)
+  alias(libs.plugins.exoquery)
   id("dev.suresh.plugin.publishing")
   kotlin("plugin.dataframe")
   // id("dev.suresh.plugin.graalvm")
@@ -26,12 +25,10 @@ application {
 }
 
 ktor {
-  @OptIn(OpenApiPreview::class)
   openApi {
-    title = rootProject.name
-    version = project.version.toString()
-    summary = project.description
-    description = project.description
+    enabled = true
+    codeInferenceEnabled = true
+    onlyCommented = false
   }
 
   fatJar { archiveFileName = "${project.name}-all.jar" }
@@ -180,6 +177,7 @@ dependencies {
 
   // OpenAPI
   implementation(libs.ktor.server.swagger)
+  implementation(libs.ktor.server.routing.openapi)
   // implementation(libs.ktor.server.openapi)
 
   // Client dependencies
