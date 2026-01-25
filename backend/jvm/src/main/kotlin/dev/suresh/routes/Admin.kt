@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory
 fun Routing.adminRoutes() {
   get("/") { call.respondRedirect("/docs") }
 
-  swaggerUI(path = "docs") {
+  swaggerUI(path = "/docs") {
     info =
         OpenApiInfo(
             title = BuildConfig.name,
