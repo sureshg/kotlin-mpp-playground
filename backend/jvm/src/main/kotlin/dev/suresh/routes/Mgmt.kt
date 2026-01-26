@@ -36,7 +36,14 @@ val docRoot = Path(System.getProperty("java.io.tmpdir"))
 
 fun Route.mgmtRoutes() {
 
-  staticFiles(remotePath = "/tmp", dir = docRoot.toFile())
+  staticFiles(remotePath = "/tmp", dir = docRoot.toFile()) {
+    fallback { requestedPath, call ->
+      when {
+        requestedPath.endsWith(".kt") -> call.respondRedirect("/info")
+        else -> call.respondFile(File("files/index.html"))
+      }
+    }
+  }
 
   get("/info") {
     call.respond(

@@ -17,34 +17,53 @@ import io.ktor.server.http.content.*
 import io.ktor.server.plugins.csrf.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.server.routing.openapi.hide
 import io.ktor.server.sessions.*
 import io.ktor.server.sse.heartbeat
 import io.ktor.server.sse.send
 import io.ktor.server.sse.sse
 import io.ktor.server.websocket.webSocket
 import io.ktor.sse.ServerSentEvent
+import io.ktor.utils.io.ExperimentalKtorApi
 import io.ktor.websocket.Frame
 import io.ktor.websocket.readText
 import io.ktor.websocket.send
 import io.opentelemetry.instrumentation.annotations.WithSpan
 import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.serialization.serializer
 
 private val logger = KotlinLogging.logger {}
 
+@OptIn(ExperimentalKtorApi::class)
 fun Routing.services() {
   get("/ffm") { call.respondLogStream { FFM.memoryLayout(this) } }
 
   get("/vthreads") { call.respondLogStream { VThread.virtualThreads(this) } }
 
-  get("/jfr") { call.respondLogStream { JFR.recordingStream(this) } }
+  get("/jfr") { call.respondLogStream { JFR.recordingStream(this) } }.hide()
+
+  get("/long-running") {
+    try {
+      while (call.isActive) {
+        delay(2.seconds)
+        logger.info { "Long running task..." }
+      }
+      call.respondText("Completed!")
+    } catch (e: CancellationException) {
+      logger.info { "Long running task cancelled: ${e.message}" }
+    }
+  }
 
   get("/trace") {
     call.respond(
         mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall().toString())
     )
   }
+
+  get("/otel-config") { call.respondResource("otel/sdk-config.yaml") }
 
   route("/session") {
     get("/set") {

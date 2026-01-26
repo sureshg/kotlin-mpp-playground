@@ -45,5 +45,30 @@ fun Application.configureSecurity() {
         call.respondError(Unauthorized, "Token is not valid or has expired")
       }
     }
+
+    //  oauth("login") {
+    //      client = ...
+    //      urlProvider = ...
+    //      providerLookup = { ... }
+    //      fallback = { cause ->
+    //          if (cause is OAuth2RedirectError) {
+    //              respondRedirect("/login-after-fallback")
+    //          } else {
+    //              respond(HttpStatusCode.Forbidden, cause.message)
+    //          }
+    //      }
+    //  }
+
+    // apiKey {
+    //   headerName = "X-Secret-Key"
+    //   validate { apiKey ->
+    //     if (apiKey == "secret-key") {
+    //       UserIdPrincipal(apiKey)
+    //     } else {
+    //       null
+    //     }
+    //   }
+    //   challenge { it.respond(HttpStatusCode.Unauthorized, "Invalid or missing API key") }
+    // }
   }
 }

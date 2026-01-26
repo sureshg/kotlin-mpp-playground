@@ -6,6 +6,7 @@ import dev.suresh.plugins.custom.CookieSessionSerializer
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
+import io.ktor.server.http.*
 import io.ktor.server.plugins.*
 import io.ktor.server.plugins.autohead.*
 import io.ktor.server.plugins.calllogging.*
@@ -53,12 +54,16 @@ fun Application.configureHTTP() {
 
   install(DefaultHeaders) { header("X-Engine", "${BuildConfig.name}-${BuildConfig.version}") }
 
+  install(HttpRequestLifecycle) { cancelCallOnClose = true }
+
   install(Compression) {
     gzip { priority = 10.0 }
     deflate {
       priority = 1.0
       minimumSize(1024) // condition
     }
+    // zstd(level = 3)
+    // identity()
   }
 
   install(CORS) {

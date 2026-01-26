@@ -50,6 +50,9 @@ data class MediaApiClient(
           .config {
             defaultRequest { url("https://suresh.dev/") }
 
+            // Replace the whole plugin config instead of merging them
+            // installOrReplace(DefaultRequest) { url("https://suresh.dev/") }
+
             // install(Auth) {
             //   basic {
             //     sendWithoutRequest { true }

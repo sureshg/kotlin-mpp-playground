@@ -22,5 +22,6 @@ actual fun httpClient(
           kLogger.warn { "Setting cacertBundle to $caInfo" }
         }
         sslVerify = true
+        // dispatcher = Dispatchers.IO
       }
     }

@@ -41,7 +41,7 @@ kotlinx-metadata               = "0.9.0"
 kotlinx-schema                 = "0.0.4"
 kotlinx-reflect-lite           = "1.2.0-RC"
 kotlin-lincheck                = "3.4"
-kotlin-wrappers                = "2026.1.12"
+kotlin-wrappers                = "2026.1.13"
 kotlin-redacted                = "1.15.1"
 kotlin-serviceloader           = "0.0.22"
 kotlinx-multik                 = "0.2.3"
@@ -109,7 +109,7 @@ wiremock                       = "4.0.0-beta.25"
 wiremock-kotlin                = "2.1.1"
 okhttp                         = "5.3.2"
 slf4j                          = "2.1.0-alpha1"
-logback                        = "1.5.25"
+logback                        = "1.5.26"
 logback-tyler                  = "1.0.3"
 log4j                          = "3.0.0-beta3"
 jmh                            = "1.37"
@@ -365,6 +365,7 @@ ktor-server-openapi                  = { module = "io.ktor:ktor-server-openapi" 
 ktor-server-routing-openapi          = { module = "io.ktor:ktor-server-routing-openapi"                             , version.ref = "ktor"}
 ktor-server-http-redirect            = { module = "io.ktor:ktor-server-http-redirect"                               , version.ref = "ktor"}
 ktor-server-compression              = { module = "io.ktor:ktor-server-compression"                                 , version.ref = "ktor"}
+ktor-server-compression-zstd         = { module = "io.ktor:ktor-server-compression-zstd"                            , version.ref = "ktor"}
 ktor-server-sessions                 = { module = "io.ktor:ktor-server-sessions"                                    , version.ref = "ktor"}
 ktor-server-rate-limit               = { module = "io.ktor:ktor-server-rate-limit"                                  , version.ref = "ktor"}
 ktor-server-double-receive           = { module = "io.ktor:ktor-server-double-receive"                              , version.ref = "ktor"}
@@ -373,6 +374,7 @@ ktor-server-host-common              = { module = "io.ktor:ktor-server-host-comm
 ktor-server-resources                = { module = "io.ktor:ktor-server-resources"                                   , version.ref = "ktor"}
 ktor-server-auth                     = { module = "io.ktor:ktor-server-auth"                                        , version.ref = "ktor"}
 ktor-server-auth-jwt                 = { module = "io.ktor:ktor-server-auth-jwt"                                    , version.ref = "ktor"}
+ktor-server-auth-apikey              = { module = "io.ktor:ktor-server-auth-api-key"                                , version.ref = "ktor"}
 ktor-server-default-headers          = { module = "io.ktor:ktor-server-default-headers"                             , version.ref = "ktor"}
 ktor-server-status-pages             = { module = "io.ktor:ktor-server-status-pages"                                , version.ref = "ktor"}
 ktor-server-partial-content          = { module = "io.ktor:ktor-server-partial-content"                             , version.ref = "ktor"}

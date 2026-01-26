@@ -128,7 +128,7 @@ tasks {
   processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     dependsOn(copyTasks)
-    // dependsOn(copyTasks, "buildOpenApi")
+    // dependsOn(copyTasks)
   }
 
   // Makes sure jte is generated before compilation
@@ -168,6 +168,7 @@ dependencies {
   implementation(libs.ktor.server.resources)
   implementation(libs.ktor.server.auth)
   implementation(libs.ktor.server.auth.jwt)
+  implementation(libs.ktor.server.auth.apikey)
   implementation(libs.ktor.server.websockets)
   implementation(libs.ktor.server.sse)
   implementation(libs.ktor.server.html)
