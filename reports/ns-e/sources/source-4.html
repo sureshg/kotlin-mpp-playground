@@ -307,6 +307,31 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;        call.respondError(Unauthorized, &quot;Token is not valid or has expired&quot;)</b>
 &nbsp;      }
 &nbsp;    }
+&nbsp;
+&nbsp;    //  oauth(&quot;login&quot;) {
+&nbsp;    //      client = ...
+&nbsp;    //      urlProvider = ...
+&nbsp;    //      providerLookup = { ... }
+&nbsp;    //      fallback = { cause -&gt;
+&nbsp;    //          if (cause is OAuth2RedirectError) {
+&nbsp;    //              respondRedirect(&quot;/login-after-fallback&quot;)
+&nbsp;    //          } else {
+&nbsp;    //              respond(HttpStatusCode.Forbidden, cause.message)
+&nbsp;    //          }
+&nbsp;    //      }
+&nbsp;    //  }
+&nbsp;
+&nbsp;    // apiKey {
+&nbsp;    //   headerName = &quot;X-Secret-Key&quot;
+&nbsp;    //   validate { apiKey -&gt;
+&nbsp;    //     if (apiKey == &quot;secret-key&quot;) {
+&nbsp;    //       UserIdPrincipal(apiKey)
+&nbsp;    //     } else {
+&nbsp;    //       null
+&nbsp;    //     }
+&nbsp;    //   }
+&nbsp;    //   challenge { it.respond(HttpStatusCode.Unauthorized, &quot;Invalid or missing API key&quot;) }
+&nbsp;    // }
 &nbsp;  }
 &nbsp;}
 </code>
@@ -332,7 +357,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-25 06:45</div>
+    <div style="float:right;">generated on 2026-01-26 06:43</div>
 </div>
 </body>
 </html>
