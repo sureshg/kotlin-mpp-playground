@@ -78,13 +78,13 @@ val X509Certificate.expiryDateUTC
   get() = notAfter.toInstant().toKotlinInstant().toLocalDateTime(TimeZone.UTC)
 
 val PublicKey.pem: String
-  get() = PemFormat.encodePem("PUBLIC KEY", encoded)
+  get() = PemFormat.encodePem(PemString.PUBLIC, encoded)
 
 val PrivateKey.pem: String
-  get() = PemFormat.encodePem("PRIVATE KEY", encoded)
+  get() = PemFormat.encodePem(PemString.PKCS8INF, encoded)
 
 val X509Certificate.pem: String
-  get() = PemFormat.encodePem("CERTIFICATE", encoded)
+  get() = PemFormat.encodePem(PemString.X509, encoded)
 
 /** Returns true if the given cert chain is signed by custom Root CAs. */
 val List<X509Certificate>.isSignedByRootCA
