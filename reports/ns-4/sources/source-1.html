@@ -179,13 +179,13 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;  get() = notAfter.toInstant().toKotlinInstant().toLocalDateTime(TimeZone.UTC)</b>
 &nbsp;
 &nbsp;val PublicKey.pem: String
-<b class="nc">&nbsp;  get() = PemFormat.encodePem(&quot;PUBLIC KEY&quot;, encoded)</b>
+<b class="nc">&nbsp;  get() = PemFormat.encodePem(PemString.PUBLIC, encoded)</b>
 &nbsp;
 &nbsp;val PrivateKey.pem: String
-<b class="nc">&nbsp;  get() = PemFormat.encodePem(&quot;PRIVATE KEY&quot;, encoded)</b>
+<b class="nc">&nbsp;  get() = PemFormat.encodePem(PemString.PKCS8INF, encoded)</b>
 &nbsp;
 &nbsp;val X509Certificate.pem: String
-<b class="nc">&nbsp;  get() = PemFormat.encodePem(&quot;CERTIFICATE&quot;, encoded)</b>
+<b class="nc">&nbsp;  get() = PemFormat.encodePem(PemString.X509, encoded)</b>
 &nbsp;
 &nbsp;/** Returns true if the given cert chain is signed by custom Root CAs. */
 &nbsp;val List&lt;X509Certificate&gt;.isSignedByRootCA
@@ -223,7 +223,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-26 23:52</div>
+    <div style="float:right;">generated on 2026-01-27 16:27</div>
 </div>
 </body>
 </html>
