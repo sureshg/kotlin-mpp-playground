@@ -39,12 +39,16 @@ private val logger = KotlinLogging.logger {}
 
 @OptIn(ExperimentalKtorApi::class)
 fun Routing.services() {
+  /** Tag: Service */
   get("/ffm") { call.respondLogStream { FFM.memoryLayout(this) } }
 
+  /** Tag: Service */
   get("/vthreads") { call.respondLogStream { VThread.virtualThreads(this) } }
 
+  /** Tag: Service */
   get("/jfr") { call.respondLogStream { JFR.recordingStream(this) } }.hide()
 
+  /** Tag: Service */
   get("/long-running") {
     try {
       while (call.isActive) {
@@ -57,14 +61,16 @@ fun Routing.services() {
     }
   }
 
+  /** Tag: Service */
   get("/trace") {
     call.respond(
         mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall().toString())
     )
   }
-
+  /** Tag: Service */
   get("/otel-config") { call.respondResource("otel/sdk-config.yaml") }
 
+  /** Tag: Service */
   route("/session") {
     get("/set") {
       call.sessions.set(CookieSession("${BuildConfig.name}: ${BuildConfig.version}"))
@@ -77,6 +83,7 @@ fun Routing.services() {
     }
   }
 
+  /** Tag: Service */
   route("/csrf") {
     install(CSRF) {
       allowOrigin("https://localhost:8080")
@@ -94,6 +101,7 @@ fun Routing.services() {
 
   wasm()
 
+  /** Tag: Service */
   webSocket("/chat") {
     send("You are connected!")
     for (frame in incoming) {
@@ -103,6 +111,7 @@ fun Routing.services() {
     }
   }
 
+  /** Tag: Service */
   sse(
       "/sse",
       serialize = { typeInfo, data ->
@@ -124,6 +133,7 @@ fun Routing.services() {
     close()
   }
 
+  /** Tag: Service */
   get("/no-compression") {
     // Prevent response body compression
     call.suppressCompression()
@@ -132,6 +142,7 @@ fun Routing.services() {
     println(call.isCompressionSuppressed) // true
   }
 
+  /** Tag: Service */
   route("/authz") {
     install(AuthzPlugin) {
       enabled = true

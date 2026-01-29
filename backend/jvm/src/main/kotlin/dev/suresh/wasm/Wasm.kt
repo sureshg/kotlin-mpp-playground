@@ -22,6 +22,7 @@ val factWasmInst: Instance by lazy {
 }
 
 fun Routing.wasm() {
+  /** Tag: Service */
   route("/wasm") {
     get("fact") {
       val num = call.parameters["num"]?.toLongOrNull() ?: 5

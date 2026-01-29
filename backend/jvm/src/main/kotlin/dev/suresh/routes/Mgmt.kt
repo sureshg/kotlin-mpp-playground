@@ -34,6 +34,7 @@ val mutex = Mutex()
 
 val docRoot = Path(System.getProperty("java.io.tmpdir"))
 
+/** Tag: mgmt */
 fun Route.mgmtRoutes() {
 
   staticFiles(remotePath = "/tmp", dir = docRoot.toFile()) {
