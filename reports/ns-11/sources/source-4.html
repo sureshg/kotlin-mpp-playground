@@ -76,7 +76,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/312)
+    (0/320)
   </span>
 </td>
 </tr>
@@ -253,7 +253,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">ServiceKt$services$14$1$2</td>
+    <td class="name">ServiceKt$services$15$1$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -281,7 +281,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">ServiceKt$services$14$2</td>
+    <td class="name">ServiceKt$services$15$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -309,7 +309,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">ServiceKt$services$15</td>
+    <td class="name">ServiceKt$services$17</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -344,7 +344,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">ServiceKt$services$17</td>
+    <td class="name">ServiceKt$services$19</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -379,7 +379,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">ServiceKt$services$18</td>
+    <td class="name">ServiceKt$services$20</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -407,7 +407,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </td>
   </tr>
   <tr>
-    <td class="name">ServiceKt$services$19$2</td>
+    <td class="name">ServiceKt$services$22$2</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -647,7 +647,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/1056)
+    (0/1064)
   </span>
 </td>
 </tr>
@@ -699,12 +699,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 &nbsp;@OptIn(ExperimentalKtorApi::class)
 &nbsp;fun Routing.services() {
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  get(&quot;/ffm&quot;) { call.respondLogStream { FFM.memoryLayout(this) } }</b>
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  get(&quot;/vthreads&quot;) { call.respondLogStream { VThread.virtualThreads(this) } }</b>
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  get(&quot;/jfr&quot;) { call.respondLogStream { JFR.recordingStream(this) } }.hide()</b>
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  get(&quot;/long-running&quot;) {</b>
 &nbsp;    try {
 <b class="nc">&nbsp;      while (call.isActive) {</b>
@@ -717,14 +721,16 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    }
 &nbsp;  }
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  get(&quot;/trace&quot;) {</b>
 <b class="nc">&nbsp;    call.respond(</b>
 <b class="nc">&nbsp;        mapOf(&quot;OpenTelemetry&quot; to BuildConfig.otelInstr, &quot;Image Size&quot; to mediaApiCall().toString())</b>
 &nbsp;    )
 &nbsp;  }
-&nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  get(&quot;/otel-config&quot;) { call.respondResource(&quot;otel/sdk-config.yaml&quot;) }</b>
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  route(&quot;/session&quot;) {</b>
 <b class="nc">&nbsp;    get(&quot;/set&quot;) {</b>
 <b class="nc">&nbsp;      call.sessions.set(CookieSession(&quot;${BuildConfig.name}: ${BuildConfig.version}&quot;))</b>
@@ -737,6 +743,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    }
 &nbsp;  }
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  route(&quot;/csrf&quot;) {</b>
 <b class="nc">&nbsp;    install(CSRF) {</b>
 <b class="nc">&nbsp;      allowOrigin(&quot;https://localhost:8080&quot;)</b>
@@ -754,6 +761,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;
 <b class="nc">&nbsp;  wasm()</b>
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  webSocket(&quot;/chat&quot;) {</b>
 <b class="nc">&nbsp;    send(&quot;You are connected!&quot;)</b>
 <b class="nc">&nbsp;    for (frame in incoming) {</b>
@@ -763,6 +771,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;    }
 &nbsp;  }
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  sse(</b>
 <b class="nc">&nbsp;      &quot;/sse&quot;,</b>
 &nbsp;      serialize = { typeInfo, data -&gt;
@@ -784,6 +793,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    close()</b>
 &nbsp;  }
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  get(&quot;/no-compression&quot;) {</b>
 &nbsp;    // Prevent response body compression
 <b class="nc">&nbsp;    call.suppressCompression()</b>
@@ -792,6 +802,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;    println(call.isCompressionSuppressed) // true</b>
 &nbsp;  }
 &nbsp;
+&nbsp;  /** Tag: Service */
 <b class="nc">&nbsp;  route(&quot;/authz&quot;) {</b>
 <b class="nc">&nbsp;    install(AuthzPlugin) {</b>
 <b class="nc">&nbsp;      enabled = true</b>
@@ -833,7 +844,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-27 16:27</div>
+    <div style="float:right;">generated on 2026-01-29 05:29</div>
 </div>
 </body>
 </html>

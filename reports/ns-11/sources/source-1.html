@@ -52,7 +52,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/15)
+    (0/17)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -61,7 +61,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/34)
+    (0/37)
   </span>
 </td>
 <td class="coverageStat">
@@ -69,7 +69,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/183)
+    (0/215)
   </span>
 </td>
 </tr>
@@ -206,7 +206,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/19)
+    (0/21)
   </span>
 </td>
 <td class="coverageStat">
@@ -222,7 +222,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/55)
+    (0/58)
   </span>
 </td>
 <td class="coverageStat">
@@ -230,7 +230,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/537)
+    (0/569)
   </span>
 </td>
 </tr>
@@ -256,7 +256,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import io.ktor.server.plugins.swagger.*
 &nbsp;import io.ktor.server.response.*
 &nbsp;import io.ktor.server.routing.*
-&nbsp;import io.ktor.server.routing.openapi.describe
+&nbsp;import io.ktor.server.routing.openapi.*
 &nbsp;import io.ktor.utils.io.ExperimentalKtorApi
 &nbsp;import org.slf4j.Logger.ROOT_LOGGER_NAME
 &nbsp;import org.slf4j.LoggerFactory
@@ -272,80 +272,85 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <b class="nc">&nbsp;            version = BuildConfig.version,</b>
 <b class="nc">&nbsp;            description = BuildConfig.description,</b>
 &nbsp;        )
+&nbsp;
+<b class="nc">&nbsp;    source = OpenApiDocSource.Routing { routingRoot.descendants() }</b>
+<b class="nc">&nbsp;    servers { server(&quot;http://localhost:8080&quot;) }</b>
+&nbsp;
 <b class="nc">&nbsp;    version = BuildConfig.swaggerUi</b>
 <b class="nc">&nbsp;    customStyle(BuildConfig.swaggerStyle)</b>
 &nbsp;  }
 &nbsp;
 <b class="nc">&nbsp;  authenticate(&quot;admin&quot;, optional = false) {</b>
-<b class="nc">&nbsp;    route(&quot;/loglevel&quot;) {</b>
-<b class="nc">&nbsp;      get(&quot;/{logger}&quot;) {</b>
+<b class="nc">&nbsp;        route(&quot;/loglevel&quot;) {</b>
+<b class="nc">&nbsp;          get(&quot;/{logger}&quot;) {</b>
+<b class="nc">&nbsp;                val loggerName = call.parameters[&quot;logger&quot;] ?: ROOT_LOGGER_NAME</b>
+<b class="nc">&nbsp;                val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
+<b class="nc">&nbsp;                when (val logger = loggerCtx.getLogger(loggerName)) {</b>
+<b class="nc">&nbsp;                  null -&gt; call.respondText(&quot;Logger &#39;$loggerName&#39; not found&quot;, status = NotFound)</b>
+<b class="nc">&nbsp;                  else -&gt; call.respondText(&quot;Logger &#39;$loggerName&#39; has level: ${logger.level}&quot;)</b>
+&nbsp;                }
+&nbsp;              }
+<b class="nc">&nbsp;              .describe {</b>
+<b class="nc">&nbsp;                parameters {</b>
+<b class="nc">&nbsp;                  path(&quot;logger&quot;) {</b>
+<b class="nc">&nbsp;                    description = &quot;Logger name (e.g., &#39;dev.suresh&#39;)&quot;</b>
+<b class="nc">&nbsp;                    required = false</b>
+&nbsp;                  }
+&nbsp;                }
+<b class="nc">&nbsp;                responses {</b>
+<b class="nc">&nbsp;                  HttpStatusCode.OK {</b>
+<b class="nc">&nbsp;                    description = &quot;Current log level of the logger&quot;</b>
+&nbsp;                    // schema = jsonSchema&lt;List&lt;Message&gt;&gt;()
+&nbsp;                  }
+<b class="nc">&nbsp;                  HttpStatusCode.NotFound {</b>
+<b class="nc">&nbsp;                    description = &quot;Logger not found&quot;</b>
+<b class="nc">&nbsp;                    ContentType.Text.Plain()</b>
+&nbsp;                  }
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                summary = &quot;Get log level for a specific logger&quot;</b>
+<b class="nc">&nbsp;                description = &quot;Retrieves the current log level for the specified logger&quot;</b>
+&nbsp;              }
+&nbsp;
+&nbsp;          /**
+&nbsp;           * Set log level for a logger and its sub-packages.
+&nbsp;           *
+&nbsp;           * Path parameters:
+&nbsp;           * - logger [String] Logger name (e.g., &#39;dev.suresh&#39;, &#39;io.ktor&#39;). Defaults to root logger.
+&nbsp;           * - level [String] Log level to set (TRACE, DEBUG, INFO, WARN, ERROR, OFF). Case
+&nbsp;           *   insensitive. Defaults to INFO.
+&nbsp;           */
+<b class="nc">&nbsp;          post(&quot;/{logger}/{level}&quot;) {</b>
 <b class="nc">&nbsp;            val loggerName = call.parameters[&quot;logger&quot;] ?: ROOT_LOGGER_NAME</b>
+<b class="nc">&nbsp;            val levelName = call.parameters[&quot;level&quot;]?.uppercase() ?: INFO.levelStr</b>
+&nbsp;            try {
+<b class="nc">&nbsp;              val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
+&nbsp;              // loggerCtx.isPackagingDataEnabled = true
+<b class="nc">&nbsp;              val matching =</b>
+<b class="nc">&nbsp;                  loggerCtx.loggerList</b>
+<b class="nc">&nbsp;                      .filter { it.name.startsWith(prefix = loggerName, ignoreCase = true) }</b>
+<b class="nc">&nbsp;                      .onEach { it.level = Level.valueOf(levelName) }</b>
+&nbsp;
+<b class="nc">&nbsp;              when (matching.isNotEmpty()) {</b>
+<b class="nc">&nbsp;                true -&gt; call.respondText(&quot;Set $loggerName and sub-packages to $levelName&quot;)</b>
+<b class="nc">&nbsp;                else -&gt; call.respondText(&quot;Logger &#39;$loggerName&#39; not found&quot;, status = NotFound)</b>
+&nbsp;              }
+&nbsp;            } catch (_: Exception) {
+<b class="nc">&nbsp;              call.respondText(&quot;Invalid log level: $levelName&quot;, status = BadRequest)</b>
+&nbsp;            }
+&nbsp;          }
+&nbsp;
+<b class="nc">&nbsp;          post(&quot;/reset&quot;) {</b>
 <b class="nc">&nbsp;            val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
-<b class="nc">&nbsp;            when (val logger = loggerCtx.getLogger(loggerName)) {</b>
-<b class="nc">&nbsp;              null -&gt; call.respondText(&quot;Logger &#39;$loggerName&#39; not found&quot;, status = NotFound)</b>
-<b class="nc">&nbsp;              else -&gt; call.respondText(&quot;Logger &#39;$loggerName&#39; has level: ${logger.level}&quot;)</b>
-&nbsp;            }
+<b class="nc">&nbsp;            loggerCtx.reset()</b>
+<b class="nc">&nbsp;            ContextInitializer(loggerCtx).autoConfig()</b>
+<b class="nc">&nbsp;            call.respondText(&quot;Logback configuration reset!&quot;)</b>
 &nbsp;          }
-<b class="nc">&nbsp;          .describe {</b>
-<b class="nc">&nbsp;            parameters {</b>
-<b class="nc">&nbsp;              path(&quot;logger&quot;) {</b>
-<b class="nc">&nbsp;                description = &quot;Logger name (e.g., &#39;dev.suresh&#39;)&quot;</b>
-<b class="nc">&nbsp;                required = false</b>
-&nbsp;              }
-&nbsp;            }
-<b class="nc">&nbsp;            responses {</b>
-<b class="nc">&nbsp;              HttpStatusCode.OK {</b>
-<b class="nc">&nbsp;                description = &quot;Current log level of the logger&quot;</b>
-&nbsp;                // schema = jsonSchema&lt;List&lt;Message&gt;&gt;()
-&nbsp;              }
-<b class="nc">&nbsp;              HttpStatusCode.NotFound {</b>
-<b class="nc">&nbsp;                description = &quot;Logger not found&quot;</b>
-<b class="nc">&nbsp;                ContentType.Text.Plain()</b>
-&nbsp;              }
-&nbsp;            }
-&nbsp;
-<b class="nc">&nbsp;            summary = &quot;Get log level for a specific logger&quot;</b>
-<b class="nc">&nbsp;            description = &quot;Retrieves the current log level for the specified logger&quot;</b>
-&nbsp;          }
-&nbsp;
-&nbsp;      /**
-&nbsp;       * Set log level for a logger and its sub-packages.
-&nbsp;       *
-&nbsp;       * Path parameters:
-&nbsp;       * - logger [String] Logger name (e.g., &#39;dev.suresh&#39;, &#39;io.ktor&#39;). Defaults to root logger.
-&nbsp;       * - level [String] Log level to set (TRACE, DEBUG, INFO, WARN, ERROR, OFF). Case insensitive.
-&nbsp;       *   Defaults to INFO.
-&nbsp;       */
-<b class="nc">&nbsp;      post(&quot;/{logger}/{level}&quot;) {</b>
-<b class="nc">&nbsp;        val loggerName = call.parameters[&quot;logger&quot;] ?: ROOT_LOGGER_NAME</b>
-<b class="nc">&nbsp;        val levelName = call.parameters[&quot;level&quot;]?.uppercase() ?: INFO.levelStr</b>
-&nbsp;        try {
-<b class="nc">&nbsp;          val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
-&nbsp;          // loggerCtx.isPackagingDataEnabled = true
-<b class="nc">&nbsp;          val matching =</b>
-<b class="nc">&nbsp;              loggerCtx.loggerList</b>
-<b class="nc">&nbsp;                  .filter { it.name.startsWith(prefix = loggerName, ignoreCase = true) }</b>
-<b class="nc">&nbsp;                  .onEach { it.level = Level.valueOf(levelName) }</b>
-&nbsp;
-<b class="nc">&nbsp;          when (matching.isNotEmpty()) {</b>
-<b class="nc">&nbsp;            true -&gt; call.respondText(&quot;Set $loggerName and sub-packages to $levelName&quot;)</b>
-<b class="nc">&nbsp;            else -&gt; call.respondText(&quot;Logger &#39;$loggerName&#39; not found&quot;, status = NotFound)</b>
-&nbsp;          }
-&nbsp;        } catch (_: Exception) {
-<b class="nc">&nbsp;          call.respondText(&quot;Invalid log level: $levelName&quot;, status = BadRequest)</b>
 &nbsp;        }
-&nbsp;      }
 &nbsp;
-<b class="nc">&nbsp;      post(&quot;/reset&quot;) {</b>
-<b class="nc">&nbsp;        val loggerCtx = LoggerFactory.getILoggerFactory() as LoggerContext</b>
-<b class="nc">&nbsp;        loggerCtx.reset()</b>
-<b class="nc">&nbsp;        ContextInitializer(loggerCtx).autoConfig()</b>
-<b class="nc">&nbsp;        call.respondText(&quot;Logback configuration reset!&quot;)</b>
+<b class="nc">&nbsp;        staticResources(&quot;/resources&quot;, &quot;.&quot;) { contentType { ContentType.Text.Plain } }</b>
 &nbsp;      }
-&nbsp;    }
-&nbsp;
-<b class="nc">&nbsp;    staticResources(&quot;/resources&quot;, &quot;.&quot;) { contentType { ContentType.Text.Plain } }</b>
-&nbsp;  }
+<b class="nc">&nbsp;      .describe { tag(&quot;Admin&quot;) }</b>
 &nbsp;}
 </code>
 </pre>
@@ -370,7 +375,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-01-27 16:27</div>
+    <div style="float:right;">generated on 2026-01-29 05:29</div>
 </div>
 </body>
 </html>
