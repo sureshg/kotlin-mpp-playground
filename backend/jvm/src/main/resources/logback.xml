@@ -18,7 +18,7 @@
               value="%date{yyyy-MM-dd'T'HH:mm:ss.SSS z, America/Los_Angeles} trace_id=%X{trace_id} span_id=%X{span_id} trace_flags=%X{trace_flags} %-5level %logger{16} - %msg%n"/>
 
     <appender name="APP" class="RollingFileAppender">
-        <file>${LOG_DIR}/app.log</file>
+        <file>${LOG_DIR:-.}/app.log</file>
         <rollingPolicy class="TimeBasedRollingPolicy">
             <!-- weekly rollover -->
             <fileNamePattern>app.%d{yyyy-ww}.gz</fileNamePattern>
@@ -32,7 +32,7 @@
     </appender>
 
     <appender name="APP2" class="RollingFileAppender">
-        <file>${LOG_DIR}/app2.log</file>
+        <file>${LOG_DIR:-.}/app2.log</file>
         <rollingPolicy class="SizeAndTimeBasedRollingPolicy">
             <fileNamePattern>app2.%d{yyyy-ww}.log</fileNamePattern>
             <maxFileSize>10MB</maxFileSize>
@@ -55,7 +55,7 @@
     </appender-->
 
     <appender name="JSON" class="RollingFileAppender">
-        <file>${LOG_DIR}/app.json</file>
+        <file>${LOG_DIR:-.}/app.json</file>
         <rollingPolicy class="TimeBasedRollingPolicy">
             <fileNamePattern>app2.%d{yyyy-ww}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
