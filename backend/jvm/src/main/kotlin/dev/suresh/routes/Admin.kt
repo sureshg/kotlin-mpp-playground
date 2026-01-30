@@ -31,6 +31,7 @@ fun Routing.adminRoutes() {
         )
 
     source = OpenApiDocSource.Routing { routingRoot.descendants() }
+    deepLinking = true
     servers { server("http://localhost:8080") }
 
     version = BuildConfig.swaggerUi
