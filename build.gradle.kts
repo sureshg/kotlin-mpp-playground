@@ -13,7 +13,6 @@ dependencies {
   dokka(project(":backend:jvm"))
   dokka(project(":backend:data"))
   dokka(project(":backend:profiling"))
-  dokka(project(":backend:security"))
 
   findProject(":web")?.let { dokka(it) }
   findProject(":backend:native")?.let { dokka(it) }

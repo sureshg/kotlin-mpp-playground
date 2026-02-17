@@ -36,8 +36,6 @@ include(":dep-mgmt:catalog")
 
 include(":backend:jvm")
 
-include(":backend:security")
-
 include(":backend:data")
 
 include(":backend:profiling")
