@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > WasmKt</title>
+  <title>: Coverage Report > FileColors</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,15 +19,18 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.wasm</a>
+    <a href="../index.html">ui</a>
 </div>
 
-<h1>Coverage Summary for Class: WasmKt (dev.suresh.wasm)</h1>
+<h1>Coverage Summary for Class: FileColors (ui)</h1>
 
 <table class="coverageStats">
-
 <tr>
   <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -46,35 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">WasmKt</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/7)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/14)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/87)
-  </span>
-</td>
-</tr>
-  <tr>
-    <td class="name">WasmKt$wasm$1$1</td>
+  <td class="name">FileColors</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -91,6 +66,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     (0/4)
   </span>
 </td>
+    <td class="coverageStat"/>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -104,45 +80,11 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/66)
-  </span>
-</td>
-  </tr>
-<tr>
-  <td class="name"><strong>Total</strong></td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/8)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/4)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/18)
-  </span>
-</td>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/153)
+    (0/22)
   </span>
 </td>
 </tr>
+
 </table>
 
 <br/>
@@ -150,54 +92,35 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.wasm
+<code class="sourceCode" id="sourceCode">&nbsp;package ui
 &nbsp;
-&nbsp;import com.dylibso.chicory.compiler.MachineFactoryCompiler
-&nbsp;import com.dylibso.chicory.runtime.HostFunction
-&nbsp;import com.dylibso.chicory.runtime.Instance
-&nbsp;import com.dylibso.chicory.wasm.Parser
-&nbsp;import com.dylibso.chicory.wasm.types.FunctionType
-&nbsp;import com.dylibso.chicory.wasm.types.ValType
-&nbsp;import io.ktor.server.response.*
-&nbsp;import io.ktor.server.routing.*
+&nbsp;import androidx.compose.foundation.shape.RoundedCornerShape
+&nbsp;import androidx.compose.material3.MaterialTheme
+&nbsp;import androidx.compose.runtime.Composable
+&nbsp;import androidx.compose.ui.graphics.Color
+&nbsp;import androidx.compose.ui.unit.dp
 &nbsp;
-&nbsp;/**
-&nbsp; * More wasm modules can be found in
-&nbsp; * - [wasm-corpus](https://github.com/dylibso/chicory/tree/main/wasm-corpus/src/main/resources/compiled)
-&nbsp; * - [extism](https://github.com/extism/plugins/releases)
-&nbsp; */
-<b class="nc">&nbsp;val factWasmInst: Instance by lazy {</b>
-<b class="nc">&nbsp;  val wasmRes = Thread.currentThread().contextClassLoader.getResourceAsStream(&quot;wasm/factorial.wasm&quot;)</b>
-&nbsp;  // val wasmRes = object {}.javaClass.getResourceAsStream(&quot;wasm/factorial.wasm&quot;)
-<b class="nc">&nbsp;  val wasmMod = Parser.parse(wasmRes)</b>
-<b class="nc">&nbsp;  Instance.builder(wasmMod).withMachineFactory(MachineFactoryCompiler::compile).build()</b>
-&nbsp;}
-&nbsp;
-&nbsp;fun Routing.wasm() {
-&nbsp;  /** Tag: Service */
-<b class="nc">&nbsp;  route(&quot;/wasm&quot;) {</b>
-<b class="nc">&nbsp;    get(&quot;fact&quot;) {</b>
-<b class="nc">&nbsp;      val num = call.parameters[&quot;num&quot;]?.toLongOrNull() ?: 5</b>
-&nbsp;
-<b class="nc">&nbsp;      val iterFact = factWasmInst.export(&quot;iterFact&quot;)</b>
-<b class="nc">&nbsp;      val fact = iterFact.apply(num)[0]</b>
-&nbsp;
-<b class="nc">&nbsp;      call.respondText(&quot;WASM: Factorial($num): $fact&quot;)</b>
-&nbsp;    }
+&nbsp;@Composable
+&nbsp;fun AppTheme(content: @Composable () -&gt; Unit) {
+&nbsp;  MaterialTheme(
+&nbsp;      colorScheme = MaterialTheme.colorScheme.copy(primary = Color.Black),
+&nbsp;      shapes =
+&nbsp;          MaterialTheme.shapes.copy(
+&nbsp;              small = RoundedCornerShape(0.dp),
+&nbsp;              medium = RoundedCornerShape(0.dp),
+&nbsp;              large = RoundedCornerShape(0.dp),
+&nbsp;          ),
+&nbsp;  ) {
+&nbsp;    content()
 &nbsp;  }
 &nbsp;}
 &nbsp;
-&nbsp;fun logFunction() =
-<b class="nc">&nbsp;    HostFunction(</b>
-<b class="nc">&nbsp;        &quot;console&quot;,</b>
-<b class="nc">&nbsp;        &quot;log&quot;,</b>
-<b class="nc">&nbsp;        FunctionType.of(listOf(ValType.I32, ValType.I32), emptyList()),</b>
-<b class="nc">&nbsp;    ) { instance, args -&gt;</b>
-<b class="nc">&nbsp;      val msg = instance.memory().readString(args[0].toInt(), args[1].toInt())</b>
-<b class="nc">&nbsp;      println(&quot;WASM: $msg&quot;)</b>
-&nbsp;      // Value.i32(0)
-&nbsp;      longArrayOf()
-&nbsp;    }
+&nbsp;object FileColors {
+<b class="nc">&nbsp;  val default = Color.Gray</b>
+<b class="nc">&nbsp;  val active = Color(29, 117, 223, 255)</b>
+<b class="nc">&nbsp;  val fileItemBg = Color(233, 30, 99, 255)</b>
+<b class="nc">&nbsp;  val fileItemFg = Color.White</b>
+&nbsp;}
 </code>
 </pre>
 </div>
@@ -221,7 +144,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-02-16 22:39</div>
+    <div style="float:right;">generated on 2026-02-17 08:43</div>
 </div>
 </body>
 </html>

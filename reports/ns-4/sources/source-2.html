@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > CertScan</title>
+  <title>: Coverage Report > PemFormat</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">dev.suresh.cert</a>
 </div>
 
-<h1>Coverage Summary for Class: CertScan (dev.suresh.cert)</h1>
+<h1>Coverage Summary for Class: PemFormat (dev.suresh.cert)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">CertScan</td>
+  <td class="name">PemFormat</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/9)
   </span>
 </td>
 <td class="coverageStat">
@@ -71,7 +71,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
+    (0/8)
   </span>
 </td>
 <td class="coverageStat">
@@ -79,7 +79,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/17)
+    (0/40)
   </span>
 </td>
 <td class="coverageStat">
@@ -87,7 +87,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/111)
+    (0/240)
   </span>
 </td>
 </tr>
@@ -101,42 +101,134 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.cert
 &nbsp;
-&nbsp;import dev.suresh.tls.SavingTrustManager
-&nbsp;import dev.suresh.tls.newTLSSocket
-&nbsp;import java.net.InetSocketAddress
+&nbsp;import java.security.KeyFactory
+&nbsp;import java.security.cert.CertificateFactory
 &nbsp;import java.security.cert.X509Certificate
-&nbsp;import javax.net.ssl.SNIHostName
-&nbsp;import kotlin.time.Duration
-&nbsp;import kotlin.time.Duration.Companion.seconds
+&nbsp;import java.security.spec.InvalidKeySpecException
+&nbsp;import java.security.spec.PKCS8EncodedKeySpec
+&nbsp;import java.util.Locale
+&nbsp;import javax.crypto.Cipher
+&nbsp;import javax.crypto.Cipher.DECRYPT_MODE
+&nbsp;import javax.crypto.EncryptedPrivateKeyInfo
+&nbsp;import javax.crypto.SecretKeyFactory
+&nbsp;import javax.crypto.spec.PBEKeySpec
+&nbsp;import kotlin.io.encoding.Base64
 &nbsp;
-&nbsp;object CertScan {
+&nbsp;/**
+&nbsp; * PEM X.509 certificates reader &amp; writer
+&nbsp; *
+&nbsp; * @author Suresh
+&nbsp; */
+&nbsp;object PemFormat {
 &nbsp;
-&nbsp;  fun scan(
-&nbsp;      host: String,
-<b class="nc">&nbsp;      port: Int = 443,</b>
-<b class="nc">&nbsp;      sni: String? = null,</b>
-<b class="nc">&nbsp;      timeout: Duration = 2.seconds,</b>
-&nbsp;  ): List&lt;X509Certificate&gt; {
-<b class="nc">&nbsp;    val trustManager = SavingTrustManager()</b>
-<b class="nc">&nbsp;    val socket = trustManager.newTLSSocket()</b>
-<b class="nc">&nbsp;    return socket.use { sock -&gt;</b>
-<b class="nc">&nbsp;      val handshake = runCatching {</b>
-<b class="nc">&nbsp;        sni?.let {</b>
-&nbsp;          // sock.sslParameters will create a new copy
-<b class="nc">&nbsp;          val sslParams = sock.sslParameters</b>
-<b class="nc">&nbsp;          sslParams.serverNames = listOf(SNIHostName(sni))</b>
-<b class="nc">&nbsp;          sock.sslParameters = sslParams</b>
-<b class="nc">&nbsp;        }</b>
-<b class="nc">&nbsp;        sock.soTimeout = timeout.inWholeMilliseconds.toInt()</b>
-<b class="nc">&nbsp;        sock.connect(InetSocketAddress(host, port), timeout.inWholeMilliseconds.toInt())</b>
-<b class="nc">&nbsp;        sock.startHandshake()</b>
+&nbsp;  /** Supported X.509 SAN OIDs */
+&nbsp;  const val ALT_RFC822_NAME = 1
+&nbsp;  const val ALT_DNS_NAME = 2
+&nbsp;  const val ALT_IPA_NAME = 7
 &nbsp;
-&nbsp;        // Peer has to be authenticated this to work
-&nbsp;        // sock.session.peerCertificates.filterIsInstance&lt;X509Certificate&gt;()
-<b class="nc">&nbsp;      }</b>
-<b class="nc">&nbsp;      trustManager.chain</b>
-&nbsp;    }
-&nbsp;  }
+&nbsp;  /** PEM certificate pattern */
+&nbsp;  private val CERT_PATTERN =
+<b class="nc">&nbsp;      &quot;&quot;&quot;-+BEGIN\s+.*CERTIFICATE[^-]*-+(?:\s|\r|\n)+([a-z0-9+/=\r\n]+)-+END\s+.*CERTIFICATE[^-]*-+&quot;&quot;&quot;</b>
+<b class="nc">&nbsp;          .toRegex(RegexOption.IGNORE_CASE)</b>
+&nbsp;
+&nbsp;  /** PEM private key pattern */
+&nbsp;  private val KEY_PATTERN =
+<b class="nc">&nbsp;      &quot;&quot;&quot;-+BEGIN\s+(?:(.*)\s+)?PRIVATE\s+KEY[^-]*-+(?:\s|\r|\n)+([a-z0-9+/=\r\n]+)-+END\s+.*PRIVATE\s+KEY[^-]*-+&quot;&quot;&quot;</b>
+<b class="nc">&nbsp;          .toRegex(RegexOption.IGNORE_CASE)</b>
+&nbsp;
+<b class="nc">&nbsp;  val certFactory = CertificateFactory.getInstance(&quot;X.509&quot;)</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Checks if the given string is a PEM encoded certificate.
+&nbsp;   *
+&nbsp;   * @param data cert data
+&nbsp;   * @return `true` if it&#39;s a `PEM` certificate.
+&nbsp;   */
+<b class="nc">&nbsp;  fun isPem(data: String) = CERT_PATTERN.containsMatchIn(data)</b>
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Read all X.509 certificates from the given PEM encoded certificate.
+&nbsp;   *
+&nbsp;   * @param certChain PEM encoded cert(s)
+&nbsp;   * @return list of [X509Certificate]
+&nbsp;   */
+&nbsp;  fun readCertChain(certChain: String) =
+&nbsp;      try {
+<b class="nc">&nbsp;        CERT_PATTERN.findAll(certChain)</b>
+<b class="nc">&nbsp;            .map {</b>
+<b class="nc">&nbsp;              val base64Text = it.groupValues[1]</b>
+<b class="nc">&nbsp;              val buffer = Base64.Mime.decode(base64Text.toByteArray(Charsets.US_ASCII))</b>
+<b class="nc">&nbsp;              certFactory.generateCertificate(buffer.inputStream()) as X509Certificate</b>
+&nbsp;            }
+<b class="nc">&nbsp;            .toList()</b>
+&nbsp;      } catch (e: Exception) {
+<b class="nc">&nbsp;        throw IllegalStateException(&quot;Can&#39;t read the PEM certificate, cert data is invalid&quot;, e)</b>
+&nbsp;      }
+&nbsp;
+&nbsp;  /** Read PKCS#8 encoded private key. */
+<b class="nc">&nbsp;  fun readPrivateKey(privateKey: String, password: String? = null) =</b>
+<b class="nc">&nbsp;      KEY_PATTERN.findAll(privateKey)</b>
+<b class="nc">&nbsp;          .map {</b>
+<b class="nc">&nbsp;            val keyType = it.groupValues[1]</b>
+<b class="nc">&nbsp;            val base64Key = it.groupValues[2]</b>
+<b class="nc">&nbsp;            if (base64Key.lowercase(locale = Locale.US).startsWith(&quot;proc-type&quot;)) {</b>
+<b class="nc">&nbsp;              throw InvalidKeySpecException(</b>
+<b class="nc">&nbsp;                  &quot;Password protected PKCS1 private keys are not supported&quot;</b>
+&nbsp;              )
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            val encodedKey = Base64.Mime.decode(base64Key.toByteArray(Charsets.US_ASCII))</b>
+<b class="nc">&nbsp;            val encKeySpec =</b>
+<b class="nc">&nbsp;                when (keyType) {</b>
+<b class="nc">&nbsp;                  &quot;ENCRYPTED&quot; -&gt; {</b>
+<b class="nc">&nbsp;                    require(password != null) {</b>
+<b class="nc">&nbsp;                      &quot;Private key is encrypted, but no password was provided&quot;</b>
+&nbsp;                    }
+<b class="nc">&nbsp;                    val encPrivateKeyInfo = EncryptedPrivateKeyInfo(encodedKey)</b>
+<b class="nc">&nbsp;                    val keyFactory = SecretKeyFactory.getInstance(encPrivateKeyInfo.algName)</b>
+<b class="nc">&nbsp;                    val secretKey = keyFactory.generateSecret(PBEKeySpec(password.toCharArray()))</b>
+&nbsp;
+<b class="nc">&nbsp;                    val cipher = Cipher.getInstance(encPrivateKeyInfo.algName)</b>
+<b class="nc">&nbsp;                    cipher.init(DECRYPT_MODE, secretKey, encPrivateKeyInfo.algParameters)</b>
+<b class="nc">&nbsp;                    encPrivateKeyInfo.getKeySpec(cipher)</b>
+&nbsp;                  }
+<b class="nc">&nbsp;                  else -&gt; PKCS8EncodedKeySpec(encodedKey)</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;            KeyFactory.getInstance(&quot;RSA&quot;).generatePrivate(encKeySpec)</b>
+&nbsp;          }
+<b class="nc">&nbsp;          .toList()</b>
+&nbsp;
+&nbsp;  /** Encodes the given [encoded] bytes to PEM format. */
+&nbsp;  fun encodePem(pemString: PemString, encoded: ByteArray) =
+<b class="nc">&nbsp;      &quot;&quot;&quot;-----BEGIN ${pemString.beginMarker}-----</b>
+<b class="nc">&nbsp;      |${Base64.encode(encoded).chunked(64).joinToString(&quot;\n&quot;)}</b>
+<b class="nc">&nbsp;      |-----END ${pemString.beginMarker}-----</b>
+&nbsp;      |&quot;&quot;&quot;
+<b class="nc">&nbsp;          .trimMargin()</b>
+&nbsp;}
+&nbsp;
+&nbsp;/**
+&nbsp; * PEM string begin markers.
+&nbsp; *
+&nbsp; * [Pem.h](https://github.com/openssl/openssl/blob/master/include/openssl/pem.h#L35)
+&nbsp; */
+&nbsp;enum class PemString(val beginMarker: String) {
+&nbsp;  X509(&quot;CERTIFICATE&quot;),
+&nbsp;  X509_REQ(&quot;CERTIFICATE REQUEST&quot;),
+&nbsp;  X509_CRL(&quot;X509 CRL&quot;),
+&nbsp;  PUBLIC(&quot;PUBLIC KEY&quot;),
+&nbsp;  // Openssl -traditional
+&nbsp;  PKCS1(&quot;RSA PRIVATE KEY&quot;),
+&nbsp;  RSA_PUBLIC(&quot;RSA PUBLIC KEY&quot;),
+&nbsp;  DSA(&quot;DSA PRIVATE KEY&quot;),
+&nbsp;  DSA_PUBLIC(&quot;DSA PUBLIC KEY&quot;),
+&nbsp;  PKCS8(&quot;ENCRYPTED PRIVATE KEY&quot;),
+&nbsp;  // Unencrypted PKCS#8 private key
+&nbsp;  PKCS8INF(&quot;PRIVATE KEY&quot;),
+&nbsp;  ECDSA_PUBLIC(&quot;ECDSA PUBLIC KEY&quot;),
+&nbsp;  EC_PARAMETERS(&quot;EC PARAMETERS&quot;),
+&nbsp;  EC_PRIVATE_KEY(&quot;EC PRIVATE KEY&quot;),
 &nbsp;}
 </code>
 </pre>
@@ -161,7 +253,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-02-16 22:39</div>
+    <div style="float:right;">generated on 2026-02-17 08:44</div>
 </div>
 </body>
 </html>

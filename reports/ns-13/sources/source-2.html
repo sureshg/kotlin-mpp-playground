@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > ByteArrayAsBase64Serializer</title>
+  <title>: Coverage Report > SystemExitInvoker</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,10 +19,10 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.serde</a>
+    <a href="../index.html">dev.suresh.system</a>
 </div>
 
-<h1>Coverage Summary for Class: ByteArrayAsBase64Serializer (dev.suresh.serde)</h1>
+<h1>Coverage Summary for Class: SystemExitInvoker (dev.suresh.system)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">ByteArrayAsBase64Serializer</td>
+  <td class="name">SystemExitInvoker</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,7 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/1)
   </span>
 </td>
     <td class="coverageStat"/>
@@ -72,7 +72,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/4)
+    (0/1)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +80,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/26)
+    (0/2)
   </span>
 </td>
 </tr>
@@ -92,31 +92,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 
 <pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.serde
+<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.system
 &nbsp;
-&nbsp;import kotlin.io.encoding.Base64
-&nbsp;import kotlinx.serialization.KSerializer
-&nbsp;import kotlinx.serialization.descriptors.*
-&nbsp;import kotlinx.serialization.encoding.*
-&nbsp;
-&nbsp;/**
-&nbsp; * A [Base64] serializer. Use with
-&nbsp; *
-&nbsp; * ```kotlin
-&nbsp; * @Serializable(with = ByteArrayAsBase64Serializer::class)
-&nbsp; * ```
-&nbsp; */
-&nbsp;object ByteArrayAsBase64Serializer : KSerializer&lt;ByteArray&gt; {
-&nbsp;
-<b class="nc">&nbsp;  private val base64 = Base64.Default</b>
-&nbsp;
-&nbsp;  override val descriptor: SerialDescriptor
-<b class="nc">&nbsp;    get() = PrimitiveSerialDescriptor(&quot;ByteArrayAsBase64Serializer&quot;, PrimitiveKind.STRING)</b>
-&nbsp;
-<b class="nc">&nbsp;  override fun deserialize(decoder: Decoder) = base64.decode(decoder.decodeString())</b>
-&nbsp;
-&nbsp;  override fun serialize(encoder: Encoder, value: ByteArray) =
-<b class="nc">&nbsp;      encoder.encodeString(base64.encode(value))</b>
+&nbsp;object SystemExitInvoker {
+<b class="nc">&nbsp;  operator fun invoke() = System.exit(0)</b>
 &nbsp;}
 </code>
 </pre>
@@ -141,7 +120,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-02-16 22:39</div>
+    <div style="float:right;">generated on 2026-02-17 08:44</div>
 </div>
 </body>
 </html>

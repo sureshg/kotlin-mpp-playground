@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > FlippedModifier</title>
+  <title>: Coverage Report > ModifierKt</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     <a href="../index.html">ui</a>
 </div>
 
-<h1>Coverage Summary for Class: FlippedModifier (ui)</h1>
+<h1>Coverage Summary for Class: ModifierKt (ui)</h1>
 
 <table class="coverageStats">
 <tr>
@@ -49,7 +49,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 </th>
 </tr>
 <tr>
-  <td class="name">FlippedModifier</td>
+  <td class="name">ModifierKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -63,16 +63,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/2)
-  </span>
-</td>
-    <td class="coverageStat"/>
-<td class="coverageStat">
-  <span class="percent">
-    0%
-  </span>
-  <span class="absValue">
-    (0/2)
+    (0/10)
   </span>
 </td>
 <td class="coverageStat">
@@ -80,7 +71,23 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
     0%
   </span>
   <span class="absValue">
-    (0/11)
+    (0/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/237)
   </span>
 </td>
 </tr>
@@ -110,49 +117,49 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;import androidx.compose.ui.unit.dp
 &nbsp;import kotlinx.coroutines.MainScope
 &nbsp;
-&nbsp;val debug = true
+<b class="nc">&nbsp;val debug = true</b>
 &nbsp;
-&nbsp;val mainScope = MainScope()
+<b class="nc">&nbsp;val mainScope = MainScope()</b>
 &nbsp;
-&nbsp;fun Modifier.debug(color: Color = Color.Red) =
-&nbsp;    then(if (debug) dashedBorder(1.dp, color, 8.dp) else this)
+<b class="nc">&nbsp;fun Modifier.debug(color: Color = Color.Red) =</b>
+<b class="nc">&nbsp;    then(if (debug) dashedBorder(1.dp, color, 8.dp) else this)</b>
 &nbsp;
-&nbsp;fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modifier = composed {
-&nbsp;  val density = LocalDensity.current
-&nbsp;  val strokeWidthPx = density.run { strokeWidth.toPx() }
-&nbsp;  val cornerRadiusPx = density.run { cornerRadius.toPx() }
+<b class="nc">&nbsp;fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modifier = composed {</b>
+<b class="nc">&nbsp;  val density = LocalDensity.current</b>
+<b class="nc">&nbsp;  val strokeWidthPx = density.run { strokeWidth.toPx() }</b>
+<b class="nc">&nbsp;  val cornerRadiusPx = density.run { cornerRadius.toPx() }</b>
 &nbsp;
-&nbsp;  then(
-&nbsp;      Modifier.drawWithCache {
-&nbsp;        onDrawBehind {
-&nbsp;          val stroke =
-&nbsp;              Stroke(
-&nbsp;                  width = strokeWidthPx,
-&nbsp;                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f),
+<b class="nc">&nbsp;  then(</b>
+<b class="nc">&nbsp;      Modifier.drawWithCache {</b>
+<b class="nc">&nbsp;        onDrawBehind {</b>
+<b class="nc">&nbsp;          val stroke =</b>
+<b class="nc">&nbsp;              Stroke(</b>
+<b class="nc">&nbsp;                  width = strokeWidthPx,</b>
+<b class="nc">&nbsp;                  pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f),</b>
 &nbsp;              )
-&nbsp;          drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))
+<b class="nc">&nbsp;          drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))</b>
 &nbsp;        }
 &nbsp;      }
 &nbsp;      // .border(border = BorderStroke(strokeWidth, color),shape = RoundedCornerShape(cornerRadius))
-&nbsp;  )
+<b class="nc">&nbsp;  )</b>
 &nbsp;}
 &nbsp;
 &nbsp;@Composable
-&nbsp;fun buildModifier(builder: @Composable MutableList&lt;Modifier&gt;.() -&gt; Unit): Modifier {
-&nbsp;  val modifiers = mutableListOf&lt;Modifier&gt;()
-&nbsp;  modifiers.builder()
+<b class="nc">&nbsp;fun buildModifier(builder: @Composable MutableList&lt;Modifier&gt;.() -&gt; Unit): Modifier {</b>
+<b class="nc">&nbsp;  val modifiers = mutableListOf&lt;Modifier&gt;()</b>
+<b class="nc">&nbsp;  modifiers.builder()</b>
 &nbsp;  // The first Modifier is the empty, starter Modifier object
-&nbsp;  return modifiers.fold(Modifier as Modifier) { acc, modifier -&gt; acc then modifier }
+<b class="nc">&nbsp;  return modifiers.fold(Modifier as Modifier) { acc, modifier -&gt; acc then modifier }</b>
 &nbsp;}
 &nbsp;
 &nbsp;fun Modifier.ifTrue(value: Boolean, builder: Modifier.() -&gt; Modifier) =
-&nbsp;    then(if (value) builder() else Modifier)
+<b class="nc">&nbsp;    then(if (value) builder() else Modifier)</b>
 &nbsp;
-&nbsp;fun Modifier.flipped() = then(FlippedModifier())
+<b class="nc">&nbsp;fun Modifier.flipped() = then(FlippedModifier())</b>
 &nbsp;
-<b class="nc">&nbsp;class FlippedModifier : DrawModifier {</b>
+&nbsp;class FlippedModifier : DrawModifier {
 &nbsp;  override fun ContentDrawScope.draw() {
-<b class="nc">&nbsp;    scale(1f, -1f) { this@draw.drawContent() }</b>
+&nbsp;    scale(1f, -1f) { this@draw.drawContent() }
 &nbsp;  }
 &nbsp;}
 </code>
@@ -178,7 +185,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-02-16 22:39</div>
+    <div style="float:right;">generated on 2026-02-17 08:43</div>
 </div>
 </body>
 </html>

@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
-  <title>: Coverage Report > AliasKeyManager</title>
+  <title>: Coverage Report > ComposableSingletons</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -19,18 +19,15 @@
 <div class="breadCrumbs">
 Current scope: :<span class="separator">|</span>    <a href="../../index.html">all classes</a>
     <span class="separator">|</span>
-    <a href="../index.html">dev.suresh.tls</a>
+    <a href="../index.html">nav</a>
 </div>
 
-<h1>Coverage Summary for Class: AliasKeyManager (dev.suresh.tls)</h1>
+<h1>Coverage Summary for Class: ComposableSingletons (nav)</h1>
 
 <table class="coverageStats">
+
 <tr>
   <th class="name">Class</th>
-<th class="coverageStat 
-">
-  Class, %
-</th>
 <th class="coverageStat 
 ">
   Method, %
@@ -48,16 +45,36 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   Instruction, %
 </th>
 </tr>
-<tr>
-  <td class="name">AliasKeyManager</td>
+  <tr>
+    <td class="name">ComposableSingletons$NavRootKt</td>
 <td class="coverageStat">
   <span class="percent">
     0%
   </span>
   <span class="absValue">
-    (0/1)
+    (0/2)
   </span>
 </td>
+    <td class="coverageStat"/>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
     0%
@@ -84,34 +101,12 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
   </span>
 </td>
 </tr>
-
 </table>
 
 <br/>
 <br/>
 
-
-<pre>
-<code class="sourceCode" id="sourceCode">&nbsp;package dev.suresh.tls
-&nbsp;
-&nbsp;import java.net.Socket
-&nbsp;import java.security.Principal
-&nbsp;import javax.net.ssl.X509KeyManager
-&nbsp;
-&nbsp;/**
-&nbsp; * A [X509KeyManager] implementation which selects the client private key for client authentication
-&nbsp; * based on given key alias name.
-&nbsp; */
-<b class="nc">&nbsp;class AliasKeyManager(private val delegate: X509KeyManager, private val aliasName: String) :</b>
-&nbsp;    X509KeyManager by delegate {
-&nbsp;  override fun chooseClientAlias(
-&nbsp;      keyType: Array&lt;String&gt;,
-&nbsp;      issuers: Array&lt;Principal&gt;,
-&nbsp;      socket: Socket,
-<b class="nc">&nbsp;  ): String = aliasName</b>
-&nbsp;}
-</code>
-</pre>
+  <code class="sourceCode">Source code is not available<br /></code>
 </div>
 
 <script type="text/javascript">
@@ -133,7 +128,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-02-16 22:39</div>
+    <div style="float:right;">generated on 2026-02-17 08:44</div>
 </div>
 </body>
 </html>
