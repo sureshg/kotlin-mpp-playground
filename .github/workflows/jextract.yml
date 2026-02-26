@@ -60,7 +60,7 @@ jobs:
           jextract/gen/script/${{ matrix.script }}
 
       - name: 📤 Uploading generated sources
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: jextract-${{ matrix.os }}
           path: jextract/src
