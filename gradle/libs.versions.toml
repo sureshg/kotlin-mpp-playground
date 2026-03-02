@@ -20,7 +20,7 @@ org-name                       = "suresh.dev"
 org-url                        = "https://suresh.dev"
 
 # Dependency Versions
-bc-plugins                     = "2.39.0"
+bc-plugins                     = "2.40.0"
 kotlinx-kover                  = "0.9.7"
 kotlin-dokka                   = "2.2.0-Beta"
 kotlinx-io                     = "0.9.0"
