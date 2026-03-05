@@ -83,7 +83,7 @@ jib {
                       addAll(runJvmArgs.map { it.replace(tmp, "/tmp/") })
                     }
                     .joinToString(" "),
-            "OTEL_EXPERIMENTAL_CONFIG_FILE" to "${appRoot}/otel/sdk-config.yaml",
+            "OTEL_CONFIG_FILE" to "${appRoot}/otel/sdk-config.yaml",
             // "OTEL_JAVAAGENT_EXTENSIONS" to "${appRoot}/otel/extensions",
             // "OTEL_JAVAAGENT_ENABLED" to "true",
             // "OTEL_JAVAAGENT_LOGGING" to "application",
