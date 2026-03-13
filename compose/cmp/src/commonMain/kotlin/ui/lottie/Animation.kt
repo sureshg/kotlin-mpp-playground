@@ -1,14 +1,14 @@
 package ui.lottie
 
-import KottieAnimation
 import androidx.compose.runtime.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import dev.suresh.compose.res.Res
-import kottieComposition.KottieCompositionSpec
-import kottieComposition.animateKottieCompositionAsState
-import kottieComposition.rememberKottieComposition
+import kottie.KottieAnimation
+import kottie.KottieCompositionSpec
+import kottie.animateKottieCompositionAsState
+import kottie.rememberKottieComposition
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 
 @OptIn(ExperimentalResourceApi::class)
