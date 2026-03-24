@@ -175,8 +175,8 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
 * ABI Validation & Missing Targets
 
   ```bash
-  $ ./gradlew :shared:updateLegacyAbi
-  $ ./gradlew :shared:checkLegacyAbi
+  $ ./gradlew :shared:updateKotlinAbi
+  $ ./gradlew :shared:checkKotlinAbi
 
   # KMP missing targets report
   $ ./gradlew :shared:kmpMissingTargets

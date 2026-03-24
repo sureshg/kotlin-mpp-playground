@@ -158,16 +158,15 @@ tasks {
 
         val packageDmg = named<AbstractJPackageTask>("packageReleaseDmg")
         // build/compose/binaries/main-release/dmg/*.dmg
-        val fromFile =
-            packageDmg.map {
-              it.appImage
-                  .get()
-                  .dir("../dmg")
-                  .asFile
-                  .toPath()
-                  .listDirectoryEntries("${project.name}*.dmg")
-                  .single()
-            }
+        val fromFile = packageDmg.map {
+          it.appImage
+              .get()
+              .dir("../dmg")
+              .asFile
+              .toPath()
+              .listDirectoryEntries("${project.name}*.dmg")
+              .single()
+        }
 
         from(fromFile)
         into(fromFile.map { it.parent })
