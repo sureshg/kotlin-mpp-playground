@@ -130,11 +130,10 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;val robot = sql { Table&lt;Robot&gt;() }
 &nbsp;
 &nbsp;// Both people (Applicative capture) and pQuery (Direct capture) are isomorphic.
-&nbsp;val pQuery =
-&nbsp;    sql.select {
-&nbsp;      val p = from(people)
-&nbsp;      p
-&nbsp;    }
+&nbsp;val pQuery = sql.select {
+&nbsp;  val p = from(people)
+&nbsp;  p
+&nbsp;}
 &nbsp;
 &nbsp;val map = sql { people.map { it.name to it.age } }
 &nbsp;
@@ -162,16 +161,15 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;}
 &nbsp;
 &nbsp;fun select() {
-&nbsp;  val s =
-&nbsp;      sql.select {
-&nbsp;        val p = from(people)
-&nbsp;        val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;) }
-&nbsp;        where { p.age &gt; 10 }
-&nbsp;        groupBy(p.name, p.age)
-&nbsp;        having { p95(p.age).use &gt; 50 }
-&nbsp;        sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
-&nbsp;        p to a
-&nbsp;      }
+&nbsp;  val s = sql.select {
+&nbsp;    val p = from(people)
+&nbsp;    val a = join(address) { it.id == p.addressId &amp;&amp; it.city.like(&quot;%San Francisco%&quot;) }
+&nbsp;    where { p.age &gt; 10 }
+&nbsp;    groupBy(p.name, p.age)
+&nbsp;    having { p95(p.age).use &gt; 50 }
+&nbsp;    sortBy(p.name to Ord.Asc, p.age to Ord.Desc)
+&nbsp;    p to a
+&nbsp;  }
 &nbsp;  println(&quot;SQL: ${s.buildPrettyFor.Postgres().value}&quot;)
 &nbsp;}
 &nbsp;
@@ -209,8 +207,9 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 &nbsp;}
 &nbsp;
 &nbsp;@SqlFragment
-&nbsp;fun String.like(value: String) =
-&nbsp;    sql.expression { free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;() }
+&nbsp;fun String.like(value: String) = sql.expression {
+&nbsp;  free(&quot;${this@like} LIKE $value&quot;).asPure&lt;Boolean&gt;()
+&nbsp;}
 &nbsp;
 &nbsp;@SqlFragment fun p95(measure: Int) = sql.expression { avg(measure) + 1.645 * stddev(measure) }
 &nbsp;
@@ -263,7 +262,7 @@ Current scope: :<span class="separator">|</span>    <a href="../../index.html">a
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2026-03-15 00:22</div>
+    <div style="float:right;">generated on 2026-03-30 23:01</div>
 </div>
 </body>
 </html>
