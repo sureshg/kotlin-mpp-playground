@@ -38,6 +38,7 @@ public final class BuildConfig {
 	public static final field cidre Ljava/lang/String;
 	public static final field classgraph Ljava/lang/String;
 	public static final field compose Ljava/lang/String;
+	public static final field compose2pdf Ljava/lang/String;
 	public static final field composeAdaptive Ljava/lang/String;
 	public static final field composeFluent Ljava/lang/String;
 	public static final field composeFontawesome Ljava/lang/String;

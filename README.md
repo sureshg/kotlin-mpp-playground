@@ -107,16 +107,16 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
    $ brew install ymtdzzz/tap/otel-tui
    $ otel-tui
 
-   # or run hyperdx
+   # or run clickstack
    $ docker run \
             -it --rm \
-            -p 8081:8080 \
             -p 8123:8123 \
+            -p 8081:8080 \
             -p 4317:4317 \
             -p 4318:4318 \
-            --name hyperdx \
+            --name clickstack \
             --ulimit nofile=262144:262144 \
-             hyperdx/hyperdx-local:latest
+            clickhouse/clickstack-local:latest
    $ open http://localhost:8081/search
 
    # Run the app
