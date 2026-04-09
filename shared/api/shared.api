@@ -49,7 +49,6 @@ public final class BuildConfig {
 	public static final field composeNav3 Ljava/lang/String;
 	public static final field composeViewmodel Ljava/lang/String;
 	public static final field config4k Ljava/lang/String;
-	public static final field decoroutinator Ljava/lang/String;
 	public static final field delayedqueue Ljava/lang/String;
 	public static final field description Ljava/lang/String;
 	public static final field detekt Ljava/lang/String;
@@ -71,6 +70,7 @@ public final class BuildConfig {
 	public static final field foojayResolver Ljava/lang/String;
 	public static final field fusionauthJwt Ljava/lang/String;
 	public static final field fusionauthSamlv2 Ljava/lang/String;
+	public static final field fuzzykot Ljava/lang/String;
 	public static final field gitFullMessage Ljava/lang/String;
 	public static final field gitHash Ljava/lang/String;
 	public static final field gitMessage Ljava/lang/String;
@@ -155,7 +155,6 @@ public final class BuildConfig {
 	public static final field kotlinRedacted Ljava/lang/String;
 	public static final field kotlinRetry Ljava/lang/String;
 	public static final field kotlinServiceloader Ljava/lang/String;
-	public static final field kotlinStatistics Ljava/lang/String;
 	public static final field kotlinWrappers Ljava/lang/String;
 	public static final field kotlinxAtomicfu Ljava/lang/String;
 	public static final field kotlinxBenchmark Ljava/lang/String;
@@ -181,6 +180,7 @@ public final class BuildConfig {
 	public static final field kregex Ljava/lang/String;
 	public static final field ksoup Ljava/lang/String;
 	public static final field kspAutoService Ljava/lang/String;
+	public static final field kstats Ljava/lang/String;
 	public static final field ktembed Ljava/lang/String;
 	public static final field ktfmt Ljava/lang/String;
 	public static final field ktor Ljava/lang/String;
