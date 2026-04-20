@@ -250,7 +250,7 @@ npm-jsjoda-tz                  = "2.22.0"
 swagger-style                  = "https://unpkg.com/swagger-ui-themes@3.0.1/themes/3.x/theme-flattop.css"
 
 # Plugin versions
-benmanes                       = "0.53.0"
+benmanes                       = "0.54.0"
 caupain                        = "1.9.1"
 foojay-resolver                = "1.0.0"
 gradle-develocity              = "4.4.0"
