@@ -124,6 +124,7 @@ public final class BuildConfig {
 	public static final field jte Ljava/lang/String;
 	public static final field junit Ljava/lang/String;
 	public static final field jwalker Ljava/lang/String;
+	public static final field kflate Ljava/lang/String;
 	public static final field kfswatch Ljava/lang/String;
 	public static final field kmpAppdirs Ljava/lang/String;
 	public static final field kmpProcess Ljava/lang/String;
