@@ -82,7 +82,7 @@ data class MediaApiClient(
         }
         else -> error("Unsupported part: ${part.name}")
       }
-      part.dispose()
+      part.release()
     }
   }
 
