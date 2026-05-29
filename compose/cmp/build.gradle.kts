@@ -151,8 +151,8 @@ compose {
 }
 
 tasks {
-  val renameDmg by
-      registering(Copy::class) {
+  val renameDmg =
+      register<Copy>("renameDmg") {
         group = "distribution"
         description = "Rename the DMG file"
 
@@ -175,6 +175,6 @@ tasks {
 }
 
 artifacts {
-  val composeWebApp by configurations.consumable("composeWebApp")
+  val composeWebApp = configurations.consumable("composeWebApp")
   add(composeWebApp.name, tasks.named("wasmJsBrowserDistribution"))
 }

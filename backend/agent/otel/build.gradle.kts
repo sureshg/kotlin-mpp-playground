@@ -11,11 +11,11 @@ plugins {
 
 description = "OpenTelemetry agent with custom instrumentation!"
 
-val otel by configurations.registering { isTransitive = false }
+val otel = configurations.register("otel") { isTransitive = false }
 
 // Task to repackage the OpenTelemetry agent with custom extensions
-val extendedAgent by
-    tasks.registering(Jar::class) {
+val extendedAgent =
+    tasks.register<Jar>("extendedAgent") {
       description = "Creates extended OpenTelemetry agent with extensions"
       group = "build"
 

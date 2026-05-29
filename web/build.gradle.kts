@@ -27,8 +27,8 @@ kotlin {
   }
 }
 
-val sharedJsRes by configurations.creating
-val sharedWasmRes by configurations.creating
+val sharedJsRes = configurations.create("sharedJsRes")
+val sharedWasmRes = configurations.create("sharedWasmRes")
 
 dependencies {
   sharedJsRes(project(path = projects.shared.path, configuration = "sharedJsResources"))
@@ -39,15 +39,15 @@ tasks {
   val jsResources = named<ProcessResources>("jsProcessResources")
   val wasmJsResources = named<ProcessResources>("wasmJsProcessResources")
 
-  val copySharedJsResources by
-      registering(Sync::class) {
+  val copySharedJsResources =
+      register<Sync>("copySharedJsResources") {
         from(sharedJsRes)
         into(jsResources.map { it.destinationDir })
         includeEmptyDirs = false
         duplicatesStrategy = DuplicatesStrategy.INCLUDE
       }
-  val copySharedWasmResources by
-      registering(Sync::class) {
+  val copySharedWasmResources =
+      register<Sync>("copySharedWasmResources") {
         from(sharedWasmRes)
         into(wasmJsResources.map { it.destinationDir })
         includeEmptyDirs = false
@@ -59,8 +59,8 @@ tasks {
 }
 
 artifacts {
-  val jsApp by configurations.consumable("jsApp")
+  val jsApp = configurations.consumable("jsApp")
   add(jsApp.name, tasks.named("jsBrowserDistribution"))
-  val wasmApp by configurations.consumable("wasmApp")
+  val wasmApp = configurations.consumable("wasmApp")
   add(wasmApp.name, tasks.named("wasmJsBrowserDistribution"))
 }

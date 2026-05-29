@@ -29,3 +29,11 @@ jre/
 
 # App log
 *.log
+
+# AI Agents & Tools
+.junie/
+.claude/
+CLAUDE.local.md
+.codex/
+.cursor/
+.env

@@ -110,9 +110,9 @@ jib {
 }
 
 // Configuration to copy JS/Wasm app to resources
-val jsApp by configurations.creating
-val wasmApp by configurations.creating
-val composeWebApp by configurations.creating
+val jsApp = configurations.create("jsApp")
+val wasmApp = configurations.create("wasmApp")
+val composeWebApp = configurations.create("composeWebApp")
 
 tasks {
   val copyTasks =

@@ -114,8 +114,8 @@ sourceSets.maybeCreate("main")
 
 tasks {
   val buildType = "Release"
-  val macOsUniversalBinary by
-      registering(Exec::class) {
+  val macOsUniversalBinary =
+      register<Exec>("macOsUniversalBinary") {
         val macosX64 = named<KotlinNativeLink>("link${buildType}ExecutableMacosX64")
         val macosArm64 = named<KotlinNativeLink>("link${buildType}ExecutableMacosArm64")
         val binName = "${project.name}-macos"
@@ -143,8 +143,8 @@ tasks {
         onlyIf { Platform.isMac }
       }
 
-  val prepareJib by
-      registering(Copy::class) {
+  val prepareJib =
+      register<Copy>("prepareJib") {
         // DefaultNativePlatform.getCurrentArchitecture()
         val releaseExecutable =
             when {
