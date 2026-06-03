@@ -32,6 +32,7 @@ public final class BuildConfig {
 	public static final field cashTurbine Ljava/lang/String;
 	public static final field caupain Ljava/lang/String;
 	public static final field cel Ljava/lang/String;
+	public static final field certkit Ljava/lang/String;
 	public static final field chasm Ljava/lang/String;
 	public static final field chasmPlugin Ljava/lang/String;
 	public static final field chicory Ljava/lang/String;

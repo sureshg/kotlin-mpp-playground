@@ -28,8 +28,7 @@ kotlin {
     nativeTargets(project)
   }
 
-  @OptIn(ExperimentalAbiValidation::class)
-  abiValidation.enabled = true
+  @OptIn(ExperimentalAbiValidation::class) abiValidation {}
 }
 
 // dependencies {

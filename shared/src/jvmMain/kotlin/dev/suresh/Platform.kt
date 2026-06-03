@@ -168,7 +168,7 @@ fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
   appendLine("✧✧✧ Charsets ✧✧✧")
   val cs = Charset.availableCharsets()
   if (debug) {
-    cs.forEach { (name, charset) -> appendLine("$name: $charset") }
+    cs.forEach { [name, charset] -> appendLine("$name: $charset") }
   } else {
     appendLine("Found ${cs.size} charsets.")
   }
@@ -207,7 +207,7 @@ fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
 
   appendLine("✧✧✧ Env Variables ✧✧✧")
   val env = System.getenv()
-  env.forEach { (k: String, v: String) -> appendLine("$k : $v") }
+  env.forEach { [k,v] -> appendLine("$k : $v") }
 
   appendLine("✧✧✧ System Properties ✧✧✧")
   val props = System.getProperties()
