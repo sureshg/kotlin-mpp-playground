@@ -16,7 +16,7 @@ and [Compose Web (wasm)][Compose-Multiplatform] applications.
 
 ```bash
 $ curl -s "https://get.sdkman.io" | bash
-$ sdk i java 27.ea-open
+$ sdk i java 28.ea-open
 ```
 
 ### Build & Run
@@ -92,7 +92,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            --publish 8081:8081 \
            --name kotlin-mpp-playground \
            --mount type=bind,source=$(pwd),destination=/app,readonly \
-           openjdk:27-ea-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm"
+           openjdk:28-ea-slim /bin/bash -c "printenv && backend/jvm/build/libs/jvm"
 
    # Build a container image and run
    $ ./gradlew :backend:jvm:jibDockerBuild
@@ -238,7 +238,7 @@ The next version will be based on the semantic version scope (`major`, `minor`, 
            --name kotlin-native-build \
            --mount type=bind,source=$(pwd),destination=/app \
            --mount type=bind,source=${HOME}/.gradle,destination=/root/.gradle \
-           openjdk:27-ea-slim /bin/bash
+           openjdk:28-ea-slim /bin/bash
   # apt update && apt install libtree tree
   # ./gradlew --no-daemon :backend:native:build
   #  backend/native/build/bin/linuxX64/releaseExecutable/native.kexe
@@ -350,7 +350,7 @@ is [automatically with Gradle][gradle_verification].
 
 [java_url]: https://jdk.java.net/
 
-[java_img]: https://img.shields.io/badge/OpenJDK-27-e76f00?logo=openjdk&logoColor=e76f00
+[java_img]: https://img.shields.io/badge/OpenJDK-28-e76f00?logo=openjdk&logoColor=e76f00
 
 [kt_url]: https://github.com/JetBrains/kotlin/releases/latest
 
