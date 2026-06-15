@@ -241,7 +241,7 @@ antdesign                      = "1.0.0"
 compose-fluent                 = "0.1.0"
 kottie                         = "2.3.0"
 mosaic                         = "0.18.0"
-filekit-dialogs                = "0.14.1"
+filekit-dialogs                = "0.14.2"
 
 # NPM Dependencies
 npm-highlightjs                = "11.11.1"
