@@ -88,7 +88,6 @@ public final class BuildConfig {
 	public static final field graalvmNativeimage Ljava/lang/String;
 	public static final field gradle Ljava/lang/String;
 	public static final field gradleDevelocity Ljava/lang/String;
-	public static final field gradleKotlinDsl Ljava/lang/String;
 	public static final field gradlePublish Ljava/lang/String;
 	public static final field gradlexMavenPlugin Ljava/lang/String;
 	public static final field gratatouille Ljava/lang/String;
