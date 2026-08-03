@@ -90,7 +90,7 @@ jobs:
 
       - name: 🐘 Setup Gradle
         if: ${{ false }}
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
 
       - name: 📖 Get Kotlin version
         id: kotlin-version
