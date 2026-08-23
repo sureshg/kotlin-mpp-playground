@@ -1,4 +1,4 @@
-# sdk-config.yaml is a comprehensive starting point for configuring the SDK, including exporting to
+# otel-sdk-config.yaml is a comprehensive starting point for configuring the SDK, including exporting to
 # localhost via OTLP.
 #
 # NOTE: With the exception of env var substitution syntax (i.e. ${MY_ENV}), SDKs ignore
@@ -6,8 +6,8 @@
 # vars defined in https://opentelemetry.io/docs/specs/otel/configuration/sdk-environment-variables/.
 #
 # For schema documentation, including required properties, semantics, default behavior, etc,
-# see: https://github.com/open-telemetry/opentelemetry-configuration/blob/main/schema-docs.md
-file_format: "1.0"
+# see: https://opentelemetry.io/docs/specs/otel-config/types/
+file_format: "1.1"
 disabled: ${OTEL_SDK_DISABLED:-false}
 log_level: info
 resource:
@@ -21,6 +21,7 @@ resource:
 
 attribute_limits:
   attribute_value_length_limit:
+  attribute_value_depth_limit: 64
   attribute_count_limit: 128
 
 propagator:
@@ -47,6 +48,7 @@ tracer_provider:
             headers: [ ]
   limits:
     attribute_value_length_limit:
+    attribute_value_depth_limit: 64
     attribute_count_limit: 128
     event_count_limit: 128
     link_count_limit: 128
@@ -116,6 +118,7 @@ logger_provider:
             timeout: 10000
   limits:
     attribute_value_length_limit:
+    attribute_value_depth_limit: 64
     attribute_count_limit: 128
 
 instrumentation:
