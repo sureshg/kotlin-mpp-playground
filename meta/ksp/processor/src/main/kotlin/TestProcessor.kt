@@ -44,7 +44,7 @@ class TestProcessor(val codeGenerator: CodeGenerator, val logger: KSPLogger) : S
   }
 }
 
-class ClassVisitor : KSTopDownVisitor<OutputStreamWriter, Unit>() {
+class ClassVisitor : KSTopDownVisitor<OutputStreamWriter, Unit>(enableNewFeatures = true) {
   override fun defaultHandler(node: KSNode, data: OutputStreamWriter) {}
 
   override fun visitClassDeclaration(
