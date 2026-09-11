@@ -10,6 +10,7 @@
 file_format: "1.1"
 disabled: ${OTEL_SDK_DISABLED:-false}
 log_level: info
+
 resource:
   attributes:
     - name: service.name
@@ -20,7 +21,6 @@ resource:
       value: ${OTEL_SERVICE_INSTANCE_ID:-compute-1}
 
 attribute_limits:
-  attribute_value_length_limit:
   attribute_count_limit: 128
 
 propagator:
@@ -36,17 +36,11 @@ tracer_provider:
         max_queue_size: 2048
         max_export_batch_size: 512
         exporter:
-          otlp_http:
-            endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://host.docker.internal:4318}/v1/traces
-            tls:
-              ca_file:
-              key_file:
-              cert_file:
+          otlp_grpc:
+            endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://host.docker.internal:4317}
             compression: gzip
             timeout: 10000
-            headers: [ ]
   limits:
-    attribute_value_length_limit:
     attribute_count_limit: 128
     event_count_limit: 128
     link_count_limit: 128
@@ -86,12 +80,8 @@ meter_provider:
         interval: 60000
         timeout: 30000
         exporter:
-          otlp_http:
-            endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://host.docker.internal:4318}/v1/metrics
-            tls:
-              ca_file:
-              key_file:
-              cert_file:
+          otlp_grpc:
+            endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://host.docker.internal:4317}
             compression: gzip
             timeout: 10000
             temporality_preference: cumulative
@@ -106,36 +96,34 @@ logger_provider:
         max_queue_size: 2048
         max_export_batch_size: 512
         exporter:
-          otlp_http:
-            endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://host.docker.internal:4318}/v1/logs
-            tls:
-              ca_file:
-              key_file:
-              cert_file:
+          otlp_grpc:
+            endpoint: ${OTEL_EXPORTER_OTLP_ENDPOINT:-http://host.docker.internal:4317}
             compression: gzip
             timeout: 10000
   limits:
-    attribute_value_length_limit:
     attribute_count_limit: 128
 
-instrumentation:
+distribution:
+  javaagent:
+    instrumentation:
+      default_enabled: true
+
+instrumentation/development:
   java:
-    common:
-      default-enabled: true
-    runtime-telemetry:
-      emit-experimental-telemetry: true
-    runtime-telemetry-java17:
-      enable-all: true
-    # https://github.com/open-telemetry/opentelemetry-java-instrumentation/tree/main/instrumentation/logback/logback-appender-1.0/javaagent
-    logback-appender:
+    runtime_telemetry:
+      emit_experimental_metrics/development: true
+      emit_experimental_jfr_metrics/development: true
+      jfr_metrics/development:
+        included:
+          - "*"
+    logback_appender:
       enabled: true
-      experimental-log-attributes: false
-      experimental:
-        capture-code-attributes: false
-        capture-marker-attributes: false
-        capture-key-value-pair-attributes: false
-        capture-logger-context-attributes: false
-        capture-arguments: false
-        capture-mdc-attributes: false
-    ktor:
-      enabled: true
+      experimental_log_attributes/development: false
+      capture_code_attributes/development: false
+      capture_marker_attribute/development: false
+      capture_arguments/development: false
+      mdc_attributes/development:
+        included:
+          - "*"
+        excluded:
+          - "*secret*"
