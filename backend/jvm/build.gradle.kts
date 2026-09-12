@@ -81,6 +81,7 @@ jib {
                 buildList {
                       add("-javaagent:${appRoot}/otel/otel-javaagent.jar")
                       addAll(runJvmArgs.map { it.replace(tmp, "/tmp/") })
+                      add("-Xmx256M")
                     }
                     .joinToString(" "),
             "OTEL_CONFIG_FILE" to "${appRoot}/otel/sdk-config.yaml",

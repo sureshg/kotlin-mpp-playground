@@ -110,6 +110,12 @@ distribution:
 
 instrumentation/development:
   java:
+    common:
+      http:
+        server:
+          emit_experimental_telemetry/development: true
+        client:
+          emit_experimental_telemetry/development: true
     runtime_telemetry:
       emit_experimental_metrics/development: true
       emit_experimental_jfr_metrics/development: true
