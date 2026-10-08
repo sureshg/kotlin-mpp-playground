@@ -148,6 +148,7 @@ public final class BuildConfig {
 	public static final field kotlinDiff Ljava/lang/String;
 	public static final field kotlinDokka Ljava/lang/String;
 	public static final field kotlinDslJvmtarget Ljava/lang/String;
+	public static final field kotlinFormat Ljava/lang/String;
 	public static final field kotlinJvmtarget Ljava/lang/String;
 	public static final field kotlinKsp Ljava/lang/String;
 	public static final field kotlinLangVersion Ljava/lang/String;
