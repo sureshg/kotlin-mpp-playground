@@ -92,7 +92,7 @@ fun DragDropBox(modifier: Modifier = Modifier, onDrop: (DragData) -> Unit) {
       modifier =
           modifier
               .dashedBorder(strokeWidth = 2.dp, color = dndColor, cornerRadius = 8.dp)
-              .dragAndDropTarget(shouldStartDragAndDrop = { true }, target = dndTarget)
+              .dragAndDropTarget(shouldStartDragAndDrop = { true }, target = dndTarget),
   ) {
     Column(modifier = Modifier.align(Alignment.Center)) {
       Text(
@@ -134,7 +134,7 @@ fun FileListView(modifier: Modifier = Modifier, files: List<Path>) {
     items(files) {
       Box(
           modifier =
-              Modifier.padding(5.dp).background(FileColors.fileItemBg, RoundedCornerShape(10.dp))
+              Modifier.padding(5.dp).background(FileColors.fileItemBg, RoundedCornerShape(10.dp)),
       ) {
         Text(
             modifier = Modifier.padding(4.dp),

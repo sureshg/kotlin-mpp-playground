@@ -38,7 +38,7 @@ fun Modifier.dashedBorder(strokeWidth: Dp, color: Color, cornerRadius: Dp): Modi
               )
           drawRoundRect(color = color, style = stroke, cornerRadius = CornerRadius(cornerRadiusPx))
         }
-      }
+      },
       // .border(border = BorderStroke(strokeWidth, color),shape = RoundedCornerShape(cornerRadius))
   )
 }

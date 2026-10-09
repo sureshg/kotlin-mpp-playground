@@ -34,7 +34,7 @@ val extendedAgent =
       doLast {
         val agent = archiveFile.get().asFile
         logger.lifecycle(
-            magenta("OpenTelemetry Agent: ${agent.absolutePath} (${agent.length().decimalBytes})")
+            magenta("OpenTelemetry Agent: ${agent.absolutePath} (${agent.length().decimalBytes})"),
         )
       }
     }

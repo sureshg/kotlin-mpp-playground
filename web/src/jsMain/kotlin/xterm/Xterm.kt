@@ -483,7 +483,7 @@ external interface `T$2` {
 }
 
 external open class Terminal(
-    options: ITerminalOptions /* ITerminalOptions & ITerminalInitOnlyOptions */ = definedExternally
+    options: ITerminalOptions /* ITerminalOptions & ITerminalInitOnlyOptions */ = definedExternally,
 ) : IDisposable {
   open val element: HTMLElement?
   open val textarea: HTMLTextAreaElement?
@@ -525,7 +525,7 @@ external open class Terminal(
   open fun registerLinkProvider(linkProvider: ILinkProvider): IDisposable
 
   open fun registerCharacterJoiner(
-      handler: (text: String) -> Array<Any /* JsTuple<Number, Number> */>
+      handler: (text: String) -> Array<Any /* JsTuple<Number, Number> */>,
   ): Number
 
   open fun deregisterCharacterJoiner(joinerId: Number)

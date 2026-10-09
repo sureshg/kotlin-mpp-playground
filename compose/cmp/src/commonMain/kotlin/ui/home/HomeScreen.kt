@@ -75,7 +75,7 @@ fun Home(navToFile: () -> Unit, navToImage: () -> Unit) {
             }
           }
           showImage = !showImage
-        }
+        },
     ) {
       Text(text = "Click")
     }

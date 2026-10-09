@@ -45,7 +45,7 @@ fun SaveToBitmap(
                   onSave(bitmap)
                 }
               }
-              .background(Color.White)
+              .background(Color.White),
   ) {
     content()
   }

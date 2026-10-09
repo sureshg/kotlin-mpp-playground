@@ -135,8 +135,8 @@ tasks {
         doLast {
           logger.lifecycle(
               TextColors.cyan(
-                  "Universal macOS binary created: ${workingDir.resolve(binName).absolutePath}"
-              )
+                  "Universal macOS binary created: ${workingDir.resolve(binName).absolutePath}",
+              ),
           )
         }
 
@@ -165,7 +165,7 @@ tasks {
   withType<Exec>().configureEach {
     val arguments = providers.gradleProperty("runArgs")
     argumentProviders.add(
-        CommandLineArgumentProvider { arguments.orNull?.split(" ") ?: emptyList() }
+        CommandLineArgumentProvider { arguments.orNull?.split(" ") ?: emptyList() },
     )
   }
 }

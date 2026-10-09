@@ -72,7 +72,7 @@ object PemFormat {
             val base64Key = it.groupValues[2]
             if (base64Key.lowercase(locale = Locale.US).startsWith("proc-type")) {
               throw InvalidKeySpecException(
-                  "Password protected PKCS1 private keys are not supported"
+                  "Password protected PKCS1 private keys are not supported",
               )
             }
 

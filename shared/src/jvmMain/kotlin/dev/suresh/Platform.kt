@@ -75,7 +75,7 @@ object JvmPlatform : Platform {
                       val processEpochSec =
                           ProcessHandle.current().info().startInstant().get().epochSecond
                       epochSecToString(processEpochSec)
-                    }
+                    },
             )
 
   override val osInfo: Map<String, String?>
@@ -123,7 +123,7 @@ fun jvmRuntimeInfo(debug: Boolean = false) = buildString {
   appendLine("✧✧✧ [SYS-CPU] System CPU Usage     : ${osMxBean.cpuLoad}")
   appendLine("✧✧✧ [JVM-CPU] JVM CPU Usage        : ${osMxBean.processCpuLoad}")
   appendLine(
-      "✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}"
+      "✧✧✧ [JVM-CPU] JVM CPU Time(Sec)    : ${Duration.ofNanos(osMxBean.processCpuTime).toSeconds()}",
   )
   appendLine("✧✧✧ [SYS-MEM] Total Memory                  : ${osMxBean.totalMemorySize / unit} MiB")
   appendLine("✧✧✧ [SYS-MEM] Free  Memory                  : ${osMxBean.freeMemorySize / unit} MiB")

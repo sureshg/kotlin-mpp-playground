@@ -64,7 +64,7 @@ fun Routing.services() {
   /** Tag: Service */
   get("/trace") {
     call.respond(
-        mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall().toString())
+        mapOf("OpenTelemetry" to BuildConfig.otelInstr, "Image Size" to mediaApiCall().toString()),
     )
   }
   /** Tag: Service */

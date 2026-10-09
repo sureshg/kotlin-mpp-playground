@@ -48,7 +48,7 @@ fun Route.mgmtRoutes() {
 
   get("/info") {
     call.respond(
-        ScopedValue.where(DEBUG, call.debug).call(CallableOp { jvmRuntimeInfo(DEBUG.get()) })
+        ScopedValue.where(DEBUG, call.debug).call(CallableOp { jvmRuntimeInfo(DEBUG.get()) }),
     )
   }
 
